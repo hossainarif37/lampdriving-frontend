@@ -7,7 +7,8 @@ const HomePage: FC = () => {
   return (
     <div className='wrapper text-primary'>
       HomePage
-      <Button>Button</Button>
+      <Button className=''>Discover Courses</Button>
+      <Button variant='secondary'>Discover Courses</Button>
       <p className='text-secondary text'>This is the home page</p>
       <div className="min-h-[30vh] bg-secondary">
         <SectionHeading classname='items-start py-6 px-3' variant='secondary' heading="Services">
