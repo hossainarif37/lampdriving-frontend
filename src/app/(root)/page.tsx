@@ -2,10 +2,11 @@ import { Button } from '@/components/ui/button';
 import React from 'react';
 import { FC } from 'react';
 import SectionHeading from './components/shared/section-heading/SectionHeading';
+import HighlightedSection from './components/highlighted-section/HighlightedSection';
 
 const HomePage: FC = () => {
   return (
-    <div className='wrapper text-primary'>
+    <div className=' text-primary'>
       HomePage
       <Button className=''>Discover Courses</Button>
       <Button variant='secondary'>Discover Courses</Button>
@@ -16,9 +17,10 @@ const HomePage: FC = () => {
         </SectionHeading>
       </div>
 
-      <SectionHeading classname='items-center py-6' heading="Services">
+        <HighlightedSection/>
+      {/* <SectionHeading classname='items-center py-6' heading="Services">
         Our Range of Services
-        </SectionHeading>
+        </SectionHeading> */}
     </div>
   );
 };
