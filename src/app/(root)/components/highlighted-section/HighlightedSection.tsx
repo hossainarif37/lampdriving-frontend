@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import bgImage from "@/assets/highlighted-feature-images/highlightedBg.jpg";
+import bgImage from "@/assets/home-page-image/image-highlighted-section-bg.jpg";
 import { CalendarCheck, Scale } from 'lucide-react';
 import FeatureBox from './FeatureBox';
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { FC } from 'react';
 import SectionHeading from './components/shared/section-heading/SectionHeading';
 import HighlightedSection from './components/highlighted-section/HighlightedSection';
+import HowLampdrivingWorkSection from './components/how-lampdriving-works/HowLampdrivingWorkSection';
 
 const HomePage: FC = () => {
   return (
@@ -18,6 +19,7 @@ const HomePage: FC = () => {
       </div>
 
         <HighlightedSection/>
+        <HowLampdrivingWorkSection/>
       {/* <SectionHeading classname='items-center py-6' heading="Services">
         Our Range of Services
         </SectionHeading> */}

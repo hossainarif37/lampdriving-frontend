@@ -11,6 +11,7 @@ export default {
 	extend: {
 		colors: {
 			primary: '#04BF61',
+			primary2:'#FFC20E',
 			secondary: '#1A373A',
 			textCol: '#F5F5F5',
 		}
