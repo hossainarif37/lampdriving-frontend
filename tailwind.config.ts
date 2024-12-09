@@ -8,17 +8,19 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-  	extend: {
-  		colors: {
-  			background: 'var(--background)',
-  			foreground: 'var(--foreground)'
-  		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		}
-  	}
+	extend: {
+		colors: {
+			primary: '#04BF61',
+			secondary: '#1A373A',
+			textCol: '#F5F5F5',
+		}
+	},
+	screens: {
+		sm: '450px',
+		md: '768px',
+		lg: '1280px',
+		xl: '1440px'
+	}
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
