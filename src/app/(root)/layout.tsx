@@ -7,7 +7,7 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
     return (
         <div className='flex flex-col min-h-screen'>
             <Header />
-            <main className='flex-1 flex items-center justify-center'>
+            <main className='flex-1 flex flex-col items-center justify-center'>
                 {children}
             </main>
             <Footer />

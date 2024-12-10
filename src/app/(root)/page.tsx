@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 const HomePage: FC = () => {
   return (
-    <div className='wrapper'>
+    <div>
       Main Content
     </div>
   );
