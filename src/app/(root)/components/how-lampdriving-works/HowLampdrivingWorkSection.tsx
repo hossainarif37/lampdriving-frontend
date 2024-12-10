@@ -28,7 +28,7 @@ const steps = [
 
 const HowLampdrivingWorkSection: FC = () => {
   return (
-    <section className="my-44 px-4 lg:px-0">
+    <section className="my-16 px-4 lg:px-0">
       <SectionHeader
         title="How Lamp Driving Works"
         subtitle="Simple, Trusted & Flexible Booking System"
