@@ -1,5 +1,7 @@
-import Footer from '@/components/layouts/footer/Footer';
-import Header from '../../components/layouts/header/Header';
+import dynamic from 'next/dynamic';
+
+const Footer = dynamic(() => import('@/components/layouts/footer/Footer'));
+import Header from '@/components/layouts/header/Header';
 import React, { ReactNode } from 'react';
 import { FC } from 'react';
 

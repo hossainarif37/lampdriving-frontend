@@ -3,7 +3,7 @@ import Topbar from "./topbar/Topbar";
 
 const Header = () => {
     return (
-        <header className="bg-slate-100 text-center py-4">
+        <header className="bg-slate-100 text-center">
             <div>
                 <Topbar />
                 <Navbar />
