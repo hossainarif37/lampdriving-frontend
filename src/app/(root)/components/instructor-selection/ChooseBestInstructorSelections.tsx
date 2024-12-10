@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import SectionHeader from '../how-lampdriving-works/SectionHeader';
 import InstractorBoxDesign from './InstractorBoxDesign';
 import { CarTaxiFront, Mails, Repeat, Star } from 'lucide-react';
+import SectionHeading from '../shared/section-heading/SectionHeading';
 
 const instructorBoxes = [
     {
@@ -30,8 +30,8 @@ const instructorBoxes = [
 const ChooseBestInstructorSelections: FC = () => {
 
     return (
-        <section className='h-screen flex flex-col gap-5 lg:gap-10'>
-            <SectionHeader
+        <section className='flex flex-col gap-5 lg:gap-10 mb-20'>
+            <SectionHeading
                 title="Book driving lessons with confidence"
                 subtitle="Choose a driving instructor you can trust"
             />

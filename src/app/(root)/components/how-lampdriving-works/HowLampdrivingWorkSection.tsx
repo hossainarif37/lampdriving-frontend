@@ -1,9 +1,9 @@
 import { FC } from "react";
-import SectionHeader from "./SectionHeader";
 import VideoSection from "./VideoSection";
 import { Button } from "@/components/ui/button";
 import lampdrivingWordImage from "@/assets/home-page-image/image-how-lampdriving-work.png";
 import StepsList from "./StepList";
+import SectionHeading from "../shared/section-heading/SectionHeading";
 
 const steps = [
   {
@@ -29,7 +29,7 @@ const steps = [
 const HowLampdrivingWorkSection: FC = () => {
   return (
     <section className="my-16 px-4 lg:px-0">
-      <SectionHeader
+      <SectionHeading
         title="How Lamp Driving Works"
         subtitle="Simple, Trusted & Flexible Booking System"
       />
@@ -46,7 +46,7 @@ const HowLampdrivingWorkSection: FC = () => {
 
       {/* CTA Button */}
       <div className="text-center lg:mt-10 mt-6">
-        <Button className="bg-primary2">Start learning to drive now</Button>
+        <Button className="bg-primary">Start learning to drive now</Button>
       </div>
     </section>
   );
