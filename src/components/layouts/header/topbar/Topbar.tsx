@@ -4,7 +4,7 @@ import Link from "next/link";
 const Topbar = () => {
     return (
         <div className="bg-secondary p-4">
-            <div className="flex items-center justify-between text-white font-medium">
+            <div className="wrapper flex items-center justify-between text-white font-semibold">
                 {/* Left Side */}
                 <ul className="flex items-center gap-x-4">
                     <li><Link href="#">Support</Link></li>
@@ -16,9 +16,9 @@ const Topbar = () => {
 
                 {/* Right Side */}
                 <ul className="flex items-center gap-x-4">
-                    <li><Link href="#">Learner Login</Link></li>
+                    <li><Link href="#">Login</Link></li>
                     <Bar />
-                    <li><Link href="#">Instruct Login</Link></li>
+                    <li><Link href="#">Register</Link></li>
                 </ul>
             </div>
         </div>
