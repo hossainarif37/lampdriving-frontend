@@ -6,7 +6,7 @@ interface StepItemProps {
   description: string;
 }
 
-const StepItem: FC<StepItemProps> = ({ stepNumber, title, description }) => {
+const StepItemDesign: FC<StepItemProps> = ({ stepNumber, title, description }) => {
   return (
     <div className="flex gap-3">
       {/* Step Number Circle */}
@@ -27,4 +27,4 @@ const StepItem: FC<StepItemProps> = ({ stepNumber, title, description }) => {
   );
 };
 
-export default StepItem;
+export default StepItemDesign;
