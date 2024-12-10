@@ -1,32 +1,32 @@
 import LampLogo from "@/components/shared/LampLogo";
 import { Button } from "@/components/ui/button";
+import { navLinks } from "@/constant/navLinks";
 import Link from "next/link";
+import MobileNav from "./MobileNav";
 
 const Navbar = () => {
     return (
-        <nav >
+        <nav className="">
             <div className="wrapper flex justify-between items-center py-5 w-full">
                 <div>
                     <LampLogo />
                 </div>
 
 
-                <ul className="flex items-center gap-x-7 font-semibold text-secondary">
-                    <li>
-                        <Link href="#">Driving Lessons</Link>
-                    </li>
-                    <li>
-                        <Link href="#">Test Packages</Link>
-                    </li>
-                    <li>
-                        <Link href="#">Gallery</Link>
-                    </li>
-                    <li>
-                        <Link href="#">Pricing</Link>
-                    </li>
+                <ul className="hidden md:flex items-center gap-x-7 font-semibold text-secondary">
+                    {
+                        navLinks.map(({ title, href }) => (
+                            <li key={title}>
+                                <Link href={href}>{title}</Link>
+                            </li>
+                        ))
+                    }
                 </ul>
 
-                <Button size={"lg"}>Book Lesson</Button>
+                <Button className="hidden md:block" size={"lg"}>Book Lesson</Button>
+
+                {/* Mobile Nav */}
+                <MobileNav />
             </div>
         </nav>
     );
