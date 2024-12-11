@@ -25,7 +25,7 @@ const InstructorBox: FC = () => {
                 </div>
                 <div>
                     <h4 className="font-bold text-xl">
-                        $50<span className="text-primary">/hour</span>
+                        $50<span className="text-primary text-sm">/hour</span>
                     </h4>
                 </div>
             </div>
@@ -35,7 +35,7 @@ const InstructorBox: FC = () => {
                 <Button className="w-1/2 bg-secondary hover:bg-secondary h-11">
                     View Profile
                 </Button>
-                <Button className="w-1/2 h-11 text-accent">
+                <Button className="w-1/2 h-11">
                     Book Online Now
                 </Button>
             </div>
