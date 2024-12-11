@@ -1,22 +1,14 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { Pathway_Extreme } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Lamp Driving School",
   description: "Lamp Driving School is an driving school ",
+  
 };
+
+const pathway = Pathway_Extreme({ subsets: ["latin"] });
 
 export default function MainLayout({
   children,
@@ -26,7 +18,7 @@ export default function MainLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${pathway.className} antialiased`}
       >
         {children}
       </body>
