@@ -36,10 +36,15 @@ const Testimonials: FC = () => {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className='bg-[#F0F7F3] text-secondary' />
-                <CarouselNext />
+
+                {/* Slider previous and next button area*/}
+                <div className='hidden md:block'>
+                    <CarouselPrevious className='bg-[#F0F7F3] text-secondary' />
+                    <CarouselNext />
+                </div>
+
             </Carousel>
-            <div className="relative mt-12 text-center">
+            <div className="relative mt-12 text-center hidden">
                 {/* Horizontal border */}
                 <hr className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-3/4 z-0" />
 
