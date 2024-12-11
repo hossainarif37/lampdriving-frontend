@@ -16,7 +16,7 @@ const Topbar = () => {
 
                 {/* Right Side */}
                 <ul className="flex items-center gap-x-4">
-                    <li><Link href="#">Login</Link></li>
+                    <li><Link href="/login">Login</Link></li>
                     <Bar />
                     <li><Link href="#">Register</Link></li>
                 </ul>
