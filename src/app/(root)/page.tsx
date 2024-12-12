@@ -5,6 +5,7 @@ import ChooseBestInstructorSelections from './components/instructor-selection/Ch
 import FeaturedInstructors from './components/featured-instructors/FeaturedInstructors';
 import Testimonials from './components/testimials-section/Testimonials';
 import AboutUs from './components/about-us-section/AboutUs';
+import FAQSection from './components/faq-section/FAQSection';
 const HomePage: FC = () => {
   return (
     <div>
@@ -14,6 +15,7 @@ const HomePage: FC = () => {
       <FeaturedInstructors />
       <Testimonials />
       <AboutUs />
+      <FAQSection />
     </div>
   );
 };

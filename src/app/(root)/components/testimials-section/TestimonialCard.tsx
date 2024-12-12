@@ -17,7 +17,7 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard: FC<TestimonialCardProps> = ({ testimonial }) => {
-    const { name, title, image, rating, description, position } = testimonial;
+    const { name, title, rating, description, position } = testimonial;
 
     return (
         <div className="border border-gray-300 rounded-lg">
