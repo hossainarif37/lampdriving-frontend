@@ -13,7 +13,7 @@ export default {
   		colors: {
   			primary: '#FFC20E',
   			secondary: '#1A373A',
-  			accent: '#24303f',
+  			accent: '#555A57',
   			textCol: '#F5F5F5'
   		},
   		keyframes: {

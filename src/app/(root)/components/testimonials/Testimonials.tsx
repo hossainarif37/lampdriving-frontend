@@ -21,7 +21,7 @@ const Testimonials: FC = () => {
     }, []);
 
     return (
-        <div className=' bg-gradient-to-b from-[#F0F7F3] to-[#ffff] via-custom-white  md:p-24'>
+        <div className=' bg-gradient-to-b from-[#F0F7F3] to-[#ffff] via-custom-white  md:p-24 py-20 px-8'>
             <SectionHeading title='Testimonials' subtitle='Our Learner Experiences' />
             <Carousel
                 opts={{ align: "start", loop: true, }}
@@ -34,10 +34,10 @@ const Testimonials: FC = () => {
             >
                 <CarouselContent>
                     {testimonials.map((testimonial, index) => (
-                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/2">
-                            <div className='p-0'>
-                                <Card className='p-0'>
-                                    <CardContent className="p-0 ">
+                        <CarouselItem key={index} className="md:basis-1/1 lg:basis-1/2">
+                            <div className='p-0 border-none'>
+                                <Card className='p-0 border-none'>
+                                    <CardContent className='p-0 border-none'>
                                         <TestimonialCard testimonial={testimonial} />
                                     </CardContent>
                                 </Card>
@@ -51,8 +51,9 @@ const Testimonials: FC = () => {
                     <CarouselPrevious className='bg-[#F0F7F3] text-secondary' />
                     <CarouselNext />
                 </div>
-
             </Carousel>
+
+            {/*========= CTA Button section ========= */}
             <div className="relative mt-12 text-center wrapper">
                 {/* Horizontal border */}
                 <hr className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-full z-0" />

@@ -22,16 +22,17 @@ const TestimonialCard: FC<TestimonialCardProps> = ({ testimonial }) => {
     return (
         <div className="border border-gray-300 rounded-lg">
             {/* Box part */}
-            <h1 className='md:text-xl border-b p-3 text-secondary font-semibold'>{title}</h1>
-            <div className='md:p-6 flex gap-3 items-center p-4 relative' >
+            <h1 className='md:text-xl border-b p-3 px-6 text-secondary font-semibold'>{title}</h1>
+
+            <div className='relative flex lg:flex-row flex-col gap-3 lg:items-center p-4 lg:p-6' >
                 <div className='md:w-1/5 '>
                     <Image alt={`${name} image`} src={myImg} width={150} height={150} className='rounded-full' />
-                    <div className='absolute top-2 right-3 flex gap-2 bg-secondary text-textCol justify-center items-center  px-3 py-1 rounded-lg '>
-                        <Star className='w-5' />
+                    <div className='absolute top-2 right-3 flex gap-2 bg-secondary text-textCol justify-center items-center  px-3 py-2 rounded-lg'>
+                        <Star className='w-5 text-primary' />
                         <p>{rating}</p>
                     </div>
                 </div>
-                <div className='md:w-2/3'>
+                <div className='md:w-2/3 text-accent'>
                     <p>{description}</p>
                 </div>
             </div>
