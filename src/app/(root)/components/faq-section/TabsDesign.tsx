@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 const TabsDesign: FC = () => {
     const [activeTab, setActiveTab] = useState("General");
 
-    const tabs = ["General", "Pricing", "Dashboard", "API"];
+    const tabs = ["General", "Courses", "Pricing", "Support"];
     return (
         <div>
             <div className="flex space-x-4 mx-auto justify-center">
