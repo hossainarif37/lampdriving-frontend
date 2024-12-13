@@ -16,7 +16,7 @@ const FooterDesign: FC = () => {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold group flex flex-col">
                     Contact Info
-                    <span className="mt-[12px] h-[2px] w-1/3 rounded-full bg-textCol transition-all duration-300"></span>
+                    <span className="mt-[12px] h-[2px] lg:w-1/3 w-1/3 rounded-full bg-textCol"></span>
                 </h2>
                 <p className="md:leading-0 leading-relaxed text-sm">
                     We would love to hear from you! Feel free to reach out for general inquiries, collaboration, or to get involved.
@@ -27,7 +27,7 @@ const FooterDesign: FC = () => {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold group flex flex-col">
                     Useful Links
-                    <span className="mt-[12px] h-[2px] md:w-1/2 w-1/3 rounded-full bg-textCol transition-all duration-300"></span>
+                    <span className="mt-[12px] h-[2px] md:w-1/7 w-1/3 rounded-full bg-textCol"></span>
                 </h2>
                 <div className="my-3 flex flex-col md:gap-3 gap-2 text-sm">
                     <Link href={'/'} className="hover:text-primary duration-300">Home</Link>
@@ -42,7 +42,7 @@ const FooterDesign: FC = () => {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold group flex flex-col">
                     Update News
-                    <span className="mt-[12px] h-[2px] w-1/3 rounded-full bg-textCol transition-all duration-300"></span>
+                    <span className="mt-[12px] h-[2px] w-1/3 rounded-full bg-textCol"></span>
                 </h2>
                 <div className="space-y-2 text-sm">
                     <p>Lamp Driving School While The Lovely Valley Team Work</p>
