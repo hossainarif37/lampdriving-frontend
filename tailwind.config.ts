@@ -32,11 +32,18 @@ export default {
   				to: {
   					height: '0'
   				}
-  			}
+  			},
+				//Add your new keyframes for sliding animation
+                slide: {
+                    '0%, 100%': { transform: 'translateX(0)' },
+                    '50%': { transform: 'translateX(20px)' },
+                },
+			
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+			 slide: 'slide 4s ease-in-out infinite',
   		}
   	},
   	screens: {

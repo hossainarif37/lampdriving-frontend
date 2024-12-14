@@ -1,23 +1,24 @@
 import { FC } from 'react';
 import bannerBg from "@/assets/banner-img/slide-v1-3.jpg";
 import SearchBoxDesign from './SearchBoxDesign';
+import BannerLeftContent from './BannerLeftContent';
 
 const BannerDesign: FC = () => {
     return (
         <div
-            className="relative md:h-[600px] bg-cover bg-center"
+            className="relative md:h-[650px] py-20 md:py-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${bannerBg.src})` }}
         >
-            {/* Semi-transparent overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-gray-950 to-gray-600 opacity-60"></div>
+            {/* transparent overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-gray-950 to-gray-700 opacity-60"></div>
 
             {/* Content layer */}
-            <div className="relative wrapper mx-auto flex items-center justify-between h-full">
-                <div>
-                    <h2 className="uppercase text-textCol text-4xl flex flex-col font-bold gap-4 ">
-                        <span>Drive safe</span> <span className='leading-9'>& smart with </span><span>our school</span>
-                    </h2>
-                </div>
+            <div className="relative wrapper mx-auto md:flex items-center justify-between h-full space-y-8" >
+
+                {/* Left content */}
+                <BannerLeftContent />
+
+                {/* Search feild based on location*/}
                 <div>
                     <SearchBoxDesign />
                 </div>
