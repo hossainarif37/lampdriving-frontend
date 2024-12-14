@@ -9,7 +9,7 @@ const BannerDesign: FC = () => {
             style={{ backgroundImage: `url(${bannerBg.src})` }}
         >
             {/* Semi-transparent overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-950 to-gray-6x00 opacity-50"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-gray-950 to-gray-600 opacity-60"></div>
 
             {/* Content layer */}
             <div className="relative wrapper mx-auto flex items-center justify-between h-full">
