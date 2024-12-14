@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
 
-interface SectionHeaderProps {
+interface SectionHeadingProps {
     title: string;
     subtitle: string;
 }
-const SectionHeading: FC<SectionHeaderProps> = ({ title, subtitle }) => {
+const SectionHeading: FC<SectionHeadingProps> = ({ title, subtitle }) => {
 
     // set heading color based on the varient
     // const headingColor = variant === "default" ? "bg-secondary before:bg-secondary" : "bg-primary before:bg-primary";
@@ -27,7 +27,7 @@ const SectionHeading: FC<SectionHeaderProps> = ({ title, subtitle }) => {
             <h1 className="text-secondary font-semibold lg:text-3xl text-2xl mb-1">
                 {title}
             </h1>
-            <p className="lg:text-xl text-accent lg:tracking-widest tracking-wide w-2/3 mx-auto">
+            <p className="lg:text-xl text-accent lg:tracking-widest tracking-wide md:w-2/4 mx-auto">
                 {subtitle}
             </p>
         </div>
