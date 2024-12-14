@@ -34,7 +34,7 @@ const HowLampdrivingWorkSection: FC = () => {
         subtitle="Simple, Trusted & Flexible Booking System"
       />
 
-      <div className="wrapper flex justify-center mx-auto gap-10 flex-col lg:flex-row mt-12">
+      <div className="wrapper flex justify-center mx-auto gap-10 flex-col md:flex-row lg:flex-row mt-12">
         <div className="md:w-1/2">
           <div className="w-full flex justify-center">
             <VideoSection
