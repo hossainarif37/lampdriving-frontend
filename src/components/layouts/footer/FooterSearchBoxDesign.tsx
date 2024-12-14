@@ -32,7 +32,7 @@ const FooterSearchBoxDesign: FC = () => {
                         type="text"
                         placeholder="Enter your suburb"
                     />
-                    <button className="px-6 py-3 bg-[#FFDD00] text-black font-semibold rounded-md">
+                    <button className="px-6 py-3 bg-primary text-black font-semibold rounded-md">
                         SEARCH
                     </button>
                 </div>
