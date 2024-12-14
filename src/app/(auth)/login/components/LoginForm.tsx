@@ -23,12 +23,13 @@ const LoginForm: FC = () => {
     return (
         <form
             onSubmit={handleSubmit(handleLogin)}
-            className='w-full md:w-[400px] xl:w-[500px] mx-auto p-10 flex flex-col items-center shadow-lg rounded-lg border'
+            className='w-full md:w-[400px] xl:w-[500px] mx-auto p-10 flex flex-col items-center md:shadow-lg md:rounded-lg md:border'
         >
             <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Login</h1>
 
-            <div className='w-full'>
-                <div className='mt-5 flex flex-col gap-5'>
+            <div className='w-full mt-7'>
+                <div className='flex flex-col gap-5'>
+                    {/* Email */}
                     <div>
                         <label htmlFor="email" className='font-semibold text-secondary'>Email</label>
                         <Input
@@ -39,11 +40,12 @@ const LoginForm: FC = () => {
                                     message: "Invalid email address"
                                 }
                             })}
-                            type="email" placeholder="Enter your email" className='xl:h-12 mt-1'
+                            type="email" id='email' placeholder="Enter your email" className='xl:h-12 mt-1'
                         />
                         {errors?.email && <p className='text-red-500 text-sm mt-1'>{errors?.email?.message}</p>}
                     </div>
 
+                    {/* Password */}
                     <div>
                         <label htmlFor="password" className='font-semibold text-secondary'>Password</label>
                         <Input
@@ -54,16 +56,18 @@ const LoginForm: FC = () => {
                                 required: "Password is required"
                             })
                             }
-                            type="password" placeholder="Enter your password" className='xl:h-12 mt-1'
+                            type="password" id='password' placeholder="Enter your password" className='xl:h-12 mt-1'
                         />
                         {errors?.password && <p className='text-red-500 text-sm mt-1'>{errors?.password?.message}</p>}
                     </div>
                 </div>
+
                 <p className='text-right mt-2'>
                     <Link href="#" className='text-secondary hover:underline font-semibold'>Forgot password?</Link>
                 </p>
             </div>
 
+            {/* Submit */}
             <Button className='w-full mt-3 bg-primary h-12'>Login</Button>
 
             <p className='mt-5'>Don&apos;t have an account? <Link href="/register" className='text-blue-500 hover:underline font-semibold'>Register Here</Link></p>

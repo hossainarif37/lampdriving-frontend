@@ -18,7 +18,7 @@ const Topbar = () => {
                 <ul className="flex items-center gap-x-4">
                     <li><Link href="/login">Login</Link></li>
                     <Bar />
-                    <li><Link href="#">Register</Link></li>
+                    <li><Link href="/register">Register</Link></li>
                 </ul>
             </div>
         </div>
