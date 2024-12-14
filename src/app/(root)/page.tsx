@@ -6,10 +6,11 @@ import FeaturedInstructors from './components/featured-instructors/FeaturedInstr
 import Testimonials from './components/testimonials/Testimonials';
 import AboutUs from './components/about-us-section/AboutUs';
 import FAQSection from './components/faq-section/FAQSection';
+import Banner from './components/banner/Banner';
 const HomePage: FC = () => {
   return (
     <div>
-      {/* <HighlightedSection /> */}
+      <Banner />
       <HowLampdrivingWorkSection />
       <ChooseBestInstructorSelections />
       <FeaturedInstructors />
