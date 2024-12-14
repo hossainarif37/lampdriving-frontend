@@ -1,0 +1,42 @@
+[
+  {
+    "name": "John Doe",
+    "title": "Excellent Experience!",
+    "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 5,
+    "description": "This was a fantastic learning experience. The instructors were very professional, and I gained valuable skills.",
+    "position": "Software Engineer"
+  },
+  {
+    "name": "Jane Smith",
+    "title": "Highly Recommend!",
+     "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 4,
+    "description": "The flexible scheduling and supportive staff made it easy to learn. I highly recommend this program!",
+    "position": "Project Manager"
+  },
+  {
+    "name": "Emily Johnson",
+    "title": "Great Instructors!",
+     "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 5,
+    "description": "The instructors were knowledgeable and patient. I feel much more confident in my abilities now.",
+    "position": "UI/UX Designer"
+  },
+  {
+    "name": "Michael Brown",
+    "title": "Value for Money!",
+    "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 4,
+    "description": "Affordable pricing with top-notch quality training. I would definitely recommend it to others.",
+    "position": "Data Analyst"
+  },
+  {
+    "name": "Sophia Davis",
+    "title": "Life-Changing Experience!",
+     "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 5,
+    "description": "This training has been life-changing for me. I have learned so much and grown tremendously.",
+    "position": "Product Manager"
+  }
+]
