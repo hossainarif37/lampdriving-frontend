@@ -38,9 +38,9 @@ const VideoSection: FC<VideoSectionProps> = ({ imageSrc, videoSrc, altText }) =>
         </>
       ) : (
         <iframe
-          className="rounded-lg"
-          width="350"
-          height="350"
+            className="rounded-lg "
+            width="400"
+            height="333"
           src={videoSrc}
           title="YouTube video"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

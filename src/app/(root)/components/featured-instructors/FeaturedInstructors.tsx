@@ -14,7 +14,7 @@ const FeaturedInstructors: FC = () => {
             />
 
             {/* Instructors Grid */}
-            <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-7 mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-7 mx-auto">
                 {Array(6).fill(null).map((_, index) => (
                     <InstructorBox key={index} />
                 ))}

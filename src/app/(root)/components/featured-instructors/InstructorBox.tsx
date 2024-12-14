@@ -1,19 +1,21 @@
 import Image from 'next/image';
 import { FC } from 'react';
-import myImg from "@/assets/home-page-image/test-image.avif";
+import myImg from "@/assets/home-page-image/test-image.webp";
 import { Button } from '@/components/ui/button';
 
 const InstructorBox: FC = () => {
     return (
-        <div className="border text-secondary flex flex-col gap-4 p-4">
+        <div className="border rounded-md text-secondary flex flex-col gap-4 p-4">
             {/* Instructor Image */}
-            <Image
-                src={myImg}
-                width={200}
-                height={200}
-                alt="Instructor image"
-                className="rounded-full mx-auto w-24 h-24"
-            />
+            <div className='w-24 h-24 rounded-full mx-auto'>
+                <Image
+                    src={myImg}
+                    width={200}
+                    height={200}
+                    alt="Instructor image"
+                    className="rounded-full"
+                />
+            </div>
 
             {/* Instructor Details */}
             <div className="flex justify-between">
