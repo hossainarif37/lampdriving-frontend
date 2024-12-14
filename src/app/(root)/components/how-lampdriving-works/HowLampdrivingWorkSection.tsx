@@ -34,14 +34,21 @@ const HowLampdrivingWorkSection: FC = () => {
         subtitle="Simple, Trusted & Flexible Booking System"
       />
 
-      <div className="wrapper flex lg:justify-between gap-10 flex-col lg:flex-row mt-12">
-        <VideoSection
-          imageSrc={lampdrivingWordImage.src}
-          videoSrc="https://www.youtube.com/embed/d1tf9MMDfWw"
-          altText="How Lamp Driving Works"
-        />
+      <div className="wrapper flex justify-center mx-auto gap-10 flex-col lg:flex-row mt-12">
+        <div className="md:w-1/2">
+          <div className="w-full flex justify-center">
+            <VideoSection
+              imageSrc={lampdrivingWordImage.src}
+              videoSrc="https://www.youtube.com/embed/d1tf9MMDfWw"
+              altText="How Lamp Driving Works"
+            />
+          </div>
+        </div>
 
-        <StepsList steps={steps} />
+        <div className="md:w-1/2">
+
+          <StepsList steps={steps} />
+        </div>
       </div>
 
       {/* CTA Button */}

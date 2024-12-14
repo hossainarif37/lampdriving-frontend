@@ -21,11 +21,11 @@ const HighlightedSection: FC = () => {
           <div key={index} className="relative">
             {/* Skewed Background */}
             <div
-              className="flex-shrink-0 w-full md:h-[135px] h-[110px] md:skew-x-[-22deg]"
+              className="flex-shrink-0  md:h-[135px] h-[110px] md:skew-x-[-22deg]"
               style={{ backgroundColor: box.bgColor }}
             />
             {/* Feature Box */}
-            <div className="absolute top-0 right-28">
+            <div className="absolute top-0 right-28 text-center">
               <FeatureBox Icon={CalendarCheck} title={box.title} />
             </div>
           </div>
