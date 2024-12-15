@@ -33,7 +33,7 @@ export default {
   					height: '0'
   				}
   			},
-				//Add your new keyframes for sliding animation
+				//Add new keyframes for sliding animation
                 slide: {
                     '0%, 100%': { transform: 'translateX(0)' },
                     '50%': { transform: 'translateX(20px)' },
