@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 import myImg from "@/assets/home-page-image/test-image.webp"
 import { Star } from 'lucide-react';
+import shape from "@/assets/testimonials-image/testimonial-v1-shape1.png"
 
 export interface Testimonial {
     name: string;
@@ -17,31 +18,55 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard: FC<TestimonialCardProps> = ({ testimonial }) => {
-    const { name, title, rating, description, position } = testimonial;
+    const { name, title, rating, description, } = testimonial;
 
     return (
-        <div className="border border-gray-300 rounded-lg">
-            {/* Box part */}
-            <h1 className='md:text-xl border-b p-3 px-6 text-secondary font-semibold'>{title}</h1>
+        <div className="relative border border-gray-100 rounded-lg bg-white pb-8">
 
-            <div className='relative flex lg:flex-row flex-col gap-3 lg:items-center p-4 lg:p-6' >
-                <div className='md:w-1/5 '>
-                    <Image alt={`${name} image`} src={myImg} width={150} height={150} className='rounded-full' />
-                    <div className='absolute top-2 right-3 flex gap-2 bg-secondary text-textCol justify-center items-center  px-3 py-2 rounded-lg'>
-                        <Star className='w-5 text-primary' />
+
+            {/* Content */}
+            <div className='relative'>
+                <h1 className="text-xl border-b p-3 px-6 text-secondary font-bold">{title}</h1>
+                <p className='absolute top-2 right-3'>
+                    <Image src={shape} alt='shape-img' width={50} height={50} />
+                </p>
+            </div>
+
+            <div className="relative flex lg:flex-row flex-col gap-3 lg:items-center p-4 lg:p-6">
+                <div className="md:w-1/5">
+                    <Image
+                        alt={`${name} image`}
+                        src={myImg}
+                        width={150}
+                        height={150}
+                        className="rounded-full"
+                    />
+                    <div className="absolute -bottom-5 left-10 flex gap-2 bg-secondary text-textCol justify-center items-center px-5 py-2 rounded-full">
+                        <Star className="w-5 text-primary" />
                         <p>{rating}</p>
                     </div>
                 </div>
-                <div className='md:w-2/3 text-accent'>
+                <div className="md:w-2/3 text-accent md:mb-0 mb-4 ">
                     <p>{description}</p>
                 </div>
             </div>
 
-            {/* Reviewer position part */}
-            <div className=" p-4">
-                <h1 className="font-medium text-xl text-secondary" >{name} <span className="text-sm text-primary">{position}</span></h1>
-            </div>
+            {/* Background element */}
+            <div
+                className="absolute w-full h-full top-[14px] left-4 -bottom-2 -right-2 -z-10"
+                style={{
+                    backgroundColor: '#F0F7F3',
+                    borderRadius: '3px',
+                }}
+            ></div>
+
+            {/* Decorative corner triangle */}
+            <div
+                className="absolute left-[35px] -bottom-[59px] w-[45px] h-[45px] bg-[#F0F7F3] z-50"
+                style={{ clipPath: 'polygon(100% 0, 0 0, 100% 100%)' }}
+            ></div>
         </div>
+
     );
 };
 
