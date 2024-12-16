@@ -25,13 +25,13 @@ const VideoSection: FC<VideoSectionProps> = ({ imageSrc, videoSrc, altText }) =>
             priority={false}
           />
           <div
-            className="flex items-center text-secondary absolute top-[128px] left-[125px] cursor-pointer"
+            className="flex items-center text-white absolute top-[128px] left-[125px] cursor-pointer"
             onClick={() => setIsVideoPlaying(true)}
           >
-            <p className="w-14 h-14 rounded-full bg-primary flex justify-center items-center z-50 shadow-lg">
+            <p className="w-14 h-14 rounded-full gradient-color flex justify-center items-center z-50 shadow-lg">
               <CirclePlay className="w-8 h-8" />
             </p>
-            <Button className="bg-primary rounded-full h-12 ml-[-32px] z-0 text-secondary">
+            <Button className="gradient-color rounded-full h-12 ml-[-32px] z-0 ">
               Play video
             </Button>
           </div>

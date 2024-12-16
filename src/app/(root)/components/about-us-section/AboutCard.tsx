@@ -15,7 +15,7 @@ const AboutCard: FC<Card> = ({ card }: Card) => {
 
             <div className="relative w-20 h-20 mb-6">
                 {/* Diamond Background */}
-                <div className="absolute w-20 h-20 bg-slate-100 transform rotate-45 top-0 left-0"></div>
+                <div className="absolute w-20 h-20 bg-primary/5 transform rotate-45 top-0 left-0"></div>
                 {/* Icon Centered in the Diamond Background */}
                 <div className="absolute inset-0 flex items-center justify-center">
                     {icon} {/* Directly render the icon */}

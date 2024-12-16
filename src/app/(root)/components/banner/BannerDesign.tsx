@@ -6,7 +6,7 @@ import BannerLeftContent from './BannerLeftContent';
 const BannerDesign: FC = () => {
     return (
         <div
-            className="relative md:h-[650px] py-20 md:py-0 bg-cover bg-center"
+            className="relative md:h-[650px] xl:min-h-[820px] py-20 md:py-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${bannerBg.src})` }}
         >
             {/* transparent overlay */}

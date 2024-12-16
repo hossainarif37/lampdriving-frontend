@@ -11,32 +11,32 @@ interface Card {
 
 const cards: Card[] = [
     {
-        icon: <ShieldCheck className="text-primary w-14 h-14" />,
+        icon: <ShieldCheck className="text-gradient w-14 h-14" />,
         title: "BEST SAFETY MEASURES",
         description: "Our Instructors are Highly Trained in the latest Safety Techniques & Rules of the Road.",
     },
     {
-        icon: < BellElectric className="text-primary w-14 h-14" />,
+        icon: < BellElectric className="text-gradient w-14 h-14" />,
         title: "EXPERIENCED INSTRUCTORS",
         description: "All our Instructors are DMV Licensed, mentally and physically fit and have decade or more of Instruction History.",
     },
     {
-        icon: < Clock3 className="text-primary w-14 h-14" />,
+        icon: < Clock3 className="text-gradient w-14 h-14" />,
         title: "PERFECT TIMING",
         description: "Now is the perfect time to start your In Class, Online or Behind The Wheel Training.",
     },
     {
-        icon: < CircleDollarSign className="text-primary w-14 h-14" />,
+        icon: < CircleDollarSign className="text-gradient w-14 h-14" />,
         title: "AFFORDABLE FEE",
         description: "We know this process can be expensive. So we constantly monitor our competition's pricing.",
     },
     {
-        icon: <ShipWheel className="text-primary w-14 h-14" />,
+        icon: <ShipWheel className="text-gradient w-14 h-14" />,
         title: "CLASS FORMATS",
         description: "We offer In Classroom Drivers Education as well as Online Drivers Education.",
     },
     {
-        icon: <Banknote className="text-primary w-14 h-14" />,
+        icon: <Banknote className="text-gradient w-14 h-14" />,
         title: "PAYMENT PLANS",
         description: "We allow you to decide when and how you want to pay. We accept all major forms of payments.",
     },
