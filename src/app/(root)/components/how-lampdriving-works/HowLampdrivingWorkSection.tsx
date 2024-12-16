@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import lampdrivingWordImage from "@/assets/home-page-image/image-how-lampdriving-work.png";
 import StepsList from "./StepList";
 import SectionHeading from "../shared/section-heading/SectionHeading";
+import { ChevronRight } from "lucide-react";
 
 const steps = [
   {
@@ -28,7 +29,7 @@ const steps = [
 
 const HowLampdrivingWorkSection: FC = () => {
   return (
-    <section className="my-16 px-4 lg:px-0">
+    <section className="my-16 md:py-14 py-10 bg-gradient-to-r from-primary/5 to-gradient/5 px-4 lg:px-0">
       <SectionHeading
         title="How Lamp Driving Works"
         subtitle="Simple, Trusted & Flexible Booking System"
@@ -53,7 +54,7 @@ const HowLampdrivingWorkSection: FC = () => {
 
       {/* CTA Button */}
       <div className="text-center lg:mt-10 mt-6">
-        <Button className="bg-primary">Start learning to drive now</Button>
+        <Button className="gradient-color">Start learning to drive now <ChevronRight strokeWidth={3} /> </Button>
       </div>
     </section>
   );

@@ -11,14 +11,14 @@ const FooterSearchBoxDesign: FC = () => {
                 <div className="md:w-1/4 w-full font-semibold text-textCol text-center flex gap-3 border p-2 rounded-md bg-textCol">
                     <button
                         onClick={() => setSelectedOption('Auto')}
-                        className={`flex-1 px-0 py-1 rounded-md ${selectedOption === 'Auto' ? 'bg-primary text-textCol' : 'bg-textCol text-secondary'
+                        className={`flex-1 px-0 py-1 rounded-md ${selectedOption === 'Auto' ? 'gradient-color text-textCol' : 'bg-textCol text-secondary'
                             }`}
                     >
                         Auto
                     </button>
                     <button
                         onClick={() => setSelectedOption('Manual')}
-                        className={`flex-1 py-1 rounded-md ${selectedOption === 'Manual' ? 'bg-primary text-white' : 'bg-gray-200 text-black'
+                        className={`flex-1 py-1 rounded-md ${selectedOption === 'Manual' ? 'gradient-color text-white' : 'bg-gray-200 text-black'
                             }`}
                     >
                         Manual
@@ -32,7 +32,7 @@ const FooterSearchBoxDesign: FC = () => {
                         type="text"
                         placeholder="Enter your suburb"
                     />
-                    <button className="px-6 py-3 bg-primary text-black font-semibold rounded-md">
+                    <button className="px-6 py-3 gradient-color text-white font-semibold rounded-md">
                         SEARCH
                     </button>
                 </div>
