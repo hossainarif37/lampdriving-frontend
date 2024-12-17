@@ -11,7 +11,7 @@ const SearchBoxDesign: FC = () => {
             <div className="space-y-6">
 
                 {/* Heading */}
-                <h2 className="text-3xl font-bold text-secondary text-center bg-gradient-to-r from-primary to-gradient bg-clip-text text-transparent">
+                <h2 className="text-3xl font-bold text-secondary text-center bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent">
                     Find a driving instructor
                 </h2>
 
@@ -47,7 +47,7 @@ const SearchBoxDesign: FC = () => {
                 </div>
 
                 {/* Search button */}
-                <button className="w-full py-3 gradient-color text-textWhite font-semibold rounded-md">
+                <button className="w-full py-3 gradient-color text-light font-semibold rounded-md">
                     SEARCH
                 </button>
             </div>

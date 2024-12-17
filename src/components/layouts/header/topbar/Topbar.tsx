@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Topbar = () => {
     return (
-        <div className="bg-white p-4 border border-b border-gray-300">
+        <div className="bg-light p-4 border border-b border-gray-300">
             <div className="wrapper flex items-center justify-between text-secondary font-semibold">
                 {/* Left Side */}
                 <ul className="hidden md:flex items-center gap-x-4">
