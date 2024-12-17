@@ -6,7 +6,8 @@ import { ChevronRight } from 'lucide-react';
 
 const FeaturedInstructors: FC = () => {
     return (
-        <section className="wrapper mb-24">
+        <section className="bg-gray-100 lg:p-12 md:p-10 p-6">
+            <div className="wrapper">
             {/* Section Heading */}
             <SectionHeading
                 title="Top-Rated Instructors for Your Driving Lessons"
@@ -21,10 +22,11 @@ const FeaturedInstructors: FC = () => {
             </div>
 
             {/* Explore Instructors Button */}
-            <div className="text-center mt-6 md:mt-12">
-                <Button>
+                <div className="text-center  mt-6 md:mt-12">
+                    <Button className='gradient-color'>
                     Explore Instructors <ChevronRight strokeWidth={3} />
                 </Button>
+            </div>
             </div>
         </section>
     );
