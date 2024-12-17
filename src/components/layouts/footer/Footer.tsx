@@ -5,6 +5,7 @@ import { FC } from 'react';
 import CopyRightSection from './CopyRightSection';
 import FooterDesign from './FooterDesign';
 import FooterSearchBoxDesign from './FooterSearchBoxDesign';
+import footerbg from "@/assets/footer-images/footerbg.jpg"
 
 
 const Footer: FC = () => {
@@ -12,7 +13,7 @@ const Footer: FC = () => {
         <div className='mt-32 relative'>
             {/*== Footer search box ==*/}
             <FooterSearchBoxDesign />
-            <div className='bg-secondary'>
+            <div className=' bg-cover bg-center' style={{ backgroundImage: `url(${footerbg.src})` }}>
                 {/*==== Footer Body ===*/}
                 <FooterDesign />
 

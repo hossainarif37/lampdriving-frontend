@@ -13,7 +13,7 @@ const TabsDesign: FC = () => {
                         onClick={() => setActiveTab(tab)}
                         className={`md:px-4 px-3 py-2 rounded-full text-sm font-medium border transition-all
                             ${activeTab === tab
-                                ? "bg-secondary text-textCol border-secondary"
+                            ? "gradient-color text-textCol border-indigo"
                                 : "bg-textCol text-secondary border- hover:border-black hover:text-black"
                             }`}
                     >

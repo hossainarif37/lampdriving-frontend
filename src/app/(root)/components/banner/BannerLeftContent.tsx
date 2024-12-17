@@ -26,9 +26,9 @@ const BannerLeftContent: FC = () => {
                         </p>
                         <div>
                             {/* Star rating */}
-                            <div className="text-primary font-bold flex gap-1">
+                            <div className="text-indigo font-bold flex gap-1">
                                 {[...Array(5)].map((_, i) => (
-                                    <Star key={i} className='fill-primary' />
+                                    <Star key={i} className='fill-indigo' />
                                 ))}
                             </div>
                             <p className='md:text-base text-xs'>2.8k Reviews by Trustpilot</p>
@@ -48,7 +48,7 @@ const BannerLeftContent: FC = () => {
 
                 {/* Pricing badge */}
                 <div
-                    className="flex flex-col justify-center items-center gradient-color w-28 h-28 text-textWhite font-bold md:text-base text-xs"
+                    className="flex flex-col justify-center items-center gradient-color w-28 h-28 text-light font-bold md:text-base text-xs"
                     style={{
                         clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
                     }}

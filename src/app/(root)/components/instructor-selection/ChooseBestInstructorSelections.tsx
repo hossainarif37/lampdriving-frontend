@@ -30,7 +30,7 @@ const instructorBoxes = [
 const ChooseBestInstructorSelections: FC = () => {
 
     return (
-        <section className='flex flex-col gap-5 lg:gap-10 mb-20'>
+        <section className='flex flex-col gap-5 lg:gap-10 py-20 bg-gradient-to-b from-[#F0F7F3] to-[#ffff]'>
             <SectionHeading
                 title="Book driving lessons with confidence"
                 subtitle="Choose a driving instructor you can trust"

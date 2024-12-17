@@ -8,7 +8,7 @@ import TabsDesign from './TabsDesign';
 const FAQSection: FC = () => {
 
     return (
-        <div className=' md:mb-20 md:mt-10 p-3 md:space-y-6 space-y-3'>
+        <div className=' p-3 md:space-y-6 space-y-3 bg-gradient-to-b md:py-20 py-16 from-[#F0F7F3] to-[#ffff]'>
             {/*Section Heading*/}
             <SectionHeading title='Top Frequently Asked Questions' subtitle='Find answers to common queries about our driving courses, instructors, fees, and more.' />
             {/*Tabs button part*/}

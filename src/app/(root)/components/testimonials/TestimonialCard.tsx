@@ -13,36 +13,36 @@ export interface Testimonial {
     position: string;
 }
 
-interface TestimonialCardProps {
+interface ITestimonialCardProps {
     testimonial: Testimonial;
 }
 
-const TestimonialCard: FC<TestimonialCardProps> = ({ testimonial }) => {
+const TestimonialCard: FC<ITestimonialCardProps> = ({ testimonial }) => {
     const { name, title, rating, description, } = testimonial;
 
     return (
-        <div className="relative border border-gray-100 rounded-lg bg-white pb-8">
-
+        <div className="relative border border-gray-100 bg-gradient-to-r from-indigo/10 rounded-lg">
 
             {/* Content */}
+
             <div className='relative'>
-                <h1 className="text-xl border-b p-3 px-6 text-secondary font-bold">{title}</h1>
+                <h1 className="text-xl border-b p-3 px-6 bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent font-bold">{title}</h1>
                 <p className='absolute top-2 right-3'>
                     <Image src={shape} alt='shape-img' width={50} height={50} />
                 </p>
             </div>
 
-            <div className="relative flex lg:flex-row flex-col gap-3 lg:items-center p-4 lg:p-6">
-                <div className="md:w-1/5">
+            <div className="relative flex md:flex-row flex-col md:gap-7 gap-5 md:items-center p-4 lg:p-6">
+                <div className="">
                     <Image
                         alt={`${name} image`}
                         src={myImg}
-                        width={150}
-                        height={150}
+                        width={120}
+                        height={120}
                         className="rounded-full"
                     />
-                    <div className="absolute bottom-8 left-20  gradient-color  flex gap-1 text-textCol justify-center items-center px-3 py-1 rounded-full">
-                        <Star className="w-4 text-white" />
+                    <div className="absolute md:top-24 md:left-24  lg:top-24 top-[82px] left-20  gradient-color  flex gap-1 text-textCol justify-center items-center px-3 py-1 rounded-full text-xl md:text-base lg:text-sm">
+                        <Star className="md:w-4 lg:w-4 w-6 text-light" />
                         <p>{rating}</p>
                     </div>
                 </div>
