@@ -1,36 +1,39 @@
 "use client";
+import { Check } from 'lucide-react';
 import { FC, useState } from 'react';
 
 const SearchBoxDesign: FC = () => {
-    const [selectedOption, setSelectedOption] = useState('Auto'); // State for selected button
-
+    const [selectedOption, setSelectedOption] = useState('Auto');
+    console.log(selectedOption);
     return (
-        <div className="bg-textCol lg:w-[500px] md:w-[400px] w-full rounded-lg lg:px-8 md:px-6 px-3 lg:py-14 md:py-12 py-8">
+        <div className="bg-textCol lg:w-[500px] md:w-[400px] w-full rounded-lg lg:px-8 md:px-6 px-3 lg:py-14 md:py-10 py-7">
             {/* Container for all content */}
-            <div className="space-y-8">
+            <div className="space-y-6">
 
                 {/* Heading */}
-                <h2 className="text-3xl font-bold text-secondary text-center">
+                <h2 className="text-3xl font-bold text-secondary text-center bg-gradient-to-r from-primary to-gradient bg-clip-text text-transparent">
                     Find a driving instructor
                 </h2>
 
                 {/* Toggle buttons for Auto/Manual */}
-                <div className="w-full font-semibold text-textCol text-center border flex gap-3 p-2 rounded-md">
+                <div className="w-full font-semibold text-textCol text-center border flex gap-3 p-3 rounded-md">
                     <button
                         onClick={() => setSelectedOption('Auto')}
-                        className={`flex-1 px-0 py-2 rounded-md ${selectedOption === 'Auto'
-                            ? 'bg-primary text-textCol'
+                        className={`w-1/2 flex justify-center items-center px-0 py-3 rounded-md ${selectedOption === 'Auto'
+                            ? 'gradient-color text-textCol'
                             : 'bg-gray-200 text-secondary'}`}
-                    >
-                        Auto
+                    > 
+                        {selectedOption == "Auto" && <span><Check className='w-5' /></span>}
+                        <span>Auto</span>
                     </button>
                     <button
                         onClick={() => setSelectedOption('Manual')}
-                        className={`flex-1 py-2 rounded-md ${selectedOption === 'Manual'
-                            ? 'bg-primary text-textCol'
+                        className={`w-1/2 flex justify-center items-center py-2 rounded-md ${selectedOption === 'Manual'
+                            ? 'gradient-color text-textCol'
                             : 'bg-gray-200 text-secondary'}`}
                     >
-                        Manual
+                        {selectedOption == "Manual" && <span><Check className='w-5' /></span>}
+                        <span>Manual</span>
                     </button>
                 </div>
 
@@ -44,7 +47,7 @@ const SearchBoxDesign: FC = () => {
                 </div>
 
                 {/* Search button */}
-                <button className="w-full py-3 bg-primary text-secondary font-semibold rounded-md">
+                <button className="w-full py-3 gradient-color text-textWhite font-semibold rounded-md">
                     SEARCH
                 </button>
             </div>

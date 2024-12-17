@@ -1,12 +1,15 @@
 import Link from 'next/link';
 import { FC } from 'react';
+import logo from "@/assets/logo-image/logo.png"
+import Image from 'next/image';
 
 const FooterDesign: FC = () => {
     return (
         <div className="wrapper grid lg:grid-cols-4 md:grid-cols-2 gap-8 pt-40 pb-10 text-textCol px-4">
             {/* About Section */}
-            <div className="space-y-8">
-                <h2 className="text-2xl text-primary font-bold">LampLogo</h2>
+            <div >
+                {/* <h2 className="text-2xl text-primary font-bold">LampLogo</h2> */}
+                <Image alt='lamdriving logo' src={logo} height={100} width={140} />
                 <p className="text-sm">
                     Shahid Uzzaman has more than 25 years of driving instruction experience in New South Wales (NSW). He is known for being very friendly and polite and specializes in preparing for the driving test. His endless experience has helped over a thousand people pass through his school.
                 </p>

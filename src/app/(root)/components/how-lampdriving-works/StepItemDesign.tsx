@@ -10,7 +10,7 @@ const StepItemDesign: FC<StepItemProps> = ({ stepNumber, title, description }) =
   return (
     <div className="flex gap-3">
       {/* Step Number Circle */}
-      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-primary text-textCol lg:text-xl flex-shrink-0">
+      <div className="w-8 h-8 flex items-center justify-center rounded-full gradient-color text-textCol lg:text-xl flex-shrink-0">
         {stepNumber}
       </div>
 

@@ -1,8 +1,9 @@
-
+import logo from "@/assets/logo-image/logo.png"
+import Image from "next/image";
 const LampLogo = () => {
     return (
-        <div className="text-2xl md:text-3xl xl:text-4xl font-bold text-secondary">
-            LampLogo
+        <div>
+            <Image src={logo} alt="logo image" width={150} height={100} />
         </div>
     );
 };
