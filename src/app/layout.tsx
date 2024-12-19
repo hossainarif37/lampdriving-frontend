@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Pathway_Extreme } from "next/font/google";
 import ReduxProvider from "@/providers/ReduxProvider";
+import AuthProvider from "@/providers/AuthProvider";
 
 export const metadata: Metadata = {
   title: "Lamp Driving School",
@@ -22,7 +23,9 @@ export default function MainLayout({
         className={`${pathway.className} antialiased`}
       >
         <ReduxProvider>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </ReduxProvider>
       </body>
     </html>
