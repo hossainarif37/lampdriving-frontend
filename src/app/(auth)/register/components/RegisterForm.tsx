@@ -3,32 +3,16 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { IRegisterInputs } from '@/types/auth';
 import Link from 'next/link';
 import { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-type Inputs = {
-    name: {
-        firstName: string;
-        lastName: string;
-    },
-    email: string;
-    phone: number;
-    gender: string;
-    dateOfBirth: string;
-    address: {
-        street: string;
-        suburb: string;
-        state: string;
-        zipCode: number;
-    },
-    password: string;
-}
 
 const RegisterForm: FC = () => {
-    const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
+    const { register, handleSubmit, formState: { errors }, control } = useForm<IRegisterInputs>();
 
-    const handleRegister = (data: Inputs) => {
+    const handleRegister = (data: IRegisterInputs) => {
         console.log(data);
     }
 
@@ -84,7 +68,7 @@ const RegisterForm: FC = () => {
                                     className='mt-1 flex gap-x-5'
                                 >
                                     <div className="flex items-center space-x-1">
-                                        <RadioGroupItem value="male" id="male" className=''/>
+                                        <RadioGroupItem value="male" id="male" className='' />
                                         <label htmlFor="male" className="font-medium text-secondary">Male</label>
                                     </div>
                                     <div className="flex items-center space-x-1">
