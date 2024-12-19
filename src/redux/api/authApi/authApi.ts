@@ -1,4 +1,4 @@
-import { IRegisterInputs } from "@/types/auth";
+import { ILoginInputs, IRegisterInputs } from "@/types/auth";
 import baseApi from "../baseApi";
 
 const usersApi = baseApi.injectEndpoints({
@@ -9,8 +9,15 @@ const usersApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: data
             })
+        }),
+        loginUser: builder.mutation<ILoginInputs, object>({
+            query: (data) => ({
+                url: '/auth/login',
+                method: "POST",
+                body: data
+            })
         })
     })
 })
 
-export const { useRegisterUserMutation } = usersApi;
+export const { useRegisterUserMutation, useLoginUserMutation } = usersApi;
