@@ -1,3 +1,5 @@
+import { IUser } from "./user";
+
 export interface IRegisterInputs {
     name: {
         firstName: string;
@@ -19,12 +21,6 @@ export interface IRegisterInputs {
 export interface ILoginInputs {
     email: string;
     password: string;
-}
-
-export interface IUser {
-    email: string;
-    name: string;
-    _id: string;
 }
 
 export interface IauthSliceState {
