@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
 import { IRegisterInputs } from '@/types/auth';
 import Link from 'next/link';
 import { FC } from 'react';
@@ -11,9 +12,11 @@ import { Controller, useForm } from 'react-hook-form';
 
 const RegisterForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control } = useForm<IRegisterInputs>();
+    const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
 
     const handleRegister = (data: IRegisterInputs) => {
-        console.log(data);
+        const dbResponsePromise = registerUser(data).unwrap();
+        console.log(dbResponsePromise, isRegistering);
     }
 
     return (
