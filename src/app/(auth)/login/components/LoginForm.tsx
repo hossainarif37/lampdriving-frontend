@@ -2,19 +2,17 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { ILoginInputs } from '@/types/auth';
 import Link from 'next/link';
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
-type Inputs = {
-    email: string;
-    password: string;
-}
+
 
 const LoginForm: FC = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+    const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>();
 
-    const handleLogin = (data: Inputs) => {
+    const handleLogin = (data: ILoginInputs) => {
         console.log(data);
     }
 

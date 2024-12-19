@@ -16,6 +16,11 @@ export interface IRegisterInputs {
     password: string;
 }
 
+export interface ILoginInputs {
+    email: string;
+    password: string;
+}
+
 export interface IUser {
     email: string;
     name: string;
