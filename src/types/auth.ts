@@ -19,7 +19,7 @@ export interface IRegisterInputs {
 }
 
 export interface ILoginInputs {
-    email: string;
+    emailOrPhone: string;
     password: string;
 }
 
