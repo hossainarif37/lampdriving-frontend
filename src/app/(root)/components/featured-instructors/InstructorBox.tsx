@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 
 const InstructorBox: FC = () => {
     return (
-        <div className=" rounded-md text-secondary flex flex-col gap-4 px-4 py-6 bg-textWhite">
+        <div className=" rounded-md text-secondary flex flex-col gap-4 px-4 py-6 bg-light">
             {/* Instructor Image */}
             <div className=' rounded-full mx-auto'>
                 <Image
@@ -26,18 +26,18 @@ const InstructorBox: FC = () => {
                     <p><strong>Type:</strong> Auto/Manual</p>
                 </div>
                 <div>
-                    <h4 className="font-bold text-xl">
-                        $50/<span className="text-secondary/50 text-sm">hr</span>
+                    <h4 className="font-bold text-xl bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent">
+                        $50/<span className="text-sm">hr</span>
                     </h4>
                 </div>
             </div>
 
             {/* Action Buttons */}
             <div className="flex gap-3">
-                <Button className="w-1/2 bg-white border hover:bg-gray-100 text-secondary h-11">
+                <Button className="w-1/2 bg-light border hover:bg-gray-100 text-secondary h-11">
                     View Profile
                 </Button>
-                <Button className="w-1/2 h-11 text-textWhite bg-gradient-to-r from-indigo-600 to-purple-600 ">
+                <Button className="w-1/2 h-11 text-light bg-gradient-to-r gradient-color">
                     Book Online Now
                 </Button>
             </div>

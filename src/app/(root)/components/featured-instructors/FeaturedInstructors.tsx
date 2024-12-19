@@ -6,7 +6,7 @@ import { ChevronRight } from 'lucide-react';
 
 const FeaturedInstructors: FC = () => {
     return (
-        <section className="bg-gray-100 lg:p-12 md:p-10 p-6">
+        <section className="bg-gray-50 lg:py-20 md:py-16 p-6">
             <div className="wrapper">
             {/* Section Heading */}
             <SectionHeading

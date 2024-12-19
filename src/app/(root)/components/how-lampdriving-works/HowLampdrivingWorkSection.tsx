@@ -29,7 +29,7 @@ const steps = [
 
 const HowLampdrivingWorkSection: FC = () => {
   return (
-    <section className="my-16 md:py-14 py-10 bg-gradient-to-r from-primary/5 to-gradient/5 px-4 lg:px-0">
+    <section className="md:py-16 py-14 bg-gradient-to-r from-primary/5 px-4 lg:px-0">
       <SectionHeading
         title="How Lamp Driving Works"
         subtitle="Simple, Trusted & Flexible Booking System"

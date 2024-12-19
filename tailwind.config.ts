@@ -13,12 +13,12 @@ export default {
   		colors: {
   			// primary: '#ff5200',
   			primary: '#4f46e5',
-  			gradient: '#9333ea',
+  			indigo: '#9333ea',
   			// secondary: '#1A373A',
 			secondary:"#1F2A37",
   			accent: '#555A57',
   			textCol: '#F5F5F5',
-			textWhite:"#FFFFFF"
+			light:"#FFFFFF"
   		},
   		keyframes: {
   			'accordion-down': {
