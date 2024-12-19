@@ -1,8 +1,8 @@
-import { authSliceState } from "@/types/auth";
+import { IAuthSliceState } from "@/types/auth";
 import { createSlice } from "@reduxjs/toolkit";
 
 
-const initialState: authSliceState = {
+const initialState: IAuthSliceState = {
     isAuthenticate: false,
     isAuthLoading: true,
     user: null,

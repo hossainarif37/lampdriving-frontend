@@ -23,7 +23,7 @@ export interface ILoginInputs {
     password: string;
 }
 
-export interface IauthSliceState {
+export interface IAuthSliceState {
     isAuthenticate: boolean;
     isAuthLoading: boolean;
     user: IUser | null;
