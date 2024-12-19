@@ -5,24 +5,24 @@ import { IUser } from "@/types/user";
 
 const usersApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        registerUser: builder.mutation<IRegisterInputs, IResponseBase>({
+        registerUser: builder.mutation<IResponseBase, IRegisterInputs>({
             query: (data) => ({
                 url: '/auth/learners/register',
                 method: "POST",
                 body: data
             })
         }),
-        loginUser: builder.mutation<ILoginInputs, IResponseWithData<IUser>>({
+        loginUser: builder.mutation<IResponseWithData<IUser>, ILoginInputs>({
             query: (data) => ({
                 url: '/auth/login',
                 method: "POST",
                 body: data
             })
         }),
-        currentUser: builder.query<void, IResponseWithData<IUser>>({
+        currentUser: builder.query({
             query: () => '/user/me'
         }),
-        logOutUser: builder.query<void, void>({
+        logOutUser: builder.query({
             query: () => '/auth/logout'
         })
     })
