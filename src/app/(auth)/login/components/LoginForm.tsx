@@ -68,7 +68,7 @@ const LoginForm: FC = () => {
             </div>
 
             {/* Submit */}
-            <Button className='w-full mt-3 bg-primary h-12'>Login</Button>
+            <Button className='w-full mt-3 gradient-color h-12'>Login</Button>
 
             <p className='mt-5'>Don&apos;t have an account? <Link href="/register" className='text-blue-500 hover:underline font-semibold'>Register Here</Link></p>
         </form>

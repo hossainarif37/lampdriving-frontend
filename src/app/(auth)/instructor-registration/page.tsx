@@ -18,7 +18,6 @@ const InstructorRegistrationPage: FC = () => {
                 </Suspense>
             </div>
         </div>
-
     );
 };
 
