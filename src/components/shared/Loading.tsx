@@ -4,8 +4,10 @@ import { LoaderCircle } from "lucide-react";
 
 const Loading = ({ className }: { className?: string }) => {
     return (
-        <div className={cn(`flex justify-center py-20 animate-spin`, className)}>
-            <LoaderCircle width={40} height={40} />
+        <div className="flex items-center justify-center min-h-screen">
+            <div className={cn(`animate-spin`, className)}>
+                <LoaderCircle width={40} height={40} />
+            </div>
         </div>
     );
 };
