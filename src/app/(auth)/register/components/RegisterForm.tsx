@@ -3,9 +3,13 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { toast } from '@/hooks/use-toast';
 import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
+import { useAppDispatch } from '@/redux/hook';
+import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { IRegisterInputs } from '@/types/auth';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -14,9 +18,20 @@ const RegisterForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control } = useForm<IRegisterInputs>();
     const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
 
+    const router = useRouter();
+
     const handleRegister = (data: IRegisterInputs) => {
-        const dbResponsePromise = registerUser(data).unwrap();
-        console.log(dbResponsePromise, isRegistering);
+        registerUser(data).unwrap().then((res) => {
+            toast({
+                message: res.message,
+            })
+            router.push("/login");
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong",
+            })
+        })
     }
 
     return (
@@ -149,7 +164,7 @@ const RegisterForm: FC = () => {
                 </div>
             </div>
 
-            <Button className='w-full mt-3 bg-primary h-12'>Register</Button>
+            <Button disabled={isRegistering} className='w-full mt-3 bg-primary h-12'>Register</Button>
 
             <p className='mt-5'>Already have an account? <Link href="/login" className='text-blue-500 hover:underline font-semibold'>Login Here</Link></p>
         </form>
