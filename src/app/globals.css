@@ -9,6 +9,9 @@
  .gradient-color {
     @apply bg-gradient-to-r from-primary/95 to-indigo/80;
   }
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent
+  }
 }
 
 
