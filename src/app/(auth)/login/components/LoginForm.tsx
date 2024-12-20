@@ -2,23 +2,42 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { toast } from '@/hooks/use-toast';
+import { useLoginUserMutation } from '@/redux/api/authApi/authApi';
+import { useAppDispatch } from '@/redux/hook';
+import { saveUser } from '@/redux/slices/authSlice/authSlice';
+import { ILoginInputs } from '@/types/auth';
 import Link from 'next/link';
-import { FC } from 'react';
+import { useRouter } from 'next/navigation';
+import { FC, use } from 'react';
 import { useForm } from 'react-hook-form';
 
-type Inputs = {
-    email: string;
-    password: string;
-}
+
 
 const LoginForm: FC = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+    const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>();
+    const [loginUser, { isLoading: isLoginLoading }] = useLoginUserMutation();
 
-    const handleLogin = (data: Inputs) => {
-        console.log(data);
+    const dispatch = useAppDispatch();
+
+    const router = useRouter();
+
+    const handleLogin = (data: ILoginInputs) => {
+        loginUser(data).unwrap().then((res) => {
+            toast({
+                message: res.message
+            });
+            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
+            router.push('/')
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong"
+            });
+        })
     }
 
-    console.log(errors);
+
 
     return (
         <form
@@ -31,18 +50,18 @@ const LoginForm: FC = () => {
                 <div className='flex flex-col gap-5'>
                     {/* Email */}
                     <div>
-                        <label htmlFor="email" className='font-semibold text-secondary'>Email</label>
+                        <label htmlFor="email" className='font-semibold text-secondary'>Email/Phone</label>
                         <Input
-                            {...register('email', {
+                            {...register('emailOrPhone', {
                                 required: "Email is required",
                                 pattern: {
                                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                     message: "Invalid email address"
                                 }
                             })}
-                            type="email" id='email' placeholder="Enter your email" className='xl:h-12 mt-1'
+                            type="text" id='emailOrPhone' placeholder="Enter your email or phone" className='xl:h-12 mt-1'
                         />
-                        {errors?.email && <p className='text-red-500 text-sm mt-1'>{errors?.email?.message}</p>}
+                        {errors?.emailOrPhone && <p className='text-red-500 text-sm mt-1'>{errors?.emailOrPhone?.message}</p>}
                     </div>
 
                     {/* Password */}
@@ -68,7 +87,7 @@ const LoginForm: FC = () => {
             </div>
 
             {/* Submit */}
-            <Button className='w-full mt-3 bg-primary h-12'>Login</Button>
+            <Button className='w-full mt-3 bg-primary h-12' disabled={isLoginLoading}>Login</Button>
 
             <p className='mt-5'>Don&apos;t have an account? <Link href="/register" className='text-blue-500 hover:underline font-semibold'>Register Here</Link></p>
         </form>

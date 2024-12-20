@@ -3,33 +3,35 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { toast } from '@/hooks/use-toast';
+import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
+import { useAppDispatch } from '@/redux/hook';
+import { saveUser } from '@/redux/slices/authSlice/authSlice';
+import { IRegisterInputs } from '@/types/auth';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-type Inputs = {
-    name: {
-        firstName: string;
-        lastName: string;
-    },
-    email: string;
-    phone: number;
-    gender: string;
-    dateOfBirth: string;
-    address: {
-        street: string;
-        suburb: string;
-        state: string;
-        zipCode: number;
-    },
-    password: string;
-}
 
 const RegisterForm: FC = () => {
-    const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
+    const { register, handleSubmit, formState: { errors }, control } = useForm<IRegisterInputs>();
+    const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
 
-    const handleRegister = (data: Inputs) => {
-        console.log(data);
+    const router = useRouter();
+
+    const handleRegister = (data: IRegisterInputs) => {
+        registerUser(data).unwrap().then((res) => {
+            toast({
+                message: res.message,
+            })
+            router.push("/login");
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong",
+            })
+        })
     }
 
     return (
@@ -84,7 +86,7 @@ const RegisterForm: FC = () => {
                                     className='mt-1 flex gap-x-5'
                                 >
                                     <div className="flex items-center space-x-1">
-                                        <RadioGroupItem value="male" id="male" className=''/>
+                                        <RadioGroupItem value="male" id="male" className='' />
                                         <label htmlFor="male" className="font-medium text-secondary">Male</label>
                                     </div>
                                     <div className="flex items-center space-x-1">
@@ -162,7 +164,7 @@ const RegisterForm: FC = () => {
                 </div>
             </div>
 
-            <Button className='w-full mt-3 bg-primary h-12'>Register</Button>
+            <Button disabled={isRegistering} className='w-full mt-3 bg-primary h-12'>Register</Button>
 
             <p className='mt-5'>Already have an account? <Link href="/login" className='text-blue-500 hover:underline font-semibold'>Login Here</Link></p>
         </form>
