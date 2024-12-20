@@ -4,6 +4,23 @@
 
 @layer utilities {
   .wrapper {
-      @apply max-w-7xl mx-auto px-2 lg:px-0
+      @apply max-w-7xl mx-auto px-3 lg:px-0
   }
+ .gradient-color {
+    @apply bg-gradient-to-r from-primary/95 to-indigo/80;
+  }
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: all 5000s ease-in-out 0s;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
 }

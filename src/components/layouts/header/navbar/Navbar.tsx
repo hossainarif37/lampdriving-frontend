@@ -6,8 +6,8 @@ import MobileNav from "./MobileNav";
 
 const Navbar = () => {
     return (
-        <nav className="">
-            <div className="wrapper flex justify-between items-center py-5 w-full">
+        <nav className="bg-light">
+            <div className="wrapper flex justify-between items-center py-2 w-full">
                 <div>
                     <LampLogo />
                 </div>
@@ -23,7 +23,7 @@ const Navbar = () => {
                     }
                 </ul>
 
-                <Button className="hidden md:block" size={"lg"}>Book Lesson</Button>
+                <Button className="hidden md:block gradient-color" size={"lg"}>Book Lesson</Button>
 
                 {/* Mobile Nav */}
                 <MobileNav />
