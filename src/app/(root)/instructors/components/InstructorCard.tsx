@@ -3,6 +3,7 @@ import { Star, Car, Clock, ExternalLink, Calendar, ArrowBigRight, ChevronRight }
 import Image from "next/image";
 import { StaticImageData } from "next/image";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 
 // Define the TypeScript interface for the instructor
@@ -95,11 +96,11 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor }) => {
                 </div>
 
                 {/* Check Availability Link */}
-                <a href="#" className="flex justify-center gap-1 underline cursor-pointer">
+                <Link href="#" className="flex justify-center gap-1 underline cursor-pointer">
                     <Calendar className="w-6 h-6 text-primary" />
                     <span className="text-primary">Check availability</span>
                     <ChevronRight className="text-primary"/>
-                </a>
+                </Link>
             </div>
 
             
