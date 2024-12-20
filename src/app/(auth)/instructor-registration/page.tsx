@@ -8,11 +8,11 @@ import InstructorRegistration from './components/InstructorRegistration';
 const InstructorRegistrationPage: FC = () => {
     return (
         <div className="wrapper mx-auto px-4 py-8">
-            <h1 className="text-2xl font-bold mb-6 text-center">Instructor Registration</h1>
+            <h1 className="text-4xl text-secondary font-bold my-10 text-center">Instructor Registration</h1>
             <Suspense fallback={<Loading />}>
                 <StepIndicator />
             </Suspense>
-            <div className="mt-8">
+            <div className="mt-8 min-h-screen flex flex-col">
                 <Suspense fallback={<Loading />}>
                     <InstructorRegistration/>
                 </Suspense>

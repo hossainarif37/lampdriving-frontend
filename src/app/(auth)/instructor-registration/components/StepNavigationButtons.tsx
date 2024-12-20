@@ -4,34 +4,33 @@ import { FC } from 'react';
 
 const StepNavigationButtons: FC<{ prev: string, next: string }> = ({ prev, next }) => {
     return (
-        <div className='flex gap-4'>
+        <div className='flex gap-5 justify-end mt-10'>
             <Link
                 href={prev !== "" ? `/instructor-registration?step=${prev}` : "#"}
                 className={prev === "" ? "pointer-events-none" : ""}
             >
                 <Button
                     disabled={prev === ""}
-                    className='h-11 md:w-40'
+                    className='h-11 xl:h-14 md:w-40'
                 >
-                    Previous 
+                    Previous
                 </Button>
             </Link>
             {
                 next === "" ? (
                     <Button
                         type='submit'
-                        className='h-11 md:w-40 gradient-color'
+                        className='h-11 xl:h-14 md:w-40 gradient-color'
                     >
                         Submit
                     </Button>
                 ) : (
-                    <Link href={`/instructor-registration?step=${next}`}>
-                        <Button
-                            className='h-11 md:w-40 gradient-color' 
-                        >
+                    <Button
+                        type='submit'
+                        className='h-11 xl:h-14 md:w-40 gradient-color'
+                    >
                             Next
-                        </Button>
-                    </Link>
+                    </Button>
                 )
             }
         </div>
