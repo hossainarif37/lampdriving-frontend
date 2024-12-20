@@ -5,8 +5,6 @@ import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from '@/hooks/use-toast';
 import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
-import { useAppDispatch } from '@/redux/hook';
-import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { IRegisterInputs } from '@/types/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';

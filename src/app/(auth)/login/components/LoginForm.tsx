@@ -9,7 +9,7 @@ import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { ILoginInputs } from '@/types/auth';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FC, use } from 'react';
+import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 
