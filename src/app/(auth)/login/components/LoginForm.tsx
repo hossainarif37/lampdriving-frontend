@@ -2,10 +2,14 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { toast } from '@/hooks/use-toast';
 import { useLoginUserMutation } from '@/redux/api/authApi/authApi';
+import { useAppDispatch } from '@/redux/hook';
+import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { ILoginInputs } from '@/types/auth';
 import Link from 'next/link';
-import { FC } from 'react';
+import { useRouter } from 'next/navigation';
+import { FC, use } from 'react';
 import { useForm } from 'react-hook-form';
 
 
@@ -14,13 +18,26 @@ const LoginForm: FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>();
     const [loginUser, { isLoading: isLoginLoading }] = useLoginUserMutation();
 
+    const dispatch = useAppDispatch();
+
+    const router = useRouter();
+
     const handleLogin = (data: ILoginInputs) => {
-        const dbResponsePromise = loginUser(data).unwrap();
-        console.log(dbResponsePromise, isLoginLoading);
+        loginUser(data).unwrap().then((res) => {
+            toast({
+                message: res.message
+            });
+            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
+            router.push('/')
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message
+            });
+        })
     }
 
-    
-    console.log(isLoginLoading);
+
 
     return (
         <form
@@ -70,7 +87,7 @@ const LoginForm: FC = () => {
             </div>
 
             {/* Submit */}
-            <Button className='w-full mt-3 bg-primary h-12'>Login</Button>
+            <Button className='w-full mt-3 bg-primary h-12' disabled={isLoginLoading}>Login</Button>
 
             <p className='mt-5'>Don&apos;t have an account? <Link href="/register" className='text-blue-500 hover:underline font-semibold'>Register Here</Link></p>
         </form>
