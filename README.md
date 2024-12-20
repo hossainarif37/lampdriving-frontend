@@ -1,6 +1,6 @@
 # Lamp Driving FrontEnd
 
-A modern and scalable frontend application built with **Next.js**, **Redux**, **Tailwind CSS**, **TypeScript**, and **Docker**. This project follows a clean and maintainable folder structure for enhanced development efficiency.
+A modern and scalable frontend application built with **Next.js**, **Redux**, **Tailwind CSS**, **TypeScript**, and **Docker**. This project follows a clean and maintainable folder structure for enhanced development efficiency
 
 ---
 
