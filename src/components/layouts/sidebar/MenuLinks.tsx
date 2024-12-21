@@ -1,12 +1,66 @@
 "use client"
 import NavLink from '@/components/shared/NavLink';
-import { BookIcon, DollarSignIcon, History, LayoutDashboardIcon, LucideRecycle, Recycle, RecycleIcon, Settings2Icon, Wallet } from 'lucide-react';
+import { useAppSelector } from '@/redux/hook';
+import { BookIcon, DollarSignIcon, History, LayoutDashboardIcon, Recycle, Settings2Icon, TimerIcon, Wallet } from 'lucide-react';
 import React from 'react';
 
+interface IRoute {
+    name: string;
+    path: string;
+    icon: React.ReactNode;
+}
 
 const MenuLinks = () => {
+    const { user } = useAppSelector(state => state.authSlice);
 
-    const adminRoutes = [
+    const learnerRoutes: IRoute[] = [
+        {
+            name: 'Dashboard',
+            path: '/dashboard/learner',
+            icon: <LayoutDashboardIcon />
+        },
+        {
+            name: 'Manage Bookings',
+            path: '/dashboard/learner/manage-bookings',
+            icon: <BookIcon />
+        },
+        {
+            name: 'Transaction History',
+            path: '/dashboard/learner/transaction-history',
+            icon: <History />
+        }
+    ];
+
+
+    const instructorRoutes: IRoute[] = [
+        {
+            name: 'Dashboard',
+            path: '/dashboard/instructor',
+            icon: <LayoutDashboardIcon />
+        },
+        {
+            name: 'Manage Bookings',
+            path: '/dashboard/instructor/manage-bookings',
+            icon: <BookIcon />
+        },
+        {
+            name: 'Manage Availability',
+            path: '/dashboard/instructor/manage-bookings',
+            icon: <TimerIcon />
+        },
+        {
+            name: 'Wallet',
+            path: '/dashboard/instructor/wallet',
+            icon: <Wallet />
+        },
+        {
+            name: 'Transaction History',
+            path: '/dashboard/instructor/transaction-history',
+            icon: <History />
+        }
+    ];
+
+    const adminRoutes: IRoute[] = [
         {
             name: 'Dashboard',
             path: '/dashboard/admin',
@@ -57,13 +111,16 @@ const MenuLinks = () => {
             path: '/dashboard/admin/recycle-bin',
             icon: <Recycle />
         }
-    ]
+    ];
+
+    const routes = user?.role === "admin" ? adminRoutes : user?.role === "instructor" ? instructorRoutes : learnerRoutes;
+
     return (
         <div>
             <div className='my-6'>
                 <div className='flex flex-col gap-2 justify-center h-full my-2'>
                     {
-                        adminRoutes.map((route, index) => (
+                        routes.map((route, index) => (
                             <NavLink key={index} href={route.path} active='activeSidebar' other='sidebar'>
                                 {route.icon}
                                 {route.name}
