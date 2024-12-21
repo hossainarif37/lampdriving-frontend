@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
 import FileUpload from '@/components/shared/FileUpload';
 import { Input } from '@/components/ui/input';
@@ -16,14 +16,15 @@ type Inputs = {
 }
 
 const languageList = [
-    { value: "english", label: "English"},
-    { value: "spanish", label: "Spanish"},
-    { value: "chinese", label: "Chinese"},
-    { value: "french", label: "French"},
-    { value: "german", label: "German"},
+    { value: "english", label: "English" },
+    { value: "spanish", label: "Spanish" },
+    { value: "chinese", label: "Chinese" },
+    { value: "french", label: "French" },
+    { value: "german", label: "German" },
 ];
 
 const ExperienceForm: FC = () => {
+    const [isClicked, setIsClicked] = useState(false);
     // Driving License
     const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>('');
     const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
@@ -36,6 +37,7 @@ const ExperienceForm: FC = () => {
 
     // Selected languages
     const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
+    const [selectedLanguagesError, setSelectedLanguagesError] = useState<string>('');
 
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
@@ -50,14 +52,56 @@ const ExperienceForm: FC = () => {
         setDrivingLicenseURL('');
     };
 
-    const handleExperience = (data: Inputs) => {
-        console.log({...data, languages: selectedLanguages});
+    const onSubmit = (data: Inputs) => {
+        setIsClicked(true);
+        if (!drivingLicenseURL || !experienceCertificateURL || selectedLanguages.length === 0) {
+            if (!drivingLicenseURL) {
+                setDrivingLicenseError('Driving License is required');
+            }
+            if (!experienceCertificateURL) {
+                setExperienceCertificateError('Experience Certificate is required');
+            }
+            if (selectedLanguages.length === 0) {
+                setSelectedLanguagesError('Languages are required');
+            }
+            return;
+        }
+
+        const experienceData = {
+            ...data,
+            documents: {
+                drivingLicense: drivingLicenseURL,
+                experienceCertificate: experienceCertificateURL
+            },
+            languages: selectedLanguages
+        }
+
+        console.log(experienceData);
     }
 
+    useEffect(() => {
+        if (isClicked) {
+            if (drivingLicenseURL) {
+                setDrivingLicenseError('');
+            } else {
+                setDrivingLicenseError('Driving License is required');
+            }
+            if (experienceCertificateURL) {
+                setExperienceCertificateError('');
+            } else {
+                setExperienceCertificateError('Experience Certificate is required');
+            }
+            if (selectedLanguages.length > 0) {
+                setSelectedLanguagesError('');
+            } else {
+                setSelectedLanguagesError('Languages are required');
+            }
+        }
+    }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked]);
 
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
-            <form onSubmit={handleSubmit(handleExperience)} className='w-full md:max-w-4xl flex flex-col'>
+            <form onSubmit={handleSubmit(onSubmit)} className='w-full md:max-w-4xl flex flex-col'>
                 <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Experience and Certifications</h1>
 
                 <div className='w-full mt-7'>
@@ -98,7 +142,7 @@ const ExperienceForm: FC = () => {
                                 maxCount={3}
                                 className='mt-1'
                             />
-                            {/* {errors?.description && <span className="text-red-500">{errors?.description?.message}</span>} */}
+                            {selectedLanguagesError && <p className='text-red-500 text-sm mt-1'>{selectedLanguagesError}</p>}
                         </div>
 
                         {/* Driving License */}
@@ -114,7 +158,7 @@ const ExperienceForm: FC = () => {
                                 setSelectedFile={setDrivingLicenseFile}
                                 removeImage={removeDrivingLicense}
                             />
-                            {/* {errors?.driving && <p className='text-red-500 text-sm mt-1'>{errors?.name?.firstName?.message}</p>} */}
+                            {drivingLicenseError && <p className='text-red-500 text-sm mt-1'>{drivingLicenseError}</p>}
                         </div>
 
                         {/* Experience Certificate */}
@@ -130,7 +174,7 @@ const ExperienceForm: FC = () => {
                                 setSelectedFile={setExperienceCertificateFile}
                                 removeImage={removeExperienceCertificate}
                             />
-                            {/* {errors?.driving && <p className='text-red-500 text-sm mt-1'>{errors?.name?.firstName?.message}</p>} */}
+                            {experienceCertificateError && <p className='text-red-500 text-sm mt-1'>{experienceCertificateError}</p>}
                         </div>
                     </div>
                 </div>

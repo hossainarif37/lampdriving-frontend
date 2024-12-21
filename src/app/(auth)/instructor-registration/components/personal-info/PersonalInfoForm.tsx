@@ -22,7 +22,7 @@ const PersonalInfoForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
     const router = useRouter();
 
-    const handlePersonalInfo = (data: Inputs) => {
+    const onSubmit = (data: Inputs) => {
         console.log(data);
         router.push("/instructor-registration?step=experience");
     }
@@ -30,7 +30,7 @@ const PersonalInfoForm: FC = () => {
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form
-                onSubmit={handleSubmit(handlePersonalInfo)}
+                onSubmit={handleSubmit(onSubmit)}
                 className='w-full md:max-w-4xl flex flex-col'
             >
                 <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Personal Info</h1>

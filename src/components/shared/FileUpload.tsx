@@ -40,7 +40,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
         return `${file.name}_${file.size}_${file.lastModified}`;
     };
 
-    const handleUploadFile =async () => {
+    const handleUploadFile = async () => {
         try {
             const uniqueIdentifier = generateUniqueIdentifier(selectedFile!);
             setImageUploadLoading(true);
@@ -53,8 +53,8 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             const formData = new FormData();
             formData.append('file', selectedFile!);
             formData.append('upload_preset', uploadPreset);
-            formData.append('cloud_name', cloudName); 
-            formData.append('public_id', uniqueIdentifier); 
+            formData.append('cloud_name', cloudName);
+            formData.append('public_id', uniqueIdentifier);
 
             // Make a POST request to Cloudinary's upload API
             const response = await fetch(
@@ -76,7 +76,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             if (setImageUrl) {
                 setImageUrl(data.secure_url);
             }
-            
+
             setIsSuccess(true);
             setIsError(false);
         } catch (error) {
