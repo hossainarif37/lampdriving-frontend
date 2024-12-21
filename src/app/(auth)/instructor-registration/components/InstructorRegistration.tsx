@@ -15,16 +15,18 @@ const InstructorRegistration: FC = () => {
 
     const searchParams = useSearchParams();
     const step = searchParams.get('step');
+    
     const isPersonalInfoStep = step === 'personal-info';
     const isExperienceStep = step === 'experience';
+    const isServicesStep = step === 'services';
     const isCarInfoStep = step === 'car-info';
     const isSecurityStep = step === 'security';
     return (
         <>
             {isPersonalInfoStep && <PersonalInfoForm  />}
             {isExperienceStep && <ExperienceForm  />}
+            {isServicesStep && <ServicesForm  />}
             {isCarInfoStep && <CarInfoForm  />}
-            {isCarInfoStep && <ServicesForm  />}
             {isSecurityStep && <SecurityForm  />}
         </>
     );

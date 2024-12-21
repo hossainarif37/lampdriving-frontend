@@ -16,23 +16,13 @@ const StepNavigationButtons: FC<{ prev: string, next: string }> = ({ prev, next 
                     Previous
                 </Button>
             </Link>
-            {
-                next === "" ? (
-                    <Button
-                        type='submit'
-                        className='h-11 xl:h-14 md:w-40 gradient-color'
-                    >
-                        Submit
-                    </Button>
-                ) : (
-                    <Button
-                        type='submit'
-                        className='h-11 xl:h-14 md:w-40 gradient-color'
-                    >
-                            Next
-                    </Button>
-                )
-            }
+
+            <Button
+                type='submit'
+                className='h-11 xl:h-14 md:w-40 gradient-color'
+            >
+                {next === "" ? "Submit" : "Next"}
+            </Button>
         </div>
     );
 };

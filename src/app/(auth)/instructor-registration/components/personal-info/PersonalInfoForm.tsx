@@ -3,6 +3,7 @@ import StepNavigationButtons from '../StepNavigationButtons';
 import { Controller, useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useRouter } from 'next/navigation';
 type Inputs = {
     name: {
         firstName: string;
@@ -19,15 +20,18 @@ const genderOptions = ["Male", "Female", "Other"];
 
 const PersonalInfoForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
+    const router = useRouter();
 
-    const handleRegister = (data: Inputs) => {
+    const handlePersonalInfo = (data: Inputs) => {
         console.log(data);
+        router.push("/instructor-registration?step=experience");
     }
+
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form
-                onSubmit={handleSubmit(handleRegister)}
-                className='w-full flex flex-col'
+                onSubmit={handleSubmit(handlePersonalInfo)}
+                className='w-full md:max-w-4xl flex flex-col'
             >
                 <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Personal Info</h1>
 

@@ -11,6 +11,7 @@ const StepIndicator: FC = () => {
     const steps = [
         { path: "/instructor-registration?step=personal-info", title: "Personal Info", key: "personal-info" },
         { path: "/instructor-registration?step=experience", title: "Experience", key: "experience" },
+        { path: "/instructor-registration?step=services", title: "Services", key: "services" },
         { path: "/instructor-registration?step=car-info", title: "Car Info", key: "car-info" },
         { path: "/instructor-registration?step=security", title: "Security", key: "security" }
     ];
