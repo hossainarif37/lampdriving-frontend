@@ -1,7 +1,7 @@
 "use client"
 import NavLink from '@/components/shared/NavLink';
 import { useAppSelector } from '@/redux/hook';
-import { BookIcon, DollarSignIcon, History, LayoutDashboardIcon, Recycle, Settings2Icon, TimerIcon, Wallet } from 'lucide-react';
+import { ArrowDownToLine, BookOpen, Calendar, FileText, HelpCircle, History, LayoutDashboardIcon, Trash2, UserCheck, Users, Wallet } from 'lucide-react';
 import { ReactNode } from 'react';
 
 interface IRoute {
@@ -22,7 +22,7 @@ const MenuLinks = () => {
         {
             name: 'Manage Bookings',
             path: '/dashboard/learner/manage-bookings',
-            icon: <BookIcon />
+            icon: <BookOpen />
         },
         {
             name: 'Transaction History',
@@ -41,12 +41,12 @@ const MenuLinks = () => {
         {
             name: 'Manage Bookings',
             path: '/dashboard/instructor/manage-bookings',
-            icon: <BookIcon />
+            icon: <BookOpen />
         },
         {
             name: 'Manage Availability',
-            path: '/dashboard/instructor/manage-bookings',
-            icon: <TimerIcon />
+            path: '/dashboard/instructor/manage-availability',
+            icon: <Calendar />
         },
         {
             name: 'Wallet',
@@ -69,17 +69,17 @@ const MenuLinks = () => {
         {
             name: 'Manage Bookings',
             path: '/dashboard/admin/manage-bookings',
-            icon: <BookIcon />
+            icon: <BookOpen />
         },
         {
             name: 'Manage Instructors',
             path: '/dashboard/admin/manage-instructors',
-            icon: <Settings2Icon />
+            icon: <UserCheck />
         },
         {
             name: 'Manage Learners',
             path: '/dashboard/admin/manage-learners',
-            icon: <Settings2Icon />
+            icon: <Users />
         },
         {
             name: 'Wallet',
@@ -89,7 +89,7 @@ const MenuLinks = () => {
         {
             name: 'Withdrawal Request',
             path: '/dashboard/admin/withdrawal-request',
-            icon: <DollarSignIcon />
+            icon: <ArrowDownToLine />
         },
         {
             name: 'Transaction History',
@@ -99,17 +99,17 @@ const MenuLinks = () => {
         {
             name: 'Manage Blog',
             path: '/dashboard/admin/manage-blog',
-            icon: <Settings2Icon />
+            icon: <FileText />
         },
         {
             name: 'Manage Support Articles',
             path: '/dashboard/admin/manage-support-articles',
-            icon: <Settings2Icon />
+            icon: <HelpCircle />
         },
         {
             name: 'Recycle Bin',
             path: '/dashboard/admin/recycle-bin',
-            icon: <Recycle />
+            icon: <Trash2 />
         }
     ];
 
