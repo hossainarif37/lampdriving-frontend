@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
 import { MultiSelect } from '@/components/ui/multi-select';
+import { useRouter } from 'next/navigation';
 
 type Inputs = {
     experience: string;
@@ -25,6 +26,8 @@ const languageList = [
 
 const ExperienceForm: FC = () => {
     const [isClicked, setIsClicked] = useState(false);
+    const router = useRouter();
+    
     // Driving License
     const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>('');
     const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
@@ -56,10 +59,10 @@ const ExperienceForm: FC = () => {
         setIsClicked(true);
         if (!drivingLicenseURL || !experienceCertificateURL || selectedLanguages.length === 0) {
             if (!drivingLicenseURL) {
-                setDrivingLicenseError('Driving License is required');
+                setDrivingLicenseError(`${drivingLicenseError ? drivingLicenseError : 'Driving License is required'}`);
             }
             if (!experienceCertificateURL) {
-                setExperienceCertificateError('Experience Certificate is required');
+                setExperienceCertificateError(`${experienceCertificateError ? experienceCertificateError : 'Experience Certificate is required'}`);
             }
             if (selectedLanguages.length === 0) {
                 setSelectedLanguagesError('Languages are required');
@@ -77,6 +80,7 @@ const ExperienceForm: FC = () => {
         }
 
         console.log(experienceData);
+        router.push("/instructor-registration?step=services");
     }
 
     useEffect(() => {
@@ -84,12 +88,12 @@ const ExperienceForm: FC = () => {
             if (drivingLicenseURL) {
                 setDrivingLicenseError('');
             } else {
-                setDrivingLicenseError('Driving License is required');
+                setDrivingLicenseError(`${drivingLicenseFile ? 'Upload Driving License' : 'Driving License is required'}`);
             }
             if (experienceCertificateURL) {
                 setExperienceCertificateError('');
             } else {
-                setExperienceCertificateError('Experience Certificate is required');
+                setExperienceCertificateError(`${experienceCertificateFile ? 'Upload Experience Certificate' : 'Experience Certificate is required'}`);
             }
             if (selectedLanguages.length > 0) {
                 setSelectedLanguagesError('');
@@ -97,7 +101,7 @@ const ExperienceForm: FC = () => {
                 setSelectedLanguagesError('Languages are required');
             }
         }
-    }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked]);
+    }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile]);
 
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
@@ -166,7 +170,7 @@ const ExperienceForm: FC = () => {
                             <label htmlFor="first-name" className='font-semibold text-secondary'>Experience Certificate</label>
                             <FileUpload
                                 label="Click 1 file to upload"
-                                maxSize="1500×1500px"
+                                maxSize="1500x1500px"
                                 imageUrl={experienceCertificateURL}
                                 setImageUrl={setExperienceCertificateURL}
                                 setImageError={setExperienceCertificateError}
