@@ -1,12 +1,12 @@
 import React from 'react';
 import { FC } from 'react';
 
-const UserDashboard: FC = () => {
+const AdminStatsPage: FC = () => {
     return (
         <div>
-            UserDashboard
+            AdminStatsPage
         </div>
     );
 };
 
-export default UserDashboard;
+export default AdminStatsPage;
