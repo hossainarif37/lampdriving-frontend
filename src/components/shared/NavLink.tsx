@@ -1,12 +1,12 @@
 "use client"
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { LinkHTMLAttributes } from "react";
 import { Button } from "../ui/button";
+import { ReactNode } from "react";
 
 export interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     href: string;
-    children: React.ReactNode;
+    children: ReactNode;
     active: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "sidebar" | "activeSidebar";
     other: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "sidebar" | "activeSidebar";
 }

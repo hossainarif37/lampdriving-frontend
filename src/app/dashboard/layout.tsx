@@ -1,5 +1,5 @@
 import Sidebar from '@/components/layouts/sidebar/Sidebar';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { FC } from 'react';
 
 const DashboardLayout: FC<{ children: ReactNode }> = ({ children }) => {

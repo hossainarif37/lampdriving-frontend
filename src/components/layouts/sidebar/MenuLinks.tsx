@@ -2,12 +2,12 @@
 import NavLink from '@/components/shared/NavLink';
 import { useAppSelector } from '@/redux/hook';
 import { BookIcon, DollarSignIcon, History, LayoutDashboardIcon, Recycle, Settings2Icon, TimerIcon, Wallet } from 'lucide-react';
-import React from 'react';
+import { ReactNode } from 'react';
 
 interface IRoute {
     name: string;
     path: string;
-    icon: React.ReactNode;
+    icon: ReactNode;
 }
 
 const MenuLinks = () => {
