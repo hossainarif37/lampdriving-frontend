@@ -86,7 +86,7 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor }) => {
             <div className="space-y-4">
                 <div className="flex gap-2 max-w-lg mx-auto">
                     {/* View Profile Button */}
-                    <Button className="h-12 w-1/2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 transition-colors duration-200">
+                    <Button className="border h-12 w-1/2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 transition-colors duration-200">
                         <ExternalLink className="w-4 h-4" />
                         View Profile
                     </Button>
@@ -96,10 +96,10 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor }) => {
                 </div>
 
                 {/* Check Availability Link */}
-                <Link href="#" className="flex justify-center gap-1 underline cursor-pointer">
-                    <Calendar className="w-6 h-6 text-primary" />
+                <Link href="#" className="flex justify-center gap-1 cursor-pointer underline">
+                    <Calendar className="w-4 text-primary" />
                     <span className="text-primary">Check availability</span>
-                    <ChevronRight className="text-primary"/>
+                    <ChevronRight className="text-primary w-5 -ml-1"/>
                 </Link>
             </div>
 
