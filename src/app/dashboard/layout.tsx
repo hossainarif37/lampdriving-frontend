@@ -8,7 +8,7 @@ const DashboardLayout: FC<{ children: ReactNode }> = ({ children }) => {
             <div className='lg:min-h-screen lg:w-80 relative'>
                 <Sidebar />
             </div>
-            <div className='flex-1 min-h-screen border'>
+            <div className='flex-1 min-h-screen border pt-[70px] pb-3 lg:py-3 pl-6 px-3'>
                 {children}
                 <div className="min-h-screen"></div>
                 <div className="min-h-screen"></div>
