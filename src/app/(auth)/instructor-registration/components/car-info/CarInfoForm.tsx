@@ -5,6 +5,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import FileUpload from '@/components/shared/FileUpload';
+import { useRouter } from 'next/navigation';
 
 
 interface Inputs {
@@ -21,6 +22,7 @@ const carTypes = [
 
 const CarInfoForm: FC = () => {
     const [isClicked, setIsClicked] = useState(false);
+    const router = useRouter();
 
     // Car Image
     const [carImageURL, setCarImageURL] = useState<string>("");
@@ -46,6 +48,8 @@ const CarInfoForm: FC = () => {
             image: carImageURL
         }
         console.log(carInfo);
+
+        router.push("/instructor-registration?step=security");
     }
 
      useEffect(() => {
@@ -62,7 +66,7 @@ const CarInfoForm: FC = () => {
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className='w-full md:max-w-4xl flex flex-col'
+                className='w-full flex flex-col'
             >
                 <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Car Info</h1>
                 <div className='w-full mt-7'>
@@ -130,10 +134,11 @@ const CarInfoForm: FC = () => {
                                 <label htmlFor="rating" className='font-semibold text-secondary'>Rating</label>
                                 <Input
                                     {...register('rating', {
-                                        required: "Rating is required"
+                                        required: "Rating is required",
+                                        max: { value: 5, message: "Rating should be less than 5" }
                                     })
                                     }
-                                    type="text" id="rating" placeholder="Enter car rating" className='h-11 xl:h-14 mt-1'
+                                    type="number" id="rating" placeholder="Enter car rating" className='h-11 xl:h-14 mt-1'
                                 />
                                 {errors?.rating && <p className='text-red-500 text-sm mt-1'>{errors?.rating?.message}</p>}
                             </div>

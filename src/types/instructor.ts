@@ -6,6 +6,17 @@ export interface IDocument {
     experienceCertificate: string;
 }
 
+// interface for schedule
+export interface IDaySchedule {
+    isActive: boolean
+    startTime: string
+    endTime: string
+  }
+  
+ export interface ISchedule {
+    [key: string]: IDaySchedule
+  }
+
 // interface for vehicle
 export interface IVehicle {
     name: string;
