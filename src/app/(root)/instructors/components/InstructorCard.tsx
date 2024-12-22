@@ -68,8 +68,8 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor }) => {
                     </div>
 
                     {/* Experience */}
-                    <div className="flex items-center font-semibold gap-1">
-                        <Clock className="w-4 h-4 text-primary" />
+                    <div className="flex items-center font-semibold gap-2">
+                        <Clock className="w-5 h-5 text-primary" />
                         <span className="text-gradient">{experience}</span>
                     </div>
 
