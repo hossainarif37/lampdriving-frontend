@@ -8,6 +8,9 @@ import { Input } from '@/components/ui/input';
 import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { IPersonalInfo, ISecurity } from '../InstructorRegistration';
+import { useRegisterInstructorMutation } from '@/redux/api/authApi/authApi';
+import { IRegisterInstructor } from '@/types/instructor';
+import { toast } from '@/hooks/use-toast';
 
 interface Inputs {
     password: string;
@@ -24,6 +27,10 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+
+    const [registerInstructor, {isLoading: isRegistering}] = useRegisterInstructorMutation();
+
+    console.log(32);
 
     // Separate state for checkboxes and their errors
     const [termsAccepted, setTermsAccepted] = useState(false);
@@ -58,6 +65,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
     }
 
     const onSubmit = (data: Inputs) => {
+        console.log(65);
         // Validate checkboxes
         if (!termsAccepted) {
             setTermsError("You must accept the terms and conditions");
@@ -70,7 +78,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
         }
 
 
-        const instructorFormData = {
+        const instructorFormData: IRegisterInstructor = {
             userInfo:{
                 ...userInfo,
                 password: data.password
@@ -78,6 +86,21 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
             instructorInfo
         }
 
+        registerInstructor(instructorFormData).unwrap()
+        .then((res) => {
+            console.log('Registered: ',res);
+            toast({
+                message: res.message,
+            })
+        }).catch((err) => {
+            console.log(err);
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong",
+            })
+        })
+
+        
         console.log(instructorFormData);
     }
 

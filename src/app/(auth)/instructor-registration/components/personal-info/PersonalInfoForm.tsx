@@ -12,7 +12,7 @@ type Inputs = {
         lastName: string;
     },
     email: string;
-    phone: number;
+    phone: string;
     gender: "male" | "female" | "other";
     dateOfBirth: string;
     serviceAreas: string[]
@@ -108,7 +108,11 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({personalInfo, setPersonal
                                 <label htmlFor="phone" className='font-semibold text-secondary'>Phone</label>
                                 <Input
                                     {...register('phone', {
-                                        required: "Phone number is required"
+                                        required: "Phone number is required",
+                                        maxLength:{
+                                            value: 10,
+                                            message: "Phone number must be 10 digits"
+                                        }
                                     })
                                     }
                                     type="number" placeholder="Enter your phone number" className='h-11 xl:h-14 mt-1'

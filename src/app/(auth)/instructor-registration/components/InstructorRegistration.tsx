@@ -11,7 +11,7 @@ import { IDocument, IVehicle, IWorkingHour } from '@/types/instructor';
 export interface IPersonalInfo {
     name: IName;
     email: string;
-    phone: number;
+    phone: string;
     dateOfBirth: string;
     gender: 'male' | 'female' | 'other';
 }
