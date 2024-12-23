@@ -73,7 +73,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({instructorData }) => {
             ...instructorData
         }
 
-        console.log(instructorFormData);
+        
     }
 
     return (

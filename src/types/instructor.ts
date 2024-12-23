@@ -60,3 +60,8 @@ export interface IInstructor {
     bookings: string[];
     status: "pending" | "verified";
 }
+
+export interface IRegisterInstructor {
+    userInfo: Partial<IUser>;
+    instructorInfo: Partial<IInstructor>;
+}
