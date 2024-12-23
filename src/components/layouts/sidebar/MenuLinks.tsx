@@ -185,11 +185,11 @@ const MenuLinks = () => {
                 },
                 {
                     name: 'Withdrawal Requests',
-                    path: '/dashboard/instructor/payments/withdrawal-requests'
+                    path: '/dashboard/admin/payments/withdrawal-requests'
                 },
                 {
                     name: 'Approved Withdrawals',
-                    path: '/dashboard/instructor/payments/approved-withdrawals'
+                    path: '/dashboard/admin/payments/approved-withdrawals'
                 },
                 {
                     name: 'Transaction History',
@@ -199,7 +199,7 @@ const MenuLinks = () => {
         },
         {
             name: 'Blog',
-            path: '/dashboard/admin/manage-blog',
+            path: '/dashboard/admin/manage-blogs',
             icon: <FileText />
         },
         {
