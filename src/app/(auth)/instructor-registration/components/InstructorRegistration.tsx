@@ -58,7 +58,6 @@ const InstructorRegistration: FC = () => {
         }
     }
 
-    console.log(carInfo);
 
     return (
         <>

@@ -30,7 +30,6 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({personalInfo, setPersonal
     const router = useRouter();
 
     const onSubmit = (data: Inputs) => {
-        console.log(data);
         setPersonalInfo(data);
         router.push("/instructor-registration?step=experience");
     }

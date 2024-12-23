@@ -30,7 +30,6 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
 
     const [registerInstructor, {isLoading: isRegistering}] = useRegisterInstructorMutation();
 
-    console.log(32);
 
     // Separate state for checkboxes and their errors
     const [termsAccepted, setTermsAccepted] = useState(false);
@@ -65,7 +64,6 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
     }
 
     const onSubmit = (data: Inputs) => {
-        console.log(65);
         // Validate checkboxes
         if (!termsAccepted) {
             setTermsError("You must accept the terms and conditions");
@@ -88,7 +86,6 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
 
         registerInstructor(instructorFormData).unwrap()
         .then((res) => {
-            console.log('Registered: ',res);
             toast({
                 message: res.message,
             })
@@ -99,9 +96,6 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
                 message: err.data.message || "Something went wrong",
             })
         })
-
-        
-        console.log(instructorFormData);
     }
 
     return (

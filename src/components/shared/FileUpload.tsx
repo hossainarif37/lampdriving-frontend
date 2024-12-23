@@ -26,7 +26,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        console.log('file', file?.type);
         if (file) {
             if (setSelectedFile) {
                 setSelectedFile(file);
@@ -71,8 +70,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
 
             const data = await response.json();
 
-            console.log('Image Uploading Response:', data);
-
             if (setImageUrl) {
                 setImageUrl(data.secure_url);
             }
@@ -100,7 +97,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
         e.preventDefault();
         setIsDragging(false);
         const file = e.dataTransfer.files[0];
-        console.log('file', file);
         if (file) {
             setSelectedFile(file);
         }
@@ -123,8 +119,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             const fileExtension = blob.type.split('/')[1];
             const file = new File([blob], `${fileName}.${fileExtension}`, { type: blob.type });
 
-            console.log('Converted File:', file);
-
             // Update the selectedFile state with the new File object
             setSelectedFile(file);
 
@@ -132,9 +126,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             console.error('Error converting Blob URL to File:', error);
         }
     };
-
-    console.log('imageUrl', imageUrl);
-    console.log('selectedFile', selectedFile);
 
     return (
         <div className="w-full mx-auto bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
