@@ -10,13 +10,9 @@ import MobileMenu from './MobileMenu';
 import UserMenu from '../dashboard-nav/UserMenu';
 
 const Sidebar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
-    // mobile menu toggle handler
-    const handleMenuToggler = () => {
-        setIsMenuOpen(pre => !pre);
-    }
+
 
 
     return (
@@ -28,12 +24,7 @@ const Sidebar = () => {
 
                 <div className='flex items-center gap-2 lg:hidden'>
                     {/* menu dropdown button for smaller devices */}
-                    <Button
-                        onClick={handleMenuToggler}
-                        size={"icon"}
-                        className={`rounded-[4px] text-3xl gap-2`}>
-                        <AlignJustify className='text-3xl' />
-                    </Button>
+                    <MobileMenu />
                     <div>
                         <UserMenu />
                     </div>
@@ -47,9 +38,6 @@ const Sidebar = () => {
                     <Settings />
                     Profile Settings
                 </NavLink>
-            </div>
-            <div className='lg:hidden'>
-                <MobileMenu isMenuOpen={isMenuOpen} />
             </div>
         </div>
     );
