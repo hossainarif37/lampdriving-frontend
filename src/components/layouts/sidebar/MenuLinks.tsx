@@ -8,6 +8,10 @@ interface IRoute {
     name: string;
     path: string;
     icon: ReactNode;
+    children?: {
+        name: string;
+        path: string;
+    }[]
 }
 
 const MenuLinks = () => {
@@ -21,8 +25,27 @@ const MenuLinks = () => {
         },
         {
             name: 'Bookings',
-            path: '/dashboard/learner/manage-bookings',
-            icon: <BookOpen />
+            path: '#bookings',
+            icon: <BookOpen />,
+            children: [
+                {
+                    name: 'Pending Bookings',
+                    path: '/dashboard/learner/manage-bookings/pending'
+                },
+                {
+                    name: 'Accepted Bookings',
+                    path: '/dashboard/learner/manage-bookings/accepted'
+                },
+                {
+                    name: 'Completed Bookings',
+                    path: '/dashboard/learner/manage-bookings/completed'
+                },
+                {
+                    name: 'Cancelled Bookings',
+                    path: '/dashboard/learner/manage-bookings/cancelled'
+                }
+
+            ]
         },
         {
             name: 'Transaction History',
@@ -40,8 +63,27 @@ const MenuLinks = () => {
         },
         {
             name: 'Bookings',
-            path: '/dashboard/instructor/manage-bookings',
-            icon: <BookOpen />
+            path: '#bookings',
+            icon: <BookOpen />,
+            children: [
+                {
+                    name: 'Pending Bookings',
+                    path: '/dashboard/instructor/manage-bookings/pending'
+                },
+                {
+                    name: 'Accepted Bookings',
+                    path: '/dashboard/instructor/manage-bookings/accepted'
+                },
+                {
+                    name: 'Completed Bookings',
+                    path: '/dashboard/instructor/manage-bookings/completed'
+                },
+                {
+                    name: 'Cancelled Bookings',
+                    path: '/dashboard/instructor/manage-bookings/cancelled'
+                }
+
+            ]
         },
         {
             name: 'Availability',
@@ -49,15 +91,28 @@ const MenuLinks = () => {
             icon: <Calendar />
         },
         {
-            name: 'Wallet',
-            path: '/dashboard/instructor/wallet',
-            icon: <Wallet />
+            name: 'Payments',
+            path: '#payments',
+            icon: <Wallet />,
+            children: [
+                {
+                    name: 'Wallet',
+                    path: 'dashboard/instructor/payments/wallet'
+                },
+                {
+                    name: 'Withdrawal Requests',
+                    path: '/dashboard/instructor/payments/withdrawal-requests'
+                },
+                {
+                    name: 'Approved Withdrawals',
+                    path: '/dashboard/instructor/payments/approved-withdrawals'
+                },
+                {
+                    name: 'Transaction History',
+                    path: '/dashboard/instructor/payments/transaction-history'
+                }
+            ]
         },
-        {
-            name: 'Transaction History',
-            path: '/dashboard/instructor/transaction-history',
-            icon: <History />
-        }
     ];
 
     const adminRoutes: IRoute[] = [
@@ -68,13 +123,46 @@ const MenuLinks = () => {
         },
         {
             name: 'Bookings',
-            path: '/dashboard/admin/manage-bookings',
-            icon: <BookOpen />
+            path: '#bookings',
+            icon: <BookOpen />,
+            children: [
+                {
+                    name: 'Pending Bookings',
+                    path: '/dashboard/admin/manage-bookings/pending'
+                },
+                {
+                    name: 'Accepted Bookings',
+                    path: '/dashboard/admin/manage-bookings/accepted'
+                },
+                {
+                    name: 'Completed Bookings',
+                    path: '/dashboard/admin/manage-bookings/completed'
+                },
+                {
+                    name: 'Cancelled Bookings',
+                    path: '/dashboard/admin/manage-bookings/cancelled'
+                }
+
+            ]
         },
         {
             name: 'Instructors',
             path: '/dashboard/admin/manage-instructors',
-            icon: <UserCheck />
+            icon: <UserCheck />,
+            children: [
+                {
+                    name: 'Pending Instructors',
+                    path: '/dashboard/admin/manage-instructors/pending'
+                },
+                {
+                    name: 'Approved Instructors',
+                    path: '/dashboard/admin/manage-instructors/approved'
+                },
+                {
+                    name: 'Blocked Instructors',
+                    path: '/dashboard/admin/manage-instructors/blocked'
+                }
+            ]
         },
         {
             name: 'Learners',
@@ -82,19 +170,27 @@ const MenuLinks = () => {
             icon: <Users />
         },
         {
-            name: 'Wallet',
-            path: '/dashboard/admin/wallet',
-            icon: <Wallet />
-        },
-        {
-            name: 'Withdrawal Request',
-            path: '/dashboard/admin/withdrawal-request',
-            icon: <ArrowDownToLine />
-        },
-        {
-            name: 'Transaction History',
-            path: '/dashboard/admin/transaction-history',
-            icon: <History />
+            name: 'Payments',
+            path: '#payments',
+            icon: <Wallet />,
+            children: [
+                {
+                    name: 'Wallet',
+                    path: 'dashboard/admin/payments/wallet'
+                },
+                {
+                    name: 'Withdrawal Requests',
+                    path: '/dashboard/instructor/payments/withdrawal-requests'
+                },
+                {
+                    name: 'Approved Withdrawals',
+                    path: '/dashboard/instructor/payments/approved-withdrawals'
+                },
+                {
+                    name: 'Transaction History',
+                    path: '/dashboard/admin/payments/transaction-history'
+                }
+            ]
         },
         {
             name: 'Blog',
