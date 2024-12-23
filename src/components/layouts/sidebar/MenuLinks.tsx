@@ -2,7 +2,7 @@
 import NavLink from '@/components/shared/NavLink';
 import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/redux/hook';
-import { ArrowDownToLine, BookOpen, Calendar, ChevronDown, FileText, HelpCircle, History, LayoutDashboardIcon, Trash2, UserCheck, Users, Wallet } from 'lucide-react';
+import { BookOpen, Calendar, ChevronDown, FileText, HelpCircle, History, LayoutDashboardIcon, Trash2, UserCheck, Users, Wallet } from 'lucide-react';
 import { ReactNode, useState, useRef, useEffect } from 'react';
 
 interface IRoute {
@@ -181,7 +181,7 @@ const MenuLinks = () => {
             children: [
                 {
                     name: 'Wallet',
-                    path: 'dashboard/admin/payments/wallet'
+                    path: '/dashboard/admin/payments/wallet'
                 },
                 {
                     name: 'Withdrawal Requests',
