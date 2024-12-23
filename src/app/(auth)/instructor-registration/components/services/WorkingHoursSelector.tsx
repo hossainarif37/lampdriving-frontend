@@ -107,7 +107,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
                 <Label
                   htmlFor={`${day}-active`}
                   className={cn(
-                    "text-sm font-medium",
+                    "text-sm font-medium capitalize",
                     !schedule[day]?.isActive &&
                       "text-muted-foreground line-through"
                   )}
