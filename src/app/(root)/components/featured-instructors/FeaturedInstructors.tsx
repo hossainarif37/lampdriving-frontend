@@ -3,6 +3,7 @@ import InstructorBox from './InstructorBox';
 import SectionHeading from '../shared/section-heading/SectionHeading';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 const FeaturedInstructors: FC = () => {
     return (
@@ -22,11 +23,11 @@ const FeaturedInstructors: FC = () => {
             </div>
 
             {/* Explore Instructors Button */}
-                <div className="text-center  mt-6 md:mt-12">
+                <Link href={"/instructors"} className="flex justify-center  mt-6 md:mt-12">
                     <Button className='gradient-color'>
                     Explore Instructors <ChevronRight strokeWidth={3} />
                 </Button>
-            </div>
+            </Link>
             </div>
         </section>
     );
