@@ -100,7 +100,7 @@ const MenuLinks = () => {
             children: [
                 {
                     name: 'Wallet',
-                    path: 'dashboard/instructor/payments/wallet'
+                    path: '/dashboard/instructor/payments/wallet'
                 },
                 {
                     name: 'Withdrawal Requests',
