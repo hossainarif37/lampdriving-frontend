@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useEffect, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
 import { Controller, useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import FileUpload from '@/components/shared/FileUpload';
 import { useRouter } from 'next/navigation';
+import { IVehicle } from '@/types/instructor';
 
 
 interface Inputs {
@@ -15,12 +16,18 @@ interface Inputs {
     rating: string;
 }
 
+
+interface ICarInfoFormProps {
+    carInfo: IVehicle | undefined;
+    setCarInfo: Dispatch<SetStateAction<IVehicle | undefined>>
+}
+
 const carTypes = [
     "Auto",
     "Manual"
 ]
 
-const CarInfoForm: FC = () => {
+const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo}) => {
     const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
 
@@ -163,7 +170,7 @@ const CarInfoForm: FC = () => {
                 </div>
 
                 <div>
-                    <StepNavigationButtons prev="experience" next="security" />
+                    <StepNavigationButtons prev="services" next="security" />
                 </div>
             </form>
         </div>

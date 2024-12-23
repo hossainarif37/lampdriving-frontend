@@ -7,14 +7,20 @@ import { Input } from '@/components/ui/input';
 import { MultiSelect } from '@/components/ui/multi-select';
 import { sydneySuburbs } from '@/constant/sydneySuburbs';
 import WorkingHoursSelector from './WorkingHoursSelector';
-import { ISchedule } from '@/types/instructor';
+import { ISchedule, IWorkingHour } from '@/types/instructor';
 import { DAYS } from '@/constant/days';
+import { IServices } from '../InstructorRegistration';
 
 interface Inputs {
     pricePerHour: number;
 }
 
-const ServicesForm: FC = () => {
+interface IServicesFormProps {
+    servicesInfo: IServices | undefined;
+    setServicesInfo: React.Dispatch<React.SetStateAction<IServices| undefined>>;
+}
+
+const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) => {
     const [isClicked, setIsClicked] = useState(false);
     const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
     const [selectedLocationsError, setSelectedLocationsError] = useState<string>('');
@@ -41,6 +47,21 @@ const ServicesForm: FC = () => {
             return;
         }
         console.log(data);
+        const workingHour: IWorkingHour = {
+            saturday: schedule.saturday,
+            sunday: schedule.sunday,
+            monday: schedule.monday,
+            tuesday: schedule.tuesday,
+            wednesday: schedule.wednesday,
+            thursday: schedule.thursday,
+            friday: schedule.friday,
+        };
+
+        setServicesInfo({
+            ...data,
+            serviceAreas: selectedLocations,
+            workingHour: workingHour
+        })
 
         router.push("/instructor-registration?step=car-info");
     }
@@ -108,7 +129,7 @@ const ServicesForm: FC = () => {
                     </div>
                 </div>
                 <div>
-                    <StepNavigationButtons prev="personal-info" next="car-info" />
+                    <StepNavigationButtons prev="experience" next="car-info" />
                 </div>
             </form>
         </div>

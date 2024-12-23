@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
-import { FC, useEffect, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
 import FileUpload from '@/components/shared/FileUpload';
 import { Input } from '@/components/ui/input';
@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
 import { MultiSelect } from '@/components/ui/multi-select';
 import { useRouter } from 'next/navigation';
+import { IExperience } from '../InstructorRegistration';
 
 type Inputs = {
     experience: string;
@@ -24,7 +25,12 @@ const languageList = [
     { value: "german", label: "German" },
 ];
 
-const ExperienceForm: FC = () => {
+interface IExperienceFormProps {
+    experienceInfo: IExperience | undefined;
+    setExperienceInfo: Dispatch<SetStateAction<IExperience | undefined>>
+}
+
+const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperienceInfo}) => {
     const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
     
@@ -79,7 +85,7 @@ const ExperienceForm: FC = () => {
             languages: selectedLanguages
         }
 
-        console.log(experienceData);
+        setExperienceInfo(experienceData);
         router.push("/instructor-registration?step=services");
     }
 
@@ -184,7 +190,7 @@ const ExperienceForm: FC = () => {
                 </div>
 
                 <div>
-                    <StepNavigationButtons prev="personal-info" next="car-info" />
+                    <StepNavigationButtons prev="personal-info" next="services" />
                 </div>
             </form>
         </div>

@@ -1,29 +1,37 @@
-import { FC } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Dispatch, FC, SetStateAction } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
 import { Controller, useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useRouter } from 'next/navigation';
+import { IPersonalInfo } from '../InstructorRegistration';
 type Inputs = {
     name: {
         firstName: string;
         lastName: string;
     },
     email: string;
-    phone: number;
-    gender: string;
+    phone: string;
+    gender: "male" | "female" | "other";
     dateOfBirth: string;
     serviceAreas: string[]
 }
 
 const genderOptions = ["Male", "Female", "Other"];
 
-const PersonalInfoForm: FC = () => {
+interface IPersonalInfoFormProps {
+    personalInfo: IPersonalInfo | undefined;
+    setPersonalInfo: Dispatch<SetStateAction<IPersonalInfo | undefined>>;
+}
+
+const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({personalInfo, setPersonalInfo}) => {
     const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
     const router = useRouter();
 
     const onSubmit = (data: Inputs) => {
         console.log(data);
+        setPersonalInfo(data);
         router.push("/instructor-registration?step=experience");
     }
 
@@ -74,7 +82,6 @@ const PersonalInfoForm: FC = () => {
                                     name="gender"
                                     control={control}
                                     rules={{ required: "Gender is required" }}
-                                    defaultValue=""
                                     render={({ field }) => (
                                         <Select onValueChange={field.onChange} value={field.value || ''}>
                                             <SelectTrigger className="h-11 xl:h-14 mt-1">

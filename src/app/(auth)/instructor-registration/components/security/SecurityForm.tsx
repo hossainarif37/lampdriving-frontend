@@ -1,17 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
-import { FC, useState, useEffect } from 'react';
+import { FC, useState, useEffect, SetStateAction, Dispatch } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
 import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
+import { ISecurity } from '../InstructorRegistration';
 
 interface Inputs {
     password: string;
     confirmPassword: string;
 };
 
-const SecurityForm: FC = () => {
+interface ISecurityFormProps {
+    instructorData: any;
+}
+
+const SecurityForm: FC<ISecurityFormProps> = ({instructorData }) => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<Inputs>();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -61,7 +68,12 @@ const SecurityForm: FC = () => {
             return;
         }
 
-        console.log({ ...data, termsAccepted });
+        const instructorFormData = {
+            password: data.password,
+            ...instructorData
+        }
+
+        console.log(instructorFormData);
     }
 
     return (
