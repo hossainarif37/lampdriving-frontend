@@ -20,7 +20,7 @@ const MenuLinks = () => {
             icon: <LayoutDashboardIcon />
         },
         {
-            name: 'Manage Bookings',
+            name: 'Bookings',
             path: '/dashboard/learner/manage-bookings',
             icon: <BookOpen />
         },
@@ -39,12 +39,12 @@ const MenuLinks = () => {
             icon: <LayoutDashboardIcon />
         },
         {
-            name: 'Manage Bookings',
+            name: 'Bookings',
             path: '/dashboard/instructor/manage-bookings',
             icon: <BookOpen />
         },
         {
-            name: 'Manage Availability',
+            name: 'Availability',
             path: '/dashboard/instructor/manage-availability',
             icon: <Calendar />
         },
@@ -67,17 +67,17 @@ const MenuLinks = () => {
             icon: <LayoutDashboardIcon />
         },
         {
-            name: 'Manage Bookings',
+            name: 'Bookings',
             path: '/dashboard/admin/manage-bookings',
             icon: <BookOpen />
         },
         {
-            name: 'Manage Instructors',
+            name: 'Instructors',
             path: '/dashboard/admin/manage-instructors',
             icon: <UserCheck />
         },
         {
-            name: 'Manage Learners',
+            name: 'Learners',
             path: '/dashboard/admin/manage-learners',
             icon: <Users />
         },
@@ -97,12 +97,12 @@ const MenuLinks = () => {
             icon: <History />
         },
         {
-            name: 'Manage Blog',
+            name: 'Blog',
             path: '/dashboard/admin/manage-blog',
             icon: <FileText />
         },
         {
-            name: 'Manage Support Articles',
+            name: 'Support Articles',
             path: '/dashboard/admin/manage-support-articles',
             icon: <HelpCircle />
         },
