@@ -10,19 +10,22 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-light hover:bg-primary/90",
+        gradient: "gradient-color text-light hover:bg-primary/90",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
         destructive:
           "bg-red-500 text-neutral-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-neutral-50 dark:hover:bg-red-900/90",
         outline:
-          "border border-neutral-200 bg-light hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
+          "border bg-light",
         secondary:
           "bg-secondary text-light hover:bg-secondary/90 dark:bg-secondary dark:text-light",
-        ghost: "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
+        red: "bg-red-600 text-light hover:bg-red-700",
+        green: "bg-green-600 text-light hover:bg-green-700",
         link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
         sidebar: "hover:bg-primary/90 hover:text-white",
         activeSidebar: "bg-primary text-light dark:bg-primary dark:text-light",
       },
       size: {
-        default: "h-[60px] px-10",
+        default: "h-11 md:h-14 px-10",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
