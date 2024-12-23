@@ -197,7 +197,7 @@ const MenuLinks = () => {
             ]
         },
         {
-            name: 'Blog',
+            name: 'Blogs',
             path: '/dashboard/admin/manage-blogs',
             icon: <FileText />
         },
@@ -231,13 +231,13 @@ const MenuLinks = () => {
     return (
         <div>
             <div className='my-6'>
-                <div className='flex flex-col gap-2 justify-center h-full my-2'>
+                <div className='flex flex-col justify-center h-full my-2'>
                     {routes.map((route, index) => (
                         <div key={index}>
                             {route.children ? (
                                 <>
                                     <Button
-                                        className={`h-[40px] w-full justify-start px-3 group`}
+                                        className={`h-[40px] w-full justify-start px-3 group capitalize`}
                                         variant={"sidebar"}
                                         onClick={() => handleGroupRouteOpen(route.path)}
                                     >
@@ -273,7 +273,7 @@ const MenuLinks = () => {
                                     </div>
                                 </>
                             ) : (
-                                <NavLink href={route.path} active='activeSidebar' other='sidebar'>
+                                <NavLink href={route.path} active='activeSidebar' other='sidebar' className='mb-2'>
                                     {route.icon}
                                     {route.name}
                                 </NavLink>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
 import { ReactNode } from "react";
+import { cn } from "@/lib/utils";
 
 export interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     href: string;
@@ -11,11 +12,11 @@ export interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorEleme
     other: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "sidebar" | "activeSidebar";
 }
 
-const NavLink = ({ href, children, active, other, ...props }: NavLinkProps) => {
+const NavLink = ({ href, children, active, other, className, ...props }: NavLinkProps) => {
     const pathname = usePathname();
     return (
         <Link href={href} {...props}>
-            <Button className="h-[40px] w-full justify-start px-3" variant={pathname === href ? active : other}>
+            <Button className={cn("h-[40px] w-full justify-start px-3 capitalize", className)} variant={pathname === href ? active : other}>
                 {children}
             </Button>
         </Link>
