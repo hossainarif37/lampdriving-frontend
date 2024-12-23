@@ -1,12 +1,12 @@
 import React from 'react';
 import { FC } from 'react';
 
-const UserDashboard: FC = () => {
+const LearnerStatsPage: FC = () => {
     return (
         <div>
-            UserDashboard
+            LearnerStatsPage
         </div>
     );
 };
 
-export default UserDashboard;
+export default LearnerStatsPage;
