@@ -46,7 +46,6 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
             setSelectedLocationsError('Service areas are required');
             return;
         }
-        console.log(data);
         const workingHour: IWorkingHour = {
             saturday: schedule.saturday,
             sunday: schedule.sunday,
@@ -56,13 +55,12 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
             thursday: schedule.thursday,
             friday: schedule.friday,
         };
-
+        
         setServicesInfo({
-            ...data,
+            pricePerHour: Number(data.pricePerHour),
             serviceAreas: selectedLocations,
             workingHour: workingHour
         })
-
         router.push("/instructor-registration?step=car-info");
     }
 

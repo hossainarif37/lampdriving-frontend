@@ -54,7 +54,7 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo}) => {
             ...data,
             image: carImageURL
         }
-        console.log(carInfo);
+        setCarInfo(carInfo);
 
         router.push("/instructor-registration?step=security");
     }

@@ -12,7 +12,7 @@ type Inputs = {
         lastName: string;
     },
     email: string;
-    phone: string;
+    phone: number;
     gender: "male" | "female" | "other";
     dateOfBirth: string;
     serviceAreas: string[]

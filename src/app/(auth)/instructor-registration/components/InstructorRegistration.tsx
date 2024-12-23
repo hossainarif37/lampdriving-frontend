@@ -11,7 +11,7 @@ import { IDocument, IVehicle, IWorkingHour } from '@/types/instructor';
 export interface IPersonalInfo {
     name: IName;
     email: string;
-    phone: string;
+    phone: number;
     dateOfBirth: string;
     gender: 'male' | 'female' | 'other';
 }
@@ -51,11 +51,14 @@ const InstructorRegistration: FC = () => {
     const isSecurityStep = step === 'security';
 
     const instructorData = {
-        ...personalInfo,
         ...experienceInfo,
         ...servicesInfo,
-        ...carInfo,
+        vehicle: {
+            ...carInfo
+        }
     }
+
+    console.log(carInfo);
 
     return (
         <>
@@ -72,7 +75,7 @@ const InstructorRegistration: FC = () => {
             {isCarInfoStep && <CarInfoForm carInfo={carInfo} setCarInfo={setCarInfo} />}
 
             {/* Security */}
-            {isSecurityStep && <SecurityForm instructorData={instructorData} />}
+            {isSecurityStep && <SecurityForm userInfo={personalInfo} instructorInfo={instructorData} />}
         </>
     );
 };

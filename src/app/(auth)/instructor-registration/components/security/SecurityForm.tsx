@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
-import { ISecurity } from '../InstructorRegistration';
+import { IPersonalInfo, ISecurity } from '../InstructorRegistration';
 
 interface Inputs {
     password: string;
@@ -15,10 +15,11 @@ interface Inputs {
 };
 
 interface ISecurityFormProps {
-    instructorData: any;
+    userInfo: IPersonalInfo | undefined;
+    instructorInfo: any;
 }
 
-const SecurityForm: FC<ISecurityFormProps> = ({instructorData }) => {
+const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<Inputs>();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -68,12 +69,16 @@ const SecurityForm: FC<ISecurityFormProps> = ({instructorData }) => {
             return;
         }
 
+
         const instructorFormData = {
-            password: data.password,
-            ...instructorData
+            userInfo:{
+                ...userInfo,
+                password: data.password
+            },
+            instructorInfo
         }
 
-        
+        console.log(instructorFormData);
     }
 
     return (
