@@ -2,8 +2,8 @@
 import NavLink from '@/components/shared/NavLink';
 import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/redux/hook';
-import { ArrowDownToLine, BookOpen, Calendar, FileText, HelpCircle, History, LayoutDashboardIcon, Trash2, UserCheck, Users, Wallet } from 'lucide-react';
-import { ReactNode, useState } from 'react';
+import { ArrowDownToLine, BookOpen, Calendar, ChevronDown, FileText, HelpCircle, History, LayoutDashboardIcon, Trash2, UserCheck, Users, Wallet } from 'lucide-react';
+import { ReactNode, useState, useRef, useEffect } from 'react';
 
 interface IRoute {
     name: string;
@@ -18,7 +18,10 @@ interface IRoute {
 const MenuLinks = () => {
     const [openedGroup, setOpenedGroup] = useState<string>('')
     const { user } = useAppSelector(state => state.authSlice);
+    const [heights, setHeights] = useState<{ [key: string]: number }>({});
+    const childRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
+    // learner routes
     const learnerRoutes: IRoute[] = [
         {
             name: 'Dashboard',
@@ -56,7 +59,7 @@ const MenuLinks = () => {
         }
     ];
 
-
+    // instructor routes
     const instructorRoutes: IRoute[] = [
         {
             name: 'Dashboard',
@@ -84,7 +87,6 @@ const MenuLinks = () => {
                     name: 'Cancelled Bookings',
                     path: '/dashboard/instructor/manage-bookings/cancelled'
                 }
-
             ]
         },
         {
@@ -117,6 +119,7 @@ const MenuLinks = () => {
         },
     ];
 
+    // admin routes
     const adminRoutes: IRoute[] = [
         {
             name: 'Dashboard',
@@ -211,56 +214,83 @@ const MenuLinks = () => {
         }
     ];
 
+    // routes based on user role
+    const routes = user?.role === "admin" ? adminRoutes : user?.role === "instructor" ? instructorRoutes : learnerRoutes;
 
+    // useEffect for calculate heights for all groups
+    useEffect(() => {
+        routes.forEach(route => {
+            if (route.children && childRefs.current[route.path]) {
+                const height = childRefs.current[route.path]?.scrollHeight || 0;
+                setHeights(prev => ({ ...prev, [route.path]: height }));
+            }
+        });
+    }, []);
+
+    // group menu open toggler 
     const handleGroupRouteOpen = (path: string) => {
-        if (path === openedGroup) {
-            setOpenedGroup("");
-            return;
-        }
-        setOpenedGroup(path);
+        setOpenedGroup(path === openedGroup ? "" : path);
     };
 
-    const routes = user?.role === "admin" ? adminRoutes : user?.role === "instructor" ? instructorRoutes : learnerRoutes;
 
     return (
         <div>
             <div className='my-6'>
                 <div className='flex flex-col gap-2 justify-center h-full my-2'>
-                    {
-                        routes.map((route, index) => (
-                            <div key={index}>
-                                {
-                                    route.children ?
-                                        <Button className='h-[40px] w-full justify-start px-3' variant={"sidebar"} onClick={() => handleGroupRouteOpen(route.path)}>
+                    {routes.map((route, index) => (
+                        <div key={index}>
+                            {route.children ? (
+                                <>
+                                    <Button
+                                        className={`h-[40px] w-full justify-start px-3 group`}
+                                        variant={"sidebar"}
+                                        onClick={() => handleGroupRouteOpen(route.path)}
+                                    >
+                                        <span className="flex items-center gap-2">
                                             {route.icon}
                                             {route.name}
-                                        </Button>
-                                        :
-                                        <NavLink href={route.path} active='activeSidebar' other='sidebar'>
-                                            {route.icon}
-                                            {route.name}
-                                        </NavLink>
-                                }
-                                {
-                                    (route.children && openedGroup === route.path) && (
-                                        <div className={`ml-[18px] pl-1 border-l-2 transition-all duration-300 origin-top transform ${openedGroup === route.path ? "scale-y-100" : "scale-y-0"}`}>
-                                            {
-                                                route.children.map((route, index) => (
-                                                    <NavLink key={index} href={route.path} active='activeSidebar' other='sidebar'>
-                                                        {route.name}
-                                                    </NavLink>
-                                                ))
-                                            }
-                                        </div>
-                                    )
-                                }
-                            </div>
-                        ))
-                    }
+                                        </span>
+                                        <ChevronDown
+                                            className={`ml-auto transform transition-transform duration-200 ${openedGroup === route.path ? 'rotate-180' : ''
+                                                }`}
+                                        />
+                                    </Button>
+                                    <div
+                                        ref={el => {
+                                            childRefs.current[route.path] = el;
+                                        }}
+                                        className={`ml-[18px] pl-1 border-l-2 overflow-hidden transition-all duration-300 ease-in-out`}
+                                        style={{
+                                            height: openedGroup === route.path ? `${heights[route.path]}px` : '0',
+                                            opacity: openedGroup === route.path ? 1 : 0,
+                                            visibility: openedGroup === route.path ? 'visible' : 'hidden'
+                                        }}
+                                    >
+                                        {route.children.map((childRoute, index) => (
+                                            <NavLink
+                                                key={index}
+                                                href={childRoute.path}
+                                                active='activeSidebar'
+                                                other='sidebar'
+                                            >
+                                                {childRoute.name}
+                                            </NavLink>
+                                        ))}
+                                    </div>
+                                </>
+                            ) : (
+                                <NavLink href={route.path} active='activeSidebar' other='sidebar'>
+                                    {route.icon}
+                                    {route.name}
+                                </NavLink>
+                            )}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
     );
 };
+
 
 export default MenuLinks;
