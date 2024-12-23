@@ -1,8 +1,9 @@
 "use client"
 import NavLink from '@/components/shared/NavLink';
+import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/redux/hook';
 import { ArrowDownToLine, BookOpen, Calendar, FileText, HelpCircle, History, LayoutDashboardIcon, Trash2, UserCheck, Users, Wallet } from 'lucide-react';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 
 interface IRoute {
     name: string;
@@ -15,6 +16,7 @@ interface IRoute {
 }
 
 const MenuLinks = () => {
+    const [openedGroup, setOpenedGroup] = useState<string>('')
     const { user } = useAppSelector(state => state.authSlice);
 
     const learnerRoutes: IRoute[] = [
@@ -147,7 +149,7 @@ const MenuLinks = () => {
         },
         {
             name: 'Instructors',
-            path: '/dashboard/admin/manage-instructors',
+            path: '#instructors',
             icon: <UserCheck />,
             children: [
                 {
@@ -209,6 +211,15 @@ const MenuLinks = () => {
         }
     ];
 
+
+    const handleGroupRouteOpen = (path: string) => {
+        if (path === openedGroup) {
+            setOpenedGroup("");
+            return;
+        }
+        setOpenedGroup(path);
+    };
+
     const routes = user?.role === "admin" ? adminRoutes : user?.role === "instructor" ? instructorRoutes : learnerRoutes;
 
     return (
@@ -217,10 +228,33 @@ const MenuLinks = () => {
                 <div className='flex flex-col gap-2 justify-center h-full my-2'>
                     {
                         routes.map((route, index) => (
-                            <NavLink key={index} href={route.path} active='activeSidebar' other='sidebar'>
-                                {route.icon}
-                                {route.name}
-                            </NavLink>
+                            <div key={index}>
+                                {
+                                    route.children ?
+                                        <Button className='h-[40px] w-full justify-start px-3' variant={"sidebar"} onClick={() => handleGroupRouteOpen(route.path)}>
+                                            {route.icon}
+                                            {route.name}
+                                        </Button>
+                                        :
+                                        <NavLink href={route.path} active='activeSidebar' other='sidebar'>
+                                            {route.icon}
+                                            {route.name}
+                                        </NavLink>
+                                }
+                                {
+                                    (route.children && openedGroup === route.path) && (
+                                        <div className={`ml-[18px] pl-1 border-l-2 transition-all duration-300 origin-top transform ${openedGroup === route.path ? "scale-y-100" : "scale-y-0"}`}>
+                                            {
+                                                route.children.map((route, index) => (
+                                                    <NavLink key={index} href={route.path} active='activeSidebar' other='sidebar'>
+                                                        {route.name}
+                                                    </NavLink>
+                                                ))
+                                            }
+                                        </div>
+                                    )
+                                }
+                            </div>
                         ))
                     }
                 </div>
