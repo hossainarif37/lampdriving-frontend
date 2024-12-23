@@ -3,7 +3,7 @@ import NavLink from '@/components/shared/NavLink';
 import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/redux/hook';
 import { BookOpen, Calendar, ChevronDown, FileText, HelpCircle, History, LayoutDashboardIcon, Trash2, UserCheck, Users, Wallet } from 'lucide-react';
-import { ReactNode, useState, useRef, useEffect } from 'react';
+import { ReactNode, useState, useRef } from 'react';
 
 interface IRoute {
     name: string;
@@ -18,7 +18,6 @@ interface IRoute {
 const MenuLinks = () => {
     const [openedGroup, setOpenedGroup] = useState<string>('')
     const { user } = useAppSelector(state => state.authSlice);
-    const [heights, setHeights] = useState<{ [key: string]: number }>({});
     const childRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
     // learner routes
@@ -217,21 +216,17 @@ const MenuLinks = () => {
     // routes based on user role
     const routes = user?.role === "admin" ? adminRoutes : user?.role === "instructor" ? instructorRoutes : learnerRoutes;
 
-    // useEffect for calculate heights for all groups
-    useEffect(() => {
-        routes.forEach(route => {
-            if (route.children && childRefs.current[route.path]) {
-                const height = childRefs.current[route.path]?.scrollHeight || 0;
-                setHeights(prev => ({ ...prev, [route.path]: height }));
-            }
-        });
-    }, []);
 
-    // group menu open toggler 
     const handleGroupRouteOpen = (path: string) => {
         setOpenedGroup(path === openedGroup ? "" : path);
     };
 
+    const getSubMenuHeight = (path: string): string => {
+        if (!openedGroup || openedGroup !== path) return '0px';
+        const element = childRefs.current[path];
+        if (!element) return '0px';
+        return `${element.scrollHeight}px`;
+    };
 
     return (
         <div>
@@ -259,11 +254,10 @@ const MenuLinks = () => {
                                         ref={el => {
                                             childRefs.current[route.path] = el;
                                         }}
-                                        className={`ml-[18px] pl-1 border-l-2 overflow-hidden transition-all duration-300 ease-in-out`}
+                                        className={`ml-[18px] pl-1 border-l-2 overflow-hidden transition-all duration-300 ease-in-out flex flex-col gap-2 mt-2`}
                                         style={{
-                                            height: openedGroup === route.path ? `${heights[route.path]}px` : '0',
+                                            height: getSubMenuHeight(route.path),
                                             opacity: openedGroup === route.path ? 1 : 0,
-                                            visibility: openedGroup === route.path ? 'visible' : 'hidden'
                                         }}
                                     >
                                         {route.children.map((childRoute, index) => (
