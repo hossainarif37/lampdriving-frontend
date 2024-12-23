@@ -236,7 +236,7 @@ const MenuLinks = () => {
                         {route.children ? (
                             <>
                                 <Button
-                                    className={`h-[40px] w-full justify-start px-3 group capitalize`}
+                                    className={`h-[40px] w-full justify-start px-3 group capitalize mb-2`}
                                     variant={"sidebar"}
                                     onClick={() => handleGroupRouteOpen(route.path)}
                                 >
@@ -253,22 +253,24 @@ const MenuLinks = () => {
                                     ref={el => {
                                         childRefs.current[route.path] = el;
                                     }}
-                                    className={`ml-[18px] pl-1 border-l-2 overflow-hidden transition-all duration-300 ease-in-out flex flex-col gap-2 mt-2`}
+                                    className={`overflow-hidden transition-all duration-300 ease-in-out`}
                                     style={{
                                         height: getSubMenuHeight(route.path),
                                         opacity: openedGroup === route.path ? 1 : 0,
                                     }}
                                 >
-                                    {route.children.map((childRoute, index) => (
-                                        <NavLink
-                                            key={index}
-                                            href={childRoute.path}
-                                            active='activeSidebar'
-                                            other='sidebar'
-                                        >
-                                            {childRoute.name}
-                                        </NavLink>
-                                    ))}
+                                    <div className='ml-[18px] pl-1 my-2 border-l-2 flex flex-col gap-2'>
+                                        {route.children.map((childRoute, index) => (
+                                            <NavLink
+                                                key={index}
+                                                href={childRoute.path}
+                                                active='activeSidebar'
+                                                other='sidebar'
+                                            >
+                                                {childRoute.name}
+                                            </NavLink>
+                                        ))}
+                                    </div>
                                 </div>
                             </>
                         ) : (
