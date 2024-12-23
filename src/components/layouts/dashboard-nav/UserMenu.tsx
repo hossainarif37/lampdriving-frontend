@@ -1,0 +1,59 @@
+import { useState, useRef, useEffect, FC, use } from 'react';
+import { User, Settings, HelpCircle, LogOut } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useAppSelector } from '@/redux/hook';
+
+const UserMenu: FC = () => {
+    const { user } = useAppSelector(state => state.authSlice);
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false);
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+    return (
+        <div className="relative" ref={dropdownRef}>
+            <Button
+                onClick={() => setIsOpen(!isOpen)}
+                size={"icon"}
+                className={`rounded-[4px] gap-2 bg-indigo/90 hover:bg-indigo`}>
+                <User className='text-5xl' size={24} />
+            </Button>
+
+            <div
+                className={`absolute right-0 mt-3 w-56 pb-3 overflow-hidden rounded-[4px] rounded-t-none bg-white transition-all duration-200 ease-in-out origin-right ${isOpen
+                    ? 'transform scale-x-100 opacity-100 translate-x-0'
+                    : 'transform scale-x-95 opacity-0 translate-x-2 pointer-events-none'
+                    }`}
+            >
+                <div className="px-4 py-3 ">
+                    <p className="text-sm font-medium">{user?.name.fullName}</p>
+                    <p className="text-sm text-gray-500">{user?.email.slice(0, 25)}</p>
+                </div>
+
+                <div className="py-1 px-4">
+                    <Button className="h-[40px] capitalize w-full px-4 py-2 text-sm text-red-600 bg-gray-50 hover:bg-gray-100 rounded-[4px] gap-2 font-semibold">
+                        <HelpCircle className="w-4 h-4" />
+                        <span>Help</span>
+                    </Button>
+                </div>
+
+                <div className="py-1 px-4">
+                    <Button className='h-[40px] w-full capitalize'>
+                        <LogOut className="w-4 h-4" />
+                        <span>Sign out</span>
+                    </Button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default UserMenu;

@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "rounded-[4px] font-bold text-sm uppercase transition-colors inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300",
+  "rounded-[4px] font-bold text-sm uppercase transition-colors inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300",
   {
     variants: {
       variant: {
@@ -21,6 +21,8 @@ const buttonVariants = cva(
         red: "bg-red-600 text-light hover:bg-red-700",
         green: "bg-green-600 text-light hover:bg-green-700",
         link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
+        sidebar: "hover:bg-primary/90 hover:text-white",
+        activeSidebar: "bg-primary text-light dark:bg-primary dark:text-light",
       },
       size: {
         default: "h-11 md:h-14 px-10",
@@ -38,7 +40,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
 
