@@ -104,7 +104,6 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
                 >
-                    {carType == "auto" && <span><Check className='w-5' /></span>}
                     <span>Auto</span>
                 </Button>
                 <Button
@@ -113,7 +112,6 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
                 >
-                    {carType == "manual" && <span><Check className='w-5' /></span>}
                     <span>Manual</span>
                 </Button>
                 <Button
@@ -122,7 +120,6 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
                 >
-                    {carType == "all" && <span><Check className='w-5' /></span>}
                     <span>All</span>
                 </Button>
             </div>
