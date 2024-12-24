@@ -11,11 +11,11 @@ export interface IDaySchedule {
     isActive: boolean
     startTime: string
     endTime: string
-  }
-  
- export interface ISchedule {
+}
+
+export interface ISchedule {
     [key: string]: IDaySchedule
-  }
+}
 
 // interface for vehicle
 export interface IVehicle {
@@ -55,6 +55,7 @@ export interface IInstructor {
     serviceAreas: string[];
     pricePerHour: number;
     workingHour: IWorkingHour;
+    completedLessons: number;
     withdraws: string[];
     transactions: string[];
     bookings: string[];
