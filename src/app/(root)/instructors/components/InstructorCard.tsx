@@ -17,7 +17,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
     return (
         <div className="p-4 rounded-lg space-y-5 bg-gradient-to-b from-primary/0 to-indigo/5 relative">
             {/* car type */}
-            <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium flex items-center gap-1 absolute top-5 right-5">
+            <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium flex items-center gap-1 absolute top-5 right-5 capitalize">
                 <Car className="w-4 h-4" />
                 {vehicle.type}
             </span>
