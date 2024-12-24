@@ -1,15 +1,32 @@
-import React from 'react';
+"use client"
+import { FC, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface PaginationProps {
-  currentPage: number;
+  currentPageProps: number;
   totalPages: number;
-  onPageChange: (page: number) => void;
 }
 
-export function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) {
+
+const Pagination: FC<PaginationProps> = ({ currentPageProps, totalPages }) => {
+  const [currentPage, setCurrentPage] = useState(currentPageProps);
+
   const isDisabled = (condition: boolean) => (condition ? 'disabled:opacity-50' : 'hover:bg-gray-100');
 
+  const urlSearchParams = useSearchParams();
+
+  const { replace } = useRouter();
+
+  const onPageChange = (page: number) => {
+    const searchParams = new URLSearchParams(urlSearchParams);
+    if (page >= 1 && page <= totalPages) {
+      searchParams.set('page', page.toString());
+      replace(`?${searchParams.toString()}`);
+      setCurrentPage(page);
+    }
+  }
+  
   return (
     <div className="flex items-center justify-end gap-2">
       {/* Previous Button */}
@@ -26,11 +43,10 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
         <button
           key={i}
           onClick={() => onPageChange(i + 1)}
-          className={`px-4 py-2 rounded-lg ${
-            currentPage === i + 1
-              ? 'gradient-color text-white'
-              : 'hover:bg-gray-100'
-          }`}
+          className={`px-4 py-2 rounded-lg ${currentPage === i + 1
+            ? 'gradient-color text-white'
+            : 'hover:bg-gray-100'
+            }`}
         >
           {i + 1}
         </button>
@@ -46,4 +62,6 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
       </button>
     </div>
   );
-}
+};
+
+export default Pagination;
