@@ -22,20 +22,18 @@ interface IServicesFormProps {
 
 const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) => {
     const [isClicked, setIsClicked] = useState(false);
-    const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
+    const [selectedLocations, setSelectedLocations] = useState<string[]>(servicesInfo?.serviceAreas || []);
     const [selectedLocationsError, setSelectedLocationsError] = useState<string>('');
+    const defaultSchedule: ISchedule = DAYS.reduce((acc, day) => {
+        acc[day] = {
+            isActive: true,
+            startTime: "09:00",
+            endTime: "17:00",
+        };
+        return acc;
+    }, {} as ISchedule)
 
-    const [schedule, setSchedule] = useState<ISchedule>(() => {
-        return DAYS.reduce((acc, day) => {
-            acc[day] = {
-                isActive: true,
-                startTime: "09:00",
-                endTime: "17:00",
-            };
-            return acc;
-        }, {} as ISchedule);
-    });
-
+    const [schedule, setSchedule] = useState<ISchedule>(servicesInfo?.workingHour as unknown as ISchedule || defaultSchedule);
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const router = useRouter();
@@ -93,6 +91,7 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
                                     required: "Price is required"
                                 })
                                 }
+                                defaultValue={servicesInfo?.pricePerHour}
                                 type="number"
                                 placeholder="Enter price per hour"
                                 className='h-11 xl:h-14 mt-1'
@@ -107,6 +106,7 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
                                 options={sydneySuburbs}
                                 onValueChange={setSelectedLocations}
                                 defaultValue={selectedLocations}
+                                value={selectedLocations}
                                 placeholder="Select Areas"
                                 variant="inverted"
                                 animation={2}

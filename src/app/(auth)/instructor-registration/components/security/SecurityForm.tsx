@@ -120,6 +120,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
                                         required: "Password is required"
                                     })
                                     }
+                                    defaultValue={password}
                                     type={`${passwordVisible ? "text" : "password"}`}
                                     id='password'
                                     placeholder="Enter your password"
@@ -149,6 +150,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
                                         required: "Confirm Password is required"
                                     })
                                     }
+                                    defaultValue={confirmPassword}
                                     type={`${confirmPasswordVisible ? "text" : "password"}`}
                                     id='confirm-password'
                                     placeholder="Re-type your password"
