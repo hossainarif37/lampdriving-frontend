@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 import arrowImg from "@/assets/banner-img/main-slider-style1__arrow.png";
 
-const BannerLeftContent: FC = () => {
+const BannerHeading: FC = () => {
     return (
         <div className="text-textCol">
             {/* Main heading */}
@@ -66,4 +66,4 @@ const BannerLeftContent: FC = () => {
     );
 };
 
-export default BannerLeftContent;
+export default BannerHeading;
