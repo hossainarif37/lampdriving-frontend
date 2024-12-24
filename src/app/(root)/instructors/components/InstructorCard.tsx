@@ -1,46 +1,31 @@
 
-import { Star, Car, Clock, ExternalLink, Calendar, ArrowBigRight, ChevronRight } from "lucide-react";
+import { Star, Car, Clock, ExternalLink, Calendar, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { StaticImageData } from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { IInstructor } from "@/types/instructor";
+import cardImg from "@/assets/home-page-image/test-image.webp"
 
-
-// Define the TypeScript interface for the instructor
-interface Instructor {
-    id: number;
-    name: string;
-    image: StaticImageData;
-    rating: number;
-    experience: string;
-    pricePerHour: number;
-    skills: string;
-    totalRatings: number;
-    totalLessons: number
-}
 
 // Define the props type for the component
-interface InstructorCardProps {
-    instructor: Instructor;
-}
 
-const InstructorCard: React.FC<InstructorCardProps> = ({ instructor }) => {
-    const { name, image, rating, experience, pricePerHour, totalRatings, skills, totalLessons } = instructor;
 
+const InstructorCard: React.FC<{ instructor: IInstructor }> = ({ instructor }) => {
+    const { user, experience, pricePerHour, vehicle, feedback, completedLessons } = instructor;
 
     return (
         <div className="p-4 rounded-lg space-y-5 bg-gradient-to-b from-primary/0 to-indigo/5 relative">
             {/* car type */}
             <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium flex items-center gap-1 absolute top-5 right-5">
                 <Car className="w-4 h-4" />
-                {skills}
+                {vehicle.type}
             </span>
             <div className="flex gap-8">
                 {/* Profile Picture and Auto Badge */}
                 <div className="rounded-full flex flex-col items-center gap-2">
                     <Image
-                        src={image}
-                        alt={`Profile of ${name}`}
+                        src={cardImg}
+                        alt={`Profile of ${typeof user !== 'string' && user?.name?.fullName}`}
                         height={120}
                         width={120}
                         className="rounded-full"
@@ -59,22 +44,22 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor }) => {
                     </div>
 
                     {/* Name */}
-                    <h4 className="text-xl font-semibold text-gradient">{name}</h4>
+                    <h4 className="text-xl font-semibold text-gradient">{typeof user !== 'string' && user?.name?.fullName}</h4>
 
                     {/* Rating and Total Ratings */}
                     <div className="flex gap-2">
                         <div className="flex items-center gap-2">
                             <Star className="w-5 h-5 text-primary fill-current" />
-                            <span>{rating}</span>
+                            <span>{feedback?.rating || "N/A"}</span>
                         </div>
                         <span className="text-primary">•</span>
-                        <span>{totalRatings} Ratings</span>
+                        <span>{feedback?.reviews?.length || 0} Ratings</span>
                     </div>
 
                     {/* Completed Lessons */}
                     <div className="flex items-center gap-2">
                         <Calendar className="w-5 h-5 text-primary" />
-                        {totalLessons} Completed lessons
+                        {completedLessons} Completed lessons
                     </div>
 
                     {/* Experience */}
