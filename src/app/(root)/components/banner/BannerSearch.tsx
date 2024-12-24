@@ -5,6 +5,7 @@ import { Check } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 import { sydneySuburbs } from '@/constant/sydneySuburbs';
+import { Button } from '@/components/ui/button';
 
 const BannerSearch: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -33,24 +34,22 @@ const BannerSearch: FC = () => {
 
                 {/* Toggle buttons for Auto/Manual */}
                 <div className="w-full font-semibold text-textCol text-center border flex gap-3 p-3 rounded-md">
-                    <button
+                    <Button
                         onClick={() => setCarType('auto')}
-                        className={`w-1/2 flex justify-center items-center px-0 py-3 rounded-md ${carType === 'auto'
+                        className={`w-1/2 hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
                             ? 'gradient-color text-textCol'
                             : 'bg-gray-200 text-secondary'}`}
                     >
-                        {carType == "auto" && <span><Check className='w-5' /></span>}
                         <span>Auto</span>
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         onClick={() => setCarType('manual')}
-                        className={`w-1/2 flex justify-center items-center py-2 rounded-md ${carType === 'manual'
+                        className={`w-1/2 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
                             ? 'gradient-color text-textCol'
                             : 'bg-gray-200 text-secondary'}`}
                     >
-                        {carType == "manual" && <span><Check className='w-5' /></span>}
                         <span>Manual</span>
-                    </button>
+                    </Button>
                 </div>
 
                 {/* Search input field */}
@@ -93,9 +92,9 @@ const BannerSearch: FC = () => {
 
                 <div>
                     {/* Search button */}
-                    <button onClick={handleSearch} className="w-full py-3 gradient-color text-light font-semibold rounded-md">
+                    <Button onClick={handleSearch} className="w-full py-3 gradient-color text-light rounded-md text-base">
                         Search
-                    </button>
+                    </Button>
 
                 </div>
             </div>
