@@ -154,7 +154,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperience
                             <MultiSelect
                                 options={languageList}
                                 onValueChange={setSelectedLanguages}
-                                defaultValue={selectedLanguages}
+                                // defaultValue={selectedLanguages}
                                 value={experienceInfo?.languages}
                                 placeholder="Select Languages"
                                 variant="inverted"
