@@ -10,10 +10,20 @@ const InstructorsNotFound: FC = () => {
     // remove search handler
     const handleRemoveSearch = () => {
         const searchParams = new URLSearchParams(urlSearchParams);
+        const searchKey = searchParams.get('searchKey');
+        const vehicleType = searchParams.get('vehicle.type');
+        const page = searchParams.get('page');
 
-        searchParams.get('searchKey') && searchParams.delete('searchKey');
-        searchParams.get('vehicle.type') && searchParams.delete('vehicle.type');
-        searchParams.get('page') && searchParams.delete('page');
+        if (searchKey) {
+            searchParams.delete('searchKey');
+
+        }
+        if (vehicleType) {
+            searchParams.delete('vehicle.type');
+        }
+        if (page) {
+            searchParams.delete('page');
+        }
 
         replace(`?${searchParams.toString()}`);
     }
@@ -26,9 +36,9 @@ const InstructorsNotFound: FC = () => {
                 Instructors Not Found
             </h3>
             <p className="text-gray-600 text-center max-w-md mb-6">
-                We couldn't find any instructors matching your search criteria. Try adjusting your filters or search terms.
+                We couldn&apos;t find any instructors matching your search criteria. Try adjusting your filters or search terms.
             </p>
-            <Button onClick={handleRemoveSearch} className='w-44 md:w-52 gradient-color'>Reset Search</Button>
+            <Button onClick={() => handleRemoveSearch()} className='w-44 md:w-52 gradient-color'>Reset Search</Button>
         </div>
     );
 };
