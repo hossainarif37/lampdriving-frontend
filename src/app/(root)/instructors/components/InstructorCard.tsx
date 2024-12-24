@@ -1,5 +1,5 @@
 
-import { Star, Car, Clock, ExternalLink, Calendar, ArrowBigRight, ChevronRight } from "lucide-react";
+import { Star, Car, Clock, ExternalLink, Calendar, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { StaticImageData } from "next/image";
 import { Button } from "@/components/ui/button";
@@ -86,10 +86,10 @@ const InstructorCard: React.FC<InstructorCardProps> = ({ instructor }) => {
             <div className="space-y-4">
                 <div className="flex gap-2 max-w-lg mx-auto">
                     {/* View Profile Button */}
-                    <Button className="border h-12 w-1/2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 transition-colors duration-200">
+                    <Link href="instructors/instructor-details" className="border h-12 w-1/2 text-sm font-medium text-secondary bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2 transition-colors duration-200">
                         <ExternalLink className="w-4 h-4" />
                         View Profile
-                    </Button>
+                    </Link>
 
                     {/* Book Button */}
                     <Button className="h-12 w-1/2 gradient-color">Book</Button>
