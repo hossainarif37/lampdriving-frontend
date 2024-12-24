@@ -1,20 +1,24 @@
 "use client";
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command"
 import { Check } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
+import { sydneySuburbs } from '@/constant/sydneySuburbs';
 
 const BannerSearch: FC = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const [carType, setCarType] = useState<'auto' | 'manual'>('auto');
-    const [searchKey, setSearchKey] = useState<string>('');
+    const [selectedSuburb, setSelectedSuburb] = useState<string>('');
 
     const router = useRouter();
 
     // search handler
     const handleSearch = () => {
-        if (!searchKey) {
+        if (!selectedSuburb) {
             return;
         }
-        router.push(`/instructors?vehicle.type=${carType}&searchTerm=${searchKey}`)
+        router.push(`/instructors?vehicle.type=${carType}&searchTerm=${selectedSuburb}`)
     }
 
     return (
@@ -51,12 +55,40 @@ const BannerSearch: FC = () => {
 
                 {/* Search input field */}
                 <div className="flex gap-2 items-center rounded-md w-full border">
-                    <input
-                        onChange={(e) => setSearchKey(e.target.value)}
-                        className="flex-1 px-4 py-3 rounded-md text-secondary focus:outline-none placeholder:text-accent"
-                        type="text"
-                        placeholder="Enter your suburb"
-                    />
+                    <Popover
+                        open={isOpen}
+                        onOpenChange={(open) => setIsOpen(open)} // Update popover state
+                    >
+                        <PopoverTrigger asChild>
+                            <input
+                                value={selectedSuburb}
+                                onChange={(e) => setSelectedSuburb(e.target.value)}
+                                readOnly={selectedSuburb ? true : false}
+                                className="flex-1 px-4 py-3 rounded-md text-secondary focus:outline-none placeholder:text-accent"
+                                type="text"
+                                placeholder="Enter your suburb"
+                            />
+                        </PopoverTrigger>
+                        <PopoverContent className="md:w-[350px] lg:w-[434px] p-2">
+                            <Command>
+                                <CommandInput placeholder="Enter your suburb" />
+                                <CommandList>
+                                    {sydneySuburbs.map((suburb, index) => (
+                                        <CommandItem
+                                            className='py-3'
+                                            key={index}
+                                            onSelect={() => {
+                                                setSelectedSuburb(suburb.value);
+                                                setIsOpen(false);
+                                            }}
+                                        >
+                                            {suburb.label}
+                                        </CommandItem>
+                                    ))}
+                                </CommandList>
+                            </Command>
+                        </PopoverContent>
+                    </Popover>
                 </div>
 
                 <div>
@@ -64,6 +96,7 @@ const BannerSearch: FC = () => {
                     <button onClick={handleSearch} className="w-full py-3 gradient-color text-light font-semibold rounded-md">
                         Search
                     </button>
+
                 </div>
             </div>
         </div>
