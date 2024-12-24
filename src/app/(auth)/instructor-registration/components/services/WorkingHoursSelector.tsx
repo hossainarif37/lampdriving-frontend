@@ -18,6 +18,7 @@ interface WorkingHoursProps {
   onUpdate?: (schedule: ISchedule) => void;
   schedule: ISchedule;
   setSchedule: React.Dispatch<React.SetStateAction<ISchedule>>;
+  setWorkingHoursError: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const TIME_OPTIONS = Array.from({ length: 48 }, (_, i) => {
@@ -26,7 +27,7 @@ const TIME_OPTIONS = Array.from({ length: 48 }, (_, i) => {
   return `${String(hour).padStart(2, "0")}:${minute}`
 })
 
-const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule, setSchedule }) => {
+const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule, setSchedule, setWorkingHoursError }) => {
   const [openDays, setOpenDays] = useState<string[]>([]);
   const [checkboxState, setCheckboxState] = useState<Record<string, boolean>>(
     () => DAYS.reduce((acc, day) => ({ ...acc, [day]: false }), {})
@@ -46,6 +47,8 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
         ...update,
       },
     }));
+    
+
 
     // Reset the "Apply to all" checkbox for the day
     if (update.startTime || update.endTime) {
@@ -100,8 +103,15 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
                 <Switch
                   id={`${day}-active`}
                   checked={schedule[day]?.isActive}
-                  onCheckedChange={(checked) =>
-                    updateSchedule(day, { isActive: checked })
+                  onCheckedChange={(checked) =>{
+                    updateSchedule(day, { isActive: checked });
+                    // if (!checked) {
+                    //   setWorkingHoursError('At least one working day must be active');
+                    // }else{
+                    //   setWorkingHoursError('');
+                    // }
+                  }
+                    
                   }
                 />
                 <Label
