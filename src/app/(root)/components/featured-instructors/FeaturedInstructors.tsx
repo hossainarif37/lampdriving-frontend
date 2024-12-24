@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import InstructorBox from './InstructorBox';
 import SectionHeading from '../shared/section-heading/SectionHeading';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import InstructorCard from './InstructorCard';
 
 const FeaturedInstructors: FC = () => {
     return (
@@ -16,9 +16,9 @@ const FeaturedInstructors: FC = () => {
             />
 
             {/* Instructors Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-7 mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-7 mx-auto">
                 {Array(6).fill(null).map((_, index) => (
-                    <InstructorBox key={index} />
+                    <InstructorCard key={index} />
                 ))}
             </div>
 

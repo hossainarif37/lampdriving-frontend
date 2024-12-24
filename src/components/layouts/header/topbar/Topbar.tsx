@@ -37,7 +37,7 @@ const Topbar = () => {
                     <Bar />
                     <li><Link href="#">Blog</Link></li>
                     <Bar />
-                    <li><Link href="#">Instruct with LampDriving</Link></li>
+                    <li><Link href="/instruct">Instruct with LampDriving</Link></li>
                 </ul>
 
                 {/* Right Side */}
