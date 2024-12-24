@@ -1,6 +1,14 @@
 import Image from 'next/image'
 import IImg from "@/assets/home-page-image/test-image.webp"
 
+
+import * as React from "react"
+
+import {
+  Carousel,
+  CarouselContent,
+} from "@/components/ui/carousel"
+
 export default function OtherInstructors() {
   const instructors = [
     { id: 1, name: 'Kim' },
@@ -13,11 +21,16 @@ export default function OtherInstructors() {
   ]
 
   return (
-    <section className="bg-light rounded-xl border p-4 md:p-6">
-      <h2 className="text-xl font-semibold mb-6 text-secondary">Other instructors in BANKSIA, 2216</h2>
-      <div className="flex gap-6 overflow-x-hidden">
+    <Carousel
+      opts={{
+        align: "start",
+      }}
+      className="w-full bg-white rounded-xl border p-6"
+    >
+      <h2 className="text-xl font-semibold mb-6">Other instructors in BANKSIA, 2216</h2>
+      <CarouselContent className="">
         {instructors.map((instructor) => (
-          <div key={instructor.id} className="text-center">
+          <div key={instructor.id} className="text-center felx w-full px-6">
             <div className="relative w-24 h-24 mx-auto mb-1">
               <Image
                 src={IImg}
@@ -30,8 +43,8 @@ export default function OtherInstructors() {
             <p className="text-xs text-accent font-medium">{instructor.name}</p>
           </div>
         ))}
-      </div>
-    </section>
+      </CarouselContent>
+    </Carousel>
   );
 }
 

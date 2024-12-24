@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import InstructorDetails from './InstructorDetails';
+import InstructorProfile from '../InstructorDetails/components/InstructorProfile';
 
 const page: FC = () => {
     return (
         <div>
-            <InstructorDetails/>
+            <InstructorProfile />
         </div>
     );
 };

@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-Taisor-Car-Color-Image.webp";
 import carImg2 from "@/assets/dummy-images/map-image.jpg";
-
 export default function Sidebar() {
   return (
     <div className="space-y-6">
