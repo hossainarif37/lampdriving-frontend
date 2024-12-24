@@ -1,23 +1,31 @@
 "use client";
 import { Input } from '@/components/ui/input';
 import { Check, Search } from 'lucide-react';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-const InstructorsSearchFilter: FC = () => {
-    const [carType, setCarType] = useState<'auto' | 'manual' | 'all'>('all');
+interface IInstructorSearchFilterProps {
+    searchParams?: {
+        carType?: string;
+        searchKey?: string;
+        page?: string;
+    }
+}
+
+const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParams }) => {
+    const [carType, setCarType] = useState<'auto' | 'manual' | 'all'>(searchParams?.carType === "auto" || searchParams?.carType === "manual" ? searchParams?.carType : 'all');
     const urlSearchParams = useSearchParams();
     const { replace } = useRouter();
 
     // Function to handle search
-    const handleSearch = (searchTerm: string) => {
+    const handleSearch = (searchKey: string) => {
         const searchParams = new URLSearchParams(urlSearchParams);
 
-        if (searchTerm) {
-            searchParams.set('searchTerm', searchTerm.toString());
+        if (searchKey) {
+            searchParams.set('searchKey', searchKey.toString());
             searchParams.delete('page');
         } else {
-            searchParams.delete('searchTerm');
+            searchParams.delete('searchKey');
         }
         replace(`?${searchParams.toString()}`);
     }
@@ -34,23 +42,22 @@ const InstructorsSearchFilter: FC = () => {
         }
     }
 
-    useEffect(() => {
-        if (carType !== "all") {
-            handleFilter('vehicle.type', carType);
-        } else {
-            handleFilter('vehicle.type', '');
-        }
-    }, [carType])
+    const handleChangeCarType = (type: 'auto' | 'manual' | 'all') => {
+        setCarType(type);
+        handleFilter('carType', type);
+    }
+
+
     return (
         <div className='flex gap-5 justify-end max-w-7xl'>
 
             <div className='relative lg:w-4/12 md:w-5/12' >
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-                <Input onChange={(e) => handleSearch(e.target.value)} placeholder="Enter your suburb" className='h-12 pl-12' />
+                <Input defaultValue={searchParams?.searchKey} onChange={(e) => handleSearch(e.target.value)} placeholder="Enter your suburb" className='h-12 pl-12' />
             </div>
             <div className="font-semibold text-textCol text-center flex gap-3">
                 <button
-                    onClick={() => setCarType('auto')}
+                    onClick={() => handleChangeCarType('auto')}
                     className={`w-32 flex justify-center items-center px-0 py-3 rounded-md ${carType === 'auto'
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
@@ -59,7 +66,7 @@ const InstructorsSearchFilter: FC = () => {
                     <span>Auto</span>
                 </button>
                 <button
-                    onClick={() => setCarType('manual')}
+                    onClick={() => handleChangeCarType('manual')}
                     className={`w-32 flex justify-center items-center py-2 rounded-md ${carType === 'manual'
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
@@ -68,7 +75,7 @@ const InstructorsSearchFilter: FC = () => {
                     <span>Manual</span>
                 </button>
                 <button
-                    onClick={() => setCarType('all')}
+                    onClick={() => handleChangeCarType('all')}
                     className={`w-32 flex justify-center items-center py-2 rounded-md ${carType === 'all'
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}

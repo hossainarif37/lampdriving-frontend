@@ -21,7 +21,7 @@ const InstructorsPage: FC<IInstructorProps> = async ({ searchParams }) => {
         <div className=''>
             <div className='wrapper py-14 space-y-7 '>
                 <SectionHeading title='Our Instructors' subtitle='Find the perfect instructor for your learning journey' />
-                <InstructorsSearchFilter />
+                <InstructorsSearchFilter searchParams={searchedParams} />
                 <Instructors instructors={instructors.data.result || []} />
                 <Pagination
                     currentPageProps={Number(searchedParams?.page) || 1}
