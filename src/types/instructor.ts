@@ -55,6 +55,7 @@ export interface IInstructor {
     serviceAreas: string[];
     pricePerHour: number;
     workingHour: IWorkingHour;
+    completedLessons: number;
     withdraws: string[];
     transactions: string[];
     bookings: string[];
