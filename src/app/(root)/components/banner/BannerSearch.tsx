@@ -1,12 +1,21 @@
 "use client";
-import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 
 const BannerSearch: FC = () => {
-    const [carType, setCarType] = useState<'Auto' | 'Manual'>('Auto');
+    const [carType, setCarType] = useState<'auto' | 'manual'>('auto');
     const [searchKey, setSearchKey] = useState<string>('');
+
+    const router = useRouter();
+
+    // search handler
+    const handleSearch = () => {
+        if (!searchKey) {
+            return;
+        }
+        router.push(`/instructors?vehicle.type=${carType}&searchTerm=${searchKey}`)
+    }
 
     return (
         <div className="bg-textCol lg:w-[500px] md:w-[400px] w-full rounded-lg lg:px-8 md:px-6 px-3 lg:py-14 md:py-10 py-7">
@@ -21,21 +30,21 @@ const BannerSearch: FC = () => {
                 {/* Toggle buttons for Auto/Manual */}
                 <div className="w-full font-semibold text-textCol text-center border flex gap-3 p-3 rounded-md">
                     <button
-                        onClick={() => setCarType('Auto')}
-                        className={`w-1/2 flex justify-center items-center px-0 py-3 rounded-md ${carType === 'Auto'
+                        onClick={() => setCarType('auto')}
+                        className={`w-1/2 flex justify-center items-center px-0 py-3 rounded-md ${carType === 'auto'
                             ? 'gradient-color text-textCol'
                             : 'bg-gray-200 text-secondary'}`}
                     >
-                        {carType == "Auto" && <span><Check className='w-5' /></span>}
+                        {carType == "auto" && <span><Check className='w-5' /></span>}
                         <span>Auto</span>
                     </button>
                     <button
-                        onClick={() => setCarType('Manual')}
-                        className={`w-1/2 flex justify-center items-center py-2 rounded-md ${carType === 'Manual'
+                        onClick={() => setCarType('manual')}
+                        className={`w-1/2 flex justify-center items-center py-2 rounded-md ${carType === 'manual'
                             ? 'gradient-color text-textCol'
                             : 'bg-gray-200 text-secondary'}`}
                     >
-                        {carType == "Manual" && <span><Check className='w-5' /></span>}
+                        {carType == "manual" && <span><Check className='w-5' /></span>}
                         <span>Manual</span>
                     </button>
                 </div>
@@ -50,13 +59,11 @@ const BannerSearch: FC = () => {
                     />
                 </div>
 
-                {/* Search button */}
                 <div>
-                    <Link href={`/instructors?carType=${carType}&searchKey=${searchKey}`}>
-                        <button className="w-full py-3 gradient-color text-light font-semibold rounded-md">
-                            Search
-                        </button>
-                    </Link>
+                    {/* Search button */}
+                    <button onClick={handleSearch} className="w-full py-3 gradient-color text-light font-semibold rounded-md">
+                        Search
+                    </button>
                 </div>
             </div>
         </div>

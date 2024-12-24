@@ -10,7 +10,7 @@ interface PaginationProps {
 
 
 const Pagination: FC<PaginationProps> = ({ currentPageProps, totalPages }) => {
-  const [currentPage, setCurrentPage] = useState(currentPageProps);
+  const [currentPage, setCurrentPage] = useState(currentPageProps || 1);
 
   const isDisabled = (condition: boolean) => (condition ? 'disabled:opacity-50' : 'hover:bg-gray-100');
 
@@ -26,7 +26,7 @@ const Pagination: FC<PaginationProps> = ({ currentPageProps, totalPages }) => {
       setCurrentPage(page);
     }
   }
-  
+
   return (
     <div className="flex items-center justify-end gap-2">
       {/* Previous Button */}
