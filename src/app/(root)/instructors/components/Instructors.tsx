@@ -1,18 +1,28 @@
-"use client";
 import { FC } from 'react';
 import InstructorCard from './InstructorCard';
-import { IInstructor } from '@/types/instructor';
 import InstructorsNotFound from './InstructorsNotFound';
+import { getInstructors } from '@/api/getInstructors';
+import Pagination from './Pagination';
 
-const Instructors: FC<{ instructors: IInstructor[] | [] }> = ({ instructors }) => {
+interface IInstructorProps {
+    searchedParams?: {
+        carType?: string;
+        searchKey?: string;
+        page?: string;
+    };
+}
+
+const Instructors: FC<IInstructorProps> = async ({ searchedParams }) => {
+
+    const instructors = await getInstructors(searchedParams);
 
     return (
-        <div className='min-h-[40vh]'>
+        <div className='min-h-[40vh] space-y-7'>
             {
-                instructors.length > 0 ?
+                instructors.data.result.length > 0 ?
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
                         {
-                            instructors.map((instructor, index) => (
+                            instructors.data.result.map((instructor, index) => (
                                 <InstructorCard key={index} instructor={instructor} />
                             ))
                         }
@@ -20,6 +30,10 @@ const Instructors: FC<{ instructors: IInstructor[] | [] }> = ({ instructors }) =
                     :
                     <InstructorsNotFound />
             }
+            <Pagination
+                currentPageProps={Number(searchedParams?.page) || 1}
+                totalPages={instructors.data.meta.totalPage || 1}
+            />
         </div>
     );
 };

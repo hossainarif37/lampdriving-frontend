@@ -1,6 +1,6 @@
 "use client";
 import { Input } from '@/components/ui/input';
-import { Check, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { FC, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -17,9 +17,12 @@ interface IInstructorSearchFilterProps {
 
 const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParams }) => {
     const [searchPopOverOpen, setSearchPopOverOpen] = useState(false);
+    
     const [carType, setCarType] = useState<'auto' | 'manual' | 'all'>(
         searchParams?.['vehicle.type'] === "auto" || searchParams?.['vehicle.type'] === "manual" ? searchParams?.['vehicle.type'] : 'all');
     const [selectedSuburb, setSelectedSuburb] = useState<string>(searchParams?.searchKey || '');
+
+    
     const urlSearchParams = useSearchParams();
     const { replace } = useRouter();
 
@@ -37,18 +40,20 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
         replace(`?${searchParams.toString()}`);
     }
 
+    // Function to handle filter
     const handleFilter = (field: string, value: string) => {
+        const searchParams = new URLSearchParams(urlSearchParams);
         if (value) {
-            const searchParams = new URLSearchParams(urlSearchParams);
             searchParams.set(field, value);
             replace(`?${searchParams.toString()}`);
         } else {
-            const searchParams = new URLSearchParams(urlSearchParams);
             searchParams.delete(field);
-            replace(`?${searchParams.toString()}`);
         }
+        searchParams.delete('page');
+        replace(`?${searchParams.toString()}`);
     }
 
+    // Function to handle car type
     const handleChangeCarType = (type: 'auto' | 'manual' | 'all') => {
         setCarType(type);
         if (type == "auto" || type == "manual") {
@@ -58,11 +63,8 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
         }
     }
 
-
     return (
         <div className='flex gap-5 justify-end max-w-7xl'>
-
-
             <Popover
                 open={searchPopOverOpen}
                 onOpenChange={(open) => setSearchPopOverOpen(open)} // Update popover state
