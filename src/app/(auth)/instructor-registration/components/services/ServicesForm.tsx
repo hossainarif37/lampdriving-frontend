@@ -23,6 +23,7 @@ interface IServicesFormProps {
 const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) => {
     const [isClicked, setIsClicked] = useState(false);
     const [selectedLocations, setSelectedLocations] = useState<string[]>(servicesInfo?.serviceAreas || []);
+    const [workingHoursError, setWorkingHoursError] = useState<string>('');
     const [selectedLocationsError, setSelectedLocationsError] = useState<string>('');
     const defaultSchedule: ISchedule = DAYS.reduce((acc, day) => {
         acc[day] = {
@@ -53,6 +54,22 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
             thursday: schedule.thursday,
             friday: schedule.friday,
         };
+
+        console.log('workingHour', workingHour);
+        let hasActiveDay = false;
+        for (const day in workingHour) {
+            const dayKey = day as keyof IWorkingHour;
+            if (!workingHour[dayKey]?.isActive) {
+                delete workingHour[dayKey];
+            } else {
+                hasActiveDay = true;
+            }
+        }
+
+        if (!hasActiveDay) {
+           setWorkingHoursError('At least one working day must be active');
+            return;
+        }
         
         setServicesInfo({
             pricePerHour: Number(data.pricePerHour),
@@ -72,7 +89,7 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
         }
     }, [selectedLocations, isClicked]);
 
-    console.log('schedule', schedule);
+    
 
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
@@ -105,7 +122,7 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
                             <MultiSelect
                                 options={sydneySuburbs}
                                 onValueChange={setSelectedLocations}
-                                defaultValue={selectedLocations}
+                                // defaultValue={selectedLocations}
                                 value={selectedLocations}
                                 placeholder="Select Areas"
                                 variant="inverted"
@@ -122,7 +139,9 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
                             <WorkingHoursSelector
                                 schedule={schedule}
                                 setSchedule={setSchedule}
+                                setWorkingHoursError={setWorkingHoursError}
                             />
+                            {workingHoursError && <p className='text-red-500 text-sm mt-1'>{workingHoursError}</p>}
                         </div>
                     </div>
                 </div>
