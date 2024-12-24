@@ -3,17 +3,22 @@ import { Input } from '@/components/ui/input';
 import { Check, Search } from 'lucide-react';
 import { FC, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command"
+import { sydneySuburbs } from '@/constant/sydneySuburbs';
 interface IInstructorSearchFilterProps {
     searchParams?: {
-        carType?: string;
+        'vehicle.type'?: string;
         searchKey?: string;
         page?: string;
     }
 }
 
 const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParams }) => {
-    const [carType, setCarType] = useState<'auto' | 'manual' | 'all'>(searchParams?.carType === "auto" || searchParams?.carType === "manual" ? searchParams?.carType : 'all');
+    const [searchPopOverOpen, setSearchPopOverOpen] = useState(false);
+    const [carType, setCarType] = useState<'auto' | 'manual' | 'all'>(
+        searchParams?.['vehicle.type'] === "auto" || searchParams?.['vehicle.type'] === "manual" ? searchParams?.['vehicle.type'] : 'all');
+    const [selectedSuburb, setSelectedSuburb] = useState<string>(searchParams?.searchKey || '');
     const urlSearchParams = useSearchParams();
     const { replace } = useRouter();
 
@@ -24,6 +29,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
         if (searchKey) {
             searchParams.set('searchKey', searchKey.toString());
             searchParams.delete('page');
+            setSelectedSuburb(searchKey);
         } else {
             searchParams.delete('searchKey');
         }
@@ -44,17 +50,52 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
 
     const handleChangeCarType = (type: 'auto' | 'manual' | 'all') => {
         setCarType(type);
-        handleFilter('carType', type);
+        if (type == "auto" || type == "manual") {
+            handleFilter('vehicle.type', type);
+        } else {
+            handleFilter('vehicle.type', '');
+        }
     }
 
 
     return (
         <div className='flex gap-5 justify-end max-w-7xl'>
 
-            <div className='relative lg:w-4/12 md:w-5/12' >
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-                <Input defaultValue={searchParams?.searchKey} onChange={(e) => handleSearch(e.target.value)} placeholder="Enter your suburb" className='h-12 pl-12' />
-            </div>
+
+            <Popover
+                open={searchPopOverOpen}
+                onOpenChange={(open) => setSearchPopOverOpen(open)} // Update popover state
+            >
+                <PopoverTrigger asChild>
+                    <div className='relative md:w-[350px] lg:w-[434px]' >
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                        <Input
+                            value={selectedSuburb}
+                            onChange={(e) => handleSearch(e.target.value)}
+                            placeholder="Enter your suburb" className='h-12 pl-12' />
+                    </div>
+                </PopoverTrigger>
+                <PopoverContent className="md:w-[350px] lg:w-[434px] p-2">
+                    <Command>
+                        <CommandInput placeholder="Enter your suburb" />
+                        <CommandList>
+                            {sydneySuburbs.map((suburb, index) => (
+                                <CommandItem
+                                    className='py-3'
+                                    key={index}
+                                    onSelect={() => {
+                                        handleSearch(suburb.value);
+                                        setSearchPopOverOpen(false);
+                                    }}
+                                >
+                                    {suburb.label}
+                                </CommandItem>
+                            ))}
+                        </CommandList>
+                    </Command>
+                </PopoverContent>
+            </Popover>
+
             <div className="font-semibold text-textCol text-center flex gap-3">
                 <button
                     onClick={() => handleChangeCarType('auto')}
@@ -84,9 +125,6 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                     <span>All</span>
                 </button>
             </div>
-            {/* <div>
-                <FilterBar />
-            </div> */}
         </div>
     );
 };
