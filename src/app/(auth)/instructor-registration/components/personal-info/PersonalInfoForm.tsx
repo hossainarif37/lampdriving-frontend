@@ -54,6 +54,7 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({personalInfo, setPersonal
                                         required: "First name is required"
                                     })
                                     }
+                                    defaultValue={personalInfo?.name.firstName}
                                     type="text" id='first-name' placeholder="Enter your firstname" className='h-11 xl:h-14 mt-1'
                                 />
                                 {errors?.name?.firstName && <p className='text-red-500 text-sm mt-1'>{errors?.name?.firstName?.message}</p>}
@@ -67,6 +68,7 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({personalInfo, setPersonal
                                         required: "Last name is required"
                                     })
                                     }
+                                    defaultValue={personalInfo?.name.lastName}
                                     type="text" id="last-name" placeholder="Enter your lastname" className='h-11 xl:h-14 mt-1'
                                 />
                                 {errors?.name?.lastName && <p className='text-red-500 text-sm mt-1'>{errors?.name?.lastName?.message}</p>}
@@ -80,6 +82,7 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({personalInfo, setPersonal
                                 <Controller
                                     name="gender"
                                     control={control}
+                                    defaultValue={personalInfo?.gender}
                                     rules={{ required: "Gender is required" }}
                                     render={({ field }) => (
                                         <Select onValueChange={field.onChange} value={field.value || ''}>
@@ -111,9 +114,14 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({personalInfo, setPersonal
                                         maxLength:{
                                             value: 10,
                                             message: "Phone number must be 10 digits"
+                                        },
+                                        minLength: {
+                                            value: 10,
+                                            message: "Phone number must be 10 digits"
                                         }
                                     })
                                     }
+                                    defaultValue={personalInfo?.phone}
                                     type="number" placeholder="Enter your phone number" className='h-11 xl:h-14 mt-1'
                                 />
                                 {errors?.phone && <p className='text-red-500 text-sm mt-1'>{errors?.phone?.message}</p>}
@@ -129,6 +137,7 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({personalInfo, setPersonal
                                         required: "Date of birth is required"
                                     })
                                     }
+                                    defaultValue={personalInfo?.dateOfBirth}
                                     type="date" className='h-11 xl:h-14 mt-1'
                                 />
                                 {errors?.dateOfBirth && <p className='text-red-500 text-sm mt-1'>{errors?.dateOfBirth?.message}</p>}
@@ -145,6 +154,7 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({personalInfo, setPersonal
                                             message: "Invalid email address"
                                         }
                                     })}
+                                    defaultValue={personalInfo?.email}
                                     type="email" placeholder="Enter your email" className='h-11 xl:h-14 mt-1'
                                 />
                                 {errors?.email && <p className='text-red-500 text-sm mt-1'>{errors?.email?.message}</p>}

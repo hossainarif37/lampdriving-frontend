@@ -34,13 +34,13 @@ export interface IFeedback {
 
 // interface for working hour
 export interface IWorkingHour {
-    saturday: { startTime: string, endTime: string };
-    sunday: { startTime: string, endTime: string };
-    monday: { startTime: string, endTime: string };
-    tuesday: { startTime: string, endTime: string };
-    wednesday: { startTime: string, endTime: string };
-    thursday: { startTime: string, endTime: string };
-    friday: { startTime: string, endTime: string };
+    saturday: { isActive: boolean, startTime: string, endTime: string };
+    sunday: { isActive: boolean, startTime: string, endTime: string };
+    monday: { isActive: boolean, startTime: string, endTime: string };
+    tuesday: { isActive: boolean, startTime: string, endTime: string };
+    wednesday: { isActive: boolean, startTime: string, endTime: string };
+    thursday: { isActive: boolean, startTime: string, endTime: string };
+    friday: { isActive: boolean, startTime: string, endTime: string };
 }
 
 // interface for instructor

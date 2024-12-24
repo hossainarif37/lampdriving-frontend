@@ -26,13 +26,13 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
+        console.log('file', file);
         if (file) {
             if (setSelectedFile) {
                 setSelectedFile(file);
             }
         }
     };
-
 
     const generateUniqueIdentifier = (file: File): string => {
         // You can use a combination of file properties to create a unique identifier
@@ -69,6 +69,8 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             }
 
             const data = await response.json();
+
+            console.log('Image uploaded successfully:', data);
 
             if (setImageUrl) {
                 setImageUrl(data.secure_url);
@@ -155,16 +157,17 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             )}
 
             {/* File Info (only if a file is selected) */}
-            {selectedFile && (
+            {(selectedFile) && (
                 <div className={`border ${isError ? 'bg-[#FFF5F3] border-[#E12525]' : 'border-gray-300'}  rounded-lg w-full ${(!isSuccess || selectedFile) ? 'mt-4' : 'mt-0'} p-4 flex items-center justify-between`}>
                     <div className="flex items-center">
                         <Image
-                            src={URL.createObjectURL(selectedFile)}
+                            src={ URL.createObjectURL(selectedFile)}
                             alt={selectedFile?.name || 'Selected file'}
                             width={48}
                             height={48}
                             className="object-cover rounded-md mr-4 border"
                         />
+
                         <div>
                             <p className="font-medium">{selectedFile?.name}</p>
                             <p className="text-gray-500 text-sm">

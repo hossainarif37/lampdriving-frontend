@@ -28,24 +28,30 @@ const languageList = [
 interface IExperienceFormProps {
     experienceInfo: IExperience | undefined;
     setExperienceInfo: Dispatch<SetStateAction<IExperience | undefined>>
+    drivingLicenseFile: File | null;
+    setDrivingLicenseFile: Dispatch<SetStateAction<File | null>>;
+    experienceCertificateFile: File | null;
+    setExperienceCertificateFile: Dispatch<SetStateAction<File | null>>;
 }
 
-const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperienceInfo}) => {
+const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperienceInfo, drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile}) => {
     const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
     
     // Driving License
-    const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>('');
-    const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
+    const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(experienceInfo?.documents?.drivingLicense || '');
+    
     const [drivingLicenseError, setDrivingLicenseError] = useState<string>('');
 
     // Experience Certificate
-    const [experienceCertificateURL, setExperienceCertificateURL] = useState<string>('');
-    const [experienceCertificateFile, setExperienceCertificateFile] = useState<File | null>(null);
+    const [experienceCertificateURL, setExperienceCertificateURL] = useState<string>(experienceInfo?.documents?.experienceCertificate || '');
     const [experienceCertificateError, setExperienceCertificateError] = useState<string>('');
 
+    console.log('experienceInfo', experienceInfo);
+    
+
     // Selected languages
-    const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
+    const [selectedLanguages, setSelectedLanguages] = useState<string[]>(experienceInfo?.languages || []);  
     const [selectedLanguagesError, setSelectedLanguagesError] = useState<string>('');
 
 
@@ -57,10 +63,11 @@ const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperience
     };
 
     const removeExperienceCertificate = () => {
-        setDrivingLicenseFile(null);
-        setDrivingLicenseURL('');
+        setExperienceCertificateFile(null);
+        setExperienceCertificateURL('');
     };
 
+    console.log('Selected languages', selectedLanguages);
     const onSubmit = (data: Inputs) => {
         setIsClicked(true);
         if (!drivingLicenseURL || !experienceCertificateURL || selectedLanguages.length === 0) {
@@ -70,7 +77,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperience
             if (!experienceCertificateURL) {
                 setExperienceCertificateError(`${experienceCertificateError ? experienceCertificateError : 'Experience Certificate is required'}`);
             }
-            if (selectedLanguages.length === 0) {
+            if (selectedLanguages.length === 0 ) {
                 setSelectedLanguagesError('Languages are required');
             }
             return;
@@ -101,13 +108,13 @@ const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperience
             } else {
                 setExperienceCertificateError(`${experienceCertificateFile ? 'Upload Experience Certificate' : 'Experience Certificate is required'}`);
             }
-            if (selectedLanguages.length > 0) {
+            if (selectedLanguages.length > 0 || (experienceInfo?.languages?.length ?? 0) > 0) {
                 setSelectedLanguagesError('');
             } else {
                 setSelectedLanguagesError('Languages are required');
             }
         }
-    }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile]);
+    }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile, experienceInfo]);
 
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
@@ -123,6 +130,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperience
                                     required: "Experience is required"
                                 })
                                 }
+                                defaultValue={experienceInfo?.experience}
                                 type="text" id='experience' placeholder="Enter your experience (ex: 2 years)" className='h-11 xl:h-14 mt-1'
                             />
                             {errors?.experience && <p className='text-red-500 text-sm mt-1'>{errors?.experience?.message}</p>}
@@ -136,6 +144,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperience
                                 rows={5}
                                 {...register('description', { required: 'Description is required' })}
                                 className='mt-1'
+                                defaultValue={experienceInfo?.description}
                             />
                             {errors?.description && <span className="text-red-500">{errors?.description?.message}</span>}
                         </div>
@@ -146,6 +155,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperience
                                 options={languageList}
                                 onValueChange={setSelectedLanguages}
                                 defaultValue={selectedLanguages}
+                                value={experienceInfo?.languages}
                                 placeholder="Select Languages"
                                 variant="inverted"
                                 animation={2}

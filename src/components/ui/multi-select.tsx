@@ -132,13 +132,14 @@ export const MultiSelect = React.forwardRef<
       maxCount = 3,
       modalPopover = false,
       // asChild = false,
+      value = [],
       className,
       ...props
     },
     ref
   ) => {
     const [selectedValues, setSelectedValues] =
-      React.useState<string[]>(defaultValue);
+      React.useState<string[]>(Array.isArray(value) ? value : defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     // const [isAnimating, setIsAnimating] = React.useState(false);
 

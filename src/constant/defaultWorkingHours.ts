@@ -1,11 +1,11 @@
 import { IWorkingHour } from "@/types/instructor";
 
 export const defaultWorkingHours: IWorkingHour = {
-  saturday: { startTime: '09:00', endTime: '17:00' },
-  sunday: { startTime: '09:00', endTime: '17:00' },
-  monday: { startTime: '09:00', endTime: '17:00' },
-  tuesday: { startTime: '09:00', endTime: '17:00' },
-  wednesday: { startTime: '09:00', endTime: '17:00' },
-  thursday: { startTime: '09:00', endTime: '17:00' },
-  friday: { startTime: '09:00', endTime: '17:00' },
+  saturday: { isActive: true, startTime: '09:00', endTime: '17:00' },
+  sunday: { isActive: true, startTime: '09:00', endTime: '17:00' },
+  monday: { isActive: true, startTime: '09:00', endTime: '17:00' },
+  tuesday: { isActive: true, startTime: '09:00', endTime: '17:00' },
+  wednesday: { isActive: true, startTime: '09:00', endTime: '17:00' },
+  thursday: { isActive: true, startTime: '09:00', endTime: '17:00' },
+  friday: { isActive: true, startTime: '09:00', endTime: '17:00' },
 };
