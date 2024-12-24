@@ -36,9 +36,19 @@ export interface ISecurity {
 
 
 const InstructorRegistration: FC = () => {
+    // Personal Info
     const [personalInfo, setPersonalInfo] = useState<IPersonalInfo | undefined>(undefined);
+
+    // Experience
     const [experienceInfo, setExperienceInfo] = useState<IExperience | undefined>(undefined);
+    const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
+    const [experienceCertificateFile, setExperienceCertificateFile] = useState<File | null>(null);
+
+    // Car Info
     const [carInfo, setCarInfo] = useState<IVehicle | undefined>(undefined);
+    const [carImageFile, setCarImageFile] = useState<File | null>(null);
+
+    // Services
     const [servicesInfo, setServicesInfo] = useState<IServices | undefined>(undefined);
 
     const searchParams = useSearchParams();
@@ -65,13 +75,13 @@ const InstructorRegistration: FC = () => {
             {isPersonalInfoStep && <PersonalInfoForm personalInfo={personalInfo} setPersonalInfo={setPersonalInfo} />}
 
             {/* Experience */}
-            {isExperienceStep && <ExperienceForm experienceInfo={experienceInfo} setExperienceInfo={setExperienceInfo} />}
+            {isExperienceStep && <ExperienceForm experienceInfo={experienceInfo} setExperienceInfo={setExperienceInfo} drivingLicenseFile={drivingLicenseFile} setDrivingLicenseFile={setDrivingLicenseFile} experienceCertificateFile={experienceCertificateFile} setExperienceCertificateFile={setExperienceCertificateFile}/>}
 
             {/* Services */}
             {isServicesStep && <ServicesForm servicesInfo={servicesInfo} setServicesInfo={setServicesInfo} />}
 
             {/* Vehicle */}
-            {isCarInfoStep && <CarInfoForm carInfo={carInfo} setCarInfo={setCarInfo} />}
+            {isCarInfoStep && <CarInfoForm carInfo={carInfo} setCarInfo={setCarInfo} carImageFile={carImageFile} setCarImageFile={setCarImageFile}/>}
 
             {/* Security */}
             {isSecurityStep && <SecurityForm userInfo={personalInfo} instructorInfo={instructorData} />}

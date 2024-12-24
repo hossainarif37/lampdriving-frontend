@@ -20,6 +20,8 @@ interface Inputs {
 interface ICarInfoFormProps {
     carInfo: IVehicle | undefined;
     setCarInfo: Dispatch<SetStateAction<IVehicle | undefined>>
+    carImageFile: File | null;
+    setCarImageFile: Dispatch<SetStateAction<File | null>>
 }
 
 const carTypes = [
@@ -27,14 +29,14 @@ const carTypes = [
     "Manual"
 ]
 
-const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo}) => {
+const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo, carImageFile, setCarImageFile}) => {
     const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
 
     // Car Image
-    const [carImageURL, setCarImageURL] = useState<string>("");
+    const [carImageURL, setCarImageURL] = useState<string>(carInfo?.image || '');
     const [carImageError, setCarImageError] = useState<string>("");
-    const [carImageFile, setCarImageFile] = useState<File | null>(null);
+    
 
     const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
 
@@ -87,6 +89,7 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo}) => {
                                         required: "Brand name is required"
                                     })
                                     }
+                                    defaultValue={carInfo?.name}
                                     type="text" id='brand-name' placeholder="Enter brand name" className='h-11 xl:h-14 mt-1'
                                 />
                                 {errors?.name && <p className='text-red-500 text-sm mt-1'>{errors?.name?.message}</p>}
@@ -100,6 +103,7 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo}) => {
                                         required: "Model is required"
                                     })
                                     }
+                                    defaultValue={carInfo?.model}
                                     type="text" id="model" placeholder="Enter car model" className='h-11 xl:h-14 mt-1'
                                 />
                                 {errors?.model && <p className='text-red-500 text-sm mt-1'>{errors?.model?.message}</p>}
@@ -114,7 +118,7 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo}) => {
                                     name="type"
                                     control={control}
                                     rules={{ required: "Type is required" }}
-                                    // defaultValue=""
+                                    defaultValue={carInfo?.type}
                                     render={({ field }) => (
                                         <Select onValueChange={field.onChange} value={field.value || ''}>
                                             <SelectTrigger className="h-11 xl:h-14 mt-1">
@@ -145,6 +149,7 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo}) => {
                                         max: { value: 5, message: "Rating should be less than 5" }
                                     })
                                     }
+                                    defaultValue={carInfo?.rating}
                                     type="number" id="rating" placeholder="Enter car rating" className='h-11 xl:h-14 mt-1'
                                 />
                                 {errors?.rating && <p className='text-red-500 text-sm mt-1'>{errors?.rating?.message}</p>}
