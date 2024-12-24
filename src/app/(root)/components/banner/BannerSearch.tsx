@@ -18,7 +18,7 @@ const BannerSearch: FC = () => {
         if (!selectedSuburb) {
             return;
         }
-        router.push(`/instructors?vehicle.type=${carType}&searchTerm=${selectedSuburb}`)
+        router.push(`/instructors?vehicle.type=${carType}&searchKey=${selectedSuburb}`)
     }
 
     return (
