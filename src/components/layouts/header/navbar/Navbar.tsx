@@ -9,7 +9,9 @@ const Navbar = () => {
         <nav className="bg-light">
             <div className="wrapper flex justify-between items-center py-2 w-full">
                 <div>
-                    <LampLogo />
+                    <Link href={'/'}>
+                        <LampLogo />
+                    </Link>
                 </div>
 
 
