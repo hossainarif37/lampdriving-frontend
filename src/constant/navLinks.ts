@@ -1,7 +1,7 @@
 export const navLinks = [
     {
-        title: "Driving Lessons",
-        href: "#",
+        title: "Instructors",
+        href: "/instructors",
     },
     {
         title: "Test Packages",

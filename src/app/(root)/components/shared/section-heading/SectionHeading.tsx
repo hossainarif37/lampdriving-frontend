@@ -24,7 +24,7 @@ const SectionHeading: FC<SectionHeadingProps> = ({ title, subtitle }) => {
         // </div>
 
         <div className="text-center flex flex-col lg:gap-2 mb-6">
-            <h1 className="bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent font-semibold lg:text-3xl text-2xl mb-1">
+            <h1 className="text-gradient font-semibold lg:text-3xl text-2xl mb-1">
                 {title}
             </h1>
             <p className="lg:text-xl text-accent lg:tracking-widest tracking-wide md:w-2/4 mx-auto">

@@ -162,7 +162,7 @@ const RegisterForm: FC = () => {
                 </div>
             </div>
 
-            <Button disabled={isRegistering} className='w-full mt-3 bg-primary h-12'>Register</Button>
+            <Button disabled={isRegistering} className='w-full mt-3 gradient-color h-12'>Register</Button>
 
             <p className='mt-5'>Already have an account? <Link href="/login" className='text-blue-500 hover:underline font-semibold'>Login Here</Link></p>
         </form>
