@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { IInstructor } from "@/types/instructor";
 import cardImg from "@/assets/home-page-image/test-image.webp"
+import { FC } from "react";
 
 
 // Define the props type for the component
 
 
-const InstructorCard: React.FC<{ instructor: IInstructor }> = ({ instructor }) => {
+const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
     const { user, experience, pricePerHour, vehicle, feedback, completedLessons } = instructor;
 
     return (
