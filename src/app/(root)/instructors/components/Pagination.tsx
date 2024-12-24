@@ -18,6 +18,7 @@ const Pagination: FC<PaginationProps> = ({ currentPageProps, totalPages }) => {
 
   const { replace } = useRouter();
 
+  // Function to handle page change
   const onPageChange = (page: number) => {
     const searchParams = new URLSearchParams(urlSearchParams);
     if (page >= 1 && page <= totalPages) {
