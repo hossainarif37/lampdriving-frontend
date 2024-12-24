@@ -1,15 +1,6 @@
 
-import { Star, Car, Clock, ExternalLink, Calendar, ChevronRight } from "lucide-react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { IInstructor } from "@/types/instructor";
-import cardImg from "@/assets/home-page-image/test-image.webp"
 import { Skeleton } from "@/components/ui/skeleton";
 import { FC } from "react";
-
-
-// Define the props type for the component
 
 
 const InstructorCardSkeleton: FC = () => {
