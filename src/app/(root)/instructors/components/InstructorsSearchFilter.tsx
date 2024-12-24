@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command"
 import { sydneySuburbs } from '@/constant/sydneySuburbs';
+import { Button } from '@/components/ui/button';
 interface IInstructorSearchFilterProps {
     searchParams?: {
         'vehicle.type'?: string;
@@ -97,33 +98,33 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
             </Popover>
 
             <div className="font-semibold text-textCol text-center flex gap-3">
-                <button
+                <Button
                     onClick={() => handleChangeCarType('auto')}
-                    className={`w-32 flex justify-center items-center px-0 py-3 rounded-md ${carType === 'auto'
+                    className={`w-32 hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
                 >
                     {carType == "auto" && <span><Check className='w-5' /></span>}
                     <span>Auto</span>
-                </button>
-                <button
+                </Button>
+                <Button
                     onClick={() => handleChangeCarType('manual')}
-                    className={`w-32 flex justify-center items-center py-2 rounded-md ${carType === 'manual'
+                    className={`w-32 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
                 >
                     {carType == "manual" && <span><Check className='w-5' /></span>}
                     <span>Manual</span>
-                </button>
-                <button
+                </Button>
+                <Button
                     onClick={() => handleChangeCarType('all')}
-                    className={`w-32 flex justify-center items-center py-2 rounded-md ${carType === 'all'
+                    className={`w-32 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'all'
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
                 >
                     {carType == "all" && <span><Check className='w-5' /></span>}
                     <span>All</span>
-                </button>
+                </Button>
             </div>
         </div>
     );

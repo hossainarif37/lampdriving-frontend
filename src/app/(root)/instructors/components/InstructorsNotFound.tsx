@@ -7,7 +7,7 @@ const InstructorsNotFound: FC = () => {
     const urlSearchParams = useSearchParams();
     const { replace } = useRouter();
 
-    // function to remove search
+    // remove search handler
     const handleRemoveSearch = () => {
         const searchParams = new URLSearchParams(urlSearchParams);
 

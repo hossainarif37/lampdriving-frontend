@@ -25,7 +25,7 @@ const InstructorsPage: FC<IInstructorProps> = async ({ searchParams }) => {
                 <Instructors instructors={instructors.data.result || []} />
                 <Pagination
                     currentPageProps={Number(searchedParams?.page) || 1}
-                    totalPages={instructors.data.meta.totalPage}
+                    totalPages={instructors.data.meta.totalPage || 1}
                 />
             </div>
         </div>
