@@ -1,39 +1,56 @@
 "use client";
-import { Clock, Package, User2, UserCheck, Wallet } from 'lucide-react';
+import { Package, User2, UserCheck, Wallet } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { FC, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
+
+interface IStep {
+    name: string;
+    icon: ReactNode;
+    key: string;
+    index: number
+}
 
 const BookingSteps: FC = () => {
-    const [currentStep, setCurrentStep] = useState<string>("");
+    const [currentStep, setCurrentStep] = useState<IStep>({
+        name: 'Instructor',
+        icon: <UserCheck />,
+        key: 'instructor',
+        index: 1
+    });
+    
     const { replace } = useRouter();
-    console.log(currentStep);
-    const steps = [
+
+    const steps: IStep[] = [
         {
             name: 'Instructor',
             icon: <UserCheck />,
-            key: 'instructor'
+            key: 'instructor',
+            index: 1
         },
         {
             name: 'Book Lesson',
             icon: <Package />,
-            key: 'book-lesson'
+            key: 'book-lesson',
+            index: 2
         },
         {
             name: 'Register',
             icon: <User2 />,
-            key: 'register'
+            key: 'register',
+            index: 3
         },
         {
             name: 'Payment',
             icon: <Wallet />,
-            key: 'payment'
+            key: 'payment',
+            index: 4
         }
     ]
 
     const urlSearchParams = useSearchParams();
-    const handleStepChange = (step: string) => {
+    const handleStepChange = (step: IStep) => {
         const searchParams = new URLSearchParams(urlSearchParams);
-        searchParams.set('step', step);
+        searchParams.set('step', step.key);
         replace(`?${searchParams.toString()}`);
         setCurrentStep(step);
     };
@@ -45,9 +62,9 @@ const BookingSteps: FC = () => {
                     steps.map((step, index) => (
                         <button
                             key={index}
-                            onClick={() => handleStepChange(step.key)}
-                            className='flex flex-col items-center justify-between gap-2 max-w-3xl mx-auto'>
-                            <div className='w-10 h-10 flex items-center justify-center rounded-full gradient-color text-white'>
+                            onClick={() => handleStepChange(step)}
+                            className='flex flex-col items-center justify-between gap-2 flex-1'>
+                            <div className={`w-10 h-10 flex items-center justify-center rounded-full ${(currentStep.index >= step.index) ? 'gradient-color text-white' : 'bg-[#dbeafe] text-primary'}`}>
                                 {step.icon}
                             </div>
                             <p className='text-sm font-medium'>{step.name}</p>
@@ -55,13 +72,13 @@ const BookingSteps: FC = () => {
                     ))
                 }
             </div>
-            <div className='h-3.5 bg-gray-200 rounded-md absolute top-3 -z-10 w-11/12 mx-auto left-0 right-0'>
-                <div className={`h-full bg-primary rounded-md z-10 
+            <div className='h-3 bg-gray-200 rounded-md absolute top-3.5 -z-10 w-11/12 mx-auto left-0 right-0'>
+                <div className={`h-full gradient-color rounded-md z-10 
                 transition-all duration-300
-                    ${currentStep === 'instructor' && 'w-2/12'}
-                    ${currentStep === 'book-lesson' && 'w-6/12'}
-                    ${currentStep === 'register' && 'w-9/12'}
-                    ${currentStep === 'payment' && 'w-full'}
+                    ${currentStep.key === 'instructor' && 'w-2/12'}
+                    ${currentStep.key === 'book-lesson' && 'w-6/12'}
+                    ${currentStep.key === 'register' && 'w-9/12'}
+                    ${currentStep.key === 'payment' && 'w-full'}
                     `} />
             </div>
         </div>
