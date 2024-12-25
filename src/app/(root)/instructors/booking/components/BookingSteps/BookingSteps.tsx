@@ -59,8 +59,8 @@ const BookingSteps: FC = () => {
                 <div className={`h-full bg-primary rounded-md z-10 
                 transition-all duration-300
                     ${currentStep === 'instructor' && 'w-2/12'}
-                    ${currentStep === 'book-lesson' && 'w-4/12'}
-                    ${currentStep === 'register' && 'w-8/12'}
+                    ${currentStep === 'book-lesson' && 'w-6/12'}
+                    ${currentStep === 'register' && 'w-9/12'}
                     ${currentStep === 'payment' && 'w-full'}
                     `} />
             </div>
