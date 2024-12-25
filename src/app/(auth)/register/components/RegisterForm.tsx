@@ -197,13 +197,12 @@ const RegisterForm: FC = () => {
                                     placeholder="Enter your password"
                                     className='w-full xl:h-12 mt-1 pr-10'
                                 />
-                                <button
+                                <span
                                     className='cursor-pointer absolute right-2 top-1/2 -translate-y-1/2'
-                                    type='button'
                                     onClick={() => handlePasswordToggle('password')}
                                 >
                                     {passwordVisible ? <Eye width={20} height={20} /> : <EyeOff width={20} height={20} />}
-                                </button>
+                                </span>
                             </div>
                             {errors?.password && <p className='text-red-500 text-sm mt-1'>{errors?.password?.message}</p>}
                         </div>
@@ -224,13 +223,12 @@ const RegisterForm: FC = () => {
                                     placeholder="Re-type your password"
                                     className='w-full xl:h-12 mt-1 pr-10'
                                 />
-                                <button
+                                <span
                                     className='cursor-pointer absolute right-2 top-1/2 -translate-y-1/2'
-                                    type='button'
                                     onClick={() => handlePasswordToggle('confirm-password')}
                                 >
                                     {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeOff width={20} height={20} />}
-                                </button>
+                                </span>
                             </div>
                             {errors?.confirmPassword && <p className='text-red-500 text-sm mt-1'>{errors.confirmPassword.message}</p>}
                             {confirmPasswordError && <p className='text-red-500 text-sm mt-1'>{confirmPasswordError}</p>}

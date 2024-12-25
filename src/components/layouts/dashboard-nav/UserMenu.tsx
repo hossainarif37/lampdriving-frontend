@@ -53,9 +53,9 @@ const UserMenu: FC = () => {
             </Button>
 
             <div
-                className={`absolute right-0 mt-3 w-56 pb-3 overflow-hidden rounded-[4px] rounded-t-none bg-white transition-all duration-200 ease-in-out origin-right ${isOpen
-                    ? 'transform scale-x-100 opacity-100 translate-x-0'
-                    : 'transform scale-x-95 opacity-0 translate-x-2 pointer-events-none'
+                className={`absolute right-0 mt-3 w-56 pb-3 overflow-hidden rounded-[4px] rounded-t-none bg-white transition-all duration-200 ease-in-out origin-top ${isOpen
+                    ? 'scale-y-100'
+                    : 'scale-y-0'
                     }`}
             >
                 <div className="px-4 py-3 ">

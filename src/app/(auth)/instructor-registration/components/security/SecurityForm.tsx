@@ -129,13 +129,12 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
                                     className="w-full xl:h-12 mt-1 pr-10"
                                 />
 
-                                <button
+                                <span
                                     className="absolute right-3 top-1/2 -translate-y-1/2"
-                                    type="button"
                                     onClick={() => handlePasswordToggle("password")}
                                 >
                                     {passwordVisible ? <Eye width={20} height={20}/> : <EyeOff width={20} height={20}/>}
-                                </button>
+                                </span>
                             </div>
                             {errors?.password && (
                                 <p className="text-red-500 text-sm mt-1">{errors?.password?.message}</p>
@@ -163,13 +162,12 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
                                     className="w-full xl:h-12 mt-1 pr-10"
                                 />
 
-                                <button
+                                <span
                                     className="absolute right-3 top-1/2 -translate-y-1/2"
-                                    type="button"
                                     onClick={() => handlePasswordToggle("confirm-password")}
                                 >
                                     {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeOff width={20} height={20}/>}
-                                </button>
+                                </span>
                             </div>
                             {errors?.confirmPassword && (
                                 <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
