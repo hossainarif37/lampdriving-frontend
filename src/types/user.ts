@@ -16,6 +16,7 @@ export interface IUser {
     name: IName;
     email: string;
     phone: string;
+    username: string;
     password: string;
     dateOfBirth: string;
     address?: IAddress;

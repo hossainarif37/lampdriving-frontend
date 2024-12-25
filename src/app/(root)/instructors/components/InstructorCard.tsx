@@ -75,13 +75,19 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
             <div className="space-y-3">
                 <div className="flex gap-3 max-w-lg mx-auto">
                     {/* View Profile Button */}
-                    <Button className="border md:h-12 w-1/2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 transition-colors duration-200">
-                        <ExternalLink className="w-4 h-4" />
-                        View Profile
-                    </Button>
+                    <Link
+                        href={`/instructors/${typeof user !== 'string' && user?.username}`}
+                        className="w-1/2">
+                        <Button className="border w-full text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 transition-colors duration-200">
+                            <ExternalLink className="w-4 h-4" />
+                            View Profile
+                        </Button>
+                    </Link>
 
                     {/* Book Button */}
-                    <Button className="md:h-12 w-1/2 gradient-color">Book</Button>
+                    <Link href={"/instructors/booking"} className="w-1/2">
+                        <Button className="w-full gradient-color">Book</Button>
+                    </Link>
                 </div>
 
                 {/* Check Availability Link */}
