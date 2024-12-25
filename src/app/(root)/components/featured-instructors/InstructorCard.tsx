@@ -3,7 +3,8 @@ import { FC } from 'react';
 import myImg from "@/assets/home-page-image/test-image.webp";
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Car, Clock, Star } from 'lucide-react';
+import { Car, Clock, ExternalLink, Star } from 'lucide-react';
+import Link from 'next/link';
 
 const InstructorCard: FC = () => {
     return (
@@ -45,7 +46,7 @@ const InstructorCard: FC = () => {
         //     </div>
         // </div>
 
-        <Card className="w-full">
+        <Card className="w-full bg-gradient-to-b from-primary/0 to-indigo/5 border-none">
             <CardContent className="p-6 overflow-hidden">
                 <div className="flex items-start gap-4 md:gap-6">
                     {/* Profile Image with Gradient Border */}
@@ -92,18 +93,24 @@ const InstructorCard: FC = () => {
                     </div>
                 </div>
                 <div className="flex md:gap-3 gap-2 py-2 lg:pt-0 justify-end overflow-hidden">
-                    <Button
+                    {/* <Button
                         variant="outline"
                         size="lg"
                         className="bg-white hover:bg-slate-50 text-xs lg:text-base"
                     >
                         VIEW PROFILE
-                    </Button>
+                    </Button> */}
+
+                    {/* View Profile Button */}
+                    <Link href="instructors/instructor-details" className="border text-sm font-medium text-secondary bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2 transition-colors duration-200 lg:w-44">
+                        <ExternalLink className="w-4 h-4" />
+                        View Profile
+                    </Link>
                     <Button
                         size="lg"
-                        className=" bg-primary hover:bg-primary/90 text-xs lg:text-base"
+                        className=" bg-primary hover:bg-primary/90 text-xs lg:text-sm"
                     >
-                        BOOK ONLINE NOW
+                        Book Online Now
                     </Button>
                 </div>
             </CardContent>
