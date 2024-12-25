@@ -7,27 +7,27 @@ import InstructorCard from './InstructorCard';
 
 const FeaturedInstructors: FC = () => {
     return (
-        <section className="bg-gray-50 lg:py-20 md:py-16 p-6">
+        <section className="bg-gray-50 lg:py-20 md:py-16 md:p-6">
             <div className="wrapper">
-            {/* Section Heading */}
-            <SectionHeading
-                title="Top-Rated Instructors for Your Driving Lessons"
-                subtitle="Choose from a curated list of expert instructors to guide you on your journey"
-            />
+                {/* Section Heading */}
+                <SectionHeading
+                    title="Top-Rated Instructors for Your Driving Lessons"
+                    subtitle="Choose from a curated list of expert instructors to guide you on your journey"
+                />
 
-            {/* Instructors Grid */}
+                {/* Instructors Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-7 mx-auto">
-                {Array(6).fill(null).map((_, index) => (
-                    <InstructorCard key={index} />
-                ))}
-            </div>
+                    {Array(6).fill(null).map((_, index) => (
+                        <InstructorCard key={index} />
+                    ))}
+                </div>
 
-            {/* Explore Instructors Button */}
+                {/* Explore Instructors Button */}
                 <Link href={"/instructors"} className="flex justify-center  mt-6 md:mt-12">
                     <Button className='gradient-color'>
-                    Explore Instructors <ChevronRight strokeWidth={3} />
-                </Button>
-            </Link>
+                        Explore Instructors <ChevronRight strokeWidth={3} />
+                    </Button>
+                </Link>
             </div>
         </section>
     );

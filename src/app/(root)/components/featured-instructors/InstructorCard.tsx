@@ -47,9 +47,9 @@ const InstructorCard: FC = () => {
 
         <Card className="w-full">
             <CardContent className="p-6 overflow-hidden">
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 md:gap-6">
                     {/* Profile Image with Gradient Border */}
-                    <div className="relative group">
+                    <div className="relative group flex flex-col">
                         <div className="absolute -inset-1 bg-gradient-to-r from-indigo/50 to-primary/50 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-300" />
                         <Image
                             src={myImg}
@@ -61,24 +61,24 @@ const InstructorCard: FC = () => {
                     </div>
 
                     {/* Info Section */}
-                    <div className="flex-1 space-y-4">
-                        <div className="flex justify-between items-start">
-                            <div>
-                                <h3 className="text-xl font-semibold text-slate-800 group-hover:text-primary transition-colors">
+                    <div className="flex-1 lg:space-y-4 space-y-1">
+                        <div className="lg:flex justify-between items-start space-y-1">
+                            <div className='space-y-1'>
+                                <h3 className="text-xl font-semibold text-secondary">
                                     Hridoy Ahmed
                                 </h3>
                                 <div className="flex items-center gap-1.5 mt-1">
                                     <Star className="h-4 w-4 fill-primary text-primary" />
-                                    <span className="text-sm font-medium text-slate-600">4.5/5</span>
+                                    <span className="text-sm font-medium text-secondary">4.5/5</span>
                                 </div>
                             </div>
-                            <div className="text-right">
-                                <span className="text-2xl font-bold text-primary">$50</span>
-                                <span className="text-sm text-slate-500">/hr</span>
+                            <div className="lg:text-right text-gradient">
+                                <span className="text-2xl font-bold">$50</span>
+                                <span className="text-sm">/hr</span>
                             </div>
                         </div>
 
-                        <div className="flex gap-4 text-sm text-slate-600">
+                        <div className="lg:flex gap-4 text-sm text-accent space-y-1">
                             <div className="flex items-center gap-1.5">
                                 <Clock className="h-4 w-4 text-primary" />
                                 <span>3 years experience</span>
@@ -89,22 +89,22 @@ const InstructorCard: FC = () => {
                             </div>
                         </div>
 
-                        <div className="flex gap-3 pt-2">
-                            <Button
-                                variant="outline"
-                                size="lg"
-                                className="flex-1 bg-white hover:bg-slate-50"
-                            >
-                                VIEW PROFILE
-                            </Button>
-                            <Button
-                                className="flex-1 bg-primary hover:bg-primary/90"
-                                size="lg"
-                            >
-                                BOOK ONLINE NOW
-                            </Button>
-                        </div>
                     </div>
+                </div>
+                <div className="flex md:gap-3 gap-2 py-2 lg:pt-0 justify-end overflow-hidden">
+                    <Button
+                        variant="outline"
+                        size="lg"
+                        className="bg-white hover:bg-slate-50 text-xs lg:text-base"
+                    >
+                        VIEW PROFILE
+                    </Button>
+                    <Button
+                        size="lg"
+                        className=" bg-primary hover:bg-primary/90 text-xs lg:text-base"
+                    >
+                        BOOK ONLINE NOW
+                    </Button>
                 </div>
             </CardContent>
         </Card>
