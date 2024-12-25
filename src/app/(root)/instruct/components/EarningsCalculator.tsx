@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import React, { FC } from "react"
 import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -9,16 +9,22 @@ import Image from "next/image"
 import bannerImg from "@/assets/banner-img/slide-v1-2.jpg"
 import Link from "next/link"
 
-export default function EarningsCalculator() {
+const EarningsCalculator: FC = () => {
     const [hourlyRate, setHourlyRate] = React.useState(80)
     const [lessonHours, setLessonHours] = React.useState(16)
     const weeklyEarnings = hourlyRate * lessonHours
 
     return (
         <div className="py-24 px-4 sm:px-6 lg:px-8 text-secondary">
+            {/* Main container for the section with responsive padding and text color */}
             <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                {/* Grid layout for dividing content into two columns on medium and larger screens */}
+
                 <div className="space-y-8">
+                    {/* Left column: Contains text, sliders, and the call-to-action button */}
+
                     <div className="space-y-4">
+                        {/* Heading section */}
                         <h2 className="text-4xl font-bold">
                             Get Bookings With{" "}
                             <span className="text-gradient">
@@ -39,7 +45,9 @@ export default function EarningsCalculator() {
                     </div>
 
                     <Card className="p-6 space-y-6">
+                        {/* Card for hourly rate and lesson hours sliders */}
                         <div className="space-y-2">
+                            {/* Hourly Rate Slider */}
                             <div className="flex justify-between">
                                 <label className="font-medium">Hourly Rate</label>
                                 <span className="font-semibold">${hourlyRate}</span>
@@ -55,6 +63,7 @@ export default function EarningsCalculator() {
                         </div>
 
                         <div className="space-y-2">
+                            {/* Lesson Hours Slider */}
                             <div className="flex justify-between">
                                 <label className="font-medium">Lesson Hours per Week</label>
                                 <span className="font-semibold">{lessonHours} hours</span>
@@ -71,6 +80,7 @@ export default function EarningsCalculator() {
                     </Card>
 
                     <div>
+                        {/* Call-to-action button linking to the registration page */}
                         <Link href="/register mt-5">
                             <Button size="lg" className="w-full sm:w-auto gradient-color">
                                 Sign up now
@@ -79,7 +89,8 @@ export default function EarningsCalculator() {
                     </div>
                 </div>
 
-                <div className="relative h-[480px] rounded-2xl overflow-hidden  hidden md:block">
+                <div className="relative h-[480px] rounded-2xl overflow-hidden hidden md:block">
+                    {/* Right column: Displays an image, hidden on small screens */}
                     <Image
                         src={bannerImg}
                         alt="Driving instructor with student"
@@ -90,8 +101,11 @@ export default function EarningsCalculator() {
                 </div>
             </div>
         </div>
+
     )
 }
+export default EarningsCalculator;
+
 
 
 

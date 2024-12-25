@@ -1,10 +1,12 @@
 import { Check } from 'lucide-react';
 import { FC } from 'react';
+import Counter from './Counter';
 
 const LearnerStats: FC = () => {
     return (
-        <div className="w-full bg-slate-900 px-6 py-12 md:py-32">
-            <div className="mx-auto max-w-6xl">
+        <div className="w-full bg-[#020617] py-12 md:py-16">
+            {/* Container for the entire section */}
+            <div className="mx-auto wrapper space-y-8">
                 <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
                     {/* Stats Section */}
                     <div className="space-y-4">
@@ -33,15 +35,20 @@ const LearnerStats: FC = () => {
                                 "Learn at your own pace with a wealth of training materials",
                             ].map((item, index) => (
                                 <li key={index} className="flex items-start gap-3">
+                                    {/* Icon Section */}
                                     <div className="mt-1">
-                                        <Check className="h-5 w-5 text-emerald-400" />
+                                        <Check className="h-5 w-5 text-indigo" />
                                     </div>
+                                    {/* Text for each point */}
                                     <span className="text-white/90">{item}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
                 </div>
+
+                {/* Counter Component */}
+                <Counter />
             </div>
         </div>
     );

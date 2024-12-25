@@ -23,13 +23,13 @@ const SuccessStories: FC = () => {
         }
     ]
     return (
-        <section className="py-16 ">
+        <section className="py-16 px-3 max-w-4xl mx-auto">
             <div>
-                <h2 className="text-4xl font-bold mb-12 text-center">
+                <h2 className="text-3xl font-semibold mb-8 text-secondary">
                     Educational Excellence
                 </h2>
 
-                <div className="space-y-6 max-w-4xl mx-auto">
+                <div className="space-y-6 ">
                     {stories.map((story, index) => (
                         <Link
                             href="#"

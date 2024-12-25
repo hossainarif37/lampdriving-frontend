@@ -93,13 +93,6 @@ const InstructorCard: FC = () => {
                     </div>
                 </div>
                 <div className="flex md:gap-3 gap-2 py-2 lg:pt-0 justify-end overflow-hidden">
-                    {/* <Button
-                        variant="outline"
-                        size="lg"
-                        className="bg-white hover:bg-slate-50 text-xs lg:text-base"
-                    >
-                        VIEW PROFILE
-                    </Button> */}
 
                     {/* View Profile Button */}
                     <Link href="instructors/instructor-details" className="border text-sm font-medium text-secondary bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2 transition-colors duration-200 lg:w-44">

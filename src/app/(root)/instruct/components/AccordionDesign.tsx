@@ -29,13 +29,13 @@ const AccordionDesign: FC = () => {
                         Description: We offer convenient training times to suit your busy lifestyle.
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-3">
+                <AccordionItem value="item-4">
                     <AccordionTrigger className='hover:no-underline text-secondary'>Flexible Scheduling Options</AccordionTrigger>
                     <AccordionContent className='text-accent'>
                         Description: We offer convenient training times to suit your busy lifestyle.
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-3">
+                <AccordionItem value="item-5">
                     <AccordionTrigger className='hover:no-underline text-secondary'>Flexible Scheduling Options</AccordionTrigger>
                     <AccordionContent className='text-accent'>
                         Description: We offer convenient training times to suit your busy lifestyle.
