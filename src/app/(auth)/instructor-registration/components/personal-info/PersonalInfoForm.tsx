@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useRouter } from 'next/navigation';
 import { IPersonalInfo } from '../InstructorRegistration';
+import { genderOptions } from '@/constant/gender';
 type Inputs = {
     name: {
         firstName: string;
@@ -18,7 +19,7 @@ type Inputs = {
     serviceAreas: string[]
 }
 
-const genderOptions = ["Male", "Female", "Other"];
+
 
 interface IPersonalInfoFormProps {
     personalInfo: IPersonalInfo | undefined;

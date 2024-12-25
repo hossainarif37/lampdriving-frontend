@@ -86,6 +86,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
           onClick={() =>
             setOpenDays(openDays.length === DAYS.length ? [] : [...DAYS])
           }
+          className="px-5 md:px-10"
         >
           {openDays.length === DAYS.length ? "Collapse all" : "Expand all"}
         </Button>

@@ -1,3 +1,5 @@
+"use client"
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, useEffect, useState } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
@@ -10,6 +12,7 @@ import WorkingHoursSelector from './WorkingHoursSelector';
 import { ISchedule, IWorkingHour } from '@/types/instructor';
 import { DAYS } from '@/constant/days';
 import { IServices } from '../InstructorRegistration';
+import useScreenSize from '@/hooks/useScreenSize';
 
 interface Inputs {
     pricePerHour: number;
@@ -21,6 +24,7 @@ interface IServicesFormProps {
 }
 
 const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) => {
+    const device = useScreenSize();
     const [isClicked, setIsClicked] = useState(false);
     const [selectedLocations, setSelectedLocations] = useState<string[]>(servicesInfo?.serviceAreas || []);
     const [workingHoursError, setWorkingHoursError] = useState<string>('');
@@ -127,7 +131,7 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
                                 placeholder="Select Areas"
                                 variant="inverted"
                                 animation={2}
-                                maxCount={3}
+                                maxCount={device === 'mobile' ? 1 : 3}
                                 className='mt-1'
                             />
                             {selectedLocationsError && <p className='text-red-500 text-sm mt-1'>{selectedLocationsError}</p>}
