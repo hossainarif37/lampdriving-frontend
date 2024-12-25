@@ -1,12 +1,36 @@
+"use client"
+
 import { useState, useRef, useEffect, FC, use } from 'react';
 import { User, Settings, HelpCircle, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useAppSelector } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
+import { useLazyLogOutUserQuery } from '@/redux/api/authApi/authApi';
+import { removeUser } from '@/redux/slices/authSlice/authSlice';
+import { toast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 const UserMenu: FC = () => {
     const { user } = useAppSelector(state => state.authSlice);
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const [logoutUser, { isLoading: isLogoutLoading }] = useLazyLogOutUserQuery();
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+
+    const handleLogout = () => {
+        logoutUser().unwrap().then((res) => {
+            router.push("/");
+            dispatch(removeUser());
+            toast({
+                message: res.message
+            })
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong"
+            })
+        });
+    }
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -18,6 +42,7 @@ const UserMenu: FC = () => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
     return (
         <div className="relative" ref={dropdownRef}>
             <Button
@@ -46,7 +71,7 @@ const UserMenu: FC = () => {
                 </div>
 
                 <div className="py-1 px-4">
-                    <Button className='h-[40px] w-full capitalize'>
+                    <Button onClick={handleLogout} className='h-[40px] w-full capitalize'>
                         <LogOut className="w-4 h-4" />
                         <span>Sign out</span>
                     </Button>

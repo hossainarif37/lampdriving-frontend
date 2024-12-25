@@ -11,7 +11,7 @@ const NavigationItem: FC<INavigationItemProps> = ({path, title, isActive }) => {
     return (
         <li className='flex-1 flex flex-col'>
             <span className={`w-full h-2 ${isActive ? "bg-primary" : "bg-gray-300"}`}></span>
-            <Link href={path} className="font-semibold text-secondary w-full text-center">{title}</Link>
+            <Link href={path} className="font-semibold text-secondary w-full text-nowrap text-center">{title}</Link>
         </li>
     );
 }

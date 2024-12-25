@@ -33,7 +33,7 @@ const StepIndicator: FC = () => {
 
     return (
         <div>
-            <ul className='flex gap-4'>
+            <ul className='flex overflow-auto pb-5 md:pb-0 gap-4'>
                 {
                     steps.map((step, index) => (
                         <NavigationItem 
