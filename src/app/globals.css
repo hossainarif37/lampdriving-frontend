@@ -4,7 +4,7 @@
 
 @layer utilities {
   .wrapper {
-      @apply max-w-7xl mx-auto px-3 lg:px-0
+      @apply max-w-6xl mx-auto px-3 lg:px-0
   }
  .gradient-color {
     @apply bg-gradient-to-r from-primary/95 to-indigo/80;

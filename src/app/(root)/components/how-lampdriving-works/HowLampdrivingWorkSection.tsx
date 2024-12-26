@@ -54,7 +54,7 @@ const HowLampdrivingWorkSection: FC = () => {
 
       {/* CTA Button */}
       <div className="text-center lg:mt-10 mt-6">
-        <Button className="gradient-color">Start learning to drive now <ChevronRight strokeWidth={3} /> </Button>
+        <Button className="gradient-color h-12 md:h-14">Start learning to drive now <ChevronRight strokeWidth={3} /> </Button>
       </div>
     </section>
   );
