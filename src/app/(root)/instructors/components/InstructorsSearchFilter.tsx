@@ -1,0 +1,132 @@
+"use client";
+import { Input } from '@/components/ui/input';
+import { Search } from 'lucide-react';
+import { FC, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command"
+import { sydneySuburbs } from '@/constant/sydneySuburbs';
+import { Button } from '@/components/ui/button';
+interface IInstructorSearchFilterProps {
+    searchParams?: {
+        'vehicle.type'?: string;
+        searchKey?: string;
+        page?: string;
+    }
+}
+
+const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParams }) => {
+    const [searchPopOverOpen, setSearchPopOverOpen] = useState(false);
+    
+    const [carType, setCarType] = useState<'auto' | 'manual' | 'all'>(
+        searchParams?.['vehicle.type'] === "auto" || searchParams?.['vehicle.type'] === "manual" ? searchParams?.['vehicle.type'] : 'all');
+    const [selectedSuburb, setSelectedSuburb] = useState<string>(searchParams?.searchKey || '');
+
+    
+    const urlSearchParams = useSearchParams();
+    const { replace } = useRouter();
+
+    // Function to handle search
+    const handleSearch = (searchKey: string) => {
+        const searchParams = new URLSearchParams(urlSearchParams);
+
+        if (searchKey) {
+            searchParams.set('searchKey', searchKey.toString());
+            searchParams.delete('page');
+            setSelectedSuburb(searchKey);
+        } else {
+            searchParams.delete('searchKey');
+        }
+        replace(`?${searchParams.toString()}`);
+    }
+
+    // Function to handle filter
+    const handleFilter = (field: string, value: string) => {
+        const searchParams = new URLSearchParams(urlSearchParams);
+        if (value) {
+            searchParams.set(field, value);
+            replace(`?${searchParams.toString()}`);
+        } else {
+            searchParams.delete(field);
+        }
+        searchParams.delete('page');
+        replace(`?${searchParams.toString()}`);
+    }
+
+    // Function to handle car type
+    const handleChangeCarType = (type: 'auto' | 'manual' | 'all') => {
+        setCarType(type);
+        if (type == "auto" || type == "manual") {
+            handleFilter('vehicle.type', type);
+        } else {
+            handleFilter('vehicle.type', '');
+        }
+    }
+
+    return (
+        <div className='flex gap-5 justify-end max-w-7xl'>
+            <Popover
+                open={searchPopOverOpen}
+                onOpenChange={(open) => setSearchPopOverOpen(open)} // Update popover state
+            >
+                <PopoverTrigger asChild>
+                    <div className='relative md:w-[350px] lg:w-[434px]' >
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                        <Input
+                            value={selectedSuburb}
+                            onChange={(e) => handleSearch(e.target.value)}
+                            placeholder="Enter your suburb" className='h-12 pl-12' />
+                    </div>
+                </PopoverTrigger>
+                <PopoverContent className="md:w-[350px] lg:w-[434px] p-2">
+                    <Command>
+                        <CommandInput placeholder="Enter your suburb" />
+                        <CommandList>
+                            {sydneySuburbs.map((suburb, index) => (
+                                <CommandItem
+                                    className='py-3'
+                                    key={index}
+                                    onSelect={() => {
+                                        handleSearch(suburb.value);
+                                        setSearchPopOverOpen(false);
+                                    }}
+                                >
+                                    {suburb.label}
+                                </CommandItem>
+                            ))}
+                        </CommandList>
+                    </Command>
+                </PopoverContent>
+            </Popover>
+
+            <div className="font-semibold text-textCol text-center flex gap-3">
+                <Button
+                    onClick={() => handleChangeCarType('auto')}
+                    className={`w-32 hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
+                        ? 'gradient-color text-textCol'
+                        : 'bg-gray-200 text-secondary'}`}
+                >
+                    <span>Auto</span>
+                </Button>
+                <Button
+                    onClick={() => handleChangeCarType('manual')}
+                    className={`w-32 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
+                        ? 'gradient-color text-textCol'
+                        : 'bg-gray-200 text-secondary'}`}
+                >
+                    <span>Manual</span>
+                </Button>
+                <Button
+                    onClick={() => handleChangeCarType('all')}
+                    className={`w-32 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'all'
+                        ? 'gradient-color text-textCol'
+                        : 'bg-gray-200 text-secondary'}`}
+                >
+                    <span>All</span>
+                </Button>
+            </div>
+        </div>
+    );
+};
+
+export default InstructorsSearchFilter;

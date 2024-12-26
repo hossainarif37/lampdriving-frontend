@@ -7,12 +7,12 @@ import { removeUser } from "@/redux/slices/authSlice/authSlice";
 import Link from "next/link";
 
 const Topbar = () => {
-    const { isAuthenticate } = useAppSelector(state => state.authSlice);
+    const { isAuthenticate, user } = useAppSelector(state => state.authSlice);
 
     const [logoutUser, { isLoading: isLogoutLoading }] = useLazyLogOutUserQuery();
 
     const dispatch = useAppDispatch();
-    
+
     // logout button handler
     const handleLogout = () => {
         logoutUser().unwrap().then((res) => {
@@ -27,6 +27,8 @@ const Topbar = () => {
             })
         });
     }
+
+    const dashboardURL = isAuthenticate && user?.role === "admin" ? "/dashboard/admin" : user?.role === "instructor" ? "/dashboard/instructor" : "/dashboard/learner";
 
     return (
         <div className="bg-light p-4 border border-b border-gray-300">
@@ -44,9 +46,17 @@ const Topbar = () => {
                 <ul className="flex items-center gap-x-4">
                     {
                         isAuthenticate ? (
-                            <button onClick={handleLogout} disabled={isLogoutLoading}>
-                                Logout
-                            </button>
+                            <>
+                                <li>
+                                    <Link href={dashboardURL}>Dashboard</Link>
+                                </li>
+                                <Bar />
+                                <li>
+                                    <button onClick={handleLogout} disabled={isLogoutLoading}>
+                                        Logout
+                                    </button>
+                                </li>
+                            </>
 
                         )
                             :
