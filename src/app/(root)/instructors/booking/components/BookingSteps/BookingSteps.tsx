@@ -1,5 +1,5 @@
 "use client";
-import { Package, User2, UserCheck, Wallet } from 'lucide-react';
+import { Calendar, Package, User2, UserCheck, Wallet } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FC, ReactNode, useState } from 'react';
 
@@ -10,44 +10,54 @@ interface IStep {
     index: number
 }
 
-const BookingSteps: FC = () => {
-    const [currentStep, setCurrentStep] = useState<IStep>({
+const steps: IStep[] = [
+    {
         name: 'Instructor',
         icon: <UserCheck />,
         key: 'instructor',
         index: 1
-    });
-    
+    },
+    {
+        name: 'Package',
+        icon: <Package />,
+        key: 'package-selection',
+        index: 2
+    },
+    {
+        name: 'Schedule',
+        icon: <Calendar />,
+        key: 'schedule',
+        index: 3
+    },
+    {
+        name: 'Register',
+        icon: <User2 />,
+        key: 'register',
+        index: 4
+    },
+    {
+        name: 'Payment',
+        icon: <Wallet />,
+        key: 'payment',
+        index: 5
+    }
+]
+
+const BookingSteps: FC = () => {
+    const urlSearchParams = useSearchParams();
+    const step = urlSearchParams.get('step');
+
+    const initialCurrentStep = step && steps.find(currstep => currstep.key === (step === "login" ? "register" : step)) || {
+        name: 'Instructor',
+        icon: <UserCheck />,
+        key: 'instructor',
+        index: 1
+    };
+    const [currentStep, setCurrentStep] = useState<IStep>(initialCurrentStep);
+
+
     const { replace } = useRouter();
 
-    const steps: IStep[] = [
-        {
-            name: 'Instructor',
-            icon: <UserCheck />,
-            key: 'instructor',
-            index: 1
-        },
-        {
-            name: 'Book Lesson',
-            icon: <Package />,
-            key: 'book-lesson',
-            index: 2
-        },
-        {
-            name: 'Register',
-            icon: <User2 />,
-            key: 'register',
-            index: 3
-        },
-        {
-            name: 'Payment',
-            icon: <Wallet />,
-            key: 'payment',
-            index: 4
-        }
-    ]
-
-    const urlSearchParams = useSearchParams();
     const handleStepChange = (step: IStep) => {
         const searchParams = new URLSearchParams(urlSearchParams);
         searchParams.set('step', step.key);
@@ -76,8 +86,9 @@ const BookingSteps: FC = () => {
                 <div className={`h-full gradient-color rounded-md z-10 
                 transition-all duration-300
                     ${currentStep.key === 'instructor' && 'w-2/12'}
-                    ${currentStep.key === 'book-lesson' && 'w-6/12'}
-                    ${currentStep.key === 'register' && 'w-9/12'}
+                    ${currentStep.key === 'package-selection' && 'w-4/12'}
+                    ${currentStep.key === 'schedule' && 'w-7/12'}
+                    ${currentStep.key === 'register' && 'w-10/12'}
                     ${currentStep.key === 'payment' && 'w-full'}
                     `} />
             </div>
