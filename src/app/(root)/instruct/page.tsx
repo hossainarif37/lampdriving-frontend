@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import EarningsCalculator from './components/EarningsCalculator';
 import SuccessStories from './components/SuccessStories';
-import AccordionDesign from '../instruct/components/AccordionDesign';
+import AccordionDesign from './components/FAQ';
 import Stats from './components/Stats/Stats';
 
 const page: FC = () => {

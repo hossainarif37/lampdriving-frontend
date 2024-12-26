@@ -1,7 +1,7 @@
 import { FC } from "react";
 import VideoSection from "./VideoSection";
 import { Button } from "@/components/ui/button";
-import lampdrivingWordImage from "@/assets/home-page-image/image-how-lampdriving-work.png";
+import lampdrivingWordImage from "@/assets/home-page-image/illustration-image.png";
 import StepsList from "./StepList";
 import SectionHeading from "../shared/section-heading/SectionHeading";
 import { ChevronRight } from "lucide-react";
