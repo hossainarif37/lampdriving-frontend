@@ -3,9 +3,20 @@ import SectionHeading from '../shared/section-heading/SectionHeading';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import InstructorCard from './InstructorCard';
+import { getInstructors } from '@/api/getInstructors';
+// import InstructorCard from './InstructorCard';
+import InstructorCard from '../../instructors/components/InstructorCard';
 
-const FeaturedInstructors: FC = () => {
+
+interface IInstructorProps {
+    searchedParams?: {
+        carType?: string;
+        searchKey?: string;
+        page?: string;
+    };
+}
+const FeaturedInstructors: FC<IInstructorProps> = async ({ searchedParams }) => {
+    const instructors = await getInstructors(searchedParams);
     return (
         <section className="bg-gray-50 lg:py-20 md:py-16 md:p-6">
             <div className="wrapper">
@@ -17,9 +28,14 @@ const FeaturedInstructors: FC = () => {
 
                 {/* Instructors Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-7 mx-auto">
-                    {Array(6).fill(null).map((_, index) => (
+                    {/* {Array(6).fill(null).map((_, index) => (
                         <InstructorCard key={index} />
-                    ))}
+                    ))} */}
+                    {
+                        instructors.data.result.slice(0, 4).map((instructor, index) => (
+                            <InstructorCard key={index} instructor={instructor} />
+                        ))
+                    }
                 </div>
 
                 {/* Explore Instructors Button */}
