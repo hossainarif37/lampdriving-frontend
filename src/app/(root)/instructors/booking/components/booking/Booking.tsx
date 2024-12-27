@@ -2,6 +2,7 @@
 import { FC } from 'react';
 import BookingInfo from '../booking-info/BookingInfo';
 import { BookingProvider } from '@/providers/BookingProvider';
+import InstructorInfo from '../instructor-info/InstructorInfo';
 
 const Booking: FC = () => {
 
@@ -13,6 +14,7 @@ const Booking: FC = () => {
                 </div>
                 <div className='col-span-2 space-y-6'>
                     <BookingInfo />
+                    <InstructorInfo />
                 </div>
             </div>
         </BookingProvider>
