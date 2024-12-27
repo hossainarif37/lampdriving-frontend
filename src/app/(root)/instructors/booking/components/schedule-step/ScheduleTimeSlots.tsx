@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 
-interface TimeSlotsProps {
+interface ScheduleTimeSlotsProps {
     selectedTime: string | null;
     onSelectTime: (time: string) => void;
     selectedDate: Date | null;
@@ -9,9 +9,9 @@ interface TimeSlotsProps {
 
 import { FC } from 'react';
 
-const TimeSlots: FC<TimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate }) => {
+const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate }) => {
 
-    const timeSlots = [
+    const scheduleTimeSlots = [
         '09:00', '10:00', '11:00', '12:00', '13:00',
         '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'
     ];
@@ -32,7 +32,7 @@ const TimeSlots: FC<TimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDat
             </h2>
             <div className='h-[244px] overflow-y-auto thin-scrollbar'>
                 <div className="grid grid-cols-2 gap-3">
-                    {timeSlots.map(time => (
+                    {scheduleTimeSlots.map(time => (
                         <button
                             key={time}
                             onClick={() => onSelectTime(time)}
@@ -52,4 +52,4 @@ const TimeSlots: FC<TimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDat
     );
 };
 
-export default TimeSlots;
+export default ScheduleTimeSlots;

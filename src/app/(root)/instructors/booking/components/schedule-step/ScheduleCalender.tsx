@@ -2,12 +2,12 @@ import { FC, useState } from 'react';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday, addMonths, isBefore, startOfDay } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-interface ICalendarProps {
+interface IScheduleCalenderProps {
     selectedDate: Date | null;
     onSelectDate: (date: Date) => void;
 }
 
-const Calendar: FC<ICalendarProps> = ({ selectedDate, onSelectDate }) => {
+const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDate }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const today = new Date();
 
@@ -96,4 +96,4 @@ const Calendar: FC<ICalendarProps> = ({ selectedDate, onSelectDate }) => {
     );
 };
 
-export default Calendar;
+export default ScheduleCalender;

@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
-import Calender from './Calender';
-import TimeSlots from './TimeSlots';
-import LocationInput from './LocationInput';
+import ScheduleCalender from './ScheduleCalender';
+import ScheduleTimeSlots from './ScheduleTimeSlots';
+import LocationInput from './PickupLocation';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 
@@ -69,13 +69,13 @@ const ScheduleStep: FC = () => {
                 </div>
 
                 <div>
-                    <Calender
+                    <ScheduleCalender
                         selectedDate={selectedDate}
                         onSelectDate={setSelectedDate}
                     />
                 </div>
                 <div>
-                    <TimeSlots
+                    <ScheduleTimeSlots
                         selectedTime={selectedTime}
                         onSelectTime={setSelectedTime}
                         selectedDate={selectedDate}

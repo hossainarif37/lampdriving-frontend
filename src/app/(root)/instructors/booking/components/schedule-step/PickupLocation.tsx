@@ -5,7 +5,7 @@ import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui
 import { sydneySuburbs } from '@/constant/sydneySuburbs';
 import { Input } from '@/components/ui/input';
 
-interface ILocationInputProps {
+interface IPickupLocationProps {
     value: {
         address: string;
         suburb: string;
@@ -16,7 +16,7 @@ interface ILocationInputProps {
     }>>
 }
 
-const LocationInput: FC<ILocationInputProps> = ({ onChange, value }) => {
+const PickupLocation: FC<IPickupLocationProps> = ({ onChange, value }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -83,4 +83,4 @@ const LocationInput: FC<ILocationInputProps> = ({ onChange, value }) => {
     );
 };
 
-export default LocationInput;
+export default PickupLocation;
