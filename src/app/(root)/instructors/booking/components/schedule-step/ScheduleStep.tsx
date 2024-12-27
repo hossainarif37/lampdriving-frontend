@@ -1,14 +1,40 @@
 import { FC, useState } from 'react';
 import Calender from './Calender';
 import TimeSlots from './TimeSlots';
+import LocationInput from './LocationInput';
 import { Button } from '@/components/ui/button';
+import { format } from 'date-fns';
 
+interface IShedule {
+    date: string;
+    duration: '1-hour' | '2-hour' | 'test-package';
+    time: string;
+    pickupAddress: {
+        address: string;
+        suburb: string;
+    };
+}
 
 const ScheduleStep: FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
     const [selectedDuration, setSelectedDuration] = useState<'1-hour' | '2-hour' | 'test-package'>('1-hour');
+    const [location, setLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
 
+
+    const handleAddSchedule = () => {
+        const schedule: IShedule = {
+            date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '',
+            duration: selectedDuration,
+            time: selectedTime ? selectedTime : '',
+            pickupAddress: {
+                address: location?.address || '',
+                suburb: location?.suburb || '',
+            }
+        }
+
+        console.log(schedule)
+    };
     return (
         <div className="space-y-6 sticky top-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -55,8 +81,15 @@ const ScheduleStep: FC = () => {
                         selectedDate={selectedDate}
                     />
                 </div>
+
                 <div className='col-span-2'>
-                    <Button className='w-full'>
+                    <LocationInput
+                        value={location}
+                        onChange={setLocation}
+                    />
+                </div>
+                <div className='col-span-2'>
+                    <Button onClick={handleAddSchedule} className='w-full'>
                         Add Schedule
                     </Button>
                 </div>
