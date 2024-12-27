@@ -4,6 +4,7 @@ import { FC } from 'react';
 import PacakageSelectionStep from '../package-selection-step/PacakageSelectionStep';
 import BookingInfo from '../booking-info/BookingInfo';
 import InstructorInfo from '../instructor-info/InstructorInfo';
+import ScheduleStep from '../schedule-step/ScheduleStep';
 import RegisterStep from '../register-step/RegisterStep';
 import PaymentStep from '../payment-step/PaymentStep';
 import BookingSchedule from '../booking-schedule/BookingSchedule';
@@ -14,6 +15,7 @@ const Booking: FC = () => {
     const step = urlSearchParams.get('step');
 
     const pacakageSelectionStep = step === 'package-selection';
+    const scheduleStep = step === 'schedule';
     const registerStep = step === 'register' || step === 'login';
     const paymentStep = step === 'payment';
 
@@ -23,8 +25,9 @@ const Booking: FC = () => {
                 <div className='col-span-4'>
                     {
                         pacakageSelectionStep ? <PacakageSelectionStep /> :
-                            registerStep ? <RegisterStep /> :
-                                paymentStep && <PaymentStep />
+                            scheduleStep ? <ScheduleStep /> :
+                                registerStep ? <RegisterStep /> :
+                                    paymentStep && <PaymentStep />
                     }
                 </div>
                 <div className='col-span-2 space-y-6'>
