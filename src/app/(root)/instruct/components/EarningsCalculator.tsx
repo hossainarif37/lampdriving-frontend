@@ -101,7 +101,6 @@ const EarningsCalculator: FC = () => {
                 </div>
             </div>
         </div>
-
     )
 }
 export default EarningsCalculator;

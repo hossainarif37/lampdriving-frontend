@@ -147,7 +147,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
             </div>
 
             <CollapsibleContent className="pb-4">
-              <div className="mt-2 grid gap-4 rounded-lg bg-textCol p-4">
+              <div className="mt-2 grid gap-4 rounded-lg bg-light p-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <TimeSelect
                     label="Start Time"

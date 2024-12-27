@@ -99,11 +99,11 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                 </PopoverContent>
             </Popover>
 
-            <div className="font-semibold text-textCol text-center flex gap-3 mx-auto md:mx-0">
+            <div className="font-semibold text-light text-center flex gap-3 mx-auto md:mx-0">
                 <Button
                     onClick={() => handleChangeCarType('auto')}
                     className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
-                        ? 'gradient-color text-textCol'
+                        ? 'gradient-color text-light'
                         : 'bg-gray-200 text-secondary'}`}
                 >
                     <span>Auto</span>
@@ -111,7 +111,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                 <Button
                     onClick={() => handleChangeCarType('manual')}
                     className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
-                        ? 'gradient-color text-textCol'
+                        ? 'gradient-color text-light'
                         : 'bg-gray-200 text-secondary'}`}
                 >
                     <span>Manual</span>
@@ -119,7 +119,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                 <Button
                     onClick={() => handleChangeCarType('all')}
                     className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'all'
-                        ? 'gradient-color text-textCol'
+                        ? 'gradient-color text-light'
                         : 'bg-gray-200 text-secondary'}`}
                 >
                     <span>All</span>

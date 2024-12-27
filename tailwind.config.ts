@@ -20,7 +20,7 @@ export default {
   			// secondary: '#1A373A',
 			secondary:"#1F2A37",
   			accent: '#555A57',
-  			textCol: '#F5F5F5',
+  			// textCol: '#F5F5F5',
 			light:"#FFFFFF"
   		},
   		keyframes: {
