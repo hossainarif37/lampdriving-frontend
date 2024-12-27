@@ -19,8 +19,8 @@ const UserMenu: FC = () => {
 
     const handleLogout = () => {
         logoutUser().unwrap().then((res) => {
-            router.push("/");
             dispatch(removeUser());
+            router.push("/");
             toast({
                 message: res.message
             })
@@ -58,10 +58,10 @@ const UserMenu: FC = () => {
                     : 'scale-y-0'
                     }`}
             >
-                <div className="px-4 py-3 ">
+                {/* <div className="px-4 py-3 ">
                     <p className="text-sm font-medium">{user?.name.fullName}</p>
                     <p className="text-sm text-gray-500">{user?.email.slice(0, 25)}</p>
-                </div>
+                </div> */}
 
                 <div className="py-1 px-4">
                     <Button className="h-[40px] capitalize w-full px-4 py-2 text-sm text-red-600 bg-gray-50 hover:bg-gray-100 rounded-[4px] gap-2 font-semibold">
@@ -71,7 +71,7 @@ const UserMenu: FC = () => {
                 </div>
 
                 <div className="py-1 px-4">
-                    <Button onClick={handleLogout} className='h-[40px] w-full capitalize'>
+                    <Button variant={"outline"} disabled={isLogoutLoading} onClick={handleLogout} className='h-[40px] w-full text-secondary capitalize'>
                         <LogOut className="w-4 h-4" />
                         <span>Sign out</span>
                     </Button>

@@ -7,7 +7,7 @@ import { useLoginUserMutation } from '@/redux/api/authApi/authApi';
 import { useAppDispatch } from '@/redux/hook';
 import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { ILoginInputs } from '@/types/auth';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeClosed, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
@@ -88,7 +88,7 @@ const LoginForm: FC = () => {
                                 className='cursor-pointer absolute right-2 top-1/2 -translate-y-1/2'
                                 onClick={() => handlePasswordToggle('password')}
                             >
-                                {passwordVisible ? <Eye width={20} height={20} /> : <EyeOff width={20} height={20} />}
+                                {passwordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
                             </span>
                         </div>
                         {errors?.password && <p className='text-red-500 text-sm mt-1'>{errors?.password?.message}</p>}

@@ -29,13 +29,13 @@ const MenuLinks = () => {
 
     return (
         <div>
-            <div className='flex flex-col justify-center h-full my-2'>
+            <div className='flex flex-col text-secondary justify-center h-full my-2'>
                 {routes.map((route, index) => (
                     <div key={index}>
                         {route.children ? (
                             <>
                                 <Button
-                                    className={`h-[40px] w-full justify-start px-3 group capitalize mb-2`}
+                                    className={`md:h-10 xl:h-11 w-full font-semibold justify-start px-3 group capitalize mb-1`}
                                     variant={"sidebar"}
                                     onClick={() => handleGroupRouteOpen(route.path)}
                                 >
@@ -58,7 +58,7 @@ const MenuLinks = () => {
                                         opacity: openedGroup === route.path ? 1 : 0,
                                     }}
                                 >
-                                    <div className='ml-[18px] pl-1 my-2 border-l-2 flex flex-col gap-2'>
+                                    <div className='ml-[18px] pl-1 border-l-2 flex flex-col gap-1'>
                                         {route.children.map((childRoute, index) => (
                                             <NavLink
                                                 key={index}
@@ -73,7 +73,7 @@ const MenuLinks = () => {
                                 </div>
                             </>
                         ) : (
-                            <NavLink href={route.path} active='activeSidebar' other='sidebar' className='mb-2'>
+                            <NavLink href={route.path} active='activeSidebar' other='sidebar' className='mb-1'>
                                 {route.icon}
                                 {route.name}
                             </NavLink>

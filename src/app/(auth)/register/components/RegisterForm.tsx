@@ -8,7 +8,7 @@ import { genderOptions } from '@/constant/gender';
 import { toast } from '@/hooks/use-toast';
 import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
 import { IRegisterInputs } from '@/types/auth';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeClosed, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
@@ -99,6 +99,19 @@ const RegisterForm: FC = () => {
                     </div>
 
                     <div className='flex flex-col md:flex-row gap-5'>
+                         {/* Date of Birth */}
+                         <div className='w-full'>
+                            <label htmlFor="date-of-birth" className='font-semibold text-secondary'>Date of Birth</label>
+                            <Input
+                                {...register('dateOfBirth', {
+                                    required: "Date of birth is required"
+                                })
+                                }
+                                type="date" id='date-of-birth' className='xl:h-12 mt-1'
+                            />
+                            {errors?.dateOfBirth && <p className='text-red-500 text-sm mt-1'>{errors?.dateOfBirth?.message}</p>}
+                        </div>
+                        
                         {/* Gender */}
                         <div className='w-full'>
                             <label className="font-semibold text-secondary">Gender</label>
@@ -125,19 +138,6 @@ const RegisterForm: FC = () => {
                             />
 
                             {errors?.gender && <p className='text-red-500 text-sm mt-1'>{errors?.gender?.message}</p>}
-                        </div>
-
-                        {/* Date of Birth */}
-                        <div className='w-full'>
-                            <label htmlFor="date-of-birth" className='font-semibold text-secondary'>Date of Birth</label>
-                            <Input
-                                {...register('dateOfBirth', {
-                                    required: "Date of birth is required"
-                                })
-                                }
-                                type="date" id='date-of-birth' className='xl:h-12 mt-1'
-                            />
-                            {errors?.dateOfBirth && <p className='text-red-500 text-sm mt-1'>{errors?.dateOfBirth?.message}</p>}
                         </div>
                     </div>
 
@@ -201,7 +201,7 @@ const RegisterForm: FC = () => {
                                     className='cursor-pointer absolute right-2 top-1/2 -translate-y-1/2'
                                     onClick={() => handlePasswordToggle('password')}
                                 >
-                                    {passwordVisible ? <Eye width={20} height={20} /> : <EyeOff width={20} height={20} />}
+                                    {passwordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
                                 </span>
                             </div>
                             {errors?.password && <p className='text-red-500 text-sm mt-1'>{errors?.password?.message}</p>}
@@ -227,7 +227,7 @@ const RegisterForm: FC = () => {
                                     className='cursor-pointer absolute right-2 top-1/2 -translate-y-1/2'
                                     onClick={() => handlePasswordToggle('confirm-password')}
                                 >
-                                    {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeOff width={20} height={20} />}
+                                    {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
                                 </span>
                             </div>
                             {errors?.confirmPassword && <p className='text-red-500 text-sm mt-1'>{errors.confirmPassword.message}</p>}
