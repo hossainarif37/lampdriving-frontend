@@ -13,6 +13,12 @@ interface IBookingContext {
     setTestPackage: React.Dispatch<React.SetStateAction<ITestPackage>>;
     price: IPrice;
     setPrice: React.Dispatch<React.SetStateAction<IPrice>>;
+    isCustomSelected: boolean;
+    setIsCustomSelected: React.Dispatch<React.SetStateAction<boolean>>;
+    paymentInfo: IPaymentInfo;
+    setPaymentInfo: React.Dispatch<React.SetStateAction<IPaymentInfo>>;
+    paymentImageFile: File | null;
+    setPaymentImageFile: React.Dispatch<React.SetStateAction<File | null>>;
 }
 
 interface IPrice {
@@ -26,6 +32,15 @@ interface ITestPackage {
     price: number;
 }
 
+interface IPaymentInfo {
+    user: string;
+    transactionId: string;
+    amount: string;
+    proofImage: string;
+    method: string;
+    reference: string;
+}
+
 const BookingContext = createContext<IBookingContext | undefined>(undefined);
 
 
@@ -34,17 +49,30 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [instructor, setInstructor] = useState<Partial<IInstructor> | null>({
         pricePerHour: 76
     });
+    const [isCustomSelected, setIsCustomSelected] = useState(false);
     const [bookingHours, setBookingHours] = useState<number>(0);
     const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: 225 });
     const [price, setPrice] = useState<IPrice>({ payableAmount: 0, originalAmount: 0, discountedAmount: 0 });
+    const [paymentImageFile, setPaymentImageFile] = useState<File | null>(null);
+    const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({
+        user: '',
+        transactionId: '',
+        amount: '',
+        proofImage: '',
+        method: '',
+        reference: ''
+    });
 
 
     const value = useMemo(() => ({
         instructor, setInstructor,
         bookingHours, setBookingHours,
         testPackage, setTestPackage,
-        price, setPrice
-    }), [instructor, bookingHours, testPackage, price]);
+        price, setPrice,
+        isCustomSelected, setIsCustomSelected,
+        paymentInfo, setPaymentInfo,
+        paymentImageFile, setPaymentImageFile
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo]);
 
     const router = useRouter();
     const urlSearchParams = useSearchParams();
