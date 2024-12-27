@@ -1,5 +1,6 @@
 "use client"
 import { FC } from 'react';
+import BookingInfo from '../booking-info/BookingInfo';
 import { BookingProvider } from '@/providers/BookingProvider';
 
 const Booking: FC = () => {
@@ -11,7 +12,7 @@ const Booking: FC = () => {
 
                 </div>
                 <div className='col-span-2 space-y-6'>
-
+                    <BookingInfo />
                 </div>
             </div>
         </BookingProvider>
