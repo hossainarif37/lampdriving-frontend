@@ -5,7 +5,7 @@ import { FC, useState, useEffect, SetStateAction, Dispatch } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
 import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeClosed, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { IPersonalInfo, ISecurity } from '../InstructorRegistration';
 import { useRegisterInstructorMutation } from '@/redux/api/authApi/authApi';
@@ -47,13 +47,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
         }
     }, [password, confirmPassword]);
 
-    // Handle checkbox changes
-    const handleTermsChange = (checked: boolean) => {
-        setTermsAccepted(checked);
-        if (checked) {
-            setTermsError("");
-        }
-    };
+   
 
     const handlePasswordToggle = (field: string) => {
         if (field === 'password') {
@@ -62,6 +56,14 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
             setConfirmPasswordVisible((prev) => !prev);
         }
     }
+
+     // Handle checkbox changes
+     const handleTermsChange = (checked: boolean) => {
+        setTermsAccepted(checked);
+        if (checked) {
+            setTermsError("");
+        }
+    };
 
     const onSubmit = (data: Inputs) => {
         // Validate checkboxes
@@ -129,13 +131,12 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
                                     className="w-full xl:h-12 mt-1 pr-10"
                                 />
 
-                                <button
+                                <span
                                     className="absolute right-3 top-1/2 -translate-y-1/2"
-                                    type="button"
                                     onClick={() => handlePasswordToggle("password")}
                                 >
-                                    {passwordVisible ? <Eye width={20} height={20}/> : <EyeOff width={20} height={20}/>}
-                                </button>
+                                    {passwordVisible ? <Eye width={20} height={20}/> : <EyeClosed width={20} height={20}/>}
+                                </span>
                             </div>
                             {errors?.password && (
                                 <p className="text-red-500 text-sm mt-1">{errors?.password?.message}</p>
@@ -163,13 +164,12 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
                                     className="w-full xl:h-12 mt-1 pr-10"
                                 />
 
-                                <button
+                                <span
                                     className="absolute right-3 top-1/2 -translate-y-1/2"
-                                    type="button"
                                     onClick={() => handlePasswordToggle("confirm-password")}
                                 >
-                                    {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeOff width={20} height={20}/>}
-                                </button>
+                                    {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20}/>}
+                                </span>
                             </div>
                             {errors?.confirmPassword && (
                                 <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
