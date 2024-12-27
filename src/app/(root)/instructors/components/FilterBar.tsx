@@ -1,12 +1,16 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import useOutsideClick from "@/hooks/useOutsideClick";
 import { SlidersHorizontal } from "lucide-react";
 import { FC, useState } from "react";
 
 const FilterBar: FC = () => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
+    console.log(isFilterOpen)
 
-    const toggleFilter = () => setIsFilterOpen((prev) => !prev);
+    const toggleFilter = () => {
+        setIsFilterOpen((prev) => !prev);
+    };
 
     // Use the custom hook to detect clicks outside
     const filterRef = useOutsideClick(() => {
@@ -17,7 +21,7 @@ const FilterBar: FC = () => {
         <div className="relative">
             {/* Main Filter Bar */}
             <div
-                ref={filterRef}
+                // ref={filterRef}
                 onClick={toggleFilter}
                 className="flex items-center gap-2 h-12 px-6 rounded-md gradient-color text-light cursor-pointer"
             >
