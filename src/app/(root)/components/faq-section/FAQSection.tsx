@@ -2,8 +2,8 @@
 import { FC } from 'react';
 
 import SectionHeading from '../shared/section-heading/SectionHeading';
-import AccordionDesign from './AccordionDesign';
 import TabsDesign from './TabsDesign';
+import FaqAccordion from '../shared/faq-accordion/FaqAccordion';
 
 const FAQSection: FC = () => {
 
@@ -17,7 +17,9 @@ const FAQSection: FC = () => {
             </div>
             {/*Accordion part*/}
             <div className='max-w-4xl mx-auto px-4 md:px-0'>
-                <AccordionDesign />
+                {Array(5).fill(null).map((_, index) => (
+                    <FaqAccordion key={index} />
+                ))}
             </div>
         </div>
     );

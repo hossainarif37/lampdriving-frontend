@@ -6,7 +6,7 @@ import arrowImg from "@/assets/banner-img/main-slider-style1__arrow.png";
 
 const BannerHeading: FC = () => {
     return (
-        <div className="text-textCol">
+        <div className="text-light">
             {/* Main heading */}
             <h2 className="uppercase md:text-5xl text-3xl flex flex-col font-bold md:gap-4 gap-1">
                 <span>Drive safe</span>
@@ -21,7 +21,7 @@ const BannerHeading: FC = () => {
                 <div className="space-y-8 my-8">
                     {/* Review block */}
                     <div className="flex gap-3 items-center">
-                        <p className="w-14 h-14 rounded-full bg-textCol flex justify-center items-center text-secondary font-bold">
+                        <p className="w-14 h-14 rounded-full bg-light flex justify-center items-center text-secondary font-bold">
                             4.9
                         </p>
                         <div>
