@@ -48,7 +48,13 @@ const ScheduleStep: FC = () => {
                         onSelectDate={setSelectedDate}
                     />
                 </div>
-
+                <div>
+                    <TimeSlots
+                        selectedTime={selectedTime}
+                        onSelectTime={setSelectedTime}
+                        selectedDate={selectedDate}
+                    />
+                </div>
                 <div className='col-span-2'>
                     <Button className='w-full'>
                         Add Schedule
