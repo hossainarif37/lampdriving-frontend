@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import PackageCard from './PackageCard';
 import CustomPackage from './CustomPackage';
+import TestPackage from './TestPackage';
 import { useBooking } from '@/providers/BookingProvider';
 
 
@@ -46,6 +47,7 @@ const PacakageSelectionStep: FC = () => {
                 </div>
             </div>
 
+            <TestPackage />
         </div>
     );
 };
