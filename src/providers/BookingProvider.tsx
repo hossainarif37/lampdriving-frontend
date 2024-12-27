@@ -19,6 +19,8 @@ interface IBookingContext {
     setPaymentInfo: React.Dispatch<React.SetStateAction<IPaymentInfo>>;
     paymentImageFile: File | null;
     setPaymentImageFile: React.Dispatch<React.SetStateAction<File | null>>;
+    schedules: IShedule[];
+    setSchedules: React.Dispatch<React.SetStateAction<IShedule[]>>;
 }
 
 interface IPrice {
@@ -39,6 +41,16 @@ interface IPaymentInfo {
     proofImage: string;
     method: string;
     reference: string;
+}
+
+interface IShedule {
+    date: string;
+    duration: '1-hour' | '2-hour' | 'test-package';
+    time: string;
+    pickupAddress: {
+        address: string;
+        suburb: string;
+    };
 }
 
 const BookingContext = createContext<IBookingContext | undefined>(undefined);
@@ -62,6 +74,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         method: '',
         reference: ''
     });
+    const [schedules, setSchedules] = useState<IShedule[]>([]);
 
 
     const value = useMemo(() => ({
@@ -71,8 +84,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         price, setPrice,
         isCustomSelected, setIsCustomSelected,
         paymentInfo, setPaymentInfo,
-        paymentImageFile, setPaymentImageFile
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo]);
+        paymentImageFile, setPaymentImageFile,
+        schedules, setSchedules
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules]);
 
     const router = useRouter();
     const urlSearchParams = useSearchParams();

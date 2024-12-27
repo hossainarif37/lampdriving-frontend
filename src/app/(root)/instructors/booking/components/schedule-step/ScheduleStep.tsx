@@ -4,6 +4,7 @@ import ScheduleTimeSlots from './ScheduleTimeSlots';
 import LocationInput from './PickupLocation';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
+import { useBooking } from '@/providers/BookingProvider';
 
 interface IShedule {
     date: string;
@@ -21,8 +22,17 @@ const ScheduleStep: FC = () => {
     const [selectedDuration, setSelectedDuration] = useState<'1-hour' | '2-hour' | 'test-package'>('1-hour');
     const [location, setLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
 
+    const { setSchedules } = useBooking();
 
     const handleAddSchedule = () => {
+        if (!selectedDate || !selectedTime) {
+            return;
+        }
+        if (location?.address === '' || location?.suburb === '') {
+            return;
+        }
+
+
         const schedule: IShedule = {
             date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '',
             duration: selectedDuration,
@@ -33,8 +43,15 @@ const ScheduleStep: FC = () => {
             }
         }
 
-        console.log(schedule)
+        setSchedules((pre) => [...pre, schedule]);
+
+        setSelectedDate(null);
+        setSelectedTime(null);
+        setSelectedDuration('1-hour');
+        setLocation({ address: '', suburb: '' });
     };
+
+
     return (
         <div className="space-y-6 sticky top-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
