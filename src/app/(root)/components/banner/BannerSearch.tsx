@@ -1,7 +1,6 @@
 "use client";
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command"
-import { Check } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 import { sydneySuburbs } from '@/constant/sydneySuburbs';
