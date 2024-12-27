@@ -85,7 +85,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                     </Link>
 
                     {/* Book Button */}
-                    <Link href={"/instructors/booking"} className="w-1/2">
+                    <Link href={`/instructors/booking/?instructor=${typeof user !== 'string' && user?.username}&step=package-selection`} className="w-1/2">
                         <Button className="w-full gradient-color">Book</Button>
                     </Link>
                 </div>
