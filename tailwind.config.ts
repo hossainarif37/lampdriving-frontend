@@ -12,8 +12,11 @@ export default {
   	extend: {
   		colors: {
   			// primary: '#ff5200',
-  			primary: '#4f46e5',
-  			indigo: '#9333ea',
+			// indigo: '#db5616',
+  			// primary: '#4f46e5',
+  			// indigo: '#9333ea',
+  			indigo: '#0665DB',
+  			primary: '#7D82FF',
   			// secondary: '#1A373A',
 			secondary:"#1F2A37",
   			accent: '#555A57',
