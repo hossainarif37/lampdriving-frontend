@@ -25,7 +25,7 @@ const VideoSection: FC<VideoSectionProps> = ({ imageSrc, videoSrc, altText }) =>
             priority={false}
           />
           <div
-            className="flex items-center text-light absolute top-[120px] left-[125px] cursor-pointer"
+            className="flex items-center text-light absolute top-[120px] left-[122px] cursor-pointer"
             onClick={() => setIsVideoPlaying(true)}
           >
             <p className="w-14 h-14 rounded-full gradient-color flex justify-center items-center z-50 shadow-lg">

@@ -8,44 +8,6 @@ import Link from 'next/link';
 
 const InstructorCard: FC = () => {
     return (
-        // <div className=" rounded-md text-secondary flex flex-col gap-4 px-4 py-6 bg-light">
-        //     {/* Instructor Image */}
-        //     <div className=' rounded-full mx-auto'>
-        //         <Image
-        //             src={myImg}
-        //             width={120}
-        //             height={120}
-        //             alt="Instructor image"
-        //             className="rounded-full"
-        //         />
-        //     </div>
-
-        //     {/* Instructor Details */}
-        //     <div className="flex justify-between">
-        //         <div className='space-y-1'>
-        //             <p><strong>Name:</strong> John Doe</p>
-        //             <p><strong>Rating:</strong> 4.8/5</p>
-        //             <p><strong>Experience:</strong> 5 years</p>
-        //             <p><strong>Type:</strong> Auto/Manual</p>
-        //         </div>
-        //         <div>
-        //             <h4 className="font-bold text-xl bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent">
-        //                 $50/<span className="text-sm">hr</span>
-        //             </h4>
-        //         </div>
-        //     </div>
-
-        //     {/* Action Buttons */}
-        //     <div className="flex gap-3">
-        //         <Button className="w-1/2 bg-light border hover:bg-gray-100 text-secondary h-11">
-        //             View Profile
-        //         </Button>
-        //         <Button className="w-1/2 h-11 text-light bg-gradient-to-r gradient-color">
-        //             Book Online Now
-        //         </Button>
-        //     </div>
-        // </div>
-
         <Card className="w-full bg-gradient-to-b from-primary/0 to-indigo/5 border-none">
             <CardContent className="p-6 overflow-hidden">
                 <div className="flex items-start gap-4 md:gap-6">
@@ -92,16 +54,22 @@ const InstructorCard: FC = () => {
 
                     </div>
                 </div>
-                <div className="flex md:gap-3 gap-2 py-2 lg:pt-0 justify-end overflow-hidden">
+                <div className="flex md:gap-3 gap-2 py-2 lg:pt-0 md:justify-end justify-center">
 
                     {/* View Profile Button */}
-                    <Link href="instructors/instructor-details" className="border text-sm font-medium text-secondary bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2 transition-colors duration-200 lg:w-44">
+                    <Link href="instructors/instructor-details" >
+                        <Button
+                            size='lg'
+                            className="border text-xs lg:text-sm font-medium text-secondary bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2 transition-colors duration-200"
+
+                        >
                         <ExternalLink className="w-4 h-4" />
                         View Profile
+                        </Button>
                     </Link>
                     <Button
                         size="lg"
-                        className=" bg-primary hover:bg-primary/90 text-xs lg:text-sm"
+                        className=" gradient-color text-xs lg:text-sm"
                     >
                         Book Online Now
                     </Button>

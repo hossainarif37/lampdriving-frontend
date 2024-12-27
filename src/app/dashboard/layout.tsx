@@ -15,8 +15,8 @@ const DashboardLayout: FC<{ children: ReactNode }> = ({ children }) => {
                     {children}
                 </div>
                 <div className="min-h-screen"></div>
-                <div className="min-h-screen"></div>
-                <div className="min-h-screen"></div>
+                {/* <div className="min-h-screen"></div>
+                <div className="min-h-screen"></div> */}
             </div>
         </div>
     );

@@ -64,13 +64,13 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
     }
 
     return (
-        <div className='flex gap-5 justify-end max-w-7xl'>
+        <div className='flex flex-col md:flex-row gap-5 md:justify-end justify-center max-w-7xl'>
             <Popover
                 open={searchPopOverOpen}
                 onOpenChange={(open) => setSearchPopOverOpen(open)} // Update popover state
             >
-                <PopoverTrigger asChild>
-                    <div className='relative md:w-[350px] lg:w-[434px]' >
+                <PopoverTrigger asChild >
+                    <div className='relative md:w-[350px] lg:w-[434px] sm:w-[500px] w-full mx-auto md:mx-0' >
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
                         <Input
                             value={selectedSuburb}
@@ -99,10 +99,10 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                 </PopoverContent>
             </Popover>
 
-            <div className="font-semibold text-textCol text-center flex gap-3">
+            <div className="font-semibold text-textCol text-center flex gap-3 mx-auto md:mx-0">
                 <Button
                     onClick={() => handleChangeCarType('auto')}
-                    className={`w-32 hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
+                    className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
                 >
@@ -110,7 +110,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                 </Button>
                 <Button
                     onClick={() => handleChangeCarType('manual')}
-                    className={`w-32 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
+                    className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
                 >
@@ -118,7 +118,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                 </Button>
                 <Button
                     onClick={() => handleChangeCarType('all')}
-                    className={`w-32 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'all'
+                    className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'all'
                         ? 'gradient-color text-textCol'
                         : 'bg-gray-200 text-secondary'}`}
                 >
