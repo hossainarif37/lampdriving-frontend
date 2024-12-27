@@ -5,6 +5,7 @@ import PacakageSelectionStep from '../package-selection-step/PacakageSelectionSt
 import BookingInfo from '../booking-info/BookingInfo';
 import InstructorInfo from '../instructor-info/InstructorInfo';
 import RegisterStep from '../register-step/RegisterStep';
+import PaymentStep from '../payment-step/PaymentStep';
 import BookingSchedule from '../booking-schedule/BookingSchedule';
 import { BookingProvider } from '@/providers/BookingProvider';
 
@@ -14,6 +15,7 @@ const Booking: FC = () => {
 
     const pacakageSelectionStep = step === 'package-selection';
     const registerStep = step === 'register' || step === 'login';
+    const paymentStep = step === 'payment';
 
     return (
         <BookingProvider>
@@ -21,7 +23,8 @@ const Booking: FC = () => {
                 <div className='col-span-4'>
                     {
                         pacakageSelectionStep ? <PacakageSelectionStep /> :
-                            registerStep && <RegisterStep />
+                            registerStep ? <RegisterStep /> :
+                                paymentStep && <PaymentStep />
                     }
                 </div>
                 <div className='col-span-2 space-y-6'>
