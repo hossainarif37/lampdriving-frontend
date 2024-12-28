@@ -16,7 +16,7 @@ interface IInstructorProps {
     };
 }
 const FeaturedInstructors: FC<IInstructorProps> = async ({ searchedParams }) => {
-    const instructors = await getInstructors(searchedParams);
+    const instructors = await getInstructors({limit: "4"});
     return (
         <section className="bg-gray-50 lg:py-20 md:py-16 md:p-6">
             <div className="wrapper">
@@ -28,9 +28,6 @@ const FeaturedInstructors: FC<IInstructorProps> = async ({ searchedParams }) => 
 
                 {/* Instructors Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-7 mx-auto">
-                    {/* {Array(6).fill(null).map((_, index) => (
-                        <InstructorCard key={index} />
-                    ))} */}
                     {
                         instructors.data.result.slice(0, 4).map((instructor, index) => (
                             <InstructorCard key={index} instructor={instructor} />

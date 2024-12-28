@@ -45,7 +45,7 @@ const FooterDesign: FC = () => {
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold group flex flex-col">
                     Update News
-                    <span className="mt-[12px] h-[2px] w-1/3 rounded-full bg-textCol"></span>
+                    <span className="mt-[12px] h-[2px] w-1/3 rounded-full bg-light"></span>
                 </h2>
                 <div className="space-y-2 text-sm">
                     <p>Lamp Driving School While The Lovely Valley Team Work</p>
