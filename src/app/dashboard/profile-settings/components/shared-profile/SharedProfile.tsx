@@ -25,7 +25,7 @@ const SharedProfile: FC = () => {
                 onSubmit={handleSubmit(onSubmit)}
                 className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col items-start md:shadow-lg bg-light md:rounded-lg md:border'
             >
-                <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Personal Details</h1>
+                <h1 className='text-xl md:text-2xl font-bold text-secondary'>Personal Details</h1>
 
                 <PhotoUpload
                     profilePhoto={profilePhoto}
@@ -39,7 +39,6 @@ const SharedProfile: FC = () => {
                 />
                 <Button className='w-full mt-7 gradient-color h-12'>Update</Button>
             </form >
-
             <UpdatePassword />
         </div>
     );

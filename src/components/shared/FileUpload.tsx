@@ -4,6 +4,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Check, CloudUpload, Upload, X } from 'lucide-react';
+import { generateUniqueIdentifier } from '@/lib/utils';
 
 interface FileUploadProps {
     label?: string;
@@ -32,11 +33,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
                 setSelectedFile(file);
             }
         }
-    };
-
-    const generateUniqueIdentifier = (file: File): string => {
-        // You can use a combination of file properties to create a unique identifier
-        return `${file.name}_${file.size}_${file.lastModified}`;
     };
 
     const handleUploadFile = async () => {
