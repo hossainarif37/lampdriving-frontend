@@ -23,7 +23,7 @@ const BannerSearch: FC = () => {
     }
 
     return (
-        <div className="bg-textCol lg:w-[500px] md:w-[400px] w-full rounded-lg lg:px-8 md:px-6 px-3 lg:py-14 md:py-10 py-7">
+        <div className="bg-light lg:w-[500px] md:w-[400px] w-full rounded-lg lg:px-8 md:px-6 px-3 lg:py-14 md:py-10 py-7">
             {/* Container for all content */}
             <div className="space-y-6">
 
@@ -33,11 +33,11 @@ const BannerSearch: FC = () => {
                 </h2>
 
                 {/* Toggle buttons for Auto/Manual */}
-                <div className="w-full font-semibold text-textCol text-center border flex gap-3 p-3 rounded-md">
+                <div className="w-full font-semibold text-light text-center border flex gap-3 p-3 rounded-md">
                     <Button
                         onClick={() => setCarType('auto')}
                         className={`w-1/2 hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
-                            ? 'gradient-color text-textCol'
+                            ? 'gradient-color text-light'
                             : 'bg-gray-200 text-secondary'}`}
                     >
                         <span>Auto</span>
@@ -45,7 +45,7 @@ const BannerSearch: FC = () => {
                     <Button
                         onClick={() => setCarType('manual')}
                         className={`w-1/2 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
-                            ? 'gradient-color text-textCol'
+                            ? 'gradient-color text-light'
                             : 'bg-gray-200 text-secondary'}`}
                     >
                         <span>Manual</span>
