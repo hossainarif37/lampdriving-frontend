@@ -8,16 +8,7 @@ import { useRouter } from 'next/navigation';
 import { IPersonalInfo } from '../InstructorRegistration';
 import { genderOptions } from '@/constant/gender';
 import PersonalInfoFields from '@/components/shared/forms/PersonalInfoFields';
-type Inputs = {
-    name: {
-        firstName: string;
-        lastName: string;
-    },
-    email: string;
-    phone: string;
-    gender: "male" | "female" | "other";
-    dateOfBirth: string;
-}
+
 
 
 
@@ -27,10 +18,10 @@ interface IPersonalInfoFormProps {
 }
 
 const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({ personalInfo, setPersonalInfo }) => {
-    const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
+    const { register, handleSubmit, formState: { errors }, control } = useForm<IPersonalInfo>();
     const router = useRouter();
 
-    const onSubmit = (data: Inputs) => {
+    const onSubmit = (data: IPersonalInfo) => {
         setPersonalInfo(data);
         router.push("/instructor-registration?step=experience");
     };

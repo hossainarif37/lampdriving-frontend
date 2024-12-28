@@ -16,7 +16,7 @@ export default {
   			// primary: '#4f46e5',
   			// indigo: '#9333ea',
   			indigo: '#0665DB',
-  			primary: '#7D82FF',
+  			primary: '#6267ff',
   			// secondary: '#1A373A',
 			secondary:"#1F2A37",
   			accent: '#555A57',

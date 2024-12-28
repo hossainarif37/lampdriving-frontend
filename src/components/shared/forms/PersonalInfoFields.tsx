@@ -4,28 +4,28 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { genderOptions } from '@/constant/gender';
 
-type Inputs = {
-  name: {
-    firstName: string;
-    lastName: string;
-  };
-  email: string;
-  phone: string;
-  gender: "male" | "female" | "other";
-  dateOfBirth: string;
-};
+export interface IPersonalInfoInputs  {
+    name: {
+        firstName: string;
+        lastName: string;
+    },
+    email: string;
+    phone: string;
+    gender: "male" | "female" | "other";
+    dateOfBirth: string;
+}
 
 interface PersonalInfoFieldsProps {
-  register: UseFormRegister<Inputs>;
-  errors: FieldErrors<Inputs>;
-  personalInfo?: Inputs;
-  control: Control<Inputs>;
+  register: UseFormRegister<IPersonalInfoInputs>;
+  errors: FieldErrors<IPersonalInfoInputs>;
+  personalInfo?: IPersonalInfoInputs;
+  control: Control<IPersonalInfoInputs>;
 }
 
 const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, personalInfo, control }) => {
   return (
     <>
-      <div className='w-full mt-7'>
+      <div className='w-full mt-5'>
         <div className='flex flex-col gap-5'>
           {/* Name */}
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>

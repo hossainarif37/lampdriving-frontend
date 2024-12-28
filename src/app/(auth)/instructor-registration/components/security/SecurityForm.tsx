@@ -22,6 +22,7 @@ interface ISecurityFormProps {
     instructorInfo: any;
 }
 
+
 const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<Inputs>();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
