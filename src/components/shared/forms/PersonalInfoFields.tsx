@@ -20,9 +20,10 @@ interface PersonalInfoFieldsProps {
   errors: FieldErrors<IPersonalInfoInputs>;
   personalInfo?: IPersonalInfoInputs;
   control: Control<IPersonalInfoInputs>;
+  isRequired: boolean;
 }
 
-const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, personalInfo, control }) => {
+const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, personalInfo, control, isRequired }) => {
   return (
     <>
       <div className='w-full mt-5'>
@@ -34,7 +35,10 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
               <label htmlFor="first-name" className='font-semibold text-secondary'>First Name</label>
               <Input
                 {...register('name.firstName', {
-                  required: "First name is required",
+                  required: {
+                    value: isRequired,
+                    message: "First name is required",
+                  },
                 })}
                 defaultValue={personalInfo?.name.firstName}
                 type="text"
@@ -50,7 +54,10 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
               <label htmlFor="last-name" className='font-semibold text-secondary'>Last Name</label>
               <Input
                 {...register('name.lastName', {
-                  required: "Last name is required",
+                  required: {
+                    value: isRequired,
+                    message: "Last name is required",
+                  },
                 })}
                 defaultValue={personalInfo?.name.lastName}
                 type="text"
@@ -70,7 +77,10 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
                 name="gender"
                 control={control}
                 defaultValue={personalInfo?.gender}
-                rules={{ required: "Gender is required" }}
+                rules={{ required: {
+                    value: isRequired,
+                    message: "Gender is required",
+                  }, }}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value || ''}>
                     <SelectTrigger className="h-11 xl:h-14 mt-1">
@@ -94,7 +104,10 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
               <label htmlFor="phone" className='font-semibold text-secondary'>Phone</label>
               <Input
                 {...register('phone', {
-                  required: "Phone number is required",
+                  required: {
+                    value: isRequired,
+                    message: "Phone number is required",
+                  },
                   maxLength: {
                     value: 10,
                     message: "Phone number must be 10 digits",
@@ -119,7 +132,10 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
               <label htmlFor="date-of-birth" className='font-semibold text-secondary'>Date of Birth</label>
               <Input
                 {...register('dateOfBirth', {
-                  required: "Date of birth is required",
+                  required: {
+                    value: isRequired,
+                    message: "Date of birth is required",
+                  },
                 })}
                 defaultValue={personalInfo?.dateOfBirth}
                 type="date"
@@ -133,7 +149,10 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
               <label htmlFor="email" className='font-semibold text-secondary'>Email</label>
               <Input
                 {...register('email', {
-                  required: "Email is required",
+                  required: {
+                    value: isRequired,
+                    message: "Email is required",
+                  },
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                     message: "Invalid email address",
