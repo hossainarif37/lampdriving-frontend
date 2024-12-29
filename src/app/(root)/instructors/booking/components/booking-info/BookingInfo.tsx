@@ -10,7 +10,7 @@ const BookingInfo: FC = () => {
 
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 sticky top-10 z-10">
             <h2 className="text-lg font-semibold mb-4">Booking Info</h2>
 
             <div className="space-y-4">
