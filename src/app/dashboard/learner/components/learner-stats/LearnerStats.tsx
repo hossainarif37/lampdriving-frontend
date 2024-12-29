@@ -1,8 +1,10 @@
+"use client"
 import { FC } from 'react';
 import React from 'react';
 import { Clock, DollarSign, BookOpen, Calendar, Award, History, Package } from 'lucide-react';
 import Image, { StaticImageData } from 'next/image';
 import personImg from "@/assets/person_1.jpg"
+import { useAppSelector } from '@/redux/hook';
 
 interface BookingStats {
   totalBookings: number;
@@ -39,14 +41,13 @@ const packages = [
 ];
 
 const LearnerStats: FC = () => {
-  // Implement the sum function
-  
-
+  const {user} = useAppSelector(state => state.authSlice);
+  console.log(user);
     return (
         <div className="min-h-screen bg-gray-50 p-6">
       {/* Welcome Section */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Welcome back, Alex! 👋</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user?.name?.firstName}! 👋</h1>
         <p className="text-gray-600 mt-2">Track your learning progress and manage your driving lessons</p>
       </div>
 
