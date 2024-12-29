@@ -1,12 +1,77 @@
 import { Button } from '@/components/ui/button';
+import { toast } from '@/hooks/use-toast';
 import { useBooking } from '@/providers/BookingProvider';
+import { useLoginUserMutation, useRegisterUserMutation } from '@/redux/api/authApi/authApi';
+import { useAppDispatch } from '@/redux/hook';
+import { saveUser } from '@/redux/slices/authSlice/authSlice';
+import { ILoginInputs, IRegisterInputs } from '@/types/auth';
 import { Clock, NotepadText, TicketPercent } from 'lucide-react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 
 
 
 const BookingInfo: FC = () => {
     const { price, bookingHours, testPackage, useRegisterForm, useLoginForm, currentStep } = useBooking();
+
+    // register and login button trigger
+    const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
+    const { trigger: loginTrigger, handleSubmit: handleLoginSubmit } = useLoginForm;
+
+    // register and login mutation
+    const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
+    const [loginUser, { isLoading: isLoginLoading }] = useLoginUserMutation();
+
+    const dispatch = useAppDispatch();
+
+    const urlSearchParams = useSearchParams();
+    const searchParams = new URLSearchParams(urlSearchParams);
+    const router = useRouter();
+
+
+    // handle register function
+    const handleRegister = (data: IRegisterInputs) => {
+        registerUser(data).unwrap().then((res) => {
+            toast({
+                message: res.message,
+            })
+            searchParams.set('step', 'payment');
+            router.replace(`?${searchParams.toString()}`);
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong",
+            })
+        })
+    }
+
+
+    // handle login function
+    const handleLogin = (data: ILoginInputs) => {
+        loginUser(data).unwrap().then((res) => {
+            toast({
+                message: res.message
+            });
+            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
+            searchParams.set('step', 'payment');
+            router.replace(`?${searchParams.toString()}`);
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong"
+            });
+        })
+    }
+
+
+    // handle trigger function for hook form
+    const handleTrigger = async () => {
+        if (currentStep.key == "register") {
+            await registerTrigger().then((_res) => handleRegisterSubmit(handleRegister)());
+        } else if (currentStep.key == "login") {
+            await loginTrigger().then((_res) => handleLoginSubmit(handleLogin)());
+        }
+    }
 
 
     return (
@@ -59,7 +124,7 @@ const BookingInfo: FC = () => {
                     </div>
                 </div>
 
-                <Button className='w-full'>
+                <Button disabled={isRegistering} onClick={handleTrigger} className='w-full'>
                     {
                         currentStep.key == "instructor" ? "Choose Instructor" :
                             currentStep.key == "package-selection" ? "Select Package" :
