@@ -76,9 +76,9 @@ const PaymentFrom: FC = () => {
                     />
                 </div>
 
-                <Button className='w-full'>
+                {/* <Button className='w-full'>
                     Submit Payment Details
-                </Button>
+                </Button> */}
             </div>
         </form>
     );

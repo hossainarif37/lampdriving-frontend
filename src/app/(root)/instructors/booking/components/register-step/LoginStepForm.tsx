@@ -94,9 +94,9 @@ const LoginFormStep: FC = () => {
             </div>
 
             {/* Submit */}
-            <div className='text-center'>
+            {/* <div className='text-center'>
                 <Button className='w-full mx-auto mt-6 gradient-color h-12' disabled={isLoginLoading}>Login</Button>
-            </div>
+            </div> */}
 
             <p className='mt-5'>Don&apos;t have an account? <span onClick={handleNavigate} className='text-blue-500 hover:underline font-semibold cursor-pointer'>
                     Register Here

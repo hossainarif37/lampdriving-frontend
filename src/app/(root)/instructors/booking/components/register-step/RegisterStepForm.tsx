@@ -170,9 +170,9 @@ const RegisterStepForm: FC = () => {
                     </div>
                 </div>
             </div>
-            <div className='text-center'>
+            {/* <div className='text-center'>
                 <Button className='w-full mx-auto mt-6 gradient-color h-12' disabled={isRegistering}>Register</Button>
-            </div>
+            </div> */}
             <p className='mt-5'>Already have an account? <span onClick={handleNavigate} className='text-blue-500 hover:underline font-semibold cursor-pointer'>
                     Login Here
                 </span>
