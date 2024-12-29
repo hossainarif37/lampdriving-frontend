@@ -4,6 +4,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi';
 import Loading from '@/components/shared/Loading';
 import { Calendar, Package, User2, UserCheck, Wallet } from 'lucide-react';
+import { useForm, UseFormReturn } from 'react-hook-form';
+import { IRegisterInputs } from '@/types/auth';
 interface IBookingContext {
     steps: IStep[];
     currentStep: IStep;
@@ -24,6 +26,7 @@ interface IBookingContext {
     setPaymentImageFile: React.Dispatch<React.SetStateAction<File | null>>;
     schedules: IShedule[];
     setSchedules: React.Dispatch<React.SetStateAction<IShedule[]>>;
+    useRegisterForm: UseFormReturn<IRegisterInputs, any, undefined>
 }
 
 interface IPrice {
@@ -133,6 +136,8 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         reference: ''
     });
     const [schedules, setSchedules] = useState<IShedule[]>([]);
+    const useRegisterForm = useForm<IRegisterInputs>();
+
 
 
     const value = useMemo(() => ({
@@ -144,8 +149,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         paymentInfo, setPaymentInfo,
         paymentImageFile, setPaymentImageFile,
         schedules, setSchedules,
-        steps, currentStep, setCurrentStep
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep]);
+        steps, currentStep, setCurrentStep,
+        useRegisterForm
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams.get('instructor');
