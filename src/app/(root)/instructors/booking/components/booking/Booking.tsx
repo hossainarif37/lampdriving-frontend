@@ -9,6 +9,7 @@ import RegisterStep from '../register-step/RegisterStep';
 import PaymentStep from '../payment-step/PaymentStep';
 import BookingSchedule from '../booking-schedule/BookingSchedule';
 import { BookingProvider } from '@/providers/BookingProvider';
+import BookingSteps from '../booking-steps/BookingSteps';
 
 const Booking: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -21,6 +22,7 @@ const Booking: FC = () => {
 
     return (
         <BookingProvider>
+            <BookingSteps />
             <div className='py-8 grid grid-cols-6 gap-6'>
                 <div className='col-span-4'>
                     {

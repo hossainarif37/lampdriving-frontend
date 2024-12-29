@@ -3,8 +3,11 @@ import { IInstructor } from '@/types/instructor';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi';
 import Loading from '@/components/shared/Loading';
-
+import { Calendar, Package, User2, UserCheck, Wallet } from 'lucide-react';
 interface IBookingContext {
+    steps: IStep[];
+    currentStep: IStep;
+    setCurrentStep: React.Dispatch<React.SetStateAction<IStep>>;
     instructor: Partial<IInstructor> | null;
     setInstructor: React.Dispatch<React.SetStateAction<Partial<IInstructor> | null>>;
     bookingHours: number;
@@ -53,11 +56,66 @@ interface IShedule {
     };
 }
 
+
+interface IStep {
+    name: string;
+    icon: ReactNode;
+    key: string;
+    index: number
+}
+
+const steps: IStep[] = [
+    {
+        name: 'Instructor',
+        icon: <UserCheck />,
+        key: 'instructor',
+        index: 1
+    },
+    {
+        name: 'Package',
+        icon: <Package />,
+        key: 'package-selection',
+        index: 2
+    },
+    {
+        name: 'Schedule',
+        icon: <Calendar />,
+        key: 'schedule',
+        index: 3
+    },
+    {
+        name: 'Register',
+        icon: <User2 />,
+        key: 'register',
+        index: 4
+    },
+    {
+        name: 'Payment',
+        icon: <Wallet />,
+        key: 'payment',
+        index: 5
+    }
+];
+
+
 const BookingContext = createContext<IBookingContext | undefined>(undefined);
 
 
 // Create the provider component
 export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
+
+    const urlSearchParams = useSearchParams();
+    const step = urlSearchParams.get('step');
+
+    const initialCurrentStep = step && steps.find(currstep => currstep.key === (step === "login" ? "register" : step)) || {
+        name: 'Instructor',
+        icon: <UserCheck />,
+        key: 'instructor',
+        index: 1
+    };
+    const [currentStep, setCurrentStep] = useState<IStep>(initialCurrentStep);
+
+
     const [instructor, setInstructor] = useState<Partial<IInstructor> | null>({
         pricePerHour: 76
     });
@@ -85,11 +143,11 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         isCustomSelected, setIsCustomSelected,
         paymentInfo, setPaymentInfo,
         paymentImageFile, setPaymentImageFile,
-        schedules, setSchedules
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules]);
+        schedules, setSchedules,
+        steps, currentStep, setCurrentStep
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep]);
 
     const router = useRouter();
-    const urlSearchParams = useSearchParams();
     const instructorQuery = urlSearchParams.get('instructor');
 
     if (!instructorQuery) {

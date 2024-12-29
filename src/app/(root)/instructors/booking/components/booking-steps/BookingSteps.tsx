@@ -1,4 +1,5 @@
 "use client";
+import { useBooking } from '@/providers/BookingProvider';
 import { Calendar, Package, User2, UserCheck, Wallet } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FC, ReactNode, useState } from 'react';
@@ -10,50 +11,9 @@ interface IStep {
     index: number
 }
 
-const steps: IStep[] = [
-    {
-        name: 'Instructor',
-        icon: <UserCheck />,
-        key: 'instructor',
-        index: 1
-    },
-    {
-        name: 'Package',
-        icon: <Package />,
-        key: 'package-selection',
-        index: 2
-    },
-    {
-        name: 'Schedule',
-        icon: <Calendar />,
-        key: 'schedule',
-        index: 3
-    },
-    {
-        name: 'Register',
-        icon: <User2 />,
-        key: 'register',
-        index: 4
-    },
-    {
-        name: 'Payment',
-        icon: <Wallet />,
-        key: 'payment',
-        index: 5
-    }
-]
-
 const BookingSteps: FC = () => {
+    const { steps, currentStep, setCurrentStep } = useBooking();
     const urlSearchParams = useSearchParams();
-    const step = urlSearchParams.get('step');
-
-    const initialCurrentStep = step && steps.find(currstep => currstep.key === (step === "login" ? "register" : step)) || {
-        name: 'Instructor',
-        icon: <UserCheck />,
-        key: 'instructor',
-        index: 1
-    };
-    const [currentStep, setCurrentStep] = useState<IStep>(initialCurrentStep);
 
 
     const { replace } = useRouter();
