@@ -6,7 +6,7 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { price, bookingHours, testPackage } = useBooking();
+    const { price, bookingHours, testPackage, useRegisterForm, useLoginForm, currentStep } = useBooking();
 
 
     return (
@@ -60,7 +60,15 @@ const BookingInfo: FC = () => {
                 </div>
 
                 <Button className='w-full'>
-                    Continue
+                    {
+                        currentStep.key == "instructor" ? "Choose Instructor" :
+                            currentStep.key == "package-selection" ? "Select Package" :
+                                currentStep.key == "schedule" ? "Select Schedule" :
+                                    currentStep.key == "register" ? "Register Now" :
+                                        currentStep.key == "login" ? "Login Now" :
+                                            currentStep.key == "payment" && "Pay Now"
+
+                    }
                 </Button>
             </div>
         </div>
