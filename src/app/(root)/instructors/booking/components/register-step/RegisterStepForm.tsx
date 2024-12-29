@@ -1,37 +1,18 @@
 "use client"
-
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { toast } from '@/hooks/use-toast';
-import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
-import { IRegisterInputs } from '@/types/auth';
+import { useBooking } from '@/providers/BookingProvider';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FC } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 
 const RegisterStepForm: FC = () => {
-    const { register, handleSubmit, formState: { errors }, control } = useForm<IRegisterInputs>();
-    const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
+    const { register, formState: { errors }, control } = useBooking().useRegisterForm;
 
 
     const urlSearchParams = useSearchParams();
     const router = useRouter();
-
-    const handleRegister = (data: IRegisterInputs) => {
-        registerUser(data).unwrap().then((res) => {
-            toast({
-                message: res.message,
-            })
-            router.push("?step=payment");
-        }).catch((err) => {
-            toast({
-                success: false,
-                message: err.data.message || "Something went wrong",
-            })
-        })
-    }
 
     // handler for navigating with exisiting query
     const handleNavigate = () => {
@@ -43,7 +24,7 @@ const RegisterStepForm: FC = () => {
 
     return (
         <form
-            onSubmit={handleSubmit(handleRegister)}
+            // onSubmit={handleSubmit(handleRegister)}
             className='bg-white p-6 rounded-lg shadow-sm border border-gray-200'
         >
             <h2 className="text-xl font-semibold mb-6 text-left">Register Learner</h2>
@@ -170,12 +151,10 @@ const RegisterStepForm: FC = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className='text-center'>
-                <Button className='w-full mx-auto mt-6 gradient-color h-12' disabled={isRegistering}>Register</Button>
-            </div> */}
+
             <p className='mt-5'>Already have an account? <span onClick={handleNavigate} className='text-blue-500 hover:underline font-semibold cursor-pointer'>
-                    Login Here
-                </span>
+                Login Here
+            </span>
             </p>
         </form>
     );
