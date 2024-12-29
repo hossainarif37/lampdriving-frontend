@@ -1,41 +1,16 @@
 "use client"
 
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { toast } from '@/hooks/use-toast';
-import { useLoginUserMutation } from '@/redux/api/authApi/authApi';
-import { useAppDispatch } from '@/redux/hook';
-import { saveUser } from '@/redux/slices/authSlice/authSlice';
-import { ILoginInputs } from '@/types/auth';
+import { useBooking } from '@/providers/BookingProvider';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FC } from 'react';
-import { useForm } from 'react-hook-form';
-
 
 
 const LoginFormStep: FC = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>();
-    const [loginUser, { isLoading: isLoginLoading }] = useLoginUserMutation();
-
-    const dispatch = useAppDispatch();
+    const { register, formState: { errors } } = useBooking().useLoginForm;
 
     const urlSearchParams = useSearchParams();
     const router = useRouter();
-
-    const handleLogin = (data: ILoginInputs) => {
-        loginUser(data).unwrap().then((res) => {
-            toast({
-                message: res.message
-            });
-            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
-            router.push('?step=payment')
-        }).catch((err) => {
-            toast({
-                success: false,
-                message: err.data.message || "Something went wrong"
-            });
-        })
-    }
 
 
     // handler for navigating with exisiting query
@@ -48,7 +23,6 @@ const LoginFormStep: FC = () => {
 
     return (
         <form
-            onSubmit={handleSubmit(handleLogin)}
             className='bg-white p-6 rounded-lg shadow-sm border border-gray-200'
         >
             <h2 className="text-xl font-semibold mb-6 text-left">Learner Login</h2>
@@ -93,14 +67,9 @@ const LoginFormStep: FC = () => {
                 </p> */}
             </div>
 
-            {/* Submit */}
-            {/* <div className='text-center'>
-                <Button className='w-full mx-auto mt-6 gradient-color h-12' disabled={isLoginLoading}>Login</Button>
-            </div> */}
-
             <p className='mt-5'>Don&apos;t have an account? <span onClick={handleNavigate} className='text-blue-500 hover:underline font-semibold cursor-pointer'>
-                    Register Here
-                </span>
+                Register Here
+            </span>
             </p>
         </form>
     );
