@@ -5,7 +5,7 @@ export const navLinks = [
     },
     {
         title: "Test Packages",
-        href: "#",
+        href: "/test-package",
     },
     {
         title: "Gallery",
