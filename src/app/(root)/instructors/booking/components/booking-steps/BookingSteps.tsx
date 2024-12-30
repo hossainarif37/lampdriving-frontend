@@ -1,29 +1,17 @@
 "use client";
 import { useBooking } from '@/providers/BookingProvider';
-import { Calendar, Package, User2, UserCheck, Wallet } from 'lucide-react';
+import { IStep } from '@/types/booking';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { FC, ReactNode, useState } from 'react';
+import { FC } from 'react';
 
-interface IStep {
-    name: string;
-    icon: ReactNode;
-    key: string;
-    index: number
-}
 
 const BookingSteps: FC = () => {
-    const { steps, currentStep, setCurrentStep } = useBooking();
+    const { steps, currentStep, setCurrentStep, handleStepChange } = useBooking();
     const urlSearchParams = useSearchParams();
 
 
     const { replace } = useRouter();
 
-    const handleStepChange = (step: IStep) => {
-        const searchParams = new URLSearchParams(urlSearchParams);
-        searchParams.set('step', step.key);
-        replace(`?${searchParams.toString()}`);
-        setCurrentStep(step);
-    };
 
     return (
         <div className='max-w-3xl w-full mx-auto relative'>
@@ -32,10 +20,10 @@ const BookingSteps: FC = () => {
                     steps.map((step, index) => (
                         <button
                             key={index}
-                            onClick={() => handleStepChange(step)}
+                            onClick={() => handleStepChange(step.key)}
                             className='flex flex-col items-center justify-between gap-2 flex-1'>
                             <div className={`w-10 h-10 flex items-center justify-center rounded-full ${(currentStep.index >= step.index) ? 'gradient-color text-white' : 'bg-[#dbeafe] text-primary'}`}>
-                                {step.icon}
+                                <step.icon />
                             </div>
                             <p className='text-sm font-medium'>{step.name}</p>
                         </button>

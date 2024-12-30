@@ -12,7 +12,7 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { price, bookingHours, testPackage, useRegisterForm, useLoginForm, currentStep } = useBooking();
+    const { price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, setCurrentStep, handleStepChange } = useBooking();
 
     // register and login button trigger
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
@@ -74,6 +74,24 @@ const BookingInfo: FC = () => {
     }
 
 
+
+    const handleNavigate = () => {
+        if (currentStep.key === "instructor") {
+            return handleStepChange("package-selection");
+        }
+        else if (currentStep.key === "package-selection") {
+            return handleStepChange("schedule");
+        }
+        else if (currentStep.key === "schedule") {
+            return handleStepChange("register");
+        }
+        else if (currentStep.key === "register") {
+            handleTrigger();
+        }
+    }
+
+    const isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
+        (currentStep.key === "schedule" && !schedules.length) 
     return (
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 sticky top-10 z-10">
             <h2 className="text-lg font-semibold mb-4">Booking Info</h2>
@@ -124,7 +142,7 @@ const BookingInfo: FC = () => {
                     </div>
                 </div>
 
-                <Button disabled={isRegistering} onClick={handleTrigger} className='w-full'>
+                <Button disabled={isDisable} onClick={handleNavigate} className='w-full'>
                     {
                         currentStep.key == "instructor" ? "Choose Instructor" :
                             currentStep.key == "package-selection" ? "Select Package" :
