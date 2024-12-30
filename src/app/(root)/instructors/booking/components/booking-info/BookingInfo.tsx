@@ -20,9 +20,9 @@ const BookingInfo: FC = () => {
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
     const { trigger: loginTrigger, handleSubmit: handleLoginSubmit } = useLoginForm;
 
-    // register and login mutation
+    // register, login, booking create mutation
     const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
-    const [loginUser, { isLoading: isLoginLoading }] = useLoginUserMutation();
+    const [loginUser, { isLoading: isLogging }] = useLoginUserMutation();
     const [createABooking, { isLoading: isCreatingABooking }] = useCreateABookingMutation();
 
     const dispatch = useAppDispatch();
@@ -74,6 +74,7 @@ const BookingInfo: FC = () => {
         }
     }
 
+    // handle confirm booking
     const handleConfirmBooking = () => {
         if (!user?._id || !instructor?._id) {
             return;
@@ -108,7 +109,7 @@ const BookingInfo: FC = () => {
     }
 
 
-
+    // handler for navigating
     const handleNavigate = () => {
         if (currentStep.key === "instructor") {
             return handleStepChange("package-selection");
@@ -129,7 +130,7 @@ const BookingInfo: FC = () => {
 
 
     const isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
-        (currentStep.key === "schedule" && !schedules.length)
+        (currentStep.key === "schedule" && !schedules.length) || (isLogging || isRegistering || isCreatingABooking);
     return (
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 sticky top-10 z-10">
             <h2 className="text-lg font-semibold mb-4">Booking Info</h2>
@@ -180,7 +181,7 @@ const BookingInfo: FC = () => {
                     </div>
                 </div>
 
-                <Button disabled={isDisable} onClick={handleNavigate} className='w-full'>
+                <Button loading={isCreatingABooking || isRegistering || isLogging} disabled={isDisable} onClick={handleNavigate} className='w-full'>
                     {
                         currentStep.key == "instructor" ? "Choose Instructor" :
                             currentStep.key == "package-selection" ? "Select Package" :
