@@ -41,12 +41,9 @@ export interface ITestPackage {
 }
 
 export interface IPaymentInfo {
-    user: string;
     transactionId: string;
-    amount: string;
     proofImage: string;
     method: string;
-    reference: string;
 }
 
 export interface IShedule {

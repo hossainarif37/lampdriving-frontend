@@ -13,6 +13,7 @@ export interface IAddress {
 }
 
 export interface IUser {
+    _id?: string;
     name: IName;
     email: string;
     phone: string;

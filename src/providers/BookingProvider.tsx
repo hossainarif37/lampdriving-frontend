@@ -36,12 +36,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [price, setPrice] = useState<IPrice>({ payableAmount: 0, originalAmount: 0, discountedAmount: 0 });
     const [paymentImageFile, setPaymentImageFile] = useState<File | null>(null);
     const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({
-        user: '',
         transactionId: '',
-        amount: '',
         proofImage: '',
         method: '',
-        reference: ''
     });
     const [schedules, setSchedules] = useState<IShedule[]>([]);
     const useRegisterForm = useForm<IRegisterInputs>();

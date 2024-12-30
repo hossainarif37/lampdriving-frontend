@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { useBooking } from '@/providers/BookingProvider';
 import { useLoginUserMutation, useRegisterUserMutation } from '@/redux/api/authApi/authApi';
-import { useAppDispatch } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { ILoginInputs, IRegisterInputs } from '@/types/auth';
 import { Clock, NotepadText, TicketPercent } from 'lucide-react';
@@ -12,8 +12,8 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange } = useBooking();
-
+    const { instructor, price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, paymentInfo } = useBooking();
+    const { user } = useAppSelector((state) => state.authSlice);
     // register and login button trigger
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
     const { trigger: loginTrigger, handleSubmit: handleLoginSubmit } = useLoginForm;
@@ -26,7 +26,6 @@ const BookingInfo: FC = () => {
 
     const urlSearchParams = useSearchParams();
     const searchParams = new URLSearchParams(urlSearchParams);
-    const router = useRouter();
 
 
     // handle register function
@@ -63,13 +62,32 @@ const BookingInfo: FC = () => {
 
 
     // handle trigger function for hook form
+    const registerStep = searchParams.get('step');
     const handleTrigger = async () => {
-        const registerStep = searchParams.get('step');
         if (registerStep == "register") {
             await registerTrigger().then((_res) => handleRegisterSubmit(handleRegister)());
         } else if (registerStep == "login") {
             await loginTrigger().then((_res) => handleLoginSubmit(handleLogin)());
         }
+    }
+
+    const handleConfirmBooking = () => {
+        console.log(user)
+        const reqData = {
+            bookingInfo: {
+                learner: user?.learner,
+                instructor: instructor?._id,
+                price: price.payableAmount,
+                bookingHours,
+                schedules
+            },
+            transactionInfo: {
+                user: user?._id,
+                amount: price.payableAmount,
+                ...paymentInfo
+            }
+        }
+        console.log(reqData);
     }
 
 
@@ -86,8 +104,12 @@ const BookingInfo: FC = () => {
         }
         else if (currentStep.key === "register") {
             handleTrigger();
+        } else if (currentStep.key === "payment") {
+            handleConfirmBooking();
         }
     }
+
+
 
     const isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
         (currentStep.key === "schedule" && !schedules.length)
@@ -146,9 +168,9 @@ const BookingInfo: FC = () => {
                         currentStep.key == "instructor" ? "Choose Instructor" :
                             currentStep.key == "package-selection" ? "Select Package" :
                                 currentStep.key == "schedule" ? "Select Schedule" :
-                                    currentStep.key == "register" ? "Register Now" :
-                                        currentStep.key == "login" ? "Login Now" :
-                                            currentStep.key == "payment" && "Pay Now"
+                                    registerStep == "register" ? "Register Now" :
+                                        registerStep == "login" ? "Login Now" :
+                                            currentStep.key == "payment" && "Confirm Booking"
 
                     }
                 </Button>

@@ -1,13 +1,11 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import FileUpload from '@/components/shared/FileUpload';
-import { Button } from '@/components/ui/button';
 import { useBooking } from '@/providers/BookingProvider';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const PaymentFrom: FC = () => {
-    const { paymentInfo, setPaymentInfo } = useBooking();
-    const [paymentImageFile, setPaymentImageFile] = useState<File | null>(null);
+    const { paymentInfo, setPaymentInfo, paymentImageFile, setPaymentImageFile } = useBooking();
 
     // remove image handler
     const removeProofImage = () => {
@@ -20,13 +18,9 @@ const PaymentFrom: FC = () => {
         setPaymentInfo((prev) => ({ ...prev, proofImage: url }));
     }
     
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        // onSubmit(paymentInfo);
-    };
 
     return (
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+        <form className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
             <h2 className="text-xl font-semibold mb-6">Payment Details</h2>
 
             <div className="space-y-6">
