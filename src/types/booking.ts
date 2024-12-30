@@ -63,3 +63,21 @@ export interface IStep {
     key: string;
     index: number
 }
+
+
+export interface IBookingInputs {
+    bookingInfo: {
+        learner: string;
+        instructor: string;
+        price: number;
+        bookingHours: number;
+        schedules: IShedule[];
+    };
+    transactionInfo: {
+        user: string;
+        amount: number;
+        transactionId: string;
+        proofImage: string;
+        method: string;
+    };
+}

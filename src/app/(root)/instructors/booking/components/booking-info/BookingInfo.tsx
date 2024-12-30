@@ -2,11 +2,13 @@ import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { useBooking } from '@/providers/BookingProvider';
 import { useLoginUserMutation, useRegisterUserMutation } from '@/redux/api/authApi/authApi';
+import { useCreateABookingMutation } from '@/redux/api/bookingApi/bookingApi';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { ILoginInputs, IRegisterInputs } from '@/types/auth';
+import { IBookingInputs } from '@/types/booking';
 import { Clock, NotepadText, TicketPercent } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 
 
@@ -21,6 +23,7 @@ const BookingInfo: FC = () => {
     // register and login mutation
     const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
     const [loginUser, { isLoading: isLoginLoading }] = useLoginUserMutation();
+    const [createABooking, { isLoading: isCreatingABooking }] = useCreateABookingMutation();
 
     const dispatch = useAppDispatch();
 
@@ -72,10 +75,13 @@ const BookingInfo: FC = () => {
     }
 
     const handleConfirmBooking = () => {
-        console.log(user)
-        const reqData = {
+        if (!user?._id || !instructor?._id) {
+            return;
+        }
+
+        const reqData: IBookingInputs = {
             bookingInfo: {
-                learner: typeof user?.learner !== "string" ? user?.learner?._id : user?.learner,
+                learner: user ? typeof user?.learner !== "string" ? user?.learner?._id ?? "" : user?.learner ?? "" : "",
                 instructor: instructor?._id,
                 price: price.payableAmount,
                 bookingHours,
@@ -87,7 +93,18 @@ const BookingInfo: FC = () => {
                 ...paymentInfo
             }
         }
-        console.log(reqData);
+
+        createABooking(reqData).unwrap().then((res) => {
+            toast({
+                message: res.message,
+            })
+            // handleStepChange("payment");
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong",
+            })
+        })
     }
 
 
