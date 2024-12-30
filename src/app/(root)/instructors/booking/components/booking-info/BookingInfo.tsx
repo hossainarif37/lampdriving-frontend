@@ -12,7 +12,7 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, setCurrentStep, handleStepChange } = useBooking();
+    const { price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange } = useBooking();
 
     // register and login button trigger
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
@@ -35,8 +35,7 @@ const BookingInfo: FC = () => {
             toast({
                 message: res.message,
             })
-            searchParams.set('step', 'payment');
-            router.replace(`?${searchParams.toString()}`);
+            handleStepChange("payment");
         }).catch((err) => {
             toast({
                 success: false,
@@ -53,8 +52,7 @@ const BookingInfo: FC = () => {
                 message: res.message
             });
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
-            searchParams.set('step', 'payment');
-            router.replace(`?${searchParams.toString()}`);
+            handleStepChange("payment");
         }).catch((err) => {
             toast({
                 success: false,
