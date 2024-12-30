@@ -75,7 +75,7 @@ const BookingInfo: FC = () => {
         console.log(user)
         const reqData = {
             bookingInfo: {
-                learner: user?.learner,
+                learner: typeof user?.learner !== "string" ? user?.learner?._id : user?.learner,
                 instructor: instructor?._id,
                 price: price.payableAmount,
                 bookingHours,
