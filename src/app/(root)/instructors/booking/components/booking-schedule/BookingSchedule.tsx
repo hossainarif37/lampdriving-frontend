@@ -23,7 +23,7 @@ const BookingSchedule: FC = () => {
                                 </div>
                                 <div className='flex items-center justify-between'>
                                     <p className='flex items-center gap-2'>
-                                        <Timer className='size-5 text-primary' /> {schedule.duration == 'test-package' ? '1.5-hours' : schedule.duration}
+                                        <Timer className='size-5 text-primary' /> {schedule.duration == 1.5 ? '1.5-Hours' : `${schedule.duration}-Hours`}
                                     </p>
                                     <p className="flex items-center gap-2">
                                         <MapPinIcon className="size-5 text-primary mt-0.5" />

@@ -5,21 +5,13 @@ import LocationInput from './PickupLocation';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { useBooking } from '@/providers/BookingProvider';
+import { IShedule } from '@/types/booking';
 
-interface IShedule {
-    date: string;
-    duration: '1-hour' | '2-hour' | 'test-package';
-    time: string;
-    pickupAddress: {
-        address: string;
-        suburb: string;
-    };
-}
 
 const ScheduleStep: FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
-    const [selectedDuration, setSelectedDuration] = useState<'1-hour' | '2-hour' | 'test-package'>('1-hour');
+    const [selectedDuration, setSelectedDuration] = useState<1 | 2 | 1.5>(1);
     const [location, setLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
 
     const { setSchedules } = useBooking();
@@ -31,7 +23,6 @@ const ScheduleStep: FC = () => {
         if (location?.address === '' || location?.suburb === '') {
             return;
         }
-
 
         const schedule: IShedule = {
             date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '',
@@ -47,7 +38,7 @@ const ScheduleStep: FC = () => {
 
         setSelectedDate(null);
         setSelectedTime(null);
-        setSelectedDuration('1-hour');
+        setSelectedDuration(1);
         setLocation({ address: '', suburb: '' });
     };
 
@@ -60,21 +51,21 @@ const ScheduleStep: FC = () => {
                     <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
                         <h2 className="text-lg font-semibold mb-4">Select Duration</h2>
                         <div className="flex gap-4">
-                            {['1-hour', '2-hour'].map((duration) => (
+                            {[1, 2].map((duration) => (
                                 <button
                                     key={duration}
-                                    onClick={() => setSelectedDuration(duration as '1-hour' | '2-hour')}
+                                    onClick={() => setSelectedDuration(duration as 1 | 2)}
                                     className={`flex-1 py-2 px-4 rounded-[4px] border ${selectedDuration === duration
                                         ? 'border-primary bg-primary/5 text-primary'
                                         : 'border-gray-200 hover:border-primary/70'
                                         }`}
                                 >
-                                    {duration} Lesson
+                                    {duration}-Hour Lesson
                                 </button>
                             ))}
                             <button
-                                onClick={() => setSelectedDuration('test-package')}
-                                className={`flex-1 py-2 px-4 rounded-[4px] border ${selectedDuration === 'test-package'
+                                onClick={() => setSelectedDuration(1.5)}
+                                className={`flex-1 py-2 px-4 rounded-[4px] border ${selectedDuration === 1.5
                                     ? 'border-primary bg-primary/5 text-primary'
                                     : 'border-gray-200 hover:border-primary/70'
                                     }`}

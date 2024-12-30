@@ -48,7 +48,7 @@ export interface IPaymentInfo {
 
 export interface IShedule {
     date: string;
-    duration: '1-hour' | '2-hour' | 'test-package';
+    duration: 1 | 2 | 1.5;
     time: string;
     pickupAddress: {
         address: string;
