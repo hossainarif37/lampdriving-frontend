@@ -11,7 +11,7 @@ const ProfileSettingsPage: FC = () => {
     const { user } = useAppSelector((state) => state.authSlice);
     console.log('user', user);
     return (
-        <div className='py-20'>
+        <div className=''>
             {
                 user?.role === 'instructor' ? <InstructorProfile/> : <SharedProfile/>
             }
