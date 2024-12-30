@@ -84,7 +84,7 @@ const BookingInfo: FC = () => {
         else if (currentStep.key === "schedule") {
             return handleStepChange("register");
         }
-        else if (currentStep.key === "register" || currentStep.key === "login") {
+        else if (currentStep.key === "register") {
             handleTrigger();
         }
     }
@@ -141,7 +141,7 @@ const BookingInfo: FC = () => {
                     </div>
                 </div>
 
-                <Button disabled={isDisable} onClick={handleTrigger} className='w-full'>
+                <Button disabled={isDisable} onClick={handleNavigate} className='w-full'>
                     {
                         currentStep.key == "instructor" ? "Choose Instructor" :
                             currentStep.key == "package-selection" ? "Select Package" :
