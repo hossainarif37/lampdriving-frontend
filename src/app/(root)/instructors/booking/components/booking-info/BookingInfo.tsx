@@ -66,9 +66,10 @@ const BookingInfo: FC = () => {
 
     // handle trigger function for hook form
     const handleTrigger = async () => {
-        if (currentStep.key == "register") {
+        const registerStep = searchParams.get('step');
+        if (registerStep == "register") {
             await registerTrigger().then((_res) => handleRegisterSubmit(handleRegister)());
-        } else if (currentStep.key == "login") {
+        } else if (registerStep == "login") {
             await loginTrigger().then((_res) => handleLoginSubmit(handleLogin)());
         }
     }
@@ -85,13 +86,13 @@ const BookingInfo: FC = () => {
         else if (currentStep.key === "schedule") {
             return handleStepChange("register");
         }
-        else if (currentStep.key === "register") {
+        else if (currentStep.key === "register" || currentStep.key === "login") {
             handleTrigger();
         }
     }
 
     const isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
-        (currentStep.key === "schedule" && !schedules.length) 
+        (currentStep.key === "schedule" && !schedules.length)
     return (
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 sticky top-10 z-10">
             <h2 className="text-lg font-semibold mb-4">Booking Info</h2>
@@ -142,7 +143,7 @@ const BookingInfo: FC = () => {
                     </div>
                 </div>
 
-                <Button disabled={isDisable} onClick={handleNavigate} className='w-full'>
+                <Button disabled={isDisable} onClick={handleTrigger} className='w-full'>
                     {
                         currentStep.key == "instructor" ? "Choose Instructor" :
                             currentStep.key == "package-selection" ? "Select Package" :
