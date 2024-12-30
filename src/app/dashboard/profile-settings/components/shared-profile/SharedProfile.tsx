@@ -36,6 +36,7 @@ const SharedProfile: FC = () => {
                     register={register}
                     errors={errors}
                     control={control}
+                    isRequired={false}
                 />
                 <Button className='w-full mt-7 gradient-color h-12'>Update</Button>
             </form >

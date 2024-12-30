@@ -35,6 +35,7 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({ personalInfo, setPersona
                     errors={errors}
                     personalInfo={personalInfo}
                     control={control}
+                    isRequired={true}
                 />
                 <div>
                     <StepNavigationButtons prev="" next="experience" />
