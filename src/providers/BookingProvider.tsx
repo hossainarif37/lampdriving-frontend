@@ -1,105 +1,13 @@
-import React, { createContext, FC, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, FC, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
 import { IInstructor } from '@/types/instructor';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi';
 import Loading from '@/components/shared/Loading';
-import { Calendar, Package, User2, UserCheck, Wallet } from 'lucide-react';
-import { useForm, UseFormReturn } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { ILoginInputs, IRegisterInputs } from '@/types/auth';
-interface IBookingContext {
-    steps: IStep[];
-    currentStep: IStep;
-    setCurrentStep: React.Dispatch<React.SetStateAction<IStep>>;
-    instructor: Partial<IInstructor> | null;
-    setInstructor: React.Dispatch<React.SetStateAction<Partial<IInstructor> | null>>;
-    bookingHours: number;
-    setBookingHours: React.Dispatch<React.SetStateAction<number>>;
-    testPackage: ITestPackage;
-    setTestPackage: React.Dispatch<React.SetStateAction<ITestPackage>>;
-    price: IPrice;
-    setPrice: React.Dispatch<React.SetStateAction<IPrice>>;
-    isCustomSelected: boolean;
-    setIsCustomSelected: React.Dispatch<React.SetStateAction<boolean>>;
-    paymentInfo: IPaymentInfo;
-    setPaymentInfo: React.Dispatch<React.SetStateAction<IPaymentInfo>>;
-    paymentImageFile: File | null;
-    setPaymentImageFile: React.Dispatch<React.SetStateAction<File | null>>;
-    schedules: IShedule[];
-    setSchedules: React.Dispatch<React.SetStateAction<IShedule[]>>;
-    useRegisterForm: UseFormReturn<IRegisterInputs, any, undefined>
-    useLoginForm: UseFormReturn<ILoginInputs, any, undefined>
-}
-
-interface IPrice {
-    payableAmount: number;
-    originalAmount: number;
-    discountedAmount: number;
-}
-
-interface ITestPackage {
-    included: boolean;
-    price: number;
-}
-
-interface IPaymentInfo {
-    user: string;
-    transactionId: string;
-    amount: string;
-    proofImage: string;
-    method: string;
-    reference: string;
-}
-
-interface IShedule {
-    date: string;
-    duration: '1-hour' | '2-hour' | 'test-package';
-    time: string;
-    pickupAddress: {
-        address: string;
-        suburb: string;
-    };
-}
-
-
-interface IStep {
-    name: string;
-    icon: ReactNode;
-    key: string;
-    index: number
-}
-
-const steps: IStep[] = [
-    {
-        name: 'Instructor',
-        icon: <UserCheck />,
-        key: 'instructor',
-        index: 1
-    },
-    {
-        name: 'Package',
-        icon: <Package />,
-        key: 'package-selection',
-        index: 2
-    },
-    {
-        name: 'Schedule',
-        icon: <Calendar />,
-        key: 'schedule',
-        index: 3
-    },
-    {
-        name: 'Register',
-        icon: <User2 />,
-        key: 'register',
-        index: 4
-    },
-    {
-        name: 'Payment',
-        icon: <Wallet />,
-        key: 'payment',
-        index: 5
-    }
-];
+import { IBookingContext, IPaymentInfo, IPrice, IShedule, IStep, ITestPackage } from '@/types/booking';
+import { steps } from '@/constant/bookingSteps';
+import { UserCheck } from 'lucide-react';
 
 
 const BookingContext = createContext<IBookingContext | undefined>(undefined);
@@ -107,13 +15,12 @@ const BookingContext = createContext<IBookingContext | undefined>(undefined);
 
 // Create the provider component
 export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
-
     const urlSearchParams = useSearchParams();
     const step = urlSearchParams.get('step');
 
     const initialCurrentStep = step && steps.find(currstep => currstep.key === (step === "login" ? "register" : step)) || {
         name: 'Instructor',
-        icon: <UserCheck />,
+        icon: UserCheck,
         key: 'instructor',
         index: 1
     };
@@ -140,8 +47,16 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const useRegisterForm = useForm<IRegisterInputs>();
     const useLoginForm = useForm<ILoginInputs>();
 
+    // handle step change
+    const handleStepChange = (stepKey: string) => {
+        const step = steps.find(step => step.key === stepKey)!;
+        const searchParams = new URLSearchParams(urlSearchParams);
+        searchParams.set('step', step.key);
+        router.replace(`?${searchParams.toString()}`);
+        setCurrentStep(step);
+    };
 
-
+    
     const value = useMemo(() => ({
         instructor, setInstructor,
         bookingHours, setBookingHours,
@@ -152,7 +67,8 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         paymentImageFile, setPaymentImageFile,
         schedules, setSchedules,
         steps, currentStep, setCurrentStep,
-        useRegisterForm, useLoginForm
+        useRegisterForm, useLoginForm,
+        handleStepChange
     }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm]);
 
     const router = useRouter();
@@ -193,7 +109,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     if (isLoading) {
         return <Loading />
     }
-    console.log(instructor);
+
     return <BookingContext.Provider value={value}>{children}</BookingContext.Provider>;
 };
 
