@@ -1,11 +1,18 @@
 import { useBooking } from '@/providers/BookingProvider';
 import { format } from 'date-fns';
-import { CalendarIcon, MapPinIcon, Timer } from 'lucide-react';
+import { CalendarIcon, Cross, MapPinIcon, Timer, X } from 'lucide-react';
 import { FC } from 'react';
 
 
 const BookingSchedule: FC = () => {
-    const { schedules } = useBooking();
+    const { schedules, setSchedules } = useBooking();
+
+    // remove schedule handler
+    const handleRemoveSchedule = (index: number) => {
+        const updatedSchedules = [...schedules];
+        updatedSchedules.splice(index, 1);
+        setSchedules(updatedSchedules);
+    }
     return (
         <>
             {
@@ -15,8 +22,12 @@ const BookingSchedule: FC = () => {
                     <div className='h-[234px] overflow-y-auto thin-scrollbar'>
                         {
                             schedules.map((schedule, index) => (
-                                <div key={index} className="space-y-3 border-y py-2">
+                                <div key={index} className="space-y-3 border-y py-2 relative group">
                                     <div className="flex items-center justify-between">
+                                        <button className='absolute right-0.5 top-0.5 opacity-0 group-hover:opacity-100 duration-150'
+                                            onClick={() => handleRemoveSchedule(index)}>
+                                            <X />
+                                        </button>
                                         <p className="flex items-start gap-2">
                                             <CalendarIcon className="size-5 text-primary mt-0.5" />
                                             {format(new Date(schedule.date), 'MMMM dd, yyyy')} at {schedule.time[0]}
