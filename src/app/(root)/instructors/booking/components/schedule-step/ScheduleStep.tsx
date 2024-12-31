@@ -84,6 +84,7 @@ const ScheduleStep: FC = () => {
                 </div>
                 <div>
                     <ScheduleTimeSlots
+                        bookedTimeSlots={[]}
                         selectedDuration={selectedDuration}
                         selectedTime={selectedTime}
                         onSelectTime={setSelectedTime}

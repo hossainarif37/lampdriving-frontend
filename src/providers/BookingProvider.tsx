@@ -53,7 +53,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         setCurrentStep(step);
     };
 
-    
+
     const value = useMemo(() => ({
         instructor, setInstructor,
         bookingHours, setBookingHours,
@@ -89,7 +89,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
 
     useEffect(() => {
-        const totalAmount = bookingHours * instructor?.pricePerHour!;
+        const totalAmount = bookingHours * (instructor?.pricePerHour || 0);
         if (bookingHours >= 10) {
             setPrice({ originalAmount: totalAmount, payableAmount: totalAmount * 0.9, discountedAmount: totalAmount * 0.1 }); // 10% discount
         } else if (bookingHours >= 6) {

@@ -6,11 +6,12 @@ interface ScheduleTimeSlotsProps {
     onSelectTime: (time: string[]) => void;
     selectedDate: Date | null;
     selectedDuration: number;
+    bookedTimeSlots: string[];
 }
 
 import { FC } from 'react';
 
-const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate, selectedDuration }) => {
+const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate, selectedDuration, bookedTimeSlots }) => {
     const [disabledTimeSlots, setDisabledTimeSlots] = useState<string[]>([]);
     const startTime = "10:00";
     const endTime = "16:30";
@@ -32,7 +33,6 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectT
     };
 
     const scheduleTimeSlots = getTimeSlots(startTime, endTime);
-    const bookedTimeSlots = ["11:30 AM", "11:00 AM", "01:00 PM", "01:30 PM", "02:00 PM"];
 
     const handleSelectTimes = (time: string) => {
         const selectedTimeList = [];
@@ -102,7 +102,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectT
                 setDisabledTimeSlots(pre => [...pre, scheduleTimeSlots[i]]);
             }
         }
-    }, [selectedDate, selectedDuration]);
+    }, [selectedDate, selectedDuration, bookedTimeSlots]);
 
     if (!selectedDate) {
         return (

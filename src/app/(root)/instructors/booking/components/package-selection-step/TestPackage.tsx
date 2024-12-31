@@ -12,11 +12,8 @@ const features = [
     { icon: NotepadText, text: '40 minute warm up lesson' },
 ];
 
-interface ITestPackageProps {
 
-}
-
-const TestPackage: FC<ITestPackageProps> = () => {
+const TestPackage: FC = () => {
     const { testPackage, setTestPackage } = useBooking();
 
     return (

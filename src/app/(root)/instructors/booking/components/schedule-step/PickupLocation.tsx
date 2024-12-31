@@ -23,7 +23,7 @@ const PickupLocation: FC<IPickupLocationProps> = ({ onChange, value }) => {
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
             <h2 className="text-lg font-semibold ">Pickup Location</h2>
             <p className="text-sm text-gray-500 mb-4">
-                Please enter a specific address where you'd like to be picked up
+                Please enter a specific address where you&apos;d like to be picked up
             </p>
             <div className="space-y-4">
                 {/* address field */}

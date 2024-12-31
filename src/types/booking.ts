@@ -24,8 +24,8 @@ export interface IBookingContext {
     setPaymentImageFile: React.Dispatch<React.SetStateAction<File | null>>;
     schedules: IShedule[];
     setSchedules: React.Dispatch<React.SetStateAction<IShedule[]>>;
-    useRegisterForm: UseFormReturn<IRegisterInputs, any, undefined>;
-    useLoginForm: UseFormReturn<ILoginInputs, any, undefined>;
+    useRegisterForm: UseFormReturn<IRegisterInputs, unknown, undefined>;
+    useLoginForm: UseFormReturn<ILoginInputs, unknown, undefined>;
     handleStepChange: (step: string) => void;
 }
 
