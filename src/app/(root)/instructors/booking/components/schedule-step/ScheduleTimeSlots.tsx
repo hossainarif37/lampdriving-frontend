@@ -21,7 +21,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectT
         const timeSlots = [];
 
         while (startDate <= endDate) {
-            const hour = startDate.getHours() % 12 || 12;
+            const hour = (startDate.getHours() % 12 || 12).toString().padStart(2, '0');
             const minute = startDate.getMinutes().toString().padStart(2, '0');
             const ampm = startDate.getHours() < 12 ? 'AM' : 'PM';
             timeSlots.push(`${hour}:${minute} ${ampm}`);
@@ -32,29 +32,50 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectT
     };
 
     const scheduleTimeSlots = getTimeSlots(startTime, endTime);
+    const bookedTimeSlots = ["10:30 AM", "11:00 AM", "01:00 PM", "01:30 PM", "02:00 PM"];
 
     const handleSelectTimes = (time: string) => {
         const selectedTimeList = [];
         const index = scheduleTimeSlots.indexOf(time);
         if (index !== -1) {
             selectedTimeList.push(time);
-            if (index < scheduleTimeSlots.length - 1) {
-                if (selectedDuration === 1) {
-                    selectedTimeList.push(scheduleTimeSlots[index + 1]);
-                } else if (selectedDuration === 1.5) {
-                    selectedTimeList.push(scheduleTimeSlots[index + 1]);
-                    selectedTimeList.push(scheduleTimeSlots[index + 2]);
+            const duration = selectedDuration == 1 ? 1 : selectedDuration == 1.5 ? 2 : 3;
+            let notFoundSlots = 0;
+            for (let i = 0; i < duration; i++) {
+                const nextSlot = scheduleTimeSlots[index + i + 1];
+                console.log(nextSlot);
+                if (nextSlot && !bookedTimeSlots.includes(nextSlot)) {
+
+                    selectedTimeList.push(nextSlot);
+                } else {
+                    notFoundSlots++;
                 }
-                else if (selectedDuration === 2) {
-                    selectedTimeList.push(scheduleTimeSlots[index + 1]);
-                    selectedTimeList.push(scheduleTimeSlots[index + 2]);
-                    selectedTimeList.push(scheduleTimeSlots[index + 3]);
+            }
+            for (let i = 1; i <= notFoundSlots; i++) {
+                const prevSlot = scheduleTimeSlots[index - i];
+                if (prevSlot && !bookedTimeSlots.includes(prevSlot)) {
+                    selectedTimeList.push(prevSlot);
                 }
             }
         }
+
+        // sort timeslots
+        selectedTimeList.sort((a, b) => {
+            const parseTime = (timeStr: string) => {
+                const [time, modifier] = timeStr.split(' ');
+                let [hours, minutes] = time.split(':').map(Number);
+                if (modifier === 'PM' && hours !== 12) {
+                    hours += 12;
+                } else if (modifier === 'AM' && hours === 12) {
+                    hours = 0;
+                }
+                return hours * 60 + minutes;
+            };
+
+            return parseTime(a) - parseTime(b);
+        });
         onSelectTime(selectedTimeList);
     }
-    const bookedTimeSlots = ["10:30 AM", "11:30 AM"];
 
     useEffect(() => {
         setDisabledTimeSlots(bookedTimeSlots);
