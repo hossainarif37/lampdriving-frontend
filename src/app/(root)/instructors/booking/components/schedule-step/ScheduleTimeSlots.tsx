@@ -1,20 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
 interface ScheduleTimeSlotsProps {
-    selectedTime: string | null;
-    onSelectTime: (time: string) => void;
+    selectedTime: string[] | null;
+    onSelectTime: (time: string[]) => void;
     selectedDate: Date | null;
+    selectedDuration: number;
 }
 
 import { FC } from 'react';
 
-const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate }) => {
+const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate, selectedDuration }) => {
+    const [disabledTimeSlots, setDisabledTimeSlots] = useState<string[]>([]);
+    const startTime = 9;
+    const endTime = 20;
 
-    const scheduleTimeSlots = [
-        '09:00', '10:00', '11:00', '12:00', '13:00',
-        '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00'
-    ];
+    const scheduleTimeSlots = Array.from({ length: (endTime - startTime) * 2 }).map((_, i) => {
+        const hour = (startTime + Math.floor(i / 2)) % 12 || 12;
+        const minute = ((i % 2) * 30).toString().padStart(2, '0');
+        const ampm = (startTime + Math.floor(i / 2)) < 12 ? 'AM' : 'PM';
+        return `${hour} : ${minute} ${ampm}`;
+    });
+
+    const handleSelectTimes = (time: string) => {
+        const selectedTimeList = [];
+        const index = scheduleTimeSlots.indexOf(time);
+        if (index !== -1) {
+            selectedTimeList.push(time);
+            if (index < scheduleTimeSlots.length - 1) {
+                if (selectedDuration === 1) {
+                    selectedTimeList.push(scheduleTimeSlots[index + 1]);
+                } else if (selectedDuration === 1.5) {
+                    selectedTimeList.push(scheduleTimeSlots[index + 1]);
+                    selectedTimeList.push(scheduleTimeSlots[index + 2]);
+                }
+                else if (selectedDuration === 2) {
+                    selectedTimeList.push(scheduleTimeSlots[index + 1]);
+                    selectedTimeList.push(scheduleTimeSlots[index + 2]);
+                    selectedTimeList.push(scheduleTimeSlots[index + 3]);
+                }
+            }
+        }
+        onSelectTime(selectedTimeList);
+    }
+    const bookedTimeSlots = ["10 : 30 AM", "11 : 30AM"];
+
+    useEffect(() => {
+        setDisabledTimeSlots(bookedTimeSlots);
+    }, []);
 
     if (!selectedDate) {
         return (
@@ -35,10 +68,12 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectT
                     {scheduleTimeSlots.map(time => (
                         <button
                             key={time}
-                            onClick={() => onSelectTime(time)}
+                            disabled={bookedTimeSlots.includes(time)}
+                            onClick={() => handleSelectTimes(time)}
                             className={`
               py-2 px-4 rounded-[4px] border text-sm
-              ${selectedTime === time
+              disabled:opacity-50
+              ${selectedTime?.includes(time)
                                     ? 'border-primary bg-primary/5 text-primary'
                                     : 'border-gray-200 hover:border-primary/70'}
             `}

@@ -49,7 +49,7 @@ export interface IPaymentInfo {
 export interface IShedule {
     date: string;
     duration: 1 | 2 | 1.5;
-    time: string;
+    time: string[];
     pickupAddress: {
         address: string;
         suburb: string;

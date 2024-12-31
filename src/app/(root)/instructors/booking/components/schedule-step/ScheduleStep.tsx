@@ -10,7 +10,7 @@ import { IShedule } from '@/types/booking';
 
 const ScheduleStep: FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-    const [selectedTime, setSelectedTime] = useState<string | null>(null);
+    const [selectedTime, setSelectedTime] = useState<string[] | null>(null);
     const [selectedDuration, setSelectedDuration] = useState<1 | 2 | 1.5>(1);
     const [location, setLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
 
@@ -27,7 +27,7 @@ const ScheduleStep: FC = () => {
         const schedule: IShedule = {
             date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '',
             duration: selectedDuration,
-            time: selectedTime ? selectedTime : '',
+            time: selectedTime ? selectedTime : [],
             pickupAddress: {
                 address: location?.address || '',
                 suburb: location?.suburb || '',
@@ -84,6 +84,7 @@ const ScheduleStep: FC = () => {
                 </div>
                 <div>
                     <ScheduleTimeSlots
+                        selectedDuration={selectedDuration}
                         selectedTime={selectedTime}
                         onSelectTime={setSelectedTime}
                         selectedDate={selectedDate}
