@@ -18,7 +18,7 @@ const BookingSchedule: FC = () => {
                                 <div className="flex items-center justify-between">
                                     <p className="flex items-start gap-2">
                                         <CalendarIcon className="size-5 text-primary mt-0.5" />
-                                        {format(new Date(schedule.date), 'MMMM dd, yyyy')} at {schedule.time}
+                                        {format(new Date(schedule.date), 'MMMM dd, yyyy')} at {schedule.time[0]}
                                     </p>
                                 </div>
                                 <div className='flex items-center justify-between'>

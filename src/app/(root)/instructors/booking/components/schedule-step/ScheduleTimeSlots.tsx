@@ -12,15 +12,26 @@ import { FC } from 'react';
 
 const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate, selectedDuration }) => {
     const [disabledTimeSlots, setDisabledTimeSlots] = useState<string[]>([]);
-    const startTime = 9;
-    const endTime = 20;
+    const startTime = "10:00";
+    const endTime = "16:30";
 
-    const scheduleTimeSlots = Array.from({ length: (endTime - startTime) * 2 }).map((_, i) => {
-        const hour = (startTime + Math.floor(i / 2)) % 12 || 12;
-        const minute = ((i % 2) * 30).toString().padStart(2, '0');
-        const ampm = (startTime + Math.floor(i / 2)) < 12 ? 'AM' : 'PM';
-        return `${hour} : ${minute} ${ampm}`;
-    });
+    const getTimeSlots = (start: string, end: string) => {
+        const startDate = new Date(`1970-01-01T${start}:00`);
+        const endDate = new Date(`1970-01-01T${end}:00`);
+        const timeSlots = [];
+
+        while (startDate <= endDate) {
+            const hour = startDate.getHours() % 12 || 12;
+            const minute = startDate.getMinutes().toString().padStart(2, '0');
+            const ampm = startDate.getHours() < 12 ? 'AM' : 'PM';
+            timeSlots.push(`${hour}:${minute} ${ampm}`);
+            startDate.setMinutes(startDate.getMinutes() + 30);
+        }
+
+        return timeSlots;
+    };
+
+    const scheduleTimeSlots = getTimeSlots(startTime, endTime);
 
     const handleSelectTimes = (time: string) => {
         const selectedTimeList = [];
@@ -43,7 +54,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectT
         }
         onSelectTime(selectedTimeList);
     }
-    const bookedTimeSlots = ["10 : 30 AM", "11 : 30AM"];
+    const bookedTimeSlots = ["10:30 AM", "11:30 AM"];
 
     useEffect(() => {
         setDisabledTimeSlots(bookedTimeSlots);
