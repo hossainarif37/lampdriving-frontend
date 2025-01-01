@@ -12,13 +12,24 @@ interface ScheduleTimeSlotsProps {
     bookedTimeSlots: string[];
     classname?: string;
     btnClassname?: string;
+    workingHour: { isActive: boolean, startTime: string, endTime: string }
 }
 
 
-const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate, selectedDuration, bookedTimeSlots, classname, btnClassname }) => {
+const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
+    const {
+        selectedTime,
+        onSelectTime,
+        selectedDate,
+        selectedDuration,
+        bookedTimeSlots,
+        classname,
+        btnClassname,
+        workingHour } = props;
+
     const [disabledTimeSlots, setDisabledTimeSlots] = useState<string[]>([]);
-    const startTime = "10:00";
-    const endTime = "16:30";
+    const startTime = `${workingHour.startTime.split(':')[0].padStart(2, '0')}:${workingHour.startTime.split(':')[1]}`;
+    const endTime = `${workingHour.endTime.split(':')[0].padStart(2, '0')}:${workingHour.endTime.split(':')[1]}`;
 
     const getTimeSlots = (start: string, end: string) => {
         const startDate = new Date(`1970-01-01T${start}:00`);

@@ -17,6 +17,7 @@ const ScheduleStep: FC = () => {
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const { setSchedules, instructor, schedules } = useBooking();
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
+    const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
 
     // add schedule handler
     const handleAddSchedule = () => {
@@ -62,6 +63,16 @@ const ScheduleStep: FC = () => {
         setBookedTimeSlots([...bookedSlots?.time || '', ...slotArr]);
     }, [data?.data.schedules, selectedDate, schedules]);
 
+
+    useEffect(() => {
+        if (selectedDate && instructor?.workingHour) {
+            const dateName = (format(selectedDate, 'cccc')).toLowerCase() as keyof typeof instructor.workingHour;
+            if (instructor?.workingHour) {
+                setWorkingHour(instructor?.workingHour[dateName]);
+            }
+        }
+    }, [instructor?.workingHour, selectedDate]);
+
     return (
         <div className="space-y-6 sticky top-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -104,6 +115,7 @@ const ScheduleStep: FC = () => {
                 </div>
                 <div>
                     <ScheduleTimeSlots
+                        workingHour={workingHour}
                         bookedTimeSlots={bookedTimeSlots}
                         selectedDuration={selectedDuration}
                         selectedTime={selectedTime}
