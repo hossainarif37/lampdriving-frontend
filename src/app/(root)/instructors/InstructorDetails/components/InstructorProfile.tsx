@@ -1,9 +1,22 @@
+import { getInstructors } from "@/api/getInstructors";
 import InstructorInfo from "./InstructorInfo";
 import OtherInstructors from "./OtherInstructors";
 import Reviews from "./Reviews";
 import Sidebar from "./Sidebar";
 
-export default function InstructorProfile() {
+import { FC } from 'react';
+interface IInstructorProps {
+  searchedParams?: {
+    carType?: string;
+    searchKey?: string;
+    page?: string;
+  };
+}
+const InstructorProfile: FC<IInstructorProps> = async ({ searchedParams }) => {
+
+  const instructors = await getInstructors(searchedParams);
+
+  console.log('instructors page', instructors);
   return (
     <div className="bg-gray-50">
       <main className="wrapper py-8">
@@ -16,6 +29,7 @@ export default function InstructorProfile() {
               <OtherInstructors />
             </div>
           </div>
+
           {/* Sidebar */}
           <div>
             <Sidebar />
@@ -24,4 +38,6 @@ export default function InstructorProfile() {
       </main>
     </div>
   );
-}
+};
+
+export default InstructorProfile;

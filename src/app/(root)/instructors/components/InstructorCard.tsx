@@ -8,11 +8,10 @@ import cardImg from "@/assets/home-page-image/test-image.webp"
 import { FC } from "react";
 
 
-// Define the props type for the component
-
 
 const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
     const { user, experience, pricePerHour, vehicle, feedback, completedLessons } = instructor;
+    console.log(instructor);
 
     return (
         <div className="p-4 rounded-lg space-y-5 bg-gradient-to-b from-primary/0 to-indigo/5 relative">
@@ -75,10 +74,10 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
             <div className="space-y-3">
                 <div className="flex gap-3 max-w-lg mx-auto">
                     {/* View Profile Button */}
-                    <Button className="border md:h-12 w-1/2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 transition-colors duration-200">
+                    <Link href={`/instructors/instructor-details`} className="border md:h-12 w-1/2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2 transition-colors duration-200 ">
                         <ExternalLink className="w-4 h-4" />
                         View Profile
-                    </Button>
+                    </Link>
 
                     {/* Book Button */}
                     <Button className="md:h-12 w-1/2 gradient-color">Book</Button>
