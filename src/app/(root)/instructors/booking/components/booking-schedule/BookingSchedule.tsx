@@ -16,15 +16,15 @@ const BookingSchedule: FC = () => {
     return (
         <>
             {
-                schedules &&
+                schedules.length > 0 &&
                 <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
                     <h2 className="text-lg font-semibold mb-4">Booking Schedule</h2>
-                    <div className='h-[234px] overflow-y-auto thin-scrollbar'>
+                    <div className='max-h-[234px] overflow-y-auto thin-scrollbar'>
                         {
                             schedules.map((schedule, index) => (
                                 <div key={index} className="space-y-3 border-y py-2 relative group">
                                     <div className="flex items-center justify-between">
-                                        <button className='absolute right-0.5 top-0.5 opacity-0 group-hover:opacity-100 duration-150'
+                                        <button className='absolute right-0.5 top-0.5 opacity-0 group-hover:opacity-100 duration-150 border rounded-[4px] hover:bg-gray-200 bg-gray-100'
                                             onClick={() => handleRemoveSchedule(index)}>
                                             <X />
                                         </button>
