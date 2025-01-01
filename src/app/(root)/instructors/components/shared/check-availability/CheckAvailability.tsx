@@ -1,6 +1,6 @@
 "use client"
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Calendar, ChevronRight } from 'lucide-react';
+import { Calendar, ChevronRight, Clock, XCircle } from 'lucide-react';
 import { FC, useEffect, useState } from 'react';
 import ScheduleCalender from '../../../booking/components/schedule-step/ScheduleCalender';
 import ScheduleTimeSlots from '../../../booking/components/schedule-step/ScheduleTimeSlots';
@@ -10,7 +10,7 @@ import { format } from 'date-fns';
 import Link from 'next/link';
 
 interface ICheckAvailabilityProps {
-    id : string;
+    id: string;
     name: string;
     username: string;
 }
@@ -41,10 +41,20 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username }) 
             </DialogTrigger>
             <DialogContent className='max-w-3xl py-0 px-0 space-y-0 gap-0'>
                 <DialogHeader>
-                    <DialogTitle className='text-2xl font-semibold px-4 py-3 text-center'>
+                    <DialogTitle className='text-2xl font-semibold px-4 pt-3 pb-1 text-center'>
                         <span className='text-secondary'>Check Availability for</span> <span className='font-semibold text-gradient'>{name}</span>
                     </DialogTitle>
                 </DialogHeader>
+                <div className="flex items-center justify-center pb-3 gap-6 mt-4 text-sm text-gray-600">
+                    <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-indigo-600" />
+                        <span>Available</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <XCircle className="w-4 h-4 text-gray-400" />
+                        <span>Closed / Booked</span>
+                    </div>
+                </div>
                 <div className='grid grid-cols-2 text-black border-y'>
                     <div>
                         <ScheduleCalender
@@ -55,6 +65,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username }) 
                     </div>
                     <div>
                         <ScheduleTimeSlots
+                            btnClassname='cursor-default'
                             classname='border-none shadow-none'
                             bookedTimeSlots={bookedTimeSlots}
                             selectedDuration={1}
@@ -82,7 +93,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username }) 
                     </div>
                 </DialogFooter>
             </DialogContent>
-        </Dialog>
+        </Dialog >
     );
 };
 

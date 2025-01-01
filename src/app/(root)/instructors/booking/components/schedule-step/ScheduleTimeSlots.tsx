@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { FC } from 'react';
 import { cn } from '@/lib/utils';
+import { Clock, XCircle } from 'lucide-react';
 
 interface ScheduleTimeSlotsProps {
     selectedTime: string[] | null;
@@ -9,11 +10,12 @@ interface ScheduleTimeSlotsProps {
     selectedDate: Date | null;
     selectedDuration: number;
     bookedTimeSlots: string[];
-    classname?: string
+    classname?: string;
+    btnClassname?: string;
 }
 
 
-const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate, selectedDuration, bookedTimeSlots, classname }) => {
+const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate, selectedDuration, bookedTimeSlots, classname, btnClassname }) => {
     const [disabledTimeSlots, setDisabledTimeSlots] = useState<string[]>([]);
     const startTime = "10:00";
     const endTime = "16:30";
@@ -123,18 +125,27 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectT
                         </h2>
                         <div className='h-[244px] overflow-y-auto thin-scrollbar'>
                             <div className="grid grid-cols-2 gap-3">
-                                {scheduleTimeSlots.map(time => (
-                                    <button
+                                {scheduleTimeSlots.map(time => {
+                                    const isDisabled = disabledTimeSlots.includes(time);
+                                    return <button
                                         key={time}
-                                        disabled={disabledTimeSlots.includes(time)}
+                                        disabled={isDisabled}
                                         onClick={() => handleSelectTimes(time)}
-                                        className={`py-2 px-4 rounded-[4px] border text-sm disabled:opacity-50
+                                        className={cn(`py-2 px-4 rounded-[4px] border text-sm disabled:opacity-50 flex items-center justify-center
                                         ${selectedTime?.includes(time) ? 'border-primary bg-primary/5 text-primary'
-                                                : 'border-gray-200 hover:border-primary/70'}`}
+                                                : 'border-gray-200 hover:border-primary/70'}`, btnClassname)}
                                     >
-                                        {time}
+                                        {
+                                            isDisabled ?
+                                                <XCircle className="w-4 h-4" />
+                                                :
+                                                <Clock className="w-4 h-4" />
+                                        }
+                                        <span className='w-20'>
+                                            {time}
+                                        </span>
                                     </button>
-                                ))}
+                                })}
                             </div>
                         </div>
                     </>
