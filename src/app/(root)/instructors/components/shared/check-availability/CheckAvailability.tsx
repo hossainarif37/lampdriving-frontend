@@ -34,14 +34,14 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username }) 
 
     return (
         <Dialog>
-            <DialogTrigger className="flex justify-center gap-1 cursor-pointer underline p-6">
+            <DialogTrigger className="flex justify-center gap-1 cursor-pointer underline">
                 <Calendar className="w-4 text-primary" />
                 <span className="text-primary">Check availability</span>
                 <ChevronRight className="text-primary w-5 -ml-1" />
             </DialogTrigger>
             <DialogContent className='max-w-3xl py-0 px-0 space-y-0 gap-0'>
                 <DialogHeader>
-                    <DialogTitle className='my-4 text-2xl font-semibold px-4'>
+                    <DialogTitle className='text-2xl font-semibold px-4 py-3'>
                         Check Availability for <span className='font-semibold text-gradient'>{name}</span>
                     </DialogTitle>
                 </DialogHeader>
