@@ -41,8 +41,8 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username }) 
             </DialogTrigger>
             <DialogContent className='max-w-3xl py-0 px-0 space-y-0 gap-0'>
                 <DialogHeader>
-                    <DialogTitle className='text-2xl font-semibold px-4 py-3'>
-                        Check Availability for <span className='font-semibold text-gradient'>{name}</span>
+                    <DialogTitle className='text-2xl font-semibold px-4 py-3 text-center'>
+                        <span className='text-secondary'>Check Availability for</span> <span className='font-semibold text-gradient'>{name}</span>
                     </DialogTitle>
                 </DialogHeader>
                 <div className='grid grid-cols-2 text-black border-y'>
