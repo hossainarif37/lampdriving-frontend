@@ -46,6 +46,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // handle step change
     const handleStepChange = (stepKey: string) => {
+        if (stepKey === "instructor") {
+            return;
+        }
         const step = steps.find(step => step.key === stepKey)!;
         const searchParams = new URLSearchParams(urlSearchParams);
         searchParams.set('step', step.key);
