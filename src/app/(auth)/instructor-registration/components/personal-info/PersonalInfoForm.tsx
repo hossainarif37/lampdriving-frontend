@@ -9,9 +9,6 @@ import { IPersonalInfo } from '../InstructorRegistration';
 import { genderOptions } from '@/constant/gender';
 import PersonalInfoFields from '@/components/shared/forms/PersonalInfoFields';
 
-
-
-
 interface IPersonalInfoFormProps {
     personalInfo: IPersonalInfo | undefined;
     setPersonalInfo: Dispatch<SetStateAction<IPersonalInfo | undefined>>;

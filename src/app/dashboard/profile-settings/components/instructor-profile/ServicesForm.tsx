@@ -1,31 +1,22 @@
-"use client"
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { FC, useEffect, useState } from 'react';
-import StepNavigationButtons from '../StepNavigationButtons';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
-import { MultiSelect } from '@/components/ui/multi-select';
-import { sydneySuburbs } from '@/constant/sydneySuburbs';
-import WorkingHoursSelector from './WorkingHoursSelector';
-import { ISchedule, IWorkingHour } from '@/types/instructor';
-import { DAYS } from '@/constant/days';
-import { IServices } from '../InstructorRegistration';
-import useScreenSize from '@/hooks/useScreenSize';
+import { IServices } from '@/app/(auth)/instructor-registration/components/InstructorRegistration';
 import ServicesFields from '@/components/shared/forms/ServicesFields';
-
+import { Button } from '@/components/ui/button';
+import { DAYS } from '@/constant/days';
+import { ISchedule, IWorkingHour } from '@/types/instructor';
+import { useRouter } from 'next/navigation';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 interface Inputs {
     pricePerHour: number;
 }
 
 interface IServicesFormProps {
     servicesInfo: IServices | undefined;
-    setServicesInfo: React.Dispatch<React.SetStateAction<IServices| undefined>>;
+    setServicesInfo: Dispatch<SetStateAction<IServices| undefined>>;
 }
 
-const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) => {
-    const device = useScreenSize();
+const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo }) => {
+    
     const [isClicked, setIsClicked] = useState(false);
     const [selectedLocations, setSelectedLocations] = useState<string[]>(servicesInfo?.serviceAreas || []);
     const [workingHoursError, setWorkingHoursError] = useState<string>('');
@@ -81,7 +72,6 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
             serviceAreas: selectedLocations,
             workingHour: workingHour
         })
-        router.push("/instructor-registration?step=car-info");
     }
 
     useEffect(() => {
@@ -94,13 +84,10 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
         }
     }, [selectedLocations, isClicked]);
 
-    
-
     return (
-        <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
+        <div className='my-5'>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
-                <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Service Details</h1>
-
+                <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Experience</h1>
                 <ServicesFields
                     errors={errors}
                     register={register}
@@ -113,9 +100,8 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
                     setWorkingHoursError={setWorkingHoursError}
                     defaultValues={servicesInfo}
                 />
-                <div>
-                    <StepNavigationButtons prev="experience" next="car-info" />
-                </div>
+
+                <Button type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>
             </form>
         </div>
     );

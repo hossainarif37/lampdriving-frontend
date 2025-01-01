@@ -20,7 +20,7 @@ const SharedProfile: FC = () => {
     const onSubmit = (data: IPersonalInfo) => console.log(data);    
 
     return (
-        <div>
+        <div>         
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col items-start md:shadow-lg bg-light md:rounded-lg md:border'
@@ -38,7 +38,7 @@ const SharedProfile: FC = () => {
                     control={control}
                     isRequired={false}
                 />
-                <Button className='w-full mt-7 gradient-color h-12'>Update</Button>
+                <Button type='submit' className='w-full text-gray-300 mt-7 gradient-color h-12'>Update</Button>
             </form >
             <UpdatePassword />
         </div>

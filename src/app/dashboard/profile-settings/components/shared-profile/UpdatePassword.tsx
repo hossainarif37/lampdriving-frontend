@@ -1,12 +1,13 @@
 import UpdatePasswordField, { IUpdatePasswordInputs } from '@/components/shared/forms/UpdatePasswordFields';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 
 
-const UpdatePassword: FC = () => {
+const UpdatePassword: FC<{ className?: string }> = ({ className}) => {
     const [passwordVisibility, setPasswordVisibility] = useState({
         oldPasswordVisible: false,
         newPasswordVisible: false
@@ -28,7 +29,7 @@ const UpdatePassword: FC = () => {
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 mt-10 flex flex-col items-start md:shadow-lg bg-light md:rounded-lg md:border'
+            className={cn("w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 mt-10 flex flex-col items-start md:shadow-lg bg-light md:rounded-lg md:border", className)}
         >
             <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Update Password</h1>
 
