@@ -1,4 +1,3 @@
-
 import { Star, Car, Clock, ExternalLink, Calendar, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import Link from "next/link";
 import { IInstructor } from "@/types/instructor";
 import cardImg from "@/assets/home-page-image/test-image.webp"
 import { FC } from "react";
+import CheckAvailability from "./shared/check-availability/CheckAvailability";
 
 
 // Define the props type for the component
@@ -91,11 +91,9 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                 </div>
 
                 {/* Check Availability Link */}
-                <Link href="#" className="flex justify-center gap-1 cursor-pointer underline">
-                    <Calendar className="w-4 text-primary" />
-                    <span className="text-primary">Check availability</span>
-                    <ChevronRight className="text-primary w-5 -ml-1" />
-                </Link>
+                <div className="text-center flex items-center justify-center">
+                    <CheckAvailability />
+                </div>
             </div>
 
 
