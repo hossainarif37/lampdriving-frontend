@@ -26,6 +26,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 
 /**
  * Variants for the multi-select component to handle different styles.
@@ -142,6 +143,11 @@ export const MultiSelect = React.forwardRef<
       React.useState<string[]>(Array.isArray(value) ? value : defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     // const [isAnimating, setIsAnimating] = React.useState(false);
+    const searchParams = useSearchParams()
+ 
+    const step = searchParams.get('step');
+    const isServicesStep = step === 'services';
+    const isExperienceStep = step === 'experience';
 
     const handleInputKeyDown = (
       event: React.KeyboardEvent<HTMLInputElement>
@@ -202,7 +208,7 @@ export const MultiSelect = React.forwardRef<
             onClick={handleTogglePopover}
             variant="outline"
             className={cn(
-              "flex w-full p-1 rounded-md border h-11 md:h-14 items-center justify-between [&_svg]:pointer-events-auto text-neutral-500",
+              `flex w-full p-1 rounded-md border ${isServicesStep && selectedValues.length > 1 ? 'h-auto': 'h-11'} ${isExperienceStep && selectedValues.length > 2 && 'h-auto'} md:h-14 items-center justify-between [&_svg]:pointer-events-auto text-neutral-500`,
               className
             )}
           >

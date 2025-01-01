@@ -15,7 +15,7 @@ const MobileNav = () => {
                 type="button">
                 <Menu />
             </button>
-            <ul className={`absolute origin-top duration-200 ${isOpen ? "scale-y-100" : "scale-y-0"} top-12 right-0 w-48 bg-light shadow rounded-lg p-5 flex flex-col gap-5 font-semibold text-secondary`}>
+            <ul className={`z-50 absolute origin-top duration-200 ${isOpen ? "scale-y-100" : "scale-y-0"} top-12 right-0 w-48 bg-light shadow rounded-lg p-5 flex flex-col gap-5 font-semibold text-secondary`}>
                 {
                     navLinks.map(({ title, href }) => (
                         <li key={title}>

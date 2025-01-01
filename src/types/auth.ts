@@ -16,6 +16,7 @@ export interface IRegisterInputs {
         zipCode: number;
     },
     password: string;
+    confirmPassword: string;
 }
 
 export interface ILoginInputs {

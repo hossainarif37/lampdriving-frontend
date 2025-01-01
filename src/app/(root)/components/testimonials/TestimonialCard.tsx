@@ -41,7 +41,7 @@ const TestimonialCard: FC<ITestimonialCardProps> = ({ testimonial }) => {
                         height={120}
                         className="rounded-full"
                     />
-                    <div className="absolute md:top-24 md:left-24  lg:top-24 top-[82px] left-20  gradient-color  flex gap-1 text-textCol justify-center items-center px-3 py-1 rounded-full text-xl md:text-base lg:text-sm">
+                    <div className="absolute md:top-24 md:left-24  lg:top-24 top-[82px] left-20  gradient-color flex gap-1 text-light justify-center items-center px-3 py-1 rounded-full text-xl md:text-base lg:text-sm">
                         <Star className="md:w-4 lg:w-4 w-6 text-light" />
                         <p>{rating}</p>
                     </div>

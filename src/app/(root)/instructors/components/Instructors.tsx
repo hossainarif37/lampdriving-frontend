@@ -16,6 +16,8 @@ const Instructors: FC<IInstructorProps> = async ({ searchedParams }) => {
 
     const instructors = await getInstructors(searchedParams);
 
+    // console.log('instructors page', instructors);
+
     return (
         <div className='min-h-[40vh] space-y-7'>
             {
