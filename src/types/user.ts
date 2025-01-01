@@ -13,9 +13,11 @@ export interface IAddress {
 }
 
 export interface IUser {
+    _id?: string;
     name: IName;
     email: string;
     phone: string;
+    username: string;
     password: string;
     dateOfBirth: string;
     address?: IAddress;
