@@ -1,13 +1,15 @@
 import { FC, useState } from 'react';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday, addMonths, isBefore, startOfDay } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface IScheduleCalenderProps {
     selectedDate: Date | null;
     onSelectDate: (date: Date) => void;
+    classname?: string;
 }
 
-const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDate }) => {
+const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDate, classname }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const today = new Date();
 
@@ -34,7 +36,7 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
     const emptyDays = Array(firstDayOfMonth).fill(null);
 
     return (
-        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+        <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", classname)}>
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-lg font-semibold">
                     {format(currentMonth, 'MMMM yyyy')}

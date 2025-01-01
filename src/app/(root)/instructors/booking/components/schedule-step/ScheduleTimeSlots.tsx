@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
+import { FC } from 'react';
+import { cn } from '@/lib/utils';
 
 interface ScheduleTimeSlotsProps {
     selectedTime: string[] | null;
@@ -7,11 +9,11 @@ interface ScheduleTimeSlotsProps {
     selectedDate: Date | null;
     selectedDuration: number;
     bookedTimeSlots: string[];
+    classname?: string
 }
 
-import { FC } from 'react';
 
-const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate, selectedDuration, bookedTimeSlots }) => {
+const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectTime, selectedDate, selectedDuration, bookedTimeSlots, classname }) => {
     const [disabledTimeSlots, setDisabledTimeSlots] = useState<string[]>([]);
     const startTime = "10:00";
     const endTime = "16:30";
@@ -103,41 +105,40 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectT
         }
     }, [selectedDate, selectedDuration, bookedTimeSlots]);
 
-    if (!selectedDate) {
-        return (
-            <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-                <h2 className="text-lg font-semibold mb-4">Available Times</h2>
-                <p className="text-gray-500">Please select a date first</p>
-            </div>
-        );
-    }
+
 
 
     return (
-        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-            <h2 className="text-lg font-semibold mb-4">
-                Available Times for {format(selectedDate, 'MMMM d, yyyy')}
-            </h2>
-            <div className='h-[244px] overflow-y-auto thin-scrollbar'>
-                <div className="grid grid-cols-2 gap-3">
-                    {scheduleTimeSlots.map(time => (
-                        <button
-                            key={time}
-                            disabled={disabledTimeSlots.includes(time)}
-                            onClick={() => handleSelectTimes(time)}
-                            className={`
-              py-2 px-4 rounded-[4px] border text-sm
-              disabled:opacity-50
-              ${selectedTime?.includes(time)
-                                    ? 'border-primary bg-primary/5 text-primary'
-                                    : 'border-gray-200 hover:border-primary/70'}
-            `}
-                        >
-                            {time}
-                        </button>
-                    ))}
-                </div>
-            </div>
+        <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", classname)}>
+            {
+                !selectedDate ?
+                    <>
+                        <h2 className="text-lg font-semibold mb-4">Available Times</h2>
+                        <p className="text-gray-500">Please select a date first</p>
+                    </>
+                    :
+                    <>
+                        <h2 className="text-lg font-semibold mb-4">
+                            Available Times for {format(selectedDate, 'MMMM d, yyyy')}
+                        </h2>
+                        <div className='h-[244px] overflow-y-auto thin-scrollbar'>
+                            <div className="grid grid-cols-2 gap-3">
+                                {scheduleTimeSlots.map(time => (
+                                    <button
+                                        key={time}
+                                        disabled={disabledTimeSlots.includes(time)}
+                                        onClick={() => handleSelectTimes(time)}
+                                        className={`py-2 px-4 rounded-[4px] border text-sm disabled:opacity-50
+                                        ${selectedTime?.includes(time) ? 'border-primary bg-primary/5 text-primary'
+                                                : 'border-gray-200 hover:border-primary/70'}`}
+                                    >
+                                        {time}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    </>
+            }
         </div>
     );
 };
