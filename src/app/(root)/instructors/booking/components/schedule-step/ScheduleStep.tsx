@@ -15,9 +15,10 @@ const ScheduleStep: FC = () => {
     const [selectedDuration, setSelectedDuration] = useState<1 | 2 | 1.5>(1);
     const [location, setLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
-
     const { setSchedules, instructor, schedules } = useBooking();
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
+
+    // add schedule handler
     const handleAddSchedule = () => {
         if (!selectedDate || !selectedTime) {
             return;
@@ -96,6 +97,7 @@ const ScheduleStep: FC = () => {
 
                 <div>
                     <ScheduleCalender
+                        workingHours={instructor?.workingHour || null}
                         selectedDate={selectedDate}
                         onSelectDate={setSelectedDate}
                     />
