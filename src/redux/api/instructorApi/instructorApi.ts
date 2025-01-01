@@ -7,8 +7,8 @@ const instructorApi = baseApi.injectEndpoints({
         getAInstructor: builder.query<IResponseWithData<IInstructor>, { username: string }>({
             query: ({ username }) => `/instructor/${username}`
         }),
-        getInstructorAvailability: builder.query<IResponseWithData<{ schedules: [{ date: string, time: [string] }] }>, { id: string }>({
-            query: ({ id }) => `/instructor/availability/${id}`
+        getInstructorAvailability: builder.query<IResponseWithData<{ schedules: [{ date: string, time: [string] }] }>, { id: string, date: string }>({
+            query: ({ id, date }) => `/instructor/availability/${id}/${date}`
         })
     })
 })

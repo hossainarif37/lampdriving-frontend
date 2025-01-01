@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { useBooking } from '@/providers/BookingProvider';
 import { IShedule } from '@/types/booking';
+import { useGetInstructorAvailabilityQuery } from '@/redux/api/instructorApi/instructorApi';
 
 
 const ScheduleStep: FC = () => {
@@ -13,8 +14,10 @@ const ScheduleStep: FC = () => {
     const [selectedTime, setSelectedTime] = useState<string[] | null>(null);
     const [selectedDuration, setSelectedDuration] = useState<1 | 2 | 1.5>(1);
     const [location, setLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
+    const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
 
-    const { setSchedules } = useBooking();
+    const { setSchedules, instructor } = useBooking();
+    const { data, isLoading } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "", date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : "" });
 
     const handleAddSchedule = () => {
         if (!selectedDate || !selectedTime) {
@@ -42,6 +45,7 @@ const ScheduleStep: FC = () => {
         setLocation({ address: '', suburb: '' });
     };
 
+    // console.log(data, isLoading)
 
     return (
         <div className="space-y-6 sticky top-10">
@@ -84,7 +88,7 @@ const ScheduleStep: FC = () => {
                 </div>
                 <div>
                     <ScheduleTimeSlots
-                        bookedTimeSlots={[]}
+                        bookedTimeSlots={bookedTimeSlots}
                         selectedDuration={selectedDuration}
                         selectedTime={selectedTime}
                         onSelectTime={setSelectedTime}
