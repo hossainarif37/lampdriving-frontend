@@ -51,10 +51,14 @@ const ScheduleStep: FC = () => {
         const bookedSlots = data?.data.schedules.find((schedule: { date: string, time: string[] }) => {
             return format(schedule.date, 'yyyy-MM-dd') === format(selectedDate!, 'yyyy-MM-dd');
         });
-        const addedTimeSlots = schedules.find((schedule: IShedule) => {
-            return format(schedule.date, 'yyyy-MM-dd') === format(selectedDate!, 'yyyy-MM-dd');
+
+        let slotArr: string[] = [];
+        schedules.map((schedule: { date: string, time: string[] }) => {
+            if (format(schedule.date, 'yyyy-MM-dd') === format(selectedDate!, 'yyyy-MM-dd')) {
+                slotArr = [...slotArr, ...schedule.time];
+            }
         })
-        setBookedTimeSlots([...bookedSlots?.time || '', ...addedTimeSlots?.time || '']);
+        setBookedTimeSlots([...bookedSlots?.time || '', ...slotArr]);
     }, [data?.data.schedules, selectedDate, schedules]);
 
     return (
