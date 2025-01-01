@@ -93,6 +93,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                 {/* Check Availability Link */}
                 <div className="text-center flex items-center justify-center">
                     <CheckAvailability
+                        workingHours={instructor?.workingHour}
                         name={typeof user !== 'string' && user?.name.fullName || ""}
                         username={typeof user !== 'string' && user?.username || ""} id={instructor._id || ""} />
                 </div>

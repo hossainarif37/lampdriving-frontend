@@ -8,16 +8,19 @@ import { Button } from '@/components/ui/button';
 import { useGetInstructorAvailabilityQuery } from '@/redux/api/instructorApi/instructorApi';
 import { format } from 'date-fns';
 import Link from 'next/link';
+import { IWorkingHour } from '@/types/instructor';
 
 interface ICheckAvailabilityProps {
     id: string;
     name: string;
     username: string;
+    workingHours: IWorkingHour;
 }
 
-const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username }) => {
+const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, workingHours }) => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
+    const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
 
     const { data } = useGetInstructorAvailabilityQuery({ id });
 
@@ -31,6 +34,15 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username }) 
 
         setBookedTimeSlots([...bookedSlots?.time || '']);
     }, [data?.data.schedules, selectedDate]);
+
+    useEffect(() => {
+        if (selectedDate && workingHours) {
+            const dateName = (format(selectedDate, 'cccc')).toLowerCase() as keyof typeof workingHours;
+            if (workingHours) {
+                setWorkingHour(workingHours[dateName]);
+            }
+        }
+    }, [workingHours, selectedDate]);
 
     return (
         <Dialog>
@@ -58,6 +70,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username }) 
                 <div className='grid grid-cols-2 text-black border-y'>
                     <div>
                         <ScheduleCalender
+                            workingHours={workingHours}
                             classname='border-y-0 border-l-0 shadow-none border-r rounded-none'
                             selectedDate={selectedDate}
                             onSelectDate={setSelectedDate}
@@ -65,6 +78,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username }) 
                     </div>
                     <div>
                         <ScheduleTimeSlots
+                            workingHour={workingHour}
                             btnClassname='cursor-default'
                             classname='border-none shadow-none'
                             bookedTimeSlots={bookedTimeSlots}
