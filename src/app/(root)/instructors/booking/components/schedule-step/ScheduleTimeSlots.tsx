@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
 interface ScheduleTimeSlotsProps {
@@ -98,7 +98,6 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectT
                 }
             }
             if (flag !== duration) {
-                console.log(scheduleTimeSlots[i], flag, duration);
                 setDisabledTimeSlots(pre => [...pre, scheduleTimeSlots[i]]);
             }
         }
@@ -113,7 +112,6 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = ({ selectedTime, onSelectT
         );
     }
 
-    // console.log(disabledTimeSlots);
 
     return (
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">

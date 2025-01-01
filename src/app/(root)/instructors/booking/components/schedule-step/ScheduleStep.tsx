@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ScheduleCalender from './ScheduleCalender';
 import ScheduleTimeSlots from './ScheduleTimeSlots';
 import LocationInput from './PickupLocation';
@@ -16,9 +16,8 @@ const ScheduleStep: FC = () => {
     const [location, setLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
 
-    const { setSchedules, instructor } = useBooking();
-    const { data, isLoading } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "", date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : "" });
-
+    const { setSchedules, instructor, schedules } = useBooking();
+    const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
     const handleAddSchedule = () => {
         if (!selectedDate || !selectedTime) {
             return;
@@ -45,7 +44,18 @@ const ScheduleStep: FC = () => {
         setLocation({ address: '', suburb: '' });
     };
 
-    // console.log(data, isLoading)
+    useEffect(() => {
+        if (!selectedDate) {
+            setBookedTimeSlots([]);
+        }
+        const bookedSlots = data?.data.schedules.find((schedule: { date: string, time: string[] }) => {
+            return format(schedule.date, 'yyyy-MM-dd') === format(selectedDate!, 'yyyy-MM-dd');
+        });
+        const addedTimeSlots = schedules.find((schedule: IShedule) => {
+            return format(schedule.date, 'yyyy-MM-dd') === format(selectedDate!, 'yyyy-MM-dd');
+        })
+        setBookedTimeSlots([...bookedSlots?.time || '', ...addedTimeSlots?.time || '']);
+    }, [data?.data.schedules, selectedDate, schedules]);
 
     return (
         <div className="space-y-6 sticky top-10">
