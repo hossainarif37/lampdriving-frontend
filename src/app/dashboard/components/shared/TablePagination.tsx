@@ -17,6 +17,10 @@ const TablePagination: FC<ITablePaginationProps> = ({ meta }) => {
     const handleLimit = (reqLimit: string) => {
         const searchParams = new URLSearchParams(urlSearchParams);
         searchParams.set('limit', reqLimit);
+        const page = searchParams.get('page');
+        if (page) {
+            searchParams.set('page', "1");
+        }
         replace(`?${searchParams.toString()}`);
         setLimit(reqLimit);
     }
