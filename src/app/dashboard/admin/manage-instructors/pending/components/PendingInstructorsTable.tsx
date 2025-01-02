@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { UserRoundCheck, UserRoundSearch, UserRoundX } from 'lucide-react';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
+import VerifyInstructorModal from './VerifyInstructorModal';
 
 const PendingInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -87,12 +88,7 @@ const PendingInstructorsTable: FC = () => {
                                                             size={"icon"}>
                                                             <UserRoundSearch />
                                                         </Button>
-                                                        <Button
-                                                            className='bg-green-500 hover:bg-green-600'
-                                                            title='Verify Instructor'
-                                                            size={"icon"}>
-                                                            <UserRoundCheck />
-                                                        </Button>
+                                                        <VerifyInstructorModal id={instructor._id || ""} />
                                                         <Button
                                                             className='bg-red-500 hover:bg-red-600'
                                                             title='Reject Instructor'
