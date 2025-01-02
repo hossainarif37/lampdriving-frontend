@@ -12,9 +12,16 @@ const instructorApi = baseApi.injectEndpoints({
         }),
         getAllInstructors: builder.query<IResponseWithPaginationData<IInstructor[]>, { status: "pending" | "verified", searchKey: string, limit: string, page: string }>({
             query: ({ status, searchKey, limit, page }) => `/instructor/all?status=${status}${searchKey && `&searchKey=${searchKey}`}&populate=user&limit=${limit}&page=${page}`
+        }),
+        updateInstructorStatus: builder.mutation<IResponseWithData<IInstructor>, { id: string, status: "pending" | "verified" }>({
+            query: ({ id, status }) => ({
+                url: `/instructor/status/${id}`,
+                method: "PATCH",
+                body: { status }
+            })
         })
     })
 })
 
 
-export const { useGetAInstructorQuery, useGetInstructorAvailabilityQuery, useGetAllInstructorsQuery } = instructorApi;
+export const { useGetAInstructorQuery, useGetInstructorAvailabilityQuery, useGetAllInstructorsQuery, useUpdateInstructorStatusMutation } = instructorApi;
