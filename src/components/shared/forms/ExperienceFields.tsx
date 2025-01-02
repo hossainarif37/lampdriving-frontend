@@ -83,7 +83,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
                     <MultiSelect
                         options={languageList}
                         onValueChange={setSelectedLanguages}
-                        defaultValue={selectedLanguages}
+                        defaultValue={defaultValues?.languages || selectedLanguages}
                         value={defaultValues?.languages}
                         placeholder="Select Languages"
                         variant="inverted"

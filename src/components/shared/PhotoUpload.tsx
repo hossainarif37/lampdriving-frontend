@@ -16,6 +16,7 @@ export interface IProfilePhoto {
 interface PhotoUploadProps {
     profilePhoto: IProfilePhoto;
     setProfilePhoto: Dispatch<SetStateAction<IProfilePhoto>>
+
 }
 
 const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto }) => {

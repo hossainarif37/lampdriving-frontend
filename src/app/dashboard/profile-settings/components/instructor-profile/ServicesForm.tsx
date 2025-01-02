@@ -1,8 +1,11 @@
+"use client"
+
 import { IServices } from '@/app/(auth)/instructor-registration/components/InstructorRegistration';
 import ServicesFields from '@/components/shared/forms/ServicesFields';
 import { Button } from '@/components/ui/button';
 import { DAYS } from '@/constant/days';
-import { ISchedule, IWorkingHour } from '@/types/instructor';
+import { useAppSelector } from '@/redux/hook';
+import { IInstructor, ISchedule, IWorkingHour } from '@/types/instructor';
 import { useRouter } from 'next/navigation';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -10,15 +13,16 @@ interface Inputs {
     pricePerHour: number;
 }
 
-interface IServicesFormProps {
-    servicesInfo: IServices | undefined;
-    setServicesInfo: Dispatch<SetStateAction<IServices | undefined>>;
-}
-
-const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo }) => {
-
+const ServicesForm: FC = () => {
+    const { user } = useAppSelector((state) => state.authSlice);
+    const instructor = user?.instructor as IInstructor;
+    const defaultValues: IServices = {
+        pricePerHour: instructor.pricePerHour,
+        serviceAreas: instructor.serviceAreas,
+        workingHour: instructor.workingHour,
+    }
     const [isClicked, setIsClicked] = useState(false);
-    const [selectedLocations, setSelectedLocations] = useState<string[]>(servicesInfo?.serviceAreas || []);
+    const [selectedLocations, setSelectedLocations] = useState<string[]>(defaultValues?.serviceAreas || []);
     const [workingHoursError, setWorkingHoursError] = useState<string>('');
     const [selectedLocationsError, setSelectedLocationsError] = useState<string>('');
     const defaultSchedule: ISchedule = DAYS.reduce((acc, day) => {
@@ -30,7 +34,7 @@ const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo })
         return acc;
     }, {} as ISchedule)
 
-    const [schedule, setSchedule] = useState<ISchedule>(servicesInfo?.workingHour as unknown as ISchedule || defaultSchedule);
+    const [schedule, setSchedule] = useState<ISchedule>(defaultValues?.workingHour as unknown as ISchedule || defaultSchedule);
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const router = useRouter();
@@ -72,7 +76,6 @@ const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo })
             workingHour: workingHour
         }
 
-        setServicesInfo(servicesData)
         console.log(servicesData);
         console.log(schedule);
 
@@ -102,7 +105,7 @@ const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo })
                     schedule={schedule}
                     setSchedule={setSchedule}
                     setWorkingHoursError={setWorkingHoursError}
-                    defaultValues={servicesInfo}
+                    defaultValues={defaultValues}
                 />
 
                 <Button type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>

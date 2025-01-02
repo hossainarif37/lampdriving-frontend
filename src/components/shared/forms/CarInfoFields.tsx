@@ -22,7 +22,7 @@ interface ICarInfoFieldsProps {
     register: UseFormRegister<Inputs>;
     control: Control<Inputs>;
     errors: FieldErrors<Inputs>;
-    defaultValues: IVehicle | undefined;
+    defaultValues?: IVehicle | undefined;
     setCarImageFile: Dispatch<SetStateAction<File | null>>;
     setCarImageURL: Dispatch<SetStateAction<string>>;
     carImageURL: string;
@@ -110,7 +110,7 @@ const CarInfoFields: FC<ICarInfoFieldsProps> = ({register, control, errors, defa
                         })
                         }
                         defaultValue={defaultValues?.rating}
-                        type="number" id="rating" placeholder="Enter car rating" className='h-11 xl:h-14 mt-1'
+                            type="text" id="rating" placeholder="Enter car rating" className='h-11 xl:h-14 mt-1'
                     />
                     {errors?.rating && <p className='text-red-500 text-sm mt-1'>{errors?.rating?.message}</p>}
                 </div>

@@ -21,7 +21,7 @@ export interface IUser {
     address?: IAddress;
     profileImg: string;
     learner?: string | ILearner;
-    instructor?: string | IInstructor;
+    instructor?: IInstructor | string;
     gender: 'male' | 'female' | 'other';
     role: 'learner' | 'instructor' | 'admin';
     status: 'active' | 'blocked';

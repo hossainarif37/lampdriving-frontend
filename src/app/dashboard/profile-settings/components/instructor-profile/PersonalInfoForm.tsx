@@ -10,11 +10,20 @@ import PhotoUpload, { IProfilePhoto } from '@/components/shared/PhotoUpload';
 const PersonalInfoForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control } = useForm<IPersonalInfoInputs>();
     const { user } = useAppSelector((state) => state.authSlice);
-    console.log(user)
+    const defaultValues: IPersonalInfoInputs = {
+        name: {
+            firstName: user?.name?.firstName || '',
+            lastName: user?.name?.lastName || '',
+        },
+        email: user?.email || '',
+        phone: user?.phone || '',
+        gender: user?.gender || 'male',
+        dateOfBirth: user?.dateOfBirth || '',
+    }
 
     const [profilePhoto, setProfilePhoto] = useState<IProfilePhoto>({
         file: null,
-        url: ""
+        url: user?.profileImg || ""
     })
 
     const onSubmit = (data: IPersonalInfoInputs) => {
@@ -36,6 +45,7 @@ const PersonalInfoForm: FC = () => {
                     errors={errors}
                     control={control}
                     isRequired={true}
+                    defaultValues={defaultValues}
                 />
 
                 <Button type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>

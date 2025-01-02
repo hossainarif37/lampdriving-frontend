@@ -1,5 +1,6 @@
 import CarInfoFields from '@/components/shared/forms/CarInfoFields';
 import { Button } from '@/components/ui/button';
+import { useAppSelector } from '@/redux/hook';
 import { IVehicle } from '@/types/instructor';
 import { useRouter } from 'next/navigation';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
@@ -14,27 +15,34 @@ interface Inputs {
 
 
 interface ICarInfoFormProps {
-    carInfo: IVehicle | undefined;
-    setCarInfo: Dispatch<SetStateAction<IVehicle | undefined>>
     carImageFile: File | null;
     setCarImageFile: Dispatch<SetStateAction<File | null>>
 }
 
 
 
-const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo, carImageFile, setCarImageFile}) => {
+const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) => {
     const [isClicked, setIsClicked] = useState(false);
         const router = useRouter();
+    const { instructor } = useAppSelector(state => state.authSlice);
+
+    const defaultValues = {
+        name: instructor?.vehicle?.name || '',
+        model: instructor?.vehicle?.model || '',
+        type: instructor?.vehicle?.type || 'auto',
+        rating: instructor?.vehicle?.rating || '',
+        image: instructor?.vehicle?.image || ''
+    }
+
+    console.log('defaultValues', defaultValues);
     
         // Car Image
-        const [carImageURL, setCarImageURL] = useState<string>(carInfo?.image || '');
+    const [carImageURL, setCarImageURL] = useState<string>(instructor?.vehicle?.image || '');
         const [carImageError, setCarImageError] = useState<string>("");
         
     
         const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
-    
-       
-    
+
         const onSubmit = (data: Inputs) => {
             setIsClicked(true);
             if (!carImageURL) {
@@ -46,9 +54,7 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo, carImageFile, 
                 ...data,
                 image: carImageURL
             }
-            setCarInfo(carInfo);
-    
-            router.push("/instructor-registration?step=security");
+            console.log(carInfo);
         }
     
          useEffect(() => {
@@ -76,7 +82,7 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo, carImageFile, 
                     carImageURL={carImageURL}
                     setCarImageError={setCarImageError}
                     carImageFile={carImageFile}
-                    defaultValues={carInfo}
+                    defaultValues={defaultValues}
                 />
 
                 <Button type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>

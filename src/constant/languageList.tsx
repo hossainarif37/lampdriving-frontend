@@ -1,7 +1,8 @@
 export const languageList = [
-    { value: "english", label: "English" },
-    { value: "spanish", label: "Spanish" },
-    { value: "chinese", label: "Chinese" },
-    { value: "french", label: "French" },
-    { value: "german", label: "German" },
+    { value: "English", label: "English" },
+    { value: "Spanish", label: "Spanish" },
+    { value: "Chinese", label: "Chinese" },
+    { value: "French", label: "French" },
+    { value: "German", label: "German" },
+    { value: "Mandarin", label: "Mandarin" },
 ];

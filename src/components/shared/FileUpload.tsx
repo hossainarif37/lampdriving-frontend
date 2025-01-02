@@ -157,7 +157,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
                 <div className={`border ${isError ? 'bg-[#FFF5F3] border-[#E12525]' : 'border-gray-300'}  rounded-lg w-full ${(!isSuccess || selectedFile) ? 'mt-4' : 'mt-0'} p-4 flex items-center justify-between`}>
                     <div className="flex items-center">
                         <Image
-                            src={ URL.createObjectURL(selectedFile)}
+                            src={imageUrl || URL.createObjectURL(selectedFile)}
                             alt={selectedFile?.name || 'Selected file'}
                             width={48}
                             height={48}

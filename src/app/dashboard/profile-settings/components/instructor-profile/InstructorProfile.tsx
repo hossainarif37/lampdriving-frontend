@@ -17,7 +17,6 @@ const InstructorProfile: FC = () => {
   const { user } = useAppSelector(state => state.authSlice);
   const [activeTab, setActiveTab] = useState('personal');
   // Experience
-  const [experienceInfo, setExperienceInfo] = useState<IExperience | undefined>(undefined);
   const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
   const [experienceCertificateFile, setExperienceCertificateFile] = useState<File | null>(null);
 
@@ -37,8 +36,6 @@ const InstructorProfile: FC = () => {
       case 'experience':
         return (
           <ExperienceForm
-            experienceInfo={experienceInfo}
-            setExperienceInfo={setExperienceInfo}
             drivingLicenseFile={drivingLicenseFile}
             setDrivingLicenseFile={setDrivingLicenseFile}
             experienceCertificateFile={experienceCertificateFile}
@@ -47,23 +44,18 @@ const InstructorProfile: FC = () => {
         );
       case 'services':
         return (
-          <ServicesForm
-            servicesInfo={servicesInfo}
-            setServicesInfo={setServicesInfo}
-          />
+          <ServicesForm />
         );
       case 'car':
         return (
           <CarInfoForm
             carImageFile={carImageFile}
             setCarImageFile={setCarImageFile}
-            carInfo={carInfo}
-            setCarInfo={setCarInfo}
           />
         );
       case 'security':
         return (
-          <SecurityForm/>
+          <SecurityForm />
         );
       default:
         return null;
@@ -75,11 +67,6 @@ const InstructorProfile: FC = () => {
       <div className="max-w-5xl mx-auto py-6 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          {/* <div className="flex items-center space-x-2 text-gray-600">
-            <span>Settings</span>
-            <ChevronRight className="w-4 h-4" />
-            <span>Profile</span>
-          </div> */}
           <div className="mt-2 flex items-center">
             <Settings className="w-8 h-8 text-blue-600" />
             <h1 className="ml-3 text-2xl font-bold text-gray-900">Profile Settings</h1>

@@ -1,7 +1,9 @@
-import { IExperience } from '@/app/(auth)/instructor-registration/components/InstructorRegistration';
+"use client"
+
 import ExperienceFields from '@/components/shared/forms/ExperienceFields';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/redux/hook';
+import { IInstructor } from '@/types/instructor';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -12,32 +14,35 @@ interface Inputs {
 }
 
 interface IExperienceFormProps {
-    experienceInfo: IExperience | undefined;
-    setExperienceInfo: Dispatch<SetStateAction<IExperience | undefined>>
     drivingLicenseFile: File | null;
     setDrivingLicenseFile: Dispatch<SetStateAction<File | null>>;
     experienceCertificateFile: File | null;
     setExperienceCertificateFile: Dispatch<SetStateAction<File | null>>;
 }
 
-const ExperienceForm: FC<IExperienceFormProps> = ({ experienceInfo, setExperienceInfo, drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
+const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
     const [isClicked, setIsClicked] = useState(false);
-    const router = useRouter();
+    const { instructor } = useAppSelector((state) => state.authSlice);
+    const defaultValues = {
+        experience: instructor?.experience || '',
+        description: instructor?.description || '',
+        languages: instructor?.languages || [],
+        documents: instructor?.documents || {}
+    }
 
     // Driving License
-    const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(experienceInfo?.documents?.drivingLicense || '');
+    const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(defaultValues?.documents?.drivingLicense || '');
 
     const [drivingLicenseError, setDrivingLicenseError] = useState<string>('');
 
     // Experience Certificate
-    const [experienceCertificateURL, setExperienceCertificateURL] = useState<string>(experienceInfo?.documents?.experienceCertificate || '');
+    const [experienceCertificateURL, setExperienceCertificateURL] = useState<string>(defaultValues?.documents?.experienceCertificate || '');
     const [experienceCertificateError, setExperienceCertificateError] = useState<string>('');
 
-    console.log('experienceInfo', experienceInfo);
 
 
     // Selected languages
-    const [selectedLanguages, setSelectedLanguages] = useState<string[]>(experienceInfo?.languages || []);
+    const [selectedLanguages, setSelectedLanguages] = useState<string[]>(defaultValues?.languages || []);
     const [selectedLanguagesError, setSelectedLanguagesError] = useState<string>('');
 
 
@@ -67,7 +72,6 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ experienceInfo, setExperienc
             languages: selectedLanguages
         }
 
-        setExperienceInfo(experienceData);
         console.log('experienceData', experienceData);
     }
 
@@ -83,13 +87,13 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ experienceInfo, setExperienc
             } else {
                 setExperienceCertificateError(`${experienceCertificateFile ? 'Upload Experience Certificate' : 'Experience Certificate is required'}`);
             }
-            if (selectedLanguages.length > 0 || (experienceInfo?.languages?.length ?? 0) > 0) {
+            if (selectedLanguages.length > 0 || (defaultValues?.languages?.length ?? 0) > 0) {
                 setSelectedLanguagesError('');
             } else {
                 setSelectedLanguagesError('Languages are required');
             }
         }
-    }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile, experienceInfo]);
+    }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile, defaultValues?.languages?.length]);
 
     return (
         <div className=''>
@@ -97,8 +101,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ experienceInfo, setExperienc
                 <h1 className='text-2xl font-bold text-secondary'>Experience</h1>
                 <ExperienceFields
                     errors={errors}
-                    defaultValues={experienceInfo}
-                    setDefaultValues={setExperienceInfo}
+                    defaultValues={defaultValues}
                     isRequired={true}
                     register={register}
                     setDrivingLicenseError={setDrivingLicenseError}

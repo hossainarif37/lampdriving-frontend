@@ -30,7 +30,7 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({ personalInfo, setPersona
                 <PersonalInfoFields
                     register={register}
                     errors={errors}
-                    personalInfo={personalInfo}
+                    defaultValues={personalInfo}
                     control={control}
                     isRequired={true}
                 />
