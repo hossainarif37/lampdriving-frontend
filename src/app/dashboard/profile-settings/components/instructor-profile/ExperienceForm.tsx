@@ -22,78 +22,79 @@ interface IExperienceFormProps {
 
 const ExperienceForm: FC<IExperienceFormProps> = ({ experienceInfo, setExperienceInfo, drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
     const [isClicked, setIsClicked] = useState(false);
-        const router = useRouter();
-    
-        // Driving License
-        const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(experienceInfo?.documents?.drivingLicense || '');
-    
-        const [drivingLicenseError, setDrivingLicenseError] = useState<string>('');
-    
-        // Experience Certificate
-        const [experienceCertificateURL, setExperienceCertificateURL] = useState<string>(experienceInfo?.documents?.experienceCertificate || '');
-        const [experienceCertificateError, setExperienceCertificateError] = useState<string>('');
-    
-        console.log('experienceInfo', experienceInfo);
-    
-    
-        // Selected languages
-        const [selectedLanguages, setSelectedLanguages] = useState<string[]>(experienceInfo?.languages || []);
-        const [selectedLanguagesError, setSelectedLanguagesError] = useState<string>('');
-    
-    
-        const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
-    
-        const onSubmit = (data: Inputs) => {
-            setIsClicked(true);
-            if (!drivingLicenseURL || !experienceCertificateURL || selectedLanguages.length === 0) {
-                if (!drivingLicenseURL) {
-                    setDrivingLicenseError(`${drivingLicenseError ? drivingLicenseError : 'Driving License is required'}`);
-                }
-                if (!experienceCertificateURL) {
-                    setExperienceCertificateError(`${experienceCertificateError ? experienceCertificateError : 'Experience Certificate is required'}`);
-                }
-                if (selectedLanguages.length === 0) {
-                    setSelectedLanguagesError('Languages are required');
-                }
-                return;
+    const router = useRouter();
+
+    // Driving License
+    const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(experienceInfo?.documents?.drivingLicense || '');
+
+    const [drivingLicenseError, setDrivingLicenseError] = useState<string>('');
+
+    // Experience Certificate
+    const [experienceCertificateURL, setExperienceCertificateURL] = useState<string>(experienceInfo?.documents?.experienceCertificate || '');
+    const [experienceCertificateError, setExperienceCertificateError] = useState<string>('');
+
+    console.log('experienceInfo', experienceInfo);
+
+
+    // Selected languages
+    const [selectedLanguages, setSelectedLanguages] = useState<string[]>(experienceInfo?.languages || []);
+    const [selectedLanguagesError, setSelectedLanguagesError] = useState<string>('');
+
+
+    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
+
+    const onSubmit = (data: Inputs) => {
+        setIsClicked(true);
+        if (!drivingLicenseURL || !experienceCertificateURL || selectedLanguages.length === 0) {
+            if (!drivingLicenseURL) {
+                setDrivingLicenseError(`${drivingLicenseError ? drivingLicenseError : 'Driving License is required'}`);
             }
-    
-            const experienceData = {
-                ...data,
-                documents: {
-                    drivingLicense: drivingLicenseURL,
-                    experienceCertificate: experienceCertificateURL
-                },
-                languages: selectedLanguages
+            if (!experienceCertificateURL) {
+                setExperienceCertificateError(`${experienceCertificateError ? experienceCertificateError : 'Experience Certificate is required'}`);
             }
-    
-            setExperienceInfo(experienceData);
-            router.push("/instructor-registration?step=services");
+            if (selectedLanguages.length === 0) {
+                setSelectedLanguagesError('Languages are required');
+            }
+            return;
         }
-    
-        useEffect(() => {
-            if (isClicked) {
-                if (drivingLicenseURL) {
-                    setDrivingLicenseError('');
-                } else {
-                    setDrivingLicenseError(`${drivingLicenseFile ? 'Upload Driving License' : 'Driving License is required'}`);
-                }
-                if (experienceCertificateURL) {
-                    setExperienceCertificateError('');
-                } else {
-                    setExperienceCertificateError(`${experienceCertificateFile ? 'Upload Experience Certificate' : 'Experience Certificate is required'}`);
-                }
-                if (selectedLanguages.length > 0 || (experienceInfo?.languages?.length ?? 0) > 0) {
-                    setSelectedLanguagesError('');
-                } else {
-                    setSelectedLanguagesError('Languages are required');
-                }
+
+        const experienceData = {
+            ...data,
+            documents: {
+                drivingLicense: drivingLicenseURL,
+                experienceCertificate: experienceCertificateURL
+            },
+            languages: selectedLanguages
+        }
+
+        setExperienceInfo(experienceData);
+        console.log('experienceData', experienceData);
+    }
+
+    useEffect(() => {
+        if (isClicked) {
+            if (drivingLicenseURL) {
+                setDrivingLicenseError('');
+            } else {
+                setDrivingLicenseError(`${drivingLicenseFile ? 'Upload Driving License' : 'Driving License is required'}`);
             }
-        }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile, experienceInfo]);
+            if (experienceCertificateURL) {
+                setExperienceCertificateError('');
+            } else {
+                setExperienceCertificateError(`${experienceCertificateFile ? 'Upload Experience Certificate' : 'Experience Certificate is required'}`);
+            }
+            if (selectedLanguages.length > 0 || (experienceInfo?.languages?.length ?? 0) > 0) {
+                setSelectedLanguagesError('');
+            } else {
+                setSelectedLanguagesError('Languages are required');
+            }
+        }
+    }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile, experienceInfo]);
+
     return (
-        <div className='my-5'>
+        <div className=''>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
-                <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Experience</h1>
+                <h1 className='text-2xl font-bold text-secondary'>Experience</h1>
                 <ExperienceFields
                     errors={errors}
                     defaultValues={experienceInfo}

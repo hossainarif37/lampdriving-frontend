@@ -12,11 +12,11 @@ interface Inputs {
 
 interface IServicesFormProps {
     servicesInfo: IServices | undefined;
-    setServicesInfo: Dispatch<SetStateAction<IServices| undefined>>;
+    setServicesInfo: Dispatch<SetStateAction<IServices | undefined>>;
 }
 
 const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo }) => {
-    
+
     const [isClicked, setIsClicked] = useState(false);
     const [selectedLocations, setSelectedLocations] = useState<string[]>(servicesInfo?.serviceAreas || []);
     const [workingHoursError, setWorkingHoursError] = useState<string>('');
@@ -51,7 +51,6 @@ const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo })
             friday: schedule.friday,
         };
 
-        console.log('workingHour', workingHour);
         let hasActiveDay = false;
         for (const day in workingHour) {
             const dayKey = day as keyof IWorkingHour;
@@ -63,15 +62,20 @@ const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo })
         }
 
         if (!hasActiveDay) {
-           setWorkingHoursError('At least one working day must be active');
+            setWorkingHoursError('At least one working day must be active');
             return;
         }
-        
-        setServicesInfo({
+
+        const servicesData = {
             pricePerHour: Number(data.pricePerHour),
             serviceAreas: selectedLocations,
             workingHour: workingHour
-        })
+        }
+
+        setServicesInfo(servicesData)
+        console.log(servicesData);
+        console.log(schedule);
+
     }
 
     useEffect(() => {
@@ -85,9 +89,9 @@ const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo })
     }, [selectedLocations, isClicked]);
 
     return (
-        <div className='my-5'>
+        <div className=''>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
-                <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Experience</h1>
+                <h1 className='text-2xl font-bold text-secondary'>Services</h1>
                 <ServicesFields
                     errors={errors}
                     register={register}

@@ -77,7 +77,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
   }, [schedule, onUpdate]);
 
   return (
-    <div className="space-y-4 rounded-lg border p-4 mt-1">
+    <div className="space-y-4 rounded-md border p-4 mt-1">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Schedule</h3>
         <Button

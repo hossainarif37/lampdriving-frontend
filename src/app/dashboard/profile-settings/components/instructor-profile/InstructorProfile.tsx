@@ -91,7 +91,7 @@ const InstructorProfile: FC = () => {
           <div className="px-8 pt-6">
             <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
           </div>
-          <div className="p-8">
+          <div className="px-8 pb-8 pt-5">
             {renderTabContent()}
           </div>
         </div>

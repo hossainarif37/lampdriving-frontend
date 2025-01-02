@@ -31,7 +31,7 @@ const UpdatePassword: FC<{ className?: string }> = ({ className}) => {
             onSubmit={handleSubmit(onSubmit)}
             className={cn("w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 mt-10 flex flex-col items-start md:shadow-lg bg-light md:rounded-lg md:border", className)}
         >
-            <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Update Password</h1>
+            <h1 className='text-2xl font-bold text-secondary'>Update Password</h1>
 
             <UpdatePasswordField
                 register={register}

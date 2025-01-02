@@ -61,9 +61,9 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo, carImageFile, 
                 }
             }, [carImageFile, carImageURL, isClicked]);
     return (
-        <div className='my-5'>
+        <div className=''>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
-                <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Experience</h1>
+                <h1 className='text-2xl font-bold text-secondary'>Car Info</h1>
                 
                 <CarInfoFields
                     register={register}
