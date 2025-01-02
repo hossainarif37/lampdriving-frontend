@@ -60,7 +60,7 @@ export interface IInstructor {
     withdraws: string[];
     transactions: string[];
     bookings: string[];
-    status: "pending" | "verified";
+    status: "pending" | "verified" | "rejected";
 }
 
 export interface IRegisterInstructor {
