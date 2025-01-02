@@ -1,4 +1,3 @@
-
 import { Star, Car, Clock, ExternalLink, Calendar, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -6,13 +5,13 @@ import Link from "next/link";
 import { IInstructor } from "@/types/instructor";
 import cardImg from "@/assets/home-page-image/test-image.webp"
 import { FC } from "react";
+import CheckAvailability from "./shared/check-availability/CheckAvailability";
 
-
-// Define the props type for the component
 
 
 const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
     const { user, experience, pricePerHour, vehicle, feedback, completedLessons } = instructor;
+    console.log(instructor);
 
     return (
         <div className="p-4 rounded-lg space-y-5 bg-gradient-to-b from-primary/0 to-indigo/5 relative">
@@ -75,21 +74,28 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
             <div className="space-y-3">
                 <div className="flex gap-3 max-w-lg mx-auto">
                     {/* View Profile Button */}
-                    <Button className="border md:h-12 w-1/2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 transition-colors duration-200">
-                        <ExternalLink className="w-4 h-4" />
-                        View Profile
-                    </Button>
+                    <Link
+                        href={`/instructors/${typeof user !== 'string' && user?.username}`}
+                        className="w-1/2">
+                        <Button className="border w-full text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 transition-colors duration-200">
+                            <ExternalLink className="w-4 h-4" />
+                            View Profile
+                        </Button>
+                    </Link>
 
                     {/* Book Button */}
-                    <Button className="md:h-12 w-1/2 gradient-color">Book</Button>
+                    <Link href={`/instructors/booking/?instructor=${typeof user !== 'string' && user?.username}&step=package-selection`} className="w-1/2">
+                        <Button className="w-full gradient-color">Book</Button>
+                    </Link>
                 </div>
 
                 {/* Check Availability Link */}
-                <Link href="#" className="flex justify-center gap-1 cursor-pointer underline">
-                    <Calendar className="w-4 text-primary" />
-                    <span className="text-primary">Check availability</span>
-                    <ChevronRight className="text-primary w-5 -ml-1" />
-                </Link>
+                <div className="text-center flex items-center justify-center">
+                    <CheckAvailability
+                        workingHours={instructor?.workingHour}
+                        name={typeof user !== 'string' && user?.name.fullName || ""}
+                        username={typeof user !== 'string' && user?.username || ""} id={instructor._id || ""} />
+                </div>
             </div>
 
 
