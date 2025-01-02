@@ -5,24 +5,20 @@ import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-T
 import { CircleCheck } from 'lucide-react'
 
 import { FC } from 'react';
+import { IInstructor } from '@/types/instructor';
+import { IUser } from '@/types/user';
 
-interface IInstructor {
-  name: string;
-  rating: number;
-  ratingsCount: number;
-  bio: string;
-  languages: string[];
-}
 
 interface InstructorInfoProps {
   instructor: IInstructor;
 }
-const InstructorInfo: FC = () => {
+const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const carInfo = [
     { id: 1, info: 'Auto Lessons & Test Packages' },
     { id: 2, info: 'Verified Working with Children Check' },
     { id: 3, info: 'Instructed for 15 yr 4 mo' },
   ];
+  const user: IUser | undefined = typeof instructor.user != "string" ? instructor.user : undefined;
 
   return (
     <section className="bg-light rounded-xl border p-4 md:p-6 space-y-6">
@@ -45,7 +41,7 @@ const InstructorInfo: FC = () => {
           />
         </div>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold">Hridoy</h1>
+          <h1 className="text-2xl font-bold">{user?.name.fullName}</h1>
           <div className="flex md:flex-row flex-col md:items-center gap-1 mt-1">
             <div className="flex text-indigo">{'★'.repeat(5)}</div>
             <span className="text-sm text-accent ml-1">4.6 - 79 ratings</span>

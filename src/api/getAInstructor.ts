@@ -3,7 +3,7 @@ import { IInstructor } from "@/types/instructor";
 import { IResponseWithData } from "@/types/response";
 
 export const getAInstructor = async (username: string): Promise<IResponseWithData<IInstructor>> => {
-    const response = await fetch(`${envConfigs.apiUrl}/instructor/${username}`)
+    const response = await fetch(`${envConfigs.apiUrl}/instructor/${username}?fields=-workingHour`)
     const data = response.json();
     return data;
 }

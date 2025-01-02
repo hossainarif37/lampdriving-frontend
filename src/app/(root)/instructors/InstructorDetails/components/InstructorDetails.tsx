@@ -6,12 +6,9 @@ import Sidebar from "./Sidebar";
 import { IInstructor } from "@/types/instructor";
 
 interface InstructorInfoProps {
-  params: {
-    name: string;
-  };
-  instructor: IInstructor | null;
+  instructor: IInstructor;
 }
-const nstructorDetails: FC<InstructorInfoProps> = async ({ params }) => {
+const nstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
 
   return (
     <div className="bg-gray-50">
@@ -19,7 +16,7 @@ const nstructorDetails: FC<InstructorInfoProps> = async ({ params }) => {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Main content */}
           <div className="md:col-span-2 space-y-8">
-            <InstructorInfo />
+            <InstructorInfo instructor={instructor} />
 
             <Reviews />
             <div className="hidden md:block">

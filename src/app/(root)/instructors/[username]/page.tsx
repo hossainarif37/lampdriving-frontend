@@ -1,15 +1,20 @@
 import { FC } from 'react';
 import InstructorDetails from "../InstructorDetails/components/InstructorDetails"
+import { getAInstructor } from '@/api/getAInstructor';
 
-// interface IInstructorPageProps {
-//     username: string
-// }
+interface IInstructorPageProps {
+    params: Promise<{
+        username: string
+    }>
+}
 
-const InstructorPage: FC = () => {
-    // console.log(username);
+const InstructorPage: FC<IInstructorPageProps> = async ({ params }) => {
+    const { username } = await params;
+    const data = await getAInstructor(username);
+
     return (
         <div>
-            <InstructorDetails params={{ name: 'Instructor Name' }} instructor={null} />
+            <InstructorDetails instructor={data.data} />
         </div>
     );
 };
