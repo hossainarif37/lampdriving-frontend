@@ -1,7 +1,12 @@
 import { FC } from 'react';
 import InstructorDetails from "../InstructorDetails/components/InstructorDetails"
 
-const page: FC = () => {
+// interface IInstructorPageProps {
+//     username: string
+// }
+
+const InstructorPage: FC = () => {
+    // console.log(username);
     return (
         <div>
             <InstructorDetails params={{ name: 'Instructor Name' }} instructor={null} />
@@ -9,4 +14,4 @@ const page: FC = () => {
     );
 };
 
-export default page;
+export default InstructorPage;

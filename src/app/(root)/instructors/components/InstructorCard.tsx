@@ -73,7 +73,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
             <div className="space-y-3">
                 <div className="flex gap-3 max-w-lg mx-auto">
                     {/* View Profile Button */}
-                    <Link href={`/instructors/instructor-details`} className="border md:h-12 w-1/2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2 transition-colors duration-200 ">
+                    <Link href={`/instructors/${typeof instructor.user != "string" && instructor.username}`} className="border md:h-12 w-1/2 text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2 transition-colors duration-200 ">
                         <ExternalLink className="w-4 h-4" />
                         View Profile
                     </Link>

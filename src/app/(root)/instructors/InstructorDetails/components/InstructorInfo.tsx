@@ -17,7 +17,7 @@ interface IInstructor {
 interface InstructorInfoProps {
   instructor: IInstructor;
 }
-const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
+const InstructorInfo: FC = () => {
   const carInfo = [
     { id: 1, info: 'Auto Lessons & Test Packages' },
     { id: 2, info: 'Verified Working with Children Check' },

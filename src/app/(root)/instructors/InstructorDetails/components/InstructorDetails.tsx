@@ -1,24 +1,9 @@
-import { getInstructorByName, getInstructors } from "@/api/getInstructors";
+import { FC } from 'react';
 import InstructorInfo from "./InstructorInfo";
 import OtherInstructors from "./OtherInstructors";
 import Reviews from "./Reviews";
 import Sidebar from "./Sidebar";
-
-import { FC } from 'react';
 import { IInstructor } from "@/types/instructor";
-// interface IInstructorProps {
-//   searchedParams?: {
-//     carType?: string;
-//     searchKey?: string;
-//     page?: string;
-//   };
-// }
-
-// interface IInstructorProps {
-//   params: {
-//     name: string;
-//   };
-// }
 
 interface InstructorInfoProps {
   params: {
@@ -28,17 +13,13 @@ interface InstructorInfoProps {
 }
 const nstructorDetails: FC<InstructorInfoProps> = async ({ params }) => {
 
-  console.log("Params received:", params);
-  const instructor = await getInstructorByName(params.name);
-
-  console.log(instructor);
   return (
     <div className="bg-gray-50">
       <main className="wrapper py-8">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Main content */}
           <div className="md:col-span-2 space-y-8">
-            <InstructorInfo instructor={instructor} />
+            <InstructorInfo />
 
             <Reviews />
             <div className="hidden md:block">

@@ -10,18 +10,3 @@ export const getInstructors = async (searchedParams: Record<string, string> | un
 };
 
 
-export const getInstructorByName = async (name: string): Promise<IInstructor | null> => {
-  try {
-    const res = await fetch(`${envConfigs.apiUrl}/instructor/verified?populate=user&name=${name}`);
-    if (!res.ok) {
-      console.error("Failed to fetch instructor details");
-      return null;
-    }
-    const data = await res.json();
-    // Assuming the API returns an array of instructors
-    return data?.data?.[0] || null; // Return the first instructor if found
-  } catch (error) {
-    console.error("Error fetching instructor details:", error);
-    return null;
-  }
-};
