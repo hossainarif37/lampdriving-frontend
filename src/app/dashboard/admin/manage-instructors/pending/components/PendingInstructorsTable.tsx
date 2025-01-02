@@ -14,10 +14,10 @@ import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { UserRoundCheck, UserRoundSearch, UserRoundX } from 'lucide-react';
+import { UserRoundSearch } from 'lucide-react';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
-import VerifyInstructorModal from './VerifyInstructorModal';
+import UpdateInstructorStatus from './UpdateInstructorStatus';
 
 const PendingInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -80,7 +80,9 @@ const PendingInstructorsTable: FC = () => {
                                                     </div>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">${instructor.pricePerHour}</TableCell>
-                                                <TableCell className="font-medium text-center">{instructor.status === "pending" ? "Pending" : "Verified"}</TableCell>
+                                                <TableCell className="font-medium text-center">
+                                                    {instructor.status === "verified" ? "Verified" : instructor.status === "pending" ? "Pending" : "Rejected"}
+                                                </TableCell>
                                                 <TableCell className="font-medium">
                                                     <div className='flex items-center justify-center gap-2'>
                                                         <Button
@@ -88,13 +90,8 @@ const PendingInstructorsTable: FC = () => {
                                                             size={"icon"}>
                                                             <UserRoundSearch />
                                                         </Button>
-                                                        <VerifyInstructorModal id={instructor._id || ""} />
-                                                        <Button
-                                                            className='bg-red-500 hover:bg-red-600'
-                                                            title='Reject Instructor'
-                                                            size={"icon"}>
-                                                            <UserRoundX />
-                                                        </Button>
+                                                        <UpdateInstructorStatus status='verify' id={instructor._id || ""} />
+                                                        <UpdateInstructorStatus status='reject' id={instructor._id || ""} />
                                                     </div>
                                                 </TableCell>
                                             </TableRow>
