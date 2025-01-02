@@ -1,10 +1,10 @@
-import { ReactNode } from "react";
-import { BookOpen, Calendar, FileText, HelpCircle, History, LayoutDashboardIcon, Trash2, UserCheck, Users, Wallet } from 'lucide-react';
+import { ForwardRefExoticComponent, ReactNode, RefAttributes } from "react";
+import { BookOpen, Calendar, FileText, HelpCircle, History, LayoutDashboardIcon, LucideProps, Trash2, UserCheck, Users, Wallet } from 'lucide-react';
 
 interface IRoute {
     name: string;
     path: string;
-    icon: ReactNode;
+    icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
     children?: {
         name: string;
         path: string;
@@ -16,12 +16,12 @@ export const learnerRoutes: IRoute[] = [
     {
         name: 'Dashboard',
         path: '/dashboard/learner',
-        icon: <LayoutDashboardIcon />
+        icon: LayoutDashboardIcon
     },
     {
         name: 'Bookings',
         path: '#bookings',
-        icon: <BookOpen />,
+        icon: BookOpen,
         children: [
             {
                 name: 'Pending Bookings',
@@ -45,7 +45,7 @@ export const learnerRoutes: IRoute[] = [
     {
         name: 'Transaction History',
         path: '/dashboard/learner/transaction-history',
-        icon: <History />
+        icon: History
     }
 ];
 
@@ -54,12 +54,12 @@ export const instructorRoutes: IRoute[] = [
     {
         name: 'Dashboard',
         path: '/dashboard/instructor',
-        icon: <LayoutDashboardIcon />
+        icon: LayoutDashboardIcon
     },
     {
         name: 'Bookings',
         path: '#bookings',
-        icon: <BookOpen />,
+        icon: BookOpen,
         children: [
             {
                 name: 'Pending Bookings',
@@ -82,12 +82,12 @@ export const instructorRoutes: IRoute[] = [
     {
         name: 'Availability',
         path: '/dashboard/instructor/manage-availability',
-        icon: <Calendar />
+        icon: Calendar
     },
     {
         name: 'Payments',
         path: '#payments',
-        icon: <Wallet />,
+        icon: Wallet,
         children: [
             {
                 name: 'Wallet',
@@ -114,12 +114,12 @@ export const adminRoutes: IRoute[] = [
     {
         name: 'Dashboard',
         path: '/dashboard/admin',
-        icon: <LayoutDashboardIcon />
+        icon: LayoutDashboardIcon
     },
     {
         name: 'Bookings',
         path: '#bookings',
-        icon: <BookOpen />,
+        icon: BookOpen,
         children: [
             {
                 name: 'Pending Bookings',
@@ -143,7 +143,7 @@ export const adminRoutes: IRoute[] = [
     {
         name: 'Instructors',
         path: '#instructors',
-        icon: <UserCheck />,
+        icon: UserCheck,
         children: [
             {
                 name: 'Pending Instructors',
@@ -162,13 +162,13 @@ export const adminRoutes: IRoute[] = [
     {
         name: 'Learners',
         path: '/dashboard/admin/manage-learners',
-        icon: <Users
-         />
+        icon: Users
+
     },
     {
         name: 'Payments',
         path: '#payments',
-        icon: <Wallet />,
+        icon: Wallet,
         children: [
             {
                 name: 'Wallet',
@@ -191,16 +191,16 @@ export const adminRoutes: IRoute[] = [
     {
         name: 'Blogs',
         path: '/dashboard/admin/manage-blogs',
-        icon: <FileText />
+        icon: FileText
     },
     {
         name: 'Support Articles',
         path: '/dashboard/admin/manage-support-articles',
-        icon: <HelpCircle />
+        icon: HelpCircle
     },
     {
         name: 'Recycle Bin',
         path: '/dashboard/admin/recycle-bin',
-        icon: <Trash2 />
+        icon: Trash2
     }
 ];

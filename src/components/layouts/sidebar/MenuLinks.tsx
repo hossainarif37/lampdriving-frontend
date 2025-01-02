@@ -40,7 +40,7 @@ const MenuLinks = () => {
                                     onClick={() => handleGroupRouteOpen(route.path)}
                                 >
                                     <span className="flex items-center gap-2">
-                                        {route.icon}
+                                        <route.icon />
                                         {route.name}
                                     </span>
                                     <ChevronDown
@@ -74,7 +74,7 @@ const MenuLinks = () => {
                             </>
                         ) : (
                             <NavLink href={route.path} active='activeSidebar' other='sidebar' className='mb-1'>
-                                {route.icon}
+                                <route.icon />
                                 {route.name}
                             </NavLink>
                         )}
