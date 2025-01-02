@@ -12,15 +12,15 @@ const SharedProfile: FC = () => {
     const { register, handleSubmit, formState: { errors }, control, watch } = useForm<IPersonalInfo>();
     const [profilePhoto, setProfilePhoto] = useState<IProfilePhoto>({
         file: null,
-        url: ""
+        url: undefined
     })
 
     console.log('profilePhoto', profilePhoto);
 
-    const onSubmit = (data: IPersonalInfo) => console.log(data);    
+    const onSubmit = (data: IPersonalInfo) => console.log(data);
 
     return (
-        <div>         
+        <div>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col items-start md:shadow-lg bg-light md:rounded-lg md:border'

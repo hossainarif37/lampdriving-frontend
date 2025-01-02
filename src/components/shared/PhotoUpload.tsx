@@ -10,7 +10,7 @@ import { toast } from '@/hooks/use-toast';
 
 export interface IProfilePhoto {
     file: File | null;
-    url: string | "";
+    url: string | undefined;
 }
 
 interface PhotoUploadProps {

@@ -1,12 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Dispatch, FC, SetStateAction } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
-import { Controller, useForm } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { IPersonalInfo } from '../InstructorRegistration';
-import { genderOptions } from '@/constant/gender';
 import PersonalInfoFields from '@/components/shared/forms/PersonalInfoFields';
 
 interface IPersonalInfoFormProps {

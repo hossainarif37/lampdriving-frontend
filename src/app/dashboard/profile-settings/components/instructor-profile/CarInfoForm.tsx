@@ -1,8 +1,6 @@
 import CarInfoFields from '@/components/shared/forms/CarInfoFields';
 import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/redux/hook';
-import { IVehicle } from '@/types/instructor';
-import { useRouter } from 'next/navigation';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -20,10 +18,8 @@ interface ICarInfoFormProps {
 }
 
 
-
 const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) => {
     const [isClicked, setIsClicked] = useState(false);
-        const router = useRouter();
     const { instructor } = useAppSelector(state => state.authSlice);
 
     const defaultValues = {
@@ -35,42 +31,42 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) =
     }
 
     console.log('defaultValues', defaultValues);
-    
-        // Car Image
-    const [carImageURL, setCarImageURL] = useState<string>(instructor?.vehicle?.image || '');
-        const [carImageError, setCarImageError] = useState<string>("");
-        
-    
-        const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
 
-        const onSubmit = (data: Inputs) => {
-            setIsClicked(true);
-            if (!carImageURL) {
-                setCarImageError(`${carImageError ? carImageError : 'Car Image is required'}`);
-                return;
-            }
-    
-            const carInfo = {
-                ...data,
-                image: carImageURL
-            }
-            console.log(carInfo);
+    // Car Image
+    const [carImageURL, setCarImageURL] = useState<string>(instructor?.vehicle?.image || '');
+    const [carImageError, setCarImageError] = useState<string>("");
+
+
+    const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
+
+    const onSubmit = (data: Inputs) => {
+        setIsClicked(true);
+        if (!carImageURL) {
+            setCarImageError(`${carImageError ? carImageError : 'Car Image is required'}`);
+            return;
         }
-    
-         useEffect(() => {
-                if (isClicked) {
-                    if (carImageURL) {
-                        setCarImageError('');
-                    } else {
-                        setCarImageError(`${carImageFile ? 'Upload Car Image' : 'Car Image is required'}`);
-                    }
-                }
-            }, [carImageFile, carImageURL, isClicked]);
+
+        const carInfo = {
+            ...data,
+            image: carImageURL
+        }
+        console.log(carInfo);
+    }
+
+    useEffect(() => {
+        if (isClicked) {
+            if (carImageURL) {
+                setCarImageError('');
+            } else {
+                setCarImageError(`${carImageFile ? 'Upload Car Image' : 'Car Image is required'}`);
+            }
+        }
+    }, [carImageFile, carImageURL, isClicked]);
     return (
         <div className=''>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
                 <h1 className='text-2xl font-bold text-secondary'>Car Info</h1>
-                
+
                 <CarInfoFields
                     register={register}
                     errors={errors}
