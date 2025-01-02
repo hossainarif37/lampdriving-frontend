@@ -1,5 +1,5 @@
 "use client"
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import {
     Table,
     TableBody,
@@ -21,14 +21,21 @@ import UpdateInstructorStatus from './UpdateInstructorStatus';
 
 const PendingInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
+    const [page, setPage] = useState(urlSearchParams.get('page') || '1');
+    const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
 
     const { data, isLoading } = useGetAllInstructorsQuery(
         {
             status: "pending",
             searchKey: urlSearchParams.get('searchKey') || '',
-            limit: urlSearchParams.get('limit') || '8',
-            page: urlSearchParams.get('page') || '1'
+            limit: limit,
+            page: page
         });
+
+    useEffect(() => {
+        setPage(urlSearchParams.get('page') || '1');
+        setLimit(urlSearchParams.get('limit') || '8');
+    }, [urlSearchParams])
 
     if (isLoading) {
         return <Loading />
