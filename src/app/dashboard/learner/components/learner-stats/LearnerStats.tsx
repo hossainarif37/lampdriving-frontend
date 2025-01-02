@@ -7,6 +7,7 @@ import personImg from "@/assets/person_1.jpg"
 import { useAppSelector } from '@/redux/hook';
 import { Button } from '@/components/ui/button';
 import PackageCard from './PackageCard';
+import StatsCard from '@/app/dashboard/shared/StatsCard';
 
 interface BookingStats {
   totalBookings: number;
@@ -113,15 +114,13 @@ const LearnerStats: FC = () => {
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {statsData.map((stat) => (
-          <div key={stat.id} className="bg-white rounded-xl shadow-sm p-6 flex items-center">
-            <div className={`rounded-full p-3 mr-4 ${stat.bgColor}`}>
-              {stat.icon}
-            </div>
-            <div>
-              <p className="text-sm text-accent">{stat.title}</p>
-              <p className="text-2xl font-bold text-gradient">{stat.value}</p>
-            </div>
-          </div>
+          <StatsCard
+            key={stat.id}
+            bgColor={stat.bgColor}
+            icon={stat.icon}
+            title={stat.title}
+            value={stat.value}
+          />
         ))}
       </div>
 

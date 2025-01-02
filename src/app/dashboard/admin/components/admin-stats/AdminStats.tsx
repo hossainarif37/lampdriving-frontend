@@ -1,12 +1,10 @@
-"use client"
-import { FC } from 'react';
-import React, { useState } from 'react';
-import DashboardStats from './DashboardStats';
-import BookingFilters from './BookingFilters';
-import BookingList from './BookingList';
-// import BookingCalendar from './BookingCalendar';
-import { useAppSelector } from '@/redux/hook';
-import BookingCalendar from './BookingCalendar';
+"use client";
+import { FC, useState } from "react";
+import DashboardStats from "./DashboardStats";
+import BookingFilters from "./BookingFilters";
+import BookingCalendar from "./BookingCalendar";
+import { useAppSelector } from "@/redux/hook";
+import { BookingList } from "./BookingList";
 
 // Define the Booking type
 type Booking = {
@@ -14,12 +12,12 @@ type Booking = {
     studentName: string;
     date: string;
     time: string;
-    status: 'running' | 'completed';
+    status: "running" | "completed";
     instructor: string;
 };
 
-// Sample data with more bookings
-const runningBookings: Booking[] = [
+// Sample data for bookings
+const inisialRunningBookings: Booking[] = [
     {
         id: '1',
         studentName: 'John Doe',
@@ -52,15 +50,15 @@ const runningBookings: Booking[] = [
         status: 'running',
         instructor: 'Sarah Wilson'
     }
-] as const;
+];
 
-const pastBookings: Booking[] = [
+const inisialPastBookings: Booking[] = [
     {
         id: '3',
         studentName: 'Alice Brown',
         date: '2024-03-14',
         time: '11:00 AM',
-        status: 'completed' as const,
+        status: 'completed',
         instructor: 'Mike Johnson'
     },
     {
@@ -68,7 +66,7 @@ const pastBookings: Booking[] = [
         studentName: 'Bob Wilson',
         date: '2024-03-14',
         time: '3:00 PM',
-        status: 'completed' as const,
+        status: 'completed',
         instructor: 'Sarah Wilson'
     },
     {
@@ -76,7 +74,7 @@ const pastBookings: Booking[] = [
         studentName: 'Sophie Turner',
         date: '2024-03-14',
         time: '1:15 PM',
-        status: 'completed' as const,
+        status: 'completed',
         instructor: 'Mike Johnson'
     },
     {
@@ -84,16 +82,34 @@ const pastBookings: Booking[] = [
         studentName: 'James Miller',
         date: '2024-03-14',
         time: '5:00 PM',
-        status: 'completed' as const,
+        status: 'completed',
         instructor: 'Sarah Wilson'
     }
 ];
 
 const AdminStats: FC = () => {
-    const [activeFilter, setActiveFilter] = useState('all');
     const { user } = useAppSelector(state => state.authSlice);
+    const [activeFilter, setActiveFilter] = useState('running');
+    const [runningBookings, setRunningBookings] = useState(inisialRunningBookings);
+    const [pastBookings, setPastBookings] = useState(inisialPastBookings);
 
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+
+
+    const handleConfirm = (bookingId: string) => {
+        const bookingToMove = runningBookings.find(booking => booking.id === bookingId);
+        if (bookingToMove) {
+            // Remove from running bookings
+            setRunningBookings(prev => prev.filter(booking => booking.id !== bookingId));
+
+            // Add to past bookings with completed status
+            setPastBookings(prev => [{
+                ...bookingToMove,
+                status: 'completed'
+            }, ...prev]);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-gray-100">
             <div className="mx-auto px-6 py-8 bg-gray-50">
@@ -112,20 +128,23 @@ const AdminStats: FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div className="lg:col-span-2">
-                        <BookingFilters
-                            activeFilter={activeFilter}
-                            onFilterChange={setActiveFilter}
-                        />
-                        {(activeFilter === 'all' || activeFilter === 'running') && (
-                            <BookingList title="Running Bookings" bookings={runningBookings} />
+                        {/* Booking Filters */}
+                        <div className="flex justify-end">
+                            <BookingFilters
+                                activeFilter={activeFilter}
+                                onFilterChange={setActiveFilter}
+                            />
+                        </div>
+                        {activeFilter === 'running' && (
+                            <BookingList bookings={runningBookings} onConfirm={handleConfirm} />
                         )}
-                        {(activeFilter === 'all' || activeFilter === 'past') && (
-                            <BookingList title="Past Bookings" bookings={pastBookings} />
+                        {activeFilter === 'past' && (
+                            <BookingList bookings={pastBookings} onConfirm={handleConfirm} />
+
                         )}
                     </div>
                     <div>
                         <BookingCalendar />
-                        {/* <Calendar selectedDate={selectedDate} onDateSelect={setSelectedDate} /> */}
                     </div>
                 </div>
             </div>
