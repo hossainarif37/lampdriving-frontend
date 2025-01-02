@@ -10,13 +10,13 @@ interface StatCardProps {
 }
 
 const StatCard: React.FC<StatCardProps> = ({ title, value, icon, color }) => (
-    <div className={`${color} rounded-lg p-6 shadow-lg`}>
+    <div className={`${color} rounded-lg p-6 shadow-sm`}>
         <div className="flex items-center justify-between">
             <div>
-                <p className="text-sm font-medium text-gray-100 mb-1">{title}</p>
-                <h3 className="text-2xl font-bold text-white">{value}</h3>
+                <p className="text-sm font-medium text-secondary mb-1">{title}</p>
+                <h3 className="text-2xl font-bold text-gradient">{value}</h3>
             </div>
-            <div className="text-white opacity-80">{icon}</div>
+            <div className="text-primary opacity-80">{icon}</div>
         </div>
     </div>
 );
@@ -28,25 +28,25 @@ const DashboardStats: FC = () => {
                 title="Total Bookings"
                 value="156"
                 icon={<BookOpen size={24} />}
-                color="bg-blue-600"
+                color="bg-white"
             />
             <StatCard
                 title="Completed Bookings"
                 value="89"
                 icon={<CheckCircle size={24} />}
-                color="bg-green-600"
+                color="bg-white"
             />
             <StatCard
                 title="Running Bookings"
                 value="34"
                 icon={<Clock size={24} />}
-                color="bg-orange-600"
+                color="bg-white"
             />
             <StatCard
                 title="Total Earnings"
                 value="$12,450"
                 icon={<DollarSign size={24} />}
-                color="bg-purple-600"
+                color="bg-white"
             />
         </div>
     );

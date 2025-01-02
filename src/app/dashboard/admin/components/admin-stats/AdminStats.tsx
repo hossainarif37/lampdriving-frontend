@@ -6,7 +6,7 @@ import BookingFilters from './BookingFilters';
 import BookingList from './BookingList';
 // import BookingCalendar from './BookingCalendar';
 import { useAppSelector } from '@/redux/hook';
-import BookingCalendar, { Calendar } from './BookingCalendar';
+import BookingCalendar from './BookingCalendar';
 
 // Define the Booking type
 type Booking = {
