@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import InstructorProfile from '../InstructorDetails/components/InstructorProfile';
+import InstructorDetails from "../InstructorDetails/components/InstructorDetails"
 
 const page: FC = () => {
     return (
         <div>
-            <InstructorProfile />
+            <InstructorDetails params={{ name: 'Instructor Name' }} instructor={null} />
         </div>
     );
 };

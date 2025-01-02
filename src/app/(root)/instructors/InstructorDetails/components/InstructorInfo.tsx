@@ -1,3 +1,4 @@
+
 import Image from 'next/image'
 import instructorImg from "@/assets/home-page-image/test-image.webp"
 import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-Taisor-Car-Color-Image.webp"
@@ -5,7 +6,18 @@ import { CircleCheck } from 'lucide-react'
 
 import { FC } from 'react';
 
-const InstructorInfo: FC = () => {
+interface IInstructor {
+  name: string;
+  rating: number;
+  ratingsCount: number;
+  bio: string;
+  languages: string[];
+}
+
+interface InstructorInfoProps {
+  instructor: IInstructor;
+}
+const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const carInfo = [
     { id: 1, info: 'Auto Lessons & Test Packages' },
     { id: 2, info: 'Verified Working with Children Check' },
