@@ -18,13 +18,13 @@ interface IBookingListProps {
 
 const BookingList: FC<IBookingListProps> = ({ title, bookings }) => {
     return (
-        <div className="bg-white rounded-lg shadow-lg">
+        <div className="bg-white rounded-lg shadow-sm" >
             <div className="p-6 border-b">
                 <h2 className="text-xl font-semibold text-secondary">{title}</h2>
             </div>
 
             <div className="max-h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-                {bookings.slice(0, 2).map((booking) => (
+                {bookings.map((booking) => (
                     <div
                         key={booking.id}
                         className="p-4 border-b last:border-b-0 hover:bg-gray-50 transition-colors duration-200"
@@ -53,7 +53,7 @@ const BookingList: FC<IBookingListProps> = ({ title, bookings }) => {
                 ))}
             </div>
 
-            <div className="p-4 border-t bg-gray-50 flex items-center justify-between">
+            {/* <div className="p-4 border-t bg-gray-50 flex items-center justify-between">
                 <div className="text-sm text-gray-600">
                     Showing {bookings.length} bookings
                 </div>
@@ -65,7 +65,7 @@ const BookingList: FC<IBookingListProps> = ({ title, bookings }) => {
                         <ChevronRight size={20} />
                     </button>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

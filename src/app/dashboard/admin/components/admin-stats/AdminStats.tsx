@@ -96,7 +96,7 @@ const AdminStats: FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     return (
         <div className="min-h-screen bg-gray-100">
-            <div className="mx-auto px-4 py-8">
+            <div className="mx-auto px-6 py-8 bg-gray-50">
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-secondary mb-2">
                         Welcome back, {user?.name?.firstName}!
@@ -111,7 +111,7 @@ const AdminStats: FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div className="lg:col-span-2 space-y-8">
+                    <div className="lg:col-span-2">
                         <BookingFilters
                             activeFilter={activeFilter}
                             onFilterChange={setActiveFilter}
