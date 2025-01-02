@@ -24,7 +24,7 @@ const PendingInstructorsTable: FC = () => {
 
     const { data, isLoading } = useGetAllInstructorsQuery(
         {
-            status: "verified",
+            status: "pending",
             searchKey: urlSearchParams.get('searchKey') || '',
             limit: urlSearchParams.get('limit') || '8',
             page: urlSearchParams.get('page') || '1'
