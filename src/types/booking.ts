@@ -95,6 +95,7 @@ export interface ISchedule {
 }
 
 export interface IBooking {
+    _id: string;
     learner: string | ILearner;
     instructor: string | IInstructor;
     bookingHours: number;
