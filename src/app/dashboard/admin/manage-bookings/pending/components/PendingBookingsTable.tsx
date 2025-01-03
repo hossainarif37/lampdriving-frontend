@@ -4,11 +4,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { UserRoundSearch } from 'lucide-react';
+import { MoreHorizontal } from 'lucide-react';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import { useGetAllBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking } from '@/types/booking';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 
 const PendingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -79,14 +80,20 @@ const PendingBookingsTable: FC = () => {
                                                 <TableCell className="font-medium text-center">
                                                     {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Pending" : "Rejected"}
                                                 </TableCell>
-                                                <TableCell className="font-medium">
-                                                    <div className='flex items-center justify-center gap-2'>
-                                                        <Button
-                                                            title='View booking'
-                                                            size={"icon"}>
-                                                            <UserRoundSearch />
-                                                        </Button>
-                                                    </div>
+                                                <TableCell className="font-medium text-center">
+                                                    <DropdownMenu>
+                                                        <DropdownMenuTrigger asChild>
+                                                            <Button className="h-8 w-8 p-0 bg-white hover:bg-gray-100 text-secondary">
+                                                                <span className="sr-only">Open menu</span>
+                                                                <MoreHorizontal />
+                                                            </Button>
+                                                        </DropdownMenuTrigger>
+                                                        <DropdownMenuContent align="end">
+                                                            <DropdownMenuItem className='py-2'>Details</DropdownMenuItem>
+                                                            <DropdownMenuItem className='py-2'>Approve</DropdownMenuItem>
+                                                            <DropdownMenuItem className='py-2'>Cancel</DropdownMenuItem>
+                                                        </DropdownMenuContent>
+                                                    </DropdownMenu>
                                                 </TableCell>
                                             </TableRow>
                                         )
