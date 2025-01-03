@@ -1,6 +1,13 @@
-import { IResponseBase } from "@/types/response";
+import { IResponseBase, IResponseWithPaginationData } from "@/types/response";
 import baseApi from "../baseApi";
-import { IBookingInputs } from "@/types/booking";
+import { IBooking, IBookingInputs } from "@/types/booking";
+
+interface IGetAllBookingsQuery {
+    status: "pending" | "accepted" | "completed" | "cancelled";
+    searchKey: string;
+    limit: string;
+    page: string;
+}
 
 const bookingApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -10,9 +17,12 @@ const bookingApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: data
             })
+        }),
+        getAllBookings: builder.query<IResponseWithPaginationData<IBooking[]>, IGetAllBookingsQuery>({
+            query: ({ status, searchKey, limit, page }) => `/booking/all?status=${status},populate=instructor,learner${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`
         })
     })
 })
 
 
-export const { useCreateABookingMutation } = bookingApi
+export const { useCreateABookingMutation, useGetAllBookingsQuery } = bookingApi
