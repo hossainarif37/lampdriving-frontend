@@ -20,9 +20,16 @@ const bookingApi = baseApi.injectEndpoints({
         }),
         getAllBookings: builder.query<IResponseWithPaginationData<IBooking[]>, IGetAllBookingsQuery>({
             query: ({ status, searchKey, limit, page }) => `/booking/all?status=${status}&populate=instructor.user,learner.user${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`
+        }),
+        updateBookingStatus: builder.mutation<IResponseBase, { id: string, status: "pending" | "accepted" | "completed" | "cancelled" }>({
+            query: ({ id, status }) => ({
+                url: `/booking/status/${id}`,
+                method: "PATCH",
+                body: { status }
+            })
         })
     })
 })
 
 
-export const { useCreateABookingMutation, useGetAllBookingsQuery } = bookingApi
+export const { useCreateABookingMutation, useGetAllBookingsQuery, useUpdateBookingStatusMutation } = bookingApi
