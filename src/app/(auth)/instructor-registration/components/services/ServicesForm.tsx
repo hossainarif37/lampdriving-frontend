@@ -21,10 +21,10 @@ interface Inputs {
 
 interface IServicesFormProps {
     servicesInfo: IServices | undefined;
-    setServicesInfo: React.Dispatch<React.SetStateAction<IServices| undefined>>;
+    setServicesInfo: React.Dispatch<React.SetStateAction<IServices | undefined>>;
 }
 
-const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) => {
+const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo }) => {
     const device = useScreenSize();
     const [isClicked, setIsClicked] = useState(false);
     const [selectedLocations, setSelectedLocations] = useState<string[]>(servicesInfo?.serviceAreas || []);
@@ -60,7 +60,6 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
             friday: schedule.friday,
         };
 
-        console.log('workingHour', workingHour);
         let hasActiveDay = false;
         for (const day in workingHour) {
             const dayKey = day as keyof IWorkingHour;
@@ -72,10 +71,10 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
         }
 
         if (!hasActiveDay) {
-           setWorkingHoursError('At least one working day must be active');
+            setWorkingHoursError('At least one working day must be active');
             return;
         }
-        
+
         setServicesInfo({
             pricePerHour: Number(data.pricePerHour),
             serviceAreas: selectedLocations,
@@ -94,7 +93,7 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
         }
     }, [selectedLocations, isClicked]);
 
-    
+
 
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>

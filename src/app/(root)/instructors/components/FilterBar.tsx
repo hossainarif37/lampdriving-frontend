@@ -6,7 +6,6 @@ import { FC, useState } from "react";
 
 const FilterBar: FC = () => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
-    console.log(isFilterOpen)
 
     const toggleFilter = () => {
         setIsFilterOpen((prev) => !prev);

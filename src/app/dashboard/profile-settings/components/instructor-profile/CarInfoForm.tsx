@@ -30,8 +30,6 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) =
         image: instructor?.vehicle?.image || ''
     }
 
-    console.log('defaultValues', defaultValues);
-
     // Car Image
     const [carImageURL, setCarImageURL] = useState<string>(instructor?.vehicle?.image || '');
     const [carImageError, setCarImageError] = useState<string>("");
@@ -50,7 +48,6 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) =
             ...data,
             image: carImageURL
         }
-        console.log(carInfo);
     }
 
     useEffect(() => {

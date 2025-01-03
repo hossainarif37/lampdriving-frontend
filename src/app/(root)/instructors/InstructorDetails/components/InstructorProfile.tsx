@@ -16,7 +16,6 @@ const InstructorProfile: FC<IInstructorProps> = async ({ searchedParams }) => {
 
   const instructors = await getInstructors(searchedParams);
 
-  console.log('instructors page', instructors);
   return (
     <div className="bg-gray-50">
       <main className="wrapper py-8">

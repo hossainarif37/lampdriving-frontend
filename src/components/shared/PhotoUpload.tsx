@@ -77,7 +77,6 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto }) =>
 
             const data = await response.json();
 
-            console.log('Image uploaded successfully:', data);
             toast({
                 message: "Image uploaded successfully",
             })

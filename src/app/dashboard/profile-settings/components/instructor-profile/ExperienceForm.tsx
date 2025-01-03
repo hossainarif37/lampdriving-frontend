@@ -71,8 +71,6 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
             },
             languages: selectedLanguages
         }
-
-        console.log('experienceData', experienceData);
     }
 
     useEffect(() => {

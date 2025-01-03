@@ -41,9 +41,6 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ experienceInfo, setExperienc
     const [experienceCertificateURL, setExperienceCertificateURL] = useState<string>(experienceInfo?.documents?.experienceCertificate || '');
     const [experienceCertificateError, setExperienceCertificateError] = useState<string>('');
 
-    console.log('experienceInfo', experienceInfo);
-
-
     // Selected languages
     const [selectedLanguages, setSelectedLanguages] = useState<string[]>(experienceInfo?.languages || []);
     const [selectedLanguagesError, setSelectedLanguagesError] = useState<string>('');
