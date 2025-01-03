@@ -1,18 +1,21 @@
+"use client";
+
 import { FC } from 'react';
 import { UseFormRegister, FieldErrors, Control, Controller } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { genderOptions } from '@/constant/gender';
+import { usePathname } from 'next/navigation';
 
-export interface IPersonalInfoInputs  {
-    name: {
-        firstName: string;
-        lastName: string;
-    },
-    email: string;
-    phone: string;
-    gender: "male" | "female" | "other";
-    dateOfBirth: string;
+export interface IPersonalInfoInputs {
+  name: {
+    firstName: string;
+    lastName: string;
+  },
+  email: string;
+  phone: string;
+  gender: "male" | "female" | "other";
+  dateOfBirth: string;
 }
 
 interface PersonalInfoFieldsProps {
@@ -24,6 +27,8 @@ interface PersonalInfoFieldsProps {
 }
 
 const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, defaultValues, control, isRequired }) => {
+  const pathname = usePathname();
+  const isDashboard = pathname.includes("dashboard");
   return (
     <>
       <div className='w-full mt-5'>
@@ -77,10 +82,12 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
                 name="gender"
                 control={control}
                 defaultValue={defaultValues?.gender}
-                rules={{ required: {
+                rules={{
+                  required: {
                     value: isRequired,
                     message: "Gender is required",
-                  }, }}
+                  },
+                }}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value || ''}>
                     <SelectTrigger className="h-11 xl:h-14 mt-1">
@@ -161,7 +168,8 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
                 defaultValue={defaultValues?.email}
                 type="email"
                 placeholder="Enter your email"
-                className='h-11 xl:h-14 mt-1'
+                className='h-11 xl:h-14 mt-1 disabled:opacity-90'
+                disabled={isDashboard}
               />
               {errors?.email && <p className='text-red-500 text-sm mt-1'>{errors.email.message}</p>}
             </div>

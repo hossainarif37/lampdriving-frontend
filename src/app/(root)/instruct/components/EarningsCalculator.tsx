@@ -81,7 +81,7 @@ const EarningsCalculator: FC = () => {
 
                     <div>
                         {/* Call-to-action button linking to the registration page */}
-                        <Link href="/register mt-5">
+                        <Link href="/instructor-registration?step=personal-info">
                             <Button size="lg" className="w-full sm:w-auto gradient-color">
                                 Sign up now
                             </Button>

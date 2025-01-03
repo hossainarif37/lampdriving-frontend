@@ -5,10 +5,12 @@ import PersonalInfoFields, { IPersonalInfoInputs } from '@/components/shared/for
 import { FC, useState, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
-import { useAppSelector } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import PhotoUpload, { IProfilePhoto } from '@/components/shared/PhotoUpload';
 import { useFormWithDefaultValues } from '@/hooks/useFormWithDefaultValues';
 import { useImage } from '@/hooks/useImage';
+import { useUpdateUserMutation } from '@/redux/api/userApi/userApi';
+import { toast } from '@/hooks/use-toast';
 
 const PersonalInfoForm: FC = () => {
     const { user } = useAppSelector((state) => state.authSlice);
@@ -29,6 +31,8 @@ const PersonalInfoForm: FC = () => {
 
     const { profilePhoto, setProfilePhoto, isImageModified, validateImage } = useImage(user?.profileImg);
 
+    const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
+
     const onSubmit = async (data: typeof defaultValues) => {
         // Validate the image before proceeding
         if (!validateImage()) return;
@@ -43,14 +47,15 @@ const PersonalInfoForm: FC = () => {
             ...modifiedFields,
             ...(isImageModified && profilePhoto.url ? { profileImg: profilePhoto.url } : {}),
         };
+        console.log('payload', payload);
 
-        try {
-            console.log(payload); // Replace with API call
-            alert('Profile updated successfully!');
-        } catch (error) {
+        console.log(payload); // Replace with API call
+        updateUser(payload).unwrap().then((res) => {
+            toast({ message: res.message })
+        }).catch((error) => {
             console.error('Failed to update profile:', error);
-            alert('Failed to update profile.');
-        }
+            toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
+        })
     };
 
     return (
@@ -71,8 +76,8 @@ const PersonalInfoForm: FC = () => {
                     defaultValues={defaultValues}
                 />
 
-                <Button type='submit' className='w-full mt-7 gradient-color h-12'>
-                    Save
+                <Button type='submit' className='w-full mt-7 gradient-color h-12' disabled={isUpdating}>
+                    {isUpdating ? 'Updating...' : 'Update Profile'}
                 </Button>
             </form>
         </div>
