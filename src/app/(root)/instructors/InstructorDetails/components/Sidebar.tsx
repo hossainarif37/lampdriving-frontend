@@ -3,8 +3,16 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-Taisor-Car-Color-Image.webp";
 import carImg2 from "@/assets/dummy-images/map-image.jpg";
+import { IInstructor } from '@/types/instructor';
+import { IUser } from '@/types/user';
 
-const Sidebar: FC = () => {
+
+interface InstructorInfoProps {
+  instructor: IInstructor;
+}
+const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
+  // const user: IUser | undefined = typeof instructor?.user != "string" ? instructor?.user : undefined;
+  console.log(instructor.vehicle.image);
   return (
     <div className="space-y-6">
 
@@ -15,7 +23,7 @@ const Sidebar: FC = () => {
             {/* Pricing and available lesson durations */}
             <div className="flex justify-between items-baseline">
               <span className="text-sm text-accent">Offers 1 & 2hr lessons</span>
-              <span className="text-2xl font-bold text-gradient">$70<span className='text-sm'>/hr</span></span>
+            <span className="text-2xl font-bold text-gradient">{instructor?.pricePerHour}<span className='text-sm'>/hr</span></span>
             </div>
 
             {/* Discount details for longer lessons */}
@@ -58,8 +66,8 @@ const Sidebar: FC = () => {
               />
             </div>
             <div>
-              <h3 className="font-medium">Toyota Yaris 2018 (Auto)</h3>
-              <p className="text-sm text-gray-600 mt-1">4-star ANCAP rating</p>
+            <h3 className="font-medium">{instructor.vehicle.name} {instructor.vehicle.model}({instructor.vehicle.type})</h3>
+            <p className="text-sm text-gray-600 mt-1">{instructor.vehicle.rating}</p>
             </div>
           </div>
         </section>

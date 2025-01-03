@@ -26,7 +26,7 @@ const nstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
 
           {/* Sidebar */}
           <div>
-            <Sidebar />
+            <Sidebar instructor={instructor} />
           </div>
         </div>
       </main>

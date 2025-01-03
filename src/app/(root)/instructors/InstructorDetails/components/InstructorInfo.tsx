@@ -19,7 +19,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
     { id: 3, info: 'Instructed for 15 yr 4 mo' },
   ];
   const user: IUser | undefined = typeof instructor.user != "string" ? instructor.user : undefined;
-
+  console.log(instructor);
   return (
     <section className="bg-light rounded-xl border p-4 md:p-6 space-y-6">
       {/* Profile section */}
@@ -53,7 +53,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
       <div>
         <h2 className="font-semibold mb-2 text-secondary">Instructor Bio</h2>
         <p className="text-accent mb-4">
-          Hi, my name is Arun. I started as a car driver over 10 years. This experience is invaluable and I&apos;m very passionate about teaching. I started teaching in 2015 with my focus on full-time teaching people to pass the test and drive safely. I always cover all laws related to NSW roads.
+          {instructor?.description}
         </p>
 
         <div className="space-y-2 ">
@@ -70,9 +70,12 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
       <div>
         <h3 className="text-sm font-medium mb-2 text-secondary">Spoken language(s)</h3>
         <div className="flex flex-wrap gap-2">
-          <span className="px-3 py-1 bg-gray-100 rounded-full text-sm gradient-color text-light">Bengali</span>
-          <span className="px-3 py-1 bg-gray-100 rounded-full text-sm gradient-color text-light">English</span>
-          <span className="px-3 py-1 bg-gray-100 rounded-full text-sm gradient-color text-light">Hindi</span>
+          {
+            instructor.languages.map((language, index) => (
+
+              <span key={index} className="px-3 py-1 bg-gray-100 rounded-full text-sm gradient-color text-light">{language}</span>
+            ))
+          }
         </div>
       </div>
     </section>
