@@ -47,9 +47,7 @@ const SharedProfile: FC = () => {
             ...modifiedFields,
             ...(isImageModified && profilePhoto.url ? { profileImg: profilePhoto.url } : {}),
         };
-        console.log('payload', payload);
 
-        console.log(payload); // Replace with API call
         updateUser(payload).unwrap().then((res) => {
             toast({ message: res.message })
         }).catch((error) => {

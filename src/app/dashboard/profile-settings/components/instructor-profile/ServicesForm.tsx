@@ -75,10 +75,6 @@ const ServicesForm: FC = () => {
             serviceAreas: selectedLocations,
             workingHour: workingHour
         }
-
-        console.log(servicesData);
-        console.log(schedule);
-
     }
 
     useEffect(() => {

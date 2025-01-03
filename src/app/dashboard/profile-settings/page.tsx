@@ -7,11 +7,10 @@ import SharedProfile from './components/shared-profile/SharedProfile';
 
 const ProfileSettingsPage: FC = () => {
     const { user } = useAppSelector((state) => state.authSlice);
-    console.log('user', user);
     return (
         <div className=''>
             {
-                user?.role === 'instructor' ? <InstructorProfile/> : <SharedProfile/>
+                user?.role === 'instructor' ? <InstructorProfile /> : <SharedProfile />
             }
         </div>
     );

@@ -20,7 +20,6 @@ interface FileUploadProps {
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxSize = "1500×1500px", acceptedFormats = ".svg,.png,.jpg", setImageUrl, setImageError, selectedFile, setSelectedFile, imageUrl, removeImage }) => {
-    console.log('imageUrl', imageUrl);
     const [isSuccess, setIsSuccess] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -33,7 +32,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        console.log('file', file);
         if (file) {
             if (setSelectedFile) {
                 setSelectedFile(file);
@@ -71,8 +69,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             }
 
             const data = await response.json();
-
-            console.log('Image uploaded successfully:', data);
 
             if (setImageUrl) {
                 setImageUrl(data.secure_url);
@@ -146,8 +142,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             console.error('Error converting Blob URL to File:', error);
         }
     };
-
-    console.log('Image Details: ', imageDetails);
 
     return (
         <div className="w-full mx-auto bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
