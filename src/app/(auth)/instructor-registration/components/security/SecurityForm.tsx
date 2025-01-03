@@ -48,7 +48,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
         }
     }, [password, confirmPassword]);
 
-   
+
 
     const handlePasswordToggle = (field: string) => {
         if (field === 'password') {
@@ -58,8 +58,8 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
         }
     }
 
-     // Handle checkbox changes
-     const handleTermsChange = (checked: boolean) => {
+    // Handle checkbox changes
+    const handleTermsChange = (checked: boolean) => {
         setTermsAccepted(checked);
         if (checked) {
             setTermsError("");
@@ -136,7 +136,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
                                     className="absolute right-3 top-1/2 -translate-y-1/2"
                                     onClick={() => handlePasswordToggle("password")}
                                 >
-                                    {passwordVisible ? <Eye width={20} height={20}/> : <EyeClosed width={20} height={20}/>}
+                                    {passwordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
                                 </span>
                             </div>
                             {errors?.password && (
@@ -169,7 +169,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
                                     className="absolute right-3 top-1/2 -translate-y-1/2"
                                     onClick={() => handlePasswordToggle("confirm-password")}
                                 >
-                                    {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20}/>}
+                                    {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
                                 </span>
                             </div>
                             {errors?.confirmPassword && (

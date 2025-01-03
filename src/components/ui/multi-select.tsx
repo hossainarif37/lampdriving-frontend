@@ -144,7 +144,9 @@ export const MultiSelect = React.forwardRef<
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     // const [isAnimating, setIsAnimating] = React.useState(false);
     const searchParams = useSearchParams()
- 
+
+    console.log('selectedValues', selectedValues);
+
     const step = searchParams.get('step');
     const isServicesStep = step === 'services';
     const isExperienceStep = step === 'experience';
@@ -163,6 +165,7 @@ export const MultiSelect = React.forwardRef<
     };
 
     const toggleOption = (option: string) => {
+      console.log('option', option);
       const newSelectedValues = selectedValues.includes(option)
         ? selectedValues.filter((value) => value !== option)
         : [...selectedValues, option];
@@ -189,11 +192,14 @@ export const MultiSelect = React.forwardRef<
       if (selectedValues.length === options.length) {
         handleClear();
       } else {
+        console.log('options', options);
         const allValues = options.map((option) => option.value);
         setSelectedValues(allValues);
         onValueChange(allValues);
       }
     };
+
+    console.log('selectedValues', selectedValues);
 
     return (
       <Popover

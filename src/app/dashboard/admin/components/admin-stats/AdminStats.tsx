@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import { FC, useState } from "react";
 import DashboardStats from "./DashboardStats";

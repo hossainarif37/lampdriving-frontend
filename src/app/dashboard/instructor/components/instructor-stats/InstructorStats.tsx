@@ -41,6 +41,7 @@ const pastBookings = [
 const InstructorStats: FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const {user} = useAppSelector(state=>state.authSlice);
+    console.log('user', user);
 
   return (
     <div className="min-h-screen bg-gray-50">

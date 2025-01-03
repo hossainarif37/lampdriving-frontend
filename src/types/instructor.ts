@@ -2,8 +2,8 @@ import { IUser } from "./user";
 
 // interface for document
 export interface IDocument {
-    drivingLicense: string;
-    experienceCertificate: string;
+    drivingLicense?: string;
+    experienceCertificate?: string;
 }
 
 // interface for schedule
