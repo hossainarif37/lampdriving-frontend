@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
-import UpdateBookingStatus from './UpdateBookingStatus';
+import UpdateBookingStatus from '../../components/shared/UpdateBookingStatus';
 
 interface IPendingBookingActionsProps {
     id: string;
