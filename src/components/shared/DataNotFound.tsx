@@ -5,11 +5,12 @@ import { useRouter } from 'next/navigation';
 
 interface IDataNotFoundProps {
     dataName: string;
+    isSearched?: boolean;
 }
 
-const DataNotFound: FC<IDataNotFoundProps> = ({ dataName = "Data" }) => {
+const DataNotFound: FC<IDataNotFoundProps> = ({ dataName = "Data", isSearched }) => {
     const { replace } = useRouter();
-
+    console.log(isSearched);
     // reset search handler
     const handleResetSearch = () => {
         replace('?');
@@ -23,9 +24,17 @@ const DataNotFound: FC<IDataNotFoundProps> = ({ dataName = "Data" }) => {
                 {dataName} Not Found
             </h3>
             <p className="text-gray-600 text-center max-w-md mb-6">
-                We couldn&apos;t find any {dataName} matching your search criteria. Try adjusting your filters or search terms.
+                {
+                    isSearched ?
+                        `We couldn't find any ${dataName.toLowerCase()} matching your search criteria. Try adjusting your filters or search terms.`
+                        :
+                        `We couldn't find any ${dataName.toLowerCase()}.`
+                }
             </p>
-            <Button onClick={handleResetSearch} className='w-44 md:w-52 gradient-color'>Reset Search</Button>
+            {
+                isSearched &&
+                <Button onClick={handleResetSearch} className='w-44 md:w-52 gradient-color'>Reset Search</Button>
+            }
         </div>
     );
 };

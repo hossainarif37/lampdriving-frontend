@@ -110,7 +110,7 @@ const PendingInstructorsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound dataName='Pending Instructors' />
+                        <DataNotFound isSearched={urlSearchParams.get('searchKey')?.length ? true : false} dataName='Pending Instructors' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />
