@@ -22,13 +22,14 @@ const FooterSearchBoxDesign: FC = () => {
     }
     return (
         <div className="lg:max-w-5xl md:max-w-3xl h-48  md:h-40 flex flex-col md:flex-row items-center justify-center md:gap-4 gap-6 bg-[#212139] w-full md:rounded-md rounded-lg absolute -top-20 left-1/2 right-1/2 -translate-x-1/2 md:px-20 px-6">
-            <div className='w-10/12 flex items-center justify-between gap-2'>
+
+            <div className='md:w-10/12 flex flex-col lg:flex-row items-center justify-between gap-2'>
 
                 {/* Toggle Buttons */}
                 <div className="w-full font-semibold text-light text-center flex gap-1 border p-1 rounded-md bg-light">
                     <Button
                         onClick={() => setCarType('auto')}
-                        className={`w-1/2 h-[40px] hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
+                        className={`w-1/2 h-[40px] hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'auto'
                             ? 'gradient-color text-light'
                             : 'bg-gray-200 text-secondary'}`}
                     >
@@ -45,7 +46,7 @@ const FooterSearchBoxDesign: FC = () => {
                 </div>
 
                 {/* Search Box */}
-                <div className="flex gap-2 items-center rounded-md flex-1">
+                <div className="flex flex-col md:flex-row gap-2 items-center rounded-md md:flex-1 w-full">
                     <Popover
                         open={isOpen}
                         onOpenChange={(open) => setIsOpen(open)} // Update popover state
@@ -55,12 +56,12 @@ const FooterSearchBoxDesign: FC = () => {
                                 value={selectedSuburb}
                                 onChange={(e) => setSelectedSuburb(e.target.value)}
                                 readOnly={selectedSuburb ? true : false}
-                                className="flex-1 px-4 py-3 rounded-md text-secondary focus:outline-none placeholder:text-accent md:w-[200px] lg:w-[340px]"
+                                className="md:flex-1 px-4 py-3 rounded-md text-secondary focus:outline-none placeholder:text-accent w-[300px] md:w-[380px] lg:w-[340px]"
                                 type="text"
                                 placeholder="Enter your suburb"
                             />
                         </PopoverTrigger>
-                        <PopoverContent className="md:w-[350px] lg:w-[340px] p-2">
+                        <PopoverContent className="w-[300px] md:w-[380px] lg:w-[340px] p-2">
                             <Command>
                                 <CommandInput placeholder="Enter your suburb" />
                                 <CommandList>
@@ -80,7 +81,7 @@ const FooterSearchBoxDesign: FC = () => {
                             </Command>
                         </PopoverContent>
                     </Popover>
-                    <Button onClick={handleSearch} className="py-3 gradient-color text-light rounded-md text-base">
+                    <Button onClick={handleSearch} className="py-3 gradient-color text-light rounded-md text-base w-full md:w-auto">
                         Search
                     </Button>
                 </div>
