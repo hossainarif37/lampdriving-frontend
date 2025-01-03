@@ -35,7 +35,7 @@ const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdown
                     <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>
                         {
                             status === "complete" ?
-                                "Completed"
+                                "Complete"
                                 :
                                 status === "accept" ?
                                     "Accept"
@@ -79,7 +79,7 @@ const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdown
                         >
                             {
                                 status === "complete" ?
-                                    "Completed"
+                                    "Complete"
                                     :
                                     status === "accept" ?
                                         "Accept"
