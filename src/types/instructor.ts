@@ -45,6 +45,7 @@ export interface IWorkingHour {
 
 // interface for instructor
 export interface IInstructor {
+    _id?: string;
     user: string | IUser;
     description: string;
     documents: IDocument;
