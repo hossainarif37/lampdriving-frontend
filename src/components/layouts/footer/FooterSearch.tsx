@@ -23,7 +23,7 @@ const FooterSearchBoxDesign: FC = () => {
         setCarType('auto');
     }
     return (
-        <div className="lg:max-w-5xl md:max-w-3xl h-48 md:h-40 flex flex-col md:flex-row items-center justify-center md:gap-4 gap-6 bg-[#212139] w-full md:rounded-md rounded-lg absolute -top-20 left-1/2 right-1/2 -translate-x-1/2 md:px-20 px-6">
+        <div className="lg:max-w-5xl md:max-w-3xl h-48 md:h-40 flex flex-col md:flex-row items-center justify-center md:gap-4 gap-6 w-full md:rounded-md rounded-lg absolute -top-20 left-1/2 right-1/2 -translate-x-1/2 md:px-20 px-6 bg-gradient-to-r from-[#1a1340] to-[#341b53]">
 
             <div className='md:w-10/12 flex flex-col lg:flex-row items-center justify-between gap-2'>
 
