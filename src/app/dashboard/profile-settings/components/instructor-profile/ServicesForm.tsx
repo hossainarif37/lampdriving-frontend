@@ -1,11 +1,10 @@
 "use client"
 
-import { IServices } from '@/app/(auth)/instructor-registration/components/InstructorRegistration';
 import ServicesFields from '@/components/shared/forms/ServicesFields';
 import { Button } from '@/components/ui/button';
 import { DAYS } from '@/constant/days';
 import { useAppSelector } from '@/redux/hook';
-import { IInstructor, ISchedule, IWorkingHour } from '@/types/instructor';
+import { IInstructor, ISchedule, IServices, IWorkingHour } from '@/types/instructor';
 import { useRouter } from 'next/navigation';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';

@@ -8,6 +8,7 @@ import FileUpload from '@/components/shared/FileUpload';
 import { useRouter } from 'next/navigation';
 import { IVehicle } from '@/types/instructor';
 import CarInfoFields from '@/components/shared/forms/CarInfoFields';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 
 interface Inputs {
@@ -19,8 +20,6 @@ interface Inputs {
 
 
 interface ICarInfoFormProps {
-    carInfo: IVehicle | undefined;
-    setCarInfo: Dispatch<SetStateAction<IVehicle | undefined>>
     carImageFile: File | null;
     setCarImageFile: Dispatch<SetStateAction<File | null>>
 }
@@ -30,14 +29,15 @@ const carTypes = [
     "Manual"
 ]
 
-const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo, carImageFile, setCarImageFile}) => {
+const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) => {
     const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
+    const { carInfo, setCarInfo } = useInstructorRegister();
 
     // Car Image
     const [carImageURL, setCarImageURL] = useState<string>(carInfo?.image || '');
     const [carImageError, setCarImageError] = useState<string>("");
-    
+
 
     const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
 
@@ -62,16 +62,16 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo, carImageFile, 
         router.push("/instructor-registration?step=security");
     }
 
-     useEffect(() => {
-            if (isClicked) {
-                if (carImageURL) {
-                    setCarImageError('');
-                } else {
-                    setCarImageError(`${carImageFile ? 'Upload Car Image' : 'Car Image is required'}`);
-                }
+    useEffect(() => {
+        if (isClicked) {
+            if (carImageURL) {
+                setCarImageError('');
+            } else {
+                setCarImageError(`${carImageFile ? 'Upload Car Image' : 'Car Image is required'}`);
             }
-        }, [carImageFile, carImageURL, isClicked]);
-    
+        }
+    }, [carImageFile, carImageURL, isClicked]);
+
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form

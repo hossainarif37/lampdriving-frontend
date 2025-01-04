@@ -5,27 +5,19 @@ import { FC, useEffect, useState } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
-import { MultiSelect } from '@/components/ui/multi-select';
-import { sydneySuburbs } from '@/constant/sydneySuburbs';
-import WorkingHoursSelector from './WorkingHoursSelector';
 import { ISchedule, IWorkingHour } from '@/types/instructor';
 import { DAYS } from '@/constant/days';
-import { IServices } from '../InstructorRegistration';
 import useScreenSize from '@/hooks/useScreenSize';
 import ServicesFields from '@/components/shared/forms/ServicesFields';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 interface Inputs {
     pricePerHour: number;
 }
 
-interface IServicesFormProps {
-    servicesInfo: IServices | undefined;
-    setServicesInfo: React.Dispatch<React.SetStateAction<IServices | undefined>>;
-}
-
-const ServicesForm: FC<IServicesFormProps> = ({ servicesInfo, setServicesInfo }) => {
+const ServicesForm: FC = () => {
     const device = useScreenSize();
+    const { servicesInfo, setServicesInfo } = useInstructorRegister();
     const [isClicked, setIsClicked] = useState(false);
     const [selectedLocations, setSelectedLocations] = useState<string[]>(servicesInfo?.serviceAreas || []);
     const [workingHoursError, setWorkingHoursError] = useState<string>('');

@@ -1,30 +1,20 @@
 "use client"
 
 import { TabNavigation } from '@/components/shared/TabNavigation';
-import { mockInstructor, mockUser } from '@/constant/mockProfileData';
-import { useAppSelector } from '@/redux/hook';
-import { ChevronRight, Settings } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import { FC, useState } from 'react';
 import PersonalInfoForm from './PersonalInfoForm';
 import ExperienceForm from './ExperienceForm';
-import { IExperience, IServices } from '@/app/(auth)/instructor-registration/components/InstructorRegistration';
 import ServicesForm from './ServicesForm';
 import CarInfoForm from './CarInfoForm';
-import { IVehicle } from '@/types/instructor';
 import SecurityForm from './SecurityForm';
 
 const InstructorProfile: FC = () => {
-  const { user } = useAppSelector(state => state.authSlice);
   const [activeTab, setActiveTab] = useState('personal');
+
   // Experience
   const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
   const [experienceCertificateFile, setExperienceCertificateFile] = useState<File | null>(null);
-
-  // Services
-  const [servicesInfo, setServicesInfo] = useState<IServices | undefined>(undefined);
-
-  // Car Info
-  const [carInfo, setCarInfo] = useState<IVehicle | undefined>(undefined);
   const [carImageFile, setCarImageFile] = useState<File | null>(null);
 
   const renderTabContent = () => {

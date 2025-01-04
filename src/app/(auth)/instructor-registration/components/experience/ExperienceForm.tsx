@@ -9,9 +9,9 @@ import { useForm } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
 import { MultiSelect } from '@/components/ui/multi-select';
 import { useRouter } from 'next/navigation';
-import { IExperience } from '../InstructorRegistration';
 import { languageList } from '@/constant/languageList';
 import ExperienceFields from '@/components/shared/forms/ExperienceFields';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 interface Inputs {
     experience: string;
@@ -20,17 +20,18 @@ interface Inputs {
 }
 
 interface IExperienceFormProps {
-    experienceInfo: IExperience | undefined;
-    setExperienceInfo: Dispatch<SetStateAction<IExperience | undefined>>
+    // experienceInfo: IExperience | undefined;
+    // setExperienceInfo: Dispatch<SetStateAction<IExperience | undefined>>
     drivingLicenseFile: File | null;
     setDrivingLicenseFile: Dispatch<SetStateAction<File | null>>;
     experienceCertificateFile: File | null;
     setExperienceCertificateFile: Dispatch<SetStateAction<File | null>>;
 }
 
-const ExperienceForm: FC<IExperienceFormProps> = ({ experienceInfo, setExperienceInfo, drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
+const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
     const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
+    const { experienceInfo, setExperienceInfo } = useInstructorRegister();
 
     // Driving License
     const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(experienceInfo?.documents?.drivingLicense || '');

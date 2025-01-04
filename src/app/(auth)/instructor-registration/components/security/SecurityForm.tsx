@@ -7,24 +7,20 @@ import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Eye, EyeClosed, EyeOff } from 'lucide-react';
 import Link from 'next/link';
-import { IPersonalInfo, ISecurity } from '../InstructorRegistration';
 import { useRegisterInstructorMutation } from '@/redux/api/authApi/authApi';
 import { IRegisterInstructor } from '@/types/instructor';
 import { toast } from '@/hooks/use-toast';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 interface Inputs {
     password: string;
     confirmPassword: string;
 };
 
-interface ISecurityFormProps {
-    userInfo: IPersonalInfo | undefined;
-    instructorInfo: any;
-}
 
-
-const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
+const SecurityForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<Inputs>();
+    const { personalInfo, carInfo, experienceInfo, servicesInfo } = useInstructorRegister();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -81,11 +77,18 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
 
         const instructorFormData: IRegisterInstructor = {
             userInfo: {
-                ...userInfo,
+                ...personalInfo,
                 password: data.password
             },
-            instructorInfo
+            instructorInfo: {
+                ...carInfo,
+                ...experienceInfo,
+                ...servicesInfo
+            }
         }
+
+        console.log('instructorFormData', instructorFormData);
+        return;
 
         registerInstructor(instructorFormData).unwrap()
             .then((res) => {

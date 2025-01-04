@@ -4,8 +4,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Dispatch, FC, SetStateAction } from 'react';
 import { Control, FieldErrors, UseFormRegister } from 'react-hook-form';
 import FileUpload from '../FileUpload';
-import { IExperience } from '@/app/(auth)/instructor-registration/components/InstructorRegistration';
 import { languageList } from '@/constant/languageList';
+import { IExperience } from '@/types/instructor';
 
 interface IExperienceInputs {
     experience: string;
@@ -18,7 +18,6 @@ interface IExperienceFieldsProps {
     errors: FieldErrors<IExperienceInputs>;
     defaultValues?: IExperience | undefined;
     setDefaultValues?: Dispatch<SetStateAction<IExperience | undefined>>;
-    // control: Control<IExperience>;
     isRequired: boolean;
     drivingLicenseFile: File | null;
     setDrivingLicenseFile: Dispatch<SetStateAction<File | null>>;
@@ -48,7 +47,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
         setExperienceCertificateFile(null);
         setExperienceCertificateURL('');
     };
-    
+
     return (
         <div className='w-full mt-7'>
             <div className='flex flex-col gap-5'>
