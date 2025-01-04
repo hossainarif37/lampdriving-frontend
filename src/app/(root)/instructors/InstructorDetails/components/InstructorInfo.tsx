@@ -1,10 +1,10 @@
-
+"use client"
 import Image from 'next/image'
 import instructorImg from "@/assets/home-page-image/test-image.webp"
 import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-Taisor-Car-Color-Image.webp"
 import { CircleCheck } from 'lucide-react'
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
 
@@ -13,13 +13,24 @@ interface InstructorInfoProps {
   instructor: IInstructor;
 }
 const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const user: IUser | undefined = typeof instructor.user != "string" ? instructor.user : undefined;
+  console.log(instructor);
+
   const carInfo = [
     { id: 1, info: 'Auto Lessons & Test Packages' },
     { id: 2, info: 'Verified Working with Children Check' },
     { id: 3, info: 'Instructed for 15 yr 4 mo' },
   ];
-  const user: IUser | undefined = typeof instructor.user != "string" ? instructor.user : undefined;
-  console.log(instructor);
+
+
+  const toggleDescription = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  // Split the description into words
+  const words = instructor.description.split(" ");
+  const truncatedDescription = words.slice(0, 40).join(" ");
   return (
     <section className="bg-light rounded-xl border p-4 md:p-6 space-y-6">
       {/* Profile section */}
@@ -43,7 +54,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
         <div className="flex-1">
           <h1 className="text-2xl font-bold">{user?.name.fullName}</h1>
           <div className="flex md:flex-row flex-col md:items-center gap-1 mt-1">
-            <div className="flex text-indigo">{'★'.repeat(5)}</div>
+            <div className="flex text-gradient">{'★'.repeat(5)}</div>
             <span className="text-sm text-accent ml-1">4.6 - 79 ratings</span>
           </div>
         </div>
@@ -52,10 +63,12 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
       {/* Instructor bio */}
       <div>
         <h2 className="font-semibold mb-2 text-secondary">Instructor Bio</h2>
-        <p className="text-accent mb-4">
-          {instructor?.description}
+        <p className="text-accent mb-4" onClick={toggleDescription}>
+          {isExpanded ? instructor.description : `${truncatedDescription}....`}{" "}
+          <span className="text-indigo cursor-pointer">
+            {isExpanded ? "Show less" : "Show more"}
+          </span>
         </p>
-
         <div className="space-y-2 ">
           {carInfo.map(info => (
             <div key={info.id} className="flex items-center gap-2">
