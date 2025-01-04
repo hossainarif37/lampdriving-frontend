@@ -1,20 +1,20 @@
-"use client"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 
-import { IPersonalInfo } from '@/app/(auth)/instructor-registration/components/InstructorRegistration';
-import PersonalInfoFields from '@/components/shared/forms/PersonalInfoFields';
-import { Button } from '@/components/ui/button';
-import { FC, useMemo, useState } from 'react';
+import PersonalInfoFields, { IPersonalInfoInputs } from '@/components/shared/forms/PersonalInfoFields';
+import { FC, useState, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
-import UpdatePassword from './UpdatePassword';
+import { Button } from '@/components/ui/button';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import PhotoUpload, { IProfilePhoto } from '@/components/shared/PhotoUpload';
-import { useAppSelector } from '@/redux/hook';
 import { useFormWithDefaultValues } from '@/hooks/useFormWithDefaultValues';
 import { useImage } from '@/hooks/useImage';
 import { useUpdateUserMutation } from '@/redux/api/userApi/userApi';
 import { toast } from '@/hooks/use-toast';
 
-const SharedProfile: FC = () => {
+const PersonalInfoForm: FC = () => {
     const { user } = useAppSelector((state) => state.authSlice);
+
     // Default values from the user
     const defaultValues = useMemo(() => ({
         name: {
@@ -58,11 +58,8 @@ const SharedProfile: FC = () => {
 
     return (
         <div>
-            <form
-                onSubmit={handleSubmit(onSubmit)}
-                className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col items-start md:shadow-lg bg-light md:rounded-lg md:border'
-            >
-                <h1 className='text-xl md:text-2xl font-bold text-secondary'>Personal Details</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
+                <h1 className='text-2xl font-bold text-secondary'>Personal Info</h1>
 
                 <PhotoUpload
                     profilePhoto={profilePhoto}
@@ -74,12 +71,15 @@ const SharedProfile: FC = () => {
                     errors={errors}
                     control={control}
                     isRequired={false}
+                    defaultValues={defaultValues}
                 />
-                <Button type='submit' className='w-full text-gray-300 mt-7 gradient-color h-12'>Update</Button>
-            </form >
-            <UpdatePassword />
+
+                <Button type='submit' className='w-full mt-7 gradient-color h-12' disabled={isUpdating}>
+                    {isUpdating ? 'Updating...' : 'Update Profile'}
+                </Button>
+            </form>
         </div>
     );
 };
 
-export default SharedProfile;
+export default PersonalInfoForm;

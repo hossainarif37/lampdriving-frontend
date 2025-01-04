@@ -10,12 +10,13 @@ import { toast } from '@/hooks/use-toast';
 
 export interface IProfilePhoto {
     file: File | null;
-    url: string | "";
+    url: string | undefined;
 }
 
 interface PhotoUploadProps {
     profilePhoto: IProfilePhoto;
     setProfilePhoto: Dispatch<SetStateAction<IProfilePhoto>>
+
 }
 
 const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto }) => {
@@ -76,7 +77,6 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto }) =>
 
             const data = await response.json();
 
-            console.log('Image uploaded successfully:', data);
             toast({
                 message: "Image uploaded successfully",
             })

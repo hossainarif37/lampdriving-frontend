@@ -57,7 +57,7 @@ const multiSelectVariants = cva(
  */
 interface MultiSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof multiSelectVariants> {
+  VariantProps<typeof multiSelectVariants> {
   /**
    * An array of option objects to be displayed in the multi-select component.
    * Each option object has a label, value, and an optional icon.
@@ -144,7 +144,7 @@ export const MultiSelect = React.forwardRef<
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
     // const [isAnimating, setIsAnimating] = React.useState(false);
     const searchParams = useSearchParams()
- 
+
     const step = searchParams.get('step');
     const isServicesStep = step === 'services';
     const isExperienceStep = step === 'experience';
@@ -208,7 +208,7 @@ export const MultiSelect = React.forwardRef<
             onClick={handleTogglePopover}
             variant="outline"
             className={cn(
-              `flex w-full p-1 rounded-md border ${isServicesStep && selectedValues.length > 1 ? 'h-auto': 'h-11'} ${isExperienceStep && selectedValues.length > 2 && 'h-auto'} md:h-14 items-center justify-between [&_svg]:pointer-events-auto text-neutral-500`,
+              `flex w-full p-1 rounded-md border ${isServicesStep && selectedValues.length > 1 ? 'h-auto' : 'h-11'} ${isExperienceStep && selectedValues.length > 2 && 'h-auto'} md:h-14 items-center justify-between [&_svg]:pointer-events-auto text-neutral-500`,
               className
             )}
           >
@@ -222,10 +222,10 @@ export const MultiSelect = React.forwardRef<
                       <Badge
                         key={value}
                         className={cn(
-                        //   isAnimating ? "animate-bounce" : "",
+                          //   isAnimating ? "animate-bounce" : "",
                           multiSelectVariants({ variant })
                         )}
-                        // style={{ animationDuration: `${animation}s` }}
+                      // style={{ animationDuration: `${animation}s` }}
                       >
                         {IconComponent && (
                           <IconComponent className="h-4 w-4 mr-2" />
@@ -237,7 +237,7 @@ export const MultiSelect = React.forwardRef<
                             event.stopPropagation();
                             toggleOption(value);
                           }}
-                        />  
+                        />
                       </Badge>
                     );
                   })}
