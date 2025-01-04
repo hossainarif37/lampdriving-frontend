@@ -1,4 +1,5 @@
-import { IUser } from "./user";
+import { Dispatch, SetStateAction } from "react";
+import { IName, IUser } from "./user";
 
 // interface for document
 export interface IDocument {
@@ -66,4 +67,40 @@ export interface IInstructor {
 export interface IRegisterInstructor {
     userInfo: Partial<IUser>;
     instructorInfo: Partial<IInstructor>;
+}
+
+export interface IPersonalInfo {
+    name: IName;
+    email: string;
+    phone: string;
+    dateOfBirth: string;
+    gender: 'male' | 'female' | 'other';
+}
+
+export interface IExperience {
+    experience: string;
+    description: string;
+    languages: string[];
+    documents: IDocument;
+}
+
+export interface IServices {
+    serviceAreas: string[];
+    pricePerHour: number;
+    workingHour: IWorkingHour;
+}
+
+export interface ISecurity {
+    password: string;
+}
+
+export interface IInstructorRegisterContext {
+    personalInfo: IPersonalInfo | undefined;
+    experienceInfo: IExperience | undefined;
+    carInfo: IVehicle | undefined;
+    servicesInfo: IServices | undefined;
+    setPersonalInfo: React.Dispatch<React.SetStateAction<IPersonalInfo | undefined>>;
+    setExperienceInfo: React.Dispatch<React.SetStateAction<IExperience | undefined>>;
+    setCarInfo: React.Dispatch<React.SetStateAction<IVehicle | undefined>>;
+    setServicesInfo: React.Dispatch<React.SetStateAction<IServices | undefined>>;
 }

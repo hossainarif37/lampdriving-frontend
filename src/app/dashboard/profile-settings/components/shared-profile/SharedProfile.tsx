@@ -1,12 +1,10 @@
 "use client"
 
-import { IPersonalInfo } from '@/app/(auth)/instructor-registration/components/InstructorRegistration';
 import PersonalInfoFields from '@/components/shared/forms/PersonalInfoFields';
 import { Button } from '@/components/ui/button';
-import { FC, useMemo, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FC, useMemo } from 'react';
 import UpdatePassword from './UpdatePassword';
-import PhotoUpload, { IProfilePhoto } from '@/components/shared/PhotoUpload';
+import PhotoUpload from '@/components/shared/PhotoUpload';
 import { useAppSelector } from '@/redux/hook';
 import { useFormWithDefaultValues } from '@/hooks/useFormWithDefaultValues';
 import { useImage } from '@/hooks/useImage';

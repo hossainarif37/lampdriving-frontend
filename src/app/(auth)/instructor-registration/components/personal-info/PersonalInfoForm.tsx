@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction, useContext } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { IPersonalInfo } from '../InstructorRegistration';
 import PersonalInfoFields from '@/components/shared/forms/PersonalInfoFields';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
+import { IPersonalInfo } from '@/types/instructor';
 
-interface IPersonalInfoFormProps {
-    personalInfo: IPersonalInfo | undefined;
-    setPersonalInfo: Dispatch<SetStateAction<IPersonalInfo | undefined>>;
-}
+// interface IPersonalInfoFormProps {
+//     personalInfo: IPersonalInfo | undefined;
+//     setPersonalInfo: Dispatch<SetStateAction<IPersonalInfo | undefined>>;
+// }
 
-const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({ personalInfo, setPersonalInfo }) => {
+const PersonalInfoForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control } = useForm<IPersonalInfo>();
     const router = useRouter();
-
+    const { setPersonalInfo, personalInfo } = useInstructorRegister();
     const onSubmit = (data: IPersonalInfo) => {
         setPersonalInfo(data);
         router.push("/instructor-registration?step=experience");
