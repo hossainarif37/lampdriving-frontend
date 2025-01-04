@@ -15,7 +15,7 @@ const BlockedInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
     const [page, setPage] = useState(urlSearchParams.get('page') || '1');
     const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
-
+    const [isSearched, setIsSearched] = useState(false);
     const { data, isLoading } = useGetAllInstructorsQuery(
         {
             status: "verified",
@@ -27,6 +27,11 @@ const BlockedInstructorsTable: FC = () => {
     useEffect(() => {
         setPage(urlSearchParams.get('page') || '1');
         setLimit(urlSearchParams.get('limit') || '8');
+        if (urlSearchParams.get('searchKey')?.length) {
+            setIsSearched(true);
+        }else{
+            setIsSearched(false);
+        }
     }, [urlSearchParams])
 
     if (isLoading) {
@@ -113,7 +118,7 @@ const BlockedInstructorsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound dataName='Pending Instructors' />
+                        <DataNotFound isSearched={isSearched} dataName='Blocked Instructors' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />
