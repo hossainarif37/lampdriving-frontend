@@ -7,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import FileUpload from '@/components/shared/FileUpload';
 import { useRouter } from 'next/navigation';
 import { IVehicle } from '@/types/instructor';
+import CarInfoFields from '@/components/shared/forms/CarInfoFields';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 
 interface Inputs {
@@ -18,8 +20,6 @@ interface Inputs {
 
 
 interface ICarInfoFormProps {
-    carInfo: IVehicle | undefined;
-    setCarInfo: Dispatch<SetStateAction<IVehicle | undefined>>
     carImageFile: File | null;
     setCarImageFile: Dispatch<SetStateAction<File | null>>
 }
@@ -29,14 +29,15 @@ const carTypes = [
     "Manual"
 ]
 
-const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo, carImageFile, setCarImageFile}) => {
+const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) => {
     const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
+    const { carInfo, setCarInfo } = useInstructorRegister();
 
     // Car Image
     const [carImageURL, setCarImageURL] = useState<string>(carInfo?.image || '');
     const [carImageError, setCarImageError] = useState<string>("");
-    
+
 
     const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
 
@@ -61,16 +62,16 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo, carImageFile, 
         router.push("/instructor-registration?step=security");
     }
 
-     useEffect(() => {
-            if (isClicked) {
-                if (carImageURL) {
-                    setCarImageError('');
-                } else {
-                    setCarImageError(`${carImageFile ? 'Upload Car Image' : 'Car Image is required'}`);
-                }
+    useEffect(() => {
+        if (isClicked) {
+            if (carImageURL) {
+                setCarImageError('');
+            } else {
+                setCarImageError(`${carImageFile ? 'Upload Car Image' : 'Car Image is required'}`);
             }
-        }, [carImageFile, carImageURL, isClicked]);
-    
+        }
+    }, [carImageFile, carImageURL, isClicked]);
+
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form
@@ -78,101 +79,19 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({carInfo, setCarInfo, carImageFile, 
                 className='w-full flex flex-col'
             >
                 <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Car Info</h1>
-                <div className='w-full mt-7'>
-                    <div className='flex flex-col gap-5'>
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-                            {/* Brand Name */}
-                            <div className='w-full'>
-                                <label htmlFor="brand-name" className='font-semibold text-secondary'>Brand Name</label>
-                                <Input
-                                    {...register('name', {
-                                        required: "Brand name is required"
-                                    })
-                                    }
-                                    defaultValue={carInfo?.name}
-                                    type="text" id='brand-name' placeholder="Enter brand name" className='h-11 xl:h-14 mt-1'
-                                />
-                                {errors?.name && <p className='text-red-500 text-sm mt-1'>{errors?.name?.message}</p>}
-                            </div>
-
-                            {/* Car Model */}
-                            <div className='w-full'>
-                                <label htmlFor="model" className='font-semibold text-secondary'>Model</label>
-                                <Input
-                                    {...register('model', {
-                                        required: "Model is required"
-                                    })
-                                    }
-                                    defaultValue={carInfo?.model}
-                                    type="text" id="model" placeholder="Enter car model" className='h-11 xl:h-14 mt-1'
-                                />
-                                {errors?.model && <p className='text-red-500 text-sm mt-1'>{errors?.model?.message}</p>}
-                            </div>
-                        </div>
-
-                        <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-                            {/* Cart Type */}
-                            <div>
-                                <label className="font-semibold text-secondary">Type</label>
-                                <Controller
-                                    name="type"
-                                    control={control}
-                                    rules={{ required: "Type is required" }}
-                                    defaultValue={carInfo?.type}
-                                    render={({ field }) => (
-                                        <Select onValueChange={field.onChange} value={field.value || ''}>
-                                            <SelectTrigger className="h-11 xl:h-14 mt-1">
-                                                <SelectValue className="placeholder:text-[#00000012]" placeholder="Select Type" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                {
-                                                    carTypes.map((type, i) => (
-                                                        <SelectItem key={i} value={type.toLowerCase()}>
-                                                            {type}
-                                                        </SelectItem>
-                                                    ))
-                                                }
-                                            </SelectContent>
-                                        </Select>
-                                    )}
-                                />
-
-                                {errors?.type && <p className='text-red-500 text-sm mt-1'>{errors?.type?.message}</p>}
-                            </div>
-
-                            {/* Car Rating */}
-                            <div>
-                                <label htmlFor="rating" className='font-semibold text-secondary'>Rating</label>
-                                <Input
-                                    {...register('rating', {
-                                        required: "Rating is required",
-                                        max: { value: 5, message: "Rating should be less than 5" }
-                                    })
-                                    }
-                                    defaultValue={carInfo?.rating}
-                                    type="number" id="rating" placeholder="Enter car rating" className='h-11 xl:h-14 mt-1'
-                                />
-                                {errors?.rating && <p className='text-red-500 text-sm mt-1'>{errors?.rating?.message}</p>}
-                            </div>
-                        </div>
-
-                        {/* Car Image */}
-                        <div className='w-full space-y-1'>
-                            <label htmlFor="first-name" className='font-semibold text-secondary'>Car Image</label>
-                            <FileUpload
-                                label="Click 1 file to upload"
-                                maxSize="1500x1500px"
-                                imageUrl={carImageURL}
-                                setImageUrl={setCarImageURL}
-                                setImageError={setCarImageError}
-                                selectedFile={carImageFile}
-                                setSelectedFile={setCarImageFile}
-                                removeImage={removeCarImage}
-                            />
-                            {carImageError && <p className='text-red-500 text-sm mt-1'>{carImageError}</p>}
-                        </div>
-                    </div>
-                </div>
+                <CarInfoFields
+                    register={register}
+                    errors={errors}
+                    control={control}
+                    isRequired={true}
+                    carImageError={carImageError}
+                    setCarImageFile={setCarImageFile}
+                    setCarImageURL={setCarImageURL}
+                    carImageURL={carImageURL}
+                    setCarImageError={setCarImageError}
+                    carImageFile={carImageFile}
+                    defaultValues={carInfo}
+                />
 
                 <div>
                     <StepNavigationButtons prev="services" next="security" />

@@ -29,7 +29,7 @@ const LoginForm: FC = () => {
             toast({
                 message: res.message
             });
-            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
+            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
             router.push('/')
         }).catch((err) => {
             toast({

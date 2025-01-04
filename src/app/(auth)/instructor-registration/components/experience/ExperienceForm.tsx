@@ -9,65 +9,46 @@ import { useForm } from 'react-hook-form';
 import { Textarea } from '@/components/ui/textarea';
 import { MultiSelect } from '@/components/ui/multi-select';
 import { useRouter } from 'next/navigation';
-import { IExperience } from '../InstructorRegistration';
+import { languageList } from '@/constant/languageList';
+import ExperienceFields from '@/components/shared/forms/ExperienceFields';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
-type Inputs = {
+interface Inputs {
     experience: string;
     description: string;
     languages: string[];
 }
 
-const languageList = [
-    { value: "english", label: "English" },
-    { value: "spanish", label: "Spanish" },
-    { value: "chinese", label: "Chinese" },
-    { value: "french", label: "French" },
-    { value: "german", label: "German" },
-];
-
 interface IExperienceFormProps {
-    experienceInfo: IExperience | undefined;
-    setExperienceInfo: Dispatch<SetStateAction<IExperience | undefined>>
+    // experienceInfo: IExperience | undefined;
+    // setExperienceInfo: Dispatch<SetStateAction<IExperience | undefined>>
     drivingLicenseFile: File | null;
     setDrivingLicenseFile: Dispatch<SetStateAction<File | null>>;
     experienceCertificateFile: File | null;
     setExperienceCertificateFile: Dispatch<SetStateAction<File | null>>;
 }
 
-const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperienceInfo, drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile}) => {
+const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
     const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
-    
+    const { experienceInfo, setExperienceInfo } = useInstructorRegister();
+
     // Driving License
     const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(experienceInfo?.documents?.drivingLicense || '');
-    
+
     const [drivingLicenseError, setDrivingLicenseError] = useState<string>('');
 
     // Experience Certificate
     const [experienceCertificateURL, setExperienceCertificateURL] = useState<string>(experienceInfo?.documents?.experienceCertificate || '');
     const [experienceCertificateError, setExperienceCertificateError] = useState<string>('');
 
-    console.log('experienceInfo', experienceInfo);
-    
-
     // Selected languages
-    const [selectedLanguages, setSelectedLanguages] = useState<string[]>(experienceInfo?.languages || []);  
+    const [selectedLanguages, setSelectedLanguages] = useState<string[]>(experienceInfo?.languages || []);
     const [selectedLanguagesError, setSelectedLanguagesError] = useState<string>('');
 
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
 
-    const removeDrivingLicense = () => {
-        setDrivingLicenseFile(null);
-        setDrivingLicenseURL('');
-    };
-
-    const removeExperienceCertificate = () => {
-        setExperienceCertificateFile(null);
-        setExperienceCertificateURL('');
-    };
-
-    console.log('Selected languages', selectedLanguages);
     const onSubmit = (data: Inputs) => {
         setIsClicked(true);
         if (!drivingLicenseURL || !experienceCertificateURL || selectedLanguages.length === 0) {
@@ -77,7 +58,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperience
             if (!experienceCertificateURL) {
                 setExperienceCertificateError(`${experienceCertificateError ? experienceCertificateError : 'Experience Certificate is required'}`);
             }
-            if (selectedLanguages.length === 0 ) {
+            if (selectedLanguages.length === 0) {
                 setSelectedLanguagesError('Languages are required');
             }
             return;
@@ -121,83 +102,29 @@ const ExperienceForm: FC<IExperienceFormProps> = ({experienceInfo, setExperience
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
                 <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Experience and Certifications</h1>
 
-                <div className='w-full mt-7'>
-                    <div className='flex flex-col gap-5'>
-                        <div className='w-full'>
-                            <label htmlFor="experience" className='font-semibold text-secondary'>Driving Experience</label>
-                            <Input
-                                {...register('experience', {
-                                    required: "Experience is required"
-                                })
-                                }
-                                defaultValue={experienceInfo?.experience}
-                                type="text" id='experience' placeholder="Enter your experience (ex: 2 years)" className='h-11 xl:h-14 mt-1'
-                            />
-                            {errors?.experience && <p className='text-red-500 text-sm mt-1'>{errors?.experience?.message}</p>}
-                        </div>
-
-                        {/* Description */}
-                        <div className='w-full'>
-                            <label htmlFor="experience" className='font-semibold text-secondary'>Description</label>
-                            <Textarea
-                                placeholder="Enter your description"
-                                rows={5}
-                                {...register('description', { required: 'Description is required' })}
-                                className='mt-1'
-                                defaultValue={experienceInfo?.description}
-                            />
-                            {errors?.description && <span className="text-red-500">{errors?.description?.message}</span>}
-                        </div>
-
-                        <div className='w-full'>
-                            <label htmlFor="experience" className='font-semibold text-secondary'>Languages</label>
-                            <MultiSelect
-                                options={languageList}
-                                onValueChange={setSelectedLanguages}
-                                // defaultValue={selectedLanguages}
-                                value={experienceInfo?.languages}
-                                placeholder="Select Languages"
-                                variant="inverted"
-                                animation={2}
-                                maxCount={3}
-                                className='mt-1'
-                            />
-                            {selectedLanguagesError && <p className='text-red-500 text-sm mt-1'>{selectedLanguagesError}</p>}
-                        </div>
-
-                        {/* Driving License */}
-                        <div className='w-full space-y-1'>
-                            <label htmlFor="first-name" className='font-semibold text-secondary'>Driving License</label>
-                            <FileUpload
-                                label="Click 1 file to upload"
-                                maxSize="1500x1500px"
-                                imageUrl={drivingLicenseURL}
-                                setImageUrl={setDrivingLicenseURL}
-                                setImageError={setDrivingLicenseError}
-                                selectedFile={drivingLicenseFile}
-                                setSelectedFile={setDrivingLicenseFile}
-                                removeImage={removeDrivingLicense}
-                            />
-                            {drivingLicenseError && <p className='text-red-500 text-sm mt-1'>{drivingLicenseError}</p>}
-                        </div>
-
-                        {/* Experience Certificate */}
-                        <div className='w-full space-y-1'>
-                            <label htmlFor="first-name" className='font-semibold text-secondary'>Experience Certificate</label>
-                            <FileUpload
-                                label="Click 1 file to upload"
-                                maxSize="1500x1500px"
-                                imageUrl={experienceCertificateURL}
-                                setImageUrl={setExperienceCertificateURL}
-                                setImageError={setExperienceCertificateError}
-                                selectedFile={experienceCertificateFile}
-                                setSelectedFile={setExperienceCertificateFile}
-                                removeImage={removeExperienceCertificate}
-                            />
-                            {experienceCertificateError && <p className='text-red-500 text-sm mt-1'>{experienceCertificateError}</p>}
-                        </div>
-                    </div>
-                </div>
+                <ExperienceFields
+                    errors={errors}
+                    defaultValues={experienceInfo}
+                    setDefaultValues={setExperienceInfo}
+                    isRequired={true}
+                    register={register}
+                    setDrivingLicenseError={setDrivingLicenseError}
+                    setExperienceCertificateError={setExperienceCertificateError}
+                    setSelectedLanguagesError={setSelectedLanguagesError}
+                    drivingLicenseFile={drivingLicenseFile}
+                    setDrivingLicenseFile={setDrivingLicenseFile}
+                    experienceCertificateFile={experienceCertificateFile}
+                    setExperienceCertificateFile={setExperienceCertificateFile}
+                    drivingLicenseURL={drivingLicenseURL}
+                    setDrivingLicenseURL={setDrivingLicenseURL}
+                    experienceCertificateURL={experienceCertificateURL}
+                    setExperienceCertificateURL={setExperienceCertificateURL}
+                    drivingLicenseError={drivingLicenseError}
+                    experienceCertificateError={experienceCertificateError}
+                    selectedLanguages={selectedLanguages}
+                    setSelectedLanguages={setSelectedLanguages}
+                    selectedLanguagesError={selectedLanguagesError}
+                />
 
                 <div>
                     <StepNavigationButtons prev="personal-info" next="services" />

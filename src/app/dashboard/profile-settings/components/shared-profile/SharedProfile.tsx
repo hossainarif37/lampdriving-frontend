@@ -1,23 +1,58 @@
 "use client"
 
-import { IPersonalInfo } from '@/app/(auth)/instructor-registration/components/InstructorRegistration';
 import PersonalInfoFields from '@/components/shared/forms/PersonalInfoFields';
 import { Button } from '@/components/ui/button';
-import { FC, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FC, useMemo } from 'react';
 import UpdatePassword from './UpdatePassword';
-import PhotoUpload, { IProfilePhoto } from '@/components/shared/PhotoUpload';
+import PhotoUpload from '@/components/shared/PhotoUpload';
+import { useAppSelector } from '@/redux/hook';
+import { useFormWithDefaultValues } from '@/hooks/useFormWithDefaultValues';
+import { useImage } from '@/hooks/useImage';
+import { useUpdateUserMutation } from '@/redux/api/userApi/userApi';
+import { toast } from '@/hooks/use-toast';
 
 const SharedProfile: FC = () => {
-    const { register, handleSubmit, formState: { errors }, control, watch } = useForm<IPersonalInfo>();
-    const [profilePhoto, setProfilePhoto] = useState<IProfilePhoto>({
-        file: null,
-        url: ""
-    })
+    const { user } = useAppSelector((state) => state.authSlice);
+    // Default values from the user
+    const defaultValues = useMemo(() => ({
+        name: {
+            firstName: user?.name?.firstName || '',
+            lastName: user?.name?.lastName || '',
+        },
+        email: user?.email || '',
+        phone: user?.phone || '',
+        gender: user?.gender || 'male',
+        dateOfBirth: user?.dateOfBirth || '',
+    }), [user]);
 
-    console.log('profilePhoto', profilePhoto);
+    const { register, handleSubmit, modifiedFields, control, formState: { errors } } = useFormWithDefaultValues(defaultValues);
 
-    const onSubmit = (data: IPersonalInfo) => console.log(data);    
+    const { profilePhoto, setProfilePhoto, isImageModified, validateImage } = useImage(user?.profileImg);
+
+    const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
+
+    const onSubmit = async (data: typeof defaultValues) => {
+        // Validate the image before proceeding
+        if (!validateImage()) return;
+
+        // Check if there are any changes
+        if (Object.keys(modifiedFields).length === 0 && !isImageModified) {
+            alert('No changes detected.');
+            return;
+        }
+
+        const payload = {
+            ...modifiedFields,
+            ...(isImageModified && profilePhoto.url ? { profileImg: profilePhoto.url } : {}),
+        };
+
+        updateUser(payload).unwrap().then((res) => {
+            toast({ message: res.message })
+        }).catch((error) => {
+            console.error('Failed to update profile:', error);
+            toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
+        })
+    };
 
     return (
         <div>
@@ -38,7 +73,7 @@ const SharedProfile: FC = () => {
                     control={control}
                     isRequired={false}
                 />
-                <Button className='w-full mt-7 gradient-color h-12'>Update</Button>
+                <Button type='submit' className='w-full text-gray-300 mt-7 gradient-color h-12'>Update</Button>
             </form >
             <UpdatePassword />
         </div>

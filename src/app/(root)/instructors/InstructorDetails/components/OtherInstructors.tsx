@@ -9,7 +9,9 @@ import {
   CarouselContent,
 } from "@/components/ui/carousel"
 
-export default function OtherInstructors() {
+import { FC } from 'react';
+
+const OtherInstructors: FC = () => {
   const instructors = [
     { id: 1, name: 'Kim' },
     { id: 2, name: 'Steve' },
@@ -46,5 +48,6 @@ export default function OtherInstructors() {
       </CarouselContent>
     </Carousel>
   );
-}
+};
 
+export default OtherInstructors;

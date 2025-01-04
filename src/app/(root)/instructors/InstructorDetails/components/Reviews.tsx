@@ -1,6 +1,6 @@
-// Defining the Reviews component
-export default function Reviews() {
-  // Sample review data
+import { FC } from 'react';
+
+const Reviews: FC = () => {
   const reviews = [
     {
       id: 1,
@@ -48,4 +48,6 @@ export default function Reviews() {
       </div>
     </section>
   );
-}
+};
+
+export default Reviews;

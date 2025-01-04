@@ -7,24 +7,20 @@ import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Eye, EyeClosed, EyeOff } from 'lucide-react';
 import Link from 'next/link';
-import { IPersonalInfo, ISecurity } from '../InstructorRegistration';
 import { useRegisterInstructorMutation } from '@/redux/api/authApi/authApi';
 import { IRegisterInstructor } from '@/types/instructor';
 import { toast } from '@/hooks/use-toast';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 interface Inputs {
     password: string;
     confirmPassword: string;
 };
 
-interface ISecurityFormProps {
-    userInfo: IPersonalInfo | undefined;
-    instructorInfo: any;
-}
 
-
-const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
+const SecurityForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<Inputs>();
+    const { personalInfo, carInfo, experienceInfo, servicesInfo } = useInstructorRegister();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -48,7 +44,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
         }
     }, [password, confirmPassword]);
 
-   
+
 
     const handlePasswordToggle = (field: string) => {
         if (field === 'password') {
@@ -58,8 +54,8 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
         }
     }
 
-     // Handle checkbox changes
-     const handleTermsChange = (checked: boolean) => {
+    // Handle checkbox changes
+    const handleTermsChange = (checked: boolean) => {
         setTermsAccepted(checked);
         if (checked) {
             setTermsError("");
@@ -81,11 +77,18 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
 
         const instructorFormData: IRegisterInstructor = {
             userInfo: {
-                ...userInfo,
+                ...personalInfo,
                 password: data.password
             },
-            instructorInfo
+            instructorInfo: {
+                ...carInfo,
+                ...experienceInfo,
+                ...servicesInfo
+            }
         }
+
+        console.log('instructorFormData', instructorFormData);
+        return;
 
         registerInstructor(instructorFormData).unwrap()
             .then((res) => {
@@ -136,7 +139,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
                                     className="absolute right-3 top-1/2 -translate-y-1/2"
                                     onClick={() => handlePasswordToggle("password")}
                                 >
-                                    {passwordVisible ? <Eye width={20} height={20}/> : <EyeClosed width={20} height={20}/>}
+                                    {passwordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
                                 </span>
                             </div>
                             {errors?.password && (
@@ -169,7 +172,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({ userInfo, instructorInfo }) => {
                                     className="absolute right-3 top-1/2 -translate-y-1/2"
                                     onClick={() => handlePasswordToggle("confirm-password")}
                                 >
-                                    {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20}/>}
+                                    {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
                                 </span>
                             </div>
                             {errors?.confirmPassword && (

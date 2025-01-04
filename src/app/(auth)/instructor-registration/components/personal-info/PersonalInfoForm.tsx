@@ -1,26 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction, useContext } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
-import { Controller, useForm } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { IPersonalInfo } from '../InstructorRegistration';
-import { genderOptions } from '@/constant/gender';
 import PersonalInfoFields from '@/components/shared/forms/PersonalInfoFields';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
+import { IPersonalInfo } from '@/types/instructor';
 
+// interface IPersonalInfoFormProps {
+//     personalInfo: IPersonalInfo | undefined;
+//     setPersonalInfo: Dispatch<SetStateAction<IPersonalInfo | undefined>>;
+// }
 
-
-
-interface IPersonalInfoFormProps {
-    personalInfo: IPersonalInfo | undefined;
-    setPersonalInfo: Dispatch<SetStateAction<IPersonalInfo | undefined>>;
-}
-
-const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({ personalInfo, setPersonalInfo }) => {
+const PersonalInfoForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control } = useForm<IPersonalInfo>();
     const router = useRouter();
-
+    const { setPersonalInfo, personalInfo } = useInstructorRegister();
     const onSubmit = (data: IPersonalInfo) => {
         setPersonalInfo(data);
         router.push("/instructor-registration?step=experience");
@@ -33,7 +28,7 @@ const PersonalInfoForm: FC<IPersonalInfoFormProps> = ({ personalInfo, setPersona
                 <PersonalInfoFields
                     register={register}
                     errors={errors}
-                    personalInfo={personalInfo}
+                    defaultValues={personalInfo}
                     control={control}
                     isRequired={true}
                 />

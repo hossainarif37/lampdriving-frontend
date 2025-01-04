@@ -1,3 +1,4 @@
+import { IInstructor } from "./instructor";
 import { IUser } from "./user";
 
 export interface IRegisterInputs {
@@ -28,4 +29,5 @@ export interface IAuthSliceState {
     isAuthenticate: boolean;
     isAuthLoading: boolean;
     user: IUser | null;
+    instructor: IInstructor | null;
 }

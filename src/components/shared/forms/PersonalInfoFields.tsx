@@ -1,29 +1,34 @@
+"use client";
+
 import { FC } from 'react';
 import { UseFormRegister, FieldErrors, Control, Controller } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { genderOptions } from '@/constant/gender';
+import { usePathname } from 'next/navigation';
 
-export interface IPersonalInfoInputs  {
-    name: {
-        firstName: string;
-        lastName: string;
-    },
-    email: string;
-    phone: string;
-    gender: "male" | "female" | "other";
-    dateOfBirth: string;
+export interface IPersonalInfoInputs {
+  name: {
+    firstName: string;
+    lastName: string;
+  },
+  email: string;
+  phone: string;
+  gender: "male" | "female" | "other";
+  dateOfBirth: string;
 }
 
 interface PersonalInfoFieldsProps {
   register: UseFormRegister<IPersonalInfoInputs>;
   errors: FieldErrors<IPersonalInfoInputs>;
-  personalInfo?: IPersonalInfoInputs;
+  defaultValues?: IPersonalInfoInputs;
   control: Control<IPersonalInfoInputs>;
   isRequired: boolean;
 }
 
-const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, personalInfo, control, isRequired }) => {
+const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, defaultValues, control, isRequired }) => {
+  const pathname = usePathname();
+  const isDashboard = pathname.includes("dashboard");
   return (
     <>
       <div className='w-full mt-5'>
@@ -40,7 +45,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
                     message: "First name is required",
                   },
                 })}
-                defaultValue={personalInfo?.name.firstName}
+                defaultValue={defaultValues?.name.firstName}
                 type="text"
                 id='first-name'
                 placeholder="Enter your firstname"
@@ -59,7 +64,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
                     message: "Last name is required",
                   },
                 })}
-                defaultValue={personalInfo?.name.lastName}
+                defaultValue={defaultValues?.name.lastName}
                 type="text"
                 id="last-name"
                 placeholder="Enter your lastname"
@@ -76,11 +81,13 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
               <Controller
                 name="gender"
                 control={control}
-                defaultValue={personalInfo?.gender}
-                rules={{ required: {
+                defaultValue={defaultValues?.gender}
+                rules={{
+                  required: {
                     value: isRequired,
                     message: "Gender is required",
-                  }, }}
+                  },
+                }}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value || ''}>
                     <SelectTrigger className="h-11 xl:h-14 mt-1">
@@ -117,7 +124,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
                     message: "Phone number must be 10 digits",
                   },
                 })}
-                defaultValue={personalInfo?.phone}
+                defaultValue={defaultValues?.phone}
                 type="number"
                 placeholder="Enter your phone number"
                 className='h-11 xl:h-14 mt-1'
@@ -137,7 +144,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
                     message: "Date of birth is required",
                   },
                 })}
-                defaultValue={personalInfo?.dateOfBirth}
+                defaultValue={defaultValues?.dateOfBirth}
                 type="date"
                 className='h-11 xl:h-14 mt-1'
               />
@@ -158,10 +165,11 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, per
                     message: "Invalid email address",
                   },
                 })}
-                defaultValue={personalInfo?.email}
+                defaultValue={defaultValues?.email}
                 type="email"
                 placeholder="Enter your email"
-                className='h-11 xl:h-14 mt-1'
+                className='h-11 xl:h-14 mt-1 disabled:opacity-90'
+                disabled={isDashboard}
               />
               {errors?.email && <p className='text-red-500 text-sm mt-1'>{errors.email.message}</p>}
             </div>
