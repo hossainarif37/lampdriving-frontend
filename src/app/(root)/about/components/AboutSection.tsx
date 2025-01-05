@@ -1,54 +1,30 @@
-// import Image from 'next/image';
-// import { FC } from 'react';
-import leftImg from "@/assets/about-page-image/man_1.jpg"
-import carImg from "@/assets/about-page-image/about-car.png"
-import badgeImg from "@/assets/about-page-image/badge.png"
+import { FC } from "react";
+import leftImg from "@/assets/about-page-image/man_1.jpg";
+import carImg from "@/assets/about-page-image/about-car.png";
+import badgeImg from "@/assets/about-page-image/badge.png";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { ChevronsRight, FileText } from "lucide-react";
 
-// const AboutSection: FC = () => {
-//     return (
-//         <div>
-//             <div>
-//             <Image src={leftImg} alt='about-image' />
-//             </div>
-
-//             <div>
-
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default AboutSection;
-
-
-
-
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { FileText } from 'lucide-react'
-
-export default function AboutSection() {
+const AboutSection: FC = () => {
     return (
-        <>
+        <div className="py-16">
             <div className="wrapper py-12">
-                <div className="flex md:flex-row flex-col gap-14 justify-between">
+                <div className="flex md:flex-row flex-col gap-14 justify-between  md:max-w-full max-w-lg mx-auto">
                     {/* Left Column with Image */}
-                    <div className="relative sm:w-1/2 gap-8">
+                    <div className="relative md:w-1/2">
                         {/* Background image with person */}
-                        <div className="relative overflow-hidden w-full">
+                        <div className="md:max-w-[425px]">
                             <Image
                                 src={leftImg}
                                 alt="Driving instructor"
-                                // width={400}
-                                // height={350}
-                                className="object-cover rounded-lg"
+                                className="object-cover rounded-lg w-full"
                                 priority
                             />
                         </div>
 
                         {/* Award badge - positioned to overlap */}
-                        <div className="absolute right-16 top-16  bg-white p-7 rounded-full shadow-lg">
+                        <div className="absolute right-8 top-16 bg-white p-7 rounded-full shadow-lg">
                             <Image
                                 src={badgeImg}
                                 alt="Best Driving School Award"
@@ -59,57 +35,51 @@ export default function AboutSection() {
                         </div>
 
                         {/* Circular green border with car */}
-                        <div className="absolute bottom-0 left-0 w-full">
-                            <div className="relative aspect-square w-full">
-                                {/* Rotating border with text */}
-
-
-                                {/* Car image */}
-                                <div className="absolute bottom-0 md:-left-10 md:w-7/8 w-5/7">
-                                    <Image
-                                        src={carImg}
-                                        alt="Mercedes AMG"
-                                        // width={500}
-                                        // height={300}
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </div>
+                        <div className="absolute -bottom-10 md:-left-9 md:w-7/8 w-full animate-carSlide">
+                            <Image
+                                src={carImg}
+                                alt="Mercedes AMG"
+                                className="object-contain"
+                            />
                         </div>
                     </div>
 
                     {/* Right Column Content */}
-                    <div className="space-y-4 sm:w-1/2">
-                        <Badge variant="secondary" className="bg-[#1B2534] text-white hover:bg-[#1B2534]/90 rounded px-4 py-1">
-                            ABOUT US
-                        </Badge>
+                    <div className="space-y-8 md:w-1/2">
+                        <div className="space-y-4">
+                            <h3 className="w-[105px] bg-secondary py-[6px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-secondary text-light before:top-0 before:rounded-[4px] before:-ml-6">
+                                ABOUT US
+                            </h3>
 
-                        <h1 className="md:text-5xl text-xl font-bold leading-tight text-[#1B2534]">
-                            Experience, Quality and Trust in Driving Education
-                        </h1>
+                            <h1 className="lg:text-5xl md:text-4xl text-3xl font-bold leading-[2.3rem] lg:leading-[3.5rem] md:leading-[2.7rem] text-[#1B2534]">
+                                Experience, Quality and Trust in Driving Education
+                            </h1>
 
-                        <p className="text-gray-600 text-sm md:text-base ">
-                            Certain circumstances and owing to the claims of duty or the obliga- tions
-                            of business it will frequently occur that pleasures have to be repudiated and
-                            annoyances accepted.
-                        </p>
+                            <p className="text-gray-600 text-sm md:text-base leading-6 md:leading-7">
+                                Certain circumstances and owing to the claims of duty or the
+                                obligations of business it will frequently occur that pleasures
+                                have to be repudiated and annoyances accepted.
+                            </p>
+                        </div>
 
-                        <div className="md:space-y-6 space-y-3  ">
+                        <div className="md:space-y-6 space-y-3">
                             <div className="space-y-2">
-                                <div className="flex items-center gap-3">
-                                    <div className="p-2 bg-gray-50 rounded">
-                                        <FileText className="w-6 h-6 text-[#1B2534]" />
+                                <div className="flex items-center gap-4">
+                                    <div className="bg-gray-50 rounded">
+                                        <FileText className="w-14 h-14 text-indigo" />
                                     </div>
-                                    <h3 className="text-xl font-semibold text-[#1B2534]">
-                                        Our History
-                                    </h3>
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-secondary">
+                                            Our History
+                                        </h3>
+                                        <p className="text-accent">
+                                            Duty or the obligations of business matters.
+                                        </p>
+                                    </div>
                                 </div>
-                                <p className="text-gray-600 pl-[52px]">
-                                    Duty or the obligations of business matters.
-                                </p>
                             </div>
 
-                            <div className="space-y-2 pl-[52px] text-sm md:text-base">
+                            <div className="space-y-3 pl-[70px] text-sm md:text-base">
                                 {[
                                     "Established in 2005.",
                                     "In 2008, we expanded our services.",
@@ -117,26 +87,23 @@ export default function AboutSection() {
                                     "Online learning platform in 2015.",
                                 ].map((text, index) => (
                                     <div key={index} className="flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                                        <ChevronsRight className="text-primary" />
                                         <span className="text-gray-600">{text}</span>
                                     </div>
                                 ))}
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="text-center">
-                <Button
-                    className="bg-[#1B2534] text-white hover:bg-[#1B2534]/90 mt-4"
-                >
+            <div className="text-center mt-8">
+                <Button className="bg-secondary hover:bg-secondary/90">
                     READ MORE
                 </Button>
             </div>
-        </>
-    )
-}
+        </div>
+    );
+};
 
+export default AboutSection;
