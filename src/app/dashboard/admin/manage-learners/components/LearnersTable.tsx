@@ -5,11 +5,9 @@ import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
-import { IBooking } from '@/types/booking';
-import Dropdown from '../../manage-bookings/pending/components/PendingBookingActions';
-import { useGetAllInstructorsQuery } from '@/redux/api/instructorApi/instructorApi';
-import { IInstructor } from '@/types/instructor';
 import PendingBookingActions from '../../manage-bookings/pending/components/PendingBookingActions';
+import { useGetAllLearnersQuery } from '@/redux/api/learnerApi/learnerApi';
+import { ILearner } from '@/types/learner';
 
 const LearnersTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -17,10 +15,8 @@ const LearnersTable: FC = () => {
     const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
     const [isSearched, setIsSearched] = useState(false);
 
-    const { data, isLoading } = useGetAllInstructorsQuery(
+    const { data, isLoading } = useGetAllLearnersQuery(
         {
-            status: "pending",
-            searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page
         });
@@ -51,14 +47,14 @@ const LearnersTable: FC = () => {
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Name & Username</TableHead>
                                     <TableHead className='min-w-[280px]'>Email & Phone</TableHead>
-                                    <TableHead className='min-w-[140px]'>Experience</TableHead>
+                                    <TableHead className='min-w-[140px] text-center'>Total Bookings</TableHead>
                                     <TableHead className='min-w-[140px] text-center'>Status</TableHead>
                                     <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {
-                                    data.data.result.map((learner: IInstructor, index: number) => {
+                                    data.data.result.map((learner: ILearner, index: number) => {
                                         const user = typeof learner.user !== 'string' ? learner.user : undefined;
 
                                         return (
@@ -70,15 +66,15 @@ const LearnersTable: FC = () => {
                                                         {user?.username && <span className="text-sm text-gray-500">{user?.username}</span>}
                                                     </div>
                                                 </TableCell>
-                                                <TableCell className="font-medium">{
+                                                <TableCell className="font-medium">
                                                     <div>
                                                         <h3>{user?.email}</h3>
                                                         {user?.phone && <span className="text-sm text-gray-500">{user?.phone}</span>}
                                                     </div>
-                                                }</TableCell>
-                                                <TableCell className="font-medium">${learner.pricePerHour}</TableCell>
+                                                </TableCell>
+                                                <TableCell className="font-medium text-center">{learner.bookings.length || 0}</TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    {learner.status === "verified" ? "Verified" : learner.status === "pending" ? "Pending" : "Rejected"}
+                                                    {user?.status === 'active' ? 'Active' : 'Blocked'}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <PendingBookingActions id={""} />
