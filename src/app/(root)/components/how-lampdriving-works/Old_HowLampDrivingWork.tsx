@@ -27,7 +27,7 @@ const steps = [
   },
 ];
 
-const HowLampdrivingWorkSection: FC = () => {
+const Old_HowLampDrivingWork: FC = () => {
   return (
     <section className="md:py-16 py-14 bg-gradient-to-r from-primary/5 px-4 lg:px-0">
       <SectionHeading
@@ -44,10 +44,10 @@ const HowLampdrivingWorkSection: FC = () => {
               altText="How Lamp Driving Works"
             />
           </div>
+          {/* <StepsList steps={steps} /> */}
         </div>
 
         <div className="md:w-1/2">
-
           <StepsList steps={steps} />
         </div>
       </div>
@@ -60,4 +60,4 @@ const HowLampdrivingWorkSection: FC = () => {
   );
 };
 
-export default HowLampdrivingWorkSection;
+export default Old_HowLampDrivingWork;

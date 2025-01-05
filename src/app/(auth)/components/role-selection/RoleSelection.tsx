@@ -2,7 +2,7 @@
 
 import { FC, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Check, Car, GraduationCap, Calendar, Award, Users, ClipboardCheck, BookOpen } from 'lucide-react';
+import { Check, Car, GraduationCap, Calendar, Award, Users, ClipboardCheck, BookOpen, ChevronRight } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -111,12 +111,13 @@ const RoleSelection: FC<RoleSelectionProps> = ({ onRoleSelect }) => {
 
             <div className="flex justify-center">
                 <Button
+                    variant={"gradient"}
                     type="button"
                     onClick={handleContinue}
                     disabled={!selectedRole}
                     className="px-8 py-2 text-lg"
                 >
-                    Continue
+                    Continue <ChevronRight size={20} />
                 </Button>
             </div>
         </div>

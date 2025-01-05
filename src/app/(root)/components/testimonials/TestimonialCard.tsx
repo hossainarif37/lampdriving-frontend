@@ -21,15 +21,15 @@ const TestimonialCard: FC<ITestimonialCardProps> = ({ testimonial }) => {
     const { name, title, rating, description, } = testimonial;
 
     return (
-        <div className="relative border border-gray-100 bg-gradient-to-r from-indigo/10 rounded-lg">
+        <div className="relative border border-gray-200/90 gradient-to-b rounded-lg">
 
             {/* Content */}
-
             <div className='relative'>
                 <h1 className="text-xl border-b p-3 px-6 bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent font-bold">{title}</h1>
-                <p className='absolute top-2 right-3'>
-                    <Image src={shape} alt='shape-img' width={50} height={50} />
-                </p>
+                {/* Quote */}
+                <div className='absolute top-2 right-3'>
+                    <Image src={shape} alt='quote' width={50} height={50} />
+                </div>
             </div>
 
             <div className="relative flex md:flex-row flex-col md:gap-7 gap-5 md:items-center p-4 lg:p-6">

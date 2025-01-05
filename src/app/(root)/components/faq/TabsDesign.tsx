@@ -11,10 +11,10 @@ const TabsDesign: FC = () => {
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
-                        className={`md:px-4 px-3 py-2 rounded-full text-sm font-medium border transition-all
+                        className={`md:px-4 px-3 py-2 rounded-full text-sm font-medium border
                             ${activeTab === tab
-                            ? "gradient-color text-light border-indigo"
-                            : "bg-light text-secondary border- hover:border-black hover:text-black"
+                                ? "gradient-color text-light border-indigo"
+                                : "bg-light text-secondary border hover:gradient-color hover:text-light"
                             }`}
                     >
                         {tab}
