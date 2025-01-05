@@ -8,6 +8,7 @@ import Loading from '@/components/shared/Loading';
 import PendingBookingActions from '../../manage-bookings/pending/components/PendingBookingActions';
 import { useGetAllLearnersQuery } from '@/redux/api/learnerApi/learnerApi';
 import { ILearner } from '@/types/learner';
+import ManageLearnersActions from './ManageLearnersActions';
 
 const LearnersTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -77,7 +78,7 @@ const LearnersTable: FC = () => {
                                                     {user?.status === 'active' ? 'Active' : 'Blocked'}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <PendingBookingActions id={""} />
+                                                    <ManageLearnersActions id={learner._id || ''} />
                                                 </TableCell>
                                             </TableRow>
                                         )
