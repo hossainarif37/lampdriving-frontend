@@ -1,13 +1,13 @@
+import React from 'react';
 import { LucideIcon } from 'lucide-react';
-import { FC } from 'react';
 
-interface Card {
+interface BenefitCardProps {
     icon: LucideIcon;
     title: string;
     description: string;
 }
 
-const AboutCard: FC<Card> = ({ icon: Icon, title, description }: Card) => {
+const BenefitCard = ({ icon: Icon, title, description }: BenefitCardProps) => {
     return (
         <div className="flex flex-col items-center p-6 text-center group">
             <div className="mb-4 p-3 rounded-full bg-blue-50 text-blue-600 transition-colors">
@@ -17,6 +17,6 @@ const AboutCard: FC<Card> = ({ icon: Icon, title, description }: Card) => {
             <p className="text-gray-600 leading-relaxed">{description}</p>
         </div>
     );
-};
+}
 
-export default AboutCard;
+export default BenefitCard;
