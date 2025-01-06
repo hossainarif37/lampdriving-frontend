@@ -59,8 +59,8 @@ export default {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
-			 slide: 'slide 4s ease-in-out infinite',
-			 gradient: 'gradient 10s linear infinite',
+				slide: 'slide 4s ease-in-out infinite',
+				gradient: 'gradient 10s linear infinite',
 				carSlide: 'carSlide 2.5s ease-in-out infinite',
   		},
 		backgroundImage: {

@@ -87,13 +87,13 @@ const MissionVisionSection: FC = () => {
                 </div>
 
                 {/* Right Column - Image */}
-                <div className="relative lg:w-3/12 md:w-4/12 w-full">
+                <div className="relative lg:w-3/12 md:w-4/12 w-full ">
                     <Image
                         src={missionImg}
                         alt="Success Road"
                         width={400}
                         height={400}
-                        className="rounded-sm object-cover w-full h-[400px]"
+                        className="object-cover w-full h-[400px] rounded-lg"
                     />
                 </div>
             </div>
