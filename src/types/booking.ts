@@ -3,6 +3,8 @@ import { IInstructor } from "./instructor";
 import { ILoginInputs, IRegisterInputs } from "./auth";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 import { LucideProps } from "lucide-react";
+import { IAddress } from "./user";
+import { ILearner } from "./learner";
 
 export interface IBookingContext {
     steps: IStep[];
@@ -80,4 +82,25 @@ export interface IBookingInputs {
         proofImage: string;
         method: string;
     };
+}
+
+
+
+
+export interface ISchedule {
+    date: Date;
+    time: string[];
+    duration: 1 | 2 | 1.5;
+    pickupAddress: IAddress;
+}
+
+export interface IBooking {
+    _id: string;
+    learner: string | ILearner;
+    instructor: string | IInstructor;
+    bookingHours: number;
+    schedules: ISchedule[];
+    transaction: string;
+    price: number;
+    status: "pending" | "accepted" | "completed" | "cancelled";
 }

@@ -16,9 +16,9 @@ interface IInstructorProps {
     };
 }
 const FeaturedInstructors: FC<IInstructorProps> = async ({ searchedParams }) => {
-    const instructors = await getInstructors({limit: "4"});
+    const instructors = await getInstructors({ limit: "4" });
     return (
-        <section className="bg-gray-50 lg:py-20 md:py-16 md:p-6">
+        <section className="gradient-to-b lg:py-10 md:py-16 md:p-6">
             <div className="wrapper">
                 {/* Section Heading */}
                 <SectionHeading
@@ -27,7 +27,7 @@ const FeaturedInstructors: FC<IInstructorProps> = async ({ searchedParams }) => 
                 />
 
                 {/* Instructors Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-7 mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-7 mt-16 mx-auto">
                     {
                         instructors.data.result.slice(0, 4).map((instructor, index) => (
                             <InstructorCard key={index} instructor={instructor} />

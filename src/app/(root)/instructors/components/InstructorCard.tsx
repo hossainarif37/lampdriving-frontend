@@ -13,7 +13,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
     const { user, experience, pricePerHour, vehicle, feedback, completedLessons } = instructor;
 
     return (
-        <div className="p-4 rounded-lg space-y-5 bg-gradient-to-b from-primary/0 to-indigo/5 relative">
+        <div className="p-4 rounded-lg space-y-5 border bg-white/20 relative">
             {/* car type */}
             <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium flex items-center gap-1 absolute top-5 right-5 capitalize">
                 <Car className="w-4 h-4" />
@@ -93,7 +93,8 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                     <CheckAvailability
                         workingHours={instructor?.workingHour}
                         name={typeof user !== 'string' && user?.name.fullName || ""}
-                        username={typeof user !== 'string' && user?.username || ""} id={instructor._id || ""} />
+                        username={typeof user !== 'string' && user?.username || ""} id={instructor._id || ""}
+                    />
                 </div>
             </div>
 
