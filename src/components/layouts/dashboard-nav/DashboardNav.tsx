@@ -8,7 +8,7 @@ const DashboardNav: FC = () => {
     const { user } = useAppSelector(state => state.authSlice);
 
     return (
-        <div className='bg-white pl-5 p-3 lg:flex justify-between items-center w-full z-10 sticky top-0 hidden'>
+        <div className='bg-white pl-5 p-3 pr-6 lg:flex justify-between items-center w-full z-10 sticky top-0 hidden'>
             <div>
                 <MenuSearch />
             </div>

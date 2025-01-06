@@ -15,9 +15,10 @@ interface ICheckAvailabilityProps {
     name: string;
     username: string;
     workingHours: IWorkingHour;
+    parent?: string;
 }
 
-const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, workingHours }) => {
+const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, workingHours, parent }) => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
@@ -46,10 +47,21 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
 
     return (
         <Dialog>
-            <DialogTrigger className="flex justify-center gap-1 cursor-pointer group">
-                <Calendar className="w-4 text-primary" />
-                <span className="text-primary group-hover:underline">Check availability</span>
-                <ChevronRight className="text-primary w-5 -ml-1" />
+            <DialogTrigger asChild>
+                {
+                    parent === "details" ?
+                        <Button
+                            className="w-full py-3 px-4 bg-light border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors"
+                        >
+                            Check Availability
+                        </Button>
+                        :
+                        <Button className="flex justify-center gap-1 cursor-pointer underline">
+                            <Calendar className="w-4 text-primary" />
+                            <span className="text-primary">Check availability</span>
+                            <ChevronRight className="text-primary w-5 -ml-1" />
+                        </Button>
+                }
             </DialogTrigger>
             <DialogContent className='max-w-3xl py-0 px-0 space-y-0 gap-0'>
                 <DialogHeader>

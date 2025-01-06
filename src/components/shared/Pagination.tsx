@@ -34,7 +34,7 @@ const Pagination: FC<PaginationProps> = ({ currentPageProps, totalPages }) => {
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className={`p-2 rounded-lg ${isDisabled(currentPage === 1)}`}
+        className={`p-2 rounded-[4px] ${isDisabled(currentPage === 1)}`}
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
@@ -44,7 +44,7 @@ const Pagination: FC<PaginationProps> = ({ currentPageProps, totalPages }) => {
         <button
           key={i}
           onClick={() => onPageChange(i + 1)}
-          className={`px-4 py-2 rounded-lg ${currentPage === i + 1
+          className={`px-4 py-2 rounded-[4px] ${currentPage === i + 1
             ? 'gradient-color text-white'
             : 'hover:bg-gray-100'
             }`}
@@ -57,7 +57,7 @@ const Pagination: FC<PaginationProps> = ({ currentPageProps, totalPages }) => {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className={`p-2 rounded-lg ${isDisabled(currentPage === totalPages)}`}
+        className={`p-2 rounded-[4px] ${isDisabled(currentPage === totalPages)}`}
       >
         <ChevronRight className="h-5 w-5" />
       </button>
