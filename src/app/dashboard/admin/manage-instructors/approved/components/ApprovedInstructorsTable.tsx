@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { UserRoundSearch } from 'lucide-react';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
+import ApprovedInstructorActions from './ApprovedInstructorActions';
 
 const ApprovedInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -111,11 +112,12 @@ const ApprovedInstructorsTable: FC = () => {
                                                 <TableCell className="font-medium text-center">${instructor.pricePerHour}</TableCell>
                                                 <TableCell className="font-medium">
                                                     <div className='flex items-center justify-center gap-2'>
-                                                        <Button
+                                                        {/* <Button
                                                             title='View Instructor'
                                                             size={"icon"}>
                                                             <UserRoundSearch />
-                                                        </Button>
+                                                        </Button> */}
+                                                        <ApprovedInstructorActions id={instructor._id || ""} />
                                                     </div>
                                                 </TableCell>
                                             </TableRow>

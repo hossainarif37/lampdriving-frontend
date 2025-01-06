@@ -18,6 +18,7 @@ import { UserRoundSearch } from 'lucide-react';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import UpdateInstructorStatus from './UpdateInstructorStatus';
+import PendingInstructorActions from './PendingInstructorActions';
 
 const PendingInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -99,13 +100,14 @@ const PendingInstructorsTable: FC = () => {
                                                 </TableCell>
                                                 <TableCell className="font-medium">
                                                     <div className='flex items-center justify-center gap-2'>
-                                                        <Button
+                                                        {/* <Button
                                                             title='View Instructor'
                                                             size={"icon"}>
                                                             <UserRoundSearch />
-                                                        </Button>
-                                                        <UpdateInstructorStatus status='verify' id={instructor._id || ""} />
-                                                        <UpdateInstructorStatus status='reject' id={instructor._id || ""} />
+                                                        </Button> */}
+                                                        <PendingInstructorActions id={instructor._id || ""} />
+                                                        {/* <UpdateInstructorStatus status='verify' id={instructor._id || ""} />
+                                                        <UpdateInstructorStatus status='reject' id={instructor._id || ""} /> */}
                                                     </div>
                                                 </TableCell>
                                             </TableRow>

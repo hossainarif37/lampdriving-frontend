@@ -2,12 +2,12 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { toast } from '@/hooks/use-toast';
 import { useUpdateInstructorStatusMutation } from '@/redux/api/instructorApi/instructorApi';
-import { UserRoundCheck, UserRoundX } from 'lucide-react';
-import { FC, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 interface IUpdateInstructorStatus {
     id: string;
     status: 'verify' | 'reject';
+    setDropdownIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
 const UpdateInstructorStatus: FC<IUpdateInstructorStatus> = ({ id, status }) => {
@@ -32,19 +32,9 @@ const UpdateInstructorStatus: FC<IUpdateInstructorStatus> = ({ id, status }) => 
             <DialogTrigger asChild>
                 {
                     status === "verify" ?
-                        <Button
-                            className='bg-green-500 hover:bg-green-600'
-                            title='Verify Instructor'
-                            size={"icon"}>
-                            <UserRoundCheck />
-                        </Button>
+                        <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>Verify</Button>
                         :
-                        <Button
-                            className='bg-red-500 hover:bg-red-600'
-                            title='Reject Instructor'
-                            size={"icon"}>
-                            <UserRoundX />
-                        </Button>
+                        <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>Reject</Button>
                 }
             </DialogTrigger>
             <DialogContent>

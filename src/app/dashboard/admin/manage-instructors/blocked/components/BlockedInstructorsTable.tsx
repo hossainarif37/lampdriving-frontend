@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { UserRoundSearch } from 'lucide-react';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
+import BlockedInstructorActions from './BlockedInstructorActions';
 
 const BlockedInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -29,7 +30,7 @@ const BlockedInstructorsTable: FC = () => {
         setLimit(urlSearchParams.get('limit') || '8');
         if (urlSearchParams.get('searchKey')?.length) {
             setIsSearched(true);
-        }else{
+        } else {
             setIsSearched(false);
         }
     }, [urlSearchParams])
@@ -102,11 +103,7 @@ const BlockedInstructorsTable: FC = () => {
                                                 <TableCell className="font-medium text-center">${instructor.pricePerHour}</TableCell>
                                                 <TableCell className="font-medium">
                                                     <div className='flex items-center justify-center gap-2'>
-                                                        <Button
-                                                            title='View Instructor'
-                                                            size={"icon"}>
-                                                            <UserRoundSearch />
-                                                        </Button>
+                                                        <BlockedInstructorActions id={instructor._id || ""} />
                                                     </div>
                                                 </TableCell>
                                             </TableRow>

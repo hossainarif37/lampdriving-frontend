@@ -36,7 +36,7 @@ export const learnerRoutes: IRoute[] = [
                 path: '/dashboard/learner/manage-bookings/completed'
             },
             {
-                name: 'Cancelled Bookings',
+                name: 'Rejected Bookings',
                 path: '/dashboard/learner/manage-bookings/cancelled'
             }
 
@@ -74,7 +74,7 @@ export const instructorRoutes: IRoute[] = [
                 path: '/dashboard/instructor/manage-bookings/completed'
             },
             {
-                name: 'Cancelled Bookings',
+                name: 'Rejected Bookings',
                 path: '/dashboard/instructor/manage-bookings/cancelled'
             }
         ]
@@ -134,7 +134,7 @@ export const adminRoutes: IRoute[] = [
                 path: '/dashboard/admin/manage-bookings/completed'
             },
             {
-                name: 'Cancelled Bookings',
+                name: 'Rejected Bookings',
                 path: '/dashboard/admin/manage-bookings/cancelled'
             }
 
