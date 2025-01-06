@@ -2,11 +2,11 @@
 
 import { FC, useState } from 'react';
 import { BookingsList } from './BookingList';
-import { 
-  Calendar as CalendarIcon, 
-  BookOpen, 
-  CheckCircle, 
-  Clock, 
+import {
+  Calendar as CalendarIcon,
+  BookOpen,
+  CheckCircle,
+  Clock,
   DollarSign,
   GraduationCap
 } from 'lucide-react';
@@ -39,8 +39,8 @@ const pastBookings = [
 
 
 const InstructorStats: FC = () => {
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-    const {user} = useAppSelector(state=>state.authSlice);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const { user } = useAppSelector(state => state.authSlice);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -105,9 +105,9 @@ const InstructorStats: FC = () => {
 
           {/* Bookings Lists */}
           <div className="lg:col-span-2 space-y-6">
-            <BookingsList 
-              title="Running Bookings" 
-              bookings={runningBookings} 
+            <BookingsList
+              title="Running Bookings"
+              bookings={runningBookings}
               type="running"
               selectedDate={selectedDate}
             />
@@ -121,7 +121,7 @@ const InstructorStats: FC = () => {
         </div>
       </div>
     </div>
-    );
+  );
 };
 
 export default InstructorStats;

@@ -5,51 +5,17 @@ import PersonalInfoForm from './personal-info/PersonalInfoForm';
 import CarInfoForm from './car-info/CarInfoForm';
 import SecurityForm from './security/SecurityForm';
 import ServicesForm from './services/ServicesForm';
-import { IName } from '@/types/user';
-import { IDocument, IVehicle, IWorkingHour } from '@/types/instructor';
-
-export interface IPersonalInfo {
-    name: IName;
-    email: string;
-    phone: string;
-    dateOfBirth: string;
-    gender: 'male' | 'female' | 'other';
-}
-
-export interface IExperience {
-    experience: string;
-    description: string;
-    languages: string[];
-    documents: IDocument;
-}
-
-export interface IServices {
-    serviceAreas: string[];
-    pricePerHour: number;
-    workingHour: IWorkingHour;
-}
-
-export interface ISecurity {
-    password: string;
-}
-
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 
 const InstructorRegistration: FC = () => {
-    // Personal Info
-    const [personalInfo, setPersonalInfo] = useState<IPersonalInfo | undefined>(undefined);
-
     // Experience
-    const [experienceInfo, setExperienceInfo] = useState<IExperience | undefined>(undefined);
     const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
     const [experienceCertificateFile, setExperienceCertificateFile] = useState<File | null>(null);
+    const { personalInfo, experienceInfo, servicesInfo, carInfo } = useInstructorRegister();
 
     // Car Info
-    const [carInfo, setCarInfo] = useState<IVehicle | undefined>(undefined);
     const [carImageFile, setCarImageFile] = useState<File | null>(null);
-
-    // Services
-    const [servicesInfo, setServicesInfo] = useState<IServices | undefined>(undefined);
 
     const searchParams = useSearchParams();
     const step = searchParams.get('step');
@@ -60,31 +26,23 @@ const InstructorRegistration: FC = () => {
     const isCarInfoStep = step === 'car-info';
     const isSecurityStep = step === 'security';
 
-    const instructorData = {
-        ...experienceInfo,
-        ...servicesInfo,
-        vehicle: {
-            ...carInfo
-        }
-    }
-
 
     return (
         <>
             {/* Personal Info */}
-            {isPersonalInfoStep && <PersonalInfoForm personalInfo={personalInfo} setPersonalInfo={setPersonalInfo} />}
+            {isPersonalInfoStep && <PersonalInfoForm />}
 
             {/* Experience */}
-            {isExperienceStep && <ExperienceForm experienceInfo={experienceInfo} setExperienceInfo={setExperienceInfo} drivingLicenseFile={drivingLicenseFile} setDrivingLicenseFile={setDrivingLicenseFile} experienceCertificateFile={experienceCertificateFile} setExperienceCertificateFile={setExperienceCertificateFile}/>}
+            {(isExperienceStep && personalInfo) && <ExperienceForm drivingLicenseFile={drivingLicenseFile} setDrivingLicenseFile={setDrivingLicenseFile} experienceCertificateFile={experienceCertificateFile} setExperienceCertificateFile={setExperienceCertificateFile} />}
 
             {/* Services */}
-            {isServicesStep && <ServicesForm servicesInfo={servicesInfo} setServicesInfo={setServicesInfo} />}
+            {(isServicesStep && experienceInfo) && <ServicesForm />}
 
             {/* Vehicle */}
-            {isCarInfoStep && <CarInfoForm carInfo={carInfo} setCarInfo={setCarInfo} carImageFile={carImageFile} setCarImageFile={setCarImageFile}/>}
+            {(isCarInfoStep && servicesInfo) && <CarInfoForm carImageFile={carImageFile} setCarImageFile={setCarImageFile} />}
 
             {/* Security */}
-            {isSecurityStep && <SecurityForm userInfo={personalInfo} instructorInfo={instructorData} />}
+            {(isSecurityStep && carInfo) && <SecurityForm />}
         </>
     );
 };

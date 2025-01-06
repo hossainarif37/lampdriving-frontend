@@ -72,7 +72,7 @@ const UpdatePasswordField: FC<UpdatePasswordFieldProps> = ({register, errors, ha
                                     })}
                                     // defaultValue={password}
                                     type={newPasswordVisible ? "text" : "password"}
-                                    id="password"
+                                    id="new-password"
                                     placeholder="Enter new password"
                                     className="w-full xl:h-12 mt-1 pr-10"
                                 />
