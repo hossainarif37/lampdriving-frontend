@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel } from '@/components/ui/dropdown-menu';
 import { MoreHorizontal } from 'lucide-react';
 import { FC, useState } from 'react';
-import DeleteLearner from './DeleteLearner';
+import DeleteUser from '../../components/shared/DeleteUser';
 
 interface IManageLearnersActionsProps {
     id: string;
@@ -23,7 +23,7 @@ const ManageLearnersActions: FC<IManageLearnersActionsProps> = ({ id }) => {
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
                     <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
                     <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>Block</Button>
-                    <DeleteLearner id={id} setDropdownIsOpen={setDropdownIsOpen} />
+                    <DeleteUser role='learner' id={id} setDropdownIsOpen={setDropdownIsOpen} />
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
