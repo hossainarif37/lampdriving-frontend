@@ -1,26 +1,23 @@
+"use client"
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC, useEffect, useState } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
-import { MultiSelect } from '@/components/ui/multi-select';
-import { sydneySuburbs } from '@/constant/sydneySuburbs';
-import WorkingHoursSelector from './WorkingHoursSelector';
 import { ISchedule, IWorkingHour } from '@/types/instructor';
 import { DAYS } from '@/constant/days';
-import { IServices } from '../InstructorRegistration';
+import useScreenSize from '@/hooks/useScreenSize';
+import ServicesFields from '@/components/shared/forms/ServicesFields';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 interface Inputs {
     pricePerHour: number;
 }
 
-interface IServicesFormProps {
-    servicesInfo: IServices | undefined;
-    setServicesInfo: React.Dispatch<React.SetStateAction<IServices| undefined>>;
-}
-
-const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) => {
+const ServicesForm: FC = () => {
+    const device = useScreenSize();
+    const { servicesInfo, setServicesInfo } = useInstructorRegister();
     const [isClicked, setIsClicked] = useState(false);
     const [selectedLocations, setSelectedLocations] = useState<string[]>(servicesInfo?.serviceAreas || []);
     const [workingHoursError, setWorkingHoursError] = useState<string>('');
@@ -55,7 +52,6 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
             friday: schedule.friday,
         };
 
-        console.log('workingHour', workingHour);
         let hasActiveDay = false;
         for (const day in workingHour) {
             const dayKey = day as keyof IWorkingHour;
@@ -67,10 +63,10 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
         }
 
         if (!hasActiveDay) {
-           setWorkingHoursError('At least one working day must be active');
+            setWorkingHoursError('At least one working day must be active');
             return;
         }
-        
+
         setServicesInfo({
             pricePerHour: Number(data.pricePerHour),
             serviceAreas: selectedLocations,
@@ -89,62 +85,25 @@ const ServicesForm: FC<IServicesFormProps> = ({servicesInfo, setServicesInfo}) =
         }
     }, [selectedLocations, isClicked]);
 
-    
+
 
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
                 <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Service Details</h1>
 
-                <div className='w-full mt-7'>
-                    <div className='flex flex-col gap-5'>
-                        {/* Price Per Hour */}
-                        <div>
-                            <label htmlFor="phone" className='font-semibold text-secondary'>
-                                Price Per Hour
-                            </label>
-                            <Input
-                                {...register('pricePerHour', {
-                                    required: "Price is required"
-                                })
-                                }
-                                defaultValue={servicesInfo?.pricePerHour}
-                                type="number"
-                                placeholder="Enter price per hour"
-                                className='h-11 xl:h-14 mt-1'
-                            />
-                            {errors?.pricePerHour && <p className='text-red-500 text-sm mt-1'>{errors?.pricePerHour?.message}</p>}
-                        </div>
-
-                        {/* Service Areas */}
-                        <div className='w-full'>
-                            <label htmlFor="experience" className='font-semibold text-secondary'>Service Areas</label>
-                            <MultiSelect
-                                options={sydneySuburbs}
-                                onValueChange={setSelectedLocations}
-                                // defaultValue={selectedLocations}
-                                value={selectedLocations}
-                                placeholder="Select Areas"
-                                variant="inverted"
-                                animation={2}
-                                maxCount={3}
-                                className='mt-1'
-                            />
-                            {selectedLocationsError && <p className='text-red-500 text-sm mt-1'>{selectedLocationsError}</p>}
-                        </div>
-
-                        {/* Working Hours */}
-                        <div className='w-full'>
-                            <label htmlFor="experience" className='font-semibold text-secondary'>Set Working Hours</label>
-                            <WorkingHoursSelector
-                                schedule={schedule}
-                                setSchedule={setSchedule}
-                                setWorkingHoursError={setWorkingHoursError}
-                            />
-                            {workingHoursError && <p className='text-red-500 text-sm mt-1'>{workingHoursError}</p>}
-                        </div>
-                    </div>
-                </div>
+                <ServicesFields
+                    errors={errors}
+                    register={register}
+                    workingHoursError={workingHoursError}
+                    selectedLocationsError={selectedLocationsError}
+                    selectedLocations={selectedLocations}
+                    setSelectedLocations={setSelectedLocations}
+                    schedule={schedule}
+                    setSchedule={setSchedule}
+                    setWorkingHoursError={setWorkingHoursError}
+                    defaultValues={servicesInfo}
+                />
                 <div>
                     <StepNavigationButtons prev="experience" next="car-info" />
                 </div>

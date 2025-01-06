@@ -6,6 +6,7 @@ const initialState: IAuthSliceState = {
     isAuthenticate: false,
     isAuthLoading: true,
     user: null,
+    instructor: null
 }
 
 const authSlice = createSlice({
@@ -16,11 +17,13 @@ const authSlice = createSlice({
             state.isAuthenticate = payload.isAuthenticate;
             state.isAuthLoading = payload.isLoading;
             state.user = payload.user;
+            state.instructor = payload.instructor;
         },
         removeUser: (state) => {
             state.isAuthenticate = false;
             state.isAuthLoading = false;
             state.user = null;
+            state.instructor = null;
         }
     }
 })

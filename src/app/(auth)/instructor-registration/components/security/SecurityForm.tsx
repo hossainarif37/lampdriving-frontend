@@ -5,30 +5,27 @@ import { FC, useState, useEffect, SetStateAction, Dispatch } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
 import { useForm } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeClosed, EyeOff } from 'lucide-react';
 import Link from 'next/link';
-import { IPersonalInfo, ISecurity } from '../InstructorRegistration';
 import { useRegisterInstructorMutation } from '@/redux/api/authApi/authApi';
 import { IRegisterInstructor } from '@/types/instructor';
 import { toast } from '@/hooks/use-toast';
+import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 interface Inputs {
     password: string;
     confirmPassword: string;
 };
 
-interface ISecurityFormProps {
-    userInfo: IPersonalInfo | undefined;
-    instructorInfo: any;
-}
 
-const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
+const SecurityForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm<Inputs>();
+    const { personalInfo, carInfo, experienceInfo, servicesInfo } = useInstructorRegister();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-    const [registerInstructor, {isLoading: isRegistering}] = useRegisterInstructorMutation();
+    const [registerInstructor, { isLoading: isRegistering }] = useRegisterInstructorMutation();
 
 
     // Separate state for checkboxes and their errors
@@ -47,13 +44,7 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
         }
     }, [password, confirmPassword]);
 
-    // Handle checkbox changes
-    const handleTermsChange = (checked: boolean) => {
-        setTermsAccepted(checked);
-        if (checked) {
-            setTermsError("");
-        }
-    };
+
 
     const handlePasswordToggle = (field: string) => {
         if (field === 'password') {
@@ -62,6 +53,14 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
             setConfirmPasswordVisible((prev) => !prev);
         }
     }
+
+    // Handle checkbox changes
+    const handleTermsChange = (checked: boolean) => {
+        setTermsAccepted(checked);
+        if (checked) {
+            setTermsError("");
+        }
+    };
 
     const onSubmit = (data: Inputs) => {
         // Validate checkboxes
@@ -77,121 +76,145 @@ const SecurityForm: FC<ISecurityFormProps> = ({userInfo, instructorInfo }) => {
 
 
         const instructorFormData: IRegisterInstructor = {
-            userInfo:{
-                ...userInfo,
+            userInfo: {
+                ...personalInfo,
                 password: data.password
             },
-            instructorInfo
+            instructorInfo: {
+                ...carInfo,
+                ...experienceInfo,
+                ...servicesInfo
+            }
         }
 
+        console.log('instructorFormData', instructorFormData);
+        return;
+
         registerInstructor(instructorFormData).unwrap()
-        .then((res) => {
-            toast({
-                message: res.message,
+            .then((res) => {
+                toast({
+                    message: res.message,
+                })
+            }).catch((err) => {
+                console.log(err);
+                toast({
+                    success: false,
+                    message: err.data.message || "Something went wrong",
+                })
             })
-        }).catch((err) => {
-            console.log(err);
-            toast({
-                success: false,
-                message: err.data.message || "Something went wrong",
-            })
-        })
     }
 
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className='w-full flex flex-col'
+                className="w-full flex flex-col"
             >
-                <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Security</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-secondary">Security</h1>
 
-                <div className='w-full mt-7'>
-                    <div className='flex flex-col gap-5'>
+                <div className="w-full mt-7">
+                    <div className="flex flex-col gap-6">
                         {/* Password */}
-                        <div>
-                            <label htmlFor="password" className='font-semibold text-secondary'>Password</label>
-                            <div className='relative flex'>
+                        <div className="w-full">
+                            <label htmlFor="password" className="font-semibold text-secondary">
+                                Password
+                            </label>
+                            <div className="relative flex w-full">
                                 <Input
-                                    {...register('password', {
+                                    {...register("password", {
                                         minLength: {
-                                            message: "Password must be at least 6 characters", value: 6
+                                            message: "Password must be at least 6 characters",
+                                            value: 6,
                                         },
-                                        required: "Password is required"
-                                    })
-                                    }
+                                        required: "Password is required",
+                                    })}
                                     defaultValue={password}
-                                    type={`${passwordVisible ? "text" : "password"}`}
-                                    id='password'
+                                    type={passwordVisible ? "text" : "password"}
+                                    id="password"
                                     placeholder="Enter your password"
-                                    className='xl:h-12 mt-1'
+                                    className="w-full xl:h-12 mt-1 pr-10"
                                 />
 
-                                <button
-                                    className='cursor-pointer -translate-x-10'
-                                    type='button'
-                                    onClick={() => handlePasswordToggle('password')}
+                                <span
+                                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                                    onClick={() => handlePasswordToggle("password")}
                                 >
-                                    {passwordVisible ? <Eye /> : <EyeOff />}
-                                </button>
+                                    {passwordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
+                                </span>
                             </div>
-                            {errors?.password && <p className='text-red-500 text-sm mt-1'>{errors?.password?.message}</p>}
+                            {errors?.password && (
+                                <p className="text-red-500 text-sm mt-1">{errors?.password?.message}</p>
+                            )}
                         </div>
 
                         {/* Confirm Password */}
-                        <div>
-                            <label htmlFor="confirm-password" className='font-semibold text-secondary'>Confirm Password</label>
-                            <div className='relative flex'>
+                        <div className="w-full">
+                            <label htmlFor="confirm-password" className="font-semibold text-secondary">
+                                Confirm Password
+                            </label>
+                            <div className="relative flex w-full">
                                 <Input
-                                    {...register('confirmPassword', {
+                                    {...register("confirmPassword", {
                                         minLength: {
-                                            message: "Password must be at least 6 characters", value: 6
+                                            message: "Password must be at least 6 characters",
+                                            value: 6,
                                         },
-                                        required: "Confirm Password is required"
-                                    })
-                                    }
+                                        required: "Confirm Password is required",
+                                    })}
                                     defaultValue={confirmPassword}
-                                    type={`${confirmPasswordVisible ? "text" : "password"}`}
-                                    id='confirm-password'
+                                    type={confirmPasswordVisible ? "text" : "password"}
+                                    id="confirm-password"
                                     placeholder="Re-type your password"
-                                    className='xl:h-12 mt-1'
+                                    className="w-full xl:h-12 mt-1 pr-10"
                                 />
 
-                                <button
-                                    className='cursor-pointer -translate-x-10'
-                                    type='button'
-                                    onClick={() => handlePasswordToggle('confirm-password')}
+                                <span
+                                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                                    onClick={() => handlePasswordToggle("confirm-password")}
                                 >
-                                    {confirmPasswordVisible ? <Eye /> : <EyeOff />}
-                                </button>
+                                    {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
+                                </span>
                             </div>
-                            {errors?.confirmPassword && <p className='text-red-500 text-sm mt-1'>{errors.confirmPassword.message}</p>}
-                            {confirmPasswordError && <p className='text-red-500 text-sm mt-1'>{confirmPasswordError}</p>}
+                            {errors?.confirmPassword && (
+                                <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
+                            )}
+                            {confirmPasswordError && (
+                                <p className="text-red-500 text-sm mt-1">{confirmPasswordError}</p>
+                            )}
                         </div>
 
                         {/* Terms and Conditions */}
-                        <div>
+                        <div className="w-full">
                             <div className="flex items-center space-x-2">
                                 <Input
-                                    type='checkbox'
-                                    className='h-4 w-4'
+                                    type="checkbox"
+                                    className="h-4 w-4"
                                     id="terms"
                                     checked={termsAccepted}
                                     onChange={(e) => handleTermsChange(e.target.checked)}
                                 />
                                 <label
                                     htmlFor="terms"
-                                    className="text-sm font-medium leading-none select-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                    className="text-sm font-medium leading-none select-none"
                                 >
-                                    I accept the <Link target='_blank' href="#" className='text-indigo-600 underline'>terms and conditions</Link>
+                                    I accept the{" "}
+                                    <Link
+                                        target="_blank"
+                                        href="#"
+                                        className="text-indigo-600 underline"
+                                    >
+                                        terms and conditions
+                                    </Link>
                                 </label>
                             </div>
-                            {termsError && <p className='text-red-500 text-sm mt-1'>{termsError}</p>}
+                            {termsError && (
+                                <p className="text-red-500 text-sm mt-1">{termsError}</p>
+                            )}
                         </div>
                     </div>
                 </div>
 
-                <div>
+                <div className="mt-6">
                     <StepNavigationButtons prev="car-info" next="" />
                 </div>
             </form>

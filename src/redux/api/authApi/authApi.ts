@@ -21,7 +21,8 @@ const usersApi = baseApi.injectEndpoints({
             })
         }),
         currentUser: builder.query({
-            query: () => '/user/me'
+            query: () => '/user/me',
+            providesTags: ['User']
         }),
         logOutUser: builder.query<IResponseBase, void>({
             query: () => '/auth/logout'

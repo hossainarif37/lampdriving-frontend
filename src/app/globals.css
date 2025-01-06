@@ -7,8 +7,26 @@
       @apply max-w-6xl mx-auto px-3 lg:px-0
   }
  .gradient-color {
-    @apply bg-gradient-to-r from-primary/95 to-indigo/80;
+    @apply bg-gradient-to-r from-primary to-indigo;
   }
+
+    .gradient-to-t {
+    @apply bg-gradient-to-t from-[#ffffff] to-[#F0F7F3]
+  }
+
+    .gradient-to-r {
+    @apply bg-gradient-to-r from-[#ffffff] to-[#F0F7F3]
+  }
+
+  .gradient-to-b {
+    @apply bg-gradient-to-b  from-[#ffffff] to-[#F0F7F3]
+  }
+
+
+  .gradient-to-l {
+    @apply bg-gradient-to-l from-[#ffffff] to-[#F0F7F3]
+  }
+
   .text-gradient {
     @apply bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent
   }
@@ -26,4 +44,19 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
+}
+
+
+.thin-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #e4e2e3;
+  border-radius: 999px;
+  border: 1px solid #e4e2e3;
 }

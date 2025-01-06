@@ -8,6 +8,7 @@ const baseApi = createApi({
         baseUrl: envConfigs.apiUrl,
         credentials: "include"
     }),
+    tagTypes: ["User", "instructor", "learner", "booking"],
     endpoints: () => ({})
 })
 

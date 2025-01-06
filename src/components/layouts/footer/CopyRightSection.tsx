@@ -1,3 +1,4 @@
+"use client"
 import { FC } from 'react';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 const CopyRightSection: FC = () => {
@@ -6,7 +7,7 @@ const CopyRightSection: FC = () => {
         <div>
             <div className='pb-4 md:px-0'>
                 <p className='border-b border-gray-600 mb-4'></p>
-                <div className='md:flex space-y-3 md:space-y-0 justify-between wrapper text-textCol text-sm'>
+                <div className='md:flex space-y-3 md:space-y-0 justify-between wrapper text-light text-sm'>
                     <p>&copy; {currentYear} All Rights Reserved. Developed By Lamp driving school</p>
                     <div className='flex gap-2'>
                         <a href="#facebook" aria-label='Facebook'><Facebook className='hover:text-primary inline mx-2 text-2xl hover:scale-105' /></a>

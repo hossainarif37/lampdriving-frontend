@@ -5,7 +5,7 @@ import BannerHeading from './BannerHeading';
 
 const Banner: FC = () => {
     return (
-        <div
+        <section
             className="relative md:h-[650px] xl:min-h-[820px] py-20 md:py-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${bannerBg.src})` }}
         >
@@ -23,7 +23,7 @@ const Banner: FC = () => {
                     <SearchBoxDesign />
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

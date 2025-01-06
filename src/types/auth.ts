@@ -1,3 +1,4 @@
+import { IInstructor } from "./instructor";
 import { IUser } from "./user";
 
 export interface IRegisterInputs {
@@ -16,6 +17,7 @@ export interface IRegisterInputs {
         zipCode: number;
     },
     password: string;
+    confirmPassword: string;
 }
 
 export interface ILoginInputs {
@@ -27,4 +29,5 @@ export interface IAuthSliceState {
     isAuthenticate: boolean;
     isAuthLoading: boolean;
     user: IUser | null;
+    instructor: IInstructor | null;
 }

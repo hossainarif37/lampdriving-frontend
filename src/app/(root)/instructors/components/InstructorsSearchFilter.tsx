@@ -17,12 +17,12 @@ interface IInstructorSearchFilterProps {
 
 const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParams }) => {
     const [searchPopOverOpen, setSearchPopOverOpen] = useState(false);
-    
+
     const [carType, setCarType] = useState<'auto' | 'manual' | 'all'>(
         searchParams?.['vehicle.type'] === "auto" || searchParams?.['vehicle.type'] === "manual" ? searchParams?.['vehicle.type'] : 'all');
     const [selectedSuburb, setSelectedSuburb] = useState<string>(searchParams?.searchKey || '');
 
-    
+
     const urlSearchParams = useSearchParams();
     const { replace } = useRouter();
 
@@ -63,67 +63,91 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
         }
     }
 
-    return (
-        <div className='flex gap-5 justify-end max-w-7xl'>
-            <Popover
-                open={searchPopOverOpen}
-                onOpenChange={(open) => setSearchPopOverOpen(open)} // Update popover state
-            >
-                <PopoverTrigger asChild>
-                    <div className='relative md:w-[350px] lg:w-[434px]' >
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-                        <Input
-                            value={selectedSuburb}
-                            onChange={(e) => handleSearch(e.target.value)}
-                            placeholder="Enter your suburb" className='h-12 pl-12' />
-                    </div>
-                </PopoverTrigger>
-                <PopoverContent className="md:w-[350px] lg:w-[434px] p-2">
-                    <Command>
-                        <CommandInput placeholder="Enter your suburb" />
-                        <CommandList>
-                            {sydneySuburbs.map((suburb, index) => (
-                                <CommandItem
-                                    className='py-3'
-                                    key={index}
-                                    onSelect={() => {
-                                        handleSearch(suburb.value);
-                                        setSearchPopOverOpen(false);
-                                    }}
-                                >
-                                    {suburb.label}
-                                </CommandItem>
-                            ))}
-                        </CommandList>
-                    </Command>
-                </PopoverContent>
-            </Popover>
+    // Function to handle reset filters
+    const handleResetFilters = () => {
+        const searchParams = new URLSearchParams(urlSearchParams);
+        searchParams.delete('searchKey');
+        searchParams.delete('vehicle.type');
+        searchParams.delete('page');
+        setCarType('all');
+        setSelectedSuburb('');
+        replace(`?${searchParams.toString()}`);
+    }
 
-            <div className="font-semibold text-textCol text-center flex gap-3">
-                <Button
-                    onClick={() => handleChangeCarType('auto')}
-                    className={`w-32 hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
-                        ? 'gradient-color text-textCol'
-                        : 'bg-gray-200 text-secondary'}`}
+    return (
+        <div className='flex items-center justify-between'>
+            <div>
+                {
+                    (searchParams?.searchKey || searchParams?.['vehicle.type']) &&
+                    <Button
+                        onClick={handleResetFilters}
+                        className='border-orange-600 hover:border-primary hover:bg-white bg-white text-black border'
+                    >
+                        Reset Filters
+                    </Button>
+                }
+            </div>
+            <div className='flex flex-col md:flex-row gap-5 md:justify-end justify-center'>
+                <Popover
+                    open={searchPopOverOpen}
+                    onOpenChange={(open) => setSearchPopOverOpen(open)} // Update popover state
                 >
-                    <span>Auto</span>
-                </Button>
-                <Button
-                    onClick={() => handleChangeCarType('manual')}
-                    className={`w-32 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
-                        ? 'gradient-color text-textCol'
-                        : 'bg-gray-200 text-secondary'}`}
-                >
-                    <span>Manual</span>
-                </Button>
-                <Button
-                    onClick={() => handleChangeCarType('all')}
-                    className={`w-32 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'all'
-                        ? 'gradient-color text-textCol'
-                        : 'bg-gray-200 text-secondary'}`}
-                >
-                    <span>All</span>
-                </Button>
+                    <PopoverTrigger asChild >
+                        <div className='relative md:w-[350px] lg:w-[434px] sm:w-[500px] w-full mx-auto md:mx-0' >
+                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                            <Input
+                                value={selectedSuburb}
+                                onChange={(e) => handleSearch(e.target.value)}
+                                placeholder="Enter your suburb" className='h-12 pl-12' />
+                        </div>
+                    </PopoverTrigger>
+                    <PopoverContent className="md:w-[350px] lg:w-[434px] p-2">
+                        <Command>
+                            <CommandInput placeholder="Enter your suburb" />
+                            <CommandList>
+                                {sydneySuburbs.map((suburb, index) => (
+                                    <CommandItem
+                                        className='py-3'
+                                        key={index}
+                                        onSelect={() => {
+                                            handleSearch(suburb.value);
+                                            setSearchPopOverOpen(false);
+                                        }}
+                                    >
+                                        {suburb.label}
+                                    </CommandItem>
+                                ))}
+                            </CommandList>
+                        </Command>
+                    </PopoverContent>
+                </Popover>
+
+                <div className="font-semibold text-light text-center flex gap-3 mx-auto md:mx-0">
+                    <Button
+                        onClick={() => handleChangeCarType('auto')}
+                        className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
+                            ? 'gradient-color text-light'
+                            : 'bg-gray-200 text-secondary'}`}
+                    >
+                        <span>Auto</span>
+                    </Button>
+                    <Button
+                        onClick={() => handleChangeCarType('manual')}
+                        className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
+                            ? 'gradient-color text-light'
+                            : 'bg-gray-200 text-secondary'}`}
+                    >
+                        <span>Manual</span>
+                    </Button>
+                    <Button
+                        onClick={() => handleChangeCarType('all')}
+                        className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'all'
+                            ? 'gradient-color text-light'
+                            : 'bg-gray-200 text-secondary'}`}
+                    >
+                        <span>All</span>
+                    </Button>
+                </div>
             </div>
         </div>
     );

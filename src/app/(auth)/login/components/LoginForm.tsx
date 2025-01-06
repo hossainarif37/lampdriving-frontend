@@ -7,9 +7,10 @@ import { useLoginUserMutation } from '@/redux/api/authApi/authApi';
 import { useAppDispatch } from '@/redux/hook';
 import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { ILoginInputs } from '@/types/auth';
+import { Eye, EyeClosed, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 
@@ -17,6 +18,7 @@ import { useForm } from 'react-hook-form';
 const LoginForm: FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>();
     const [loginUser, { isLoading: isLoginLoading }] = useLoginUserMutation();
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
     const dispatch = useAppDispatch();
 
@@ -27,7 +29,7 @@ const LoginForm: FC = () => {
             toast({
                 message: res.message
             });
-            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
+            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
             router.push('/')
         }).catch((err) => {
             toast({
@@ -37,12 +39,14 @@ const LoginForm: FC = () => {
         })
     }
 
-
+    const handlePasswordToggle = (field: string) => {
+        setPasswordVisible((prev) => !prev);
+    }
 
     return (
         <form
             onSubmit={handleSubmit(handleLogin)}
-            className='w-full md:w-[400px] xl:w-[500px] mx-auto p-10 flex flex-col items-center md:shadow-lg md:rounded-lg md:border'
+            className='w-full md:w-[450px] xl:w-[500px] mx-auto p-5 md:p-10 flex flex-col items-center md:shadow-lg md:rounded-lg md:border'
         >
             <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Login</h1>
 
@@ -65,18 +69,28 @@ const LoginForm: FC = () => {
                     </div>
 
                     {/* Password */}
-                    <div>
+                    <div className='w-full'>
                         <label htmlFor="password" className='font-semibold text-secondary'>Password</label>
-                        <Input
-                            {...register('password', {
-                                minLength: {
-                                    message: "Password must be at least 6 characters", value: 6
-                                },
-                                required: "Password is required"
-                            })
-                            }
-                            type="password" id='password' placeholder="Enter your password" className='xl:h-12 mt-1'
-                        />
+                        <div className='w-full relative flex'>
+                            <Input
+                                {...register('password', {
+                                    minLength: {
+                                        message: "Password must be at least 6 characters", value: 6
+                                    },
+                                    required: "Password is required"
+                                })}
+                                type={passwordVisible ? "text" : "password"}
+                                id='password'
+                                placeholder="Enter your password"
+                                className='w-full xl:h-12 mt-1 pr-10'
+                            />
+                            <span
+                                className='cursor-pointer absolute right-2 top-1/2 -translate-y-1/2'
+                                onClick={() => handlePasswordToggle('password')}
+                            >
+                                {passwordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
+                            </span>
+                        </div>
                         {errors?.password && <p className='text-red-500 text-sm mt-1'>{errors?.password?.message}</p>}
                     </div>
                 </div>

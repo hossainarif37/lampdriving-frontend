@@ -77,7 +77,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
   }, [schedule, onUpdate]);
 
   return (
-    <div className="space-y-4 rounded-lg border p-4 mt-1">
+    <div className="space-y-4 rounded-md border p-4 mt-1">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Schedule</h3>
         <Button
@@ -86,6 +86,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
           onClick={() =>
             setOpenDays(openDays.length === DAYS.length ? [] : [...DAYS])
           }
+          className="px-5 md:px-10"
         >
           {openDays.length === DAYS.length ? "Collapse all" : "Expand all"}
         </Button>
@@ -146,7 +147,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
             </div>
 
             <CollapsibleContent className="pb-4">
-              <div className="mt-2 grid gap-4 rounded-lg bg-textCol p-4">
+              <div className="mt-2 grid gap-4 rounded-lg bg-light p-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <TimeSelect
                     label="Start Time"

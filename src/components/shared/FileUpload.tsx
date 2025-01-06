@@ -4,6 +4,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Check, CloudUpload, Upload, X } from 'lucide-react';
+import { extractFileDetails, generateUniqueIdentifier } from '@/lib/utils';
+import { toast } from '@/hooks/use-toast';
 
 interface FileUploadProps {
     label?: string;
@@ -23,20 +25,18 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
     const inputRef = useRef<HTMLInputElement>(null);
     const [isError, setIsError] = useState(false);
     const [imageUploadLoading, setImageUploadLoading] = useState(false);
+    const [imageDetails, setImageDetails] = useState({
+        fileName: '',
+        size: ''
+    });
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        console.log('file', file);
         if (file) {
             if (setSelectedFile) {
                 setSelectedFile(file);
             }
         }
-    };
-
-    const generateUniqueIdentifier = (file: File): string => {
-        // You can use a combination of file properties to create a unique identifier
-        return `${file.name}_${file.size}_${file.lastModified}`;
     };
 
     const handleUploadFile = async () => {
@@ -70,8 +70,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
 
             const data = await response.json();
 
-            console.log('Image uploaded successfully:', data);
-
             if (setImageUrl) {
                 setImageUrl(data.secure_url);
             }
@@ -80,11 +78,16 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             setIsError(false);
         } catch (error) {
             console.error('Error uploading image to Cloudinary:', error);
+            toast({
+                success: false,
+                message: 'Error uploading image to Cloudinary',
+            })
         }
         finally {
             setImageUploadLoading(false);
         }
     };
+
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -111,6 +114,17 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
         }
     }, [imageUrl]);
 
+    useEffect(() => {
+        if (imageUrl) {
+            const decodeImageURI = decodeURIComponent(imageUrl);
+            const fileDetails = extractFileDetails(decodeImageURI);
+
+            if (fileDetails) {
+                setImageDetails(fileDetails);
+            }
+        }
+    }, [imageUrl]);
+
     const blobUrlToFile = async (blobUrl: string) => {
         try {
             const response = await fetch(blobUrl);
@@ -132,7 +146,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
     return (
         <div className="w-full mx-auto bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
             {/* Upload Area */}
-            {(!imageUrl || !selectedFile) && (
+            {(!imageUrl && !selectedFile) && (
                 <div
                     className={`border-2 ${isDragging ? 'border-blue-400' : 'border-gray-300'} border-dashed rounded-lg w-full px-6 py-5 text-center relative`}
                     onDragOver={handleDragOver}
@@ -157,11 +171,11 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             )}
 
             {/* File Info (only if a file is selected) */}
-            {(selectedFile) && (
+            {(imageUrl || selectedFile) && (
                 <div className={`border ${isError ? 'bg-[#FFF5F3] border-[#E12525]' : 'border-gray-300'}  rounded-lg w-full ${(!isSuccess || selectedFile) ? 'mt-4' : 'mt-0'} p-4 flex items-center justify-between`}>
                     <div className="flex items-center">
                         <Image
-                            src={ URL.createObjectURL(selectedFile)}
+                            src={imageUrl || (selectedFile ? URL.createObjectURL(selectedFile) : '')}
                             alt={selectedFile?.name || 'Selected file'}
                             width={48}
                             height={48}
@@ -169,9 +183,9 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
                         />
 
                         <div>
-                            <p className="font-medium">{selectedFile?.name}</p>
+                            <p className="font-medium">{selectedFile?.name || imageDetails?.fileName}</p>
                             <p className="text-gray-500 text-sm">
-                                {(selectedFile?.size / 1024).toFixed(2)}kb, Added just now
+                                {selectedFile?.size ? (selectedFile.size / 1024).toFixed(2) : (Number(imageDetails?.size) / 1024).toFixed(2)}kb, Added just now
                             </p>
                         </div>
                     </div>

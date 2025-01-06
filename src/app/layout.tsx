@@ -21,7 +21,7 @@ export default function MainLayout({
   return (
     <html lang="en">
       <body
-        className={`${pathway.className} antialiased`}
+        className={`${pathway.className}`}
       >
         <ReduxProvider>
           <AuthProvider>

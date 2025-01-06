@@ -8,3 +8,5 @@ export const getInstructors = async (searchedParams: Record<string, string> | un
     const data = await res.json();
     return data;
 };
+
+

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import InstructorCard from './InstructorCard';
 import InstructorsNotFound from './InstructorsNotFound';
 import { getInstructors } from '@/api/getInstructors';
-import Pagination from './Pagination';
+import Pagination from '../../../../components/shared/Pagination';
 
 interface IInstructorProps {
     searchedParams?: {
