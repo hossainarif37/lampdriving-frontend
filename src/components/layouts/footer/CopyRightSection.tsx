@@ -1,3 +1,4 @@
+"use client"
 import { FC } from 'react';
 import { Facebook, Instagram, Youtube } from 'lucide-react';
 const CopyRightSection: FC = () => {

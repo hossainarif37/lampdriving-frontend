@@ -8,6 +8,7 @@ import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
 import AvailabilityModal from './AvailabilityModal';
 import ServiceAreaMap from './ServiceAreaMap';
+import CheckAvailability from '../../components/shared/check-availability/CheckAvailability';
 
 
 interface InstructorInfoProps {
@@ -53,12 +54,12 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
 
           {/* Booking buttons */}
           <Button className="w-full gradient-color">Book Now</Button>
-          <Button
-            onClick={() => setIsModalOpen(true)}
-            className="w-full py-3 px-4 bg-light border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors"
-          >
-            Check Availability
-          </Button>
+          <CheckAvailability
+            parent={"details"}
+            id={instructor?._id || ""}
+            name={user?.name?.firstName || ""}
+            username={user?.username || ""}
+            workingHours={instructor?.workingHour} />
         </div>
       </section>
 
