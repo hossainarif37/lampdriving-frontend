@@ -6,7 +6,7 @@ import { FC, ReactNode } from 'react';
 const AuthLayout: FC<{ children: ReactNode }> = ({ children }) => {
     return (
         <RoleProvider>
-            <Link href="/" className='text-secondary hover:underline font-semibold flex items-center ml-6 mt-6'>
+            <Link href="/" className='text-primary hover:underline font-semibold flex items-center ml-6 mt-6'>
                 <ChevronLeft /> <span>Back to home</span>
             </Link>
             {children}
