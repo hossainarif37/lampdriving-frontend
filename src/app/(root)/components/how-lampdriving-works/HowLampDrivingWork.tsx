@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const HowLampDrivingWork: FC = () => {
     return (
-        <div className="gradient-to-b py-10 md:py-20 min-h-screen">
+        <div className="gradient-to-t py-10 md:py-20 min-h-screen">
             <div className="mx-auto px-4 max-w-6xl">
                 {/* <div className="mb-16 text-center">
                     <h2 className="mb-4 font-bold text-4xl text-gray-900">

@@ -5,8 +5,8 @@ const FeatureCard = ({ number, icon: Icon, title, description }: {
     description: string;
 }) => {
     return (
-        <div className="relative bg-white rounded-xl p-6 shadow-md">
-            <div className="absolute -top-4 -left-4 w-8 h-8 gradient-color text-white rounded-lg flex items-center justify-center font-semibold">
+        <div className="relative rounded-[4px] p-6 border">
+            <div className="absolute -top-4 -left-4 w-8 h-8 gradient-color text-white rounded-[4px] flex items-center justify-center font-semibold">
                 {number}
             </div>
             <div className="mb-4 text-blue-600">

@@ -93,7 +93,8 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                     <CheckAvailability
                         workingHours={instructor?.workingHour}
                         name={typeof user !== 'string' && user?.name.fullName || ""}
-                        username={typeof user !== 'string' && user?.username || ""} id={instructor._id || ""} />
+                        username={typeof user !== 'string' && user?.username || ""} id={instructor._id || ""}
+                    />
                 </div>
             </div>
 

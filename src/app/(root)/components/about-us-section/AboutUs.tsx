@@ -1,58 +1,52 @@
 import { FC } from 'react';
 import SectionHeading from '../shared/section-heading/SectionHeading';
-import { ShieldCheck, BellElectric, Clock3, CircleDollarSign, ShipWheel, Banknote } from 'lucide-react';
+import { ShieldCheck, BellElectric, Clock3, CircleDollarSign, ShipWheel, Banknote, LucideIcon } from 'lucide-react';
 import AboutCard from './AboutCard';
 
-interface Card {
-    icon: JSX.Element;
-    title: string;
-    description: string;
-}
-
-const cards: Card[] = [
+const cards = [
     {
-        icon: <ShieldCheck className="w-14 h-14 text-indigo" />,
+        icon: ShieldCheck,
         title: "BEST SAFETY MEASURES",
         description: "Our Instructors are Highly Trained in the latest Safety Techniques & Rules of the Road.",
     },
     {
-        icon: < BellElectric className="w-14 h-14 text-indigo" />,
+        icon: BellElectric,
         title: "EXPERIENCED INSTRUCTORS",
         description: "All our Instructors are DMV Licensed, mentally and physically fit and have decade or more of Instruction History.",
     },
     {
-        icon: < Clock3 className="w-14 h-14 text-indigo" />,
+        icon: Clock3,
         title: "PERFECT TIMING",
         description: "Now is the perfect time to start your In Class, Online or Behind The Wheel Training.",
     },
     {
-        icon: < CircleDollarSign className="w-14 h-14 text-indigo" />,
+        icon: CircleDollarSign,
         title: "AFFORDABLE FEE",
         description: "We know this process can be expensive. So we constantly monitor our competition's pricing.",
     },
     {
-        icon: <ShipWheel className="w-14 h-14 text-indigo" />,
+        icon: ShipWheel,
         title: "CLASS FORMATS",
         description: "We offer In Classroom Drivers Education as well as Online Drivers Education.",
     },
     {
-        icon: <Banknote className="w-14 h-14 text-indigo" />,
+        icon: Banknote,
         title: "PAYMENT PLANS",
         description: "We allow you to decide when and how you want to pay. We accept all major forms of payments.",
     },
 ];
 
 const AboutUs: FC = () => {
-    const sub = 'We understand that learning to drive isn’t cheap, many driving schools will take advantage of this and charge you a larger sum than necessary; not us.'
+    const sub = 'We understand learning to drive can be expensive, but we won’t take advantage by charging more than necessary.'
     return (
-        <section className="gradient-to-b px-4 py-16">
+        <section className="gradient-to-t px-4 py-16">
             {/* Section Heading */}
-            <SectionHeading title="Why Choose Us?" subtitle={sub} />
+            <SectionHeading title="Why Choose Us?" subtitle={sub} className='mb-5 md:mb-5' />
 
             {/* Cards Grid */}
             <div className="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 wrapper">
                 {cards.map((card, index) => (
-                    <AboutCard key={index} card={card} />
+                    <AboutCard key={index} {...card} />
                 ))}
             </div>
         </section>
