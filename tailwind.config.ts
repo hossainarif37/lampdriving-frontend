@@ -50,6 +50,15 @@ export default {
 					'50%': { transform: 'translateY(13px)' },
 				},
 
+				rotateSwing: {
+					// '0%': { transform: 'rotate(0deg)' },
+					'0%': { transform: 'translateY(0)' },
+					'25%': { transform: 'translateY(5px) rotate(15deg)' },
+					'50%': { transform: 'translateY(10px)' },
+					'75%': { transform: 'rotate(-15deg)' },
+					'100%': { transform: 'translateY(0) rotate(0deg)' },
+				},
+
 				gradient: {
 					'0%': { backgroundPosition: '0% 0%' },
 					'100%': { backgroundPosition: '100% 100%' },
@@ -62,6 +71,7 @@ export default {
 				slide: 'slide 4s ease-in-out infinite',
 				gradient: 'gradient 10s linear infinite',
 				carSlide: 'carSlide 2.5s ease-in-out infinite',
+				rotateSwing: 'rotateSwing 10s infinite',
   		},
 		backgroundImage: {
         	'gradient-animation': 'linear-gradient(45deg, transparent 25%, rgba(68, 107, 158, 0.5) 50%, transparent 75%)',
