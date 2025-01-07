@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import Banner from './components/Banner';
 import AboutSection from './components/AboutSection';
 import MissionVisionSection from './components/MissionVisionSection';
 import WhyChooseUs from './components/WhyChoseUs/WhyChooseUs';
+import AboutStats from './components/AboutStats/AboutStats';
 
 const aboutPage: FC = () => {
     return (
@@ -11,6 +11,7 @@ const aboutPage: FC = () => {
             <AboutSection />
             <MissionVisionSection />
             <WhyChooseUs />
+            <AboutStats />
         </div>
     );
 };

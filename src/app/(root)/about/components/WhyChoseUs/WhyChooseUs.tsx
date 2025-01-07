@@ -6,7 +6,7 @@ import FeatureCard from './FeatureCard';
 
 const WhyChooseUs: FC = () => {
     return (
-        <section className="wrapper py-16">
+        <section className="wrapper py-28">
             {/* Header Section */}
             <div className="text-center mb-12">
                 <span className="inline-block px-4 py-1.5 bg-emerald-500 text-white rounded-md text-sm font-medium mb-4">
@@ -20,22 +20,34 @@ const WhyChooseUs: FC = () => {
             {/* Main Content */}
             <div className="flex md:flex-row flex-col md:max-w-full max-w-lg mx-auto gap-10 w-full">
                 {/* Left Column */}
-                <div className="text-right md:w-3/12 flex flex-col justify-between">
-                    <FeatureCard
-                        Icon={ShieldCheck}
-                        title="Licensed"
-                        description="Take a trivial example, which of us ever undertakes laborious physical to some advantages."
-                        alignment="right"
-                    />
+                <div className="relative text-right md:w-3/12 flex flex-col justify-between ">
+                    <div className='group'>
+                        <FeatureCard
+                            Icon={ShieldCheck}
+                            title="Licensed"
+                            description="Take a trivial example, which of us ever undertakes laborious physical to some advantages."
+                            alignment="right"
+                        />
+                        {/* Absolute Positioned Circle */}
+                        <div className="absolute top-[65px] right-[-55px] w-[30px] h-[30px] rounded-full bg-white shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)] flex items-center justify-center z-[10]">
+                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-green-500 scale-100 transition-all duration-500 z-[15]" />
+                        </div>
+                    </div>
                     <div className="text-gray-100 md:text-8xl text-6xl font-bold">
                         {'«'.repeat(3)}
                     </div>
-                    <FeatureCard
-                        Icon={Calendar}
-                        title="Flexible Scheduling"
-                        description="Moment so blinded by desire, that cannot foresee the pain and trouble are bound to ensue."
-                        alignment="right"
-                    />
+                    <div className='group'>
+                        <FeatureCard
+                            Icon={Calendar}
+                            title="Flexible Scheduling"
+                            description="Moment so blinded by desire, that cannot foresee the pain and trouble are bound to ensue."
+                            alignment="right"
+                        />
+                        {/* Absolute Positioned Circle */}
+                        <div className="absolute bottom-[65px] right-[-55px] w-[30px] h-[30px] rounded-full bg-white shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)] flex items-center justify-center z-[10]">
+                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-green-500 scale-100 transition-all duration-500 z-[15]" />
+                        </div>
+                    </div>
                 </div>
 
                 {/* Main Content Container */}
@@ -51,28 +63,40 @@ const WhyChooseUs: FC = () => {
                     <div className="absolute top-[30px] left-0 right-0 text-center text-white/10 text-[100px] font-extrabold leading-[1em] uppercase font-secondary">
                         Lamp driving
                     </div>
-                    <div className="z-[100] animate-rotateSwing mb-6">
+                    <div className="z-[4] animate-rotateSwing mb-6">
                         <Image src={steeringImg} alt="steering image" className="" />
                     </div>
                 </div>
 
                 {/* Right Column */}
-                <div className="text-left md:w-3/12 flex flex-col justify-between">
-                    <FeatureCard
-                        Icon={User2}
-                        title="Experienced"
-                        description="Take a trivial example, which of us ever undertakes laborious physical to some advantages."
-                        alignment="left"
-                    />
+                <div className="relative text-left md:w-3/12 flex flex-col justify-between">
+                    <div className='group'>
+                        <FeatureCard
+                            Icon={User2}
+                            title="Experienced"
+                            description="Take a trivial example, which of us ever undertakes laborious physical to some advantages."
+                            alignment="left"
+                        />
+                        {/* Absolute Positioned Circle */}
+                        <div className="absolute top-[65px] left-[-55px] w-[30px] h-[30px] rounded-full bg-white shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)] flex items-center justify-center z-[10]">
+                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-green-500 scale-100 transition-all duration-500 z-[15]" />
+                        </div>
+                    </div>
                     <div className="text-gray-100 md:text-8xl text-6xl font-bold">
                         {'»'.repeat(3)}
                     </div>
-                    <FeatureCard
-                        Icon={Tag}
-                        title="Affordable Rates"
-                        description="Enjoy a pleasure that no annoying consequences, or one who avoids a produces."
-                        alignment="left"
-                    />
+                    <div className='group'>
+                        <FeatureCard
+                            Icon={Tag}
+                            title="Affordable Rates"
+                            description="Enjoy a pleasure that no annoying consequences, or one who avoids a produces."
+                            alignment="left"
+                        />
+                        {/* Absolute Positioned Circle */}
+                        <div className="absolute bottom-[65px] left-[-55] w-[30px] h-[30px] rounded-full bg-white shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)] flex items-center justify-center z-[10]">
+                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-green-500 scale-100 transition-all duration-500 z-[15]" />
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
