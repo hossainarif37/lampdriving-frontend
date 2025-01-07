@@ -8,10 +8,11 @@ const WhyChooseUs: FC = () => {
     return (
         <section className="wrapper py-28">
             {/* Header Section */}
-            <div className="text-center mb-12">
-                <span className="inline-block px-4 py-1.5 bg-emerald-500 text-white rounded-md text-sm font-medium mb-4">
+
+            <div className=" mb-12 flex flex-col justify-center items-center gap-3">
+                <h3 className="w-[160px] bg-green-500 py-[7px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-green-500 text-light before:top-0 before:rounded-[4px] before:-ml-6">
                     WHY CHOOSE US
-                </span>
+                </h3>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
                     Reasons to Choose Us
                 </h2>
