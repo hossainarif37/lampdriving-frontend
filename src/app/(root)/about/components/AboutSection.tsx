@@ -24,7 +24,7 @@ const AboutSection: FC = () => {
                         </div>
 
                         {/* Award badge - positioned to overlap */}
-                        <div className="absolute right-8 top-16 bg-white p-7 rounded-full shadow-lg">
+                        <div className="absolute md:right-8 right-0 top-16 bg-white p-7 rounded-full shadow-lg">
                             <Image
                                 src={badgeImg}
                                 alt="Best Driving School Award"
