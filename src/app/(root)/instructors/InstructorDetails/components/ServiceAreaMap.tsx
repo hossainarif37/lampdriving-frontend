@@ -83,7 +83,7 @@ const ServiceAreaMap: FC = () => {
     return (
         <>
             <div className=" top-4 left-4 right-4 z-[1000] flex justify-between items-center bg-white rounded-lg shadow-lg p-4">
-                <h2 className="text-[12px] font-semibold">Cliff services 42 suburbs</h2>
+                <h2 className="text-[12px] font-semibold">Cliff services {serviceAreas.length} suburbs</h2>
                 <Button
                     size="sm"
                     // variant="ghost"
@@ -143,14 +143,34 @@ const ServiceAreaMap: FC = () => {
                     >
                         <MapResizer />
                         <ZoomControl position="bottomright" />
-                        <TileLayer
+                        {/* <TileLayer
                             url={
                                 mapType === 'map'
                                     ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                                     : 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
                             }
                             attribution={`&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors`}
-                        />
+                        /> */}
+
+
+                        {mapType === 'map' ? (
+                            <TileLayer
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            />
+                        ) : (
+                            <>
+                                <TileLayer
+                                    url="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+                                    attribution="&copy; Google Maps"
+                                />
+                                <TileLayer
+                                    url="https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}"
+                                    attribution="&copy; Google Maps"
+                                    className="opacity-70"
+                                    />
+                            </>
+                        )}
                         <Polygon
                             positions={SERVICE_AREA as [number, number][]}
                             pathOptions={{
