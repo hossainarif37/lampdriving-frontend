@@ -20,7 +20,7 @@ const HomePage: FC = () => {
       {/* <ChooseBestInstructorSelections /> */}
       <FeaturedInstructors />
       <MissionVisionSection />
-      {/* <AboutUs /> */}
+      <AboutUs />
       <Testimonials />
       <AboutStats />
       <FAQ />
