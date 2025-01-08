@@ -90,6 +90,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     const { data: instructorResponse, isLoading } = useGetAInstructorQuery({ username: instructorQuery! });
 
+    useEffect(() => {
+        setSteps(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
+    }, [])
 
 
     useEffect(() => {
