@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import React from 'react';
 import {
     Carousel,
     CarouselContent,
@@ -7,12 +6,9 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Facebook, Twitter, Instagram, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
-import { Card, CardContent } from '@/components/ui/card';
+import { ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import teampImg from "@/assets/home-page-image/man_image.jpeg"
-import Link from 'next/link';
+import TeamMembarCard from './TeamMembarCard';
 
 const teamMembers = [
     {
@@ -79,51 +75,16 @@ const ExpertTeamMembar: FC = () => {
                         <CarouselContent className="-ml-4">
                             {teamMembers.map((member, index) => (
                                 <CarouselItem key={index} className="pl-10 md:basis-1/2 lg:basis-1/3">
-                                    <Card className="border border-gray-200/40  gradient-to-b rounded-lg">
-                                        <CardContent className="p-4">
-                                            <div className="flex justify-between gap-0">
-                                                {/* Left Content */}
-                                                <div className="space-y-4">
-                                                    <div className='flex justify-between gap-4'>
-                                                        <div className='space-y-2'>
-                                                            <h2 className="text-2xl font-semibold text-secondary">{member.name}</h2>
-                                                            <p className="text-sm font-bold text-gray-600">{member.role}</p>
-                                                            <p className="text-sm text-accent">
-                                                                {member.description}
-                                                            </p>
-                                                        </div>
-                                                        {/* Profile Image */}
-                                                        <div className="h-28 w-28 flex-shrink-0">
-                                                            <Image
-                                                                src={teampImg}
-                                                                alt="Profile picture"
-                                                                className="h-full w-full object-cover rounded-md"
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    {/* Social Links */}
-                                                    <div className="flex items-center gap-4">
-                                                        <Link href="#" className="border p-2 rounded-sm text-secondary">
-                                                            <Facebook className="h-5 w-5" />
-                                                        </Link>
-                                                        <Link href="#" className="border p-2 rounded-sm text-secondary" >
-                                                            <Twitter className="h-5 w-5" />
-                                                        </Link>
-                                                        <Link href="#" className="border p-2 rounded-sm text-secondary" >
-                                                            <Instagram className="h-5 w-5" />
-                                                        </Link>
-                                                        <Button variant="link" className="font-semibold text-secondary">
-                                                            VIEW PROFILE <ChevronRight />
-                                                        </Button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </CardContent>
-                                    </Card>
+                                    <TeamMembarCard
+                                        name={member.name}
+                                        role={member.role}
+                                        image={member.image}
+                                        description={member.description}
+                                    />
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <div className="flex justify-center mt-14 space-x-4">
+                        <div className="flex justify-center mt-16 space-x-4">
                             <CarouselPrevious className="static translate-y-0 w-12 h-12 rounded-md hover:bg-green-500 hover:text-white border-none border" />
                             <CarouselNext className="static translate-y-0 w-12 h-12 rounded-md hover:bg-green-500 hover:text-white border-none border" />
                         </div>
