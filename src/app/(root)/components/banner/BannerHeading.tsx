@@ -21,14 +21,14 @@ const BannerHeading: FC = () => {
                 <div className="space-y-8 my-8">
                     {/* Review block */}
                     <div className="flex gap-3 items-center">
-                        <p className="w-14 h-14 rounded-full bg-light flex justify-center items-center text-secondary font-bold">
+                        <p className="w-14 h-14 rounded-full bg-light flex justify-center items-center text-primary font-bold">
                             4.9
                         </p>
                         <div>
                             {/* Star rating */}
-                            <div className="text-indigo font-bold flex gap-1">
+                            <div className="text-primary font-bold flex gap-1">
                                 {[...Array(5)].map((_, i) => (
-                                    <Star key={i} className='fill-indigo' />
+                                    <Star key={i} className='fill-primary' />
                                 ))}
                             </div>
                             <p className='md:text-base text-xs'>2.8k Reviews by Trustpilot</p>

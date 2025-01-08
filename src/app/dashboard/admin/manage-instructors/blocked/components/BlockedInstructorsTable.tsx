@@ -40,7 +40,7 @@ const BlockedInstructorsTable: FC = () => {
     }
 
     return (
-        <div className='min-h-[calc(100vh-189px)] flex flex-col text-secondary'>
+        <div className='min-h-[calc(100vh-189px)] flex flex-col text-primary'>
             {
                 data?.data.result.length ?
                     <div className='flex-1'>

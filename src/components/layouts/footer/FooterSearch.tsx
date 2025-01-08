@@ -23,7 +23,7 @@ const FooterSearchBoxDesign: FC = () => {
         setCarType('auto');
     }
     return (
-        <div className="lg:max-w-5xl md:max-w-3xl h-48 md:h-40 flex flex-col md:flex-row items-center justify-center md:gap-4 gap-6 w-full md:rounded-md rounded-lg absolute -top-20 left-1/2 right-1/2 -translate-x-1/2 md:px-20 px-6 bg-gradient-to-r from-[#1a1340] to-[#341b53]">
+        <div className="lg:max-w-5xl md:max-w-3xl h-48 md:h-40 flex flex-col md:flex-row items-center justify-center md:gap-4 gap-6 w-full md:rounded-md rounded-lg absolute -top-20 left-1/2 right-1/2 -translate-x-1/2 md:px-20 px-6 bg-[#264649]">
 
             <div className='md:w-10/12 flex flex-col lg:flex-row items-center justify-between gap-2'>
 
@@ -33,7 +33,7 @@ const FooterSearchBoxDesign: FC = () => {
                         onClick={() => setCarType('auto')}
                         className={`w-1/2 h-[40px] px-6 lg:px-7 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'auto'
                             ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                            : 'bg-gray-200 text-primary'}`}
                     >
                         <span>Auto</span>
                     </Button>
@@ -41,7 +41,7 @@ const FooterSearchBoxDesign: FC = () => {
                         onClick={() => setCarType('manual')}
                         className={`w-1/2 h-[40px] px-6 lg:px-7 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
                             ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                            : 'bg-gray-200 text-primary'}`}
                     >
                         <span>Manual</span>
                     </Button>
@@ -58,7 +58,7 @@ const FooterSearchBoxDesign: FC = () => {
                                 value={selectedSuburb}
                                 onChange={(e) => setSelectedSuburb(e.target.value)}
                                 readOnly={selectedSuburb ? true : false}
-                                className="md:flex-1 px-4 py-3 rounded-md text-secondary focus:outline-none placeholder:text-accent w-[300px] md:w-[380px] lg:w-[280px]"
+                                className="md:flex-1 px-4 py-3 rounded-md text-primary focus:outline-none placeholder:text-accent w-[300px] md:w-[380px] lg:w-[280px]"
                                 type="text"
                                 placeholder="Enter your suburb"
                             />

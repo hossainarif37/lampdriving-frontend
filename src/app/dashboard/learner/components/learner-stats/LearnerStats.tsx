@@ -107,7 +107,7 @@ const LearnerStats: FC = () => {
     <div className="min-h-screen bg-gray-50 p-6">
       {/* Welcome Section */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-secondary">Welcome back, {user?.name?.firstName}! 👋</h1>
+        <h1 className="text-3xl font-bold text-primary">Welcome back, {user?.name?.firstName}! 👋</h1>
         <p className="text-accent mt-2">Track your learning progress and manage your driving lessons</p>
       </div>
 
@@ -142,7 +142,7 @@ const LearnerStats: FC = () => {
             </div>
           </div>
           <div className="space-x-3">
-            <Button size="lg" className="bg-indigo hover:bg-indigo/90">
+            <Button size="lg" className="bg-primary hover:bg-primary/90">
               Book Lesson
             </Button>
             <Button size="lg">
@@ -191,7 +191,7 @@ const LearnerStats: FC = () => {
       <div className="bg-light rounded-xl shadow-sm p-6">
         <div className="flex items-center mb-6">
           <Package className="h-5 w-5 text-primary mr-2" />
-          <h2 className="text-xl font-bold text-secondary">Recommended Packages</h2>
+          <h2 className="text-xl font-bold text-primary">Recommended Packages</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {packages.map((pkg) => (

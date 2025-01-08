@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Clock, ChevronDown} from "lucide-react"
+import { Clock, ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Collapsible,
@@ -47,7 +47,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
         ...update,
       },
     }));
-    
+
 
 
     // Reset the "Apply to all" checkbox for the day
@@ -104,7 +104,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
                 <Switch
                   id={`${day}-active`}
                   checked={schedule[day]?.isActive}
-                  onCheckedChange={(checked) =>{
+                  onCheckedChange={(checked) => {
                     updateSchedule(day, { isActive: checked });
                     // if (!checked) {
                     //   setWorkingHoursError('At least one working day must be active');
@@ -112,7 +112,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
                     //   setWorkingHoursError('');
                     // }
                   }
-                    
+
                   }
                 />
                 <Label
@@ -120,7 +120,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
                   className={cn(
                     "text-sm font-medium capitalize",
                     !schedule[day]?.isActive &&
-                      "text-muted-foreground line-through"
+                    "text-muted-foreground line-through"
                   )}
                 >
                   {day}
@@ -130,11 +130,11 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
               <div className="flex items-center gap-2">
                 <CollapsibleTrigger asChild>
                   <Button type="button" variant={"outline"} size={"sm"}>
-                  {schedule[day]?.isActive && (
-                  <span className="text-sm">
-                    {schedule[day]?.startTime} - {schedule[day]?.endTime}
-                  </span>
-                )}
+                    {schedule[day]?.isActive && (
+                      <span className="text-sm">
+                        {schedule[day]?.startTime} - {schedule[day]?.endTime}
+                      </span>
+                    )}
                     <ChevronDown
                       className={cn(
                         "h-4 w-4 transition-transform",
@@ -187,11 +187,10 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
                     />
                     <Label
                       htmlFor={`apply-to-all-${day}`}
-                      className={`text-sm font-medium text-gray-700 ${
-                        !schedule[day]?.isActive
+                      className={`text-sm font-medium text-gray-700 ${!schedule[day]?.isActive
                           ? "cursor-not-allowed"
                           : "cursor-pointer"
-                      }`}
+                        }`}
                     >
                       Apply this schedule to all
                     </Label>
@@ -237,7 +236,7 @@ function TimeSelect({
             variant="outline"
 
             disabled={disabled}
-            className="w-full text-secondary justify-between"
+            className="w-full text-primary justify-between"
           >
             <Clock />
             <span>{time || "Select time"}</span>

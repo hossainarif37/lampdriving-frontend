@@ -25,7 +25,7 @@ const TestimonialCard: FC<ITestimonialCardProps> = ({ testimonial }) => {
 
             {/* Content */}
             <div className='relative'>
-                <h1 className="text-xl border-b p-3 px-6 bg-gradient-to-b-2 from-primary to-indigo bg-clip-text text-transparent font-bold">{title}</h1>
+                <h1 className="text-xl border-b p-3 px-6 bg-gradient-to-b-2 from-primary to-primary bg-clip-text text-transparent font-bold">{title}</h1>
                 {/* Quote */}
                 <div className='absolute top-2 right-3'>
                     <Image src={shape} alt='quote' width={50} height={50} />

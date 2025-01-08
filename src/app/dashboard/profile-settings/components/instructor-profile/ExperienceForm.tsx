@@ -96,7 +96,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
     return (
         <div className=''>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
-                <h1 className='text-2xl font-bold text-secondary'>Experience</h1>
+                <h1 className='text-2xl font-bold text-primary'>Experience</h1>
                 <ExperienceFields
                     errors={errors}
                     defaultValues={defaultValues}

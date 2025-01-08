@@ -47,7 +47,7 @@ const AboutSection: FC = () => {
                     {/* Right Column Content */}
                     <div className="space-y-8 md:w-1/2">
                         <div className="space-y-4">
-                            <h3 className="w-[105px] bg-secondary py-[6px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-secondary text-light before:top-0 before:rounded-[4px] before:-ml-6">
+                            <h3 className="w-[105px] bg-primary py-[6px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-primary text-light before:top-0 before:rounded-[4px] before:-ml-6">
                                 ABOUT US
                             </h3>
 
@@ -66,10 +66,10 @@ const AboutSection: FC = () => {
                             <div className="space-y-2">
                                 <div className="flex items-center gap-4">
                                     <div className="bg-gray-50 rounded">
-                                        <FileText className="w-14 h-14 text-indigo" />
+                                        <FileText className="w-14 h-14 text-primary" />
                                     </div>
                                     <div>
-                                        <h3 className="text-xl font-semibold text-secondary">
+                                        <h3 className="text-xl font-semibold text-primary">
                                             Our History
                                         </h3>
                                         <p className="text-accent">
@@ -98,7 +98,7 @@ const AboutSection: FC = () => {
             </div>
 
             <div className="text-center mt-8">
-                <Button className="bg-secondary hover:bg-secondary/90">
+                <Button className="bg-primary hover:bg-primary/90">
                     READ MORE
                 </Button>
             </div>

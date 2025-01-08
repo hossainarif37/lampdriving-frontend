@@ -10,7 +10,7 @@ const InstructorRegistrationPage: FC = () => {
     return (
         <InstructorRegisterProvider>
             <div className="wrapper mx-auto px-4 py-8">
-                <h1 className="text-2xl md:text-4xl text-secondary font-bold my-10 text-center">Instructor Registration</h1>
+                <h1 className="text-2xl md:text-4xl text-primary font-bold my-10 text-center">Instructor Registration</h1>
                 <Suspense fallback={<Loading />}>
                     <StepIndicator />
                 </Suspense>

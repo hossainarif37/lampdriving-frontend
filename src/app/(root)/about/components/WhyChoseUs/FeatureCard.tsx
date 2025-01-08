@@ -18,7 +18,7 @@ const FeatureCard: FC<FeatureCardProps> = ({ Icon, title, description, alignment
             </div>
             <div className={`flex items-center ${justifyContent === 'justify-end' ? 'justify-end gap-4' : 'justify-start gap-4'}`}>
                 <div>
-                    <h3 className="text-xl font-semibold mb-2 text-secondary">{title}</h3>
+                    <h3 className="text-xl font-semibold mb-2 text-primary">{title}</h3>
                     <p className="text-accent text-sm leading-6">{description}</p>
                 </div>
             </div>

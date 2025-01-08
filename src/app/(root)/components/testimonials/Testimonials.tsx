@@ -43,8 +43,8 @@ const Testimonials: FC = () => {
 
                 {/* Slider previous and next button area*/}
                 <div className='hidden md:block'>
-                    <CarouselPrevious className='bg-[#F0F7F3] text-secondary' />
-                    <CarouselNext className='bg-[#F0F7F3] text-secondary' />
+                    <CarouselPrevious className='bg-[#F0F7F3] text-primary' />
+                    <CarouselNext className='bg-[#F0F7F3] text-primary' />
                 </div>
             </Carousel>
 

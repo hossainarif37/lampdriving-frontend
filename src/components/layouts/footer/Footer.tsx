@@ -12,11 +12,11 @@ import Image from 'next/image';
 
 const Footer: FC = () => {
     return (
-        <div className='mt-32 relative'>
+        <div className='mt-32 relative text-gray-200'>
             {/*== Footer search box ==*/}
             <FooterSearch />
 
-            <div className='bg-cover bg-center' style={{ backgroundImage: `url(${footerbg.src})` }}>
+            <div className='bg-primary'>
                 {/*==== Footer Body ===*/}
                 <div className="wrapper grid lg:grid-cols-4 md:grid-cols-2 gap-8 pt-40 pb-10 text-light px-4">
                     {/* About Section */}
@@ -30,7 +30,7 @@ const Footer: FC = () => {
 
                     {/* Contact Info Section */}
                     <div className="space-y-4">
-                        <h2 className="text-2xl font-semibold group flex flex-col">
+                        <h2 className="text-gray-200 text-2xl font-semibold group flex flex-col">
                             Contact Info
                             <span className="mt-[12px] h-[2px] lg:w-1/3 w-1/3 rounded-full bg-light"></span>
                         </h2>
@@ -41,7 +41,7 @@ const Footer: FC = () => {
 
                     {/* Useful Links Section */}
                     <div className="space-y-4">
-                        <h2 className="text-2xl font-semibold group flex flex-col">
+                        <h2 className="text-gray-200 text-2xl font-semibold group flex flex-col">
                             Useful Links
                             <span className="mt-[12px] h-[2px] md:w-1/7 w-1/3 rounded-full bg-light"></span>
                         </h2>
@@ -56,7 +56,7 @@ const Footer: FC = () => {
 
                     {/* Update News Section */}
                     <div className="space-y-4">
-                        <h2 className="text-2xl font-semibold group flex flex-col">
+                        <h2 className="text-gray-200 text-2xl font-semibold group flex flex-col">
                             Update News
                             <span className="mt-[12px] h-[2px] w-1/3 rounded-full bg-light"></span>
                         </h2>

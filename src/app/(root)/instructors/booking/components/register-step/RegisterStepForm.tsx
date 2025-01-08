@@ -34,7 +34,7 @@ const RegisterStepForm: FC = () => {
                     <div className='flex gap-5'>
                         {/* First Name */}
                         <div className='w-full'>
-                            <label htmlFor="first-name" className='font-semibold text-secondary'>First Name</label>
+                            <label htmlFor="first-name" className='font-semibold text-primary'>First Name</label>
                             <Input
                                 {...register('name.firstName', {
                                     required: "First name is required"
@@ -47,7 +47,7 @@ const RegisterStepForm: FC = () => {
 
                         {/* Last Name */}
                         <div className='w-full'>
-                            <label htmlFor="last-name" className='font-semibold text-secondary'>Last Name</label>
+                            <label htmlFor="last-name" className='font-semibold text-primary'>Last Name</label>
                             <Input
                                 {...register('name.lastName', {
                                     required: "Last name is required"
@@ -62,7 +62,7 @@ const RegisterStepForm: FC = () => {
                     <div className='flex gap-5'>
                         {/* Gender */}
                         <div className='flex-1'>
-                            <label className="font-semibold text-secondary">Gender</label>
+                            <label className="font-semibold text-primary">Gender</label>
                             <Controller
                                 name="gender"
                                 control={control}
@@ -86,7 +86,7 @@ const RegisterStepForm: FC = () => {
 
                         {/* Date of Birth */}
                         <div className='flex-1'>
-                            <label htmlFor="date-of-birth" className='font-semibold text-secondary'>Date of Birth</label>
+                            <label htmlFor="date-of-birth" className='font-semibold text-primary'>Date of Birth</label>
                             <Input
                                 {...register('dateOfBirth', {
                                     required: "Date of birth is required"
@@ -100,7 +100,7 @@ const RegisterStepForm: FC = () => {
 
                     {/* Email */}
                     <div>
-                        <label htmlFor="email" className='font-semibold text-secondary'>Email</label>
+                        <label htmlFor="email" className='font-semibold text-primary'>Email</label>
                         <Input
                             {...register('email', {
                                 required: "Email is required",
@@ -116,7 +116,7 @@ const RegisterStepForm: FC = () => {
 
                     {/* Phone */}
                     <div>
-                        <label htmlFor="phone" className='font-semibold text-secondary'>Phone</label>
+                        <label htmlFor="phone" className='font-semibold text-primary'>Phone</label>
                         <Input
                             maxLength={10}
                             {...register('phone', {
@@ -136,7 +136,7 @@ const RegisterStepForm: FC = () => {
 
                     {/* Password */}
                     <div>
-                        <label htmlFor="password" className='font-semibold text-secondary'>Password</label>
+                        <label htmlFor="password" className='font-semibold text-primary'>Password</label>
                         <Input
                             {...register('password', {
                                 minLength: {

@@ -163,8 +163,8 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
                     />
 
                     <label className="flex flex-col justify-center items-center cursor-pointer">
-                        <span className="mb-2 text-secondary"><CloudUpload /></span>
-                        <span className="text-secondary text-sm"><span className="font-semibold">{label}</span> or drag and drop</span>
+                        <span className="mb-2 text-primary"><CloudUpload /></span>
+                        <span className="text-primary text-sm"><span className="font-semibold">{label}</span> or drag and drop</span>
                         <span className="text-gray-500 mt-2">SVG, PNG or JPG (max. {maxSize})</span>
                     </label>
                 </div>

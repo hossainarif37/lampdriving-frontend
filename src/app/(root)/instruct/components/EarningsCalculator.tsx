@@ -15,7 +15,7 @@ const EarningsCalculator: FC = () => {
     const weeklyEarnings = hourlyRate * lessonHours
 
     return (
-        <div className="py-24 px-4 sm:px-6 lg:px-8 text-secondary">
+        <div className="py-24 px-4 sm:px-6 lg:px-8 text-primary">
             {/* Main container for the section with responsive padding and text color */}
             <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                 {/* Grid layout for dividing content into two columns on medium and larger screens */}
@@ -33,7 +33,7 @@ const EarningsCalculator: FC = () => {
                         </h2>
                         <h3 className="text-3xl font-semibold">
                             You could earn{" "}
-                            <span className="text-4xl font-bold text-indigo">
+                            <span className="text-4xl font-bold text-primary">
                                 ${weeklyEarnings}
                             </span>
                             /week
@@ -192,7 +192,7 @@ export default EarningsCalculator;
 //                     </Card>
 
 //                     {/* Potential Earnings Card */}
-//                     <Card className="border-indigo-100">
+//                     <Card className="border-primary-100">
 //                         <CardHeader>
 //                             <CardTitle className="flex items-center gap-2 text-gradient">
 //                                 <DollarSign className="h-5 w-5" />

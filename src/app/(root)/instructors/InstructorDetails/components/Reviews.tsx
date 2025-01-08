@@ -29,7 +29,7 @@ const Reviews: FC = () => {
     <section className="bg-light rounded-xl border p-4 md:p-6">
 
       {/* Reviews section header */}
-      <h2 className="text-xl font-semibold mb-6 text-secondary">Reviews</h2>
+      <h2 className="text-xl font-semibold mb-6 text-primary">Reviews</h2>
       <div className="space-y-6">
 
         {/* Mapping through reviews */}
@@ -37,7 +37,7 @@ const Reviews: FC = () => {
           <div key={review.id} className="border-b last:border-b-0 pb-6 last:pb-0">
             <div className="flex justify-between items-start mb-2">
               <div>
-                <h3 className="font-medium text-secondary">{review.name}</h3>
+                <h3 className="font-medium text-primary">{review.name}</h3>
                 <p className="text-sm text-gray-500">{review.date}</p>
               </div>
               <div className="flex text-gradient">{'★'.repeat(review.rating)}</div>

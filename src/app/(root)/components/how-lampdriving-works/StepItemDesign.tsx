@@ -16,7 +16,7 @@ const StepItemDesign: FC<StepItemProps> = ({ stepNumber, title, description }) =
 
       {/* Title and Description */}
       <div>
-        <h2 className="text-secondary font-semibold text-xl lg:text-2xl">
+        <h2 className="text-primary font-semibold text-xl lg:text-2xl">
           {title}
         </h2>
         <p className="text-accent text-sm lg:w-10/12 tracking-wide lg:leading-6">

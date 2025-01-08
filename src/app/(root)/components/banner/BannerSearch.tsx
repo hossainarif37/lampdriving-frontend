@@ -27,7 +27,7 @@ const BannerSearch: FC = () => {
             <div className="space-y-6">
 
                 {/* Heading */}
-                <h2 className="text-3xl font-bold text-secondary text-center bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent">
+                <h2 className="text-3xl font-bold text-primary text-center bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">
                     Find a driving instructor
                 </h2>
 
@@ -37,7 +37,7 @@ const BannerSearch: FC = () => {
                         onClick={() => setCarType('auto')}
                         className={`w-1/2 hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
                             ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                            : 'bg-gray-200 text-primary'}`}
                     >
                         <span>Auto</span>
                     </Button>
@@ -45,7 +45,7 @@ const BannerSearch: FC = () => {
                         onClick={() => setCarType('manual')}
                         className={`w-1/2 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
                             ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                            : 'bg-gray-200 text-primary'}`}
                     >
                         <span>Manual</span>
                     </Button>
@@ -62,7 +62,7 @@ const BannerSearch: FC = () => {
                                 value={selectedSuburb}
                                 onChange={(e) => setSelectedSuburb(e.target.value)}
                                 readOnly={selectedSuburb ? true : false}
-                                className="flex-1 px-4 py-3 rounded-md text-secondary focus:outline-none placeholder:text-accent"
+                                className="flex-1 px-4 py-3 rounded-md text-primary focus:outline-none placeholder:text-accent"
                                 type="text"
                                 placeholder="Enter your suburb"
                             />

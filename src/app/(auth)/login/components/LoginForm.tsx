@@ -48,13 +48,13 @@ const LoginForm: FC = () => {
             onSubmit={handleSubmit(handleLogin)}
             className='w-full md:w-[450px] xl:w-[500px] mx-auto p-5 md:p-10 flex flex-col items-center md:shadow-lg md:rounded-lg md:border'
         >
-            <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Login</h1>
+            <h1 className='text-2xl md:text-3xl font-bold text-primary'>Login</h1>
 
             <div className='w-full mt-7'>
                 <div className='flex flex-col gap-5'>
                     {/* Email */}
                     <div>
-                        <label htmlFor="email" className='font-semibold text-secondary'>Email/Phone</label>
+                        <label htmlFor="email" className='font-semibold text-primary'>Email/Phone</label>
                         <Input
                             {...register('emailOrPhone', {
                                 required: "Email is required",
@@ -70,7 +70,7 @@ const LoginForm: FC = () => {
 
                     {/* Password */}
                     <div className='w-full'>
-                        <label htmlFor="password" className='font-semibold text-secondary'>Password</label>
+                        <label htmlFor="password" className='font-semibold text-primary'>Password</label>
                         <div className='w-full relative flex'>
                             <Input
                                 {...register('password', {
@@ -96,7 +96,7 @@ const LoginForm: FC = () => {
                 </div>
 
                 <p className='text-right mt-2'>
-                    <Link href="#" className='text-secondary hover:underline font-semibold'>Forgot password?</Link>
+                    <Link href="#" className='text-primary hover:underline font-semibold'>Forgot password?</Link>
                 </p>
             </div>
 

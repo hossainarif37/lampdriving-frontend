@@ -113,7 +113,7 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto }) =>
 
                 {
                     profilePhoto?.file && !isSuccess ?
-                        <Button onClick={handleUploadFile} type='button' className='text-secondary border cursor-pointer shadow-lg mx-auto bg-light hover:bg-light px-0 w-36 text-sm capitalize h-9 rounded-lg flex justify-center items-center gap-2 -translate-y-5'>
+                        <Button onClick={handleUploadFile} type='button' className='text-primary border cursor-pointer shadow-lg mx-auto bg-light hover:bg-light px-0 w-36 text-sm capitalize h-9 rounded-lg flex justify-center items-center gap-2 -translate-y-5'>
                             {
                                 imageUploadLoading ?
                                     <>
@@ -126,14 +126,14 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto }) =>
                             }
                         </Button>
                         :
-                        <label htmlFor='image' className='text-secondary border cursor-pointer font-bold bg-light hover:bg-light shadow-lg mx-auto text-sm capitalize w-36 h-9 rounded-lg flex justify-center items-center gap-2 -translate-y-5'>
+                        <label htmlFor='image' className='text-primary border cursor-pointer font-bold bg-light hover:bg-light shadow-lg mx-auto text-sm capitalize w-36 h-9 rounded-lg flex justify-center items-center gap-2 -translate-y-5'>
                             <ImagePlus width={16} height={16} /><span>Choose File</span>
                         </label>
                 }
 
                 {
                     (profilePhoto?.file && !isSuccess) &&
-                    <Button type='button' onClick={handleRemoveImage} className='absolute top-0 right-0 shadow-lg bg-secondary hover:bg-red-500 px-0 h-8 w-8 -translate-y-3 translate-x-3 rounded-lg flex justify-center items-center'>
+                    <Button type='button' onClick={handleRemoveImage} className='absolute top-0 right-0 shadow-lg bg-primary hover:bg-red-500 px-0 h-8 w-8 -translate-y-3 translate-x-3 rounded-lg flex justify-center items-center'>
                         <X />
                     </Button>
                 }

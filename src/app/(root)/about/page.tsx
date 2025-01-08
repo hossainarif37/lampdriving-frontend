@@ -3,9 +3,9 @@ import AboutSection from './components/AboutSection';
 import MissionVisionSection from './components/MissionVisionSection';
 import WhyChooseUs from './components/WhyChoseUs/WhyChooseUs';
 import AboutStats from './components/AboutStats/AboutStats';
-import ExpertTeamMembar from './components/ExpertTeamMembar/ExpertTeamMembar';
+import ExpertTeamMember from './components/ExpertTeamMember/ExpertTeamMember';
 
-const aboutPage: FC = () => {
+const AboutPage: FC = () => {
     return (
         <div>
             {/* <Banner /> */}
@@ -13,9 +13,9 @@ const aboutPage: FC = () => {
             <MissionVisionSection />
             <WhyChooseUs />
             <AboutStats />
-            <ExpertTeamMembar />
+            <ExpertTeamMember />
         </div>
     );
 };
 
-export default aboutPage;
+export default AboutPage;

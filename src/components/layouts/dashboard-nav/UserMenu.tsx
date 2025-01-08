@@ -48,7 +48,7 @@ const UserMenu: FC = () => {
             <Button
                 onClick={() => setIsOpen(!isOpen)}
                 size={"icon"}
-                className={`rounded-[4px] gap-2 bg-indigo/90 hover:bg-indigo`}>
+                className={`rounded-[4px] gap-2 bg-primary/90 hover:bg-primary`}>
                 <User className='text-5xl' size={24} />
             </Button>
 
@@ -71,7 +71,7 @@ const UserMenu: FC = () => {
                 </div>
 
                 <div className="py-1 px-4">
-                    <Button variant={"outline"} disabled={isLogoutLoading} onClick={handleLogout} className='h-[40px] w-full text-secondary capitalize'>
+                    <Button variant={"outline"} disabled={isLogoutLoading} onClick={handleLogout} className='h-[40px] w-full text-primary capitalize'>
                         <LogOut className="w-4 h-4" />
                         <span>Sign out</span>
                     </Button>

@@ -61,7 +61,7 @@ const WhyChooseUs: FC = () => {
                             position: "absolute", top: "-510px", left: "-180px", right: "-180px", height: "570px", backgroundColor: "#ffffff", zIndex: 2, borderRadius: "50%",
                         }}
                     />
-                    <div className="absolute top-[30px] left-0 right-0 text-center text-white/10 text-[100px] font-extrabold leading-[1em] uppercase font-secondary">
+                    <div className="absolute top-[30px] left-0 right-0 text-center text-white/10 text-[100px] font-extrabold leading-[1em] uppercase font-primary">
                         Lamp driving
                     </div>
                     <div className="z-[4] animate-rotateSwing mb-6">

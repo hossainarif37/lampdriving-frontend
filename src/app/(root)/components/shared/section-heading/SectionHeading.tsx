@@ -10,17 +10,17 @@ interface SectionHeadingProps {
 const SectionHeading: FC<SectionHeadingProps> = ({ title, subtitle, className }) => {
 
     // set heading color based on the varient
-    // const headingColor = variant === "default" ? "bg-secondary before:bg-secondary" : "bg-primary before:bg-primary";
+    // const headingColor = variant === "default" ? "bg-primary before:bg-primary" : "bg-primary before:bg-primary";
     return (
         // <div className={cn("flex flex-col items-center text-light", classname)}>
 
         //     {/* heading styles */}
-        //     <h3 className={cn("bg-secondary py-[3px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-secondary text-light before:top-0 before:rounded-[4px] before:-ml-6", headingColor)}>
+        //     <h3 className={cn("bg-primary py-[3px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-primary text-light before:top-0 before:rounded-[4px] before:-ml-6", headingColor)}>
         //         {heading}
         //     </h3>
 
         //     {/* sub heading styles */}
-        //     <h1 className={`text-[48px] font-bold text-center ${variant === "default" ? "text-secondary" : "text-light"}`}>
+        //     <h1 className={`text-[48px] font-bold text-center ${variant === "default" ? "text-primary" : "text-light"}`}>
         //         {children}
         //     </h1>
         // </div>

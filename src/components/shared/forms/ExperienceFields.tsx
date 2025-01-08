@@ -52,7 +52,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
         <div className='w-full mt-7'>
             <div className='flex flex-col gap-5'>
                 <div className='w-full'>
-                    <label htmlFor="experience" className='font-semibold text-secondary'>Driving Experience</label>
+                    <label htmlFor="experience" className='font-semibold text-primary'>Driving Experience</label>
                     <Input
                         {...register('experience', {
                             required: "Experience is required"
@@ -66,7 +66,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
 
                 {/* Description */}
                 <div className='w-full'>
-                    <label htmlFor="experience" className='font-semibold text-secondary'>Description</label>
+                    <label htmlFor="experience" className='font-semibold text-primary'>Description</label>
                     <Textarea
                         placeholder="Enter your description"
                         rows={5}
@@ -78,7 +78,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
                 </div>
 
                 <div className='w-full'>
-                    <label htmlFor="experience" className='font-semibold text-secondary'>Languages</label>
+                    <label htmlFor="experience" className='font-semibold text-primary'>Languages</label>
                     <MultiSelect
                         options={languageList}
                         onValueChange={setSelectedLanguages}
@@ -95,7 +95,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
 
                 {/* Driving License */}
                 <div className='w-full space-y-1'>
-                    <label htmlFor="first-name" className='font-semibold text-secondary'>Driving License</label>
+                    <label htmlFor="first-name" className='font-semibold text-primary'>Driving License</label>
                     <FileUpload
                         label="Click 1 file to upload"
                         maxSize="1500x1500px"
@@ -111,7 +111,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
 
                 {/* Experience Certificate */}
                 <div className='w-full space-y-1'>
-                    <label htmlFor="first-name" className='font-semibold text-secondary'>Experience Certificate</label>
+                    <label htmlFor="first-name" className='font-semibold text-primary'>Experience Certificate</label>
                     <FileUpload
                         label="Click 1 file to upload"
                         maxSize="1500x1500px"

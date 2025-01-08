@@ -90,7 +90,7 @@ const ServicesForm: FC = () => {
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
-                <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Service Details</h1>
+                <h1 className='text-2xl md:text-3xl font-bold text-primary'>Service Details</h1>
 
                 <ServicesFields
                     errors={errors}

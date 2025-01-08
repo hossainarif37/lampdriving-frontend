@@ -87,9 +87,6 @@ const SecurityForm: FC = () => {
             }
         }
 
-        console.log('instructorFormData', instructorFormData);
-        return;
-
         registerInstructor(instructorFormData).unwrap()
             .then((res) => {
                 toast({
@@ -110,13 +107,13 @@ const SecurityForm: FC = () => {
                 onSubmit={handleSubmit(onSubmit)}
                 className="w-full flex flex-col"
             >
-                <h1 className="text-2xl md:text-3xl font-bold text-secondary">Security</h1>
+                <h1 className="text-2xl md:text-3xl font-bold text-primary">Security</h1>
 
                 <div className="w-full mt-7">
                     <div className="flex flex-col gap-6">
                         {/* Password */}
                         <div className="w-full">
-                            <label htmlFor="password" className="font-semibold text-secondary">
+                            <label htmlFor="password" className="font-semibold text-primary">
                                 Password
                             </label>
                             <div className="relative flex w-full">
@@ -149,7 +146,7 @@ const SecurityForm: FC = () => {
 
                         {/* Confirm Password */}
                         <div className="w-full">
-                            <label htmlFor="confirm-password" className="font-semibold text-secondary">
+                            <label htmlFor="confirm-password" className="font-semibold text-primary">
                                 Confirm Password
                             </label>
                             <div className="relative flex w-full">
@@ -201,7 +198,7 @@ const SecurityForm: FC = () => {
                                     <Link
                                         target="_blank"
                                         href="#"
-                                        className="text-indigo-600 underline"
+                                        className="text-primary-600 underline"
                                     >
                                         terms and conditions
                                     </Link>

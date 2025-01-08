@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import { ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import TeamMembarCard from './TeamMembarCard';
+import TeamMemberCard from './TeamMemberCard';
 
 const teamMembers = [
     {
@@ -49,7 +49,7 @@ const teamMembers = [
     }
 ];
 
-const ExpertTeamMembar: FC = () => {
+const ExpertTeamMember: FC = () => {
     return (
         <div className=" gradient-to-b py-20 px-4">
             <div className="max-w-7xl mx-auto">
@@ -75,7 +75,7 @@ const ExpertTeamMembar: FC = () => {
                         <CarouselContent className="-ml-4">
                             {teamMembers.map((member, index) => (
                                 <CarouselItem key={index} className="pl-10 md:basis-1/2 lg:basis-1/3">
-                                    <TeamMembarCard
+                                    <TeamMemberCard
                                         name={member.name}
                                         role={member.role}
                                         image={member.image}
@@ -111,4 +111,4 @@ const ExpertTeamMembar: FC = () => {
     );
 };
 
-export default ExpertTeamMembar;
+export default ExpertTeamMember;

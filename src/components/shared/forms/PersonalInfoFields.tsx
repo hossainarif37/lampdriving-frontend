@@ -37,7 +37,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
             {/* First Name */}
             <div className='w-full'>
-              <label htmlFor="first-name" className='font-semibold text-secondary'>First Name</label>
+              <label htmlFor="first-name" className='font-semibold text-primary'>First Name</label>
               <Input
                 {...register('name.firstName', {
                   required: {
@@ -56,7 +56,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
 
             {/* Last Name */}
             <div className='w-full'>
-              <label htmlFor="last-name" className='font-semibold text-secondary'>Last Name</label>
+              <label htmlFor="last-name" className='font-semibold text-primary'>Last Name</label>
               <Input
                 {...register('name.lastName', {
                   required: {
@@ -77,7 +77,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
             {/* Gender */}
             <div>
-              <label className="font-semibold text-secondary">Gender</label>
+              <label className="font-semibold text-primary">Gender</label>
               <Controller
                 name="gender"
                 control={control}
@@ -108,7 +108,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
 
             {/* Phone */}
             <div>
-              <label htmlFor="phone" className='font-semibold text-secondary'>Phone</label>
+              <label htmlFor="phone" className='font-semibold text-primary'>Phone</label>
               <Input
                 {...register('phone', {
                   required: {
@@ -136,7 +136,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
           <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
             {/* Date of Birth */}
             <div className='w-full'>
-              <label htmlFor="date-of-birth" className='font-semibold text-secondary'>Date of Birth</label>
+              <label htmlFor="date-of-birth" className='font-semibold text-primary'>Date of Birth</label>
               <Input
                 {...register('dateOfBirth', {
                   required: {
@@ -153,7 +153,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
 
             {/* Email */}
             <div className='w-full'>
-              <label htmlFor="email" className='font-semibold text-secondary'>Email</label>
+              <label htmlFor="email" className='font-semibold text-primary'>Email</label>
               <Input
                 {...register('email', {
                   required: {

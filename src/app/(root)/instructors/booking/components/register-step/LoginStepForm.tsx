@@ -31,7 +31,7 @@ const LoginFormStep: FC = () => {
                 <div className='flex flex-col gap-5'>
                     {/* Email */}
                     <div>
-                        <label htmlFor="email" className='font-semibold text-secondary'>Email/Phone</label>
+                        <label htmlFor="email" className='font-semibold text-primary'>Email/Phone</label>
                         <Input
                             {...register('emailOrPhone', {
                                 required: "Email is required",
@@ -47,7 +47,7 @@ const LoginFormStep: FC = () => {
 
                     {/* Password */}
                     <div>
-                        <label htmlFor="password" className='font-semibold text-secondary'>Password</label>
+                        <label htmlFor="password" className='font-semibold text-primary'>Password</label>
                         <Input
                             {...register('password', {
                                 minLength: {
@@ -63,7 +63,7 @@ const LoginFormStep: FC = () => {
                 </div>
 
                 {/* <p className='text-right mt-2'>
-                    <Link href="#" className='text-secondary hover:underline font-semibold'>Forgot password?</Link>
+                    <Link href="#" className='text-primary hover:underline font-semibold'>Forgot password?</Link>
                 </p> */}
             </div>
 

@@ -10,7 +10,7 @@ const Banner: FC = () => {
             style={{ backgroundImage: `url(${bannerBg.src})` }}
         >
             {/* transparent overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-gray-950 to-gray-700 opacity-60"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary to-primary opacity-60"></div>
 
             {/* Content layer */}
             <div className="relative wrapper mx-auto md:flex items-center justify-between h-full space-y-8" >

@@ -37,7 +37,7 @@ const LearnerStats: FC = () => {
                                 <li key={index} className="flex items-start gap-3">
                                     {/* Icon Section */}
                                     <div className="mt-1">
-                                        <Check className="h-5 w-5 text-indigo" />
+                                        <Check className="h-5 w-5 text-primary" />
                                     </div>
                                     {/* Text for each point */}
                                     <span className="text-white/90">{item}</span>
