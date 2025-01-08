@@ -31,7 +31,7 @@ const Topbar = () => {
     const dashboardURL = isAuthenticate && user?.role === "admin" ? "/dashboard/admin" : user?.role === "instructor" ? "/dashboard/instructor" : "/dashboard/learner";
 
     return (
-        <div className="p-4 border border-b border-gray-300">
+        <div className="p-4 border border-b border-gray-200">
             <div className="wrapper flex items-center justify-between text-primary font-semibold">
                 {/* Left Side */}
                 <ul className="hidden md:flex items-center gap-x-4">
