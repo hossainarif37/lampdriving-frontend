@@ -13,7 +13,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
     const { user, experience, pricePerHour, vehicle, feedback, completedLessons } = instructor;
 
     return (
-        <div className="p-4 rounded-lg space-y-5 border bg-white/20 relative">
+        <div className="p-4 rounded-lg space-y-5 border relative">
             {/* car type */}
             <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium flex items-center gap-1 absolute top-5 right-5 capitalize">
                 <Car className="w-4 h-4" />
@@ -76,7 +76,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                     <Link
                         href={`/instructors/${typeof user !== 'string' && user?.username}`}
                         className="w-1/2">
-                        <Button className="border w-full text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 transition-colors duration-200">
+                        <Button variant={"outline"} className="border w-full text-sm font-medium text-primary flex items-center gap-2 transition-colors duration-200">
                             <ExternalLink className="w-4 h-4" />
                             View Profile
                         </Button>
@@ -84,7 +84,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
 
                     {/* Book Button */}
                     <Link href={`/instructors/booking/?instructor=${typeof user !== 'string' && user?.username}&step=package-selection`} className="w-1/2">
-                        <Button className="w-full gradient-color">Book</Button>
+                        <Button className="w-full bg-primary">Book</Button>
                     </Link>
                 </div>
 

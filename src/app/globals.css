@@ -7,7 +7,7 @@
       @apply max-w-6xl mx-auto px-3 lg:px-0
   }
  .gradient-color {
-    @apply bg-gradient-to-r from-primary to-primary;
+    @apply bg-gradient-to-r from-secondary to-secondary;
   }
 
     .gradient-to-t {

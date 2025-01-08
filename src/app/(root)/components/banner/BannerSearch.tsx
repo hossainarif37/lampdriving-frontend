@@ -35,7 +35,7 @@ const BannerSearch: FC = () => {
                 <div className="w-full font-semibold text-light text-center border flex gap-3 p-3 rounded-md">
                     <Button
                         onClick={() => setCarType('auto')}
-                        className={`w-1/2 hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
+                        className={`w-1/2 hover:bg-gray-200 flex justify-center items-center px-0 ${carType === 'auto'
                             ? 'gradient-color text-light'
                             : 'bg-gray-200 text-primary'}`}
                     >
@@ -43,7 +43,7 @@ const BannerSearch: FC = () => {
                     </Button>
                     <Button
                         onClick={() => setCarType('manual')}
-                        className={`w-1/2 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
+                        className={`w-1/2 hover:bg-gray-200 flex justify-center items-center ${carType === 'manual'
                             ? 'gradient-color text-light'
                             : 'bg-gray-200 text-primary'}`}
                     >
@@ -91,7 +91,7 @@ const BannerSearch: FC = () => {
 
                 <div>
                     {/* Search button */}
-                    <Button onClick={handleSearch} className="w-full py-3 gradient-color text-light rounded-md text-base">
+                    <Button onClick={handleSearch} className="w-full py-3 gradient-color text-light text-base">
                         Search
                     </Button>
 

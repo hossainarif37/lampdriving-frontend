@@ -8,7 +8,7 @@ const MissionVisionSection: FC = () => {
     return (
         <section style={{ backgroundImage: `url(${bg.src})` }} className="relative -z-10 py-16 md:py-24 flex items-center">
             {/* Overlay */}
-            <div className="absolute inset-0 bg-[#1a373a] opacity-50 z-0" />
+            <div className="absolute inset-0 bg-primary opacity-50 z-0" />
             <div className="lg:max-w-7xl z-10 mx-auto md:max-w-4xl max-w-md flex flex-col md:flex-row gap-8 px-4 lg:items-start items-center w-full">
                 {/* Left Column - Icons (Visible on Large Screens) */}
                 <div className="lg:w-2/12 lg:flex hidden flex-col">

@@ -20,7 +20,7 @@ const Testimonials: FC = () => {
     }, []);
 
     return (
-        <div className='relative gradient-to-b md:p-16 py-16 px-8'>
+        <div className='relative md:p-16 py-16 px-8 bg-light-green'>
             <SectionHeading title='Testimonials' subtitle='Our Learner Experiences' />
             <Carousel
                 opts={{ align: "start", loop: true, }}

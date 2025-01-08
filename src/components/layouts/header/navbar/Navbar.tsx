@@ -6,7 +6,7 @@ import MobileNav from "./MobileNav";
 
 const Navbar = () => {
     return (
-        <nav className="bg-light">
+        <nav className="">
             <div className="wrapper flex justify-between items-center py-2 w-full">
                 <div>
                     <Link href={'/'}>
@@ -26,7 +26,7 @@ const Navbar = () => {
                 </ul>
 
                 <Link href={'/instructors'}>
-                    <Button className="hidden md:block gradient-color" size={"lg"}>Book Lesson</Button>
+                    <Button className="hidden md:block gradient-color">Book Lesson</Button>
                 </Link>
 
                 {/* Mobile Nav */}
