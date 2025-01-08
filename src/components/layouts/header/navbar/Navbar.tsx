@@ -6,7 +6,7 @@ import MobileNav from "./MobileNav";
 
 const Navbar = () => {
     return (
-        <nav className="">
+        <nav className="bg-light-green">
             <div className="wrapper flex justify-between items-center py-2 w-full">
                 <div>
                     <Link href={'/'}>
