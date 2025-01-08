@@ -26,9 +26,9 @@ const BannerHeading: FC = () => {
                         </p>
                         <div>
                             {/* Star rating */}
-                            <div className="text-primary font-bold flex gap-1">
+                            <div className="text-light font-bold flex gap-1">
                                 {[...Array(5)].map((_, i) => (
-                                    <Star key={i} className='fill-primary' />
+                                    <Star key={i} className='fill-light' />
                                 ))}
                             </div>
                             <p className='md:text-base text-xs'>2.8k Reviews by Trustpilot</p>

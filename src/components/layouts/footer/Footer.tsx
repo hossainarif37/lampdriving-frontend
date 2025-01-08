@@ -12,7 +12,7 @@ import Image from 'next/image';
 
 const Footer: FC = () => {
     return (
-        <div className='mt-32 relative text-gray-200'>
+        <div className='relative text-gray-200'>
             {/*== Footer search box ==*/}
             <FooterSearch />
 

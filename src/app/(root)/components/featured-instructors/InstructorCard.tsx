@@ -8,12 +8,12 @@ import Link from 'next/link';
 
 const InstructorCard: FC = () => {
     return (
-        <Card className="w-full bg-gradient-to-b from-primary/0 to-primary/5 border-none">
+        <Card className="w-full bg-gradient-to-b from-primary/0 to-indigo/5 border-none">
             <CardContent className="p-6 overflow-hidden">
                 <div className="flex items-start gap-4 md:gap-6">
                     {/* Profile Image with Gradient Border */}
                     <div className="relative group flex flex-col">
-                        <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/50 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-300" />
+                        <div className="absolute -inset-1 bg-gradient-to-r from-indigo/50 to-primary/50 rounded-full blur opacity-25 group-hover:opacity-50 transition duration-300" />
                         <Image
                             src={myImg}
                             height={130}

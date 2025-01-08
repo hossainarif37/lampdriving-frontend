@@ -7,7 +7,7 @@ const AboutStats: FC = () => {
     return (
         <div className="relative w-full md:py-36 py-32 px-4 bg-no-repeat bg-cover -z-10" style={{ backgroundImage: `url(${bgImg.src})` }}>
             {/* Overlay */}
-            <div className="absolute inset-0 bg-[#1a373a] opacity-95 z-0" />
+            <div className="absolute inset-0 bg-primary opacity-95 z-0" />
 
             {/* Content */}
             <div className="relative z-10 max-w-8xl mx-auto grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
