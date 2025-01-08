@@ -13,7 +13,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
     const { user, experience, pricePerHour, vehicle, feedback, completedLessons } = instructor;
 
     return (
-        <div className="p-4 rounded-lg space-y-5 border relative">
+        <div className="p-4 rounded-lg space-y-5 border border-primary/10 shadow-md relative">
             {/* car type */}
             <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium flex items-center gap-1 absolute top-5 right-5 capitalize">
                 <Car className="w-4 h-4" />
@@ -76,7 +76,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                     <Link
                         href={`/instructors/${typeof user !== 'string' && user?.username}`}
                         className="w-1/2">
-                        <Button variant={"outline"} className="border w-full text-sm font-medium text-primary flex items-center gap-2 transition-colors duration-200">
+                        <Button variant={"outline"} className="border border-primary/50 bg-transparent w-full text-sm font-medium text-primary flex items-center gap-2 transition-colors duration-200">
                             <ExternalLink className="w-4 h-4" />
                             View Profile
                         </Button>
