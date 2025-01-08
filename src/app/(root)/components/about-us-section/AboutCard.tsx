@@ -1,13 +1,13 @@
 import { LucideIcon } from 'lucide-react';
 import { FC } from 'react';
 
-interface Card {
+interface ICardProps {
     icon: LucideIcon;
     title: string;
     description: string;
 }
 
-const AboutCard: FC<Card> = ({ icon: Icon, title, description }: Card) => {
+const AboutCard: FC<ICardProps> = ({ icon: Icon, title, description }: ICardProps) => {
     return (
         <div className="flex flex-col items-center p-6 text-center group">
             <div className="relative w-20 h-20 mb-6">
