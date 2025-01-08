@@ -38,8 +38,13 @@ const Topbar = () => {
                     <li><Link href="#">Support</Link></li>
                     <Bar />
                     <li><Link href="#">Blog</Link></li>
-                    <Bar />
-                    <li><Link href="/instruct">Instruct with LampDriving</Link></li>
+                    {
+                        !user &&
+                        <>
+                            <Bar />
+                            <li><Link href="/instruct">Instruct with LampDriving</Link></li>
+                        </>
+                    }
                 </ul>
 
                 {/* Right Side */}

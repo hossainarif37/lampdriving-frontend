@@ -8,7 +8,6 @@ import { Toaster } from "@/components/ui/toaster";
 export const metadata: Metadata = {
   title: "Lamp Driving School",
   description: "Lamp Driving School is an driving school ",
-
 };
 
 const pathway = Pathway_Extreme({ subsets: ["latin"] });

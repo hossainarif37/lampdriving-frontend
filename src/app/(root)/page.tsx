@@ -7,6 +7,7 @@ import AboutUs from './components/about-us-section/AboutUs';
 import Banner from './components/banner/Banner';
 import FAQ from './components/faq/FAQ';
 import HowLampDrivingWork from './components/how-lampdriving-works/HowLampDrivingWork';
+
 const HomePage: FC = () => {
   return (
     <div>

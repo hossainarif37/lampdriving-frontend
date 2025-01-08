@@ -25,7 +25,9 @@ const Navbar = () => {
                     }
                 </ul>
 
-                <Button className="hidden md:block gradient-color" size={"lg"}>Book Lesson</Button>
+                <Link href={'/instructors'}>
+                    <Button className="hidden md:block gradient-color" size={"lg"}>Book Lesson</Button>
+                </Link>
 
                 {/* Mobile Nav */}
                 <MobileNav />

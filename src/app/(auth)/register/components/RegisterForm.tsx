@@ -2,18 +2,16 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { genderOptions } from '@/constant/gender';
 import { toast } from '@/hooks/use-toast';
 import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
 import { IRegisterInputs } from '@/types/auth';
-import { Eye, EyeClosed, EyeOff } from 'lucide-react';
+import { Eye, EyeClosed } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-
 
 const RegisterForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control, watch } = useForm<IRegisterInputs>();
@@ -22,24 +20,24 @@ const RegisterForm: FC = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-    // Watch password fields
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
 
     const router = useRouter();
 
     const handleRegister = (data: IRegisterInputs) => {
-        registerUser(data).unwrap().then((res) => {
-            toast({
-                message: res.message,
-            })
-            router.push("/login");
-        }).catch((err) => {
-            toast({
-                success: false,
-                message: err.data.message || "Something went wrong",
-            })
-        })
+        console.log(data);
+        // registerUser(data).unwrap().then((res) => {
+        //     toast({
+        //         message: res.message,
+        //     })
+        //     router.push("/login");
+        // }).catch((err) => {
+        //     toast({
+        //         success: false,
+        //         message: err.data.message || "Something went wrong",
+        //     })
+        // })
     }
 
     const handlePasswordToggle = (field: string) => {
@@ -65,84 +63,150 @@ const RegisterForm: FC = () => {
             onSubmit={handleSubmit(handleRegister)}
             className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col items-center md:shadow-lg md:rounded-lg md:border'
         >
-            <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Register</h1>
+            <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Learner Registration</h1>
 
-            <div className='w-full mt-7'>
+            <div className='w-full mt-10'>
                 <div className='flex flex-col gap-5'>
-                    {/* Name */}
+                    {/* Name Section */}
                     <div className='flex flex-col md:flex-row gap-5'>
-                        {/* First Name */}
                         <div className='w-full'>
                             <label htmlFor="first-name" className='font-semibold text-secondary'>First Name</label>
                             <Input
                                 {...register('name.firstName', {
                                     required: "First name is required"
-                                })
-                                }
+                                })}
                                 type="text" id='first-name' placeholder="Enter your firstname" className='xl:h-12 mt-1'
                             />
                             {errors?.name?.firstName && <p className='text-red-500 text-sm mt-1'>{errors?.name?.firstName?.message}</p>}
                         </div>
-
-                        {/* Last Name */}
                         <div className='w-full'>
                             <label htmlFor="last-name" className='font-semibold text-secondary'>Last Name</label>
                             <Input
                                 {...register('name.lastName', {
                                     required: "Last name is required"
-                                })
-                                }
+                                })}
                                 type="text" id="last-name" placeholder="Enter your lastname" className='xl:h-12 mt-1'
                             />
                             {errors?.name?.lastName && <p className='text-red-500 text-sm mt-1'>{errors?.name?.lastName?.message}</p>}
                         </div>
                     </div>
 
-                    <div className='flex flex-col md:flex-row gap-5'>
-                         {/* Date of Birth */}
-                         <div className='w-full'>
-                            <label htmlFor="date-of-birth" className='font-semibold text-secondary'>Date of Birth</label>
-                            <Input
-                                {...register('dateOfBirth', {
-                                    required: "Date of birth is required"
-                                })
-                                }
-                                type="date" id='date-of-birth' className='xl:h-12 mt-1'
-                            />
-                            {errors?.dateOfBirth && <p className='text-red-500 text-sm mt-1'>{errors?.dateOfBirth?.message}</p>}
-                        </div>
-                        
-                        {/* Gender */}
-                        <div className='w-full'>
-                            <label className="font-semibold text-secondary">Gender</label>
-                            <Controller
-                                name="gender"
-                                control={control}
-                                rules={{ required: "Gender is required" }}
-                                render={({ field }) => (
-                                    <Select onValueChange={field.onChange} value={field.value || ''}>
-                                        <SelectTrigger id='gender' className="xl:h-12 mt-1">
-                                            <SelectValue className="placeholder:text-[#00000012]" placeholder="Select Gender" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            {
-                                                genderOptions.map((gender, i) => (
-                                                    <SelectItem key={i} value={gender.toLowerCase()}>
-                                                        {gender}
-                                                    </SelectItem>
-                                                ))
-                                            }
-                                        </SelectContent>
-                                    </Select>
-                                )}
-                            />
 
-                            {errors?.gender && <p className='text-red-500 text-sm mt-1'>{errors?.gender?.message}</p>}
+                    {/* License Information */}
+                    <div className='w-full'>
+                        <h1 className='text-2xl font-semibold text-secondary mb-3'>Local License</h1>
+
+                        <div className='flex flex-col md:flex-row gap-5'>
+                            <div className='w-full'>
+                                <label htmlFor="local-licence" className='font-semibold text-secondary'>Local Licence No.</label>
+                                <Input
+                                    {...register('localLicense.licenseNumber', {
+                                        required: "Local licence number is required"
+                                    })}
+                                    type="text" id='local-licence' className='xl:h-12 mt-1'
+                                />
+                                {errors?.localLicense?.licenseNumber && <p className='text-red-500 text-sm mt-1'>{errors?.localLicense?.licenseNumber?.message}</p>}
+                            </div>
+                            <div className='w-full'>
+                                <label htmlFor="issue-date" className='font-semibold text-secondary'>Issue Date</label>
+                                <Input
+                                    {...register('localLicense.issueDate', {
+                                        required: "Issue date is required"
+                                    })}
+                                    type="date" id='issue-date' className='xl:h-12 mt-1'
+                                />
+                                {errors?.localLicense?.issueDate && <p className='text-red-500 text-sm mt-1'>{errors?.localLicense?.issueDate?.message}</p>}
+                            </div>
+                            <div className='w-full'>
+                                <label htmlFor="expire-date" className='font-semibold text-secondary'>Expire Date</label>
+                                <Input
+                                    {...register('localLicense.expiryDate')}
+                                    type="date" id='expire-date' className='xl:h-12 mt-1'
+                                />
+                                {errors?.localLicense?.expiryDate && <p className='text-red-500 text-sm mt-1'>{errors?.localLicense?.expiryDate?.message}</p>}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Overseas Experience */}
+                    <div>
+                        <h1 className='text-2xl font-semibold text-secondary mb-3'>Overseas Experience (If Applicable)</h1>
+                        <div className='flex flex-col md:flex-row gap-5'>
+                            <div className='w-full'>
+                                <label htmlFor="overseas-country" className='font-semibold text-secondary'>Country Name</label>
+                                <Input
+                                    {...register('overseasExperience.countryName')}
+                                    type="text" id='overseas-country' placeholder="Enter country name if applicable" className='xl:h-12 mt-1'
+                                />
+                            </div>
+                            <div className='w-full'>
+                                <label htmlFor="overseas-license" className='font-semibold text-secondary'>Overseas License No.</label>
+                                <Input
+                                    {...register('overseasExperience.licenseNumber')}
+                                    type="text" id='overseas-license' placeholder="Enter license number if applicable" className='xl:h-12 mt-1'
+                                />
+                            </div>
                         </div>
                     </div>
 
                     <div className='flex flex-col md:flex-row gap-5'>
-                        {/* Email */}
+                        <div className='w-full'>
+                            <label htmlFor="issue-date" className='font-semibold text-secondary'>Issue Date</label>
+                            <Input
+                                {...register('overseasExperience.issueDate')}
+                                type="date" id='issue-date' className='xl:h-12 mt-1'
+                            />
+                        </div>
+                        <div className='w-full'>
+                            <label htmlFor="expire-date" className='font-semibold text-secondary'>Expiry Date</label>
+                            <Input
+                                {...register('overseasExperience.expiryDate')}
+                                type="date" id='expire-date' className='xl:h-12 mt-1'
+                            />
+                        </div>
+                    </div>
+
+                    {/* Driving School Information */}
+                    <div className='flex flex-col md:flex-row gap-5'>
+                        <div className='w-full'>
+                            <label htmlFor="driving-school" className='font-semibold text-secondary'>Previous Driving School (if any)</label>
+                            <Input
+                                {...register('previousDrivingSchool')}
+                                type="text" id='driving-school' placeholder="Enter previous driving school name" className='xl:h-12 mt-1'
+                            />
+                        </div>
+                        <div className='w-full'>
+                            <label htmlFor="total-hours" className='font-semibold text-secondary'>Total Driving Hours</label>
+                            <Input
+                                {...register('totalLessonHours')}
+                                type="number" id='total-hours' placeholder="Enter total driving hours" className='xl:h-12 mt-1'
+                            />
+                        </div>
+                    </div>
+
+                    {/* Referral Information */}
+                    <div className='w-full'>
+                        <label htmlFor="referral" className='font-semibold text-secondary'>How did you find us?</label>
+                        <Controller
+                            name="referralSource"
+                            control={control}
+                            render={({ field }) => (
+                                <Select onValueChange={field.onChange} value={field.value || ''}>
+                                    <SelectTrigger id='referral' className="xl:h-12 mt-1">
+                                        <SelectValue placeholder="Select how you found us" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="online">Online Search</SelectItem>
+                                        <SelectItem value="word-of-mouth">Word of Mouth</SelectItem>
+                                        <SelectItem value="referral">Referral</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            )}
+                        />
+                    </div>
+
+                    {/* Contact Information */}
+                    <div className='flex flex-col md:flex-row gap-5'>
                         <div className='w-full'>
                             <label htmlFor="email" className='font-semibold text-secondary'>Email</label>
                             <Input
@@ -157,31 +221,17 @@ const RegisterForm: FC = () => {
                             />
                             {errors?.email && <p className='text-red-500 text-sm mt-1'>{errors?.email?.message}</p>}
                         </div>
-
-                        {/* Phone */}
                         <div className='w-full'>
-                            <label htmlFor="phone" className='font-semibold text-secondary'>Phone</label>
+                            <label htmlFor="facebook" className='font-semibold text-secondary'>Facebook ID</label>
                             <Input
-                                {...register('phone', {
-                                    required: "Phone number is required",
-                                    maxLength: {
-                                        value: 10,
-                                        message: "Phone number must be 10 digits"
-                                    },
-                                    minLength: {
-                                        value: 10,
-                                        message: "Phone number must be 10 digits"
-                                    }
-                                })
-                                }
-                                type="number" id='phone' placeholder="Enter your phone number" className='xl:h-12 mt-1'
+                                {...register('facebookId')}
+                                type="text" id='facebook' placeholder="Enter your Facebook ID" className='xl:h-12 mt-1'
                             />
-                            {errors?.phone && <p className='text-red-500 text-sm mt-1'>{errors?.phone?.message}</p>}
                         </div>
                     </div>
 
-                    <div className='flex flex-col md:flex-row gap-5 mb-5 w-full'>
-                        {/* Password */}
+                    {/* Password Section */}
+                    <div className='flex flex-col md:flex-row gap-5 mb-5'>
                         <div className='w-full'>
                             <label htmlFor="password" className='font-semibold text-secondary'>Password</label>
                             <div className='w-full relative flex'>
@@ -207,7 +257,6 @@ const RegisterForm: FC = () => {
                             {errors?.password && <p className='text-red-500 text-sm mt-1'>{errors?.password?.message}</p>}
                         </div>
 
-                        {/* Confirm Password */}
                         <div className='w-full'>
                             <label htmlFor="confirm-password" className='font-semibold text-secondary'>Confirm Password</label>
                             <div className='w-full relative flex'>
