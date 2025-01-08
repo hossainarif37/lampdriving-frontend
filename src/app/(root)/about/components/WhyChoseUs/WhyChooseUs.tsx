@@ -19,7 +19,7 @@ const WhyChooseUs: FC = () => {
             </div>
 
             {/* Main Content */}
-            <div className="flex md:flex-row flex-col md:max-w-full max-w-lg mx-auto gap-10 w-full">
+            <div className="flex md:flex-row flex-col md:max-w-full max-w-lg mx-auto gap-10 w-full overflow-hidden">
                 {/* Left Column */}
                 <div className="relative text-right md:w-3/12 flex flex-col justify-between ">
                     <div className='group'>

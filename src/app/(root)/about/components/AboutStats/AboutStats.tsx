@@ -5,7 +5,7 @@ import bgImg from "@/assets/about-page-image/facts-counter-v1-1.jpg";
 
 const AboutStats: FC = () => {
     return (
-        <div className="relative w-full md:py-36 py-32 px-4 bg-no-repeat bg-cover -z-10 mb-24" style={{ backgroundImage: `url(${bgImg.src})` }}>
+        <div className="relative w-full md:py-36 py-32 px-4 bg-no-repeat bg-cover -z-10" style={{ backgroundImage: `url(${bgImg.src})` }}>
             {/* Overlay */}
             <div className="absolute inset-0 bg-[#1a373a] opacity-95 z-0" />
 

@@ -3,6 +3,7 @@ import AboutSection from './components/AboutSection';
 import MissionVisionSection from './components/MissionVisionSection';
 import WhyChooseUs from './components/WhyChoseUs/WhyChooseUs';
 import AboutStats from './components/AboutStats/AboutStats';
+import ExpertTeamMembar from './components/ExpertTeamMembar/ExpertTeamMembar';
 
 const aboutPage: FC = () => {
     return (
@@ -12,6 +13,7 @@ const aboutPage: FC = () => {
             <MissionVisionSection />
             <WhyChooseUs />
             <AboutStats />
+            <ExpertTeamMembar />
         </div>
     );
 };
