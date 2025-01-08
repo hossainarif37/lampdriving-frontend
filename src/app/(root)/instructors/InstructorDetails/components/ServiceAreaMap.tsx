@@ -88,7 +88,7 @@ const ServiceAreaMap: FC = () => {
                     size="sm"
                     // variant="ghost"
                     onClick={() => setShowList(!showList)}
-                    className="flex items-center gap-2 text-[10px] capitalize bg-white border text-secondary hover:bg-neutral-50"
+                    className="flex items-center gap-2 text-[10px] capitalize bg-white border text-primary hover:bg-neutral-50"
                 >
                     View full list
                     {showList ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -114,13 +114,13 @@ const ServiceAreaMap: FC = () => {
                 <div className="relative h-full">
                     <div className="absolute top-4 left-4 z-[1000] bg-white rounded-md shadow">
                         <button
-                            className={`px-4 py-2 ${mapType === 'map' ? 'bg-white text-indigo font-bold border-r rounded-md' : ''}`}
+                            className={`px-4 py-2 ${mapType === 'map' ? 'bg-white text-primary font-bold border-r rounded-md' : ''}`}
                             onClick={() => setMapType('map')}
                         >
                             Map
                         </button>
                         <button
-                            className={`px-4 py-2 ${mapType === 'satellite' ? 'bg-white text-indigo font-bold border-l rounded-md' : ''}`}
+                            className={`px-4 py-2 ${mapType === 'satellite' ? 'bg-white text-primary font-bold border-l rounded-md' : ''}`}
                             onClick={() => setMapType('satellite')}
                         >
                             Satellite
@@ -168,7 +168,7 @@ const ServiceAreaMap: FC = () => {
                                     url="https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}"
                                     attribution="&copy; Google Maps"
                                     className="opacity-70"
-                                    />
+                                />
                             </>
                         )}
                         <Polygon

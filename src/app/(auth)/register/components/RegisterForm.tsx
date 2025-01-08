@@ -63,14 +63,14 @@ const RegisterForm: FC = () => {
             onSubmit={handleSubmit(handleRegister)}
             className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col items-center md:shadow-lg md:rounded-lg md:border'
         >
-            <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Learner Registration</h1>
+            <h1 className='text-2xl md:text-3xl font-bold text-primary'>Learner Registration</h1>
 
             <div className='w-full mt-10'>
                 <div className='flex flex-col gap-5'>
                     {/* Name Section */}
                     <div className='flex flex-col md:flex-row gap-5'>
                         <div className='w-full'>
-                            <label htmlFor="first-name" className='font-semibold text-secondary'>First Name</label>
+                            <label htmlFor="first-name" className='font-semibold text-primary'>First Name</label>
                             <Input
                                 {...register('name.firstName', {
                                     required: "First name is required"
@@ -80,7 +80,7 @@ const RegisterForm: FC = () => {
                             {errors?.name?.firstName && <p className='text-red-500 text-sm mt-1'>{errors?.name?.firstName?.message}</p>}
                         </div>
                         <div className='w-full'>
-                            <label htmlFor="last-name" className='font-semibold text-secondary'>Last Name</label>
+                            <label htmlFor="last-name" className='font-semibold text-primary'>Last Name</label>
                             <Input
                                 {...register('name.lastName', {
                                     required: "Last name is required"
@@ -94,11 +94,11 @@ const RegisterForm: FC = () => {
 
                     {/* License Information */}
                     <div className='w-full'>
-                        <h1 className='text-2xl font-semibold text-secondary mb-3'>Local License</h1>
+                        <h1 className='text-2xl font-semibold text-primary mb-3'>Local License</h1>
 
                         <div className='flex flex-col md:flex-row gap-5'>
                             <div className='w-full'>
-                                <label htmlFor="local-licence" className='font-semibold text-secondary'>Local Licence No.</label>
+                                <label htmlFor="local-licence" className='font-semibold text-primary'>Local Licence No.</label>
                                 <Input
                                     {...register('localLicense.licenseNumber', {
                                         required: "Local licence number is required"
@@ -108,7 +108,7 @@ const RegisterForm: FC = () => {
                                 {errors?.localLicense?.licenseNumber && <p className='text-red-500 text-sm mt-1'>{errors?.localLicense?.licenseNumber?.message}</p>}
                             </div>
                             <div className='w-full'>
-                                <label htmlFor="issue-date" className='font-semibold text-secondary'>Issue Date</label>
+                                <label htmlFor="issue-date" className='font-semibold text-primary'>Issue Date</label>
                                 <Input
                                     {...register('localLicense.issueDate', {
                                         required: "Issue date is required"
@@ -118,7 +118,7 @@ const RegisterForm: FC = () => {
                                 {errors?.localLicense?.issueDate && <p className='text-red-500 text-sm mt-1'>{errors?.localLicense?.issueDate?.message}</p>}
                             </div>
                             <div className='w-full'>
-                                <label htmlFor="expire-date" className='font-semibold text-secondary'>Expire Date</label>
+                                <label htmlFor="expire-date" className='font-semibold text-primary'>Expire Date</label>
                                 <Input
                                     {...register('localLicense.expiryDate')}
                                     type="date" id='expire-date' className='xl:h-12 mt-1'
@@ -130,17 +130,17 @@ const RegisterForm: FC = () => {
 
                     {/* Overseas Experience */}
                     <div>
-                        <h1 className='text-2xl font-semibold text-secondary mb-3'>Overseas Experience (If Applicable)</h1>
+                        <h1 className='text-2xl font-semibold text-primary mb-3'>Overseas Experience (If Applicable)</h1>
                         <div className='flex flex-col md:flex-row gap-5'>
                             <div className='w-full'>
-                                <label htmlFor="overseas-country" className='font-semibold text-secondary'>Country Name</label>
+                                <label htmlFor="overseas-country" className='font-semibold text-primary'>Country Name</label>
                                 <Input
                                     {...register('overseasExperience.countryName')}
                                     type="text" id='overseas-country' placeholder="Enter country name if applicable" className='xl:h-12 mt-1'
                                 />
                             </div>
                             <div className='w-full'>
-                                <label htmlFor="overseas-license" className='font-semibold text-secondary'>Overseas License No.</label>
+                                <label htmlFor="overseas-license" className='font-semibold text-primary'>Overseas License No.</label>
                                 <Input
                                     {...register('overseasExperience.licenseNumber')}
                                     type="text" id='overseas-license' placeholder="Enter license number if applicable" className='xl:h-12 mt-1'
@@ -151,14 +151,14 @@ const RegisterForm: FC = () => {
 
                     <div className='flex flex-col md:flex-row gap-5'>
                         <div className='w-full'>
-                            <label htmlFor="issue-date" className='font-semibold text-secondary'>Issue Date</label>
+                            <label htmlFor="issue-date" className='font-semibold text-primary'>Issue Date</label>
                             <Input
                                 {...register('overseasExperience.issueDate')}
                                 type="date" id='issue-date' className='xl:h-12 mt-1'
                             />
                         </div>
                         <div className='w-full'>
-                            <label htmlFor="expire-date" className='font-semibold text-secondary'>Expiry Date</label>
+                            <label htmlFor="expire-date" className='font-semibold text-primary'>Expiry Date</label>
                             <Input
                                 {...register('overseasExperience.expiryDate')}
                                 type="date" id='expire-date' className='xl:h-12 mt-1'
@@ -169,14 +169,14 @@ const RegisterForm: FC = () => {
                     {/* Driving School Information */}
                     <div className='flex flex-col md:flex-row gap-5'>
                         <div className='w-full'>
-                            <label htmlFor="driving-school" className='font-semibold text-secondary'>Previous Driving School (if any)</label>
+                            <label htmlFor="driving-school" className='font-semibold text-primary'>Previous Driving School (if any)</label>
                             <Input
                                 {...register('previousDrivingSchool')}
                                 type="text" id='driving-school' placeholder="Enter previous driving school name" className='xl:h-12 mt-1'
                             />
                         </div>
                         <div className='w-full'>
-                            <label htmlFor="total-hours" className='font-semibold text-secondary'>Total Driving Hours</label>
+                            <label htmlFor="total-hours" className='font-semibold text-primary'>Total Driving Hours</label>
                             <Input
                                 {...register('totalLessonHours')}
                                 type="number" id='total-hours' placeholder="Enter total driving hours" className='xl:h-12 mt-1'
@@ -186,7 +186,7 @@ const RegisterForm: FC = () => {
 
                     {/* Referral Information */}
                     <div className='w-full'>
-                        <label htmlFor="referral" className='font-semibold text-secondary'>How did you find us?</label>
+                        <label htmlFor="referral" className='font-semibold text-primary'>How did you find us?</label>
                         <Controller
                             name="referralSource"
                             control={control}
@@ -208,7 +208,7 @@ const RegisterForm: FC = () => {
                     {/* Contact Information */}
                     <div className='flex flex-col md:flex-row gap-5'>
                         <div className='w-full'>
-                            <label htmlFor="email" className='font-semibold text-secondary'>Email</label>
+                            <label htmlFor="email" className='font-semibold text-primary'>Email</label>
                             <Input
                                 {...register('email', {
                                     required: "Email is required",
@@ -222,7 +222,7 @@ const RegisterForm: FC = () => {
                             {errors?.email && <p className='text-red-500 text-sm mt-1'>{errors?.email?.message}</p>}
                         </div>
                         <div className='w-full'>
-                            <label htmlFor="facebook" className='font-semibold text-secondary'>Facebook ID</label>
+                            <label htmlFor="facebook" className='font-semibold text-primary'>Facebook ID</label>
                             <Input
                                 {...register('facebookId')}
                                 type="text" id='facebook' placeholder="Enter your Facebook ID" className='xl:h-12 mt-1'
@@ -233,7 +233,7 @@ const RegisterForm: FC = () => {
                     {/* Password Section */}
                     <div className='flex flex-col md:flex-row gap-5 mb-5'>
                         <div className='w-full'>
-                            <label htmlFor="password" className='font-semibold text-secondary'>Password</label>
+                            <label htmlFor="password" className='font-semibold text-primary'>Password</label>
                             <div className='w-full relative flex'>
                                 <Input
                                     {...register('password', {
@@ -258,7 +258,7 @@ const RegisterForm: FC = () => {
                         </div>
 
                         <div className='w-full'>
-                            <label htmlFor="confirm-password" className='font-semibold text-secondary'>Confirm Password</label>
+                            <label htmlFor="confirm-password" className='font-semibold text-primary'>Confirm Password</label>
                             <div className='w-full relative flex'>
                                 <Input
                                     {...register('confirmPassword', {

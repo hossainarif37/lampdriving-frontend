@@ -32,7 +32,7 @@ const FilterBar: FC = () => {
             {isFilterOpen && (
                 <div
                     // ref={filterRef}
-                    className="absolute top-14 md:-left-2 right-0 md:transform md:-translate-x-1/2 md:max-w-xs bg-white bg-gradient-to-b from-primary/5 to-indigo/0 shadow-lg border rounded-lg p-5 z-10 w-64 overflow-hidden"
+                    className="absolute top-14 md:-left-2 right-0 md:transform md:-translate-x-1/2 md:max-w-xs bg-white bg-gradient-to-b from-primary/5 to-primary/0 shadow-lg border rounded-lg p-5 z-10 w-64 overflow-hidden"
                 >
                     <h4 className="text-lg font-semibold mb-4 text-gradient">
                         Filter Options

@@ -6,7 +6,7 @@ import { FC } from "react";
 const InstructorCardSkeleton: FC = () => {
 
     return (
-        <div className="p-4 rounded-lg space-y-5 bg-gradient-to-b from-primary/0 to-indigo/5 relative">
+        <div className="p-4 rounded-lg space-y-5 bg-gradient-to-b from-primary/0 to-primary/5 relative">
             <Skeleton className="w-[97px] h-[28px] rounded-full absolute top-5 right-5" />
 
             <div className="flex gap-8">

@@ -127,7 +127,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                         onClick={() => handleChangeCarType('auto')}
                         className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
                             ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                            : 'bg-gray-200 text-primary'}`}
                     >
                         <span>Auto</span>
                     </Button>
@@ -135,7 +135,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                         onClick={() => handleChangeCarType('manual')}
                         className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
                             ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                            : 'bg-gray-200 text-primary'}`}
                     >
                         <span>Manual</span>
                     </Button>
@@ -143,7 +143,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                         onClick={() => handleChangeCarType('all')}
                         className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'all'
                             ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                            : 'bg-gray-200 text-primary'}`}
                     >
                         <span>All</span>
                     </Button>

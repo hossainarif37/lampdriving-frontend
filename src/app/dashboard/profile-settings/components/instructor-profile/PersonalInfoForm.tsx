@@ -59,7 +59,7 @@ const PersonalInfoForm: FC = () => {
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
-                <h1 className='text-2xl font-bold text-secondary'>Personal Info</h1>
+                <h1 className='text-2xl font-bold text-primary'>Personal Info</h1>
 
                 <PhotoUpload
                     profilePhoto={profilePhoto}

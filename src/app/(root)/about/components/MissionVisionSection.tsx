@@ -2,11 +2,14 @@ import { FC } from 'react';
 import Image from "next/image"
 import { Mountain, Diamond } from 'lucide-react'
 import missionImg from "@/assets/about-page-image/statement-v1-1.jpg"
+import bg from "@/assets/about-page-image/inner-banner-min-2.jpg"
 
 const MissionVisionSection: FC = () => {
     return (
-        <section className="bg-[#1a373a] py-16 md:py-24 flex items-center">
-            <div className="lg:max-w-7xl mx-auto md:max-w-4xl max-w-md flex flex-col md:flex-row gap-8 px-4 lg:items-start items-center w-full">
+        <section style={{ backgroundImage: `url(${bg.src})` }} className="relative -z-10 py-16 md:py-24 flex items-center">
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-[#1a373a] opacity-50 z-0" />
+            <div className="lg:max-w-7xl z-10 mx-auto md:max-w-4xl max-w-md flex flex-col md:flex-row gap-8 px-4 lg:items-start items-center w-full">
                 {/* Left Column - Icons (Visible on Large Screens) */}
                 <div className="lg:w-2/12 lg:flex hidden flex-col">
                     <div className="border border-green-900 p-6">

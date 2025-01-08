@@ -43,7 +43,7 @@ const NavigationItem: FC<NavigationItemProps> = ({
           w-full px-0 font-semibold capitalize
           ${isDisabled
                         ? 'text-gray-400'
-                        : 'text-secondary hover:text-secondary-dark'
+                        : 'text-primary hover:text-primary-dark'
                     }
           bg-transparent hover:bg-transparent
         `}

@@ -32,7 +32,7 @@ const ServicesFields: FC<IServicesFormProps> = ({ register, errors, defaultValue
             <div className='flex flex-col gap-5'>
                 {/* Price Per Hour */}
                 <div>
-                    <label htmlFor="phone" className='font-semibold text-secondary'>
+                    <label htmlFor="phone" className='font-semibold text-primary'>
                         Price Per Hour
                     </label>
                     <Input
@@ -50,7 +50,7 @@ const ServicesFields: FC<IServicesFormProps> = ({ register, errors, defaultValue
 
                 {/* Service Areas */}
                 <div className='w-full'>
-                    <label htmlFor="experience" className='font-semibold text-secondary'>Service Areas</label>
+                    <label htmlFor="experience" className='font-semibold text-primary'>Service Areas</label>
                     <MultiSelect
                         options={sydneySuburbs}
                         onValueChange={setSelectedLocations}
@@ -67,7 +67,7 @@ const ServicesFields: FC<IServicesFormProps> = ({ register, errors, defaultValue
 
                 {/* Working Hours */}
                 <div className='w-full'>
-                    <label htmlFor="experience" className='font-semibold text-secondary'>Set Working Hours</label>
+                    <label htmlFor="experience" className='font-semibold text-primary'>Set Working Hours</label>
                     <WorkingHoursSelector
                         schedule={schedule}
                         setSchedule={setSchedule}

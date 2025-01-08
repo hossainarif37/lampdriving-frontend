@@ -8,7 +8,7 @@ import PremiumPackageSection from './components/PremiumPackageSection';
 
 function App() {
     return (
-        <div className="bg-gradient-to-t from-primary/0 to-indigo/15">
+        <div className="bg-gradient-to-t from-primary/0 to-primary/15">
             {/* banner Section */}
             <div>
                 <TestPackageBanner />

@@ -28,7 +28,7 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
 
       {/* Hourly Price Section */}
       <section className="bg-white rounded-xl border p-4 md:p-6">
-        <h2 className="text-lg font-semibold mb-4 text-secondary">Hourly Price</h2>
+        <h2 className="text-lg font-semibold mb-4 text-primary">Hourly Price</h2>
         <div className="space-y-4">
           {/* Pricing and available lesson durations */}
           <div className="flex justify-between items-baseline">
@@ -37,7 +37,7 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
           </div>
 
           {/* Discount details for longer lessons */}
-          <div className="space-y-2 text-secondary">
+          <div className="space-y-2 text-primary">
             <div className="flex items-center justify-between text-sm">
               <span>6hrs or more</span>
               <span className="text-green-500 font-medium">SAVE 5%</span>
@@ -64,7 +64,7 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
       </section>
 
       {/* Vehicle Information Section */}
-      <section className="bg-light rounded-xl border p-4 md:p-6 text-secondary">
+      <section className="bg-light rounded-xl border p-4 md:p-6 text-primary">
         <h2 className="text-lg font-semibold mb-4">{user?.name?.firstName}&apos;s vehicle</h2>
         <div className="space-y-4">
           {/* Displaying vehicle image */}

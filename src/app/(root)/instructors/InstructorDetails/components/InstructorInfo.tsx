@@ -62,10 +62,10 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
 
       {/* Instructor bio */}
       <div>
-        <h2 className="font-semibold mb-2 text-secondary">Instructor Bio</h2>
+        <h2 className="font-semibold mb-2 text-primary">Instructor Bio</h2>
         <p className="text-accent mb-4" onClick={toggleDescription}>
           {isExpanded ? instructor.description : `${truncatedDescription}...`}{" "}
-          {descriptionLength > 40 && (<span className="text-indigo cursor-pointer">
+          {descriptionLength > 40 && (<span className="text-primary cursor-pointer">
             {isExpanded ? "Show less" : "Show more"}
           </span>)}
         </p>
@@ -81,7 +81,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
 
       {/* Spoken languages */}
       <div>
-        <h3 className="text-sm font-medium mb-2 text-secondary">Spoken language(s)</h3>
+        <h3 className="text-sm font-medium mb-2 text-primary">Spoken language(s)</h3>
         <div className="flex flex-wrap gap-2">
           {
             instructor.languages.map((language, index) => (

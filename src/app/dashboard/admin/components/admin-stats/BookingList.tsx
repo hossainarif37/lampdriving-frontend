@@ -47,7 +47,7 @@ export const BookingList: React.FC<BookingListProps> = ({ bookings, onConfirm })
                                     className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-200
                     ${booking.status === 'completed'
                                             ? 'bg-green-100 text-green-700'
-                                            : 'bg-red-200 text-secondary hover:bg-red-200'}`}
+                                            : 'bg-red-200 text-primary hover:bg-red-200'}`}
                                 >
                                     {booking.status === 'completed' ? 'completed' : 'running'}
                                 </button>

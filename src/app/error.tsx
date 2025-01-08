@@ -15,7 +15,7 @@ const error: FC<IErrorProps> = ({ error, reset }) => {
         <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white flex items-center justify-center px-4">
             <div className="text-center">
                 <div className="flex justify-center mb-8">
-                    <AlertCircle className="w-24 h-24 text-indigo" />
+                    <AlertCircle className="w-24 h-24 text-primary" />
                 </div>
                 <h1 className="text-6xl font-bold text-gray-900 mb-4">
                     {error.name}

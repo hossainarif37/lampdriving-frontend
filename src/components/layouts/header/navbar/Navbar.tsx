@@ -15,7 +15,7 @@ const Navbar = () => {
                 </div>
 
 
-                <ul className="hidden md:flex items-center gap-x-7 font-semibold text-secondary">
+                <ul className="hidden md:flex items-center gap-x-7 font-semibold text-primary">
                     {
                         navLinks.map(({ title, href }) => (
                             <li key={title}>

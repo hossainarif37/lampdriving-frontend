@@ -29,7 +29,7 @@ const MenuLinks = () => {
 
     return (
         <div>
-            <div className='flex flex-col text-secondary justify-center h-full my-2'>
+            <div className='flex flex-col text-primary justify-center h-full my-2'>
                 {routes.map((route, index) => (
                     <div key={index}>
                         {route.children ? (
