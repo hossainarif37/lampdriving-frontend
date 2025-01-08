@@ -6,8 +6,9 @@ import Loading from '@/components/shared/Loading';
 import { useForm } from 'react-hook-form';
 import { ILoginInputs, IRegisterInputs } from '@/types/auth';
 import { IBookingContext, IPaymentInfo, IPrice, IShedule, IStep, ITestPackage } from '@/types/booking';
-import { steps } from '@/constant/bookingSteps';
+import { stepsWithOutRegister, stepsWithRegister } from '@/constant/bookingSteps';
 import { UserCheck } from 'lucide-react';
+import { useAppSelector } from '@/redux/hook';
 
 
 const BookingContext = createContext<IBookingContext | undefined>(undefined);
@@ -17,8 +18,8 @@ const BookingContext = createContext<IBookingContext | undefined>(undefined);
 export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const urlSearchParams = useSearchParams();
     const step = urlSearchParams.get('step');
-
-    const initialCurrentStep = step && steps.find(currstep => currstep.key === (step === "login" ? "register" : step)) || {
+    const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
+    const initialCurrentStep = step && stepsWithRegister.find(currstep => currstep.key === (step === "login" ? "register" : step)) || {
         name: 'Instructor',
         icon: UserCheck,
         key: 'instructor',
@@ -45,7 +46,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const useLoginForm = useForm<ILoginInputs>();
     const [isConfirmTriggered, setIsConfirmTriggered] = useState(false);
     const [isCreatingABooking, setIsCreatingABooking] = useState(false);
-
+    const [steps, setSteps] = useState<IStep[]>(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
 
     // handle step change
     const handleStepChange = (stepKey: string) => {
@@ -72,7 +73,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         paymentInfo, setPaymentInfo,
         paymentImageFile, setPaymentImageFile,
         schedules, setSchedules,
-        steps, currentStep, setCurrentStep,
+        steps: steps, currentStep, setCurrentStep,
         useRegisterForm, useLoginForm,
         handleStepChange,
         isConfirmTriggered, setIsConfirmTriggered,
