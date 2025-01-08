@@ -44,6 +44,8 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const useRegisterForm = useForm<IRegisterInputs>();
     const useLoginForm = useForm<ILoginInputs>();
     const [isConfirmTriggered, setIsConfirmTriggered] = useState(false);
+    const [isCreatingABooking, setIsCreatingABooking] = useState(false);
+
 
     // handle step change
     const handleStepChange = (stepKey: string) => {
@@ -73,8 +75,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         steps, currentStep, setCurrentStep,
         useRegisterForm, useLoginForm,
         handleStepChange,
-        isConfirmTriggered, setIsConfirmTriggered
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered]);
+        isConfirmTriggered, setIsConfirmTriggered,
+        isCreatingABooking, setIsCreatingABooking
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams.get('instructor');

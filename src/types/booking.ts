@@ -29,7 +29,10 @@ export interface IBookingContext {
     useRegisterForm: UseFormReturn<IRegisterInputs, unknown, undefined>;
     useLoginForm: UseFormReturn<ILoginInputs, unknown, undefined>;
     handleStepChange: (step: string) => void;
-    isConfirmTriggered: boolean, setIsConfirmTriggered: React.Dispatch<React.SetStateAction<boolean>>
+    isConfirmTriggered: boolean;
+    setIsConfirmTriggered: React.Dispatch<React.SetStateAction<boolean>>;
+    isCreatingABooking: boolean;
+    setIsCreatingABooking: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IPrice {
@@ -80,7 +83,6 @@ export interface IBookingInputs {
         user: string;
         amount: number;
         transactionId: string;
-        proofImage: string;
         method: string;
     };
 }

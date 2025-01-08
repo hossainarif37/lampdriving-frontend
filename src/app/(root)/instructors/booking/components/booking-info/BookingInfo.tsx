@@ -14,8 +14,8 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { instructor, price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, paymentInfo, setIsConfirmTriggered } = useBooking();
-    const { user } = useAppSelector((state) => state.authSlice);
+    const { isCreatingABooking, price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, paymentInfo, setIsConfirmTriggered } = useBooking();
+
     // register and login button trigger
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
     const { trigger: loginTrigger, handleSubmit: handleLoginSubmit } = useLoginForm;
@@ -23,7 +23,6 @@ const BookingInfo: FC = () => {
     // register, login, booking create mutation
     const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
     const [loginUser, { isLoading: isLogging }] = useLoginUserMutation();
-    const [createABooking, { isLoading: isCreatingABooking }] = useCreateABookingMutation();
 
     const dispatch = useAppDispatch();
 
@@ -76,36 +75,7 @@ const BookingInfo: FC = () => {
 
     // handle confirm booking
     const handleConfirmBooking = () => {
-        if (!user?._id || !instructor?._id) {
-            return;
-        }
 
-        const reqData: IBookingInputs = {
-            bookingInfo: {
-                learner: user ? typeof user?.learner !== "string" ? user?.learner?._id ?? "" : user?.learner ?? "" : "",
-                instructor: instructor?._id,
-                price: price.payableAmount,
-                bookingHours,
-                schedules
-            },
-            transactionInfo: {
-                user: user?._id,
-                amount: price.payableAmount,
-                ...paymentInfo
-            }
-        }
-
-        createABooking(reqData).unwrap().then((res) => {
-            toast({
-                message: res.message,
-            })
-            // handleStepChange("payment");
-        }).catch((err) => {
-            toast({
-                success: false,
-                message: err.data.message || "Something went wrong",
-            })
-        })
     }
 
 
