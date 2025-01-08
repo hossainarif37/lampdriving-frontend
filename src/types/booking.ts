@@ -29,6 +29,7 @@ export interface IBookingContext {
     useRegisterForm: UseFormReturn<IRegisterInputs, unknown, undefined>;
     useLoginForm: UseFormReturn<ILoginInputs, unknown, undefined>;
     handleStepChange: (step: string) => void;
+    isConfirmTriggered: boolean, setIsConfirmTriggered: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface IPrice {

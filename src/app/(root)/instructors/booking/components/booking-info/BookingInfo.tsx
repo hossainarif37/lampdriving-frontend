@@ -14,7 +14,7 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { instructor, price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, paymentInfo } = useBooking();
+    const { instructor, price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, paymentInfo, setIsConfirmTriggered } = useBooking();
     const { user } = useAppSelector((state) => state.authSlice);
     // register and login button trigger
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
@@ -123,7 +123,7 @@ const BookingInfo: FC = () => {
         else if (currentStep.key === "register") {
             handleTrigger();
         } else if (currentStep.key === "payment") {
-            handleConfirmBooking();
+            setIsConfirmTriggered(true);
         }
     }
 

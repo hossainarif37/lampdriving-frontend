@@ -1,14 +1,15 @@
 import { Button } from '@/components/ui/button';
+import { toast } from '@/hooks/use-toast';
+import { useBooking } from '@/providers/BookingProvider';
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 const CheckoutForm: FC<{ clientSecret: string }> = ({ clientSecret }) => {
     const stripe = useStripe();
     const elements = useElements();
+    const { isConfirmTriggered, setIsConfirmTriggered } = useBooking();
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
+    const handleSubmit = async () => {
         if (!stripe || !elements) {
             console.error("Stripe or Elements not loaded");
             return;
@@ -21,24 +22,35 @@ const CheckoutForm: FC<{ clientSecret: string }> = ({ clientSecret }) => {
 
         if (error) {
             console.error("Payment failed:", error.message);
-            alert(`Payment failed: ${error.message}`);
+            toast({
+                success: false,
+                message: error.message
+            })
         } else {
-            console.log("Payment successful");
+            toast({
+                message: "Payment successful"
+            })
         }
-
         console.log(paymentIntent)
     };
 
+    useEffect(() => {
+        const handleTrigger = async () => {
+            if (isConfirmTriggered) {
+                await handleSubmit();
+                setIsConfirmTriggered(false);
+            }
+        }
+
+        handleTrigger();
+    }, [isConfirmTriggered]);
+
     return (
-        <form onSubmit={handleSubmit}>
-            <PaymentElement />
-            <Button
-                type="submit"
-                disabled={!stripe || !elements}
-            >
-                Pay Now
-            </Button>
-        </form>
+        <>
+            <form>
+                <PaymentElement />
+            </form>
+        </>
     );
 };
 

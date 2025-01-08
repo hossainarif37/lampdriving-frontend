@@ -43,6 +43,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [schedules, setSchedules] = useState<IShedule[]>([]);
     const useRegisterForm = useForm<IRegisterInputs>();
     const useLoginForm = useForm<ILoginInputs>();
+    const [isConfirmTriggered, setIsConfirmTriggered] = useState(false);
 
     // handle step change
     const handleStepChange = (stepKey: string) => {
@@ -57,6 +58,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     };
 
 
+
+
+
     const value = useMemo(() => ({
         instructor, setInstructor,
         bookingHours, setBookingHours,
@@ -68,8 +72,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         schedules, setSchedules,
         steps, currentStep, setCurrentStep,
         useRegisterForm, useLoginForm,
-        handleStepChange
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm]);
+        handleStepChange,
+        isConfirmTriggered, setIsConfirmTriggered
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams.get('instructor');
@@ -77,6 +82,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     if (!instructorQuery) {
         router.push('/');
     }
+
 
     const { data: instructorResponse, isLoading } = useGetAInstructorQuery({ username: instructorQuery! });
 
