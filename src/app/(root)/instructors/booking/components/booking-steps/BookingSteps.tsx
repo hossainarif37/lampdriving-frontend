@@ -1,16 +1,10 @@
 "use client";
 import { useBooking } from '@/providers/BookingProvider';
-import { IStep } from '@/types/booking';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 
 
 const BookingSteps: FC = () => {
-    const { steps, currentStep, setCurrentStep, handleStepChange } = useBooking();
-    const urlSearchParams = useSearchParams();
-
-
-    const { replace } = useRouter();
+    const { steps, currentStep, handleStepChange } = useBooking();
 
 
     return (

@@ -1,18 +1,22 @@
-import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { useBooking } from '@/providers/BookingProvider';
 import { useCreateABookingMutation } from '@/redux/api/bookingApi/bookingApi';
 import { useAppSelector } from '@/redux/hook';
 import { IBookingInputs } from '@/types/booking';
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { FC, useEffect } from 'react';
 
-const CheckoutForm: FC<{ clientSecret: string }> = ({ clientSecret }) => {
+const CheckoutForm: FC<{ clientSecret: string }> = () => {
     const stripe = useStripe();
     const elements = useElements();
     const { isConfirmTriggered, setIsConfirmTriggered, instructor, price, bookingHours, schedules, setIsCreatingABooking } = useBooking();
     const { user } = useAppSelector((state) => state.authSlice);
     const [createABooking] = useCreateABookingMutation();
+
+    const urlSearchParams = useSearchParams();
+    const router = useRouter();
 
     const handleSubmit = async () => {
         if (!stripe || !elements) {
@@ -27,7 +31,6 @@ const CheckoutForm: FC<{ clientSecret: string }> = ({ clientSecret }) => {
 
 
         if (error) {
-            console.log(error);
             toast({
                 success: false,
                 message: error.payment_intent?.status == "succeeded" ? "Duplicate payment" : error.message || "Payment failed"
@@ -54,12 +57,15 @@ const CheckoutForm: FC<{ clientSecret: string }> = ({ clientSecret }) => {
                 method: "card",
             }
         }
-
         createABooking(reqData).unwrap().then((res) => {
             toast({
                 message: res.message,
             })
-            setIsCreatingABooking(false);
+            const searchParams = new URLSearchParams(urlSearchParams);
+            searchParams.set('step', "success");
+            router.replace(`?${searchParams.toString()}`);
+            setIsCreatingABooking(false)
+            console.log(paymentIntent);
         }).catch((err) => {
             toast({
                 success: false,

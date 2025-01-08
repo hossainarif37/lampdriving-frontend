@@ -2,11 +2,9 @@ import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { useBooking } from '@/providers/BookingProvider';
 import { useLoginUserMutation, useRegisterUserMutation } from '@/redux/api/authApi/authApi';
-import { useCreateABookingMutation } from '@/redux/api/bookingApi/bookingApi';
-import { useAppDispatch, useAppSelector } from '@/redux/hook';
+import { useAppDispatch } from '@/redux/hook';
 import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { ILoginInputs, IRegisterInputs } from '@/types/auth';
-import { IBookingInputs } from '@/types/booking';
 import { Clock, NotepadText, TicketPercent } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
@@ -14,7 +12,7 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { isCreatingABooking, price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, paymentInfo, setIsConfirmTriggered } = useBooking();
+    const { isCreatingABooking, price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, setIsConfirmTriggered } = useBooking();
 
     // register and login button trigger
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
@@ -73,12 +71,6 @@ const BookingInfo: FC = () => {
         }
     }
 
-    // handle confirm booking
-    const handleConfirmBooking = () => {
-
-    }
-
-
     // handler for navigating
     const handleNavigate = () => {
         if (currentStep.key === "instructor") {
@@ -102,7 +94,7 @@ const BookingInfo: FC = () => {
     const isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
         (currentStep.key === "schedule" && !schedules.length) || (isLogging || isRegistering || isCreatingABooking);
     return (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 sticky top-10 z-10">
+        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h2 className="text-lg font-semibold mb-4">Booking Info</h2>
 
             <div className="space-y-4">
