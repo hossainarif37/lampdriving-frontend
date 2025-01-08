@@ -60,6 +60,10 @@ export interface IShedule {
         address: string;
         suburb: string;
     };
+    dropOffAddress?: {
+        address: string;
+        suburb: string;
+    };
 }
 
 

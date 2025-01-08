@@ -3,34 +3,45 @@ import ScheduleCalender from './ScheduleCalender';
 import ScheduleTimeSlots from './ScheduleTimeSlots';
 import PickupLocation from './PickupLocation';
 import { Button } from '@/components/ui/button';
-import { format } from 'date-fns';
+import { format, set } from 'date-fns';
 import { useBooking } from '@/providers/BookingProvider';
 import { IShedule } from '@/types/booking';
 import { useGetInstructorAvailabilityQuery } from '@/redux/api/instructorApi/instructorApi';
+import DropOffLocation from './DropOffLocation';
 
 
 const ScheduleStep: FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string[] | null>(null);
     const [selectedDuration, setSelectedDuration] = useState<1 | 2 | 1.5>(1);
-    const [location, setLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
+    const [pickupLocation, setPickupLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
+    const [dropOffLocation, setDropOffLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const { setSchedules, instructor, schedules } = useBooking();
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
-    const [locationError, setLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
+    const [pickupLocationError, setPickupLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
+    const [dropOffLocationError, setDropOffLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
 
     // add schedule handler
     const handleAddSchedule = () => {
         if (!selectedDate || !selectedTime) {
             return;
         }
+        const testPackage = selectedDuration === 1.5;
 
-        if (location?.address === '' || location?.suburb === '') {
-            setLocationError({ address: location?.address === '', suburb: location?.suburb === '' });
+        if (pickupLocation?.address === '' || pickupLocation?.suburb === '') {
+            setPickupLocationError({ address: pickupLocation?.address === '', suburb: pickupLocation?.suburb === '' });
             return;
         } else {
-            setLocationError({ address: location?.suburb === '', suburb: location?.suburb === '' });
+            setPickupLocationError({ address: pickupLocation?.suburb === '', suburb: pickupLocation?.suburb === '' });
+        }
+
+        if (testPackage && dropOffLocation?.address === '' || dropOffLocation?.suburb === '') {
+            setDropOffLocationError({ address: dropOffLocation?.address === '', suburb: dropOffLocation?.suburb === '' });
+            return;
+        } else {
+            setDropOffLocationError({ address: dropOffLocation?.suburb === '', suburb: dropOffLocation?.suburb === '' });
         }
 
         const schedule: IShedule = {
@@ -38,8 +49,15 @@ const ScheduleStep: FC = () => {
             duration: selectedDuration,
             time: selectedTime ? selectedTime : [],
             pickupAddress: {
-                address: location?.address || '',
-                suburb: location?.suburb || '',
+                address: pickupLocation?.address || '',
+                suburb: pickupLocation?.suburb || '',
+            }
+        }
+
+        if (testPackage) {
+            schedule.dropOffAddress = {
+                address: dropOffLocation?.address || '',
+                suburb: dropOffLocation?.suburb || '',
             }
         }
 
@@ -77,6 +95,17 @@ const ScheduleStep: FC = () => {
         }
     }, [instructor?.workingHour, selectedDate]);
 
+    useEffect(() => {
+        setPickupLocationError({ address: false, suburb: false });
+        setDropOffLocationError({ address: false, suburb: false });
+    }, [pickupLocation, dropOffLocation]);
+
+    const handleDuration = (duration: 1 | 2 | 1.5) => {
+        setSelectedDuration(duration)
+        setSelectedTime(null)
+        setSelectedDate(null)
+    }
+
     return (
         <div className="space-y-6 sticky top-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -88,7 +117,7 @@ const ScheduleStep: FC = () => {
                             {[1, 2].map((duration) => (
                                 <button
                                     key={duration}
-                                    onClick={() => setSelectedDuration(duration as 1 | 2)}
+                                    onClick={() => handleDuration(duration as 1 | 2)}
                                     className={`flex-1 py-2 px-4 rounded-[4px] border ${selectedDuration === duration
                                         ? 'border-primary bg-primary/5 text-primary'
                                         : 'border-gray-200 hover:border-primary/70'
@@ -98,7 +127,7 @@ const ScheduleStep: FC = () => {
                                 </button>
                             ))}
                             <button
-                                onClick={() => setSelectedDuration(1.5)}
+                                onClick={() => handleDuration(1.5)}
                                 className={`flex-1 py-2 px-4 rounded-[4px] border ${selectedDuration === 1.5
                                     ? 'border-primary bg-primary/5 text-primary'
                                     : 'border-gray-200 hover:border-primary/70'
@@ -128,13 +157,23 @@ const ScheduleStep: FC = () => {
                     />
                 </div>
 
-                <div className='col-span-2'>
+                <div className={`${selectedDuration === 1.5 ? 'col-span-1' : 'col-span-2'}`}>
                     <PickupLocation
-                        error={locationError}
-                        value={location}
-                        onChange={setLocation}
+                        error={pickupLocationError}
+                        value={pickupLocation}
+                        onChange={setPickupLocation}
                     />
                 </div>
+                {
+                    selectedDuration === 1.5 &&
+                    <div>
+                        <DropOffLocation
+                            error={dropOffLocationError}
+                            value={dropOffLocation}
+                            onChange={setDropOffLocation}
+                        />
+                    </div>
+                }
                 <div className='col-span-2'>
                     <Button onClick={handleAddSchedule} className='w-full'>
                         Add Schedule
