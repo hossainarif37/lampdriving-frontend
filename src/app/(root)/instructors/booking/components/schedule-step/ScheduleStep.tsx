@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import ScheduleCalender from './ScheduleCalender';
 import ScheduleTimeSlots from './ScheduleTimeSlots';
-import LocationInput from './PickupLocation';
+import PickupLocation from './PickupLocation';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { useBooking } from '@/providers/BookingProvider';
@@ -18,14 +18,19 @@ const ScheduleStep: FC = () => {
     const { setSchedules, instructor, schedules } = useBooking();
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
+    const [locationError, setLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
 
     // add schedule handler
     const handleAddSchedule = () => {
         if (!selectedDate || !selectedTime) {
             return;
         }
+
         if (location?.address === '' || location?.suburb === '') {
+            setLocationError({ address: location?.address === '', suburb: location?.suburb === '' });
             return;
+        } else {
+            setLocationError({ address: location?.suburb === '', suburb: location?.suburb === '' });
         }
 
         const schedule: IShedule = {
@@ -43,7 +48,6 @@ const ScheduleStep: FC = () => {
         setSelectedDate(null);
         setSelectedTime(null);
         setSelectedDuration(1);
-        setLocation({ address: '', suburb: '' });
     };
 
     useEffect(() => {
@@ -125,7 +129,8 @@ const ScheduleStep: FC = () => {
                 </div>
 
                 <div className='col-span-2'>
-                    <LocationInput
+                    <PickupLocation
+                        error={locationError}
                         value={location}
                         onChange={setLocation}
                     />
