@@ -17,7 +17,7 @@ export const config = {
 }
 
 export function middleware(req: NextRequest) {
-    const { pathname } = req.nextUrl;
+    // const { pathname } = req.nextUrl;
     const accessToken = req.cookies.get('access-token')?.value;
 
     const redirectHome = () => NextResponse.redirect(new URL(HOME_URL, req.url));
@@ -27,11 +27,12 @@ export function middleware(req: NextRequest) {
     }
 
     try {
-        const { role } = jwtDecode<{ role: UserRole }>(accessToken);
+        // const { role } = jwtDecode<{ role: UserRole }>(accessToken);
 
-        const hasAccess = ROUTE_PERMISSIONS[role].test(pathname);
+        // const hasAccess = ROUTE_PERMISSIONS[role].test(pathname);
 
-        return hasAccess ? NextResponse.next() : redirectHome();
+        // return hasAccess ? NextResponse.next() : redirectHome();
+        return NextResponse.next();
     } catch {
         return redirectHome();
     }

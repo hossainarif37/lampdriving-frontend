@@ -7,6 +7,8 @@ import { Button } from '../ui/button';
 import { ImagePlus, LoaderIcon, Upload, User, X } from 'lucide-react';
 import { generateUniqueIdentifier } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
+import { UseFormRegister, UseFormSetError, UseFormSetValue } from 'react-hook-form';
+import { IRegisterInputs } from '@/types/auth';
 
 export interface IProfilePhoto {
     file: File | null;
@@ -15,30 +17,44 @@ export interface IProfilePhoto {
 
 interface PhotoUploadProps {
     profilePhoto: IProfilePhoto;
-    setProfilePhoto: Dispatch<SetStateAction<IProfilePhoto>>
-
+    setProfilePhoto: Dispatch<SetStateAction<IProfilePhoto>>;
+    register?: UseFormRegister<IRegisterInputs>;
+    setValue?: UseFormSetValue<IRegisterInputs>;
+    setError?: UseFormSetError<IRegisterInputs>;
+    isRemoveUrl?: boolean;
 }
 
-const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto }) => {
+const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto, register, setValue, setError, isRemoveUrl }) => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isError, setIsError] = useState(false);
     const [imageUploadLoading, setImageUploadLoading] = useState(false);
+
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         setIsSuccess(false);
         const file = e.target.files?.[0];
+
+        if (setValue && isRemoveUrl) {
+            setValue('profileImg', "");
+        }
+
         setProfilePhoto((prev) => (
             {
                 ...prev,
-                file: file || null
+                file: file || null,
+                url: isRemoveUrl ? "" : prev.url
             }
         ));
     }
 
     const handleRemoveImage = () => {
+        if (setValue && isRemoveUrl) {
+            setValue('profileImg', "");
+        }
         setProfilePhoto((prev) => (
             {
                 ...prev,
-                file: null
+                file: null,
+                url: isRemoveUrl ? "" : prev.url
             }
         ));
     }
@@ -81,6 +97,16 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto }) =>
                 message: "Image uploaded successfully",
             })
 
+            if (setValue) {
+                setValue('profileImg', data.secure_url);
+            }
+            if (setError) {
+                setError('profileImg', {
+                    type: 'manual',
+                    message: ''
+                });
+            }
+
             setProfilePhoto((prev) => ({
                 ...prev,
                 url: data.secure_url
@@ -109,11 +135,14 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto }) =>
                 </div>
 
                 {/* File Input */}
-                <input onChange={handleFileChange} className='hidden' type="file" name="image" id="image" />
+                <input  {...register?.('profileImg', {
+                    required: !profilePhoto?.url ? "Please upload a profile photo" : false
+                })} onChange={handleFileChange} className='hidden' type="file" name="image" id="image" />
 
                 {
                     profilePhoto?.file && !isSuccess ?
-                        <Button onClick={handleUploadFile} type='button' className='text-primary border cursor-pointer shadow-lg mx-auto bg-light hover:bg-light px-0 w-36 text-sm capitalize h-9 rounded-lg flex justify-center items-center gap-2 -translate-y-5'>
+                        <Button onClick={handleUploadFile} type='button' className='text-primary border cursor-pointer shadow-lg mx-auto bg-light hover:bg-light px-0 w-36 text-sm capitalize h-9 rounded-lg flex justify-center items-center gap-2 -translate-y-5'
+                        >
                             {
                                 imageUploadLoading ?
                                     <>
@@ -127,7 +156,7 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto }) =>
                         </Button>
                         :
                         <label htmlFor='image' className='text-primary border cursor-pointer font-bold bg-light hover:bg-light shadow-lg mx-auto text-sm capitalize w-36 h-9 rounded-lg flex justify-center items-center gap-2 -translate-y-5'>
-                            <ImagePlus width={16} height={16} /><span>Choose File</span>
+                            <ImagePlus width={16} height={16} /><span>Choose</span>
                         </label>
                 }
 
