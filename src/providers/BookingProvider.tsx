@@ -6,7 +6,7 @@ import Loading from '@/components/shared/Loading';
 import { useForm } from 'react-hook-form';
 import { ILoginInputs, IRegisterInputs } from '@/types/auth';
 import { IBookingContext, IPaymentInfo, IPrice, ISchedule, IStep, ITestPackage } from '@/types/booking';
-import { stepsWithOutRegister, stepsWithRegister } from '@/constant/bookingSteps';
+import { stepsWithOutRegister, stepsWithRegister } from '@/constant/booking/bookingSteps';
 import { UserCheck } from 'lucide-react';
 import { useAppSelector } from '@/redux/hook';
 
