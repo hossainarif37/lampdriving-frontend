@@ -13,13 +13,13 @@ const AboutStats: FC = () => {
             <div className="relative z-10 max-w-8xl mx-auto grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
                 <StatItem
                     icon={<Clock className="w-8 h-8 text-emerald-400 relative z-10" />}
-                    endValue={16}
+                    endValue={25}
                     label="Years Of Driving Education school"
                     category="Experience"
                 />
                 <StatItem
                     icon={<Users className="w-8 h-8 text-emerald-400 relative z-10" />}
-                    endValue={18}
+                    endValue={2000}
                     label="Peoples Trained By Our Institute"
                     category="Leaners"
                 />
@@ -31,7 +31,7 @@ const AboutStats: FC = () => {
                 />
                 <StatItem
                     icon={<GraduationCap className="w-8 h-8 text-emerald-400 relative z-10" />}
-                    endValue={290}
+                    endValue={45}
                     label="Skilled And Certified Instructors"
                     category="Instructors"
                 />

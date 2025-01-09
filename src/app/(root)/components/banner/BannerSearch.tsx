@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 import { sydneySuburbs } from '@/constant/sydneySuburbs';
 import { Button } from '@/components/ui/button';
+import { Check } from 'lucide-react';
 
 const BannerSearch: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -35,19 +36,21 @@ const BannerSearch: FC = () => {
                 <div className="w-full font-semibold text-light text-center border flex gap-3 p-3 rounded-md">
                     <Button
                         onClick={() => setCarType('auto')}
-                        className={`w-1/2 hover:bg-gray-200 flex justify-center items-center px-0 ${carType === 'auto'
-                            ? 'gradient-color text-light'
+                        className={`w-1/2 flex justify-center items-center duration-150 hover:bg-gray-200 px-0 ${carType === 'auto'
+                            ? 'bg-primary text-light hover:bg-primary'
                             : 'bg-gray-200 text-primary'}`}
                     >
+                        {carType === "auto" && <span><Check className='w-5' /></span>}
                         <span>Auto</span>
                     </Button>
                     <Button
                         onClick={() => setCarType('manual')}
-                        className={`w-1/2 hover:bg-gray-200 flex justify-center items-center ${carType === 'manual'
-                            ? 'gradient-color text-light'
+                        className={`w-1/2 hover:bg-gray-200 duration-150 flex justify-center items-center ${carType === 'manual'
+                            ? 'bg-primary text-light hover:bg-primary' 
                             : 'bg-gray-200 text-primary'}`}
                     >
-                        <span>Manual</span>
+                        {carType === "manual" && <span><Check className='w-5' /></span>}
+                        <span> Manual</span>
                     </Button>
                 </div>
 

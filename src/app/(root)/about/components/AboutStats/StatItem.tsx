@@ -66,7 +66,7 @@ const StatItem: FC<StatItemProps> = ({ icon, endValue, label, category, duration
                         WebkitTextFillColor: 'transparent',
                     }}
                 >
-                    {count}{endValue === 16 ? '+' : endValue === 18 ? 'K' : ''}
+                    {count}{endValue === 25 ? '+' : endValue === 2000 ? '+' : ''}
                 </div>
                 <p className="text-slate-200 font-light tracking-wide mb-3 text-left">{label}</p>
                 <div className="rounded-full bg-teal-800/30 p-4 relative">

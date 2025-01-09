@@ -81,7 +81,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                     (searchParams?.searchKey || searchParams?.['vehicle.type']) &&
                     <Button
                         onClick={handleResetFilters}
-                        className='border-orange-600 hover:border-primary hover:bg-white bg-white text-black border'
+                            className='border-[#ff5200]/60 hover:border-primary/30 hover:bg-white bg-white text-primary border'
                     >
                         Reset Filters
                     </Button>
@@ -93,12 +93,12 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                     onOpenChange={(open) => setSearchPopOverOpen(open)} // Update popover state
                 >
                     <PopoverTrigger asChild >
-                        <div className='relative md:w-[350px] lg:w-[434px] sm:w-[500px] w-full mx-auto md:mx-0' >
+                        <div className='relative md:w-[350px] lg:w-[434px] sm:w-[500px] w-full mx-auto md:mx-0 ' >
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
                             <Input
                                 value={selectedSuburb}
                                 onChange={(e) => handleSearch(e.target.value)}
-                                placeholder="Enter your suburb" className='h-12 pl-12' />
+                                placeholder="Enter your suburb" className='h-12 pl-12 ' />
                         </div>
                     </PopoverTrigger>
                     <PopoverContent className="md:w-[350px] lg:w-[434px] p-2">
@@ -126,24 +126,24 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                     <Button
                         onClick={() => handleChangeCarType('auto')}
                         className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
-                            ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                            ? 'bg-secondary text-light hover:bg-secondary hover:text-light'
+                            : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
                     >
                         <span>Auto</span>
                     </Button>
                     <Button
                         onClick={() => handleChangeCarType('manual')}
-                        className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
-                            ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                        className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 hover:text-primary/80 flex justify-center items-center rounded-md ${carType === 'manual'
+                            ? 'bg-secondary text-light hover:bg-secondary hover:text-light'
+                            : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
                     >
                         <span>Manual</span>
                     </Button>
                     <Button
                         onClick={() => handleChangeCarType('all')}
-                        className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'all'
-                            ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                        className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-secondary hover:text-light flex justify-center items-center rounded-md ${carType === 'all'
+                            ? ' text-light'
+                            : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
                     >
                         <span>All</span>
                     </Button>

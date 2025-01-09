@@ -41,7 +41,7 @@ const AboutUs: FC = () => {
     return (
         <section className="bg-light-green px-4 py-16">
             {/* Section Heading */}
-            <SectionHeading title="Why Choose Us?" subtitle={sub} className='mb-5 md:mb-5' />
+            <SectionHeading title="Why Choose Us?" subtitle={sub} className='mb-8 md:mb-10' />
 
             {/* Cards Grid */}
             <div className="gap-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 wrapper">

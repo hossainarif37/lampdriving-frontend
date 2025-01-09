@@ -7,7 +7,7 @@ import ExpertTeamMember from './components/ExpertTeamMember/ExpertTeamMember';
 
 const AboutPage: FC = () => {
     return (
-        <div>
+        <div className=''>
             {/* <Banner /> */}
             <AboutSection />
             <MissionVisionSection />
