@@ -5,7 +5,7 @@ import { FC } from 'react';
 
 
 const BookingSteps: FC = () => {
-    const { steps, currentStep, handleStepChange } = useBooking();
+    const { steps, currentStep, handleStepChange, bookingHours, testPackage, mockTestPackage, schedules } = useBooking();
     const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
 
 
@@ -13,17 +13,37 @@ const BookingSteps: FC = () => {
         <div className='max-w-3xl w-full mx-auto relative'>
             <div className='flex items-center justify-between gap-4'>
                 {
-                    steps.map((step, index) => (
-                        <button
+                    steps.map((step, index) => {
+                        const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
+
+                        let isDisabled = false;
+
+                        if (step.key !== 'instructor' && step.key !== 'package-selection') {
+                            // Handle Schedule step
+                            if (step.key === 'schedule') {
+                                isDisabled = !isPackageSelected;
+                            }
+                            // Handle Register step
+                            else if (step.key === 'register') {
+                                isDisabled = !isPackageSelected || !schedules.length;
+                            }
+                            // Handle Payment step
+                            else if (step.key === 'payment') {
+                                isDisabled = !isPackageSelected || !schedules.length || !isAuthenticate;
+                            }
+                        }
+
+                        return (<button
                             key={index}
+                            disabled={isDisabled}
                             onClick={() => handleStepChange(step.key)}
                             className={`flex flex-col items-center justify-between gap-2 flex-1 ${step.key === 'instructor' && 'cursor-default'}`}>
                             <div className={`w-10 h-10 flex items-center justify-center rounded-full ${(currentStep.index >= step.index) ? 'gradient-color text-white' : 'bg-[#dbeafe] text-primary'}`}>
                                 <step.icon />
                             </div>
                             <p className='text-sm font-medium'>{step.name}</p>
-                        </button>
-                    ))
+                        </button>)
+                    })
                 }
             </div>
             <div className='h-3 bg-gray-200 rounded-md absolute top-3.5 -z-10 w-11/12 mx-auto left-0 right-0'>
