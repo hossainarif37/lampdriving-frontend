@@ -12,7 +12,7 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { isCreatingABooking, price, bookingHours, schedules, testPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, setIsConfirmTriggered } = useBooking();
+    const { isCreatingABooking, price, bookingHours, schedules, testPackage, mockTestPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, setIsConfirmTriggered } = useBooking();
 
     // register and login button trigger
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
@@ -91,7 +91,7 @@ const BookingInfo: FC = () => {
 
 
 
-    const isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
+    const isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included && !mockTestPackage.included) ||
         (currentStep.key === "schedule" && !schedules.length) || (isLogging || isRegistering || isCreatingABooking);
     return (
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
@@ -132,6 +132,20 @@ const BookingInfo: FC = () => {
                                 Driving Test Package
                             </span>
                             <span>${testPackage.price}</span>
+                        </div>
+                    </>
+                }
+
+                {
+                    mockTestPackage.included &&
+                    <>
+                        <hr />
+                        <div className="flex justify-between">
+                            <span className="flex gap-2">
+                                <NotepadText className="size-5 text-primary" />
+                                Mock Tests + Test Package
+                            </span>
+                            <span>${mockTestPackage.price}</span>
                         </div>
                     </>
                 }

@@ -15,6 +15,8 @@ export interface IBookingContext {
     setBookingHours: React.Dispatch<React.SetStateAction<number>>;
     testPackage: ITestPackage;
     setTestPackage: React.Dispatch<React.SetStateAction<ITestPackage>>;
+    mockTestPackage: ITestPackage;
+    setMockTestPackage: React.Dispatch<React.SetStateAction<ITestPackage>>;
     price: IPrice;
     setPrice: React.Dispatch<React.SetStateAction<IPrice>>;
     isCustomSelected: boolean;

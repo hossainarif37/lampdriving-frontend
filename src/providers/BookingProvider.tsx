@@ -34,6 +34,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [isCustomSelected, setIsCustomSelected] = useState(false);
     const [bookingHours, setBookingHours] = useState<number>(0);
     const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: 225 });
+    const [mockTestPackage, setMockTestPackage] = useState<ITestPackage>({ included: false, price: 390 });
     const [price, setPrice] = useState<IPrice>({ payableAmount: 0, originalAmount: 0, discountedAmount: 0 });
     const [paymentImageFile, setPaymentImageFile] = useState<File | null>(null);
     const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({
@@ -77,8 +78,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         useRegisterForm, useLoginForm,
         handleStepChange,
         isConfirmTriggered, setIsConfirmTriggered,
-        isCreatingABooking, setIsCreatingABooking
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking]);
+        isCreatingABooking, setIsCreatingABooking,
+        mockTestPackage, setMockTestPackage
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, mockTestPackage]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams.get('instructor');
@@ -116,7 +118,11 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         if (testPackage.included) {
             setPrice((prevPrice) => ({ ...prevPrice, payableAmount: prevPrice.payableAmount + testPackage.price })); // Add test package price
         }
-    }, [bookingHours, testPackage.included]);
+
+        if (mockTestPackage.included) {
+            setPrice((prevPrice) => ({ ...prevPrice, payableAmount: prevPrice.payableAmount + mockTestPackage.price })); // Add test package price
+        }
+    }, [bookingHours, testPackage.included, mockTestPackage.included]);
 
 
     if (isLoading) {
