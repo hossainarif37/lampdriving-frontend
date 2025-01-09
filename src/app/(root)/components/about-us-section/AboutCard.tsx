@@ -9,7 +9,7 @@ interface ICardProps {
 
 const AboutCard: FC<ICardProps> = ({ icon: Icon, title, description }: ICardProps) => {
     return (
-        <div className="flex flex-col items-center p-6 text-center group">
+        <div className="flex flex-col items-center p-6 text-center group ">
             <div className="relative w-20 h-20 mb-6">
                 {/* Diamond Background */}
                 <div className="absolute w-20 h-20 bg-secondary/5 transform rotate-45 top-0 left-0"></div>
