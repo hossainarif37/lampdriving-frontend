@@ -1,14 +1,14 @@
 import { FC } from "react";
 import leftImg from "@/assets/about-page-image/man_1.jpg";
 import carImg from "@/assets/about-page-image/about-car.png";
-import badgeImg from "@/assets/about-page-image/badge.png";
+import badgeImg from "@/assets/about-page-image/25years-badge.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ChevronsRight, FileText } from "lucide-react";
 
 const AboutSection: FC = () => {
     return (
-        <div className="py-16">
+        <div className="py-16 bg-light-green">
             <div className="wrapper py-12">
                 <div className="flex md:flex-row flex-col gap-14 justify-between  md:max-w-full max-w-lg mx-auto">
                     {/* Left Column with Image */}
@@ -24,7 +24,7 @@ const AboutSection: FC = () => {
                         </div>
 
                         {/* Award badge - positioned to overlap */}
-                        <div className="absolute md:right-8 right-0 top-16 bg-white p-7 rounded-full shadow-lg">
+                        <div className="absolute md:right-10 right-0 top-16 bg-white p-4 rounded-full shadow-lg">
                             <Image
                                 src={badgeImg}
                                 alt="Best Driving School Award"

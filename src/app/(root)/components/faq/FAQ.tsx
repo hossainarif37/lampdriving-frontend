@@ -72,7 +72,7 @@ const FAQ: FC = () => {
     return (
         <div className='space-y-3 md:space-y-6 pt-20 p-3 bg-light-green pb-40'>
             {/*Section Heading*/}
-            <SectionHeading title='Top Frequently Asked Questions' subtitle='Find answers to common queries about our driving courses, instructors, fees, and more.' className='md:mb-14' />
+            <SectionHeading title='Frequently Asked Questions' subtitle='Find answers to common queries about our driving courses, instructors, fees, and more.' className='md:mb-14' />
             {/*Tabs button part*/}
             <div>
                 {/* <TabsDesign /> */}

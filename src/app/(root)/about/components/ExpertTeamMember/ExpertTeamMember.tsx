@@ -51,7 +51,7 @@ const teamMembers = [
 
 const ExpertTeamMember: FC = () => {
     return (
-        <div className=" gradient-to-b py-20 px-4">
+        <div className="gradient-to-b py-20 pb-36 px-4">
             <div className="max-w-7xl mx-auto">
                 <div className=" mb-12 flex flex-col justify-center items-center gap-3">
                     <h3 className="w-[115px] bg-green-500 py-[7px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-green-500 text-light before:top-0 before:rounded-[4px] before:-ml-6">

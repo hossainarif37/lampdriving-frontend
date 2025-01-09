@@ -69,7 +69,7 @@ export default {
 				rotateSwing: 'rotateSwing  9.5s ease-in-out infinite',
 			},
 			backgroundImage: {
-				'gradient-animation': 'linear-gradient(45deg, transparent 25%, rgba(68, 107, 158, 0.5) 50%, transparent 75%)',
+				'gradient-animation': 'linear-gradient(45deg, transparent 25%, rgba(68, 107, 158, 0.4) 50%, transparent 75%)',
 			},
 			backgroundSize: {
 				'size-500': '500px 500px',

@@ -8,19 +8,19 @@ import PremiumPackageSection from './components/PremiumPackageSection';
 
 function App() {
     return (
-        <div className="bg-gradient-to-t from-primary/0 to-primary/15">
+        <div className=''>
             {/* banner Section */}
-            <div>
+            <div className='relative -z-10'>
                 <TestPackageBanner />
             </div>
 
             {/* Package card Section */}
-            <div className="wrapper -mt-32 py-16">
+            <div className="wrapper -mt-32 py-16 z-50 relative">
                 <TestPackageCard />
             </div>
 
             {/* Features Section */}
-            <div className=" pt-20">
+            <div className="md:mt-10 mt-6">
                 <SectionHeading
                     title='Why Choose Our Test Package?'
                     subtitle='We provide everything you need to pass your driving test with confidence'
@@ -28,8 +28,8 @@ function App() {
                 <Features />
             </div>
 
-            {/* Features Section */}
-            <div className=''>
+            {/* Premium package Section */}
+            <div className='pb-16 '>
                 <PremiumPackageSection />
             </div>
         </div>

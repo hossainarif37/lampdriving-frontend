@@ -6,7 +6,7 @@ import FeatureCard from './FeatureCard';
 
 const WhyChooseUs: FC = () => {
     return (
-        <section className="wrapper py-28">
+        <section className="wrapper py-28 ">
             {/* Header Section */}
 
             <div className=" mb-12 flex flex-col justify-center items-center gap-3">
