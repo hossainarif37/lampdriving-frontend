@@ -51,16 +51,31 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // handle step change
     const handleStepChange = (stepKey: string) => {
-        if (stepKey === "instructor") {
-            return;
-        }
-        const step = steps.find(step => step.key === stepKey)!;
-        const searchParams = new URLSearchParams(urlSearchParams);
-        searchParams.set('step', step.key);
-        router.replace(`?${searchParams.toString()}`);
-        setCurrentStep(step);
-    };
+        const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
 
+        const requestedStep = steps.find(step => step.key === stepKey);
+
+        if (!requestedStep || requestedStep.key === 'instructor') return;
+
+        // validation for each step
+        if (stepKey !== 'instructor' && stepKey !== 'package-selection') {
+            if (stepKey === 'schedule' && !isPackageSelected) {
+                return;
+            }
+            else if (stepKey === 'register' && (!isPackageSelected || !schedules.length)) {
+                return;
+            }
+            else if (stepKey === 'payment' && (!isPackageSelected || !schedules.length || !isAuthenticate)) {
+                return;
+            }
+        }
+
+        // if pass all validation then redirect to the step
+        const params = new URLSearchParams(urlSearchParams.toString());
+        params.set('step', stepKey);
+        router.push(`?${params.toString()}`);
+        setCurrentStep(requestedStep);
+    };
 
 
 
@@ -92,11 +107,13 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     const { data: instructorResponse, isLoading } = useGetAInstructorQuery({ username: instructorQuery! });
 
+    // handle steps
     useEffect(() => {
         setSteps(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
     }, [])
 
 
+    // handle instructor data
     useEffect(() => {
         if (!instructorResponse?.success && !isLoading) {
             router.push('/');
@@ -106,6 +123,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }, [instructorResponse])
 
 
+    // calculate price
     useEffect(() => {
         const totalAmount = bookingHours * (instructor?.pricePerHour || 0);
         if (bookingHours >= 10) {
@@ -124,6 +142,44 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         }
     }, [bookingHours, testPackage.included, mockTestPackage.included]);
 
+
+    // Handle initial step and URL changes
+    useEffect(() => {
+        const stepFromUrl = urlSearchParams.get('step');
+        const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
+
+        if (!stepFromUrl) {
+            handleStepChange('package-selection');
+            return;
+        }
+
+        // Validate the URL step
+        if (stepFromUrl !== 'instructor' && stepFromUrl !== 'package-selection') {
+            if (stepFromUrl === 'schedule' && !isPackageSelected) {
+                handleStepChange('package-selection');
+                return;
+            }
+            else if (stepFromUrl === 'register' && (!isPackageSelected || !schedules.length)) {
+                handleStepChange(isPackageSelected ? 'schedule' : 'package-selection');
+                return;
+            }
+            else if (stepFromUrl === 'payment' && (!isPackageSelected || !schedules.length || !isAuthenticate)) {
+                if (!isPackageSelected) {
+                    handleStepChange('package-selection');
+                } else if (!schedules.length) {
+                    handleStepChange('schedule');
+                } else if (!isAuthenticate) {
+                    handleStepChange('register');
+                }
+                return;
+            }
+        }
+
+        const validStep = steps.find(step => step.key === stepFromUrl);
+        if (validStep) {
+            setCurrentStep(validStep);
+        }
+    }, [urlSearchParams, bookingHours, testPackage.included, mockTestPackage.included, schedules.length, isAuthenticate]);
 
     if (isLoading) {
         return <Loading />
