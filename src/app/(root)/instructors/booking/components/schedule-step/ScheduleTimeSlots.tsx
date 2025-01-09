@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { FC } from 'react';
 import { cn } from '@/lib/utils';
@@ -13,6 +13,9 @@ interface ScheduleTimeSlotsProps {
     classname?: string;
     btnClassname?: string;
     workingHour: { isActive: boolean, startTime: string, endTime: string }
+    scheduleTimeSlots: string[];
+    setScheduleTimeSlots: Dispatch<SetStateAction<string[]>>;
+
 }
 
 
@@ -25,12 +28,13 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         bookedTimeSlots,
         classname,
         btnClassname,
-        workingHour } = props;
+        workingHour, scheduleTimeSlots, setScheduleTimeSlots } = props;
+
+
+    const isTwoOurSelected = selectedDuration !== 1;
 
     const startTime = `${workingHour.startTime.split(':')[0].padStart(2, '0')}:${workingHour.startTime.split(':')[1]}`;
     const endTime = `${workingHour.endTime.split(':')[0].padStart(2, '0')}:${workingHour.endTime.split(':')[1]}`;
-
-    const isTwoOurSelected = selectedDuration !== 1;
 
     const getTimeSlots = (start: string, end: string) => {
         const startDate = new Date(`1970-01-01T${start}:00`);
@@ -48,8 +52,6 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         return timeSlots;
     };
 
-    const scheduleTimeSlots = getTimeSlots(startTime, endTime);
-
     const handleSelectTimes = (time: string) => {
         const index = scheduleTimeSlots.indexOf(time.split(' - ')[0]);
         if (index !== -1) {
@@ -62,6 +64,10 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
             }
         }
     }
+
+    useEffect(() => {
+        setScheduleTimeSlots(getTimeSlots(startTime, endTime));
+    }, [startTime, endTime]);
 
 
 
@@ -80,7 +86,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
                         </h2>
                         <div className='h-[244px] overflow-y-auto thin-scrollbar'>
                             <div className="grid grid-cols-1 gap-3">
-                                {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 1)).map((time, index) => {
+                                {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 0)).map((time, index) => {
                                     const slotIndex = scheduleTimeSlots.indexOf(time);
                                     const isDisabled = bookedTimeSlots.includes(time) || (isTwoOurSelected && bookedTimeSlots.includes(scheduleTimeSlots[slotIndex + 1]));
                                     const isHidden = (isTwoOurSelected) && (index % 2 !== 0);

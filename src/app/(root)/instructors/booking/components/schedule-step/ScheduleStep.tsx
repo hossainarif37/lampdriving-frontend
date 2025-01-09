@@ -8,6 +8,7 @@ import { useBooking } from '@/providers/BookingProvider';
 import { useGetInstructorAvailabilityQuery } from '@/redux/api/instructorApi/instructorApi';
 import DropOffLocation from './DropOffLocation';
 import { ISchedule } from '@/types/booking';
+import { IWorkingHour } from '@/types/instructor';
 
 
 const ScheduleStep: FC = () => {
@@ -17,12 +18,12 @@ const ScheduleStep: FC = () => {
     const [pickupLocation, setPickupLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
     const [dropOffLocation, setDropOffLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
+    const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
     const { setSchedules, instructor, schedules } = useBooking();
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
     const [pickupLocationError, setPickupLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
     const [dropOffLocationError, setDropOffLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
-
     // add schedule handler
     const handleAddSchedule = () => {
         if (!selectedDate || !selectedTime) {
@@ -88,7 +89,7 @@ const ScheduleStep: FC = () => {
 
     useEffect(() => {
         if (selectedDate && instructor?.workingHour) {
-            const dateName = (format(selectedDate, 'cccc')).toLowerCase() as keyof typeof instructor.workingHour;
+            const dateName = (format(selectedDate, 'cccc')).toLowerCase() as keyof IWorkingHour;
             if (instructor?.workingHour) {
                 setWorkingHour(instructor?.workingHour[dateName]);
             }
@@ -141,6 +142,7 @@ const ScheduleStep: FC = () => {
 
                 <div>
                     <ScheduleCalender
+                        bookedSchedules={data?.data.schedules || []}
                         workingHours={instructor?.workingHour || null}
                         selectedDate={selectedDate}
                         onSelectDate={setSelectedDate}
@@ -149,6 +151,8 @@ const ScheduleStep: FC = () => {
                 <div>
                     <ScheduleTimeSlots
                         workingHour={workingHour}
+                        scheduleTimeSlots={scheduleTimeSlots}
+                        setScheduleTimeSlots={setScheduleTimeSlots}
                         bookedTimeSlots={bookedTimeSlots}
                         selectedDuration={selectedDuration}
                         selectedTime={selectedTime}
