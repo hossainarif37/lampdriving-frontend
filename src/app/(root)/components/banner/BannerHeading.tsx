@@ -48,7 +48,7 @@ const BannerHeading: FC = () => {
 
                 {/* Pricing badge */}
                 <div
-                    className="flex flex-col justify-center items-center bg-secondary w-28 h-28 text-light font-bold md:text-base text-xs"
+                    className="flex flex-col justify-center items-center bg-secondary w-28 h-28 text-light font-bold lg:text-base text-sm"
                     style={{
                         clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
                     }}
