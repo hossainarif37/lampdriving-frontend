@@ -5,7 +5,7 @@ import { useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi'
 import Loading from '@/components/shared/Loading';
 import { useForm } from 'react-hook-form';
 import { ILoginInputs, IRegisterInputs } from '@/types/auth';
-import { IBookingContext, IPaymentInfo, IPrice, IShedule, IStep, ITestPackage } from '@/types/booking';
+import { IBookingContext, IPaymentInfo, IPrice, ISchedule, IStep, ITestPackage } from '@/types/booking';
 import { stepsWithOutRegister, stepsWithRegister } from '@/constant/bookingSteps';
 import { UserCheck } from 'lucide-react';
 import { useAppSelector } from '@/redux/hook';
@@ -41,7 +41,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         proofImage: '',
         method: '',
     });
-    const [schedules, setSchedules] = useState<IShedule[]>([]);
+    const [schedules, setSchedules] = useState<ISchedule[]>([]);
     const useRegisterForm = useForm<IRegisterInputs>();
     const useLoginForm = useForm<ILoginInputs>();
     const [isConfirmTriggered, setIsConfirmTriggered] = useState(false);

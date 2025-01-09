@@ -6,8 +6,7 @@ import { envConfigs } from '@/configs/envConfigs';
 import { useCreatePaymentIntentMutation } from '@/redux/api/transactionApi/transactionApi';
 import { useBooking } from '@/providers/BookingProvider';
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
+
 const stripePromise = loadStripe(envConfigs.stripePublishableKey as string);
 
 const StripePayment: FC = () => {
@@ -33,7 +32,6 @@ const StripePayment: FC = () => {
                 colorBackground: '#ffffff',
                 colorText: '#30313d',
                 colorDanger: '#df1b41',
-                fontFamily: 'Ideal Sans, system-ui, sans-serif',
                 spacingUnit: '4px',
                 borderRadius: '8px',
             },

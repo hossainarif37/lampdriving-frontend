@@ -3,11 +3,11 @@ import ScheduleCalender from './ScheduleCalender';
 import ScheduleTimeSlots from './ScheduleTimeSlots';
 import PickupLocation from './PickupLocation';
 import { Button } from '@/components/ui/button';
-import { format, set } from 'date-fns';
+import { format } from 'date-fns';
 import { useBooking } from '@/providers/BookingProvider';
-import { IShedule } from '@/types/booking';
 import { useGetInstructorAvailabilityQuery } from '@/redux/api/instructorApi/instructorApi';
 import DropOffLocation from './DropOffLocation';
+import { ISchedule } from '@/types/booking';
 
 
 const ScheduleStep: FC = () => {
@@ -44,7 +44,7 @@ const ScheduleStep: FC = () => {
             setDropOffLocationError({ address: dropOffLocation?.suburb === '', suburb: dropOffLocation?.suburb === '' });
         }
 
-        const schedule: IShedule = {
+        const schedule: ISchedule = {
             date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '',
             duration: selectedDuration,
             time: selectedTime ? selectedTime : [],

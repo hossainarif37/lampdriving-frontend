@@ -3,7 +3,6 @@ import { IInstructor } from "./instructor";
 import { ILoginInputs, IRegisterInputs } from "./auth";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 import { LucideProps } from "lucide-react";
-import { IAddress } from "./user";
 import { ILearner } from "./learner";
 
 export interface IBookingContext {
@@ -22,10 +21,8 @@ export interface IBookingContext {
     setIsCustomSelected: React.Dispatch<React.SetStateAction<boolean>>;
     paymentInfo: IPaymentInfo;
     setPaymentInfo: React.Dispatch<React.SetStateAction<IPaymentInfo>>;
-    paymentImageFile: File | null;
-    setPaymentImageFile: React.Dispatch<React.SetStateAction<File | null>>;
-    schedules: IShedule[];
-    setSchedules: React.Dispatch<React.SetStateAction<IShedule[]>>;
+    schedules: ISchedule[];
+    setSchedules: React.Dispatch<React.SetStateAction<ISchedule[]>>;
     useRegisterForm: UseFormReturn<IRegisterInputs, unknown, undefined>;
     useLoginForm: UseFormReturn<ILoginInputs, unknown, undefined>;
     handleStepChange: (step: string) => void;
@@ -52,7 +49,7 @@ export interface IPaymentInfo {
     method: string;
 }
 
-export interface IShedule {
+export interface ISchedule {
     date: string;
     duration: 1 | 2 | 1.5;
     time: string[];
@@ -81,7 +78,7 @@ export interface IBookingInputs {
         instructor: string;
         price: number;
         bookingHours: number;
-        schedules: IShedule[];
+        schedules: ISchedule[];
     };
     transactionInfo: {
         user: string;
@@ -94,12 +91,7 @@ export interface IBookingInputs {
 
 
 
-export interface ISchedule {
-    date: Date;
-    time: string[];
-    duration: 1 | 2 | 1.5;
-    pickupAddress: IAddress;
-}
+
 
 export interface IBooking {
     _id: string;
