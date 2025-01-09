@@ -55,7 +55,7 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
         const endDate = new Date(`1970-01-01T${end}:00`);
         const timeSlots = [];
 
-        while (startDate <= endDate) {
+        while (startDate < endDate) {
             const hour = (startDate.getHours() % 12 || 12).toString().padStart(2, '0');
             const minute = startDate.getMinutes().toString().padStart(2, '0');
             const ampm = startDate.getHours() < 12 ? 'AM' : 'PM';
