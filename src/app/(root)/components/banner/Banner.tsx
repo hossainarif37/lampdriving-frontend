@@ -7,7 +7,7 @@ import BannerHeading from './BannerHeading';
 const Banner: FC = () => {
     return (
         <section
-            className="relative md:h-[650px] xl:min-h-[820px] py-20 md:py-0 bg-primary bg-content bg-center"
+            className="relative md:h-[650px] xl:min-h-[820px] py-20 md:py-0 bg-primary bg-cover bg-center"
             style={{ backgroundImage: `url(${bannerBg.src})` }}
         >
             {/* transparent overlay */}

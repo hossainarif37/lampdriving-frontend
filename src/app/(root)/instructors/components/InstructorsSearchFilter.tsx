@@ -75,8 +75,8 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
     }
 
     return (
-        <div className='flex items-center justify-between'>
-            <div>
+        <div className='md:flex items-center md:justify-between justify-center'>
+            <div className='hidden md:block'>
                 {
                     (searchParams?.searchKey || searchParams?.['vehicle.type']) &&
                     <Button
@@ -122,31 +122,45 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                     </PopoverContent>
                 </Popover>
 
-                <div className="font-semibold text-light text-center flex gap-3 mx-auto md:mx-0">
-                    <Button
-                        onClick={() => handleChangeCarType('auto')}
-                        className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
-                            ? 'bg-secondary text-light hover:bg-secondary hover:text-light'
-                            : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
-                    >
-                        <span>Auto</span>
-                    </Button>
-                    <Button
-                        onClick={() => handleChangeCarType('manual')}
-                        className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-gray-200 hover:text-primary/80 flex justify-center items-center rounded-md ${carType === 'manual'
-                            ? 'bg-secondary text-light hover:bg-secondary hover:text-light'
-                            : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
-                    >
-                        <span>Manual</span>
-                    </Button>
-                    <Button
-                        onClick={() => handleChangeCarType('all')}
-                        className={`sm:w-32 w-24 sm:text-base text-sm hover:bg-secondary hover:text-light flex justify-center items-center rounded-md ${carType === 'all'
-                            ? ' text-light'
-                            : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
-                    >
-                        <span>All</span>
-                    </Button>
+                <div className="font-semibold text-light text-center flex gap-3 justify-between md:mx-auto">
+                    <div className='md:hidden block'>
+                        {
+                            (searchParams?.searchKey || searchParams?.['vehicle.type']) &&
+                            <Button
+                                onClick={handleResetFilters}
+                                className='border-[#ff5200]/60 hover:border-primary/30 bg-light-green hover:bg-light-green text-primary border px-7 text-xs md:text-base'
+                            >
+                                Reset
+                            </Button>
+                        }
+                    </div>
+                    <div className='flex gap-3'>
+                        <Button
+                            onClick={() => handleChangeCarType('auto')}
+                            className={`sm:w-32 w-20 sm:text-base text-xs hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
+                                ? 'bg-secondary text-light hover:bg-secondary hover:text-light'
+                                : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
+                        >
+                            <span>Auto</span>
+                        </Button>
+                        <Button
+                            onClick={() => handleChangeCarType('manual')}
+                            className={`sm:w-32 w-20 sm:text-base text-xs hover:bg-gray-200 hover:text-primary/80 flex justify-center items-center rounded-md ${carType === 'manual'
+                                ? 'bg-secondary text-light hover:bg-secondary hover:text-light'
+                                : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
+                        >
+                            <span>Manual</span>
+                        </Button>
+                        <Button
+                            onClick={() => handleChangeCarType('all')}
+                            className={`sm:w-32 w-20 sm:text-base text-xs hover:bg-secondary hover:text-light flex justify-center items-center rounded-md ${carType === 'all'
+                                ? ' text-light'
+                                : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
+                        >
+                            <span>All</span>
+                        </Button>
+                    </div>
+
                 </div>
             </div>
         </div>

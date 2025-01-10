@@ -8,9 +8,9 @@ const BannerHeading: FC = () => {
     return (
         <div className="text-light">
             {/* Main heading */}
-            <h2 className="uppercase md:text-5xl text-3xl flex flex-col font-bold md:gap-4 gap-1">
+            <h2 className="uppercase md:text-5xl text-4xl  text-center md:text-left flex flex-col font-bold md:gap-4 gap-1">
                 <span>Drive safe</span>
-                <span className="leading-9">& smart with</span>
+                <span className="leading-10">& smart with</span>
                 <span>Lamp Driving</span>
             </h2>
 
@@ -18,9 +18,9 @@ const BannerHeading: FC = () => {
             <div className="relative md:flex justify-between items-center lg:gap-8 md:gap-4 font-bold">
 
                 {/* Left content: Reviews and button */}
-                <div className="space-y-8 my-8">
+                <div className="md:space-y-8 space-y-5 md:my-8 my-5 text-center md:text-left">
                     {/* Review block */}
-                    <div className="flex gap-3 items-center">
+                    <div className="flex gap-3 items-center justify-center md:justify-start">
                         <p className="w-14 h-14 rounded-full bg-secondary flex justify-center items-center text-light font-bold">
                             4.9
                         </p>
@@ -40,21 +40,23 @@ const BannerHeading: FC = () => {
                 </div>
 
                 {/* Center content: Pricing */}
-                <div>
+                <div className='text-center md:text-left'>
                     <p className="md:flex flex-col md:mt-14 mb-4 md:mb-0">
                         Courses Start <span>from</span>
                     </p>
                 </div>
 
                 {/* Pricing badge */}
-                <div
-                    className="flex flex-col justify-center items-center bg-secondary w-28 h-28 text-light font-bold lg:text-base text-sm"
-                    style={{
-                        clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
-                    }}
-                >
-                    <h4>$59</h4>
-                    <span>Per hour</span>
+                <div className=' flex md:flex-none justify-center'>
+                    <div
+                        className="flex flex-col justify-center items-center bg-secondary w-28 h-28 text-light font-bold lg:text-base text-sm"
+                        style={{
+                            clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
+                        }}
+                    >
+                        <h4>$59</h4>
+                        <span>Per hour</span>
+                    </div>
                 </div>
 
                 {/* Decorative arrow image */}

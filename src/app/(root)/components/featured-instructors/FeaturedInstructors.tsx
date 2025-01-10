@@ -18,7 +18,7 @@ interface IInstructorProps {
 const FeaturedInstructors: FC<IInstructorProps> = async ({ searchedParams }) => {
     const instructors = await getInstructors({ limit: "4" });
     return (
-        <section className="md:py-16 md:p-6 bg-light-green">
+        <section className="md:py-16 py-12 md:p-6 bg-light-green">
             <div className="wrapper">
                 {/* Section Heading */}
                 <SectionHeading
