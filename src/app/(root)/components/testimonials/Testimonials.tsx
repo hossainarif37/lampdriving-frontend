@@ -20,7 +20,7 @@ const Testimonials: FC = () => {
     }, []);
 
     return (
-        <div className='relative py-16 px-8 bg-light-green'>
+        <div className='relative py-16 bg-light-green'>
             <SectionHeading title='Testimonials' subtitle='Our Learner Experiences' className='mb-8 md:mb-12' />
             <Carousel
                 opts={{ align: "start", loop: true, }}

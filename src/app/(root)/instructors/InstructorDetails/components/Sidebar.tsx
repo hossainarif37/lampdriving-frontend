@@ -17,7 +17,6 @@ interface InstructorInfoProps {
 const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const user: IUser | undefined = typeof instructor?.user != "string" ? instructor?.user : undefined;
-  console.log(instructor.vehicle.image);
 
   //  function for open the image in a new tab 
   const openImageInNewTab = () => {
@@ -88,7 +87,7 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
       <section className="bg-white rounded-xl border">
         <div className="aspect-video relative rounded-lg ">
 
-          <ServiceAreaMap />
+          <ServiceAreaMap serviceAreas={instructor.serviceAreas} />
         </div>
       </section>
       <AvailabilityModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
