@@ -1,12 +1,14 @@
+import { Input } from '@/components/ui/input';
 import { toast } from '@/hooks/use-toast';
 import { useBooking } from '@/providers/BookingProvider';
 import { useCreateABookingMutation } from '@/redux/api/bookingApi/bookingApi';
 import { useAppSelector } from '@/redux/hook';
 import { IBookingInputs } from '@/types/booking';
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 const CheckoutForm: FC<{ clientSecret: string }> = () => {
     const stripe = useStripe();
@@ -14,13 +16,19 @@ const CheckoutForm: FC<{ clientSecret: string }> = () => {
     const { isConfirmTriggered, setIsConfirmTriggered, instructor, price, bookingHours, schedules, setIsCreatingABooking } = useBooking();
     const { user } = useAppSelector((state) => state.authSlice);
     const [createABooking] = useCreateABookingMutation();
-
+    const [termsAccepted, setTermsAccepted] = useState<boolean>(false);
+    const [termsError, setTermsError] = useState<boolean>(false);
     const urlSearchParams = useSearchParams();
     const router = useRouter();
 
     const handleSubmit = async () => {
+        if (!termsAccepted) {
+            setTermsError(true);
+            setIsCreatingABooking(false);
+            return;
+        }
         if (!stripe || !elements) {
-            console.error("Stripe or Elements not loaded");
+            setIsCreatingABooking(false);
             return;
         }
 
@@ -39,6 +47,7 @@ const CheckoutForm: FC<{ clientSecret: string }> = () => {
         }
 
         if (!user?._id || !instructor?._id || !paymentIntent) {
+            setIsCreatingABooking(false);
             return;
         }
 
@@ -65,7 +74,6 @@ const CheckoutForm: FC<{ clientSecret: string }> = () => {
             searchParams.set('step', "success");
             router.replace(`?${searchParams.toString()}`);
             setIsCreatingABooking(false)
-            console.log(paymentIntent);
         }).catch((err) => {
             toast({
                 success: false,
@@ -88,10 +96,42 @@ const CheckoutForm: FC<{ clientSecret: string }> = () => {
         handleTrigger();
     }, [isConfirmTriggered]);
 
+
+    const handleCheckTerms = (checked: boolean) => {
+        setTermsError(checked ? false : true);
+        setTermsAccepted(checked)
+    }
     return (
         <>
             <form>
                 <PaymentElement />
+                <div className="w-full">
+                    <div className="flex items-center space-x-2 mt-3">
+                        <Input
+                            type="checkbox"
+                            className="h-4 w-4 cursor-pointer"
+                            id="terms"
+                            checked={termsAccepted}
+                            onChange={(e) => handleCheckTerms(e.target.checked)}
+                        />
+                        <label
+                            htmlFor="terms"
+                            className="text-sm font-medium leading-none select-none cursor-pointer"
+                        >
+                            I accept the{" "}
+                            <Link
+                                target="_blank"
+                                href="#"
+                                className="text-primary-600 underline"
+                            >
+                                refund and cancellation policy
+                            </Link>
+                        </label>
+                    </div>
+                    {termsError && (
+                        <p className="text-red-500 text-sm mt-1">You must accept the refund and cancellation policy</p>
+                    )}
+                </div>
             </form>
         </>
     );
