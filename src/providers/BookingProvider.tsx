@@ -48,7 +48,6 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [isConfirmTriggered, setIsConfirmTriggered] = useState(false);
     const [isCreatingABooking, setIsCreatingABooking] = useState(false);
     const [steps, setSteps] = useState<IStep[]>(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
-
     // handle step change
     const handleStepChange = (stepKey: string) => {
         const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
@@ -77,8 +76,12 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         setCurrentStep(requestedStep);
     };
 
+    console.log(schedules);
+    const addedHours = schedules.reduce((total, schedule) => {
+        return total + (schedule.duration === 1 ? 1 : 2);
+    }, 0);
 
-
+    const avaiableScheduleHours = bookingHours - addedHours;
 
     const value = useMemo(() => ({
         instructor, setInstructor,
@@ -94,8 +97,8 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         handleStepChange,
         isConfirmTriggered, setIsConfirmTriggered,
         isCreatingABooking, setIsCreatingABooking,
-        mockTestPackage, setMockTestPackage
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, mockTestPackage]);
+        mockTestPackage, setMockTestPackage, avaiableScheduleHours
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, avaiableScheduleHours, mockTestPackage]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams.get('instructor');

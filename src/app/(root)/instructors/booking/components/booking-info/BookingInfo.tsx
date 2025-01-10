@@ -12,7 +12,7 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { isCreatingABooking, price, bookingHours, schedules, testPackage, mockTestPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, setIsConfirmTriggered, setCurrentStep, steps } = useBooking();
+    const { isCreatingABooking, price, bookingHours, avaiableScheduleHours, testPackage, mockTestPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, setIsConfirmTriggered, setCurrentStep, steps } = useBooking();
 
     // register and login button trigger
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
@@ -109,14 +109,8 @@ const BookingInfo: FC = () => {
         }
     }
 
-    const addedHours = schedules.reduce((total, schedule) => {
-        return total + (schedule.duration * (schedule.duration === 1 ? 1 : 2));
-    }, 0);
-
-    const availableBookingHours = bookingHours - addedHours;
-
     const isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included && !mockTestPackage.included) ||
-        (currentStep.key === "schedule" && availableBookingHours > 0) || (isLogging || isRegistering || isCreatingABooking);
+        (currentStep.key === "schedule" && avaiableScheduleHours > 0) || (isLogging || isRegistering || isCreatingABooking);
     return (
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h2 className="text-lg font-semibold mb-4">Booking Info</h2>
