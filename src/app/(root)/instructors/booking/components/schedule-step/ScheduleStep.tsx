@@ -9,6 +9,7 @@ import { useGetInstructorAvailabilityQuery } from '@/redux/api/instructorApi/ins
 import DropOffLocation from './DropOffLocation';
 import { ISchedule } from '@/types/booking';
 import { IWorkingHour } from '@/types/instructor';
+import { CircleAlert } from 'lucide-react';
 
 
 const ScheduleStep: FC = () => {
@@ -19,7 +20,7 @@ const ScheduleStep: FC = () => {
     const [dropOffLocation, setDropOffLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
-    const { setSchedules, instructor, schedules } = useBooking();
+    const { setSchedules, instructor, schedules, bookingHours } = useBooking();
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
     const [pickupLocationError, setPickupLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
@@ -109,19 +110,27 @@ const ScheduleStep: FC = () => {
         setSelectedDate(date);
         setSelectedTime(null);
     }
+
+    const addedHours = schedules.reduce((total, schedule) => {
+        return total + (schedule.duration * (schedule.duration === 1 ? 1 : 2));
+    }, 0);
+
+    const availableBookingHours = bookingHours - addedHours;
+
     return (
         <div className="space-y-6 sticky top-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
                 <div className="space-y-6 col-span-2">
-                    <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                    <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 relative">
                         <h2 className="text-lg font-semibold mb-4">Select Duration</h2>
                         <div className="flex gap-4">
                             {[1, 2].map((duration) => (
                                 <button
                                     key={duration}
+                                    disabled={duration > availableBookingHours}
                                     onClick={() => handleDuration(duration as 1 | 2)}
-                                    className={`flex-1 py-2 px-4 rounded-[4px] border ${selectedDuration === duration
+                                    className={`flex-1 py-2 px-4 rounded-[4px] border disabled:text-gray-500 ${selectedDuration === duration
                                         ? 'border-primary bg-primary/5 text-primary'
                                         : 'border-gray-200 hover:border-primary/70'
                                         }`}
@@ -130,8 +139,9 @@ const ScheduleStep: FC = () => {
                                 </button>
                             ))}
                             <button
+                                disabled={2 > availableBookingHours}
                                 onClick={() => handleDuration(1.5)}
-                                className={`flex-1 py-2 px-4 rounded-[4px] border ${selectedDuration === 1.5
+                                className={`flex-1 py-2 px-4 rounded-[4px] disabled:text-gray-500 border ${selectedDuration === 1.5
                                     ? 'border-primary bg-primary/5 text-primary'
                                     : 'border-gray-200 hover:border-primary/70'
                                     }`}
@@ -139,6 +149,10 @@ const ScheduleStep: FC = () => {
                                 Test Package
                             </button>
                         </div>
+                        <button title={availableBookingHours === 0 ? 'No hours left to schedule' : `Add more ${availableBookingHours} ${availableBookingHours === 1 ? 'hour' : 'hours'} schedules`} className='absolute top-6 right-6 flex items-center gap-2'>
+                            <span className='text-sm'>{availableBookingHours}-Hours left</span>
+                            <CircleAlert size={16} />
+                        </button>
                     </div>
                 </div>
 
@@ -181,7 +195,7 @@ const ScheduleStep: FC = () => {
                     </div>
                 }
                 <div className='col-span-2'>
-                    <Button onClick={handleAddSchedule} className='w-full'>
+                    <Button disabled={selectedDuration > availableBookingHours} onClick={handleAddSchedule} className='w-full'>
                         Add Schedule
                     </Button>
                 </div>

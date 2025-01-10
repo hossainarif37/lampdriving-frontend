@@ -109,10 +109,14 @@ const BookingInfo: FC = () => {
         }
     }
 
+    const addedHours = schedules.reduce((total, schedule) => {
+        return total + (schedule.duration * (schedule.duration === 1 ? 1 : 2));
+    }, 0);
 
+    const availableBookingHours = bookingHours - addedHours;
 
     const isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included && !mockTestPackage.included) ||
-        (currentStep.key === "schedule" && !schedules.length) || (isLogging || isRegistering || isCreatingABooking);
+        (currentStep.key === "schedule" && availableBookingHours > 0) || (isLogging || isRegistering || isCreatingABooking);
     return (
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h2 className="text-lg font-semibold mb-4">Booking Info</h2>
