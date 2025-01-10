@@ -23,7 +23,7 @@ const cardData = [
 const PremiumPackageSection: FC = () => {
     return (
         <section className="py-12 md:py-24 wrapper">
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary/95 to-secondary p-8 md:p-12">
+            <div className="relative overflow-hidden rounded-3xl bg-primary p-8 md:p-12">
 
                 {/* Gradient animation overlay */}
                 <div className="absolute inset-0 bg-gradient-animation bg-size-500 animate-gradient"></div>
