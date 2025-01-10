@@ -18,7 +18,7 @@ const BookingContext = createContext<IBookingContext | undefined>(undefined);
 export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const urlSearchParams = useSearchParams();
     const step = urlSearchParams.get('step');
-    const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
+    const { isAuthenticate, isAuthLoading } = useAppSelector(state => state.authSlice);
     const initialCurrentStep = step && stepsWithRegister.find(currstep => currstep.key === (step === "login" ? "register" : step)) || {
         name: 'Instructor',
         icon: UserCheck,
@@ -110,7 +110,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     // handle steps
     useEffect(() => {
         setSteps(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
-    }, [])
+    }, [isAuthLoading])
 
 
     // handle instructor data
