@@ -81,7 +81,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                     (searchParams?.searchKey || searchParams?.['vehicle.type']) &&
                     <Button
                         onClick={handleResetFilters}
-                            className='border-[#ff5200]/60 hover:border-primary/30 hover:bg-white bg-white text-primary border'
+                        className='border-[#ff5200]/60 hover:border-primary/30 bg-light-green hover:bg-light-green text-primary border'
                     >
                         Reset Filters
                     </Button>
@@ -98,7 +98,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                             <Input
                                 value={selectedSuburb}
                                 onChange={(e) => handleSearch(e.target.value)}
-                                placeholder="Enter your suburb" className='h-12 pl-12 ' />
+                                placeholder="Enter your suburb" className='h-12 pl-12 bg-light-green border border-primary/15' />
                         </div>
                     </PopoverTrigger>
                     <PopoverContent className="md:w-[350px] lg:w-[434px] p-2">
