@@ -26,7 +26,7 @@ const PricingCard: FC<IPricingCardProps> = ({
             className={`rounded-2xl  p-8 border border-light/30  hover:border-secondary transition-all duration-300 backdrop-blur-sm ${bestValue ? 'bg-gradient-to-br from-secondary/5 to-primary/80' : 'bg-primary/90'}`}
         >
             {bestValue && (
-                <div className="absolute top-4 right-4 ">
+                <div className="absolute md:top-4 top-2 md:right-4 right-2 ">
                     <span className="bg-secondary text-light px-3 py-1 rounded-full text-sm font-semibold">Best Value</span>
                 </div>
             )}

@@ -10,9 +10,9 @@ interface IFaqProps {
 const FaqAccordion: FC<IFaqProps> = ({ faqInfo }) => {
     const { title, description, val } = faqInfo;
     return (
-        <AccordionItem value={val} className=''>
-            <AccordionTrigger className='hover:no-underline text-primary'>{title}</AccordionTrigger>
-            <AccordionContent className='text-accent'>
+        <AccordionItem value={val} className='text-left'>
+            <AccordionTrigger className='hover:no-underline text-primary text-left'>{title}</AccordionTrigger>
+            <AccordionContent className='text-accent '>
                 {description}
             </AccordionContent>
         </AccordionItem>
