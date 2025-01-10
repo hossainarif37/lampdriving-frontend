@@ -19,10 +19,10 @@ const HomePage: FC = () => {
       <HowLampDrivingWork />
       {/* <Benefits /> */}
       {/* <ChooseBestInstructorSelections /> */}
+      <Pricing />
       <FeaturedInstructors />
       <MissionVisionSection />
       <AboutUs />
-      <Pricing />
       <Testimonials />
       <AboutStats />
       <FAQ />

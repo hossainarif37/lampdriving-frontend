@@ -41,7 +41,7 @@ const ultimate = [
 ]
 const Pricing: FC = () => {
     return (
-        <div className="relative -z-10 py-16 md:py-20 bg-cover" style={{ backgroundImage: `url(${bgImg.src})` }}>
+        <div className="relative py-16 md:py-20 bg-cover" style={{ backgroundImage: `url(${bgImg.src})` }}>
             <div className="absolute inset-0 bg-primary opacity-90 z-0" />
             <div className="z-10 wrapper">
                 {/* Header Section */}

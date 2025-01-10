@@ -23,7 +23,7 @@ const PricingCard: FC<IPricingCardProps> = ({
 }) => {
     return (
         <div
-            className={`rounded-2xl p-8 border border-light/30 transition-all duration-300 backdrop-blur-sm ${bestValue ? 'bg-gradient-to-br from-secondary/5 to-primary/80' : 'bg-primary/90'}`}
+            className={`rounded-2xl  p-8 border border-light/30  hover:border-secondary transition-all duration-300 backdrop-blur-sm ${bestValue ? 'bg-gradient-to-br from-secondary/5 to-primary/80' : 'bg-primary/90'}`}
         >
             {bestValue && (
                 <div className="absolute top-4 right-4 ">
@@ -58,7 +58,7 @@ const PricingCard: FC<IPricingCardProps> = ({
                     <p className="text-3xl font-bold text-light">${price}</p>
                     <p className="text-secondary text-sm">Save ${savings}</p>
                 </div>
-                <Link href='/about'>
+                <Link href='/instructors'>
                     <Button className="px-6 py-3 border border-light/40 bg-primary/5 text-light rounded-lg font-semibold cursor-pointer">
                         {buttonText}
                     </Button>
