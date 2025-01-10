@@ -114,6 +114,18 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
         );
     };
 
+    useEffect(() => {
+        for (let i = 0; i < days.length && !selectedDate; i++) {
+            const day = days[i];
+            const isPastDate = isBefore(day, startOfDay(today));
+            const isFullyBooked = findFullyBookedDate(day);
+            if (!isFullyBooked && !isPastDate) {
+                onSelectDate(day);
+                break;
+            }
+        }
+    }, [schedules])
+
     return (
         <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", classname)}>
             <div className="flex justify-between items-center mb-6">
