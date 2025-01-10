@@ -189,7 +189,7 @@ const ScheduleStep: FC = () => {
                     </div>
                 }
                 <div className='col-span-2'>
-                    <Button disabled={selectedDuration > avaiableScheduleHours} onClick={handleAddSchedule} className='w-full'>
+                    <Button disabled={(selectedDuration > avaiableScheduleHours) || !selectedDate || !selectedTime} onClick={handleAddSchedule} className='w-full'>
                         Add Schedule
                     </Button>
                 </div>

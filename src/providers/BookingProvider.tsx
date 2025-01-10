@@ -76,11 +76,10 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         setCurrentStep(requestedStep);
     };
 
-    console.log(schedules);
+    // calculate avaiable schedule hours
     const addedHours = schedules.reduce((total, schedule) => {
         return total + (schedule.duration === 1 ? 1 : 2);
     }, 0);
-
     const avaiableScheduleHours = bookingHours - addedHours;
 
     const value = useMemo(() => ({
