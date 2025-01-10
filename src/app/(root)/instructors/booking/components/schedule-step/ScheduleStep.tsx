@@ -41,7 +41,7 @@ const ScheduleStep: FC = () => {
         if (testPackage && (dropOffLocation?.address === '' || dropOffLocation?.suburb === '')) {
             setDropOffLocationError({ address: dropOffLocation?.address === '', suburb: dropOffLocation?.suburb === '' });
             return;
-        } else if(testPackage) {
+        } else if (testPackage) {
             setDropOffLocationError({ address: dropOffLocation?.suburb === '', suburb: dropOffLocation?.suburb === '' });
         }
 
@@ -105,7 +105,10 @@ const ScheduleStep: FC = () => {
         setSelectedDuration(duration)
         setSelectedTime(null)
     }
-
+    const handleSelectDate = (date: Date) => {
+        setSelectedDate(date);
+        setSelectedTime(null);
+    }
     return (
         <div className="space-y-6 sticky top-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -144,7 +147,7 @@ const ScheduleStep: FC = () => {
                         bookedSchedules={data?.data.schedules || []}
                         workingHours={instructor?.workingHour || null}
                         selectedDate={selectedDate}
-                        onSelectDate={setSelectedDate}
+                        onSelectDate={handleSelectDate}
                     />
                 </div>
                 <div>

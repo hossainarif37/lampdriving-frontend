@@ -80,7 +80,9 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
                     :
                     <>
                         <h2 className="text-lg font-semibold mb-4">
-                            Available Times for {format(selectedDate, 'MMMM d, yyyy')}
+                            {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 1)).length === 0 ? `No Available Times ` : 
+                            'Available Times '}
+                           for {format(selectedDate, 'MMMM d, yyyy')}
                         </h2>
                         <div className='h-[244px] overflow-y-auto thin-scrollbar'>
                             <div className="grid grid-cols-1 gap-3">
