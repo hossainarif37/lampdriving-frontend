@@ -2,22 +2,22 @@ import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { useBooking } from '@/providers/BookingProvider';
 import { useLoginUserMutation, useRegisterUserMutation } from '@/redux/api/authApi/authApi';
-import { useAppDispatch } from '@/redux/hook';
+import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { ILoginInputs, IRegisterInputs } from '@/types/auth';
 import { Clock, NotepadText, TicketPercent } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 
 
 
 const BookingInfo: FC = () => {
-    const { isCreatingABooking, price, bookingHours, schedules, testPackage, mockTestPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, setIsConfirmTriggered } = useBooking();
+    const { isCreatingABooking, price, bookingHours, schedules, testPackage, mockTestPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, setIsConfirmTriggered, setCurrentStep, steps } = useBooking();
 
     // register and login button trigger
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
     const { trigger: loginTrigger, handleSubmit: handleLoginSubmit } = useLoginForm;
-
+    const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
     // register, login, booking create mutation
     const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
     const [loginUser, { isLoading: isLogging }] = useLoginUserMutation();
@@ -26,7 +26,7 @@ const BookingInfo: FC = () => {
 
     const urlSearchParams = useSearchParams();
     const searchParams = new URLSearchParams(urlSearchParams);
-
+    const router = useRouter();
 
     // handle register function
     const handleRegister = (data: IRegisterInputs) => {
@@ -34,6 +34,14 @@ const BookingInfo: FC = () => {
             toast({
                 message: res.message,
             })
+            const params = new URLSearchParams(urlSearchParams.toString());
+            const step = steps.find(step => step.key === "payment");
+            if (!step) {
+                return;
+            }
+            params.set('step', step.key);
+            router.push(`?${params.toString()}`);
+            setCurrentStep(step);
             handleStepChange("payment");
         }).catch((err) => {
             toast({
@@ -51,6 +59,14 @@ const BookingInfo: FC = () => {
                 message: res.message
             });
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
+            const params = new URLSearchParams(urlSearchParams.toString());
+            const step = steps.find(step => step.key === "payment");
+            if (!step) {
+                return;
+            }
+            params.set('step', step.key);
+            router.push(`?${params.toString()}`);
+            setCurrentStep(step);
             handleStepChange("payment");
         }).catch((err) => {
             toast({
@@ -160,11 +176,11 @@ const BookingInfo: FC = () => {
                 <Button loading={isCreatingABooking || isRegistering || isLogging} disabled={isDisable} onClick={handleNavigate} className='w-full'>
                     {
                         currentStep.key == "instructor" ? "Choose Instructor" :
-                            currentStep.key == "package-selection" ? "Select Package" :
-                                currentStep.key == "schedule" ? "Select Schedule" :
-                                    registerStep == "register" ? "Register Now" :
-                                        registerStep == "login" ? "Login Now" :
-                                            currentStep.key == "payment" && "Confirm Booking"
+                            currentStep.key == "package-selection" ? "Continue" :
+                                currentStep.key == "schedule" ? "Continue" :
+                                    (registerStep == "register") ? isAuthenticate ? "Continue" : "Register" :
+                                        (registerStep == "login") ? isAuthenticate ? "Continue" : "Login" :
+                                            currentStep.key == "payment" && "Pay & Confirm"
 
                     }
                 </Button>
