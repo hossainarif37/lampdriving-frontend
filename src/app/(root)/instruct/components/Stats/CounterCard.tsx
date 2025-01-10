@@ -40,10 +40,9 @@ const CounterCard: FC<IStatCardProps> = ({
     count,
     label,
     suffix = '',
-    backgroundColor = 'bg-slate-900',
 }) => {
     return (
-        <div className={`${backgroundColor} border-slate-800`}>
+        <div className={`bg-light/5 border-slate-800`}>
             <div className="p-6">
                 <div className="flex items-center gap-4">
                     {icon}
@@ -52,7 +51,7 @@ const CounterCard: FC<IStatCardProps> = ({
                             <CountUpNumber end={count} />
                             {suffix}
                         </div>
-                        <div className="text-sm text-gray-400">{label}</div>
+                        <div className="text-sm text-light-green/90">{label}</div>
                     </div>
                 </div>
             </div>
