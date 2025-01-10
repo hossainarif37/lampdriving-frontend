@@ -15,8 +15,8 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
     return (
         <div className="p-4 rounded-lg space-y-5 border border-primary/5 shadow-sm relative">
             {/* car type */}
-            <span className="px-3 py-1 bg-green-200 text-primary rounded-full text-sm font-medium flex items-center gap-1 absolute top-5 right-5 capitalize">
-                <Car className="w-4 h-4" />
+            <span className="px-3 py-1 bg-green-200 text-primary/50 font-bold rounded-full text-sm flex items-center gap-1 absolute top-5 right-5 capitalize">
+                <Car className="w-4 h-4" strokeWidth={2.5} />
                 {vehicle.type}
             </span>
             <div className="flex gap-8">

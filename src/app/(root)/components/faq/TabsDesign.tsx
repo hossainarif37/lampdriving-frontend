@@ -1,9 +1,13 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
-const TabsDesign: FC = () => {
-    const [activeTab, setActiveTab] = useState("General");
+interface ITabsDesignProps {
+    activeTab: string;
+    setActiveTab: (tab: string) => void;
+}
 
+const TabsDesign: FC<ITabsDesignProps> = ({ activeTab, setActiveTab }) => {
     const tabs = ["General", "Courses", "Pricing", "Support"];
+
     return (
         <div>
             <div className="flex md:space-x-4 space-x-1 mx-auto justify-center">
@@ -11,10 +15,10 @@ const TabsDesign: FC = () => {
                     <button
                         key={tab}
                         onClick={() => setActiveTab(tab)}
-                        className={`md:px-4 border px-3 py-2 rounded-full text-sm font-medium
+                        className={`md:px-4 border px-3 py-2 rounded-full text-sm font-medium cursor-pointer
                             ${activeTab === tab
-                                ? "gradient-color text-light"
-                                : "bg-light text-primary hover:gradient-color hover:text-light"
+                                ? "bg-secondary text-light"
+                                : "bg-light text-primary hover:border"
                             }`}
                     >
                         {tab}

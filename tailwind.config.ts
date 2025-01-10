@@ -14,9 +14,9 @@ export default {
 				primary: '#1A373A',
 				secondary: "#04BF61",
 				"light-green": "#F0F7F3",
-				indigo: '#0665DB',
 				accent: '#555A57',
-				light: "#FFFFFF"
+				light: "#FFFFFF",
+				indigo: '#0665DB',
 			},
 			keyframes: {
 				'accordion-down': {
