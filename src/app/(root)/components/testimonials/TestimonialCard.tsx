@@ -25,7 +25,7 @@ const TestimonialCard: FC<ITestimonialCardProps> = ({ testimonial }) => {
 
             {/* Content */}
             <div className='relative'>
-                <h1 className="text-xl border-b p-3 px-6 bg-gradient-to-b-2 from-primary to-indigo bg-clip-text text-transparent font-bold">{title}</h1>
+                <h1 className="text-xl border-b p-3 px-6 bg-gradient-to-b-2 from-primary to-primary bg-clip-text text-transparent font-bold">{title}</h1>
                 {/* Quote */}
                 <div className='absolute top-2 right-3'>
                     <Image src={shape} alt='quote' width={50} height={50} />
@@ -41,7 +41,7 @@ const TestimonialCard: FC<ITestimonialCardProps> = ({ testimonial }) => {
                         height={120}
                         className="rounded-full"
                     />
-                    <div className="absolute md:top-24 md:left-24  lg:top-24 top-[82px] left-20  gradient-color flex gap-1 text-light justify-center items-center px-3 py-1 rounded-full text-xl md:text-base lg:text-sm">
+                    <div className="absolute md:top-24 md:left-24  lg:top-24 top-[82px] left-20 bg-secondary flex gap-1 text-light justify-center items-center px-3 py-1 rounded-full text-xl md:text-base lg:text-sm">
                         <Star className="md:w-4 lg:w-4 w-6 text-light" />
                         <p>{rating}</p>
                     </div>

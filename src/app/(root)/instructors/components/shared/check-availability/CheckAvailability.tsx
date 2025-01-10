@@ -66,12 +66,12 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
             <DialogContent className='max-w-3xl py-0 px-0 space-y-0 gap-0'>
                 <DialogHeader>
                     <DialogTitle className='text-2xl font-semibold px-4 pt-3 pb-1 text-center'>
-                        <span className='text-secondary'>Check Availability for</span> <span className='font-semibold text-gradient'>{name}</span>
+                        <span className='text-primary'>Check Availability for</span> <span className='font-semibold text-gradient'>{name}</span>
                     </DialogTitle>
                 </DialogHeader>
                 <div className="flex items-center justify-center pb-3 gap-6 mt-4 text-sm text-gray-600">
                     <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4 text-indigo-600" />
+                        <Clock className="w-4 h-4 text-primary-600" />
                         <span>Available</span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -82,6 +82,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                 <div className='grid grid-cols-2 text-black border-y'>
                     <div>
                         <ScheduleCalender
+                            bookedSchedules={data?.data.schedules || []}
                             workingHours={workingHours}
                             classname='border-y-0 border-l-0 shadow-none border-r rounded-none'
                             selectedDate={selectedDate}
@@ -90,6 +91,8 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                     </div>
                     <div>
                         <ScheduleTimeSlots
+                            scheduleTimeSlots={[]}
+                            setScheduleTimeSlots={() => { }}
                             workingHour={workingHour}
                             btnClassname='cursor-default'
                             classname='border-none shadow-none'

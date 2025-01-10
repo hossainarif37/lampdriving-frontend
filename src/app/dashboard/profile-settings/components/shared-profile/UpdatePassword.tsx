@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 
 
 
-const UpdatePassword: FC<{ className?: string }> = ({ className}) => {
+const UpdatePassword: FC<{ className?: string }> = ({ className }) => {
     const [passwordVisibility, setPasswordVisibility] = useState({
         oldPasswordVisible: false,
         newPasswordVisible: false
@@ -20,7 +20,7 @@ const UpdatePassword: FC<{ className?: string }> = ({ className}) => {
         if (field === 'new-password') {
             setPasswordVisibility((prev) => ({ ...prev, newPasswordVisible: !prev.newPasswordVisible }));
         } else if (field === 'old-password') {
-            setPasswordVisibility((prev) => ({...prev, oldPasswordVisible: !prev.oldPasswordVisible}));
+            setPasswordVisibility((prev) => ({ ...prev, oldPasswordVisible: !prev.oldPasswordVisible }));
         }
     }
 
@@ -31,7 +31,7 @@ const UpdatePassword: FC<{ className?: string }> = ({ className}) => {
             onSubmit={handleSubmit(onSubmit)}
             className={cn("w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 mt-10 flex flex-col items-start md:shadow-lg bg-light md:rounded-lg md:border", className)}
         >
-            <h1 className='text-2xl font-bold text-secondary'>Update Password</h1>
+            <h1 className='text-2xl font-bold text-primary'>Update Password</h1>
 
             <UpdatePasswordField
                 register={register}

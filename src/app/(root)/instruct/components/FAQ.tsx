@@ -1,18 +1,29 @@
-import { FC } from 'react';
+"use client"
+import { FC, useEffect, useState } from 'react';
 import FaqAccordion from '../../components/shared/faq-accordion/FaqAccordion';
 
 const FAQ: FC = () => {
+    const [faqs, setFaqs] = useState([]);
+
+    useEffect(() => {
+        const fetchTestimonials = async () => {
+            const response = await fetch('/faqInfo.json');
+            const data = await response.json();
+            setFaqs(data);
+        };
+        fetchTestimonials();
+    }, []);
 
     return (
-        <section className='px-4 md:px-0 md:py-20 py-10 bg-gradient-to-t from-primary/0 to-indigo/5'>
+        <section className='px-4 md:px-0 md:py-20 py-10 bg-gradient-to-t from-primary/0 to-primary/5'>
             <div className='max-w-4xl mx-auto'>
-            <h2 className='text-3xl font-semibold text-secondary my-4'>Your questions, answered</h2>
-            <div className='max-w-4xl mx-auto px-4 md:px-0'>
-                {Array(5).fill(null).map((_, index) => (
-                    <FaqAccordion key={index} />
-                ))}
+                <h2 className='text-3xl font-semibold text-primary my-4'>Your questions, answered</h2>
+                <div className='max-w-4xl mx-auto px-4 md:px-0'>
+                    {faqs.map((faqInfo, index) => (
+                        <FaqAccordion key={index} faqInfo={faqInfo} />
+                    ))}
+                </div>
             </div>
-        </div>
         </section>
     );
 };

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 import { sydneySuburbs } from '@/constant/sydneySuburbs';
 import { Button } from '@/components/ui/button';
+import { Check } from 'lucide-react';
 
 const BannerSearch: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,7 @@ const BannerSearch: FC = () => {
             <div className="space-y-6">
 
                 {/* Heading */}
-                <h2 className="text-3xl font-bold text-secondary text-center bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent">
+                <h2 className="text-3xl font-bold text-primary text-center bg-gradient-to-r from-primary to-primary bg-clip-text text-transparent">
                     Find a driving instructor
                 </h2>
 
@@ -35,19 +36,21 @@ const BannerSearch: FC = () => {
                 <div className="w-full font-semibold text-light text-center border flex gap-3 p-3 rounded-md">
                     <Button
                         onClick={() => setCarType('auto')}
-                        className={`w-1/2 hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
-                            ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                        className={`w-1/2 flex justify-center items-center duration-150 hover:bg-gray-200 px-0 ${carType === 'auto'
+                            ? 'bg-primary text-light hover:bg-primary'
+                            : 'bg-gray-200 text-primary'}`}
                     >
+                        {carType === "auto" && <span><Check className='w-5' /></span>}
                         <span>Auto</span>
                     </Button>
                     <Button
                         onClick={() => setCarType('manual')}
-                        className={`w-1/2 hover:bg-gray-200 flex justify-center items-center rounded-md ${carType === 'manual'
-                            ? 'gradient-color text-light'
-                            : 'bg-gray-200 text-secondary'}`}
+                        className={`w-1/2 hover:bg-gray-200 duration-150 flex justify-center items-center ${carType === 'manual'
+                            ? 'bg-primary text-light hover:bg-primary' 
+                            : 'bg-gray-200 text-primary'}`}
                     >
-                        <span>Manual</span>
+                        {carType === "manual" && <span><Check className='w-5' /></span>}
+                        <span> Manual</span>
                     </Button>
                 </div>
 
@@ -62,7 +65,7 @@ const BannerSearch: FC = () => {
                                 value={selectedSuburb}
                                 onChange={(e) => setSelectedSuburb(e.target.value)}
                                 readOnly={selectedSuburb ? true : false}
-                                className="flex-1 px-4 py-3 rounded-md text-secondary focus:outline-none placeholder:text-accent"
+                                className="flex-1 px-4 py-3 rounded-md text-primary focus:outline-none placeholder:text-accent"
                                 type="text"
                                 placeholder="Enter your suburb"
                             />
@@ -91,7 +94,7 @@ const BannerSearch: FC = () => {
 
                 <div>
                     {/* Search button */}
-                    <Button onClick={handleSearch} className="w-full py-3 gradient-color text-light rounded-md text-base">
+                    <Button onClick={handleSearch} className="w-full py-3 gradient-color text-light text-base">
                         Search
                     </Button>
 

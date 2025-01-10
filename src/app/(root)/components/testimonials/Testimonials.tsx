@@ -20,8 +20,8 @@ const Testimonials: FC = () => {
     }, []);
 
     return (
-        <div className='relative gradient-to-b md:p-16 py-16 px-8'>
-            <SectionHeading title='Testimonials' subtitle='Our Learner Experiences' />
+        <div className='relative py-16 px-8 bg-light-green'>
+            <SectionHeading title='Testimonials' subtitle='Our Learner Experiences' className='mb-8 md:mb-12' />
             <Carousel
                 opts={{ align: "start", loop: true, }}
                 className="wrapper"
@@ -43,24 +43,24 @@ const Testimonials: FC = () => {
 
                 {/* Slider previous and next button area*/}
                 <div className='hidden md:block'>
-                    <CarouselPrevious className='bg-[#F0F7F3] text-secondary' />
-                    <CarouselNext className='bg-[#F0F7F3] text-secondary' />
+                    <CarouselPrevious className='bg-[#F0F7F3] text-primary' />
+                    <CarouselNext className='bg-[#F0F7F3] text-primary' />
                 </div>
             </Carousel>
 
             {/*========= CTA Button section ========= */}
-            <div className="relative md:mt-12 mt-6 text-center wrapper">
+            <div className="relative text-center wrapper group">
                 {/* Horizontal border */}
-                <hr className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-full z-0" />
+                <hr className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-full z-0 border-primary/10" />
 
                 {/* Centered button */}
                 <Button
                     variant="outline"
-                    className="bg-gray-50 hover:bg-gray-100 h-12 rounded-3xl relative z-10"
+                    className="bg-gray-50  border hover:border-primary/25 h-12 rounded-3xl relative z-10"
                 >
                     <span className="text-gray-600 mr-2 md:block hidden">Discover what others are saying.</span>
-                    <ChevronRight />
-                    <span className="font-bold">VIEW ALL</span>
+                    <ChevronRight className='group-hover:translate-x-2 duration-300' />
+                    <span className="font-bold text-secondary">VIEW ALL</span>
                 </Button>
             </div>
 

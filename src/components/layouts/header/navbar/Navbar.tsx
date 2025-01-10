@@ -6,7 +6,7 @@ import MobileNav from "./MobileNav";
 
 const Navbar = () => {
     return (
-        <nav className="bg-light">
+        <nav className="bg-light-green">
             <div className="wrapper flex justify-between items-center py-2 w-full">
                 <div>
                     <Link href={'/'}>
@@ -15,7 +15,7 @@ const Navbar = () => {
                 </div>
 
 
-                <ul className="hidden md:flex items-center gap-x-7 font-semibold text-secondary">
+                <ul className="hidden md:flex items-center gap-x-7 font-semibold text-primary">
                     {
                         navLinks.map(({ title, href }) => (
                             <li key={title}>
@@ -25,7 +25,9 @@ const Navbar = () => {
                     }
                 </ul>
 
-                <Button className="hidden md:block gradient-color" size={"lg"}>Book Lesson</Button>
+                <Link href={'/instructors'}>
+                    <Button className="hidden md:block gradient-color">Book Lesson</Button>
+                </Link>
 
                 {/* Mobile Nav */}
                 <MobileNav />

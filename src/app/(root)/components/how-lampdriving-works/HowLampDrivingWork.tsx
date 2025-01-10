@@ -1,22 +1,14 @@
 import { FC } from 'react';
 import FeatureCard from './FeaturedCard';
-import { Calendar, Car, ChevronRight, GraduationCap } from 'lucide-react';
+import { Award, Calendar, Car, ChevronRight, ClipboardCheck, GraduationCap, MapPin, ShipWheel } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SectionHeading from '../shared/section-heading/SectionHeading';
 import Link from 'next/link';
 
 const HowLampDrivingWork: FC = () => {
     return (
-        <div className="gradient-to-t py-10 md:py-20 min-h-screen">
-            <div className="mx-auto px-4 max-w-6xl">
-                {/* <div className="mb-16 text-center">
-                    <h2 className="mb-4 font-bold text-4xl text-gray-900">
-                        How Lamp Driving Works
-                    </h2>
-                    <p className="mx-auto max-w-2xl text-gray-600 text-xl">
-                        Your journey to becoming a confident driver starts here with our simple, trusted, and flexible booking system
-                    </p>
-                </div> */}
+        <div className="py-10 md:pt-20 md:pb-10 min-h-screen bg-light-green">
+            <div className="mx-auto px-8 lg:px-0 max-w-6xl">
                 <SectionHeading
                     title="How Lamp Driving Works"
                     subtitle="Simple, Trusted & Flexible Booking System"
@@ -37,33 +29,34 @@ const HowLampDrivingWork: FC = () => {
                     />
                     <FeatureCard
                         number={3}
-                        icon={GraduationCap}
-                        title="Learn & Progress"
-                        description="Track your progress, receive detailed feedback, and develop your driving skills with structured lessons."
+                        icon={ShipWheel}
+                        title="Master the Basics"
+                        description="Learn essential driving techniques and safety measures to build a strong foundation for driving."
                     />
                     <FeatureCard
                         number={4}
-                        icon={GraduationCap}
-                        title="Learn & Progress"
-                        description="Track your progress, receive detailed feedback, and develop your driving skills with structured lessons."
+                        icon={MapPin}
+                        title="Practice in Your Area"
+                        description="Get lessons on familiar roads and locations to boost confidence and real-world driving skills."
                     />
                     <FeatureCard
                         number={5}
-                        icon={GraduationCap}
-                        title="Learn & Progress"
-                        description="Track your progress, receive detailed feedback, and develop your driving skills with structured lessons."
+                        icon={ClipboardCheck}
+                        title="Track Your Progress"
+                        description="Monitor your improvement with detailed feedback and a personalized learning roadmap."
                     />
                     <FeatureCard
                         number={6}
-                        icon={GraduationCap}
-                        title="Learn & Progress"
-                        description="Track your progress, receive detailed feedback, and develop your driving skills with structured lessons."
+                        icon={Award}
+                        title="Earn Your Certification"
+                        description="Complete your training and receive a certificate to showcase your driving competency."
                     />
                 </div>
 
+
                 <div className="text-center">
                     <Link href="/register">
-                        <Button variant={"gradient"} className="">
+                        <Button className="gradient-color">
                             Start Your Journey Today
                             <ChevronRight size={20} />
                         </Button>

@@ -27,12 +27,12 @@ const InstructorCard: FC = () => {
                     <div className="flex-1 lg:space-y-4 space-y-1">
                         <div className="lg:flex justify-between items-start space-y-1">
                             <div className='space-y-1'>
-                                <h3 className="text-xl font-semibold text-secondary">
+                                <h3 className="text-xl font-semibold text-primary">
                                     Hridoy Ahmed
                                 </h3>
                                 <div className="flex items-center gap-1.5 mt-1">
                                     <Star className="h-4 w-4 fill-primary text-primary" />
-                                    <span className="text-sm font-medium text-secondary">4.5/5</span>
+                                    <span className="text-sm font-medium text-primary">4.5/5</span>
                                 </div>
                             </div>
                             <div className="lg:text-right text-gradient">
@@ -60,11 +60,11 @@ const InstructorCard: FC = () => {
                     <Link href="instructors/instructor-details" >
                         <Button
                             size='lg'
-                            className="border text-xs lg:text-sm font-medium text-secondary bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2 transition-colors duration-200"
+                            className="border text-xs lg:text-sm font-medium text-primary bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center justify-center gap-2 transition-colors duration-200"
 
                         >
-                        <ExternalLink className="w-4 h-4" />
-                        View Profile
+                            <ExternalLink className="w-4 h-4" />
+                            View Profile
                         </Button>
                     </Link>
                     <Button

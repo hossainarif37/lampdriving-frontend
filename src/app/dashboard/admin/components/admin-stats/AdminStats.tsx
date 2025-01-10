@@ -115,7 +115,7 @@ const AdminStats: FC = () => {
         <div className="min-h-screen bg-gray-100">
             <div className="mx-auto px-6 py-8 bg-gray-50">
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-secondary mb-2">
+                    <h1 className="text-3xl font-bold text-primary mb-2">
                         Welcome back, {user?.name?.firstName}!
                     </h1>
                     <p className="text-accent">

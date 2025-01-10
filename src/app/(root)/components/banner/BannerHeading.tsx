@@ -11,7 +11,7 @@ const BannerHeading: FC = () => {
             <h2 className="uppercase md:text-5xl text-3xl flex flex-col font-bold md:gap-4 gap-1">
                 <span>Drive safe</span>
                 <span className="leading-9">& smart with</span>
-                <span>our school</span>
+                <span>Lamp Driving</span>
             </h2>
 
             {/* Content section */}
@@ -21,14 +21,14 @@ const BannerHeading: FC = () => {
                 <div className="space-y-8 my-8">
                     {/* Review block */}
                     <div className="flex gap-3 items-center">
-                        <p className="w-14 h-14 rounded-full bg-light flex justify-center items-center text-secondary font-bold">
+                        <p className="w-14 h-14 rounded-full bg-secondary flex justify-center items-center text-light font-bold">
                             4.9
                         </p>
                         <div>
                             {/* Star rating */}
-                            <div className="text-indigo font-bold flex gap-1">
+                            <div className="text-secondary font-bold flex gap-1">
                                 {[...Array(5)].map((_, i) => (
-                                    <Star key={i} className='fill-indigo' />
+                                    <Star key={i} className='fill-secondary' />
                                 ))}
                             </div>
                             <p className='md:text-base text-xs'>2.8k Reviews by Trustpilot</p>
@@ -36,7 +36,7 @@ const BannerHeading: FC = () => {
                     </div>
 
                     {/* Button */}
-                    <Button className="h-12 w-44 md:w-52 gradient-color">Discover courses</Button>
+                    <Button className="h-12 w-44 md:w-52 hover:bg-secondary/90">Discover courses</Button>
                 </div>
 
                 {/* Center content: Pricing */}
@@ -48,7 +48,7 @@ const BannerHeading: FC = () => {
 
                 {/* Pricing badge */}
                 <div
-                    className="flex flex-col justify-center items-center gradient-color w-28 h-28 text-light font-bold md:text-base text-xs"
+                    className="flex flex-col justify-center items-center bg-secondary w-28 h-28 text-light font-bold lg:text-base text-sm"
                     style={{
                         clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
                     }}

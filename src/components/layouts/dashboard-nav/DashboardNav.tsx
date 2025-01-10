@@ -16,7 +16,7 @@ const DashboardNav: FC = () => {
             <div className='flex items-center text-end gap-2'>
                 <div>
                     <h6 className='font-semibold'>{user?.name.firstName} {user?.name.lastName}</h6>
-                    <p className='text-secondary text-sm'>({user?.role})</p>
+                    <p className='text-primary text-sm'>({user?.role})</p>
                 </div>
                 <UserMenu />
             </div>

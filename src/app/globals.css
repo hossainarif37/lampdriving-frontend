@@ -7,7 +7,7 @@
       @apply max-w-6xl mx-auto px-3 lg:px-0
   }
  .gradient-color {
-    @apply bg-gradient-to-r from-primary to-indigo;
+    @apply bg-gradient-to-r from-primary to-primary;
   }
 
     .gradient-to-t {
@@ -28,7 +28,7 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-primary to-indigo bg-clip-text text-transparent
+    @apply bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent
   }
 }
 

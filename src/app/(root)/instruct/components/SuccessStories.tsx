@@ -31,7 +31,7 @@ const SuccessStories: FC = () => {
     return (
         // <section className="py-16 px-3 max-w-4xl mx-auto">
         //     <div>
-        //         <h2 className="text-3xl font-semibold mb-8 text-secondary">
+        //         <h2 className="text-3xl font-semibold mb-8 text-primary">
         //             Educational Excellence
         //         </h2>
 
@@ -61,7 +61,7 @@ const SuccessStories: FC = () => {
         //                                     {story.title}
         //                                 </h3>
         //                                 <ArrowUpRight
-        //                                     className="w-6 h-6 text-indigo transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+        //                                     className="w-6 h-6 text-primary transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
         //                                 />
         //                             </div>
         //                             <p className="text-gray-600 line-clamp-2">
@@ -79,9 +79,9 @@ const SuccessStories: FC = () => {
         // </section>
 
 
-        <section className="py-10 md:py-20 bg-gradient-to-br from-primary/0 to-indigo/5">
+        <section className="py-10 md:py-20 bg-gradient-to-br from-primary/0 to-primary/5">
             <div className="wrapper">
-                <h2 className="text-3xl font-semibold mb-8 text-secondary">
+                <h2 className="text-3xl font-semibold mb-8 text-primary">
                     Instructor Success Stories
                 </h2>
 
@@ -89,8 +89,8 @@ const SuccessStories: FC = () => {
                     {stories.map((item, index) => (
                         <div key={item.title} className="group relative">
                             {/* Background decorative elements */}
-                            <div className="absolute inset-0 bg-indigo/20 rounded-3xl rotate-3 opacity-50"></div>
-                            <div className="absolute inset-0 bg-indigo/20 rounded-3xl -rotate-2 opacity-70"></div>
+                            <div className="absolute inset-0 bg-primary/20 rounded-3xl rotate-3 opacity-50"></div>
+                            <div className="absolute inset-0 bg-primary/20 rounded-3xl -rotate-2 opacity-70"></div>
 
                             {/* Main content card */}
                             <div className="relative bg-white rounded-3xl md:p-6 p-4 shadow-md">
@@ -110,7 +110,7 @@ const SuccessStories: FC = () => {
                                             height={150}
                                         />
                                     </div>
-                                    <h3 className="text-xl font-semibold mb-3 md:pr-12 pr-0 text-secondary">
+                                    <h3 className="text-xl font-semibold mb-3 md:pr-12 pr-0 text-primary">
                                         {item.title}
                                     </h3>
                                     <p className="text-accent text-sm md:text-base">
@@ -124,12 +124,12 @@ const SuccessStories: FC = () => {
                                         Learn more
                                         <ArrowRight className="w-4 h-4 transform transition-transform duration-300 group-hover:translate-x-1" />
                                     </Link>
-                                    <div className="absolute h-1 w-0 bg-gradient-to-r from-primary/30 to-indigo/40 bottom-0 left-0 transition-all duration-300 group-hover:w-24"></div>
+                                    <div className="absolute h-1 w-0 bg-gradient-to-r from-primary/30 to-primary/40 bottom-0 left-0 transition-all duration-300 group-hover:w-24"></div>
                                 </div>
 
                                 {/* Decorative corner accent */}
                                 <div className="absolute bottom-0 right-0 w-24 h-24 overflow-hidden rounded-br-3xl">
-                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-indigo/10 transform rotate-45 translate-y-12 translate-x-12"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/10 transform rotate-45 translate-y-12 translate-x-12"></div>
                                 </div>
                             </div>
                         </div>

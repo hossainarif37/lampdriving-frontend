@@ -3,7 +3,7 @@ import Topbar from "./topbar/Topbar";
 
 const Header = () => {
     return (
-        <header className="bg-slate-100 text-center">
+        <header className="bg-light-green text-center">
             <div>
                 <Topbar />
                 <Navbar />

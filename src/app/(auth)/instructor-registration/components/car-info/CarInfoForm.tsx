@@ -78,7 +78,7 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) =
                 onSubmit={handleSubmit(onSubmit)}
                 className='w-full flex flex-col'
             >
-                <h1 className='text-2xl md:text-3xl font-bold text-secondary'>Car Info</h1>
+                <h1 className='text-2xl md:text-3xl font-bold text-primary'>Car Info</h1>
                 <CarInfoFields
                     register={register}
                     errors={errors}

@@ -1,16 +1,22 @@
 import { FC } from 'react';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-const FaqAccordion: FC = () => {
+import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+interface IFaqProps {
+    faqInfo: {
+        title: string;
+        description: string;
+        val: string;
+    };
+}
+const FaqAccordion: FC<IFaqProps> = ({ faqInfo }) => {
+    const { title, description, val } = faqInfo;
     return (
         <div>
-            <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="item-1" className=''>
-                    <AccordionTrigger className='hover:no-underline text-secondary'>Getting Started with Lamp Driving</AccordionTrigger>
+            <AccordionItem value={val} className=''>
+                <AccordionTrigger className='hover:no-underline text-primary'>{title}</AccordionTrigger>
                     <AccordionContent className='text-accent'>
-                        Description: Discover how to enroll and begin your journey toward becoming a confident driver.
+                    {description}
                     </AccordionContent>
-                </AccordionItem>
-            </Accordion>
+            </AccordionItem>
         </div>
     );
 };

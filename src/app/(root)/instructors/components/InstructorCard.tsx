@@ -13,9 +13,9 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
     const { user, experience, pricePerHour, vehicle, feedback, completedLessons } = instructor;
 
     return (
-        <div className="p-4 rounded-lg space-y-5 border bg-white/20 relative">
+        <div className="p-4 rounded-lg space-y-5 border border-primary/5 shadow-sm relative">
             {/* car type */}
-            <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-medium flex items-center gap-1 absolute top-5 right-5 capitalize">
+            <span className="px-3 py-1 bg-green-200 text-primary rounded-full text-sm font-medium flex items-center gap-1 absolute top-5 right-5 capitalize">
                 <Car className="w-4 h-4" />
                 {vehicle.type}
             </span>
@@ -34,7 +34,6 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                 {/* Profile Details */}
                 <div className="space-y-2 text-sm text-accent w-full relative">
 
-
                     {/* Price Per Hour */}
                     <div>
                         <h4 className="text-2xl font-bold text-gradient absolute bottom-0 right-2">
@@ -48,7 +47,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                     {/* Rating and Total Ratings */}
                     <div className="flex gap-2">
                         <div className="flex items-center gap-2">
-                            <Star className="w-5 h-5 text-primary fill-current" />
+                            <Star className="w-5 h-5 text-secondary/80 fill-current" />
                             <span>{feedback?.rating || "N/A"}</span>
                         </div>
                         <span className="text-primary">•</span>
@@ -57,13 +56,13 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
 
                     {/* Completed Lessons */}
                     <div className="flex items-center gap-2">
-                        <Calendar className="w-5 h-5 text-primary" />
+                        <Calendar className="w-5 h-5 text-secondary" />
                         {completedLessons} Completed lessons
                     </div>
 
                     {/* Experience */}
                     <div className="flex items-center font-semibold gap-2">
-                        <Clock className="w-5 h-5 text-primary" />
+                        <Clock className="w-5 h-5 text-secondary" />
                         <span className="text-gradient">{experience}</span>
                     </div>
                 </div>
@@ -76,7 +75,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                     <Link
                         href={`/instructors/${typeof user !== 'string' && user?.username}`}
                         className="w-1/2">
-                        <Button className="border w-full text-sm font-medium text-gray-700 hover:text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 flex items-center gap-2 transition-colors duration-200">
+                        <Button variant={"outline"} className="border border-primary/15 hover:border-primary/25 hover:bg-primary/5 bg-transparent w-full text-sm font-medium text-primary flex items-center gap-2 transition-colors duration-200">
                             <ExternalLink className="w-4 h-4" />
                             View Profile
                         </Button>
@@ -84,7 +83,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
 
                     {/* Book Button */}
                     <Link href={`/instructors/booking/?instructor=${typeof user !== 'string' && user?.username}&step=package-selection`} className="w-1/2">
-                        <Button className="w-full gradient-color">Book</Button>
+                        <Button className="w-full bg-primary">Book</Button>
                     </Link>
                 </div>
 

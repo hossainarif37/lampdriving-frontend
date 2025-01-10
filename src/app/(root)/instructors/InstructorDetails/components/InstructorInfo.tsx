@@ -15,7 +15,6 @@ interface InstructorInfoProps {
 const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const user: IUser | undefined = typeof instructor.user != "string" ? instructor.user : undefined;
-  console.log(instructor);
 
   const carInfo = [
     { id: 1, info: 'Auto Lessons & Test Packages' },
@@ -31,6 +30,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   // Split the description into words
   const words = instructor.description.split(" ");
   const truncatedDescription = words.slice(0, 40).join(" ");
+  const descriptionLength = words.length;
   return (
     <section className="bg-light rounded-xl border p-4 md:p-6 space-y-6">
       {/* Profile section */}
@@ -62,12 +62,12 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
 
       {/* Instructor bio */}
       <div>
-        <h2 className="font-semibold mb-2 text-secondary">Instructor Bio</h2>
+        <h2 className="font-semibold mb-2 text-primary">Instructor Bio</h2>
         <p className="text-accent mb-4" onClick={toggleDescription}>
-          {isExpanded ? instructor.description : `${truncatedDescription}....`}{" "}
-          <span className="text-indigo cursor-pointer">
+          {isExpanded ? instructor.description : `${truncatedDescription}...`}{" "}
+          {descriptionLength > 40 && (<span className="text-primary cursor-pointer">
             {isExpanded ? "Show less" : "Show more"}
-          </span>
+          </span>)}
         </p>
         <div className="space-y-2 ">
           {carInfo.map(info => (
@@ -81,7 +81,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
 
       {/* Spoken languages */}
       <div>
-        <h3 className="text-sm font-medium mb-2 text-secondary">Spoken language(s)</h3>
+        <h3 className="text-sm font-medium mb-2 text-primary">Spoken language(s)</h3>
         <div className="flex flex-wrap gap-2">
           {
             instructor.languages.map((language, index) => (

@@ -83,12 +83,12 @@ const ServiceAreaMap: FC = () => {
     return (
         <>
             <div className=" top-4 left-4 right-4 z-[1000] flex justify-between items-center bg-white rounded-lg shadow-lg p-4">
-                <h2 className="text-[12px] font-semibold">Cliff services 42 suburbs</h2>
+                <h2 className="text-[12px] font-semibold">Cliff services {serviceAreas.length} suburbs</h2>
                 <Button
                     size="sm"
                     // variant="ghost"
                     onClick={() => setShowList(!showList)}
-                    className="flex items-center gap-2 text-[10px] capitalize bg-white border text-secondary hover:bg-neutral-50"
+                    className="flex items-center gap-2 text-[10px] capitalize bg-white border text-primary hover:bg-neutral-50"
                 >
                     View full list
                     {showList ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -114,13 +114,13 @@ const ServiceAreaMap: FC = () => {
                 <div className="relative h-full">
                     <div className="absolute top-4 left-4 z-[1000] bg-white rounded-md shadow">
                         <button
-                            className={`px-4 py-2 ${mapType === 'map' ? 'bg-white text-indigo font-bold border-r rounded-md' : ''}`}
+                            className={`px-4 py-2 ${mapType === 'map' ? 'bg-white text-primary font-bold border-r rounded-md' : ''}`}
                             onClick={() => setMapType('map')}
                         >
                             Map
                         </button>
                         <button
-                            className={`px-4 py-2 ${mapType === 'satellite' ? 'bg-white text-indigo font-bold border-l rounded-md' : ''}`}
+                            className={`px-4 py-2 ${mapType === 'satellite' ? 'bg-white text-primary font-bold border-l rounded-md' : ''}`}
                             onClick={() => setMapType('satellite')}
                         >
                             Satellite
@@ -143,14 +143,34 @@ const ServiceAreaMap: FC = () => {
                     >
                         <MapResizer />
                         <ZoomControl position="bottomright" />
-                        <TileLayer
+                        {/* <TileLayer
                             url={
                                 mapType === 'map'
                                     ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                                     : 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
                             }
                             attribution={`&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors`}
-                        />
+                        /> */}
+
+
+                        {mapType === 'map' ? (
+                            <TileLayer
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            />
+                        ) : (
+                            <>
+                                <TileLayer
+                                    url="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+                                    attribution="&copy; Google Maps"
+                                />
+                                <TileLayer
+                                    url="https://mt1.google.com/vt/lyrs=h&x={x}&y={y}&z={z}"
+                                    attribution="&copy; Google Maps"
+                                    className="opacity-70"
+                                />
+                            </>
+                        )}
                         <Polygon
                             positions={SERVICE_AREA as [number, number][]}
                             pathOptions={{
