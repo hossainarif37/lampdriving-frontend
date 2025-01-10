@@ -10,8 +10,8 @@ import bannerImg from "@/assets/banner-img/slide-v1-2.jpg"
 import Link from "next/link"
 
 const EarningsCalculator: FC = () => {
-    const [hourlyRate, setHourlyRate] = React.useState(80)
-    const [lessonHours, setLessonHours] = React.useState(16)
+    const [hourlyRate, setHourlyRate] = React.useState(70)
+    const [lessonHours, setLessonHours] = React.useState(24)
     const weeklyEarnings = hourlyRate * lessonHours
 
     return (
@@ -44,7 +44,7 @@ const EarningsCalculator: FC = () => {
                         </p>
                     </div>
 
-                    <Card className="p-6 space-y-6">
+                    <Card className="p-6 space-y-6 bg-primary/5">
                         {/* Card for hourly rate and lesson hours sliders */}
                         <div className="space-y-2">
                             {/* Hourly Rate Slider */}
@@ -55,10 +55,11 @@ const EarningsCalculator: FC = () => {
                             <Slider
                                 value={[hourlyRate]}
                                 onValueChange={(value) => setHourlyRate(value[0])}
-                                min={60}
-                                max={120}
-                                step={2}
+                                min={10}
+                                max={150}
+                                step={1}
                                 className="w-full"
+
                             />
                         </div>
 
@@ -71,8 +72,8 @@ const EarningsCalculator: FC = () => {
                             <Slider
                                 value={[lessonHours]}
                                 onValueChange={(value) => setLessonHours(value[0])}
-                                min={4}
-                                max={40}
+                                min={5}
+                                max={80}
                                 step={1}
                                 className="w-full"
                             />

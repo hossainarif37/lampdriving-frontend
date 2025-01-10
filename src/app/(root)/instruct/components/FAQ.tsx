@@ -16,7 +16,7 @@ const FAQ: FC = () => {
     }, []);
 
     return (
-        <section className='px-4 md:px-0 md:py-20 py-10 bg-gradient-to-t from-primary/0 to-primary/5'>
+        <section className='px-4 md:px-0 md:py-20 py-10 bg-light-green'>
             <div className='max-w-4xl mx-auto'>
                 <h2 className='text-3xl font-semibold text-primary my-4'>Your questions, answered</h2>
                 <div className='mx-auto px-4 md:px-0 max-w-5xl'>
