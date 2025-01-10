@@ -22,7 +22,7 @@ interface IDropOffLocationProps {
 
 const DropOffLocation: FC<IDropOffLocationProps> = ({ onChange, value, error }) => {
     const [isOpen, setIsOpen] = useState(false);
-    console.log(error);
+
     return (
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
             <h2 className="text-lg font-semibold ">Drop Off Location</h2>

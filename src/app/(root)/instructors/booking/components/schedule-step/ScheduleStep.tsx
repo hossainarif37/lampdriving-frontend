@@ -38,10 +38,10 @@ const ScheduleStep: FC = () => {
             setPickupLocationError({ address: pickupLocation?.suburb === '', suburb: pickupLocation?.suburb === '' });
         }
 
-        if (testPackage && dropOffLocation?.address === '' || dropOffLocation?.suburb === '') {
+        if (testPackage && (dropOffLocation?.address === '' || dropOffLocation?.suburb === '')) {
             setDropOffLocationError({ address: dropOffLocation?.address === '', suburb: dropOffLocation?.suburb === '' });
             return;
-        } else {
+        } else if(testPackage) {
             setDropOffLocationError({ address: dropOffLocation?.suburb === '', suburb: dropOffLocation?.suburb === '' });
         }
 
