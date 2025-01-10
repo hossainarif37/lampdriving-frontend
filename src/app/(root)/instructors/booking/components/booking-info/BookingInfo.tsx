@@ -96,7 +96,11 @@ const BookingInfo: FC = () => {
             return handleStepChange("schedule");
         }
         else if (currentStep.key === "schedule") {
-            return handleStepChange("register");
+            if (isAuthenticate) {
+                return handleStepChange("payment");
+            } else {
+                return handleStepChange("register");
+            }
         }
         else if (currentStep.key === "register") {
             handleTrigger();
