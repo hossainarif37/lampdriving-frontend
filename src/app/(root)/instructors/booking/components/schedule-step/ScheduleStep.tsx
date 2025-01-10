@@ -104,7 +104,6 @@ const ScheduleStep: FC = () => {
     const handleDuration = (duration: 1 | 2 | 1.5) => {
         setSelectedDuration(duration)
         setSelectedTime(null)
-        setSelectedDate(null)
     }
 
     return (
