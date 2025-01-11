@@ -31,7 +31,7 @@ const Features: FC = () => {
             {features.map((feature, index) => (
                 <div key={index} className="text-left p-4 border border-primary/5 rounded-md shadow-md gradient-to-b">
                     <div className={
-                        `w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-gradient-to-r from-secondary/90 to-secondary/50`
+                        `w-12 h-12 rounded-lg flex items-center justify-center mb-4 icon-gradient`
                     }>
                         <feature.icon className="w-6 h-6 text-white" />
                     </div>
