@@ -7,12 +7,13 @@ import { useBooking } from '@/providers/BookingProvider';
 
 const PacakageSelectionStep: FC = () => {
 
-    const { bookingHours, setBookingHours, instructor, isCustomSelected, setIsCustomSelected } = useBooking();
+    const { bookingHours, setBookingHours, instructor, isCustomSelected, setIsCustomSelected, setSchedules } = useBooking();
 
     // handler for package selection
     const handlePakageSelection = (hours: number, isCustomSelected: boolean) => {
         setBookingHours(hours);
         setIsCustomSelected(isCustomSelected);
+        setSchedules([]);
     }
 
     return (

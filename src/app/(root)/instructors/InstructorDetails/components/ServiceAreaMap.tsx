@@ -29,30 +29,13 @@ const SERVICE_AREA = [
     [-33.847927, 151.209682],
 ];
 
-const serviceAreas = [
-    'Alexandria 2015',
-    'Allawah 2218',
-    'Annandale 2038',
-    'Arncliffe 2205',
-    'Ashbury 2193',
-    'Ashfield 2131',
-    'Banksia 2216',
-    'Banksmeadow 2019',
-    'Bardwell Park 2207',
-    'Bardwell Valley 2207',
-    'Beaconsfield 2015',
-    'Belfield 2191',
-    'Bellevue Hill 2023',
-    'Belmore 2192',
-    'Beverly Park 2217',
-    'Beverly Hills 2209',
-    'Bexley 2207',
-    'Bexley North 2207',
-];
 
 import { FC } from 'react';
 
-const ServiceAreaMap: FC = () => {
+interface IServiceAreasProps {
+    serviceAreas: string[];
+}
+const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
     const [mapType, setMapType] = useState<'map' | 'satellite'>('map');
     const [isFullscreen, setIsFullscreen] = useState(false);
     const mapContainerId = 'map-container';

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { FC } from 'react';
 import { cn } from '@/lib/utils';
@@ -13,6 +13,9 @@ interface ScheduleTimeSlotsProps {
     classname?: string;
     btnClassname?: string;
     workingHour: { isActive: boolean, startTime: string, endTime: string }
+    scheduleTimeSlots: string[];
+    setScheduleTimeSlots: Dispatch<SetStateAction<string[]>>;
+
 }
 
 
@@ -25,9 +28,11 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         bookedTimeSlots,
         classname,
         btnClassname,
-        workingHour } = props;
+        workingHour, scheduleTimeSlots, setScheduleTimeSlots } = props;
 
-    const [disabledTimeSlots, setDisabledTimeSlots] = useState<string[]>([]);
+
+    const isTwoOurSelected = selectedDuration !== 1;
+
     const startTime = `${workingHour.startTime.split(':')[0].padStart(2, '0')}:${workingHour.startTime.split(':')[1]}`;
     const endTime = `${workingHour.endTime.split(':')[0].padStart(2, '0')}:${workingHour.endTime.split(':')[1]}`;
 
@@ -41,84 +46,27 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
             const minute = startDate.getMinutes().toString().padStart(2, '0');
             const ampm = startDate.getHours() < 12 ? 'AM' : 'PM';
             timeSlots.push(`${hour}:${minute} ${ampm}`);
-            startDate.setMinutes(startDate.getMinutes() + 30);
+            startDate.setMinutes(startDate.getMinutes() + 60);
         }
-
         return timeSlots;
     };
 
-    const scheduleTimeSlots = getTimeSlots(startTime, endTime);
-
     const handleSelectTimes = (time: string) => {
-        const selectedTimeList = [];
-        const index = scheduleTimeSlots.indexOf(time);
+        const index = scheduleTimeSlots.indexOf(time.split(' - ')[0]);
         if (index !== -1) {
-            selectedTimeList.push(time);
-            const duration = selectedDuration == 1 ? 1 : selectedDuration == 1.5 ? 2 : 3;
-            let notFoundSlots = 0;
-            for (let i = 0; i < duration; i++) {
-                const nextSlot = scheduleTimeSlots[index + i + 1];
-                if (nextSlot && !disabledTimeSlots.includes(nextSlot)) {
-                    selectedTimeList.push(nextSlot);
-                } else {
-                    notFoundSlots++;
-                }
-            }
-            for (let i = 1; i <= notFoundSlots; i++) {
-                const prevSlot = scheduleTimeSlots[index - i];
-                if (prevSlot && !disabledTimeSlots.includes(prevSlot)) {
-                    selectedTimeList.push(prevSlot);
-                }
+            const startTime = scheduleTimeSlots[index];
+            const endTime = scheduleTimeSlots[index + 1];
+            if (selectedDuration == 1) {
+                onSelectTime([startTime]);
+            } else {
+                onSelectTime([startTime, endTime]);
             }
         }
-
-        // sort timeslots
-        selectedTimeList.sort((a, b) => {
-            const parseTime = (timeStr: string) => {
-                const [time, modifier] = timeStr.split(' ');
-                let [hours, minutes] = time.split(':').map(Number);
-                if (modifier === 'PM' && hours !== 12) {
-                    hours += 12;
-                } else if (modifier === 'AM' && hours === 12) {
-                    hours = 0;
-                }
-                return hours * 60 + minutes;
-            };
-
-            return parseTime(a) - parseTime(b);
-        });
-        onSelectTime(selectedTimeList);
     }
 
     useEffect(() => {
-        setDisabledTimeSlots(bookedTimeSlots);
-        const duration = selectedDuration == 1 ? 1 : selectedDuration == 1.5 ? 2 : 3;
-        for (let i = 0; i < scheduleTimeSlots.length; i++) {
-            const index = scheduleTimeSlots.indexOf(scheduleTimeSlots[i]);
-            let flag = 0;
-            let notFoundSlots = 0;
-            for (let i = 0; i < duration; i++) {
-                const nextSlot = scheduleTimeSlots[index + i + 1];
-                if (nextSlot && !bookedTimeSlots.includes(nextSlot)) {
-                    flag++;
-                    continue;
-                } else {
-                    notFoundSlots++;
-                }
-            }
-            for (let i = 1; i <= notFoundSlots; i++) {
-                const prevSlot = scheduleTimeSlots[index - i];
-                if (prevSlot && !bookedTimeSlots.includes(prevSlot)) {
-                    flag++;
-                }
-            }
-            if (flag !== duration) {
-                setDisabledTimeSlots(pre => [...pre, scheduleTimeSlots[i]]);
-            }
-        }
-    }, [selectedDate, selectedDuration, bookedTimeSlots]);
-
-
+        setScheduleTimeSlots(getTimeSlots(startTime, endTime));
+    }, [startTime, endTime]);
 
 
     return (
@@ -132,16 +80,22 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
                     :
                     <>
                         <h2 className="text-lg font-semibold mb-4">
-                            Available Times for {format(selectedDate, 'MMMM d, yyyy')}
+                            {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 1)).length === 0 ? `No Available Times ` : 
+                            'Available Times '}
+                           for {format(selectedDate, 'MMMM d, yyyy')}
                         </h2>
                         <div className='h-[244px] overflow-y-auto thin-scrollbar'>
-                            <div className="grid grid-cols-2 gap-3">
-                                {scheduleTimeSlots.map(time => {
-                                    const isDisabled = disabledTimeSlots.includes(time);
+                            <div className="grid grid-cols-1 gap-3">
+                                {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 1)).map((time, index) => {
+                                    const slotIndex = scheduleTimeSlots.indexOf(time);
+                                    const isDisabled = bookedTimeSlots.includes(time) || (isTwoOurSelected && bookedTimeSlots.includes(scheduleTimeSlots[slotIndex + 1]));
+                                    const isHidden = (isTwoOurSelected) && (index % 2 !== 0);
+                                    if (isHidden) return null;
+
                                     return <button
-                                        key={time}
+                                        key={index}
                                         disabled={isDisabled}
-                                        onClick={() => handleSelectTimes(time)}
+                                        onClick={() => handleSelectTimes(`${time} - ${scheduleTimeSlots[scheduleTimeSlots.indexOf(time) + 1]}`)}
                                         className={cn(`py-2 px-4 rounded-[4px] border text-sm disabled:opacity-50 flex items-center justify-center
                                         ${selectedTime?.includes(time) ? 'border-primary bg-primary/5 text-primary'
                                                 : 'border-gray-200 hover:border-primary/70'}`, btnClassname)}
@@ -152,8 +106,8 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
                                                 :
                                                 <Clock className="w-4 h-4" />
                                         }
-                                        <span className='w-20'>
-                                            {time}
+                                        <span className='w-40'>
+                                            {time} - {scheduleTimeSlots[scheduleTimeSlots.indexOf(time) + (isTwoOurSelected ? 2 : 1)]}
                                         </span>
                                     </button>
                                 })}

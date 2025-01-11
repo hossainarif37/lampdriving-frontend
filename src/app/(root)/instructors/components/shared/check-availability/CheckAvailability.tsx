@@ -82,6 +82,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                 <div className='grid grid-cols-2 text-black border-y'>
                     <div>
                         <ScheduleCalender
+                            bookedSchedules={data?.data.schedules || []}
                             workingHours={workingHours}
                             classname='border-y-0 border-l-0 shadow-none border-r rounded-none'
                             selectedDate={selectedDate}
@@ -90,6 +91,8 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                     </div>
                     <div>
                         <ScheduleTimeSlots
+                            scheduleTimeSlots={[]}
+                            setScheduleTimeSlots={() => { }}
                             workingHour={workingHour}
                             btnClassname='cursor-default'
                             classname='border-none shadow-none'

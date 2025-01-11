@@ -9,6 +9,7 @@ import FAQ from './components/faq/FAQ';
 import HowLampDrivingWork from './components/how-lampdriving-works/HowLampDrivingWork';
 import MissionVisionSection from './about/components/MissionVisionSection';
 import AboutStats from './about/components/AboutStats/AboutStats';
+import Pricing from './components/pricing/Pricing';
 
 const HomePage: FC = () => {
   return (
@@ -18,6 +19,7 @@ const HomePage: FC = () => {
       <HowLampDrivingWork />
       {/* <Benefits /> */}
       {/* <ChooseBestInstructorSelections /> */}
+      <Pricing />
       <FeaturedInstructors />
       <MissionVisionSection />
       <AboutUs />

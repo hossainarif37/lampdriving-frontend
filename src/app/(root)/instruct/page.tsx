@@ -7,7 +7,7 @@ import Flexibility from './components/Flexibility/Flexibility';
 
 const page: FC = () => {
     return (
-        <div className='bg-gradient-to-b from-primary/5 to-white'>
+        <div className='bg-gradient-to-b from-light-green to-white'>
             <EarningsCalculator />
             <Flexibility />
             <Stats />

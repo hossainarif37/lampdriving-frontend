@@ -9,12 +9,12 @@ import Image from 'next/image';
 
 const Footer: FC = () => {
     return (
-        <div className='relative text-gray-200 '>
+        <div className='relative text-gray-200'>
             {/*== Footer search box ==*/}
             <FooterSearch />
 
-            <div className='relative' style={{ backgroundImage: `url(${footerBg.src})` }}>
-                <div className="absolute inset-0 bg-primary opacity-70 z-0" />
+            <div className='relative ' style={{ backgroundImage: `url(${footerBg.src})` }}>
+                <div className="absolute inset-0 bg-primary opacity-60  z-0" />
                 {/*==== Footer Body ===*/}
                 <div className="wrapper grid lg:grid-cols-4 md:grid-cols-2 gap-8 pt-40 pb-10 text-light/70 px-4 z-10 relative">
                     {/* About Section */}
@@ -28,7 +28,7 @@ const Footer: FC = () => {
 
                     {/* Contact Info Section */}
                     <div className="space-y-4">
-                        <h2 className="text-light/80 text-2xl font-semibold group flex flex-col">
+                        <h2 className="text-light/70 text-2xl font-semibold group flex flex-col">
                             Contact Info
                             <span className="mt-[12px] h-[2px] lg:w-1/3 w-1/3 rounded-full bg-light/60"></span>
                         </h2>
@@ -39,7 +39,7 @@ const Footer: FC = () => {
 
                     {/* Useful Links Section */}
                     <div className="space-y-4">
-                        <h2 className="text-light/80 text-2xl font-semibold group flex flex-col">
+                        <h2 className="text-light/70 text-2xl font-semibold group flex flex-col">
                             Useful Links
                             <span className="mt-[12px] h-[2px] md:w-1/7 w-1/3 rounded-full bg-light/60"></span>
                         </h2>
@@ -54,7 +54,7 @@ const Footer: FC = () => {
 
                     {/* Update News Section */}
                     <div className="space-y-4">
-                        <h2 className="text-light/80 text-2xl font-semibold group flex flex-col">
+                        <h2 className="text-light/70 text-2xl font-semibold group flex flex-col">
                             Update News
                             <span className="mt-[12px] h-[2px] w-1/3 rounded-full bg-light/60"></span>
                         </h2>
@@ -66,7 +66,7 @@ const Footer: FC = () => {
                 </div>
 
                 {/* === Copyright section === */}
-                <div className='relative z-10'>
+                <div className='relative z-10 '>
                     <CopyRightSection />
                 </div>
             </div>

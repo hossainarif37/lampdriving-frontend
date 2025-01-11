@@ -3,7 +3,6 @@ import { IInstructor } from "./instructor";
 import { ILoginInputs, IRegisterInputs } from "./auth";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 import { LucideProps } from "lucide-react";
-import { IAddress } from "./user";
 import { ILearner } from "./learner";
 
 export interface IBookingContext {
@@ -16,19 +15,24 @@ export interface IBookingContext {
     setBookingHours: React.Dispatch<React.SetStateAction<number>>;
     testPackage: ITestPackage;
     setTestPackage: React.Dispatch<React.SetStateAction<ITestPackage>>;
+    mockTestPackage: ITestPackage;
+    setMockTestPackage: React.Dispatch<React.SetStateAction<ITestPackage>>;
     price: IPrice;
     setPrice: React.Dispatch<React.SetStateAction<IPrice>>;
     isCustomSelected: boolean;
     setIsCustomSelected: React.Dispatch<React.SetStateAction<boolean>>;
     paymentInfo: IPaymentInfo;
     setPaymentInfo: React.Dispatch<React.SetStateAction<IPaymentInfo>>;
-    paymentImageFile: File | null;
-    setPaymentImageFile: React.Dispatch<React.SetStateAction<File | null>>;
-    schedules: IShedule[];
-    setSchedules: React.Dispatch<React.SetStateAction<IShedule[]>>;
+    schedules: ISchedule[];
+    setSchedules: React.Dispatch<React.SetStateAction<ISchedule[]>>;
     useRegisterForm: UseFormReturn<IRegisterInputs, unknown, undefined>;
     useLoginForm: UseFormReturn<ILoginInputs, unknown, undefined>;
     handleStepChange: (step: string) => void;
+    isConfirmTriggered: boolean;
+    setIsConfirmTriggered: React.Dispatch<React.SetStateAction<boolean>>;
+    isCreatingABooking: boolean;
+    setIsCreatingABooking: React.Dispatch<React.SetStateAction<boolean>>;
+    avaiableScheduleHours: number;
 }
 
 export interface IPrice {
@@ -48,11 +52,15 @@ export interface IPaymentInfo {
     method: string;
 }
 
-export interface IShedule {
+export interface ISchedule {
     date: string;
     duration: 1 | 2 | 1.5;
     time: string[];
     pickupAddress: {
+        address: string;
+        suburb: string;
+    };
+    dropOffAddress?: {
         address: string;
         suburb: string;
     };
@@ -73,13 +81,12 @@ export interface IBookingInputs {
         instructor: string;
         price: number;
         bookingHours: number;
-        schedules: IShedule[];
+        schedules: ISchedule[];
     };
-    transactionInfo: {
+    paymentInfo: {
         user: string;
         amount: number;
         transactionId: string;
-        proofImage: string;
         method: string;
     };
 }
@@ -87,12 +94,7 @@ export interface IBookingInputs {
 
 
 
-export interface ISchedule {
-    date: Date;
-    time: string[];
-    duration: 1 | 2 | 1.5;
-    pickupAddress: IAddress;
-}
+
 
 export interface IBooking {
     _id: string;

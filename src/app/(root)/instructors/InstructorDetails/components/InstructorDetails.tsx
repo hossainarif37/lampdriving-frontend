@@ -8,10 +8,9 @@ import { IInstructor } from "@/types/instructor";
 interface InstructorInfoProps {
   instructor: IInstructor;
 }
-const nstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
-
+const InstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
   return (
-    <div className="bg-gray-50">
+    <div className="bg-light-green  pb-40">
       <main className="wrapper py-8">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Main content */}
@@ -34,4 +33,4 @@ const nstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
   );
 };
 
-export default nstructorDetails;
+export default InstructorDetails;

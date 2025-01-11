@@ -3,19 +3,21 @@ import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { IWorkingHour } from '@/types/instructor';
+import { useBooking } from '@/providers/BookingProvider';
 
 interface IScheduleCalenderProps {
     selectedDate: Date | null;
     onSelectDate: (date: Date) => void;
     classname?: string;
     workingHours: IWorkingHour | null;
+    bookedSchedules: { date: string; time: [string]; }[];
 }
 
-const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDate, classname, workingHours }) => {
+const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDate, classname, workingHours, bookedSchedules }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [offDays, setOffDays] = useState<string[]>([]);
     const today = new Date();
-
+    const { instructor, schedules } = useBooking();
     const isNextMonth = isSameDay(startOfMonth(currentMonth), startOfMonth(addMonths(new Date(), 1)));
 
     const days = eachDayOfInterval({
@@ -47,6 +49,82 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
             }
         }
     }, [workingHours]);
+
+    const getTimeSlots = (start: string, end: string) => {
+        const startDate = new Date(`1970-01-01T${start}:00`);
+        const endDate = new Date(`1970-01-01T${end}:00`);
+        const timeSlots = [];
+
+        while (startDate < endDate) {
+            const hour = (startDate.getHours() % 12 || 12).toString().padStart(2, '0');
+            const minute = startDate.getMinutes().toString().padStart(2, '0');
+            const ampm = startDate.getHours() < 12 ? 'AM' : 'PM';
+            timeSlots.push(`${hour}:${minute} ${ampm}`);
+            startDate.setMinutes(startDate.getMinutes() + 60);
+        }
+
+        return timeSlots;
+    };
+
+
+    // for finding the date that is fully booked
+
+    const findFullyBookedDate = (date: Date) => {
+        const dateName = (format(date, 'cccc')).toLowerCase() as keyof IWorkingHour;
+        if (!instructor?.workingHour) return true;
+        const dayWorkingHour = instructor.workingHour[dateName];
+
+        if (!dayWorkingHour?.isActive) {
+            return true;
+        }
+
+        // get all available slots with working hour
+        const availableSlots = getTimeSlots(dayWorkingHour.startTime, dayWorkingHour.endTime);
+
+
+        if (availableSlots.length === 0) return true;
+
+        // get booked slots from booked schedules
+        const bookedSlots = bookedSchedules.find((schedule: { date: string, time: string[] }) => {
+            return format(schedule.date, 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd');
+        });
+
+        // get added schedule slots
+        let scheduledSlots: string[] = [];
+        schedules.forEach((schedule: { date: string, time: string[] }) => {
+            if (format(schedule.date, 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd')) {
+                scheduledSlots = [...scheduledSlots, ...schedule.time];
+            }
+        });
+
+
+        // get all booked slots
+        const totalBookedSlots = [...bookedSlots?.time || [], ...scheduledSlots];
+
+        // normalize time formats for comparison
+        const normalizedBookedSlots = totalBookedSlots.map(slot => slot.trim().toUpperCase());
+        const normalizedAvailableSlots = availableSlots.map(slot => slot.trim().toUpperCase());
+
+
+        // for not booking slots
+        if (normalizedBookedSlots.length === 0) return false;
+
+        return normalizedAvailableSlots.every(slot =>
+            normalizedBookedSlots.includes(slot)
+        );
+    };
+
+    useEffect(() => {
+        for (let i = 0; i < days.length && !selectedDate; i++) {
+            const day = days[i];
+            const isPastDate = isBefore(day, startOfDay(today));
+            const isFullyBooked = findFullyBookedDate(day);
+            if (!isFullyBooked && !isPastDate) {
+                onSelectDate(day);
+                break;
+            }
+        }
+    }, [schedules])
 
     return (
         <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", classname)}>
@@ -90,7 +168,8 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
                     const isPastDate = isBefore(day, startOfDay(today));
                     const dayName = (format(day, 'cccc')).toLowerCase();
                     const isOffDay = offDays.includes(dayName);
-                    const isDisable = isOffDay || isPastDate;
+                    const isFullyBooked = findFullyBookedDate(day);
+                    const isDisable = isOffDay || isPastDate || isFullyBooked;
 
                     return (
                         <button

@@ -4,7 +4,7 @@ import Counter from './Counter';
 
 const LearnerStats: FC = () => {
     return (
-        <div className="w-full bg-[#020617] py-12 md:py-16">
+        <div className="w-full bg-primary py-12 md:py-16">
             {/* Container for the entire section */}
             <div className="mx-auto wrapper space-y-8">
                 <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
@@ -37,7 +37,7 @@ const LearnerStats: FC = () => {
                                 <li key={index} className="flex items-start gap-3">
                                     {/* Icon Section */}
                                     <div className="mt-1">
-                                        <Check className="h-5 w-5 text-primary" />
+                                        <Check className="h-5 w-5 text-secondary" />
                                     </div>
                                     {/* Text for each point */}
                                     <span className="text-white/90">{item}</span>
