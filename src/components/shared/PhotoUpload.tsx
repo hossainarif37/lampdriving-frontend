@@ -48,7 +48,7 @@ const PhotoUpload = <T extends { profileImg?: string }>({
             {
                 ...prev,
                 file: file || null,
-                url: isRemoveUrl ? "" : prev.url
+                url: isRemoveUrl ? undefined : prev.url
             }
         ));
     }
@@ -100,10 +100,6 @@ const PhotoUpload = <T extends { profileImg?: string }>({
 
             const data = await response.json();
 
-            toast({
-                message: "Image uploaded successfully",
-            })
-
             if (setValue) {
                 setValue('profileImg' as Path<T>, data.secure_url as PathValue<T, Path<T>>);
             }
@@ -136,7 +132,7 @@ const PhotoUpload = <T extends { profileImg?: string }>({
                 <div className={`w-[170px] h-[170px] rounded-2xl overflow-hidden ${!profilePhoto?.file || !profilePhoto?.url ? "shadow-lg border flex items-center justify-center text-accent" : ""}`}>
                     {
                         profilePhoto?.file || profilePhoto?.url ?
-                            <Image src={profilePhoto?.file ? URL.createObjectURL(profilePhoto.file) : placeHolderImage} alt="Profile Image" className='w-full' width={150} height={100} />
+                            <Image src={profilePhoto?.file ? URL.createObjectURL(profilePhoto.file) : profilePhoto?.url || placeHolderImage} alt="Profile Image" className='w-full' width={150} height={100} />
                             :
                             <User size={60} />}
                 </div>

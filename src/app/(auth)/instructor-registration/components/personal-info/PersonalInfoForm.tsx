@@ -19,12 +19,14 @@ const PersonalInfoForm: FC = () => {
     const { setPersonalInfo, personalInfo } = useInstructorRegister();
     const [profilePhoto, setProfilePhoto] = useState<IProfilePhoto>({
         file: null,
-        url: undefined
+        url: personalInfo?.profileImg || undefined
     });
     const onSubmit = (data: IPersonalInfo) => {
         setPersonalInfo(data);
         router.push("/instructor-registration?step=experience");
     };
+
+    console.log('personalInfo', personalInfo);
 
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
@@ -32,8 +34,15 @@ const PersonalInfoForm: FC = () => {
                 <h1 className='text-2xl md:text-3xl font-bold text-primary'>Personal Info</h1>
 
                 <div className='flex flex-col items-center'>
-                    <PhotoUpload profilePhoto={profilePhoto} setProfilePhoto={setProfilePhoto} register={register} setValue={setValue} setError={setError} isRemoveUrl={true} />
-                    {errors.profileImg && <p className='text-red-500 text-sm mt-1'>{errors.profileImg.message}</p>}
+                    <PhotoUpload
+                        profilePhoto={profilePhoto}
+                        setProfilePhoto={setProfilePhoto}
+                        register={register}
+                        setValue={setValue}
+                        setError={setError}
+                        isRemoveUrl={true}
+                    />
+                    {errors.profileImg && <p className='text-red-500 text-sm mb-3'>{errors.profileImg.message}</p>}
                 </div>
 
                 <PersonalInfoFields
