@@ -7,7 +7,7 @@ import { Button } from '../ui/button';
 import { ImagePlus, LoaderIcon, Upload, User, X } from 'lucide-react';
 import { generateUniqueIdentifier } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
-import { UseFormRegister, UseFormSetError, UseFormSetValue } from 'react-hook-form';
+import { Path, PathValue, UseFormRegister, UseFormSetError, UseFormSetValue } from 'react-hook-form';
 import { IRegisterInputs } from '@/types/auth';
 
 export interface IProfilePhoto {
@@ -15,16 +15,23 @@ export interface IProfilePhoto {
     url: string | undefined;
 }
 
-interface PhotoUploadProps {
+interface IPhotoUploadProps<T extends { profileImg?: string }> {
     profilePhoto: IProfilePhoto;
     setProfilePhoto: Dispatch<SetStateAction<IProfilePhoto>>;
-    register?: UseFormRegister<IRegisterInputs>;
-    setValue?: UseFormSetValue<IRegisterInputs>;
-    setError?: UseFormSetError<IRegisterInputs>;
+    register: UseFormRegister<T>;
+    setValue: UseFormSetValue<T>;
+    setError: UseFormSetError<T>;
     isRemoveUrl?: boolean;
 }
 
-const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto, register, setValue, setError, isRemoveUrl }) => {
+const PhotoUpload = <T extends { profileImg?: string }>({
+    profilePhoto,
+    setProfilePhoto,
+    register,
+    setValue,
+    setError,
+    isRemoveUrl
+}: IPhotoUploadProps<T>) => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isError, setIsError] = useState(false);
     const [imageUploadLoading, setImageUploadLoading] = useState(false);
@@ -34,7 +41,7 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto, regi
         const file = e.target.files?.[0];
 
         if (setValue && isRemoveUrl) {
-            setValue('profileImg', "");
+            setValue('profileImg' as Path<T>, "" as PathValue<T, Path<T>>);
         }
 
         setProfilePhoto((prev) => (
@@ -48,7 +55,7 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto, regi
 
     const handleRemoveImage = () => {
         if (setValue && isRemoveUrl) {
-            setValue('profileImg', "");
+            setValue('profileImg' as Path<T>, "" as PathValue<T, Path<T>>);
         }
         setProfilePhoto((prev) => (
             {
@@ -98,10 +105,10 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto, regi
             })
 
             if (setValue) {
-                setValue('profileImg', data.secure_url);
+                setValue('profileImg' as Path<T>, data.secure_url as PathValue<T, Path<T>>);
             }
             if (setError) {
-                setError('profileImg', {
+                setError('profileImg' as Path<T>, {
                     type: 'manual',
                     message: ''
                 });
@@ -135,7 +142,7 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ profilePhoto, setProfilePhoto, regi
                 </div>
 
                 {/* File Input */}
-                <input  {...register?.('profileImg', {
+                <input  {...register?.('profileImg' as Path<T>, {
                     required: !profilePhoto?.url ? "Please upload a profile photo" : false
                 })} onChange={handleFileChange} className='hidden' type="file" name="image" id="image" />
 

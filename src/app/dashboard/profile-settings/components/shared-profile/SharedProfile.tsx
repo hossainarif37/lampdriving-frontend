@@ -1,6 +1,6 @@
 "use client"
 
-import PersonalInfoFields from '@/components/shared/forms/PersonalInfoFields';
+import PersonalInfoFields, { IPersonalInfoInputs } from '@/components/shared/forms/PersonalInfoFields';
 import { Button } from '@/components/ui/button';
 import { FC, useMemo } from 'react';
 import UpdatePassword from './UpdatePassword';
@@ -23,15 +23,24 @@ const SharedProfile: FC = () => {
         phone: user?.phone || '',
         gender: user?.gender || 'male',
         dateOfBirth: user?.dateOfBirth || '',
+        profileImg: user?.profileImg || '',
     }), [user]);
 
-    const { register, handleSubmit, modifiedFields, control, formState: { errors } } = useFormWithDefaultValues(defaultValues);
+    const {
+        register,
+        handleSubmit,
+        modifiedFields,
+        control,
+        formState: { errors },
+        setValue,
+        setError
+    } = useFormWithDefaultValues<IPersonalInfoInputs>(defaultValues);
 
     const { profilePhoto, setProfilePhoto, isImageModified, validateImage } = useImage(user?.profileImg);
 
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
-    const onSubmit = async (data: typeof defaultValues) => {
+    const onSubmit = async (data: IPersonalInfoInputs) => {
         // Validate the image before proceeding
         if (!validateImage()) return;
 
@@ -65,6 +74,10 @@ const SharedProfile: FC = () => {
                 <PhotoUpload
                     profilePhoto={profilePhoto}
                     setProfilePhoto={setProfilePhoto}
+                    register={register}
+                    setValue={setValue}
+                    setError={setError}
+                    isRemoveUrl={true}
                 />
 
                 <PersonalInfoFields
@@ -72,6 +85,7 @@ const SharedProfile: FC = () => {
                     errors={errors}
                     control={control}
                     isRequired={false}
+                    defaultValues={defaultValues}
                 />
                 <Button type='submit' className='w-full text-gray-300 mt-7 gradient-color h-12'>Update</Button>
             </form >

@@ -29,8 +29,8 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
 
   // Split the description into words
   const words = instructor.description.split(" ");
-  const truncatedDescription = words.slice(0, 40).join(" ");
-  const descriptionLength = words.length;
+  const truncatedDescription = words?.slice(0, 40).join(" ");
+  const descriptionLength = words?.length;
   return (
     <section className="bg-light rounded-xl border p-4 md:p-6 space-y-6">
       {/* Profile section */}

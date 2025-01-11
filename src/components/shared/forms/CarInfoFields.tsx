@@ -11,6 +11,7 @@ interface Inputs {
     model: string;
     type: "auto" | "manual";
     rating: string;
+    year: number;
 }
 
 const carTypes = [
@@ -73,6 +74,22 @@ const CarInfoFields: FC<ICarInfoFieldsProps> = ({ register, control, errors, def
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
                     {/* Cart Type */}
                     <div>
+                        <label htmlFor="year" className='font-semibold text-primary'>Year</label>
+                        <Input
+                            {...register('year', {
+                                required: {
+                                    value: isRequired,
+                                    message: "Year is required",
+                                }
+                            })}
+                            defaultValue={defaultValues?.year}
+                            type="number"
+                            placeholder="Enter your phone number"
+                            className='h-11 xl:h-14 mt-1'
+                        />
+                        {errors?.year && <p className='text-red-500 text-sm mt-1'>{errors.year.message}</p>}
+                    </div>
+                    <div>
                         <label className="font-semibold text-primary">Type</label>
                         <Controller
                             name="type"
@@ -100,20 +117,22 @@ const CarInfoFields: FC<ICarInfoFieldsProps> = ({ register, control, errors, def
                         {errors?.type && <p className='text-red-500 text-sm mt-1'>{errors?.type?.message}</p>}
                     </div>
 
-                    {/* Car Rating */}
-                    <div>
-                        <label htmlFor="rating" className='font-semibold text-primary'>Rating</label>
-                        <Input
-                            {...register('rating', {
-                                required: "Rating is required",
-                                max: { value: 5, message: "Rating should be less than 5" }
-                            })
-                            }
-                            defaultValue={defaultValues?.rating}
-                            type="text" id="rating" placeholder="Enter car rating" className='h-11 xl:h-14 mt-1'
-                        />
-                        {errors?.rating && <p className='text-red-500 text-sm mt-1'>{errors?.rating?.message}</p>}
-                    </div>
+
+                </div>
+
+                {/* Car Rating */}
+                <div>
+                    <label htmlFor="rating" className='font-semibold text-primary'>Rating</label>
+                    <Input
+                        {...register('rating', {
+                            required: "Rating is required",
+                            max: { value: 5, message: "Rating should be less than 5" }
+                        })
+                        }
+                        defaultValue={defaultValues?.rating}
+                        type="text" id="rating" placeholder="Enter car rating" className='h-11 xl:h-14 mt-1'
+                    />
+                    {errors?.rating && <p className='text-red-500 text-sm mt-1'>{errors?.rating?.message}</p>}
                 </div>
 
                 {/* Car Image */}

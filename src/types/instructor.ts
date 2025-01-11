@@ -25,6 +25,7 @@ export interface IVehicle {
     type: "auto" | "manual";
     rating: string;
     image: string;
+    year: number;
 }
 
 // interface for feedback
@@ -75,6 +76,7 @@ export interface IPersonalInfo {
     phone: string;
     dateOfBirth: string;
     gender: 'male' | 'female' | 'other';
+    profileImg?: string;
 }
 
 export interface IExperience {

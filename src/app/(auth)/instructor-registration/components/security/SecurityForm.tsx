@@ -81,11 +81,12 @@ const SecurityForm: FC = () => {
                 password: data.password
             },
             instructorInfo: {
-                ...carInfo,
+                vehicle: carInfo,
                 ...experienceInfo,
                 ...servicesInfo
             }
         }
+
 
         registerInstructor(instructorFormData).unwrap()
             .then((res) => {

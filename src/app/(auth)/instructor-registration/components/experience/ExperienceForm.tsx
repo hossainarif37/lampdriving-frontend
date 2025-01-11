@@ -77,6 +77,9 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
         router.push("/instructor-registration?step=services");
     }
 
+    console.log('drivingLicenseURL', drivingLicenseURL);
+    console.log('experienceCertificateURL', experienceCertificateURL);
+
     useEffect(() => {
         if (isClicked) {
             if (drivingLicenseURL) {
