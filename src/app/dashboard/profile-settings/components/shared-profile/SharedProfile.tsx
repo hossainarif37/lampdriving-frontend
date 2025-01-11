@@ -38,6 +38,8 @@ const SharedProfile: FC = () => {
 
     const { profilePhoto, setProfilePhoto, isImageModified, validateImage } = useImage(user?.profileImg);
 
+
+
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
     const onSubmit = async (data: IPersonalInfoInputs) => {
@@ -67,18 +69,22 @@ const SharedProfile: FC = () => {
         <div>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col items-start md:shadow-lg bg-light md:rounded-lg md:border'
+                className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col  md:shadow-lg bg-light md:rounded-lg md:border'
             >
                 <h1 className='text-xl md:text-2xl font-bold text-primary'>Personal Details</h1>
 
-                <PhotoUpload
-                    profilePhoto={profilePhoto}
-                    setProfilePhoto={setProfilePhoto}
-                    register={register}
-                    setValue={setValue}
-                    setError={setError}
-                    isRemoveUrl={true}
-                />
+                <div className='flex flex-col items-center'>
+                    <PhotoUpload
+                        profilePhoto={profilePhoto}
+                        setProfilePhoto={setProfilePhoto}
+                        register={register}
+                        setValue={setValue}
+                        setError={setError}
+                        isRemoveUrl={true}
+                    />
+                    {errors.profileImg && <p className='text-red-500 text-sm mb-3'>{errors.profileImg.message}</p>}
+                </div>
+
 
                 <PersonalInfoFields
                     register={register}
