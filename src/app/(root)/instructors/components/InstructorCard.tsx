@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { IInstructor } from "@/types/instructor";
-import cardImg from "@/assets/home-page-image/test-image.webp"
 import { FC } from "react";
 import CheckAvailability from "./shared/check-availability/CheckAvailability";
 
@@ -21,15 +20,18 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
             </span>
             <div className="flex gap-8">
                 {/* Profile Picture and Auto Badge */}
-                <div className="rounded-full flex flex-col items-center gap-2">
+
+
+                <div className="rounded-lg w-[120px] h-[120px] overflow-hidden">
                     <Image
-                        src={cardImg}
+                        src={typeof user !== 'string' && user?.profileImg || ""}
                         alt={`Profile of ${typeof user !== 'string' && user?.name?.fullName}`}
+                        className="w-full h-full object-cover"
                         height={120}
                         width={120}
-                        className="rounded-full"
                     />
                 </div>
+
 
                 {/* Profile Details */}
                 <div className="space-y-2 text-sm text-accent w-full relative">

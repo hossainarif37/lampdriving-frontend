@@ -25,15 +25,24 @@ const PersonalInfoForm: FC = () => {
         phone: user?.phone || '',
         gender: user?.gender || 'male',
         dateOfBirth: user?.dateOfBirth || '',
+        profileImg: user?.profileImg || '',
     }), [user]);
 
-    const { register, handleSubmit, modifiedFields, control, formState: { errors } } = useFormWithDefaultValues(defaultValues);
+    const {
+        register,
+        handleSubmit,
+        modifiedFields,
+        control,
+        formState: { errors },
+        setValue,
+        setError
+    } = useFormWithDefaultValues<IPersonalInfoInputs>(defaultValues);
 
     const { profilePhoto, setProfilePhoto, isImageModified, validateImage } = useImage(user?.profileImg);
 
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
-    const onSubmit = async (data: typeof defaultValues) => {
+    const onSubmit = async (data: IPersonalInfoInputs) => {
         // Validate the image before proceeding
         if (!validateImage()) return;
 
@@ -48,12 +57,14 @@ const PersonalInfoForm: FC = () => {
             ...(isImageModified && profilePhoto.url ? { profileImg: profilePhoto.url } : {}),
         };
 
-        updateUser(payload).unwrap().then((res) => {
-            toast({ message: res.message })
-        }).catch((error) => {
-            console.error('Failed to update profile:', error);
-            toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
-        })
+        updateUser(payload).unwrap()
+            .then((res) => {
+                toast({ message: res.message })
+            })
+            .catch((error) => {
+                console.error('Failed to update profile:', error);
+                toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
+            })
     };
 
     return (
@@ -64,6 +75,10 @@ const PersonalInfoForm: FC = () => {
                 <PhotoUpload
                     profilePhoto={profilePhoto}
                     setProfilePhoto={setProfilePhoto}
+                    register={register}
+                    setValue={setValue}
+                    setError={setError}
+                    isRemoveUrl={true}
                 />
 
                 <PersonalInfoFields

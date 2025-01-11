@@ -12,7 +12,7 @@ import UserMenu from '../dashboard-nav/UserMenu';
 const Sidebar = () => {
     return (
         <div className='fixed lg:flex flex-col lg:h-full w-full lg:w-80 bg-white z-10'>
-            <div className='flex items-center justify-between lg:justify-center my-2 px-3'>
+            <div className='flex items-center justify-between  my-2 px-3'>
                 <Link href={'/'} className='w-32'>
                     <LampLogo />
                 </Link>

@@ -16,6 +16,7 @@ export interface IPersonalInfoInputs {
   phone: string;
   gender: "male" | "female" | "other";
   dateOfBirth: string;
+  profileImg?: string;
 }
 
 interface PersonalInfoFieldsProps {

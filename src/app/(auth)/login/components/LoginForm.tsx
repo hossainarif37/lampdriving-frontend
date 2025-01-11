@@ -54,7 +54,7 @@ const LoginForm: FC = () => {
                 <div className='flex flex-col gap-5'>
                     {/* Email */}
                     <div>
-                        <label htmlFor="email" className='font-semibold text-primary'>Email/Phone</label>
+                        <label htmlFor="email" className='font-semibold text-primary'>Email</label>
                         <Input
                             {...register('emailOrPhone', {
                                 required: "Email is required",
@@ -63,7 +63,7 @@ const LoginForm: FC = () => {
                                     message: "Invalid email address"
                                 }
                             })}
-                            type="text" id='emailOrPhone' placeholder="Enter your email or phone" className='xl:h-12 mt-1'
+                            type="text" id='emailOrPhone' placeholder="Enter your email" className='xl:h-12 mt-1'
                         />
                         {errors?.emailOrPhone && <p className='text-red-500 text-sm mt-1'>{errors?.emailOrPhone?.message}</p>}
                     </div>

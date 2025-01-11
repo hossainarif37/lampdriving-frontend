@@ -52,20 +52,28 @@ const ServicesForm: FC = () => {
             friday: schedule.friday,
         };
 
+
         let hasActiveDay = false;
         for (const day in workingHour) {
             const dayKey = day as keyof IWorkingHour;
             if (!workingHour[dayKey]?.isActive) {
-                delete workingHour[dayKey];
+                const { startTime, endTime } = workingHour[dayKey] || {};
+                workingHour[dayKey] = {
+                    isActive: false,
+                    startTime: startTime || "09:00",
+                    endTime: endTime || "17:00"
+                };
             } else {
                 hasActiveDay = true;
             }
         }
 
+
         if (!hasActiveDay) {
             setWorkingHoursError('At least one working day must be active');
             return;
         }
+
 
         setServicesInfo({
             pricePerHour: Number(data.pricePerHour),
