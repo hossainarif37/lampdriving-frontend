@@ -101,6 +101,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                             selectedTime={[]}
                             onSelectTime={() => { }}
                             selectedDate={selectedDate}
+                            avaiableScheduleHours={1}
                         />
                     </div>
                 </div>
