@@ -96,8 +96,17 @@ const RegisterForm: FC = () => {
                     <div>
                         <h1 className='text-2xl font-semibold text-primary mb-3'>Personal Information</h1>
 
-                        <PhotoUpload profilePhoto={profilePhoto} setProfilePhoto={setProfilePhoto} register={register} setValue={setValue} setError={setError} isRemoveUrl={true} />
-                        {errors.profileImg && <p className='text-red-500 text-sm mt-1'>{errors.profileImg.message}</p>}
+                        <div className='flex flex-col items-center'>
+                            <PhotoUpload
+                                profilePhoto={profilePhoto}
+                                setProfilePhoto={setProfilePhoto}
+                                register={register}
+                                setValue={setValue}
+                                setError={setError}
+                                isRemoveUrl={true}
+                            />
+                            {errors.profileImg && <p className='text-red-500 text-sm mb-3'>{errors.profileImg.message}</p>}
+                        </div>
 
                         <div className='flex flex-col gap-y-5'>
                             {/* Name Section */}

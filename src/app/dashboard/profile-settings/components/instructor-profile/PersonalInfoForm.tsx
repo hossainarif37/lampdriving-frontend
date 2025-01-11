@@ -43,6 +43,7 @@ const PersonalInfoForm: FC = () => {
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
     const onSubmit = async (data: IPersonalInfoInputs) => {
+        console.log('profilePhoto', profilePhoto);
         // Validate the image before proceeding
         if (!validateImage()) return;
 
@@ -56,6 +57,8 @@ const PersonalInfoForm: FC = () => {
             ...modifiedFields,
             ...(isImageModified && profilePhoto.url ? { profileImg: profilePhoto.url } : {}),
         };
+
+        console.log('payload', payload);
 
         updateUser(payload).unwrap()
             .then((res) => {
@@ -72,14 +75,17 @@ const PersonalInfoForm: FC = () => {
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
                 <h1 className='text-2xl font-bold text-primary'>Personal Info</h1>
 
-                <PhotoUpload
-                    profilePhoto={profilePhoto}
-                    setProfilePhoto={setProfilePhoto}
-                    register={register}
-                    setValue={setValue}
-                    setError={setError}
-                    isRemoveUrl={true}
-                />
+                <div className='flex flex-col items-center'>
+                    <PhotoUpload
+                        profilePhoto={profilePhoto}
+                        setProfilePhoto={setProfilePhoto}
+                        register={register}
+                        setValue={setValue}
+                        setError={setError}
+                        isRemoveUrl={true}
+                    />
+                    {errors.profileImg && <p className='text-red-500 text-sm mb-3'>{errors.profileImg.message}</p>}
+                </div>
 
                 <PersonalInfoFields
                     register={register}
