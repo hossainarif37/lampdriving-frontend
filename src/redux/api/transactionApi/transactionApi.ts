@@ -6,7 +6,7 @@ const transactionApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         createPaymentIntent: builder.mutation<IResponseWithData<{ clientSecret: string }>, { price: number }>({
             query: (data) => ({
-                url: '/transaction/payment-intent',
+                url: '/payment/payment-intent',
                 method: "POST",
                 body: data
             })

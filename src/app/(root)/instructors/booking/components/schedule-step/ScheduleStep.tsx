@@ -160,6 +160,7 @@ const ScheduleStep: FC = () => {
                 </div>
                 <div>
                     <ScheduleTimeSlots
+                        avaiableScheduleHours={avaiableScheduleHours}
                         workingHour={workingHour}
                         scheduleTimeSlots={scheduleTimeSlots}
                         setScheduleTimeSlots={setScheduleTimeSlots}
