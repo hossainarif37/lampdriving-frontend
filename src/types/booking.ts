@@ -83,7 +83,7 @@ export interface IBookingInputs {
         bookingHours: number;
         schedules: ISchedule[];
     };
-    transactionInfo: {
+    paymentInfo: {
         user: string;
         amount: number;
         transactionId: string;
