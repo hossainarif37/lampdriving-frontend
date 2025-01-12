@@ -175,8 +175,8 @@ export const adminRoutes: IRoute[] = [
                 path: '/dashboard/admin/payments/wallet'
             },
             {
-                name: 'Withdrawal Requests',
-                path: '/dashboard/admin/payments/withdrawal-requests'
+                name: 'Instructor Payouts',
+                path: '/dashboard/admin/payments/instructor-payouts'
             },
             {
                 name: 'Approved Withdrawals',

@@ -56,15 +56,15 @@ const ApprovedInstructorsTable: FC = () => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="min-w-[100px] text-center">No.</TableHead>
-                                    <TableHead className='min-w-[200px]'>Name & Username</TableHead>
-                                    <TableHead className='min-w-[220px]'>Email & Phone</TableHead>
-                                    <TableHead className='min-w-[140px]'>Experience</TableHead>
-                                    <TableHead className='min-w-[240px]'>Vehicle</TableHead>
-                                    <TableHead className='min-w-[120px] text-center'>Rating</TableHead>
-                                    <TableHead className='min-w-[200px] text-center'>Completed Lessons</TableHead>
-                                    <TableHead className='min-w-[120px] text-center'>Hourly Rate</TableHead>
-                                    <TableHead className='min-w-[120px] text-center'>Actions</TableHead>
+                                    <TableHead className=" text-center">No.</TableHead>
+                                    <TableHead className=''>Name & Username</TableHead>
+                                    <TableHead className=''>Email & Phone</TableHead>
+                                    <TableHead className=''>Experience</TableHead>
+                                    <TableHead className=''>Vehicle</TableHead>
+                                    <TableHead className=' text-center'>Rating</TableHead>
+                                    <TableHead className=' text-center'>Completed Lessons</TableHead>
+                                    <TableHead className=' text-center'>Hourly Rate</TableHead>
+                                    <TableHead className=' text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
