@@ -13,7 +13,7 @@ const TotalWithdraw = ({ totalWithdraw }: { totalWithdraw: number }) => {
                     Total <ArrowRight size={16} />
                 </span>
             </div>
-            <h3 className="text-2xl font-bold mt-4">${totalWithdraw.toLocaleString()}</h3>
+            <h3 className="text-2xl text-primary font-bold mt-4">${totalWithdraw.toLocaleString()}</h3>
             <p className="text-gray-600">Total Withdraw</p>
         </div>
     );
