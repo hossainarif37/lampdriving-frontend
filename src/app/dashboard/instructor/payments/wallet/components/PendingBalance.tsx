@@ -13,7 +13,7 @@ const PendingBalance = () => {
                     Pending <ArrowRight size={16} />
                 </span>
             </div>
-            <h3 className="text-2xl font-bold mt-4">$960</h3>
+            <h3 className="text-2xl text-primary font-bold mt-4">$960</h3>
             <p className="text-gray-600">Pending Balance</p>
         </div>
     );
