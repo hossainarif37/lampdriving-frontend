@@ -1,10 +1,10 @@
-import { Star, Car, Clock, ExternalLink, Calendar, ChevronRight } from "lucide-react";
+import { Star, Car, Clock, ExternalLink, Calendar } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { IInstructor } from "@/types/instructor";
 import { FC } from "react";
-import CheckAvailability from "./shared/check-availability/CheckAvailability";
+import CheckAvailabilityBtn from "./shared/check-availability/CheckAvailabilityBtn";
 
 
 
@@ -91,10 +91,11 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
 
                 {/* Check Availability Link */}
                 <div className="text-center flex items-center justify-center">
-                    <CheckAvailability
-                        workingHours={instructor?.workingHour}
+                    <CheckAvailabilityBtn
+                        id={instructor._id || ""}
                         name={typeof user !== 'string' && user?.name.fullName || ""}
-                        username={typeof user !== 'string' && user?.username || ""} id={instructor._id || ""}
+                        username={typeof user !== 'string' && user?.username || ""}
+                        workingHours={instructor?.workingHour}
                     />
                 </div>
             </div>

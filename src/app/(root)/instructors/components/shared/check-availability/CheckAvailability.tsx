@@ -1,7 +1,7 @@
 "use client"
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Calendar, ChevronRight, Clock, XCircle } from 'lucide-react';
-import { FC, useEffect, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import ScheduleCalender from '../../../booking/components/schedule-step/ScheduleCalender';
 import ScheduleTimeSlots from '../../../booking/components/schedule-step/ScheduleTimeSlots';
 import { Button } from '@/components/ui/button';
@@ -16,14 +16,15 @@ interface ICheckAvailabilityProps {
     username: string;
     workingHours: IWorkingHour;
     parent?: string;
+    showAvailability: boolean;
+    setShowAvailability: Dispatch<SetStateAction<boolean>>;
 }
 
-const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, workingHours, parent }) => {
+const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, workingHours, parent, showAvailability, setShowAvailability }) => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
     const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
-
     const { data } = useGetInstructorAvailabilityQuery({ id });
 
     useEffect(() => {
@@ -47,7 +48,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
     }, [workingHours, selectedDate]);
 
     return (
-        <Dialog>
+        <Dialog open={showAvailability} onOpenChange={setShowAvailability}>
             <DialogTrigger asChild>
                 {
                     parent === "details" ?
