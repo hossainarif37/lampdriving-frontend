@@ -126,16 +126,6 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
                     >
                         <MapResizer />
                         <ZoomControl position="bottomright" />
-                        {/* <TileLayer
-                            url={
-                                mapType === 'map'
-                                    ? 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                                    : 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
-                            }
-                            attribution={`&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors`}
-                        /> */}
-
-
                         {mapType === 'map' ? (
                             <TileLayer
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
