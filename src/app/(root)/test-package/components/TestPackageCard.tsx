@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { CheckCircle2, Car, Clock, MapPin, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-import cardImg from "@/assets/dummy-images/test-package-image.avif"
+import cardImg from "@/assets/dummy-images/test-package-image.jpg"
 import { Button } from '@/components/ui/button';
 
 const features = [

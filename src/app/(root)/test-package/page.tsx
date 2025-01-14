@@ -10,7 +10,7 @@ function App() {
     return (
         <div className=''>
             {/* banner Section */}
-            <div className='relative -z-10'>
+            <div className='relative'>
                 <TestPackageBanner />
             </div>
 
