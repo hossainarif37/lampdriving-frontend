@@ -5,7 +5,7 @@ import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
-import PendingBookingActions from '../../manage-bookings/pending/components/PendingBookingActions';
+import PendingBookingActions from '../../manage-bookings/upcoming/components/PendingBookingActions';
 import { useGetAllLearnersQuery } from '@/redux/api/learnerApi/learnerApi';
 import { ILearner } from '@/types/learner';
 import ManageLearnersActions from './ManageLearnersActions';
