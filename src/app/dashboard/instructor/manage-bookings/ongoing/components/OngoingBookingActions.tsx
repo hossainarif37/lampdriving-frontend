@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
 import UpdateBookingStatus from '../../components/shared/UpdateBookingStatus';
 
-interface IPendingBookingActionsProps {
+interface IOngoingBookingActionsProps {
     id: string;
 }
 
-const PendingBookingActions: FC<IPendingBookingActionsProps> = ({ id }) => {
+const OngoingBookingActions: FC<IOngoingBookingActionsProps> = ({ id }) => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -30,4 +30,4 @@ const PendingBookingActions: FC<IPendingBookingActionsProps> = ({ id }) => {
     );
 };
 
-export default PendingBookingActions;
+export default OngoingBookingActions;

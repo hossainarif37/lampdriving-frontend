@@ -7,9 +7,10 @@ import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import { useGetMyBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking } from '@/types/booking';
-import AcceptedBookingActions from './AcceptedBookingActions';
+import UpcomingBookingActions from './UpcomingBookingActions';
 
-const AcceptedBookingsTable: FC = () => {
+
+const UpcomingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
     const [page, setPage] = useState(urlSearchParams.get('page') || '1');
     const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
@@ -17,7 +18,7 @@ const AcceptedBookingsTable: FC = () => {
 
     const { data, isLoading } = useGetMyBookingsQuery(
         {
-            status: "accepted",
+            status: "upcoming",
             searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page
@@ -83,10 +84,10 @@ const AcceptedBookingsTable: FC = () => {
                                                     <h3>{booking.bookingHours}</h3>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Pending" : "Rejected"}
+                                                    {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Upcoming" : "Rejected"}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <AcceptedBookingActions id={booking._id} />
+                                                    <UpcomingBookingActions id={booking._id} />
                                                 </TableCell>
                                             </TableRow>
                                         )
@@ -97,7 +98,7 @@ const AcceptedBookingsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound isSearched={isSearched} dataName='Accepted Bookings' />
+                        <DataNotFound isSearched={isSearched} dataName='Upcoming Bookings' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />
@@ -105,4 +106,4 @@ const AcceptedBookingsTable: FC = () => {
     );
 };
 
-export default AcceptedBookingsTable;
+export default UpcomingBookingsTable;
