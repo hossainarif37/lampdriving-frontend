@@ -69,7 +69,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         setScheduleTimeSlots(getTimeSlots(startTime, endTime));
     }, [startTime, endTime]);
 
-
+    
     return (
         <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", classname)}>
             {

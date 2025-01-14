@@ -155,6 +155,8 @@ const ScheduleStep: FC = () => {
 
                 <div>
                     <ScheduleCalender
+                        availableScheduleHours={availableScheduleHours}
+                        schedules={schedules}
                         bookedSchedules={data?.data.schedules || []}
                         workingHours={instructor?.workingHour || null}
                         selectedDate={selectedDate}

@@ -22,6 +22,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
+    const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
 
     const { data } = useGetInstructorAvailabilityQuery({ id });
 
@@ -82,6 +83,8 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                 <div className='grid grid-cols-2 text-black border-y'>
                     <div>
                         <ScheduleCalender
+                            availableScheduleHours={1}
+                            schedules={[]}
                             bookedSchedules={data?.data.schedules || []}
                             workingHours={workingHours}
                             classname='border-y-0 border-l-0 shadow-none border-r rounded-none'
@@ -91,8 +94,8 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                     </div>
                     <div>
                         <ScheduleTimeSlots
-                            scheduleTimeSlots={[]}
-                            setScheduleTimeSlots={() => { }}
+                            scheduleTimeSlots={scheduleTimeSlots}
+                            setScheduleTimeSlots={setScheduleTimeSlots}
                             workingHour={workingHour}
                             btnClassname='cursor-default'
                             classname='border-none shadow-none'
