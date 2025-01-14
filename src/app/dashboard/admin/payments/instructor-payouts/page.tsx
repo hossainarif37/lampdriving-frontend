@@ -1,14 +1,16 @@
 import React from 'react';
 import InstructorPayoutsTable from './components/InstructorPayoutsTable';
+import TableSearchFilter from '@/app/dashboard/components/shared/TableSearchFilter';
 
 
 const InstructorPayoutsPage = () => {
     return (
-        <div className="min-h-[calc(100vh-117px)] bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Pending Instructor Payouts</h2>
-            <div className="overflow-x-auto">
-                <InstructorPayoutsTable />
+        <div className='bg-white rounded-xl min-h-[calc(100vh-117px)] flex flex-col text-primary'>
+            <div className='py-4 px-5 flex items-center justify-between'>
+                <h2 className='font-semibold text-2xl'>Pending Instructor Payouts</h2>
+                <TableSearchFilter />
             </div>
+            <InstructorPayoutsTable />
         </div>
     );
 };
