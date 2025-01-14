@@ -32,7 +32,7 @@ export interface IBookingContext {
     setIsConfirmTriggered: React.Dispatch<React.SetStateAction<boolean>>;
     isCreatingABooking: boolean;
     setIsCreatingABooking: React.Dispatch<React.SetStateAction<boolean>>;
-    avaiableScheduleHours: number;
+    availableScheduleHours: number;
 }
 
 export interface IPrice {
