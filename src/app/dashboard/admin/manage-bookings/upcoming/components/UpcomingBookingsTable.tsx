@@ -5,18 +5,21 @@ import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
-import { useGetAllLearnersQuery } from '@/redux/api/learnerApi/learnerApi';
-import { ILearner } from '@/types/learner';
-import ManageLearnersActions from './ManageLearnersActions';
+import { useGetAllBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
+import { IBooking } from '@/types/booking';
+import UpcomingBookingActions from './UpcomingBookingActions';
 
-const LearnersTable: FC = () => {
+
+const UpcomingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
     const [page, setPage] = useState(urlSearchParams.get('page') || '1');
     const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
     const [isSearched, setIsSearched] = useState(false);
 
-    const { data, isLoading } = useGetAllLearnersQuery(
+    const { data, isLoading } = useGetAllBookingsQuery(
         {
+            status: "upcoming",
+            searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page
         });
@@ -45,39 +48,46 @@ const LearnersTable: FC = () => {
                             <TableHeader>
                                 <TableRow>
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
-                                    <TableHead className='min-w-[214px]'>Name & Username</TableHead>
-                                    <TableHead className='min-w-[280px]'>Email & Phone</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Total Bookings</TableHead>
+                                    <TableHead className='min-w-[214px]'>Learner</TableHead>
+                                    <TableHead className='min-w-[214px]'>Instructor</TableHead>
+                                    <TableHead className='min-w-[250px]'>Transaction</TableHead>
+                                    <TableHead className='min-w-[140px]'>Price</TableHead>
+                                    <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
                                     <TableHead className='min-w-[140px] text-center'>Status</TableHead>
                                     <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
                                 {
-                                    data.data.result.map((learner: ILearner, index: number) => {
-                                        const user = typeof learner.user !== 'string' ? learner.user : undefined;
+                                    data.data.result.map((booking: IBooking, index: number) => {
+                                        const learner = typeof booking.learner !== 'string' ? typeof booking.learner.user !== 'string' ? booking.learner.user : undefined : undefined;
+                                        const instructor = typeof booking.instructor !== 'string' ? typeof booking.instructor.user !== 'string' ? booking.instructor.user : undefined : undefined;
 
                                         return (
-                                            <TableRow key={learner._id}>
+                                            <TableRow key={booking._id}>
                                                 <TableCell className="font-medium text-center">{index + 1}</TableCell>
                                                 <TableCell className="font-medium">
                                                     <div className=''>
-                                                        <h3>{user?.name?.fullName}</h3>
-                                                        {user?.username && <span className="text-sm text-gray-500">{user?.username}</span>}
+                                                        <h3>{learner?.name.fullName}</h3>
+                                                        <span className="text-sm text-gray-500">{learner?.email}</span>
                                                     </div>
                                                 </TableCell>
                                                 <TableCell className="font-medium">
-                                                    <div>
-                                                        <h3>{user?.email}</h3>
-                                                        {user?.phone && <span className="text-sm text-gray-500">{user?.phone}</span>}
+                                                    <div className=''>
+                                                        <h3>{instructor?.name.fullName}</h3>
+                                                        <span className="text-sm text-gray-500">{instructor?.email}</span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell className="font-medium text-center">{learner.bookings.length || 0}</TableCell>
+                                                <TableCell className="font-medium">{booking.transaction}</TableCell>
+                                                <TableCell className="font-medium">${booking.price}</TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    {user?.status === 'active' ? 'Active' : 'Blocked'}
+                                                    <h3>{booking.bookingHours}</h3>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <ManageLearnersActions id={typeof learner.user === "string" ? learner.user : learner.user?._id || ''} />
+                                                    {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Pending" : "Rejected"}
+                                                </TableCell>
+                                                <TableCell className="font-medium text-center">
+                                                    <UpcomingBookingActions id={booking._id} />
                                                 </TableCell>
                                             </TableRow>
                                         )
@@ -88,7 +98,7 @@ const LearnersTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound isSearched={isSearched} dataName='Learners' />
+                        <DataNotFound isSearched={isSearched} dataName='Pending Bookings' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />
@@ -96,4 +106,4 @@ const LearnersTable: FC = () => {
     );
 };
 
-export default LearnersTable;
+export default UpcomingBookingsTable;

@@ -3,7 +3,7 @@ import baseApi from "../baseApi";
 import { IBooking, IBookingInputs } from "@/types/booking";
 
 interface IGetAllBookingsQuery {
-    status: "pending" | "accepted" | "completed" | "cancelled";
+    status: "upcoming" | "ongoing" | "completed" | "refunded";
     searchKey: string;
     limit: string;
     page: string;

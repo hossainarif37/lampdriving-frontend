@@ -3,11 +3,11 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigg
 import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
 
-interface ICancelledBookingActionsProps {
+interface IOngoingBookingActionsProps {
     id: string;
 }
 
-const CancelledBookingActions: FC<ICancelledBookingActionsProps> = ({ id }) => {
+const OngoingBookingActions: FC<IOngoingBookingActionsProps> = ({ id }) => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -28,4 +28,4 @@ const CancelledBookingActions: FC<ICancelledBookingActionsProps> = ({ id }) => {
     );
 };
 
-export default CancelledBookingActions;
+export default OngoingBookingActions;
