@@ -6,7 +6,7 @@ import { FC, useEffect, useState } from 'react';
 
 const BookingSteps: FC = () => {
     const [userLoggedIn, setUserLoggedIn] = useState(false);
-    const { steps, currentStep, handleStepChange, bookingHours, testPackage, mockTestPackage, schedules, avaiableScheduleHours } = useBooking();
+    const { steps, currentStep, handleStepChange, bookingHours, testPackage, mockTestPackage, schedules, availableScheduleHours } = useBooking();
     const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ const BookingSteps: FC = () => {
                             }
                             // Handle Register step
                             else if (step.key === 'register') {
-                                isDisabled = !isPackageSelected || (avaiableScheduleHours > 0);
+                                isDisabled = !isPackageSelected || (availableScheduleHours > 0);
                             }
                             // Handle Payment step
                             else if (step.key === 'payment') {

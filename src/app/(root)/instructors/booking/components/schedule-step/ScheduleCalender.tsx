@@ -17,7 +17,7 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [offDays, setOffDays] = useState<string[]>([]);
     const today = new Date();
-    const { instructor, schedules, avaiableScheduleHours, bookingHours } = useBooking();
+    const { instructor, schedules, availableScheduleHours } = useBooking();
     const isNextMonth = isSameDay(startOfMonth(currentMonth), startOfMonth(addMonths(new Date(), 1)));
 
     const days = eachDayOfInterval({
@@ -169,7 +169,7 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
                     const dayName = (format(day, 'cccc')).toLowerCase();
                     const isOffDay = offDays.includes(dayName);
                     const isFullyBooked = findFullyBookedDate(day);
-                    const isDisable = isOffDay || isPastDate || isFullyBooked || avaiableScheduleHours <= 0;
+                    const isDisable = isOffDay || isPastDate || isFullyBooked || availableScheduleHours <= 0;
 
                     return (
                         <button
