@@ -32,8 +32,10 @@ const BookingInfo: FC = () => {
     const handleRegister = (data: IRegisterInputs) => {
         registerUser(data).unwrap().then((res) => {
             toast({
-                message: res.message,
-            })
+                message: res.message
+            });
+            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
+            router.push('/')
             const params = new URLSearchParams(urlSearchParams.toString());
             const step = steps.find(step => step.key === "payment");
             if (!step) {
