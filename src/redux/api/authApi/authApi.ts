@@ -6,7 +6,7 @@ import { IRegisterInstructor } from "@/types/instructor";
 
 const usersApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        registerUser: builder.mutation<IResponseBase, IRegisterInputs>({
+        registerUser: builder.mutation<IResponseWithData<IUser>, IRegisterInputs>({
             query: (data) => ({
                 url: '/auth/learners/register',
                 method: "POST",
