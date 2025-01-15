@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 const SuccessStep: FC = () => {
-    const { instructor, bookingHours } = useBooking();
+    const { instructor, bookingHours, price, testPackage, mockTestPackage, schedules, paymentInfo } = useBooking();
     return (
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
             <div className="max-w-3xl mx-auto">
@@ -33,7 +33,11 @@ const SuccessStep: FC = () => {
                                     <div>
                                         <p className="text-sm text-gray-500">Instructor</p>
                                         <p className="font-medium text-gray-900">
-                                            {typeof instructor?.user != "string" ? instructor?.user?.name?.fullName : ""}</p>
+                                            {typeof instructor?.user != "string" ? instructor?.user?.name?.fullName : ""}
+                                        </p>
+                                        {/* <p className="text-sm text-gray-700">
+                                            {typeof instructor?.user != "string" ? instructor?.user?.email : ""}
+                                        </p> */}
                                     </div>
                                 </div>
                                 <div className="flex items-center">
@@ -47,7 +51,7 @@ const SuccessStep: FC = () => {
                                     <Calendar className="h-5 w-5 text-gray-400 mr-3" />
                                     <div>
                                         <p className="text-sm text-gray-500">First Lesson</p>
-                                        <p className="font-medium text-gray-900">{bookingHours} hrs</p>
+                                        <p className="font-medium text-gray-900">{schedules[0].date} at {schedules[0].time[0]} for {schedules[0].duration} hrs</p>
                                     </div>
                                 </div>
                             </div>
@@ -60,21 +64,33 @@ const SuccessStep: FC = () => {
                                 <div className="space-y-3">
                                     <div className="flex justify-between">
                                         <span className="text-gray-600">Booking Credit</span>
-                                        <span className="font-medium text-gray-900">$132.00</span>
+                                        <span className="font-medium text-gray-900">${price.originalAmount}</span>
                                     </div>
                                     <div className="flex justify-between items-center">
                                         <span className="text-primary flex items-center gap-2">
                                             Credit Discount
                                             <span className="bg-blue-100 text-primary text-xs px-2 py-0.5 rounded-full">
-                                                6% OFF
+                                                {bookingHours >= 10 ? 10 : bookingHours >= 6 ? 6 : 0}% OFF
                                             </span>
                                         </span>
-                                        <span className="text-primary">- $7.92</span>
+                                        <span className="text-primary">- ${price.discountedAmount}</span>
                                     </div>
+                                    {
+                                        testPackage.included && <div className="flex justify-between">
+                                            <span className="text-gray-600">Test Package</span>
+                                            <span className="font-medium text-gray-900">${testPackage.price}</span>
+                                        </div>
+                                    }
+                                    {
+                                        mockTestPackage.included && <div className="flex justify-between">
+                                            <span className="text-gray-600">Mock Test Package</span>
+                                            <span className="font-medium text-gray-900">${mockTestPackage.price}</span>
+                                        </div>
+                                    }
                                     <div className="pt-3 border-t border-gray-200">
                                         <div className="flex justify-between">
                                             <span className="font-medium text-gray-900">Total Paid</span>
-                                            <span className="font-bold text-gray-900">$124.08</span>
+                                            <span className="font-bold text-gray-900">${price.payableAmount}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -87,8 +103,8 @@ const SuccessStep: FC = () => {
                                 </div>
                                 <div className="bg-gray-50 p-3 rounded-lg">
                                     <div className="bg-white px-3 py-2 rounded flex items-center justify-between">
-                                        <span className="font-mono text-sm">TXN-2024-8A9B2C3D</span>
-                                        <span className="text-primary text-sm">Completed</span>
+                                        <span className="font-mono text-sm">{paymentInfo.transactionId}</span>
+                                        {/* <span className="text-primary text-sm">Completed</span> */}
                                     </div>
                                 </div>
                             </div>
