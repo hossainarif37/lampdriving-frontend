@@ -129,12 +129,12 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
 
               <div className="flex items-center gap-2">
                 <CollapsibleTrigger asChild>
-                  <Button type="button" variant={"outline"} size={"sm"}>
-                    {schedule[day]?.isActive && (
-                      <span className="text-sm">
-                        {schedule[day]?.startTime} - {schedule[day]?.endTime}
-                      </span>
-                    )}
+                  <Button disabled={!schedule[day]?.isActive} type="button" variant={"outline"} size={"sm"}>
+                    {/* {schedule[day]?.isActive && ( */}
+                    <span className={"text-sm"}>
+                      {schedule[day]?.startTime} - {schedule[day]?.endTime}
+                    </span>
+                    {/* )} */}
                     <ChevronDown
                       className={cn(
                         "h-4 w-4 transition-transform",
@@ -188,8 +188,8 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
                     <Label
                       htmlFor={`apply-to-all-${day}`}
                       className={`text-sm font-medium text-gray-700 ${!schedule[day]?.isActive
-                          ? "cursor-not-allowed"
-                          : "cursor-pointer"
+                        ? "cursor-not-allowed"
+                        : "cursor-pointer"
                         }`}
                     >
                       Apply this schedule to all

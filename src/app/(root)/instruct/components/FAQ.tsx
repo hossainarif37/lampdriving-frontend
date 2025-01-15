@@ -8,7 +8,7 @@ const FAQ: FC = () => {
 
     useEffect(() => {
         const fetchTestimonials = async () => {
-            const response = await fetch('/faqInfo.json');
+            const response = await fetch('/instructorFaqInfo.json');
             const data = await response.json();
             setFaqs(data);
         };
@@ -19,7 +19,7 @@ const FAQ: FC = () => {
         <section className='px-4 md:px-0 md:py-20 py-10 bg-light-green'>
             <div className='max-w-4xl mx-auto'>
                 <h2 className='text-3xl font-semibold text-primary my-4'>Your questions, answered</h2>
-                <div className='mx-auto px-4 md:px-0 max-w-5xl'>
+                <div className='mx-auto px-4 md:px-0 max-w-5xl pb-16'>
                     <Accordion type="single" collapsible className="w-full">
                         {faqs.map((faqInfo, index) => (
                             <FaqAccordion key={index} faqInfo={faqInfo} />

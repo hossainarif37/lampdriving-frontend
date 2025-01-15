@@ -3,7 +3,7 @@ import bannerImg from '@/assets/about-page-image/inner-banner-min-2.jpg';
 const TestPackageBanner: FC = () => {
     return (
         <>
-            <div className=" relative lg:py-40 py-32 bg-cover bg-no-repeat bg-center -z-10" style={{ backgroundImage: `url(${bannerImg.src})` }}>
+            <div className=" relative lg:py-40 py-32 bg-cover bg-no-repeat bg-center" style={{ backgroundImage: `url(${bannerImg.src})` }}>
                 <div className="absolute inset-0 bg-primary opacity-50"></div>
                 <div className="absolute lg:top-32 top-28 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mx-auto">
                     <div className="text-center text-light-green/70">

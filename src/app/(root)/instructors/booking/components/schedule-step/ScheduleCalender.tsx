@@ -3,7 +3,7 @@ import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { IWorkingHour } from '@/types/instructor';
-import { useBooking } from '@/providers/BookingProvider';
+import { ISchedule } from '@/types/booking';
 
 interface IScheduleCalenderProps {
     selectedDate: Date | null;
@@ -11,13 +11,15 @@ interface IScheduleCalenderProps {
     classname?: string;
     workingHours: IWorkingHour | null;
     bookedSchedules: { date: string; time: [string]; }[];
+    schedules: ISchedule[];
+    availableScheduleHours: number
 }
 
-const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDate, classname, workingHours, bookedSchedules }) => {
+const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDate, classname, workingHours, bookedSchedules, schedules, availableScheduleHours }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [offDays, setOffDays] = useState<string[]>([]);
     const today = new Date();
-    const { instructor, schedules } = useBooking();
+
     const isNextMonth = isSameDay(startOfMonth(currentMonth), startOfMonth(addMonths(new Date(), 1)));
 
     const days = eachDayOfInterval({
@@ -71,8 +73,8 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
 
     const findFullyBookedDate = (date: Date) => {
         const dateName = (format(date, 'cccc')).toLowerCase() as keyof IWorkingHour;
-        if (!instructor?.workingHour) return true;
-        const dayWorkingHour = instructor.workingHour[dateName];
+        if (!workingHours) return true;
+        const dayWorkingHour = workingHours[dateName];
 
         if (!dayWorkingHour?.isActive) {
             return true;
@@ -169,7 +171,7 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
                     const dayName = (format(day, 'cccc')).toLowerCase();
                     const isOffDay = offDays.includes(dayName);
                     const isFullyBooked = findFullyBookedDate(day);
-                    const isDisable = isOffDay || isPastDate || isFullyBooked;
+                    const isDisable = isOffDay || isPastDate || isFullyBooked || availableScheduleHours <= 0;
 
                     return (
                         <button

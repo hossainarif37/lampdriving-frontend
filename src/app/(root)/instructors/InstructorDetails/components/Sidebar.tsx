@@ -3,19 +3,30 @@ import { FC, useState } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-Taisor-Car-Color-Image.webp";
-import carImg2 from "@/assets/dummy-images/map-image.jpg";
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
-import AvailabilityModal from './AvailabilityModal';
 import ServiceAreaMap from './ServiceAreaMap';
-import CheckAvailability from '../../components/shared/check-availability/CheckAvailability';
+import dynamic from 'next/dynamic';
 
+const CheckAvailability = dynamic(
+  () => import('../../components/shared/check-availability/CheckAvailability'),
+  {
+    loading: () => (
+      <Button
+        className="w-full py-3 px-4 bg-light border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors"
+      >
+        Checking Availability
+      </Button>
+    ),
+    ssr: false
+  }
+);
 
 interface InstructorInfoProps {
   instructor: IInstructor;
 }
 const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showAvailability, setShowAvailability] = useState(false);
   const user: IUser | undefined = typeof instructor?.user != "string" ? instructor?.user : undefined;
 
   //  function for open the image in a new tab 
@@ -53,12 +64,25 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
 
           {/* Booking buttons */}
           <Button className="w-full gradient-color">Book Now</Button>
-          <CheckAvailability
-            parent={"details"}
-            id={instructor?._id || ""}
-            name={user?.name?.firstName || ""}
-            username={user?.username || ""}
-            workingHours={instructor?.workingHour} />
+          <div className="text-center flex items-center justify-center">
+            {showAvailability ? (
+              <CheckAvailability
+                showAvailability={showAvailability}
+                setShowAvailability={setShowAvailability}
+                workingHours={instructor.workingHour}
+                name={user?.name.firstName || ""}
+                username={user?.username || ""}
+                id={instructor._id || ""}
+              />
+            ) : (
+              <Button
+                onClick={() => setShowAvailability(true)}
+                className="w-full py-3 px-4 bg-light border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50 transition-colors"
+              >
+                Check Availability
+              </Button>
+            )}
+          </div>
         </div>
       </section>
 
@@ -90,7 +114,6 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
           <ServiceAreaMap serviceAreas={instructor.serviceAreas} />
         </div>
       </section>
-      <AvailabilityModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

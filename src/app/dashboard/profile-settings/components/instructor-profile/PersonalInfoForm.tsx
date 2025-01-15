@@ -25,15 +25,25 @@ const PersonalInfoForm: FC = () => {
         phone: user?.phone || '',
         gender: user?.gender || 'male',
         dateOfBirth: user?.dateOfBirth || '',
+        profileImg: user?.profileImg || '',
     }), [user]);
 
-    const { register, handleSubmit, modifiedFields, control, formState: { errors } } = useFormWithDefaultValues(defaultValues);
+    const {
+        register,
+        handleSubmit,
+        modifiedFields,
+        control,
+        formState: { errors },
+        setValue,
+        setError
+    } = useFormWithDefaultValues<IPersonalInfoInputs>(defaultValues);
 
     const { profilePhoto, setProfilePhoto, isImageModified, validateImage } = useImage(user?.profileImg);
 
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
-    const onSubmit = async (data: typeof defaultValues) => {
+    const onSubmit = async (data: IPersonalInfoInputs) => {
+        console.log('profilePhoto', profilePhoto);
         // Validate the image before proceeding
         if (!validateImage()) return;
 
@@ -48,12 +58,16 @@ const PersonalInfoForm: FC = () => {
             ...(isImageModified && profilePhoto.url ? { profileImg: profilePhoto.url } : {}),
         };
 
-        updateUser(payload).unwrap().then((res) => {
-            toast({ message: res.message })
-        }).catch((error) => {
-            console.error('Failed to update profile:', error);
-            toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
-        })
+        console.log('payload', payload);
+
+        updateUser(payload).unwrap()
+            .then((res) => {
+                toast({ message: res.message })
+            })
+            .catch((error) => {
+                console.error('Failed to update profile:', error);
+                toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
+            })
     };
 
     return (
@@ -61,10 +75,17 @@ const PersonalInfoForm: FC = () => {
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
                 <h1 className='text-2xl font-bold text-primary'>Personal Info</h1>
 
-                <PhotoUpload
-                    profilePhoto={profilePhoto}
-                    setProfilePhoto={setProfilePhoto}
-                />
+                <div className='flex flex-col items-center'>
+                    <PhotoUpload
+                        profilePhoto={profilePhoto}
+                        setProfilePhoto={setProfilePhoto}
+                        register={register}
+                        setValue={setValue}
+                        setError={setError}
+                        isRemoveUrl={true}
+                    />
+                    {errors.profileImg && <p className='text-red-500 text-sm mb-3'>{errors.profileImg.message}</p>}
+                </div>
 
                 <PersonalInfoFields
                     register={register}

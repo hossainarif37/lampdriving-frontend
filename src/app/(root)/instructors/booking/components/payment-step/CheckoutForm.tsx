@@ -59,7 +59,7 @@ const CheckoutForm: FC<{ clientSecret: string }> = () => {
                 bookingHours,
                 schedules
             },
-            transactionInfo: {
+            paymentInfo: {
                 user: user?._id,
                 amount: price.payableAmount,
                 transactionId: paymentIntent?.id,

@@ -9,6 +9,9 @@ interface IFaqItem {
     description: string;
     val: string;
     category: string;
+    question: string;
+    answer: string;
+    value: string;
 }
 
 const FAQ: FC = () => {

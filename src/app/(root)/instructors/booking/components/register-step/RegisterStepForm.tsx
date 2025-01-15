@@ -84,18 +84,7 @@ const RegisterStepForm: FC = () => {
                             {errors?.gender && <p className='text-red-500 text-sm mt-1'>{errors?.gender?.message}</p>}
                         </div>
 
-                        {/* Date of Birth */}
-                        <div className='flex-1'>
-                            <label htmlFor="date-of-birth" className='font-semibold text-primary'>Date of Birth</label>
-                            <Input
-                                {...register('dateOfBirth', {
-                                    required: "Date of birth is required"
-                                })
-                                }
-                                type="date" className='xl:h-12 mt-1'
-                            />
-                            {errors?.dateOfBirth && <p className='text-red-500 text-sm mt-1'>{errors?.dateOfBirth?.message}</p>}
-                        </div>
+
                     </div>
 
                     {/* Email */}

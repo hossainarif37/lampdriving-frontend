@@ -1,6 +1,6 @@
 "use client"
 
-import PersonalInfoFields from '@/components/shared/forms/PersonalInfoFields';
+import PersonalInfoFields, { IPersonalInfoInputs } from '@/components/shared/forms/PersonalInfoFields';
 import { Button } from '@/components/ui/button';
 import { FC, useMemo } from 'react';
 import UpdatePassword from './UpdatePassword';
@@ -23,15 +23,26 @@ const SharedProfile: FC = () => {
         phone: user?.phone || '',
         gender: user?.gender || 'male',
         dateOfBirth: user?.dateOfBirth || '',
+        profileImg: user?.profileImg || '',
     }), [user]);
 
-    const { register, handleSubmit, modifiedFields, control, formState: { errors } } = useFormWithDefaultValues(defaultValues);
+    const {
+        register,
+        handleSubmit,
+        modifiedFields,
+        control,
+        formState: { errors },
+        setValue,
+        setError
+    } = useFormWithDefaultValues<IPersonalInfoInputs>(defaultValues);
 
     const { profilePhoto, setProfilePhoto, isImageModified, validateImage } = useImage(user?.profileImg);
 
+
+
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
-    const onSubmit = async (data: typeof defaultValues) => {
+    const onSubmit = async (data: IPersonalInfoInputs) => {
         // Validate the image before proceeding
         if (!validateImage()) return;
 
@@ -58,20 +69,29 @@ const SharedProfile: FC = () => {
         <div>
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col items-start md:shadow-lg bg-light md:rounded-lg md:border'
+                className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col  md:shadow-lg bg-light md:rounded-lg md:border'
             >
                 <h1 className='text-xl md:text-2xl font-bold text-primary'>Personal Details</h1>
 
-                <PhotoUpload
-                    profilePhoto={profilePhoto}
-                    setProfilePhoto={setProfilePhoto}
-                />
+                <div className='flex flex-col items-center'>
+                    <PhotoUpload
+                        profilePhoto={profilePhoto}
+                        setProfilePhoto={setProfilePhoto}
+                        register={register}
+                        setValue={setValue}
+                        setError={setError}
+                        isRemoveUrl={true}
+                    />
+                    {errors.profileImg && <p className='text-red-500 text-sm mb-3'>{errors.profileImg.message}</p>}
+                </div>
+
 
                 <PersonalInfoFields
                     register={register}
                     errors={errors}
                     control={control}
                     isRequired={false}
+                    defaultValues={defaultValues}
                 />
                 <Button type='submit' className='w-full text-gray-300 mt-7 gradient-color h-12'>Update</Button>
             </form >

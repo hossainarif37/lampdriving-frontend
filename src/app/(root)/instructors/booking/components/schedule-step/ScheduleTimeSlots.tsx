@@ -15,7 +15,7 @@ interface ScheduleTimeSlotsProps {
     workingHour: { isActive: boolean, startTime: string, endTime: string }
     scheduleTimeSlots: string[];
     setScheduleTimeSlots: Dispatch<SetStateAction<string[]>>;
-
+    availableScheduleHours: number;
 }
 
 
@@ -28,6 +28,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         bookedTimeSlots,
         classname,
         btnClassname,
+        availableScheduleHours,
         workingHour, scheduleTimeSlots, setScheduleTimeSlots } = props;
 
 
@@ -68,7 +69,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         setScheduleTimeSlots(getTimeSlots(startTime, endTime));
     }, [startTime, endTime]);
 
-
+    
     return (
         <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", classname)}>
             {
@@ -80,21 +81,21 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
                     :
                     <>
                         <h2 className="text-lg font-semibold mb-4">
-                            {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 1)).length === 0 ? `No Available Times ` : 
-                            'Available Times '}
-                           for {format(selectedDate, 'MMMM d, yyyy')}
+                            {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 1)).length === 0 ? `No Available Times ` :
+                                'Available Times '}
+                            for {format(selectedDate, 'MMMM d, yyyy')}
                         </h2>
                         <div className='h-[244px] overflow-y-auto thin-scrollbar'>
                             <div className="grid grid-cols-1 gap-3">
                                 {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 1)).map((time, index) => {
                                     const slotIndex = scheduleTimeSlots.indexOf(time);
-                                    const isDisabled = bookedTimeSlots.includes(time) || (isTwoOurSelected && bookedTimeSlots.includes(scheduleTimeSlots[slotIndex + 1]));
+                                    const isDisabled = (bookedTimeSlots.includes(time) || (isTwoOurSelected && bookedTimeSlots.includes(scheduleTimeSlots[slotIndex + 1])));
                                     const isHidden = (isTwoOurSelected) && (index % 2 !== 0);
                                     if (isHidden) return null;
 
                                     return <button
                                         key={index}
-                                        disabled={isDisabled}
+                                        disabled={isDisabled || availableScheduleHours <= 0}
                                         onClick={() => handleSelectTimes(`${time} - ${scheduleTimeSlots[scheduleTimeSlots.indexOf(time) + 1]}`)}
                                         className={cn(`py-2 px-4 rounded-[4px] border text-sm disabled:opacity-50 flex items-center justify-center
                                         ${selectedTime?.includes(time) ? 'border-primary bg-primary/5 text-primary'
