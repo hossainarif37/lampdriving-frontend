@@ -71,10 +71,6 @@ export const instructorRoutes: IRoute[] = [
             {
                 name: 'Completed Bookings',
                 path: '/dashboard/instructor/manage-bookings/completed'
-            },
-            {
-                name: 'Refunded Bookings',
-                path: '/dashboard/instructor/manage-bookings/refunded'
             }
         ]
     },
