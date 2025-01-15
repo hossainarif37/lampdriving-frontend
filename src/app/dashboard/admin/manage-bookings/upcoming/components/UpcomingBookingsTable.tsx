@@ -78,7 +78,7 @@ const UpcomingBookingsTable: FC = () => {
                                                         <span className="text-sm text-gray-500">{instructor?.email}</span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell className="font-medium">{booking.transaction}</TableCell>
+                                                <TableCell className="font-medium">{booking.payment}</TableCell>
                                                 <TableCell className="font-medium">${booking.price}</TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>

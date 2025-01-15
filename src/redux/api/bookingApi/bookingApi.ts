@@ -26,7 +26,7 @@ const bookingApi = baseApi.injectEndpoints({
         getMyBookings: builder.query<IResponseWithPaginationData<IBooking[]>, IGetAllBookingsQuery>({
             query: ({ status, searchKey, limit, page }) => `/booking/my?status=${status}&populate=instructor.user,learner.user${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
         }),
-        updateBookingStatus: builder.mutation<IResponseBase, { id: string, status: "pending" | "accepted" | "completed" | "cancelled" }>({
+        updateBookingStatus: builder.mutation<IResponseBase, { id: string, status: "upcoming" | "ongoing" | "completed" | "refunded" }>({
             query: ({ id, status }) => ({
                 url: `/booking/status/${id}`,
                 method: "PATCH",

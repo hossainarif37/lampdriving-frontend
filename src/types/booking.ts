@@ -103,7 +103,7 @@ export interface IBooking {
     instructor: string | IInstructor;
     bookingHours: number;
     schedules: ISchedule[];
-    transaction: string;
+    payment: string;
     price: number;
     status: "pending" | "accepted" | "completed" | "cancelled";
 }
