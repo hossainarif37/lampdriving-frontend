@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
+import UpdateBookingStatus from '../../components/shared/UpdateBookingStatus';
 
 interface IOngoingBookingActionsProps {
     id: string;
@@ -22,6 +23,7 @@ const OngoingBookingActions: FC<IOngoingBookingActionsProps> = ({ id }) => {
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
                     <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
+                    <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={"complete"} />
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>

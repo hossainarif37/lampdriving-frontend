@@ -8,6 +8,7 @@ import Loading from '@/components/shared/Loading';
 import { useGetAllBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking } from '@/types/booking';
 import OngoingBookingActions from './OngoingBookingActions';
+import { formatDate } from 'date-fns';
 
 const OngoingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -49,10 +50,10 @@ const OngoingBookingsTable: FC = () => {
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Learner</TableHead>
                                     <TableHead className='min-w-[214px]'>Instructor</TableHead>
-                                    <TableHead className='min-w-[250px]'>Transaction</TableHead>
+                                    <TableHead className='min-w-[250px]'>Transaction ID</TableHead>
                                     <TableHead className='min-w-[140px]'>Price</TableHead>
                                     <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Status</TableHead>
+                                    <TableHead className='min-w-[140px] text-center'>Upcoming Schedule</TableHead>
                                     <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
@@ -77,13 +78,18 @@ const OngoingBookingsTable: FC = () => {
                                                         <span className="text-sm text-gray-500">{instructor?.email}</span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell className="font-medium">{booking.transaction}</TableCell>
+                                                <TableCell className="font-medium">{(booking.payment as any).transactionId}</TableCell>
                                                 <TableCell className="font-medium">${booking.price}</TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Pending" : "Rejected"}
+                                                    {
+                                                        <>
+                                                            <h3>{formatDate(new Date(booking.schedules[0].date), 'dd-MM-yyyy')} at {booking.schedules[0].time[0]}</h3>
+                                                            <p>Duration {booking.schedules[0].duration} Hours</p>
+                                                        </>
+                                                    }
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <OngoingBookingActions id={booking._id} />
