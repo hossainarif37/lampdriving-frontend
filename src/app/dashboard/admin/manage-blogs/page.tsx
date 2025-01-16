@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { PlusCircle, List } from 'lucide-react'
 import { BlogList } from '../components/admin-blogs/BlogList';
-import { BlogEditor } from '../components/admin-blogs/BlogEditor';
+import BlogEditor from '../components/admin-blogs/BlogEditor';
 const BlogPage: FC = () => {
     const [activeView, setActiveView] = useState<'list' | 'create'>('list')
     return (
         <div className="flex h-screen bg-gray-100">
-            <div className="flex-1 p-8 overflow-auto">
+            <div className="flex-1 md:p-8  overflow-auto">
                 <div className="max-w-8xl mx-auto">
                     <h1 className="text-3xl font-bold mb-6 text-primary/90">Blog Management</h1>
 
