@@ -12,7 +12,7 @@ interface MarkdownPreviewProps {
 const MarkdownPreview: FC<MarkdownPreviewProps> = ({ content, title, author }) => {
     return (
         <div className="prose max-w-none">
-            <h1 className="text-3xl font-bold mb-4">{title}</h1>
+            <h1 className="text-3xl font-bold mb-4 text-primary/85">{title}</h1>
             <div className="text-sm text-gray-500 mb-6">
                 by {author} • Last updated {new Date().toLocaleDateString()}
             </div>
