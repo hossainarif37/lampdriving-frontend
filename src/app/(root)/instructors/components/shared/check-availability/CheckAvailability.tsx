@@ -120,7 +120,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                             </Button>
                         </DialogClose>
                         <Link href={`/instructors/booking?instructor=${username}&step=package-selection`}>
-                            <Button>
+                            <Button className='bg-primary' size="lg">
                                 Continue to Booking
                             </Button>
                         </Link>
