@@ -53,7 +53,7 @@ const UserMenu: FC = () => {
             </Button>
 
             <div
-                className={`absolute right-0 mt-3 w-56 pb-3 overflow-hidden rounded-[4px] rounded-t-none bg-white transition-all duration-200 ease-in-out origin-top ${isOpen
+                className={`absolute right-0 mt-3 w-56 pb-3 overflow-hidden rounded-[4px] rounded-t-none bg-white shadow-md transition-all duration-200 ease-in-out origin-top ${isOpen
                     ? 'scale-y-100'
                     : 'scale-y-0'
                     }`}
@@ -64,14 +64,14 @@ const UserMenu: FC = () => {
                 </div> */}
 
                 <div className="py-1 px-4">
-                    <Button className="h-[40px] capitalize w-full px-4 py-2 text-sm text-red-600 bg-gray-50 hover:bg-gray-100 rounded-[4px] gap-2 font-semibold">
+                    <Button className="h-[40px] capitalize w-full px-4 py-2 text-sm text-primary bg-gray-50 hover:bg-gray-100 rounded-[4px] gap-2 font-semibold">
                         <HelpCircle className="w-4 h-4" />
                         <span>Help</span>
                     </Button>
                 </div>
 
                 <div className="py-1 px-4">
-                    <Button variant={"outline"} disabled={isLogoutLoading} onClick={handleLogout} className='h-[40px] w-full text-primary capitalize'>
+                    <Button variant={"outline"} disabled={isLogoutLoading} onClick={handleLogout} className='h-[40px] w-full text-red-500 capitalize'>
                         <LogOut className="w-4 h-4" />
                         <span>Sign out</span>
                     </Button>

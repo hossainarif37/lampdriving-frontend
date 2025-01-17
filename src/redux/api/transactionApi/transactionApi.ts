@@ -10,7 +10,7 @@ const transactionApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: data
             })
-        })
+        }),
     })
 })
 
