@@ -15,7 +15,7 @@ interface ScheduleTimeSlotsProps {
     workingHour: { isActive: boolean, startTime: string, endTime: string }
     scheduleTimeSlots: string[];
     setScheduleTimeSlots: Dispatch<SetStateAction<string[]>>;
-    avaiableScheduleHours: number;
+    availableScheduleHours: number;
 }
 
 
@@ -28,7 +28,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         bookedTimeSlots,
         classname,
         btnClassname,
-        avaiableScheduleHours,
+        availableScheduleHours,
         workingHour, scheduleTimeSlots, setScheduleTimeSlots } = props;
 
 
@@ -69,7 +69,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         setScheduleTimeSlots(getTimeSlots(startTime, endTime));
     }, [startTime, endTime]);
 
-
+    
     return (
         <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", classname)}>
             {
@@ -95,7 +95,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
 
                                     return <button
                                         key={index}
-                                        disabled={isDisabled || avaiableScheduleHours <= 0}
+                                        disabled={isDisabled || availableScheduleHours <= 0}
                                         onClick={() => handleSelectTimes(`${time} - ${scheduleTimeSlots[scheduleTimeSlots.indexOf(time) + 1]}`)}
                                         className={cn(`py-2 px-4 rounded-[4px] border text-sm disabled:opacity-50 flex items-center justify-center
                                         ${selectedTime?.includes(time) ? 'border-primary bg-primary/5 text-primary'

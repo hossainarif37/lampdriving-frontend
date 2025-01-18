@@ -32,7 +32,7 @@ export interface IBookingContext {
     setIsConfirmTriggered: React.Dispatch<React.SetStateAction<boolean>>;
     isCreatingABooking: boolean;
     setIsCreatingABooking: React.Dispatch<React.SetStateAction<boolean>>;
-    avaiableScheduleHours: number;
+    availableScheduleHours: number;
 }
 
 export interface IPrice {
@@ -54,8 +54,8 @@ export interface IPaymentInfo {
 
 export interface ISchedule {
     date: string;
-    duration: 1 | 2 | 1.5;
     time: string[];
+    duration: 1 | 2 | 1.5;
     pickupAddress: {
         address: string;
         suburb: string;
@@ -64,6 +64,7 @@ export interface ISchedule {
         address: string;
         suburb: string;
     };
+    type: "lesson" | "test" | "mock-test"
 }
 
 

@@ -16,11 +16,12 @@ const ScheduleStep: FC = () => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [selectedTime, setSelectedTime] = useState<string[] | null>(null);
     const [selectedDuration, setSelectedDuration] = useState<1 | 2 | 1.5>(1);
+    const [scheduleType, setScheduleType] = useState<"lesson" | "test" | "mock-test">("lesson");
     const [pickupLocation, setPickupLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
     const [dropOffLocation, setDropOffLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
-    const { setSchedules, instructor, schedules, avaiableScheduleHours } = useBooking();
+    const { setSchedules, instructor, schedules, availableScheduleHours } = useBooking();
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
     const [pickupLocationError, setPickupLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
@@ -53,7 +54,8 @@ const ScheduleStep: FC = () => {
             pickupAddress: {
                 address: pickupLocation?.address || '',
                 suburb: pickupLocation?.suburb || '',
-            }
+            },
+            type: scheduleType
         }
 
         if (testPackage) {
@@ -102,8 +104,9 @@ const ScheduleStep: FC = () => {
         setDropOffLocationError({ address: false, suburb: false });
     }, [pickupLocation, dropOffLocation]);
 
-    const handleDuration = (duration: 1 | 2 | 1.5) => {
+    const handleDuration = (duration: 1 | 2 | 1.5, type: "lesson" | "test" | "mock-test") => {
         setSelectedDuration(duration)
+        setScheduleType(type);
         setSelectedTime(null)
     }
     const handleSelectDate = (date: Date) => {
@@ -122,8 +125,8 @@ const ScheduleStep: FC = () => {
                             {[1, 2].map((duration) => (
                                 <button
                                     key={duration}
-                                    disabled={duration > avaiableScheduleHours}
-                                    onClick={() => handleDuration(duration as 1 | 2)}
+                                    disabled={duration > availableScheduleHours}
+                                    onClick={() => handleDuration(duration as 1 | 2, "lesson")}
                                     className={`flex-1 py-2 px-4 rounded-[4px] border disabled:text-gray-500 ${selectedDuration === duration
                                         ? 'border-primary bg-primary/5 text-primary'
                                         : 'border-gray-200 hover:border-primary/70'
@@ -133,8 +136,8 @@ const ScheduleStep: FC = () => {
                                 </button>
                             ))}
                             <button
-                                disabled={2 > avaiableScheduleHours}
-                                onClick={() => handleDuration(1.5)}
+                                disabled={2 > availableScheduleHours}
+                                onClick={() => handleDuration(1.5, "test")}
                                 className={`flex-1 py-2 px-4 rounded-[4px] disabled:text-gray-500 border ${selectedDuration === 1.5
                                     ? 'border-primary bg-primary/5 text-primary'
                                     : 'border-gray-200 hover:border-primary/70'
@@ -143,8 +146,8 @@ const ScheduleStep: FC = () => {
                                 Test Package
                             </button>
                         </div>
-                        <button title={avaiableScheduleHours === 0 ? 'No hours left to schedule' : `Add more ${avaiableScheduleHours} ${avaiableScheduleHours === 1 ? 'hour' : 'hours'} schedules`} className='absolute top-6 right-6 flex items-center gap-2'>
-                            <span className='text-sm'>{avaiableScheduleHours}-Hours left</span>
+                        <button title={availableScheduleHours === 0 ? 'No hours left to schedule' : `Add more ${availableScheduleHours} ${availableScheduleHours === 1 ? 'hour' : 'hours'} schedules`} className='absolute top-6 right-6 flex items-center gap-2'>
+                            <span className='text-sm'>{availableScheduleHours}-Hours left</span>
                             <CircleAlert size={16} />
                         </button>
                     </div>
@@ -152,6 +155,8 @@ const ScheduleStep: FC = () => {
 
                 <div>
                     <ScheduleCalender
+                        availableScheduleHours={availableScheduleHours}
+                        schedules={schedules}
                         bookedSchedules={data?.data.schedules || []}
                         workingHours={instructor?.workingHour || null}
                         selectedDate={selectedDate}
@@ -160,7 +165,7 @@ const ScheduleStep: FC = () => {
                 </div>
                 <div>
                     <ScheduleTimeSlots
-                        avaiableScheduleHours={avaiableScheduleHours}
+                        availableScheduleHours={availableScheduleHours}
                         workingHour={workingHour}
                         scheduleTimeSlots={scheduleTimeSlots}
                         setScheduleTimeSlots={setScheduleTimeSlots}
@@ -190,7 +195,7 @@ const ScheduleStep: FC = () => {
                     </div>
                 }
                 <div className='col-span-2'>
-                    <Button disabled={(selectedDuration > avaiableScheduleHours) || !selectedDate || !selectedTime} onClick={handleAddSchedule} className='w-full'>
+                    <Button disabled={(selectedDuration > availableScheduleHours) || !selectedDate || !selectedTime} onClick={handleAddSchedule} className='w-full'>
                         Add Schedule
                     </Button>
                 </div>

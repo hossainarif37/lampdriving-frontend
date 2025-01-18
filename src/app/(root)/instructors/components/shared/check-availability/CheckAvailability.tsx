@@ -1,7 +1,7 @@
 "use client"
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Calendar, ChevronRight, Clock, XCircle } from 'lucide-react';
-import { FC, useEffect, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import ScheduleCalender from '../../../booking/components/schedule-step/ScheduleCalender';
 import ScheduleTimeSlots from '../../../booking/components/schedule-step/ScheduleTimeSlots';
 import { Button } from '@/components/ui/button';
@@ -16,13 +16,15 @@ interface ICheckAvailabilityProps {
     username: string;
     workingHours: IWorkingHour;
     parent?: string;
+    showAvailability: boolean;
+    setShowAvailability: Dispatch<SetStateAction<boolean>>;
 }
 
-const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, workingHours, parent }) => {
+const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, workingHours, parent, showAvailability, setShowAvailability }) => {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
-
+    const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
     const { data } = useGetInstructorAvailabilityQuery({ id });
 
     useEffect(() => {
@@ -46,7 +48,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
     }, [workingHours, selectedDate]);
 
     return (
-        <Dialog>
+        <Dialog open={showAvailability} onOpenChange={setShowAvailability}>
             <DialogTrigger asChild>
                 {
                     parent === "details" ?
@@ -82,6 +84,8 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                 <div className='grid grid-cols-2 text-black border-y'>
                     <div>
                         <ScheduleCalender
+                            availableScheduleHours={1}
+                            schedules={[]}
                             bookedSchedules={data?.data.schedules || []}
                             workingHours={workingHours}
                             classname='border-y-0 border-l-0 shadow-none border-r rounded-none'
@@ -91,8 +95,8 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                     </div>
                     <div>
                         <ScheduleTimeSlots
-                            scheduleTimeSlots={[]}
-                            setScheduleTimeSlots={() => { }}
+                            scheduleTimeSlots={scheduleTimeSlots}
+                            setScheduleTimeSlots={setScheduleTimeSlots}
                             workingHour={workingHour}
                             btnClassname='cursor-default'
                             classname='border-none shadow-none'
@@ -101,7 +105,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                             selectedTime={[]}
                             onSelectTime={() => { }}
                             selectedDate={selectedDate}
-                            avaiableScheduleHours={1}
+                            availableScheduleHours={1}
                         />
                     </div>
                 </div>
@@ -116,7 +120,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                             </Button>
                         </DialogClose>
                         <Link href={`/instructors/booking?instructor=${username}&step=package-selection`}>
-                            <Button>
+                            <Button className='bg-primary' size="lg">
                                 Continue to Booking
                             </Button>
                         </Link>

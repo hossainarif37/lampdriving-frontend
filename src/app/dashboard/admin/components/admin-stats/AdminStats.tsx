@@ -18,7 +18,7 @@ type Booking = {
 };
 
 // Sample data for bookings
-const inisialRunningBookings: Booking[] = [
+const initialRunningBookings: Booking[] = [
     {
         id: '1',
         studentName: 'John Doe',
@@ -53,7 +53,7 @@ const inisialRunningBookings: Booking[] = [
     }
 ];
 
-const inisialPastBookings: Booking[] = [
+const initialPastBookings: Booking[] = [
     {
         id: '3',
         studentName: 'Alice Brown',
@@ -91,8 +91,8 @@ const inisialPastBookings: Booking[] = [
 const AdminStats: FC = () => {
     const { user } = useAppSelector(state => state.authSlice);
     const [activeFilter, setActiveFilter] = useState('running');
-    const [runningBookings, setRunningBookings] = useState(inisialRunningBookings);
-    const [pastBookings, setPastBookings] = useState(inisialPastBookings);
+    const [runningBookings, setRunningBookings] = useState(initialRunningBookings);
+    const [pastBookings, setPastBookings] = useState(initialPastBookings);
 
 
 

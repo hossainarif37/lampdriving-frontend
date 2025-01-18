@@ -76,11 +76,11 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         setCurrentStep(requestedStep);
     };
 
-    // calculate avaiable schedule hours
+    // calculate available schedule hours
     const addedHours = schedules.reduce((total, schedule) => {
         return total + (schedule.duration === 1 ? 1 : 2);
     }, 0);
-    const avaiableScheduleHours = bookingHours - addedHours;
+    const availableScheduleHours = bookingHours - addedHours;
 
     const value = useMemo(() => ({
         instructor, setInstructor,
@@ -96,8 +96,8 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         handleStepChange,
         isConfirmTriggered, setIsConfirmTriggered,
         isCreatingABooking, setIsCreatingABooking,
-        mockTestPackage, setMockTestPackage, avaiableScheduleHours
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, avaiableScheduleHours, mockTestPackage]);
+        mockTestPackage, setMockTestPackage, availableScheduleHours
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, availableScheduleHours, mockTestPackage]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams.get('instructor');
