@@ -6,11 +6,20 @@ import { navLinks } from "@/constant/navLinks";
 import Link from "next/link";
 import MobileNav from "./MobileNav";
 import { usePathname } from "next/navigation";
+import useWindowScroll from "@/hooks/useWindowScroll";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Navbar = () => {
     const pathname = usePathname();
+    const visible = useWindowScroll(10);
+
+
     return (
-        <nav className="bg-light-green">
+        <nav
+            className={`sticky z-50 top-0 bg-light-green transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'
+                }`}
+        >
             <div className="wrapper flex justify-between items-center py-2 w-full">
                 <div>
                     <Link href={'/'}>
