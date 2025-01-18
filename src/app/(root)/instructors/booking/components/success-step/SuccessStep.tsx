@@ -3,6 +3,7 @@ import { CheckCircle, Clock, Car, User, Calendar, Receipt } from 'lucide-react';
 import { useBooking } from '@/providers/BookingProvider';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { formatDate } from 'date-fns';
 
 const SuccessStep: FC = () => {
     const { instructor, bookingHours, price, testPackage, mockTestPackage, schedules, paymentInfo } = useBooking();
@@ -51,7 +52,7 @@ const SuccessStep: FC = () => {
                                     <Calendar className="h-5 w-5 text-gray-400 mr-3" />
                                     <div>
                                         <p className="text-sm text-gray-500">First Lesson</p>
-                                        <p className="font-medium text-gray-900">{schedules[0].date} at {schedules[0].time[0]} for {schedules[0].duration} hrs</p>
+                                        <p className="font-medium text-gray-900">{formatDate(new Date(schedules[0].date),"MM/dd/yyyy")} at {schedules[0].time[0]} for {schedules[0].duration} hrs</p>
                                     </div>
                                 </div>
                             </div>

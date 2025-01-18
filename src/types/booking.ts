@@ -48,12 +48,11 @@ export interface ITestPackage {
 
 export interface IPaymentInfo {
     transactionId: string;
-    proofImage: string;
     method: string;
 }
 
 export interface ISchedule {
-    date: string;
+    date: Date;
     time: string[];
     duration: 1 | 2 | 1.5;
     pickupAddress: {
