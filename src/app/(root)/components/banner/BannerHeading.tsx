@@ -3,6 +3,7 @@ import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { FC } from 'react';
 import arrowImg from "@/assets/banner-img/main-slider-style1__arrow.png";
+import Link from 'next/link';
 
 const BannerHeading: FC = () => {
     return (
@@ -31,12 +32,14 @@ const BannerHeading: FC = () => {
                                     <Star key={i} className='fill-secondary' />
                                 ))}
                             </div>
-                            <p className='md:text-base text-xs'>2.8k Reviews by Trustpilot</p>
+                            <p className='md:text-base text-xs'>159 Reviews on Google</p>
                         </div>
                     </div>
 
                     {/* Button */}
-                    <Button className="h-12 w-44 md:w-52 hover:bg-secondary/90">Discover courses</Button>
+                    <Link href={'/instructors'}>
+                        <Button className="h-12 w-44 md:w-52 mt-7 hover:bg-secondary/90">Discover Lesson</Button>
+                    </Link>
                 </div>
 
                 {/* Center content: Pricing */}
@@ -54,7 +57,7 @@ const BannerHeading: FC = () => {
                             clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
                         }}
                     >
-                        <h4>$59</h4>
+                        <h4>$69</h4>
                         <span>Per hour</span>
                     </div>
                 </div>
