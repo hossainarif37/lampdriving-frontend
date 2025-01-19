@@ -17,16 +17,11 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`sticky z-50 top-0 bg-light-green transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'
+            className={`sticky bg-light z-50 top-0 transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'
                 }`}
         >
             <div className="wrapper flex justify-between items-center py-2 w-full">
-                <div>
-                    <Link href={'/'}>
-                        <LampLogo />
-                    </Link>
-                </div>
-
+                <LampLogo />
 
                 <ul className="hidden md:flex items-center gap-x-7 font-semibold text-primary">
                     {

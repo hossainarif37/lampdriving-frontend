@@ -19,7 +19,7 @@ const Banner: FC = () => {
                 {/* Left content */}
                 <BannerHeading />
 
-                {/* Search feild based on location*/}
+                {/* Search field based on location*/}
                 <div>
                     <SearchBoxDesign />
                 </div>

@@ -53,7 +53,7 @@ const UserMenu: FC = () => {
             </Button>
 
             <div
-                className={`absolute right-0 mt-3 w-56 pb-3 overflow-hidden rounded-[4px] rounded-t-none bg-white shadow-md transition-all duration-200 ease-in-out origin-top ${isOpen
+                className={`absolute right-0 mt-3 w-56 pb-3 overflow-hidden rounded-[4px] rounded-t-none z-50 bg-white shadow-md transition-all duration-200 ease-in-out origin-top ${isOpen
                     ? 'scale-y-100'
                     : 'scale-y-0'
                     }`}

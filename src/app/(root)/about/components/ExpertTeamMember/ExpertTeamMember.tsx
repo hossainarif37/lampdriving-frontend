@@ -51,7 +51,7 @@ const teamMembers = [
 
 const ExpertTeamMember: FC = () => {
     return (
-        <div className="gradient-to-b py-20 pb-36">
+        <div className="py-20">
             <div className="max-w-7xl mx-auto">
                 <div className=" mb-12 flex flex-col justify-center items-center gap-3">
                     <h3 className="w-[115px] bg-green-500 py-[7px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-green-500 text-light before:top-0 before:rounded-[4px] before:-ml-6">
@@ -85,8 +85,12 @@ const ExpertTeamMember: FC = () => {
                             ))}
                         </CarouselContent>
                         <div className="flex justify-center md:mt-16 mt-10 space-x-4">
-                            <CarouselPrevious className="static translate-y-0 w-12 h-12 rounded-md hover:bg-green-500 hover:text-white border-none border" />
-                            <CarouselNext className="static translate-y-0 w-12 h-12 rounded-md hover:bg-green-500 hover:text-white border-none border" />
+                            <CarouselPrevious
+                                className="static translate-y-0 w-12 h-12 rounded-md hover:bg-primary hover:text-white border-none border"
+                            />
+                            <CarouselNext
+                                className="static translate-y-0 w-12 h-12 rounded-md hover:bg-primary hover:text-white border-none border"
+                            />
                         </div>
                     </Carousel>
                 </div>
@@ -99,11 +103,11 @@ const ExpertTeamMember: FC = () => {
                     {/* Centered button */}
                     <Button
                         variant="outline"
-                        className="bg-gray-50 hover:bg-gray-100 h-12 rounded-3xl relative z-10"
+                        className="bg-light hover:bg-light h-12 rounded-3xl relative z-10"
                     >
                         <span className="text-gray-600 mr-2 md:block hidden">30+ Friendly Faces Eager to Help!</span>
                         <ChevronRight />
-                        <span className="font-bold">VIEW ALL</span>
+                        <span className="font-bold text-secondary">View All</span>
                     </Button>
                 </div>
             </div>

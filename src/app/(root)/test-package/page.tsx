@@ -15,7 +15,7 @@ function App() {
             </div>
 
             {/* Package card Section */}
-            <div className="wrapper -mt-32 py-16 z-50 relative">
+            <div className="wrapper -mt-32 py-16 z-10 relative">
                 <TestPackageCard />
             </div>
 
@@ -29,9 +29,7 @@ function App() {
             </div>
 
             {/* Premium package Section */}
-            <div className='pb-16 '>
-                <PremiumPackageSection />
-            </div>
+            <PremiumPackageSection />
         </div>
     );
 }

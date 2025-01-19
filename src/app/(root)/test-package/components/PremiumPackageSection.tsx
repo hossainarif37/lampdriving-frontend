@@ -26,7 +26,7 @@ const PremiumPackageSection: FC = () => {
             <div className="relative overflow-hidden rounded-3xl bg-primary p-8 md:p-12">
 
                 {/* Gradient animation overlay */}
-                <div className="absolute inset-0 bg-gradient-animation bg-size-500 animate-gradient"></div>
+                <div className="absolute inset-0 bg-size-500"></div>
 
                 <div className="relative z-10 max-w-3xl mx-auto text-center">
                     <div className="inline-block rounded-lg bg-primary/50 px-3 py-1 text-sm text-light mb-4">

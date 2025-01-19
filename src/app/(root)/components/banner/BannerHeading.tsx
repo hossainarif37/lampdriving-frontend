@@ -38,7 +38,9 @@ const BannerHeading: FC = () => {
 
                     {/* Button */}
                     <Link href={'/instructors'}>
-                        <Button className="h-12 w-44 md:w-52 mt-7 hover:bg-secondary/90">Discover Lesson</Button>
+                        <Button className="h-12 w-44 md:w-52 mt-7 hover:bg-secondary/90">
+                            Discover Lesson
+                        </Button>
                     </Link>
                 </div>
 

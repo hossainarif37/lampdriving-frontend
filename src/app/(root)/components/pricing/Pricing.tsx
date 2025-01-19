@@ -84,11 +84,11 @@ const Pricing: FC = () => {
                     {/* Centered button */}
                     <Button
                         variant="outline"
-                        className="bg-gray-300  border hover:border-primary/25 h-12 rounded-3xl relative z-10"
+                        className=" border hover:border-primary/25 h-12 rounded-3xl relative z-10"
                     >
                         <span className="text-gray-600 mr-2 md:block hidden">Discover what others are saying.</span>
                         <ChevronRight className='group-hover:translate-x-2 duration-300' />
-                        <span className="font-bold text-secondary">VIEW ALL</span>
+                        <span className="font-bold text-secondary">View All</span>
                     </Button>
                 </div>
             </div>
