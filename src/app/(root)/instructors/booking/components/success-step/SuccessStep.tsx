@@ -74,7 +74,7 @@ const SuccessStep: FC = () => {
                                                 {bookingHours >= 10 ? 10 : bookingHours >= 6 ? 6 : 0}% OFF
                                             </span>
                                         </span>
-                                        <span className="text-primary">- ${price.discountedAmount}</span>
+                                        <span className="text-primary">- ${price.discountedAmount.toFixed(2)}</span>
                                     </div>
                                     {
                                         testPackage.included && <div className="flex justify-between">
