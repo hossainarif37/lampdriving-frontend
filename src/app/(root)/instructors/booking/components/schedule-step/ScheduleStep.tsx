@@ -5,11 +5,11 @@ import PickupLocation from './PickupLocation';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { useBooking } from '@/providers/BookingProvider';
-import { useGetInstructorAvailabilityQuery } from '@/redux/api/instructorApi/instructorApi';
 import DropOffLocation from './DropOffLocation';
 import { ISchedule } from '@/types/booking';
 import { IWorkingHour } from '@/types/instructor';
 import { CircleAlert } from 'lucide-react';
+import { useGetInstructorAvailabilityQuery } from '@/redux/api/scheduleApi/scheduleApi';
 
 
 const ScheduleStep: FC = () => {
