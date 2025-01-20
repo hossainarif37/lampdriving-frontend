@@ -72,7 +72,7 @@ const CarInfoFields: FC<ICarInfoFieldsProps> = ({ register, control, errors, def
                 </div>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-                    {/* Cart Type */}
+                    {/* Car Type */}
                     <div>
                         <label htmlFor="year" className='font-semibold text-primary'>Year</label>
                         <Input
