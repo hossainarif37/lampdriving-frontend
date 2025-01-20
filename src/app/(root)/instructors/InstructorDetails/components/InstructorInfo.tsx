@@ -16,8 +16,7 @@ interface InstructorInfoProps {
 const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const user: IUser | undefined = typeof instructor.user != "string" ? instructor.user : undefined;
-  const profileImg = typeof instructor.user !== 'string' ? instructor.user?.profileImg : null;
-  console.log(profileImg);
+  const { vehicle, languages, description } = instructor;
 
   const carInfo = [
     { id: 1, info: 'Auto Lessons & Test Packages' },
@@ -34,6 +33,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const words = instructor.description.split(" ");
   const truncatedDescription = words?.slice(0, 40).join(" ");
   const descriptionLength = words?.length;
+  console.log(instructor);
 
 
   return (
@@ -43,15 +43,15 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
         <div className="relative flex-shrink-0">
           <div className='w-[120px] h-[120px] rounded-full overflow-hidden shadow-lg border flex items-center justify-center text-accent'>
             {
-              profileImg ?
-                <Image src={profileImg} alt="Instructor" className='w-full' width={120} height={120} />
+              user?.profileImg ?
+                <Image src={user?.profileImg} alt="Instructor" className='w-full' width={120} height={120} />
                 :
                 <User size={60} />
             }
           </div>
 
           <Image
-            src={instructor?.vehicle?.image}
+            src={vehicle?.image}
             alt="Vehicle"
             width={70}
             height={70}
@@ -59,7 +59,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
           />
         </div>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold">{user?.name.fullName}</h1>
+          <h1 className="text-2xl font-bold">{user?.name?.fullName}</h1>
           <div className="flex md:flex-row flex-col md:items-center gap-1 mt-1">
             <div className="flex text-gradient">{'★'.repeat(5)}</div>
             <span className="text-sm text-accent ml-1">4.6 - 79 ratings</span>
