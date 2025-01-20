@@ -1,17 +1,17 @@
 import TableSearchFilter from '@/app/dashboard/components/shared/TableSearchFilter';
 import { FC } from 'react';
-import AcceptedBookingsTable from './components/AcceptedBookingsTable';
+import OngoingBookingsTable from './components/OngoingBookingsTable';
 
-const AcceptedBookingsPage: FC = () => {
+const OngoingBookingsPage: FC = () => {
     return (
         <div className='bg-white rounded-xl min-h-[calc(100vh-117px)] flex flex-col text-primary'>
             <div className='py-4 px-5 flex items-center justify-between'>
-                <h2 className='font-semibold text-2xl'>Accepted Bookings</h2>
+                <h2 className='font-semibold text-2xl'>Ongoing Bookings</h2>
                 <TableSearchFilter />
             </div>
-            <AcceptedBookingsTable />
+            <OngoingBookingsTable />
         </div>
     );
 };
 
-export default AcceptedBookingsPage;
+export default OngoingBookingsPage;

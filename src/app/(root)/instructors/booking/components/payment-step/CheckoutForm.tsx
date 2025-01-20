@@ -13,7 +13,7 @@ import { FC, useEffect, useState } from 'react';
 const CheckoutForm: FC<{ clientSecret: string }> = () => {
     const stripe = useStripe();
     const elements = useElements();
-    const { isConfirmTriggered, setIsConfirmTriggered, instructor, price, bookingHours, schedules, setIsCreatingABooking } = useBooking();
+    const { isConfirmTriggered, setIsConfirmTriggered, instructor, price, bookingHours, schedules, setIsCreatingABooking, setPaymentInfo } = useBooking();
     const { user } = useAppSelector((state) => state.authSlice);
     const [createABooking] = useCreateABookingMutation();
     const [termsAccepted, setTermsAccepted] = useState<boolean>(false);
@@ -50,6 +50,7 @@ const CheckoutForm: FC<{ clientSecret: string }> = () => {
             setIsCreatingABooking(false);
             return;
         }
+        setPaymentInfo(pre => ({ ...pre, transactionId: paymentIntent.id }))
 
         const reqData: IBookingInputs = {
             bookingInfo: {

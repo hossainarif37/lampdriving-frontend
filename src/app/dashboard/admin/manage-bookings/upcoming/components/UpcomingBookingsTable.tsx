@@ -7,9 +7,11 @@ import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import { useGetAllBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking } from '@/types/booking';
-import CancelledBookingActions from './CancelledBookingActions';
+import UpcomingBookingActions from './UpcomingBookingActions';
+import { formatDate } from 'date-fns';
 
-const CancelledBookingsTable: FC = () => {
+
+const UpcomingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
     const [page, setPage] = useState(urlSearchParams.get('page') || '1');
     const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
@@ -17,7 +19,7 @@ const CancelledBookingsTable: FC = () => {
 
     const { data, isLoading } = useGetAllBookingsQuery(
         {
-            status: "cancelled",
+            status: "upcoming",
             searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page
@@ -49,10 +51,10 @@ const CancelledBookingsTable: FC = () => {
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Learner</TableHead>
                                     <TableHead className='min-w-[214px]'>Instructor</TableHead>
-                                    <TableHead className='min-w-[250px]'>Transaction</TableHead>
+                                    <TableHead className='min-w-[250px]'>Transaction ID</TableHead>
                                     <TableHead className='min-w-[140px]'>Price</TableHead>
                                     <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Status</TableHead>
+                                    <TableHead className='min-w-[140px] text-center'>Upcoming Schedule</TableHead>
                                     <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
@@ -77,16 +79,21 @@ const CancelledBookingsTable: FC = () => {
                                                         <span className="text-sm text-gray-500">{instructor?.email}</span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell className="font-medium">{booking.transaction}</TableCell>
+                                                <TableCell className="font-medium">{(booking.payment as any).transactionId}</TableCell>
                                                 <TableCell className="font-medium">${booking.price}</TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Pending" : "Rejected"}
+                                                    {
+                                                        <>
+                                                         <h3>{formatDate(new Date(booking.schedules[0].date), 'yyyy-MM-dd')} at {booking.schedules[0].time[0]}</h3>
+                                                         <p>Duration {booking.schedules[0].duration} Hours</p>
+                                                        </>
+                                                    }
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <CancelledBookingActions id={booking._id} />
+                                                    <UpcomingBookingActions id={booking._id} />
                                                 </TableCell>
                                             </TableRow>
                                         )
@@ -97,7 +104,7 @@ const CancelledBookingsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound isSearched={isSearched} dataName='Cancelled Bookings' />
+                        <DataNotFound isSearched={isSearched} dataName='Pending Bookings' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />
@@ -105,4 +112,4 @@ const CancelledBookingsTable: FC = () => {
     );
 };
 
-export default CancelledBookingsTable;
+export default UpcomingBookingsTable;
