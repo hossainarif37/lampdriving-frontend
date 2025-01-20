@@ -54,7 +54,7 @@ const BannerHeading: FC = () => {
                             clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
                         }}
                     >
-                        <h4>$57</h4>
+                        <h4>$75</h4>
                         <span>Per hour</span>
                     </div>
                 </div>
