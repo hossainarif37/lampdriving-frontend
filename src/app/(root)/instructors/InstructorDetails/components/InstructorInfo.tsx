@@ -7,6 +7,7 @@ import { CircleCheck, User } from 'lucide-react'
 import { FC, useState } from 'react';
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
+import { Button } from '@/components/ui/button'
 
 
 interface InstructorInfoProps {
@@ -50,7 +51,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
           </div>
 
           <Image
-            src={carImg}
+            src={instructor?.vehicle?.image}
             alt="Vehicle"
             width={70}
             height={70}
@@ -69,12 +70,12 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
       {/* Instructor bio */}
       <div>
         <h2 className="font-semibold mb-2 text-primary">Instructor Bio</h2>
-        <p className="text-accent mb-4" onClick={toggleDescription}>
-          {isExpanded ? instructor.description : `${truncatedDescription}...`}{" "}
-          {descriptionLength > 40 && (<span className="text-primary cursor-pointer">
+        <div className="mb-2" >
+          {isExpanded ? <span>{instructor.description}</span> : <span>{truncatedDescription}...</span>}
+          {descriptionLength > 40 && <button onClick={toggleDescription} className="text-primary ml-2 underline font-semibold">
             {isExpanded ? "Show less" : "Show more"}
-          </span>)}
-        </p>
+          </button>}
+        </div>
         <div className="space-y-2 ">
           {carInfo.map(info => (
             <div key={info.id} className="flex items-center gap-2">

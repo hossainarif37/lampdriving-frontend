@@ -21,7 +21,7 @@ const buttonVariants = cva(
           "bg-primary text-light hover:bg-primary/90 dark:bg-primary dark:text-light",
         red: "bg-red-600 text-light hover:bg-red-700",
         green: "bg-green-600 text-light hover:bg-green-700",
-        link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
+        link: "text-primary underline-offset-4 hover:underline dark:text-neutral-50",
         sidebar: "",
         activeSidebar: "gradient-color duration-150 text-light dark:bg-primary dark:text-light",
       },
