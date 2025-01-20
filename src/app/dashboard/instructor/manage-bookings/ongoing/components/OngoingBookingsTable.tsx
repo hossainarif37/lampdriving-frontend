@@ -7,9 +7,9 @@ import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import { useGetMyBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking } from '@/types/booking';
-import CompletedBookingActions from './CompletedBookingActions';
+import OngoingBookingActions from './OngoingBookingActions';
 
-const CompletedBookingsTable: FC = () => {
+const OngoingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
     const [page, setPage] = useState(urlSearchParams.get('page') || '1');
     const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
@@ -17,7 +17,7 @@ const CompletedBookingsTable: FC = () => {
 
     const { data, isLoading } = useGetMyBookingsQuery(
         {
-            status: "completed",
+            status: "ongoing",
             searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page
@@ -86,7 +86,7 @@ const CompletedBookingsTable: FC = () => {
                                                     {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Pending" : "Rejected"}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <CompletedBookingActions id={booking._id} />
+                                                    <OngoingBookingActions id={booking._id} />
                                                 </TableCell>
                                             </TableRow>
                                         )
@@ -97,7 +97,7 @@ const CompletedBookingsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound isSearched={isSearched} dataName='Completed Bookings' />
+                        <DataNotFound isSearched={isSearched} dataName='Accepted Bookings' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />
@@ -105,4 +105,4 @@ const CompletedBookingsTable: FC = () => {
     );
 };
 
-export default CompletedBookingsTable;
+export default OngoingBookingsTable;

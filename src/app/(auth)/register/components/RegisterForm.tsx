@@ -8,6 +8,8 @@ import { genderOptions } from '@/constant/gender';
 import { toast } from '@/hooks/use-toast';
 import { IProfilePhoto } from '@/hooks/useImage';
 import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
+import { useAppDispatch } from '@/redux/hook';
+import { saveUser } from '@/redux/slices/authSlice/authSlice';
 import { IRegisterInputs } from '@/types/auth';
 import { Eye, EyeClosed } from 'lucide-react';
 import Link from 'next/link';
@@ -25,6 +27,8 @@ const RegisterForm: FC = () => {
         file: null,
         url: undefined
     });
+
+    const dispatch = useAppDispatch();
 
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
@@ -50,18 +54,16 @@ const RegisterForm: FC = () => {
             password: data.password,
         }
 
-        console.log('Form Data: ', formData);
-        console.log('Data: ', data);
-
         registerUser(data).unwrap().then((res) => {
             toast({
-                message: res.message,
-            })
-            router.push("/login");
+                message: res.message
+            });
+            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
+            router.push('/')
         }).catch((err) => {
             toast({
                 success: false,
-                message: err.data.message || "Something went wrong",
+                message: err?.data?.message || "Something went wrong",
             })
         })
     }

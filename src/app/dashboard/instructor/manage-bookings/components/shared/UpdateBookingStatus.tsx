@@ -15,18 +15,18 @@ const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdown
     const [updateStatus, { isLoading }] = useUpdateBookingStatusMutation();
     const reqStatus = status === "complete" ? "completed" : status === "accept" ? "accepted" : status === "pending" ? "pending" : "cancelled";
     const handleVerify = () => {
-        updateStatus({ id, status: reqStatus }).unwrap().then((res) => {
-            toast({
-                message: res.message,
-            })
-            isOpen(false);
-            setDropdownIsOpen(false);
-        }).catch((err) => {
-            toast({
-                success: false,
-                message: err.data.message || "Something went wrong",
-            })
-        });
+        // updateStatus({ id, status: reqStatus }).unwrap().then((res) => {
+        //     toast({
+        //         message: res.message,
+        //     })
+        //     isOpen(false);
+        //     setDropdownIsOpen(false);
+        // }).catch((err) => {
+        //     toast({
+        //         success: false,
+        //         message: err.data.message || "Something went wrong",
+        //     })
+        // });
     }
     return (
         <Dialog open={open} onOpenChange={isOpen}>

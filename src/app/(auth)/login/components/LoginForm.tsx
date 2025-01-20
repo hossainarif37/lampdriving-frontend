@@ -34,7 +34,7 @@ const LoginForm: FC = () => {
         }).catch((err) => {
             toast({
                 success: false,
-                message: err.data.message || "Something went wrong"
+                message: err?.data?.message || "Something went wrong"
             });
         })
     }

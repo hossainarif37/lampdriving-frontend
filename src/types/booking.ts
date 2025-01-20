@@ -48,12 +48,11 @@ export interface ITestPackage {
 
 export interface IPaymentInfo {
     transactionId: string;
-    proofImage: string;
     method: string;
 }
 
 export interface ISchedule {
-    date: string;
+    date: Date;
     time: string[];
     duration: 1 | 2 | 1.5;
     pickupAddress: {
@@ -103,7 +102,7 @@ export interface IBooking {
     instructor: string | IInstructor;
     bookingHours: number;
     schedules: ISchedule[];
-    transaction: string;
+    payment: string;
     price: number;
     status: "pending" | "accepted" | "completed" | "cancelled";
 }

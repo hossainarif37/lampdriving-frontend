@@ -5,19 +5,19 @@ import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
-import { useGetMyBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
+import { useGetAllBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking } from '@/types/booking';
-import CompletedBookingActions from './CompletedBookingActions';
+import RefundedBookingActions from './RefundedBookingActions';
 
-const CompletedBookingsTable: FC = () => {
+const RefundedBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
     const [page, setPage] = useState(urlSearchParams.get('page') || '1');
     const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
     const [isSearched, setIsSearched] = useState(false);
 
-    const { data, isLoading } = useGetMyBookingsQuery(
+    const { data, isLoading } = useGetAllBookingsQuery(
         {
-            status: "completed",
+            status: "refunded",
             searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page
@@ -49,10 +49,9 @@ const CompletedBookingsTable: FC = () => {
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Learner</TableHead>
                                     <TableHead className='min-w-[214px]'>Instructor</TableHead>
-                                    <TableHead className='min-w-[250px]'>Transaction</TableHead>
+                                    <TableHead className='min-w-[250px]'>Transaction ID</TableHead>
                                     <TableHead className='min-w-[140px]'>Price</TableHead>
                                     <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Status</TableHead>
                                     <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
@@ -83,10 +82,7 @@ const CompletedBookingsTable: FC = () => {
                                                     <h3>{booking.bookingHours}</h3>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Pending" : "Rejected"}
-                                                </TableCell>
-                                                <TableCell className="font-medium text-center">
-                                                    <CompletedBookingActions id={booking._id} />
+                                                    <RefundedBookingActions id={booking._id} />
                                                 </TableCell>
                                             </TableRow>
                                         )
@@ -97,7 +93,7 @@ const CompletedBookingsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound isSearched={isSearched} dataName='Completed Bookings' />
+                        <DataNotFound isSearched={isSearched} dataName='Cancelled Bookings' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />
@@ -105,4 +101,4 @@ const CompletedBookingsTable: FC = () => {
     );
 };
 
-export default CompletedBookingsTable;
+export default RefundedBookingsTable;
