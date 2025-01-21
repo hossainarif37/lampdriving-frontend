@@ -5,7 +5,6 @@ import { Control, Controller, FieldErrors, UseFormRegister } from 'react-hook-fo
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { IVehicle } from '@/types/instructor';
 
-
 interface Inputs {
     name: string;
     model: string;
@@ -126,8 +125,6 @@ const CarInfoFields: FC<ICarInfoFieldsProps> = ({ register, control, errors, def
 
                         {errors?.type && <p className='text-red-500 text-sm mt-1'>{errors?.type?.message}</p>}
                     </div>
-
-
                 </div>
 
                 {/* Car Rating */}
