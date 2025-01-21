@@ -4,12 +4,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
-import Loading from '@/components/shared/Loading';
 import { useGetMyBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
-import { IBooking, ISchedule } from '@/types/booking';
+import { IBooking } from '@/types/booking';
 import OngoingBookingActions from './OngoingBookingActions';
 import { formatDate } from 'date-fns';
 import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
+import { ISchedule } from '@/types/schedule';
 
 const OngoingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -50,11 +50,9 @@ const OngoingBookingsTable: FC = () => {
                                 <TableRow>
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Learner</TableHead>
-                                    <TableHead className='min-w-[214px]'>Instructor</TableHead>
-                                    <TableHead className='min-w-[250px]'>Transaction</TableHead>
-                                    <TableHead className='min-w-[140px]'>Price</TableHead>
+                                    <TableHead className='min-w-[250px]'>Payment</TableHead>
                                     <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Status</TableHead>
+                                    <TableHead className='min-w-[140px] text-center'>Upcoming Schedule</TableHead>
                                     <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
@@ -72,12 +70,6 @@ const OngoingBookingsTable: FC = () => {
                                                     <div className=''>
                                                         <h3>{learner?.name.fullName}</h3>
                                                         <span className="text-sm text-gray-500">{learner?.email}</span>
-                                                    </div>
-                                                </TableCell>
-                                                <TableCell className="font-medium">
-                                                    <div className=''>
-                                                        <h3>{instructor?.name.fullName}</h3>
-                                                        <span className="text-sm text-gray-500">{instructor?.email}</span>
                                                     </div>
                                                 </TableCell>
                                                 <TableCell className="font-medium">
