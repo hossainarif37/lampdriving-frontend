@@ -20,26 +20,8 @@ export const learnerRoutes: IRoute[] = [
     },
     {
         name: 'Bookings',
-        path: '#bookings',
-        icon: BookOpen,
-        children: [
-            {
-                name: 'Upcoming Bookings',
-                path: '/dashboard/learner/manage-bookings/upcoming'
-            },
-            {
-                name: 'Ongoing Bookings',
-                path: '/dashboard/learner/manage-bookings/ongoing'
-            },
-            {
-                name: 'Completed Bookings',
-                path: '/dashboard/learner/manage-bookings/completed'
-            },
-            {
-                name: 'Refunded Bookings',
-                path: '/dashboard/learner/manage-bookings/refunded'
-            }
-        ]
+        path: '/dashboard/learner/manage-bookings',
+        icon: BookOpen
     },
     {
         name: 'Transaction History',
