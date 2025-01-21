@@ -24,10 +24,11 @@ interface IRescheduleAScheduleBtnProps {
     duration: number;
     pickupAddress: IAddress;
     dropOffAddress?: IAddress;
+    type: "lesson" | "test" | "mock-test";
 }
 
 
-const RescheduleAScheduleBtn: FC<IRescheduleAScheduleBtnProps> = ({ id, username, duration, pickupAddress, dropOffAddress }) => {
+const RescheduleAScheduleBtn: FC<IRescheduleAScheduleBtnProps> = ({ id, username, duration, pickupAddress, dropOffAddress, type }) => {
     const [showAvailability, setShowAvailability] = useState(false);
 
     return (
@@ -40,6 +41,7 @@ const RescheduleAScheduleBtn: FC<IRescheduleAScheduleBtnProps> = ({ id, username
                     showAvailability={showAvailability}
                     setShowAvailability={setShowAvailability}
                     username={username}
+                    type={type}
                     id={id}
                 />
             ) : (
