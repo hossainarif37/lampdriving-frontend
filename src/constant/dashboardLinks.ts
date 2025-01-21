@@ -38,6 +38,11 @@ export const instructorRoutes: IRoute[] = [
         icon: LayoutDashboardIcon
     },
     {
+        name: 'Schedule',
+        path: '/dashboard/instructor/manage-schedules',
+        icon: Calendar
+    },
+    {
         name: 'Bookings',
         path: '#bookings',
         icon: BookOpen,
