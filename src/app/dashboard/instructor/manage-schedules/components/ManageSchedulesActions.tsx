@@ -31,7 +31,11 @@ const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id, username
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
                     <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
-                    <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={status === "upcoming" ? "ongoing" : "complete"} />
+                    {
+                        (status === "upcoming" || status === "ongoing" || status === "rescheduled") && (
+                            <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={(status === "upcoming" || status === "rescheduled") ? "ongoing" : "complete"} />
+                        )
+                    }
                     {
                         status === "upcoming" && (
                             <RescheduleAScheduleBtn
