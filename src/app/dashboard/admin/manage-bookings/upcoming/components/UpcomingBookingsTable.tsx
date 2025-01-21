@@ -9,6 +9,7 @@ import { useGetAllBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking, ISchedule } from '@/types/booking';
 import UpcomingBookingActions from './UpcomingBookingActions';
 import { formatDate } from 'date-fns';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 
 const UpcomingBookingsTable: FC = () => {
@@ -37,11 +38,8 @@ const UpcomingBookingsTable: FC = () => {
     }, [urlSearchParams])
 
     if (isLoading) {
-        return <Loading />
+        return <TableSkeleton />
     }
-
-
-    // console.log(data)
 
     return (
         <div className='min-h-[calc(100vh-189px)] flex flex-col text-primary'>
