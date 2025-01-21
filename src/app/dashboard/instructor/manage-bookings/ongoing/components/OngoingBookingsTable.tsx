@@ -7,9 +7,9 @@ import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import { useGetMyBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking } from '@/types/booking';
-import PendingBookingActions from './PendingBookingActions';
+import OngoingBookingActions from './OngoingBookingActions';
 
-const PendingBookingsTable: FC = () => {
+const OngoingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
     const [page, setPage] = useState(urlSearchParams.get('page') || '1');
     const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
@@ -17,7 +17,7 @@ const PendingBookingsTable: FC = () => {
 
     const { data, isLoading } = useGetMyBookingsQuery(
         {
-            status: "pending",
+            status: "ongoing",
             searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page
@@ -77,7 +77,7 @@ const PendingBookingsTable: FC = () => {
                                                         <span className="text-sm text-gray-500">{instructor?.email}</span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell className="font-medium">{booking.transaction}</TableCell>
+                                                <TableCell className="font-medium">{(booking.payment as any).transactionId}</TableCell>
                                                 <TableCell className="font-medium">${booking.price}</TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>
@@ -86,7 +86,7 @@ const PendingBookingsTable: FC = () => {
                                                     {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Pending" : "Rejected"}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <PendingBookingActions id={booking._id} />
+                                                    <OngoingBookingActions id={booking._id} />
                                                 </TableCell>
                                             </TableRow>
                                         )
@@ -97,7 +97,7 @@ const PendingBookingsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound isSearched={isSearched} dataName='Pending Bookings' />
+                        <DataNotFound isSearched={isSearched} dataName='Accepted Bookings' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />
@@ -105,4 +105,4 @@ const PendingBookingsTable: FC = () => {
     );
 };
 
-export default PendingBookingsTable;
+export default OngoingBookingsTable;

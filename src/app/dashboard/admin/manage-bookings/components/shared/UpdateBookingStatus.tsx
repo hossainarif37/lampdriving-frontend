@@ -6,14 +6,16 @@ import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 interface IUpdateBookingStatus {
     id: string;
-    status: 'complete' | 'pending' | 'accept' | 'cancel';
+    status: 'complete' | 'refund' | 'ongoing';
     setDropdownIsOpen: Dispatch<SetStateAction<boolean>>
 }
+
 
 const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdownIsOpen }) => {
     const [open, isOpen] = useState<boolean>(false);
     const [updateStatus, { isLoading }] = useUpdateBookingStatusMutation();
-    const reqStatus = status === "complete" ? "completed" : status === "accept" ? "accepted" : status === "pending" ? "pending" : "cancelled";
+    const reqStatus = status === "complete" ? "completed" : status === "refund" ? "refunded" : status === "ongoing" ? "ongoing" : "upcoming";
+
     const handleVerify = () => {
         updateStatus({ id, status: reqStatus }).unwrap().then((res) => {
             toast({
@@ -37,10 +39,13 @@ const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdown
                             status === "complete" ?
                                 "Complete"
                                 :
-                                status === "accept" ?
-                                    "Accept"
+                                status === "refund" ?
+                                    "Refund"
                                     :
-                                    "Reject"
+                                    status === "ongoing" ?
+                                        "Ongoing"
+                                        :
+                                        "Upcoming"
                         }
                     </Button>
                 }
@@ -56,10 +61,13 @@ const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdown
                         status === "complete" ?
                             "Do you want to proceed with completing this booking? Once completed, the booking will be completed."
                             :
-                            status === "accept" ?
-                                "Do you want to proceed with accepting this booking? Once accepted, the booking will be confirmed."
+                            status === "refund" ?
+                                "Do you want to proceed with refund this booking? Once refunded, the booking will be cancelled and the amount will be refunded."
                                 :
-                                "Do you want to proceed with rejecting this? Once rejected, the status will be updated, and it will no longer be active."
+                                status === "ongoing" ?
+                                    "Do you want to proceed with ongoing this booking? Once ongoing, the booking will be started."
+                                    :
+                                    "Do you want to proceed with upcoming this booking? Once it is upcoming, the status will be updated"
                     }
                 </DialogDescription>
                 <DialogFooter>
@@ -75,16 +83,19 @@ const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdown
                         <Button
                             disabled={isLoading}
                             onClick={handleVerify}
-                            className={status === "cancel" ? "bg-red-500 hover:bg-red-600" : ""}
+                            className={status === "refund" ? "bg-red-500 hover:bg-red-600" : ""}
                         >
                             {
                                 status === "complete" ?
                                     "Complete"
                                     :
-                                    status === "accept" ?
-                                        "Accept"
+                                    status === "refund" ?
+                                        "Refund"
                                         :
-                                        "Reject"
+                                        status === "ongoing" ?
+                                            "Ongoing"
+                                            :
+                                            "Upcoming"
                             }
                         </Button>
 

@@ -24,22 +24,21 @@ export const learnerRoutes: IRoute[] = [
         icon: BookOpen,
         children: [
             {
-                name: 'Pending Bookings',
-                path: '/dashboard/learner/manage-bookings/pending'
+                name: 'Upcoming Bookings',
+                path: '/dashboard/learner/manage-bookings/upcoming'
             },
             {
-                name: 'Accepted Bookings',
-                path: '/dashboard/learner/manage-bookings/accepted'
+                name: 'Ongoing Bookings',
+                path: '/dashboard/learner/manage-bookings/ongoing'
             },
             {
                 name: 'Completed Bookings',
                 path: '/dashboard/learner/manage-bookings/completed'
             },
             {
-                name: 'Rejected Bookings',
-                path: '/dashboard/learner/manage-bookings/cancelled'
+                name: 'Refunded Bookings',
+                path: '/dashboard/learner/manage-bookings/refunded'
             }
-
         ]
     },
     {
@@ -62,20 +61,16 @@ export const instructorRoutes: IRoute[] = [
         icon: BookOpen,
         children: [
             {
-                name: 'Pending Bookings',
-                path: '/dashboard/instructor/manage-bookings/pending'
+                name: 'Upcoming Bookings',
+                path: '/dashboard/instructor/manage-bookings/upcoming'
             },
             {
-                name: 'Accepted Bookings',
-                path: '/dashboard/instructor/manage-bookings/accepted'
+                name: 'Ongoing Bookings',
+                path: '/dashboard/instructor/manage-bookings/ongoing'
             },
             {
                 name: 'Completed Bookings',
                 path: '/dashboard/instructor/manage-bookings/completed'
-            },
-            {
-                name: 'Rejected Bookings',
-                path: '/dashboard/instructor/manage-bookings/cancelled'
             }
         ]
     },
@@ -122,22 +117,21 @@ export const adminRoutes: IRoute[] = [
         icon: BookOpen,
         children: [
             {
-                name: 'Pending Bookings',
-                path: '/dashboard/admin/manage-bookings/pending'
+                name: 'Upcoming Bookings',
+                path: '/dashboard/admin/manage-bookings/upcoming'
             },
             {
-                name: 'Accepted Bookings',
-                path: '/dashboard/admin/manage-bookings/accepted'
+                name: 'Ongoing Bookings',
+                path: '/dashboard/admin/manage-bookings/ongoing'
             },
             {
                 name: 'Completed Bookings',
                 path: '/dashboard/admin/manage-bookings/completed'
             },
             {
-                name: 'Rejected Bookings',
-                path: '/dashboard/admin/manage-bookings/cancelled'
+                name: 'Refunded Bookings',
+                path: '/dashboard/admin/manage-bookings/refunded'
             }
-
         ]
     },
     {

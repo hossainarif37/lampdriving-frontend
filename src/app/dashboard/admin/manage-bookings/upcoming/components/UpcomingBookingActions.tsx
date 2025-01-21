@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
 import UpdateBookingStatus from '../../components/shared/UpdateBookingStatus';
 
-interface IPendingBookingActionsProps {
+interface IUpcomingBookingActionsProps {
     id: string;
 }
 
-const PendingBookingActions: FC<IPendingBookingActionsProps> = ({ id }) => {
+const UpcomingBookingActions: FC<IUpcomingBookingActionsProps> = ({ id }) => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -23,11 +23,12 @@ const PendingBookingActions: FC<IPendingBookingActionsProps> = ({ id }) => {
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
                     <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
-                    <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={"complete"} />
+                    <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={"ongoing"} />
+                    <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={"refund"} />
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
     );
 };
 
-export default PendingBookingActions;
+export default UpcomingBookingActions;

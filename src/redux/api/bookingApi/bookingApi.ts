@@ -3,7 +3,7 @@ import baseApi from "../baseApi";
 import { IBooking, IBookingInputs } from "@/types/booking";
 
 interface IGetAllBookingsQuery {
-    status: "pending" | "accepted" | "completed" | "cancelled";
+    status: "upcoming" | "ongoing" | "completed" | "refunded";
     searchKey: string;
     limit: string;
     page: string;
@@ -21,12 +21,12 @@ const bookingApi = baseApi.injectEndpoints({
             invalidatesTags: ["booking"]
         }),
         getAllBookings: builder.query<IResponseWithPaginationData<IBooking[]>, IGetAllBookingsQuery>({
-            query: ({ status, searchKey, limit, page }) => `/booking/all?status=${status}&populate=instructor.user,learner.user${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
+            query: ({ status, searchKey, limit, page }) => `/booking/all?status=${status}&populate=instructor.user,learner.user,payment&paymentFields=transactionId&learnerFields=user&instructorFields=user&userFields=name,email${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
         }),
         getMyBookings: builder.query<IResponseWithPaginationData<IBooking[]>, IGetAllBookingsQuery>({
-            query: ({ status, searchKey, limit, page }) => `/booking/my?status=${status}&populate=instructor.user,learner.user${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
+            query: ({ status, searchKey, limit, page }) => `/booking/my?status=${status}&populate=instructor.user,learner.user,payment&paymentFields=transactionId&learnerFields=user&instructorFields=user&userFields=name,email${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
         }),
-        updateBookingStatus: builder.mutation<IResponseBase, { id: string, status: "pending" | "accepted" | "completed" | "cancelled" }>({
+        updateBookingStatus: builder.mutation<IResponseBase, { id: string, status: "upcoming" | "ongoing" | "completed" | "refunded" }>({
             query: ({ id, status }) => ({
                 url: `/booking/status/${id}`,
                 method: "PATCH",

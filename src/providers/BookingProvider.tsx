@@ -19,35 +19,27 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const urlSearchParams = useSearchParams();
     const step = urlSearchParams.get('step');
     const { isAuthenticate, isAuthLoading } = useAppSelector(state => state.authSlice);
-    const initialCurrentStep = step && stepsWithRegister.find(currstep => currstep.key === (step === "login" ? "register" : step)) || {
-        name: 'Instructor',
-        icon: UserCheck,
-        key: 'instructor',
-        index: 1
-    };
+
+
+    const initialCurrentStep = (step && stepsWithRegister.find(currstep => currstep.key === (step === "login" ? "register" : step))) || stepsWithRegister[0];
     const [currentStep, setCurrentStep] = useState<IStep>(initialCurrentStep);
+    const [steps, setSteps] = useState<IStep[]>(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
 
 
-    const [instructor, setInstructor] = useState<Partial<IInstructor> | null>({
-        pricePerHour: 76
-    });
+    const [instructor, setInstructor] = useState<Partial<IInstructor> | null>(null);
     const [isCustomSelected, setIsCustomSelected] = useState(false);
     const [bookingHours, setBookingHours] = useState<number>(0);
     const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: 225 });
     const [mockTestPackage, setMockTestPackage] = useState<ITestPackage>({ included: false, price: 390 });
     const [price, setPrice] = useState<IPrice>({ payableAmount: 0, originalAmount: 0, discountedAmount: 0 });
-    const [paymentImageFile, setPaymentImageFile] = useState<File | null>(null);
-    const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({
-        transactionId: '',
-        proofImage: '',
-        method: '',
-    });
+    const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({ transactionId: '', method: '' });
     const [schedules, setSchedules] = useState<ISchedule[]>([]);
+
     const useRegisterForm = useForm<IRegisterInputs>();
     const useLoginForm = useForm<ILoginInputs>();
     const [isConfirmTriggered, setIsConfirmTriggered] = useState(false);
     const [isCreatingABooking, setIsCreatingABooking] = useState(false);
-    const [steps, setSteps] = useState<IStep[]>(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
+    
     // handle step change
     const handleStepChange = (stepKey: string) => {
         const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
@@ -89,7 +81,6 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         price, setPrice,
         isCustomSelected, setIsCustomSelected,
         paymentInfo, setPaymentInfo,
-        paymentImageFile, setPaymentImageFile,
         schedules, setSchedules,
         steps: steps, currentStep, setCurrentStep,
         useRegisterForm, useLoginForm,
@@ -97,7 +88,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         isConfirmTriggered, setIsConfirmTriggered,
         isCreatingABooking, setIsCreatingABooking,
         mockTestPackage, setMockTestPackage, availableScheduleHours
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentImageFile, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, availableScheduleHours, mockTestPackage]);
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, availableScheduleHours, mockTestPackage]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams.get('instructor');

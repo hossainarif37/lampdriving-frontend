@@ -5,11 +5,11 @@ import PickupLocation from './PickupLocation';
 import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { useBooking } from '@/providers/BookingProvider';
-import { useGetInstructorAvailabilityQuery } from '@/redux/api/instructorApi/instructorApi';
 import DropOffLocation from './DropOffLocation';
 import { ISchedule } from '@/types/booking';
 import { IWorkingHour } from '@/types/instructor';
 import { CircleAlert } from 'lucide-react';
+import { useGetInstructorAvailabilityQuery } from '@/redux/api/scheduleApi/scheduleApi';
 
 
 const ScheduleStep: FC = () => {
@@ -26,6 +26,8 @@ const ScheduleStep: FC = () => {
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
     const [pickupLocationError, setPickupLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
     const [dropOffLocationError, setDropOffLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
+
+
     // add schedule handler
     const handleAddSchedule = () => {
         if (!selectedDate || !selectedTime) {
@@ -48,7 +50,7 @@ const ScheduleStep: FC = () => {
         }
 
         const schedule: ISchedule = {
-            date: selectedDate ? format(selectedDate, 'yyyy-MM-dd') : '',
+            date: new Date(selectedDate && selectedTime ? format(selectedDate, 'yyyy-MM-dd') + ' ' + selectedTime[0] : ''),
             duration: selectedDuration,
             time: selectedTime ? selectedTime : [],
             pickupAddress: {
@@ -57,7 +59,6 @@ const ScheduleStep: FC = () => {
             },
             type: scheduleType
         }
-
         if (testPackage) {
             schedule.dropOffAddress = {
                 address: dropOffLocation?.address || '',
@@ -65,7 +66,8 @@ const ScheduleStep: FC = () => {
             }
         }
 
-        setSchedules((pre) => [...pre, schedule]);
+        // sort schedule by date
+        setSchedules((pre) => [...pre, schedule].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
 
         setSelectedDate(null);
         setSelectedTime(null);
@@ -81,7 +83,7 @@ const ScheduleStep: FC = () => {
         });
 
         let slotArr: string[] = [];
-        schedules.map((schedule: { date: string, time: string[] }) => {
+        schedules.map((schedule: { date: Date, time: string[] }) => {
             if (format(schedule.date, 'yyyy-MM-dd') === format(selectedDate!, 'yyyy-MM-dd')) {
                 slotArr = [...slotArr, ...schedule.time];
             }
