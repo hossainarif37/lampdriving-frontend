@@ -10,12 +10,12 @@ function App() {
     return (
         <div className=''>
             {/* banner Section */}
-            <div className='relative'>
+            {/* <div className='relative'>
                 <TestPackageBanner />
-            </div>
+            </div> */}
 
             {/* Package card Section */}
-            <div className="wrapper -mt-32 py-16 z-10 relative">
+            <div className="wrapper py-16 z-10 relative">
                 <TestPackageCard />
             </div>
 

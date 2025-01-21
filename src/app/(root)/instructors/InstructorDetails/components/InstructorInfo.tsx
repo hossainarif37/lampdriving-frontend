@@ -33,8 +33,8 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const words = instructor.description.split(" ");
   const truncatedDescription = words?.slice(0, 40).join(" ");
   const descriptionLength = words?.length;
-  console.log(instructor);
 
+  console.log('instructor', instructor);
 
   return (
     <section className="bg-light rounded-xl border p-4 md:p-6 space-y-6">

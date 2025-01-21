@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { CheckCircle2, Car, Clock, MapPin, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Car, Clock, MapPin, ArrowRight, Link, Package } from 'lucide-react';
 import Image from 'next/image';
 import cardImg from "@/assets/dummy-images/test-package-image.jpg"
 import { Button } from '@/components/ui/button';
@@ -32,65 +32,105 @@ const additionalFeatures = [
 
 const TestPackageCard: FC = () => {
     return (
-        <div className="bg-light rounded-3xl shadow-lg overflow-hidden max-w-5xl mx-auto z-50">
-            <div className="grid md:grid-cols-2">
-                {/* Left Column - Image */}
-                <div className="relative">
-                    <Image
-                        src={cardImg}
-                        alt="Driving lesson"
-                        className="h-full w-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-secondary/70 to-secondary/40 mix-blend-multiply" />
-                    <div className="absolute inset-0 p-8 flex flex-col justify-end text-light/80">
-                        <h3 className="text-2xl font-bold mb-2">Complete Test Package</h3>
-                        <p className="text-light/70">Everything you need to pass your test with confidence</p>
-                    </div>
-                </div>
+        <div className="">
+            <h1 className="text-3xl font-bold text-primary mb-8 text-center">Driving Test Packages</h1>
 
-                {/* Right Column - Content */}
-                <div className="md:p-7 p-6">
-                    <div className="flex items-center justify-between mb-8">
-                        <div>
-                            <span className="text-sm text-accent">Starting from</span>
-                            <div className="text-4xl font-bold text-gradient">$299</div>
+            <div className="bg-white rounded-3xl shadow-md overflow-hidden">
+                <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+                    {/* Test Day Package */}
+                    <div className="p-8">
+                        <div className="flex items-center justify-between mb-6">
+                            <span className="px-4 py-1.5 bg-emerald-50 text-emerald-600 font-medium rounded-full text-sm">
+                                Test Day
+                            </span>
+                            <div className="text-right">
+                                <p className="text-sm text-gray-500">From</p>
+                                <p className="text-3xl font-bold text-primary">$220</p>
+                            </div>
                         </div>
-                        <Button size="lg">
-                            Book Now
-                            <ArrowRight />
-                        </Button>
-                    </div>
 
-                    {/* Main Features */}
-                    <div className="space-y-6 mb-8">
-                        {features.map((feature, index) => (
-                            <div key={index} className="flex items-start">
-                                <div className="bg-secondary/15 p-2 rounded-lg mr-4">
-                                    <feature.icon className="h-5 w-5 text-secondary" />
+                        <div className="space-y-5">
+                            <div className="flex items-start gap-4">
+                                <div className="bg-emerald-50 p-2 rounded-lg">
+                                    <Clock className="w-5 h-5 text-emerald-600" />
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold text-primary">{feature.title}</h4>
-                                    <p className="text-sm text-accent">{feature.description}</p>
+                                    <p className="font-medium text-primary">2 hour test day</p>
+                                    <p className="text-sm text-gray-500">Complete test preparation</p>
                                 </div>
                             </div>
-                        ))}
+                            <div className="flex items-start gap-4">
+                                <div className="bg-emerald-50 p-2 rounded-lg">
+                                    <MapPin className="w-5 h-5 text-emerald-600" />
+                                </div>
+                                <div>
+                                    <p className="font-medium text-primary">Pick-up & Drop-off Service</p>
+                                    <p className="text-sm text-gray-500">Door-to-door convenience</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <div className="bg-emerald-50 p-2 rounded-lg">
+                                    <Car className="w-5 h-5 text-emerald-600" />
+                                </div>
+                                <div>
+                                    <p className="font-medium text-primary">1 hour revision practice</p>
+                                    <p className="text-sm text-gray-500">Final preparation before test</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Additional Features */}
-                    <div className="border-t pt-6">
-                        <h4 className="font-semibold text-primary mb-4">Also Included:</h4>
-                        <div className="grid grid-cols-2 gap-3">
-                            {additionalFeatures.map((feature, index) => (
-                                <div key={index} className="flex items-center text-sm text-accent">
-                                    <CheckCircle2 className="text-secondary/80 mr-2 h-4 w-4" />
-                                    <span className='text-sm'>{feature}</span>
+                    {/* Mock Tests Package */}
+                    <div className="relative p-8 bg-gradient-to-br from-emerald-50/50 to-transparent">
+                        <div className="absolute bottom-2 right-2">
+                            <span className="px-3 py-1 bg-secondary/10 text-secondary/90 text-xs font-semibold rounded-full">
+                                Save $20
+                            </span>
+                        </div>
+
+                        <div className="flex items-center justify-between mb-6">
+                            <span className="px-4 py-1.5 bg-emerald-600 text-white font-medium rounded-full text-sm">
+                                2 Mock Tests + Test Day
+                            </span>
+                            <div className="text-right">
+                                <p className="text-sm text-gray-500">From</p>
+                                <p className="text-3xl font-bold text-primary">$390</p>
+                            </div>
+                        </div>
+
+                        <div className="space-y-5">
+                            <div className="flex items-start gap-4">
+                                <div className="bg-secondary/10 p-2 rounded-lg">
+                                    <Clock className="w-5 h-5 text-emerald-600" />
                                 </div>
-                            ))}
+                                <div>
+                                    <p className="font-medium text-primary">2 hours 1st session</p>
+                                    <p className="text-sm text-gray-500">Comprehensive mock test</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <div className="bg-secondary/10 p-2 rounded-lg">
+                                    <Clock className="w-5 h-5 text-emerald-600" />
+                                </div>
+                                <div>
+                                    <p className="font-medium text-primary">1 hour 2nd session</p>
+                                    <p className="text-sm text-gray-500">Focused practice</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start gap-4">
+                                <div className="bg-secondary/10 p-2 rounded-lg">
+                                    <Package className="w-5 h-5 text-emerald-600" />
+                                </div>
+                                <div>
+                                    <p className="font-medium text-primary">Including test day package</p>
+                                    <p className="text-sm text-gray-500">Complete test day preparation</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     );
 };
 

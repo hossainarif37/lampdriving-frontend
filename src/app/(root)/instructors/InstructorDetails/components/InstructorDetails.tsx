@@ -10,7 +10,6 @@ interface InstructorInfoProps {
 }
 
 const InstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
-  console.log(instructor);
   return (
     <div className="bg-light pb-40">
       <main className="wrapper py-8">

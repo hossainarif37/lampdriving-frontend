@@ -30,8 +30,6 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
   const [showAvailability, setShowAvailability] = useState(false);
   const user: IUser | undefined = typeof instructor?.user != "string" ? instructor?.user : undefined;
   const { pricePerHour, vehicle } = instructor;
-  console.log(instructor);
-
 
   return (
     <div className="space-y-6">
