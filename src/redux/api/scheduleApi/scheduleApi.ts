@@ -6,7 +6,7 @@ import { IAddress } from "@/types/user";
 interface IGetSchedulesQuery {
     id: string;
     type: "lesson" | "test" | "mock-test" | "blank";
-    status: "upcoming" | "ongoing" | "completed" | "rescheduled" | "cancelled";
+    status?: "upcoming" | "ongoing" | "completed" | "rescheduled" | "cancelled";
     searchKey: string;
     limit: string;
     page: string;
@@ -29,7 +29,7 @@ const scheduleApi = baseApi.injectEndpoints({
             query: ({ id }) => `/schedule/availability/${id}`
         }),
         getInstructorsSchedules: builder.query<IResponseWithPaginationData<ISchedule[]>, IGetSchedulesQuery>({
-            query: ({ id, type, status, searchKey, limit, page }) => `/schedule/instructor/${id}?populate=learner.user&learnerFields=user&userFields=name,email&type=${type}&status=${status}${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}&sort=date`
+            query: ({ id, type, status, searchKey, limit, page }) => `/schedule/instructor/${id}?populate=learner.user&learnerFields=user&userFields=name,email&type=${type}${status ? `&status=${status}`: "&sort=date,-status&status=upcoming&status=ongoing&status=rescheduled&status=completed"}${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`
         }),
         rescheduleASchedule: builder.mutation<IResponseWithData<ISchedule>, IRescheduleASchedule>({
             query: ({ id, data }) => ({

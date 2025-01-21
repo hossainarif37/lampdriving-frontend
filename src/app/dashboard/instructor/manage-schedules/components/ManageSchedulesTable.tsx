@@ -18,11 +18,12 @@ const ManageSchedulesTable: FC = () => {
     const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
     const [isSearched, setIsSearched] = useState(false);
     const user = useAppSelector(state => state.authSlice.user);
+
     const { data, isLoading } = useGetInstructorsSchedulesQuery(
         {
             id: (typeof user?.instructor === "string" ? user?.instructor : "") || "",
             type: "lesson",
-            status: "upcoming",
+            // status: "",
             searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page
