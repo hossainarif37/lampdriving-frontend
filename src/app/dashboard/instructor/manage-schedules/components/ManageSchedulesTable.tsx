@@ -54,7 +54,7 @@ const ManageSchedulesTable: FC = () => {
                                 <TableRow>
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Learner</TableHead>
-                                    <TableHead className='min-w-[250px]'>Duration</TableHead>
+                                    <TableHead className='min-w-[250px]'>Schedule</TableHead>
                                     <TableHead className='min-w-[120px] text-center'>Pickup Address</TableHead>
                                     <TableHead className='min-w-[140px] text-center'>Drop-off Address</TableHead>
                                     <TableHead className='min-w-[205px] text-center'>Status</TableHead>
@@ -100,8 +100,10 @@ const ManageSchedulesTable: FC = () => {
                                                             "N/A"
                                                     }
                                                 </TableCell>
-                                                <TableCell className="font-medium text-center">
-                                                    {schedule.status.charAt(0).toUpperCase() + schedule.status.slice(1)}
+                                                <TableCell className='font-medium text-center' >
+                                                    <span className={` text-white px-2 py-0.5 rounded ${schedule.status === "ongoing" ? "bg-yellow-500" : schedule.status === "completed" ? "bg-green-500" : schedule.status === "rescheduled" ? "bg-blue-500" : "bg-orange-500"}`}>
+                                                        {schedule.status.charAt(0).toUpperCase() + schedule.status.slice(1)}
+                                                    </span>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <ManageSchedulesActions

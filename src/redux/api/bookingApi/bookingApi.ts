@@ -18,7 +18,7 @@ const bookingApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: data
             }),
-            invalidatesTags: ["booking"]
+            invalidatesTags: ["booking", "schedule"]
         }),
         getAllBookings: builder.query<IResponseWithPaginationData<IBooking[]>, IGetAllBookingsQuery>({
             query: ({ status, searchKey, limit, page }) => `/booking/all?status=${status}&populate=instructor.user,learner.user,payment,schedules&paymentFields=transactionId&learnerFields=user&instructorFields=user&userFields=name,email&schedulesFields=date,time${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
@@ -31,7 +31,7 @@ const bookingApi = baseApi.injectEndpoints({
                 url: `/booking/refund/${id}`,
                 method: "PATCH"
             }),
-            invalidatesTags: ["booking"]
+            invalidatesTags: ["booking", "schedule"]
         })
     })
 })

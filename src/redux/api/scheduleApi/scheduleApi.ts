@@ -26,10 +26,12 @@ const scheduleApi = baseApi.injectEndpoints({
     overrideExisting: true,
     endpoints: (builder) => ({
         getInstructorAvailability: builder.query<IResponseWithData<{ schedules: [{ date: string, time: [string] }] }>, { id: string }>({
-            query: ({ id }) => `/schedule/availability/${id}`
+            query: ({ id }) => `/schedule/availability/${id}`,
+            providesTags: ["schedule"]
         }),
         getInstructorsSchedules: builder.query<IResponseWithPaginationData<ISchedule[]>, IGetSchedulesQuery>({
-            query: ({ id, type, status, searchKey, limit, page }) => `/schedule/instructor/${id}?populate=learner.user&learnerFields=user&userFields=name,email&type=${type}${status ? `&status=${status}`: "&sort=date,-status&status=upcoming&status=ongoing&status=rescheduled&status=completed"}${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`
+            query: ({ id, type, status, searchKey, limit, page }) => `/schedule/instructor/${id}?populate=learner.user&learnerFields=user&userFields=name,email&type=${type}${status ? `&status=${status}`: "&sort=date,-status&status=upcoming&status=ongoing&status=rescheduled&status=completed"}${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`,
+            providesTags: ["schedule"]
         }),
         rescheduleASchedule: builder.mutation<IResponseWithData<ISchedule>, IRescheduleASchedule>({
             query: ({ id, data }) => ({
