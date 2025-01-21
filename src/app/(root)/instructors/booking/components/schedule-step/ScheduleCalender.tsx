@@ -93,7 +93,7 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
 
         // get added schedule slots
         let scheduledSlots: string[] = [];
-        schedules.forEach((schedule: { date: string, time: string[] }) => {
+        schedules.forEach((schedule: { date: Date, time: string[] }) => {
             if (format(schedule.date, 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd')) {
                 scheduledSlots = [...scheduledSlots, ...schedule.time];
             }

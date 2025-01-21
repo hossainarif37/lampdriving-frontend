@@ -6,7 +6,7 @@ import { IRegisterInstructor } from "@/types/instructor";
 
 const usersApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        registerUser: builder.mutation<IResponseBase, IRegisterInputs>({
+        registerUser: builder.mutation<IResponseWithData<IUser>, IRegisterInputs>({
             query: (data) => ({
                 url: '/auth/learners/register',
                 method: "POST",
@@ -28,7 +28,7 @@ const usersApi = baseApi.injectEndpoints({
             query: () => '/auth/logout'
         }),
 
-        registerInstructor: builder.mutation<IResponseBase, IRegisterInstructor>({
+        registerInstructor: builder.mutation<IResponseWithData<IUser>, IRegisterInstructor>({
             query: (data) => ({
                 url: '/auth/instructors/register',
                 method: "POST",

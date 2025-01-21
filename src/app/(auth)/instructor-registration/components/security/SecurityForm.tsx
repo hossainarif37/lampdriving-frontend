@@ -11,6 +11,9 @@ import { useRegisterInstructorMutation } from '@/redux/api/authApi/authApi';
 import { IRegisterInstructor } from '@/types/instructor';
 import { toast } from '@/hooks/use-toast';
 import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
+import { useAppDispatch } from '@/redux/hook';
+import { saveUser } from '@/redux/slices/authSlice/authSlice';
+import { useRouter } from 'next/navigation';
 
 interface Inputs {
     password: string;
@@ -27,7 +30,9 @@ const SecurityForm: FC = () => {
 
     const [registerInstructor, { isLoading: isRegistering }] = useRegisterInstructorMutation();
 
-
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+    
     // Separate state for checkboxes and their errors
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [termsError, setTermsError] = useState("");
@@ -91,8 +96,10 @@ const SecurityForm: FC = () => {
         registerInstructor(instructorFormData).unwrap()
             .then((res) => {
                 toast({
-                    message: res.message,
-                })
+                    message: res.message
+                });
+                dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
+                router.push('/')
             }).catch((err) => {
                 console.log(err);
                 toast({

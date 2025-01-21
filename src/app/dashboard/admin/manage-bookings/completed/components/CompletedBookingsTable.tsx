@@ -49,10 +49,9 @@ const CompletedBookingsTable: FC = () => {
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Learner</TableHead>
                                     <TableHead className='min-w-[214px]'>Instructor</TableHead>
-                                    <TableHead className='min-w-[250px]'>Transaction</TableHead>
+                                    <TableHead className='min-w-[250px]'>Transaction ID</TableHead>
                                     <TableHead className='min-w-[140px]'>Price</TableHead>
                                     <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Status</TableHead>
                                     <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
@@ -77,13 +76,10 @@ const CompletedBookingsTable: FC = () => {
                                                         <span className="text-sm text-gray-500">{instructor?.email}</span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell className="font-medium">{booking.transaction}</TableCell>
+                                                <TableCell className="font-medium">{(booking.payment as any).transactionId}</TableCell>
                                                 <TableCell className="font-medium">${booking.price}</TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>
-                                                </TableCell>
-                                                <TableCell className="font-medium text-center">
-                                                    {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Pending" : "Rejected"}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <CompletedBookingActions id={booking._id} />

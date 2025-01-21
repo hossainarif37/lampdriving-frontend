@@ -5,10 +5,10 @@ import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import ScheduleCalender from '../../../booking/components/schedule-step/ScheduleCalender';
 import ScheduleTimeSlots from '../../../booking/components/schedule-step/ScheduleTimeSlots';
 import { Button } from '@/components/ui/button';
-import { useGetInstructorAvailabilityQuery } from '@/redux/api/instructorApi/instructorApi';
 import { format } from 'date-fns';
 import Link from 'next/link';
 import { IWorkingHour } from '@/types/instructor';
+import { useGetInstructorAvailabilityQuery } from '@/redux/api/scheduleApi/scheduleApi';
 
 interface ICheckAvailabilityProps {
     id: string;
