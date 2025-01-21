@@ -12,9 +12,10 @@ interface IManageSchedulesActionsProps {
     duration: number;
     pickupAddress: IAddress;
     dropOffAddress?: IAddress;
+    type: "lesson" | "test" | "mock-test";
 }
 
-const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id, username, duration, pickupAddress, dropOffAddress }) => {
+const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id, username, duration, pickupAddress, dropOffAddress, type }) => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -31,6 +32,7 @@ const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id, username
                     <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
                     <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={"ongoing"} />
                     <RescheduleAScheduleBtn
+                        type={type}
                         duration={duration}
                         pickupAddress={pickupAddress}
                         dropOffAddress={dropOffAddress}
