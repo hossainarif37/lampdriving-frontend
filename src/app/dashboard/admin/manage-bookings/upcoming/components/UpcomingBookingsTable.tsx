@@ -4,12 +4,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
-import Loading from '@/components/shared/Loading';
 import { useGetAllBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
-import { IBooking, ISchedule } from '@/types/booking';
+import { IBooking } from '@/types/booking';
 import UpcomingBookingActions from './UpcomingBookingActions';
 import { formatDate } from 'date-fns';
 import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
+import { ISchedule } from '@/types/schedule';
 
 
 const UpcomingBookingsTable: FC = () => {

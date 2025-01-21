@@ -5,10 +5,11 @@ import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import { useGetMyBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
-import { IBooking, ISchedule } from '@/types/booking';
+import { IBooking } from '@/types/booking';
 import UpcomingBookingActions from './UpcomingBookingActions';
 import { formatDate } from 'date-fns';
 import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
+import { ISchedule } from '@/types/schedule';
 
 
 const UpcomingBookingsTable: FC = () => {
@@ -50,7 +51,6 @@ const UpcomingBookingsTable: FC = () => {
                                 <TableRow>
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Learner</TableHead>
-                                    <TableHead className='min-w-[214px]'>Instructor</TableHead>
                                     <TableHead className='min-w-[250px]'>Payment</TableHead>
                                     <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
                                     <TableHead className='min-w-[140px] text-center'>Upcoming Schedule</TableHead>
@@ -61,9 +61,9 @@ const UpcomingBookingsTable: FC = () => {
                                 {
                                     data.data.result.map((booking: IBooking, index: number) => {
                                         const learner = typeof booking.learner !== 'string' ? typeof booking.learner.user !== 'string' ? booking.learner.user : undefined : undefined;
-                                        const instructor = typeof booking.instructor !== 'string' ? typeof booking.instructor.user !== 'string' ? booking.instructor.user : undefined : undefined;
                                         const schedules: ISchedule[] = typeof booking.schedules !== 'string' ? booking.schedules : [];
-
+                                        const upcomingSchedule = schedules.find((schedule: ISchedule) => (schedule.status === 'upcoming' || schedule.status === 'rescheduled'));
+                                        console.log(schedules);
                                         return (
                                             <TableRow key={booking._id}>
                                                 <TableCell className="font-medium text-center">{index + 1}</TableCell>
@@ -71,12 +71,6 @@ const UpcomingBookingsTable: FC = () => {
                                                     <div className=''>
                                                         <h3>{learner?.name.fullName}</h3>
                                                         <span className="text-sm text-gray-500">{learner?.email}</span>
-                                                    </div>
-                                                </TableCell>
-                                                <TableCell className="font-medium">
-                                                    <div className=''>
-                                                        <h3>{instructor?.name.fullName}</h3>
-                                                        <span className="text-sm text-gray-500">{instructor?.email}</span>
                                                     </div>
                                                 </TableCell>
                                                 <TableCell className="font-medium">
@@ -95,8 +89,8 @@ const UpcomingBookingsTable: FC = () => {
                                                 <TableCell className="font-medium text-center">
                                                     {
                                                         <>
-                                                            <h3>{formatDate(new Date(schedules[0]?.date || '12/12/2023'), 'dd/MM/yyyy')} at {schedules[0]?.time[0]}</h3>
-                                                            <p>Duration {schedules[0]?.duration} Hours</p>
+                                                            <h3>{formatDate(new Date(upcomingSchedule?.date || '12/12/2023'), 'dd/MM/yyyy')} at {upcomingSchedule?.time[0]}</h3>
+                                                            <p>Duration {upcomingSchedule?.duration} Hours</p>
                                                         </>
                                                     }
                                                 </TableCell>

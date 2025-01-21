@@ -4,6 +4,7 @@ import { ILoginInputs, IRegisterInputs } from "./auth";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 import { LucideProps } from "lucide-react";
 import { ILearner } from "./learner";
+import { ISchedule } from "./schedule";
 
 export interface IBookingContext {
     steps: IStep[];
@@ -51,20 +52,6 @@ export interface IPaymentInfo {
     method: string;
 }
 
-export interface ISchedule {
-    date: Date;
-    time: string[];
-    duration: 1 | 2 | 1.5;
-    pickupAddress: {
-        address: string;
-        suburb: string;
-    };
-    dropOffAddress?: {
-        address: string;
-        suburb: string;
-    };
-    type: "lesson" | "test" | "mock-test"
-}
 
 
 export interface IStep {
