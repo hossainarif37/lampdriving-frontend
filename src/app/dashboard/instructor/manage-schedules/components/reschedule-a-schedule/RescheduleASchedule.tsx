@@ -142,7 +142,7 @@ const RescheduleASchedule: FC<IRescheduleAScheduleProps> = ({ id, username, show
                                 dropOffLocationError={dropOffLocationError}
                                 pickupLocation={pickupLocation}
                                 pickupLocationError={pickupLocationError}
-                                setDropOffLocation={dropOffLocation}
+                                setDropOffLocation={setDropOffLocation}
                             />
                     }
                 </div>
