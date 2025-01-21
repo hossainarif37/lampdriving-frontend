@@ -5,16 +5,14 @@ import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui
 import { sydneySuburbs } from '@/constant/sydneySuburbs';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import { IAddress } from '@/types/user';
 
 interface IDropOffLocationProps {
     value: {
         address: string;
         suburb: string;
     };
-    onChange: Dispatch<React.SetStateAction<{
-        address: string;
-        suburb: string;
-    }>>
+    onChange: Dispatch<React.SetStateAction<IAddress>>
     error: {
         address: boolean;
         suburb: boolean;

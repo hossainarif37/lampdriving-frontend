@@ -6,11 +6,12 @@ import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { format, set } from 'date-fns';
 import { IWorkingHour } from '@/types/instructor';
-import { useGetInstructorAvailabilityQuery } from '@/redux/api/scheduleApi/scheduleApi';
+import { useGetInstructorAvailabilityQuery, useRescheduleAScheduleMutation } from '@/redux/api/scheduleApi/scheduleApi';
 import { useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi';
 import { IAddress } from '@/types/user';
 import RescheduleTime from './RescheduleTime';
 import RescheduleLocation from './RescheduleLocation';
+import { toast } from '@/hooks/use-toast';
 
 interface IRescheduleAScheduleProps {
     id: string;
@@ -37,6 +38,7 @@ const RescheduleASchedule: FC<IRescheduleAScheduleProps> = ({ id, username, show
     const [dropOffLocation, setDropOffLocation] = useState<IAddress>({ address: '', suburb: '' });
     const [dropOffLocationError, setDropOffLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
 
+    const [rescheduleASchedule, { isLoading }] = useRescheduleAScheduleMutation();
 
     const handleSubmit = () => {
 
@@ -69,7 +71,17 @@ const RescheduleASchedule: FC<IRescheduleAScheduleProps> = ({ id, username, show
             time: selectedTime,
             pickupAddress: { ...pickupLocation },
         }
-        console.log(schedule);
+        rescheduleASchedule({ id, data: schedule }).unwrap().then((res) => {
+            toast({
+                message: res.message
+            });
+            setShowAvailability(false);
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err?.data?.message || "Something went wrong"
+            })
+        });
     }
 
     useEffect(() => {
@@ -94,7 +106,7 @@ const RescheduleASchedule: FC<IRescheduleAScheduleProps> = ({ id, username, show
     }, [instructorData?.data.workingHour, selectedDate]);
 
 
-
+    const isDisable = (!selectedDate || selectedTime.length < 0) || (step == "location" && isLoading);
     return (
         <Dialog open={showAvailability} onOpenChange={setShowAvailability}>
             <DialogTrigger asChild>
@@ -167,8 +179,13 @@ const RescheduleASchedule: FC<IRescheduleAScheduleProps> = ({ id, username, show
                                     Back
                                 </Button>
                         }
-                        <Button onClick={handleSubmit} disabled={!selectedDate || selectedTime.length === 0} className='bg-primary' size="lg">
-                            Continue
+                        <Button loading={isLoading} onClick={handleSubmit} disabled={isDisable} className='bg-primary' size="lg">
+                            {
+                                step == "time" ?
+                                    "Next"
+                                    :
+                                    "Reschedule"
+                            }
                         </Button>
                     </div>
                 </DialogFooter>
