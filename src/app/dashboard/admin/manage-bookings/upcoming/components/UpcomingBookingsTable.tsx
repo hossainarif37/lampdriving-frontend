@@ -64,7 +64,6 @@ const UpcomingBookingsTable: FC = () => {
                                         const learner = typeof booking.learner !== 'string' ? typeof booking.learner.user !== 'string' ? booking.learner.user : undefined : undefined;
                                         const instructor = typeof booking.instructor !== 'string' ? typeof booking.instructor.user !== 'string' ? booking.instructor.user : undefined : undefined;
                                         const schedules: ISchedule[] = typeof booking.schedules !== 'string' ? booking.schedules : [];
-
                                         return (
                                             <TableRow key={booking._id}>
                                                 <TableCell className="font-medium text-center">{index + 1}</TableCell>
@@ -90,7 +89,6 @@ const UpcomingBookingsTable: FC = () => {
                                                         </p>
                                                     </div>
                                                 </TableCell>
-                                                {/* <TableCell className="font-medium"></TableCell> */}
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>
                                                 </TableCell>

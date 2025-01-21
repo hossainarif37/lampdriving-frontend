@@ -14,10 +14,10 @@ interface IUpdateBookingStatus {
 const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdownIsOpen }) => {
     const [open, isOpen] = useState<boolean>(false);
     const [updateStatus, { isLoading }] = useUpdateBookingStatusMutation();
-    const reqStatus = status === "complete" ? "completed" : status === "refund" ? "refunded" : status === "ongoing" ? "ongoing" : "upcoming";
+    // const reqStatus = status === "complete" ? "completed" : status === "refund" ? "refunded" : status === "ongoing" ? "ongoing" : "upcoming";
 
     const handleVerify = () => {
-        updateStatus({ id, status: reqStatus }).unwrap().then((res) => {
+        updateStatus({ id }).unwrap().then((res) => {
             toast({
                 message: res.message,
             })
