@@ -6,8 +6,9 @@ import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import { useGetMyBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
-import { IBooking } from '@/types/booking';
+import { IBooking, ISchedule } from '@/types/booking';
 import OngoingBookingActions from './OngoingBookingActions';
+import { formatDate } from 'date-fns';
 
 const OngoingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -61,6 +62,7 @@ const OngoingBookingsTable: FC = () => {
                                     data.data.result.map((booking: IBooking, index: number) => {
                                         const learner = typeof booking.learner !== 'string' ? typeof booking.learner.user !== 'string' ? booking.learner.user : undefined : undefined;
                                         const instructor = typeof booking.instructor !== 'string' ? typeof booking.instructor.user !== 'string' ? booking.instructor.user : undefined : undefined;
+                                        const schedules: ISchedule[] = typeof booking.schedules !== 'string' ? booking.schedules : [];
 
                                         return (
                                             <TableRow key={booking._id}>
@@ -77,13 +79,26 @@ const OngoingBookingsTable: FC = () => {
                                                         <span className="text-sm text-gray-500">{instructor?.email}</span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell className="font-medium">{(booking.payment as any).transactionId}</TableCell>
-                                                <TableCell className="font-medium">${booking.price}</TableCell>
+                                                <TableCell className="font-medium">
+                                                    <div>
+                                                        <p>
+                                                            ${(booking.price).toFixed(2)}
+                                                        </p>
+                                                        <p>
+                                                            {(booking.payment as any).transactionId}
+                                                        </p>
+                                                    </div>
+                                                </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    {booking.status === "completed" ? "Completed" : booking.status === "accepted" ? "Accepted" : booking.status === "pending" ? "Pending" : "Rejected"}
+                                                    {
+                                                        <>
+                                                            <h3>{formatDate(new Date(schedules[0]?.date || '12/12/2023'), 'dd/MM/yyyy')} at {schedules[0]?.time[0]}</h3>
+                                                            <p>Duration {schedules[0]?.duration} Hours</p>
+                                                        </>
+                                                    }
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <OngoingBookingActions id={booking._id} />
@@ -97,7 +112,7 @@ const OngoingBookingsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound isSearched={isSearched} dataName='Accepted Bookings' />
+                        <DataNotFound isSearched={isSearched} dataName='Ongoing Bookings' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />
