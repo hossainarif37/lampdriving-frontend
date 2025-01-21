@@ -39,9 +39,37 @@ const RescheduleASchedule: FC<IRescheduleAScheduleProps> = ({ id, username, show
 
 
     const handleSubmit = () => {
+
+        if (!selectedDate || !selectedTime) {
+            return;
+        }
+
         if (step === "time" && selectedDate && selectedTime.length > 0) {
             setStep("location");
+            return;
         }
+        const testPackage = type === "test";
+
+        if (pickupLocation?.address === '' || pickupLocation?.suburb === '') {
+            setPickupLocationError({ address: pickupLocation?.address === '', suburb: pickupLocation?.suburb === '' });
+            return;
+        } else {
+            setPickupLocationError({ address: pickupLocation?.suburb === '', suburb: pickupLocation?.suburb === '' });
+        }
+
+        if (testPackage && (dropOffLocation?.address === '' || dropOffLocation?.suburb === '')) {
+            setDropOffLocationError({ address: dropOffLocation?.address === '', suburb: dropOffLocation?.suburb === '' });
+            return;
+        } else if (testPackage) {
+            setDropOffLocationError({ address: dropOffLocation?.suburb === '', suburb: dropOffLocation?.suburb === '' });
+        }
+
+        const schedule = {
+            date: selectedDate,
+            time: selectedTime,
+            pickupAddress: { ...pickupLocation },
+        }
+        console.log(schedule);
     }
 
     useEffect(() => {
