@@ -2,12 +2,19 @@ import { FC, useState } from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
+import UpdateBookingStatus from './UpdateScheduleStatus';
+import RescheduleAScheduleBtn from './reschedule-a-schedule/RescheduleAScheduleBtn';
+import { IAddress } from '@/types/user';
 
 interface IManageSchedulesActionsProps {
     id: string;
+    username: string;
+    duration: number;
+    pickupAddress: IAddress;
+    dropOffAddress?: IAddress;
 }
 
-const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id }) => {
+const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id, username, duration, pickupAddress, dropOffAddress }) => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -22,8 +29,12 @@ const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id }) => {
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
                     <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
-                    <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>Ongoing</Button>
-                    <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>Reschedule</Button>
+                    <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={"ongoing"} />
+                    <RescheduleAScheduleBtn
+                        duration={duration}
+                        pickupAddress={pickupAddress}
+                        dropOffAddress={dropOffAddress}
+                        username={username} id={id} />
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
