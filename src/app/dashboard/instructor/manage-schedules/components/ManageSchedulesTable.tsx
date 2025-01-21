@@ -101,9 +101,7 @@ const ManageSchedulesTable: FC = () => {
                                                     }
                                                 </TableCell>
                                                 <TableCell className='font-medium text-center' >
-                                                    <span className={` text-white px-2 py-0.5 rounded ${schedule.status === "ongoing" ? "bg-yellow-500" : schedule.status === "completed" ? "bg-green-500" : schedule.status === "rescheduled" ? "bg-blue-500" : "bg-orange-500"}`}>
-                                                        {schedule.status.charAt(0).toUpperCase() + schedule.status.slice(1)}
-                                                    </span>
+                                                    {schedule.status.charAt(0).toUpperCase() + schedule.status.slice(1)}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <ManageSchedulesActions
