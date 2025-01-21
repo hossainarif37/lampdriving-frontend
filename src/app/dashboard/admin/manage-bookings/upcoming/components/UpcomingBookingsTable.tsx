@@ -112,7 +112,7 @@ const UpcomingBookingsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound isSearched={isSearched} dataName='Pending Bookings' />
+                        <DataNotFound isSearched={isSearched} dataName='Upcoming Bookings' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />

@@ -101,7 +101,7 @@ const RefundedBookingsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound isSearched={isSearched} dataName='Cancelled Bookings' />
+                        <DataNotFound isSearched={isSearched} dataName='Refunded Bookings' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />
