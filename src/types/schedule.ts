@@ -13,3 +13,13 @@ export interface ISchedule {
     type: "lesson" | "test" | "mock-test" | "blank";
     status: "upcoming" | "ongoing" | "completed" | "rescheduled" | "cancelled";
 }
+
+
+export interface IScheduleInputs {
+    date: Date;
+    time: string[];
+    duration: number;
+    pickupAddress: IAddress;
+    dropOffAddress?: IAddress;
+    type: "lesson" | "test" | "mock-test" | "blank";
+}
