@@ -19,7 +19,7 @@ interface IPickupLocationProps {
         address: boolean;
         suburb: boolean;
     }
-    className: string;
+    className?: string;
 }
 
 const PickupLocation: FC<IPickupLocationProps> = ({ onChange, value, error, className }) => {
