@@ -19,7 +19,7 @@ interface IDropOffLocationProps {
         address: boolean;
         suburb: boolean;
     }
-    className: string;
+    className?: string;
 }
 
 const DropOffLocation: FC<IDropOffLocationProps> = ({ onChange, value, error, className }) => {
