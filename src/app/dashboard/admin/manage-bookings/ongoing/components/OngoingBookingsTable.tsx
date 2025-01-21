@@ -4,11 +4,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
-import Loading from '@/components/shared/Loading';
 import { useGetAllBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking, ISchedule } from '@/types/booking';
 import OngoingBookingActions from './OngoingBookingActions';
 import { formatDate } from 'date-fns';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const OngoingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -36,13 +36,13 @@ const OngoingBookingsTable: FC = () => {
     }, [urlSearchParams])
 
     if (isLoading) {
-        return <Loading parentClassName='min-h-[60vh]' />
+        return <TableSkeleton />
     }
 
     return (
         <div className='min-h-[calc(100vh-189px)] flex flex-col text-primary'>
             {
-                data?.data.result.length ?
+                data?.data?.result?.length ?
                     <div className='flex-1'>
                         <Table>
                             <TableHeader>
@@ -58,11 +58,11 @@ const OngoingBookingsTable: FC = () => {
                             </TableHeader>
                             <TableBody>
                                 {
-                                    data.data.result.map((booking: IBooking, index: number) => {
+                                    data.data?.result?.map((booking: IBooking, index: number) => {
                                         const learner = typeof booking.learner !== 'string' ? typeof booking.learner.user !== 'string' ? booking.learner.user : undefined : undefined;
                                         const instructor = typeof booking.instructor !== 'string' ? typeof booking.instructor.user !== 'string' ? booking.instructor.user : undefined : undefined;
                                         const schedules: ISchedule[] = typeof booking.schedules !== 'string' ? booking.schedules : [];
-                                        console.log(schedules)
+
                                         return (
                                             <TableRow key={booking._id}>
                                                 <TableCell className="font-medium text-center">{index + 1}</TableCell>
