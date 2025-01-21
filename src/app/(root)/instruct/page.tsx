@@ -5,9 +5,9 @@ import AccordionDesign from './components/FAQ';
 import Stats from './components/Stats/Stats';
 import Flexibility from './components/Flexibility/Flexibility';
 
-const page: FC = () => {
+const BecomeInstructorPage: FC = () => {
     return (
-        <div className='bg-gradient-to-b from-light-green to-white'>
+        <div className='bg-light'>
             <EarningsCalculator />
             <Flexibility />
             <Stats />
@@ -17,4 +17,4 @@ const page: FC = () => {
     );
 };
 
-export default page;
+export default BecomeInstructorPage;

@@ -2,6 +2,7 @@
 import { FC, useEffect, useState } from 'react';
 import FaqAccordion from '../../components/shared/faq-accordion/FaqAccordion';
 import { Accordion } from '@radix-ui/react-accordion';
+import SectionHeading from '../../components/shared/section-heading/SectionHeading';
 
 const FAQ: FC = () => {
     const [faqs, setFaqs] = useState([]);
@@ -16,9 +17,12 @@ const FAQ: FC = () => {
     }, []);
 
     return (
-        <section className='px-4 md:px-0 md:py-20 py-10 bg-light-green'>
+        <section className='px-4 md:px-0 bg-light'>
+            <SectionHeading
+                title='Frequently Asked Questions'
+                subtitle='Find answers to common questions about becoming an instructor with Lamp Driving.'
+            />
             <div className='max-w-4xl mx-auto'>
-                <h2 className='text-3xl font-semibold text-primary my-4'>Your questions, answered</h2>
                 <div className='mx-auto px-4 md:px-0 max-w-5xl pb-16'>
                     <Accordion type="single" collapsible className="w-full">
                         {faqs.map((faqInfo, index) => (
