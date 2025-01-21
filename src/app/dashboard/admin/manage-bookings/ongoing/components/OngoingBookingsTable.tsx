@@ -5,10 +5,11 @@ import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import { useGetAllBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
-import { IBooking, ISchedule } from '@/types/booking';
+import { IBooking } from '@/types/booking';
 import OngoingBookingActions from './OngoingBookingActions';
 import { formatDate } from 'date-fns';
 import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
+import { ISchedule } from '@/types/schedule';
 
 const OngoingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -61,8 +62,11 @@ const OngoingBookingsTable: FC = () => {
                                     data.data?.result?.map((booking: IBooking, index: number) => {
                                         const learner = typeof booking.learner !== 'string' ? typeof booking.learner.user !== 'string' ? booking.learner.user : undefined : undefined;
                                         const instructor = typeof booking.instructor !== 'string' ? typeof booking.instructor.user !== 'string' ? booking.instructor.user : undefined : undefined;
-                                        const schedules: ISchedule[] = typeof booking.schedules !== 'string' ? booking.schedules : [];
-
+                                        // sort the schedules by date
+                                        const schedules: ISchedule[] = typeof booking.schedules !== 'string' ? [...booking.schedules].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()) : [];
+                                        
+                                        // find the first upcoming or rescheduled schedule
+                                        const upcomingSchedule = schedules.find((schedule: ISchedule) => (schedule.status === 'upcoming' || schedule.status === 'rescheduled'));
                                         return (
                                             <TableRow key={booking._id}>
                                                 <TableCell className="font-medium text-center">{index + 1}</TableCell>
@@ -94,8 +98,8 @@ const OngoingBookingsTable: FC = () => {
                                                 <TableCell className="font-medium text-center">
                                                     {
                                                         <>
-                                                            <h3>{formatDate(new Date(schedules[0]?.date || '12/12/2023'), 'dd/MM/yyyy')} at {schedules[0]?.time[0]}</h3>
-                                                            <p>Duration {schedules[0]?.duration} Hours</p>
+                                                            <h3>{formatDate(new Date(upcomingSchedule?.date || '12/12/2023'), 'dd/MM/yyyy')} at {upcomingSchedule?.time[0]}</h3>
+                                                            <p>Duration {upcomingSchedule?.duration} Hours</p>
                                                         </>
                                                     }
                                                 </TableCell>

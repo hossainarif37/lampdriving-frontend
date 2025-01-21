@@ -63,7 +63,10 @@ const UpcomingBookingsTable: FC = () => {
                                     data.data.result.map((booking: IBooking, index: number) => {
                                         const learner = typeof booking.learner !== 'string' ? typeof booking.learner.user !== 'string' ? booking.learner.user : undefined : undefined;
                                         const instructor = typeof booking.instructor !== 'string' ? typeof booking.instructor.user !== 'string' ? booking.instructor.user : undefined : undefined;
-                                        const schedules: ISchedule[] = typeof booking.schedules !== 'string' ? booking.schedules : [];
+                                        const schedules: ISchedule[] = typeof booking.schedules !== 'string' ?
+                                            [...booking.schedules].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()) : [];
+                                        const upcomingSchedule = schedules.find((schedule: ISchedule) =>
+                                            (schedule.status === 'upcoming' || schedule.status === 'rescheduled'));
                                         return (
                                             <TableRow key={booking._id}>
                                                 <TableCell className="font-medium text-center">{index + 1}</TableCell>
@@ -95,8 +98,8 @@ const UpcomingBookingsTable: FC = () => {
                                                 <TableCell className="font-medium text-center">
                                                     {
                                                         <>
-                                                            <h3>{formatDate(new Date(schedules[0]?.date || '12/12/2023'), 'dd/MM/yyyy')} at {schedules[0]?.time[0]}</h3>
-                                                            <p>Duration {schedules[0]?.duration} Hours</p>
+                                                            <h3>{formatDate(new Date(upcomingSchedule?.date || '12/12/2023'), 'dd/MM/yyyy')} at {upcomingSchedule?.time[0]}</h3>
+                                                            <p>Duration {upcomingSchedule?.duration} Hours</p>
                                                         </>
                                                     }
                                                 </TableCell>
