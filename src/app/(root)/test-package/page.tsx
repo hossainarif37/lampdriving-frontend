@@ -1,4 +1,4 @@
-import React from 'react';
+import { FC } from 'react';
 
 import TestPackageBanner from './components/TestPackageBanner';
 import TestPackageCard from './components/TestPackageCard';
@@ -6,7 +6,8 @@ import SectionHeading from '../components/shared/section-heading/SectionHeading'
 import Features from './components/Features';
 import PremiumPackageSection from './components/PremiumPackageSection';
 
-function App() {
+
+const TestPackage: FC = () => {
     return (
         <div className=''>
             {/* banner Section */}
@@ -34,6 +35,6 @@ function App() {
             </div>
         </div>
     );
-}
+};
 
-export default App;
+export default TestPackage;

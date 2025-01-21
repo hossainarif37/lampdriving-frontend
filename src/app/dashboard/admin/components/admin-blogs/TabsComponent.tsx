@@ -8,10 +8,9 @@ interface TabsComponentProps {
     content: string;
     setContent: (content: string) => void;
     title: string;
-    author: string;
 }
 
-const TabsComponent: FC<TabsComponentProps> = ({ content, setContent, title, author }) => {
+const TabsComponent: FC<TabsComponentProps> = ({ content, setContent, title }) => {
     const [isActiveTab, setIsActiveTab] = useState("write");
     return (
         <Tabs defaultValue="write" className="mt-4">
@@ -37,7 +36,7 @@ const TabsComponent: FC<TabsComponentProps> = ({ content, setContent, title, aut
                 <MarkdownEditor content={content} setContent={setContent} />
             </TabsContent>
             <TabsContent value="preview" className='md:min-h-[400px] min-h-[350px]'>
-                <MarkdownPreview content={content} title={title} author={author} />
+                <MarkdownPreview content={content} title={title} />
             </TabsContent>
         </Tabs>
     );
