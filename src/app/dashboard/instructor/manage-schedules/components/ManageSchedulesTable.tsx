@@ -103,7 +103,12 @@ const ManageSchedulesTable: FC = () => {
                                                     {schedule.status.charAt(0).toUpperCase() + schedule.status.slice(1)}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <ManageSchedulesActions id={schedule._id} />
+                                                    <ManageSchedulesActions
+                                                        duration={schedule.duration}
+                                                        pickupAddress={schedule.pickupAddress}
+                                                        dropOffAddress={schedule.dropOffAddress}
+                                                        username={user?.username || ""}
+                                                        id={schedule._id} />
                                                 </TableCell>
                                             </TableRow>
                                         )
