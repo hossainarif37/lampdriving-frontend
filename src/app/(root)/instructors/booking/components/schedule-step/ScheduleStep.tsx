@@ -69,9 +69,11 @@ const ScheduleStep: FC = () => {
         // sort schedule by date
         setSchedules((pre) => [...pre, schedule].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
 
-        setSelectedDate(null);
+        if ((availableScheduleHours - selectedDuration) === 1) {
+            setSelectedDuration(1);
+        }
         setSelectedTime(null);
-        setSelectedDuration(1);
+        // setSelectedDate(null);
     };
 
     useEffect(() => {
@@ -88,6 +90,11 @@ const ScheduleStep: FC = () => {
                 slotArr = [...slotArr, ...schedule.time];
             }
         })
+
+        if ((availableScheduleHours) === 1) {
+            setSelectedDuration(1);
+        }
+
         setBookedTimeSlots([...bookedSlots?.time || '', ...slotArr]);
     }, [data?.data.schedules, selectedDate, schedules]);
 
