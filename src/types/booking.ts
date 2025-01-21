@@ -4,7 +4,7 @@ import { ILoginInputs, IRegisterInputs } from "./auth";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 import { LucideProps } from "lucide-react";
 import { ILearner } from "./learner";
-import { ISchedule } from "./schedule";
+import { ISchedule, IScheduleInputs } from "./schedule";
 
 export interface IBookingContext {
     steps: IStep[];
@@ -24,8 +24,8 @@ export interface IBookingContext {
     setIsCustomSelected: React.Dispatch<React.SetStateAction<boolean>>;
     paymentInfo: IPaymentInfo;
     setPaymentInfo: React.Dispatch<React.SetStateAction<IPaymentInfo>>;
-    schedules: ISchedule[];
-    setSchedules: React.Dispatch<React.SetStateAction<ISchedule[]>>;
+    schedules: IScheduleInputs[];
+    setSchedules: React.Dispatch<React.SetStateAction<IScheduleInputs[]>>;
     useRegisterForm: UseFormReturn<IRegisterInputs, unknown, undefined>;
     useLoginForm: UseFormReturn<ILoginInputs, unknown, undefined>;
     handleStepChange: (step: string) => void;
@@ -68,7 +68,7 @@ export interface IBookingInputs {
         instructor: string;
         price: number;
         bookingHours: number;
-        schedules: ISchedule[];
+        schedules: IScheduleInputs[];
     };
     paymentInfo: {
         user: string;
