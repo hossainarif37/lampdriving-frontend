@@ -30,7 +30,7 @@ const scheduleApi = baseApi.injectEndpoints({
             providesTags: ["schedule"]
         }),
         getInstructorsSchedules: builder.query<IResponseWithPaginationData<ISchedule[]>, IGetSchedulesQuery>({
-            query: ({ id, type, status, searchKey, limit, page }) => `/schedule/instructor/${id}?populate=learner.user&learnerFields=user&userFields=name,email&type=${type}${status ? `&status=${status}`: "&sort=date,-status&status=upcoming&status=ongoing&status=rescheduled&status=completed"}${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`,
+            query: ({ id, type, status, searchKey, limit, page }) => `/schedule/instructor/${id}?populate=learner.user&learnerFields=user&userFields=name,email&type=${type}${status ? `&status=${status}` : "&sort=date,-status&status=upcoming&status=ongoing&status=rescheduled&status=completed"}${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`,
             providesTags: ["schedule"]
         }),
         rescheduleASchedule: builder.mutation<IResponseWithData<ISchedule>, IRescheduleASchedule>({
@@ -39,7 +39,7 @@ const scheduleApi = baseApi.injectEndpoints({
                 method: "PATCH",
                 body: data
             }),
-            invalidatesTags: ["schedule"]
+            invalidatesTags: ["schedule", "booking"]
         }),
         updateAScheduleStatus: builder.mutation<IResponseWithData<ISchedule>, { id: string, status: "ongoing" | "completed" }>({
             query: ({ id, status }) => ({
@@ -47,7 +47,7 @@ const scheduleApi = baseApi.injectEndpoints({
                 method: "PATCH",
                 body: { status }
             }),
-            invalidatesTags: ["schedule"]
+            invalidatesTags: ["schedule", "booking"]
         })
     })
 })
