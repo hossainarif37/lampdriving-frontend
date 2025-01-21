@@ -8,8 +8,6 @@ interface NavigationItemProps {
     title: string;
     isActive: boolean;
     isDisabled: boolean;
-    stepIndex: number;
-    currentStepIndex: number;
 }
 
 const NavigationItem: FC<NavigationItemProps> = ({
@@ -17,8 +15,6 @@ const NavigationItem: FC<NavigationItemProps> = ({
     title,
     isActive,
     isDisabled,
-    stepIndex,
-    currentStepIndex
 }) => {
     const router = useRouter();
 
@@ -28,9 +24,7 @@ const NavigationItem: FC<NavigationItemProps> = ({
             return;
         }
 
-        if (stepIndex <= currentStepIndex + 1) {
-            router.push(path);
-        }
+        router.push(path);
     };
 
     return (
@@ -38,7 +32,7 @@ const NavigationItem: FC<NavigationItemProps> = ({
             <Button
                 type="button"
                 onClick={handleNavigate}
-                disabled={isDisabled || stepIndex > currentStepIndex + 1}
+                disabled={isDisabled}
                 className={`
           w-full px-0 font-semibold capitalize
           ${isDisabled
