@@ -6,12 +6,12 @@ import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import { useGetMyBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking, ISchedule } from '@/types/booking';
-import UpcomingBookingActions from './UpcomingBookingActions';
 import { formatDate } from 'date-fns';
 import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
+// import ManageSchedulesActions from './ManageSchedulesActions';
 
 
-const UpcomingBookingsTable: FC = () => {
+const ManageSchedulesTable: FC = () => {
     const urlSearchParams = useSearchParams();
     const [page, setPage] = useState(urlSearchParams.get('page') || '1');
     const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
@@ -50,7 +50,6 @@ const UpcomingBookingsTable: FC = () => {
                                 <TableRow>
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Learner</TableHead>
-                                    <TableHead className='min-w-[214px]'>Instructor</TableHead>
                                     <TableHead className='min-w-[250px]'>Payment</TableHead>
                                     <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
                                     <TableHead className='min-w-[140px] text-center'>Upcoming Schedule</TableHead>
@@ -100,9 +99,9 @@ const UpcomingBookingsTable: FC = () => {
                                                         </>
                                                     }
                                                 </TableCell>
-                                                <TableCell className="font-medium text-center">
-                                                    <UpcomingBookingActions id={booking._id} />
-                                                </TableCell>
+                                                {/* <TableCell className="font-medium text-center">
+                                                    <ManageSchedulesActions id={booking._id} />
+                                                </TableCell> */}
                                             </TableRow>
                                         )
                                     })
@@ -120,4 +119,4 @@ const UpcomingBookingsTable: FC = () => {
     );
 };
 
-export default UpcomingBookingsTable;
+export default ManageSchedulesTable;
