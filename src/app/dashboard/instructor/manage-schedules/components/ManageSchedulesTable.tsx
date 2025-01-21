@@ -105,6 +105,7 @@ const ManageSchedulesTable: FC = () => {
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <ManageSchedulesActions
+                                                        status={schedule.status}
                                                         type={schedule.type as 'lesson' | 'test' | 'mock-test'}
                                                         duration={schedule.duration}
                                                         pickupAddress={schedule.pickupAddress}

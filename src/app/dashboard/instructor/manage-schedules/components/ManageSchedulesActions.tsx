@@ -13,9 +13,10 @@ interface IManageSchedulesActionsProps {
     pickupAddress: IAddress;
     dropOffAddress?: IAddress;
     type: "lesson" | "test" | "mock-test";
+    status: "upcoming" | "ongoing" | "completed" | "rescheduled" | "cancelled";
 }
 
-const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id, username, duration, pickupAddress, dropOffAddress, type }) => {
+const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id, username, duration, pickupAddress, dropOffAddress, type, status }) => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -30,13 +31,17 @@ const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id, username
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
                     <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
-                    <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={"ongoing"} />
-                    <RescheduleAScheduleBtn
-                        type={type}
-                        duration={duration}
-                        pickupAddress={pickupAddress}
-                        dropOffAddress={dropOffAddress}
-                        username={username} id={id} />
+                    <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={status === "upcoming" ? "ongoing" : "complete"} />
+                    {
+                        status === "upcoming" && (
+                            <RescheduleAScheduleBtn
+                                type={type}
+                                duration={duration}
+                                pickupAddress={pickupAddress}
+                                dropOffAddress={dropOffAddress}
+                                username={username} id={id} />
+                        )
+                    }
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>
