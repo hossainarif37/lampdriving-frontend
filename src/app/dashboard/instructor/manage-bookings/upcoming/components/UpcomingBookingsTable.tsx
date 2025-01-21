@@ -52,8 +52,7 @@ const UpcomingBookingsTable: FC = () => {
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Learner</TableHead>
                                     <TableHead className='min-w-[214px]'>Instructor</TableHead>
-                                    <TableHead className='min-w-[250px]'>Transaction ID</TableHead>
-                                    <TableHead className='min-w-[140px]'>Price</TableHead>
+                                    <TableHead className='min-w-[250px]'>Payment</TableHead>
                                     <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
                                     <TableHead className='min-w-[140px] text-center'>Upcoming Schedule</TableHead>
                                     <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
