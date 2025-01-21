@@ -8,6 +8,7 @@ import Loading from '@/components/shared/Loading';
 import { useGetMyBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking } from '@/types/booking';
 import CompletedBookingActions from './CompletedBookingActions';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const CompletedBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -35,7 +36,7 @@ const CompletedBookingsTable: FC = () => {
     }, [urlSearchParams])
 
     if (isLoading) {
-        return <Loading />
+        return <TableSkeleton />
     }
 
     return (

@@ -9,6 +9,7 @@ import { useGetMyBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking, ISchedule } from '@/types/booking';
 import OngoingBookingActions from './OngoingBookingActions';
 import { formatDate } from 'date-fns';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const OngoingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -36,7 +37,7 @@ const OngoingBookingsTable: FC = () => {
     }, [urlSearchParams])
 
     if (isLoading) {
-        return <Loading />
+        return <TableSkeleton />
     }
 
     return (
