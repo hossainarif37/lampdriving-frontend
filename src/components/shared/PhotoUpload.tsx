@@ -138,7 +138,7 @@ const PhotoUpload = <T extends { profileImg?: string }>({
                 </div>
 
                 {/* File Input */}
-                <input  {...register?.('profileImg' as Path<T>, {
+                <input accept='image/*' {...register?.('profileImg' as Path<T>, {
                     required: !profilePhoto?.url ? "Please upload a profile photo" : false
                 })} onChange={handleFileChange} className='hidden' type="file" name="image" id="image" />
 

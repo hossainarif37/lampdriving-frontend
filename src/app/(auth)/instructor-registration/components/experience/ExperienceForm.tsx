@@ -3,13 +3,8 @@
 
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
-import FileUpload from '@/components/shared/FileUpload';
-import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
-import { Textarea } from '@/components/ui/textarea';
-import { MultiSelect } from '@/components/ui/multi-select';
 import { useRouter } from 'next/navigation';
-import { languageList } from '@/constant/languageList';
 import ExperienceFields from '@/components/shared/forms/ExperienceFields';
 import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 

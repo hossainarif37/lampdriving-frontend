@@ -1,14 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
-import { Controller, useForm } from 'react-hook-form';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import FileUpload from '@/components/shared/FileUpload';
+import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { IVehicle } from '@/types/instructor';
-import CarInfoFields from '@/components/shared/forms/CarInfoFields';
 import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
+import CarInfoFields from '@/components/shared/forms/CarInfoFields';
 
 
 interface Inputs {
