@@ -4,7 +4,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Check, CloudUpload, Upload, X } from 'lucide-react';
-import { extractFileDetails, generateUniqueIdentifier } from '@/lib/utils';
+import { extractFileDetails, generateUniqueIdentifier, toFixedNumber } from '@/lib/utils';
 import { toast } from '@/hooks/use-toast';
 
 interface FileUploadProps {
@@ -184,7 +184,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
                         <div>
                             <p className="font-medium">{selectedFile?.name || imageDetails?.fileName}</p>
                             <p className="text-gray-500 text-sm">
-                                {selectedFile?.size ? (selectedFile.size / 1024).toFixed(2) : (Number(imageDetails?.size) / 1024).toFixed(2)}kb, Added just now
+                                {selectedFile?.size ? (toFixedNumber(selectedFile.size / 1024)) : (toFixedNumber(Number(imageDetails?.size) / 1024))}kb, Added just now
                             </p>
                         </div>
                     </div>

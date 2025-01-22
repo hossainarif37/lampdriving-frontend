@@ -21,3 +21,7 @@ export const extractFileDetails = (url: string): { fileName: string; size: strin
   }
   return null;
 }
+
+export const toFixedNumber = (value: number): number => {
+  return Number(value.toFixed(2));
+};

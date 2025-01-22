@@ -7,52 +7,21 @@ import TotalPaidOut from './components/TotalPaidOut';
 import RevenueOverviewChart from './components/RevenueOverviewChart';
 import { Wallet } from 'lucide-react';
 
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, BanknoteIcon, HistoryIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import Link from 'next/link';
+import Loading from '@/components/shared/Loading';
+import { useGetAdminWalletQuery } from '@/redux/api/walletApi/walletApi';
+import { FC } from 'react';
 
-const instructors = [
-    {
-        name: 'John Doe',
-        lessons: 12,
-        amount: 960,
-        lastPayout: '2024-03-15',
-        status: 'ready'
-    },
-    {
-        name: 'Sarah Smith',
-        lessons: 8,
-        amount: 640,
-        lastPayout: '2024-03-15',
-        status: 'ready'
-    },
-    {
-        name: 'Mike Johnson',
-        lessons: 15,
-        amount: 1200,
-        lastPayout: '2024-03-15',
-        status: 'processing'
+
+const WalletPage: FC = () => {
+    const { data, isLoading } = useGetAdminWalletQuery(undefined);
+
+    if (isLoading) {
+        return <Loading />
     }
-];
 
+    console.log('admin wallet', data);
 
-
-const WalletPage = () => {
     return (
         <div className="min-h-screen bg-gray-50 p-6">
             <div className="space-y-6">
@@ -71,16 +40,16 @@ const WalletPage = () => {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Total Revenue */}
-                    <TotalRevenue />
+                    <TotalRevenue totalRevenue={data?.data?.totalRevenue} />
 
                     {/* Platform Earnings (20%) */}
-                    <PlatformEarnings />
+                    <PlatformEarnings platformEarnings={data?.data?.platformEarnings} />
 
                     {/* Pending Payouts */}
-                    <PendingBalance />
+                    <PendingBalance pendingPayouts={data?.data?.pendingBalance} />
 
                     {/* Total Paid Out */}
-                    <TotalPaidOut />
+                    <TotalPaidOut totalPaidOut={data?.data?.totalPayouts} />
                 </div>
 
                 {/* Chart Section */}
