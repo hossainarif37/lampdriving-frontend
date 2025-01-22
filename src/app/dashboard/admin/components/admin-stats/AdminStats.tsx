@@ -6,6 +6,8 @@ import BookingFilters from "./BookingFilters";
 import BookingCalendar from "./BookingCalendar";
 import { useAppSelector } from "@/redux/hook";
 import { BookingList } from "./BookingList";
+import { useGetAdminStatsQuery } from "@/redux/api/statsApi/statsApi";
+import Loading from "@/components/shared/Loading";
 
 // Define the Booking type
 type Booking = {
@@ -93,23 +95,11 @@ const AdminStats: FC = () => {
     const [activeFilter, setActiveFilter] = useState('running');
     const [runningBookings, setRunningBookings] = useState(initialRunningBookings);
     const [pastBookings, setPastBookings] = useState(initialPastBookings);
+    const { data, isLoading } = useGetAdminStatsQuery(undefined);
 
+    if (isLoading) return <Loading />;
 
-
-
-    const handleConfirm = (bookingId: string) => {
-        const bookingToMove = runningBookings.find(booking => booking.id === bookingId);
-        if (bookingToMove) {
-            // Remove from running bookings
-            setRunningBookings(prev => prev.filter(booking => booking.id !== bookingId));
-
-            // Add to past bookings with completed status
-            setPastBookings(prev => [{
-                ...bookingToMove,
-                status: 'completed'
-            }, ...prev]);
-        }
-    };
+    console.log('Data', data);
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -124,7 +114,15 @@ const AdminStats: FC = () => {
                 </div>
 
                 <div className="mb-8">
-                    <DashboardStats />
+                    <DashboardStats
+                        totalBookings={data?.data?.totalBookings}
+                        completedBookings={data?.data?.completedBookings}
+                        ongoingBookings={data?.data?.ongoingBookings}
+                        totalRevenue={data?.data?.totalRevenue}
+                        upcomingBookings={data?.data?.upcomingBookings}
+                        totalLearners={data?.data?.totalLearners}
+                        totalInstructors={data?.data?.totalInstructors}
+                    />
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -137,10 +135,10 @@ const AdminStats: FC = () => {
                             />
                         </div>
                         {activeFilter === 'running' && (
-                            <BookingList bookings={runningBookings} onConfirm={handleConfirm} />
+                            <BookingList bookings={runningBookings} />
                         )}
                         {activeFilter === 'past' && (
-                            <BookingList bookings={pastBookings} onConfirm={handleConfirm} />
+                            <BookingList bookings={pastBookings} />
 
                         )}
                     </div>

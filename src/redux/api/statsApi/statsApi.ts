@@ -6,8 +6,12 @@ const statsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getLearnerStats: builder.query({
             query: () => `/stats/learner?populate=instructor`
+        }),
+
+        getAdminStats: builder.query({
+            query: () => `/stats/admin`
         })
     })
 })
 
-export const { useGetLearnerStatsQuery } = statsApi;
+export const { useGetLearnerStatsQuery, useGetAdminStatsQuery } = statsApi;

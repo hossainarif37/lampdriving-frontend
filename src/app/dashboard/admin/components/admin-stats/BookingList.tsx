@@ -13,10 +13,9 @@ interface Booking {
 interface BookingListProps {
     // title: string;
     bookings: Booking[];
-    onConfirm: (bookingId: string) => void;
 }
 
-export const BookingList: React.FC<BookingListProps> = ({ bookings, onConfirm }) => {
+export const BookingList: React.FC<BookingListProps> = ({ bookings }) => {
     return (
         <div className="bg-white rounded-lg shadow-sm">
             {/* <div className="p-6 border-b">
@@ -43,7 +42,6 @@ export const BookingList: React.FC<BookingListProps> = ({ bookings, onConfirm })
                             </div>
                             <div>
                                 <button
-                                    onClick={() => onConfirm(booking.id)}
                                     className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-200
                     ${booking.status === 'completed'
                                             ? 'bg-green-100 text-green-700'
