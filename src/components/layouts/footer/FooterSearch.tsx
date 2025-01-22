@@ -25,7 +25,7 @@ const FooterSearch: FC = () => {
         setCarType('auto');
     }
     return (
-        <div className="lg:max-w-5xl mx-auto md:max-w-3xl h-48 md:h-40 flex flex-col md:flex-row items-center justify-center md:gap-4 gap-6 w-full md:rounded-md rounded-lg md:px-20 px-6 bg-[#264649] -translate-y-1/2 absolute left-0 right-0">
+        <div className="lg:max-w-5xl mx-auto md:max-w-3xl h-48 md:h-40 flex flex-col md:flex-row items-center justify-center md:gap-4 gap-6 w-full md:rounded-md rounded-lg md:px-20 px-6 bg-[#264649] -translate-y-1/2">
 
             <div className='md:w-10/12 flex flex-col lg:flex-row items-center justify-between gap-2'>
                 {/* Toggle Buttons */}
