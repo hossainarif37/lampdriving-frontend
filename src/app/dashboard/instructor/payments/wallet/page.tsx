@@ -46,8 +46,6 @@ const WalletPage: FC = () => {
 
     const { data, isLoading } = useGetWalletBalanceQuery({ id: instructorId as string });
 
-
-
     if (isLoading) {
         return <Loading />
     }

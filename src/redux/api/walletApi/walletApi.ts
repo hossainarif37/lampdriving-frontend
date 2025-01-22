@@ -7,7 +7,11 @@ const walletApi = baseApi.injectEndpoints({
         getWalletBalance: builder.query({
             query: ({ id }) => `/wallet/${id}`
         }),
+
+        getAllWallet: builder.query({
+            query: () => `/wallet/all?populate=instructor,instructor.user&balance.currentBalance[$gt]=1&instructorFields=user,completedLessons`
+        })
     })
 })
 
-export const { useGetWalletBalanceQuery } = walletApi;
+export const { useGetWalletBalanceQuery, useGetAllWalletQuery } = walletApi;

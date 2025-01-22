@@ -28,6 +28,63 @@ import { Input } from "@/components/ui/input";
 import { MoreHorizontal, BanknoteIcon, HistoryIcon, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useGetAllWalletQuery } from '@/redux/api/walletApi/walletApi';
+import Loading from '@/components/shared/Loading';
+
+interface IWalletResponse {
+    meta: {
+        page: number;
+        limit: number;
+        totalData: number;
+        totalPage: number;
+    };
+    result: IWalletResult[];
+}
+
+interface IWalletResult {
+    _id: string;
+    balance: {
+        currentBalance: number;
+        pendingBalance: number;
+        totalWithdraw: number;
+        totalEarnings: number;
+    };
+    bankAccount: {
+        payId: string;
+    };
+    instructor: {
+        _id: string;
+        completedLessons: number;
+        user: IUser;
+    };
+    transactions: string[];
+    createdAt: string;
+    updatedAt: string;
+}
+
+interface IUser {
+    _id: string;
+    name: {
+        firstName: string;
+        lastName: string;
+        fullName: string;
+    };
+    email: string;
+    phone: string;
+    username: string;
+    dateOfBirth: string;
+    profileImg: string;
+    gender: string;
+    role: string;
+    status: string;
+    isEmailVerified: boolean;
+    isDeleted: boolean;
+    instructor: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+    id: string;
+}
 
 interface IInstructorPayout {
     name: string;
@@ -35,41 +92,32 @@ interface IInstructorPayout {
     amount: number;
     lastPayout: string;
     status: 'ready' | 'processing';
-    payId: string; // Added PayID field
+    payId: string;
 }
 
-const instructors: IInstructorPayout[] = [
-    {
-        name: 'John Doe',
-        lessons: 12,
-        amount: 960,
-        lastPayout: '2024-03-15',
-        status: 'ready',
-        payId: 'john.doe$payid.example.com'
-    },
-    {
-        name: 'Sarah Smith',
-        lessons: 8,
-        amount: 640,
-        lastPayout: '2024-03-15',
-        status: 'ready',
-        payId: 'sarah.smith$payid.example.com'
-    },
-    {
-        name: 'Mike Johnson',
-        lessons: 15,
-        amount: 1200,
-        lastPayout: '2024-03-15',
-        status: 'processing',
-        payId: 'mike.johnson$payid.example.com'
-    }
-];
-
 const InstructorPayoutsTable = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [selectedInstructor, setSelectedInstructor] = useState<IInstructorPayout | null>(null);
-    const [transactionId, setTransactionId] = useState('');
-    const [isCopied, setIsCopied] = useState(false);
+    const [transactionId, setTransactionId] = useState<string>('');
+    const [isCopied, setIsCopied] = useState<boolean>(false);
+    const { data, isLoading } = useGetAllWalletQuery(undefined);
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
+    console.log(data);
+
+    const instructors: IInstructorPayout[] = data?.data?.result?.map((result: IWalletResult) => ({
+        name: result.instructor.user.name.fullName,
+        lessons: result.instructor.completedLessons,
+        amount: result.balance.currentBalance,
+        lastPayout: new Date(result.updatedAt).toLocaleDateString(),
+        status: result.balance.currentBalance > 0 ? 'ready' : 'processing',
+        payId: result.bankAccount.payId,
+    })) || [];
+
+
 
     const handleProcessPayout = (instructor: IInstructorPayout) => {
         setSelectedInstructor(instructor);
@@ -79,7 +127,6 @@ const InstructorPayoutsTable = () => {
     const handleSubmitPayout = () => {
         if (!transactionId.trim()) return;
 
-        // Here you would typically make an API call to process the payout
         console.log('Processing payout:', {
             instructor: selectedInstructor,
             transactionId,
