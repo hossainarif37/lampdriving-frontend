@@ -40,6 +40,16 @@ const ManageAvailability: FC = () => {
         }
     }, [instructorData?.data.workingHour, selectedDate]);
 
+    const handleDateChange = (date: Date) => {
+        setSelectedDate(date);
+        setSelectedTime([]);
+    }
+
+    const handleSelectTimes = (time: string[]) => {
+        const newTime = time.filter(t => !selectedTime.includes(t));
+        const removedTime = selectedTime.filter(t => time.includes(t));
+        setSelectedTime(pre => [...pre, ...newTime].filter(t => !removedTime.includes(t)));
+    }
     return (
         <div>
             <div className='grid grid-cols-2 text-black gap-6'>
@@ -51,7 +61,7 @@ const ManageAvailability: FC = () => {
                         bookedSchedules={data?.data.schedules || []}
                         workingHours={instructorData?.data.workingHour || null}
                         selectedDate={selectedDate}
-                        onSelectDate={setSelectedDate}
+                        onSelectDate={handleDateChange}
                     />
                 </div>
                 <div>
@@ -64,7 +74,7 @@ const ManageAvailability: FC = () => {
                         bookedTimeSlots={bookedTimeSlots}
                         selectedDuration={1}
                         selectedTime={selectedTime}
-                        onSelectTime={setSelectedTime}
+                        onSelectTime={handleSelectTimes}
                         selectedDate={selectedDate}
                         availableScheduleHours={1}
                     />
