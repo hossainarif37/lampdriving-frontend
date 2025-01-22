@@ -107,6 +107,11 @@ const RescheduleASchedule: FC<IRescheduleAScheduleProps> = ({ id, username, show
 
 
     const isDisable = (!selectedDate || selectedTime.length < 0) || (step == "location" && isLoading);
+
+    const handleDateChange = (date: Date) => {
+        setSelectedDate(date);
+        setSelectedTime([]);
+    }
     return (
         <Dialog open={showAvailability} onOpenChange={setShowAvailability}>
             <DialogTrigger asChild>
@@ -135,7 +140,7 @@ const RescheduleASchedule: FC<IRescheduleAScheduleProps> = ({ id, username, show
                         step === "time" ?
                             <RescheduleTime
                                 selectedDate={selectedDate}
-                                setSelectedDate={setSelectedDate}
+                                setSelectedDate={handleDateChange}
                                 scheduleTimeSlots={scheduleTimeSlots}
                                 setScheduleTimeSlots={setScheduleTimeSlots}
                                 workingHour={workingHour}
