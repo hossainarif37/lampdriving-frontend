@@ -106,17 +106,21 @@ const InstructorPayoutsTable = () => {
                 <TableHeader>
                     <TableRow>
                         <TableHead>Instructor</TableHead>
+                        <TableHead>PayID</TableHead>
                         <TableHead>Completed Lessons</TableHead>
                         <TableHead>Amount Due</TableHead>
                         <TableHead>Last Payout</TableHead>
                         <TableHead>Status</TableHead>
-                        <TableHead className="text-right">Actions</TableHead>
+                        <TableHead className="text-center">Actions</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {instructors.map((instructor, index) => (
                         <TableRow key={index}>
                             <TableCell className="font-medium">{instructor.name}</TableCell>
+                            <TableCell className="text-gray-600">
+                                {instructor.payId}
+                            </TableCell>
                             <TableCell className="text-gray-600">
                                 {instructor.lessons} lessons
                             </TableCell>
@@ -140,7 +144,7 @@ const InstructorPayoutsTable = () => {
                                         : "Processing"}
                                 </span>
                             </TableCell>
-                            <TableCell className="text-right">
+                            <TableCell className="text-center">
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
                                         <Button
@@ -149,7 +153,7 @@ const InstructorPayoutsTable = () => {
                                             disabled={instructor.status !== "ready"}
                                         >
                                             <span className="sr-only">Open menu</span>
-                                            <MoreHorizontal className="h-4 w-4" />
+                                            <MoreHorizontal className="h-5 w-5" />
                                         </Button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end">

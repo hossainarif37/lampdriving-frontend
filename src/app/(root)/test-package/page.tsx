@@ -11,12 +11,12 @@ const TestPackage: FC = () => {
     return (
         <div className=''>
             {/* banner Section */}
-            <div className='relative'>
+            {/* <div className='relative'>
                 <TestPackageBanner />
-            </div>
+            </div> */}
 
             {/* Package card Section */}
-            <div className="wrapper -mt-32 py-16 z-50 relative">
+            <div className="wrapper py-16 z-10 relative">
                 <TestPackageCard />
             </div>
 
@@ -30,9 +30,7 @@ const TestPackage: FC = () => {
             </div>
 
             {/* Premium package Section */}
-            <div className='pb-16 '>
-                <PremiumPackageSection />
-            </div>
+            <PremiumPackageSection />
         </div>
     );
 };

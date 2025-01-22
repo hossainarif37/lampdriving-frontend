@@ -8,12 +8,10 @@ import ExpertTeamMember from './components/ExpertTeamMember/ExpertTeamMember';
 const AboutPage: FC = () => {
     return (
         <div className=''>
-            {/* <Banner /> */}
             <AboutSection />
-            <MissionVisionSection />
-            <WhyChooseUs />
+            {/* <MissionVisionSection /> */}
             <AboutStats />
-            <ExpertTeamMember />
+            <WhyChooseUs />
         </div>
     );
 };

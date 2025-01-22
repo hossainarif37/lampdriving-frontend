@@ -29,7 +29,7 @@ const SuccessStories: FC = () => {
         }
     ]
     return (
-        <section className="py-10 md:py-20 bg-light-green">
+        <section className="py-10 md:py-20 bg-light">
             <div className="wrapper">
                 <h2 className="text-3xl font-semibold mb-8 text-primary">
                     Instructor Success Stories

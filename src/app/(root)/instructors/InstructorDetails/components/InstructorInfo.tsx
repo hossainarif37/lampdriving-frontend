@@ -2,11 +2,12 @@
 import Image from 'next/image'
 import instructorImg from "@/assets/home-page-image/test-image.webp"
 import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-Taisor-Car-Color-Image.webp"
-import { CircleCheck } from 'lucide-react'
+import { CircleCheck, User } from 'lucide-react'
 
 import { FC, useState } from 'react';
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
+import { Button } from '@/components/ui/button'
 
 
 interface InstructorInfoProps {
@@ -15,6 +16,7 @@ interface InstructorInfoProps {
 const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const user: IUser | undefined = typeof instructor.user != "string" ? instructor.user : undefined;
+  const { vehicle, languages, description } = instructor;
 
   const carInfo = [
     { id: 1, info: 'Auto Lessons & Test Packages' },
@@ -31,28 +33,33 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const words = instructor.description.split(" ");
   const truncatedDescription = words?.slice(0, 40).join(" ");
   const descriptionLength = words?.length;
+
+  console.log('instructor', instructor);
+
   return (
     <section className="bg-light rounded-xl border p-4 md:p-6 space-y-6">
       {/* Profile section */}
       <div className="flex items-start gap-6">
         <div className="relative flex-shrink-0">
+          <div className='w-[120px] h-[120px] rounded-full overflow-hidden shadow-lg border flex items-center justify-center text-accent'>
+            {
+              user?.profileImg ?
+                <Image src={user?.profileImg} alt="Instructor" className='w-full' width={120} height={120} />
+                :
+                <User size={60} />
+            }
+          </div>
+
           <Image
-            src={instructorImg}
-            alt="Instructor"
-            width={120}
-            height={120}
-            className="rounded-full "
-          />
-          <Image
-            src={carImg}
+            src={vehicle?.image}
             alt="Vehicle"
             width={70}
             height={70}
-            className="absolute -bottom-2 -right-2 rounded-full "
+            className="absolute -bottom-2 -right-2 rounded-full"
           />
         </div>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold">{user?.name.fullName}</h1>
+          <h1 className="text-2xl font-bold">{user?.name?.fullName}</h1>
           <div className="flex md:flex-row flex-col md:items-center gap-1 mt-1">
             <div className="flex text-gradient">{'★'.repeat(5)}</div>
             <span className="text-sm text-accent ml-1">4.6 - 79 ratings</span>
@@ -63,12 +70,12 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
       {/* Instructor bio */}
       <div>
         <h2 className="font-semibold mb-2 text-primary">Instructor Bio</h2>
-        <p className="text-accent mb-4" onClick={toggleDescription}>
-          {isExpanded ? instructor.description : `${truncatedDescription}...`}{" "}
-          {descriptionLength > 40 && (<span className="text-primary cursor-pointer">
+        <div className="mb-2" >
+          {isExpanded ? <span>{instructor.description}</span> : <span>{truncatedDescription}...</span>}
+          {descriptionLength > 40 && <button onClick={toggleDescription} className="text-primary ml-2 underline font-semibold">
             {isExpanded ? "Show less" : "Show more"}
-          </span>)}
-        </p>
+          </button>}
+        </div>
         <div className="space-y-2 ">
           {carInfo.map(info => (
             <div key={info.id} className="flex items-center gap-2">

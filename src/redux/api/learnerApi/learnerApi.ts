@@ -11,7 +11,6 @@ const learnerApi = baseApi.injectEndpoints({
                     `/learner?populate=user&limit=${limit}&page=${page}`,
             providesTags: ["learner"]
         })
-
     })
 })
 

@@ -1,6 +1,6 @@
 "use client";
 import { Input } from '@/components/ui/input';
-import { Search } from 'lucide-react';
+import { Brush, Paintbrush, Search } from 'lucide-react';
 import { FC, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -81,9 +81,9 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                     (searchParams?.searchKey || searchParams?.['vehicle.type']) &&
                     <Button
                         onClick={handleResetFilters}
-                        className='border-[#ff5200]/60 hover:border-primary/30 bg-light-green hover:bg-light-green text-primary border'
+                        className='border-red-500 bg-light hover:bg-light text-red-500 border flex items-center gap-2  '
                     >
-                        Reset Filters
+                        <Paintbrush className="w-6 h-6" /> <span>Reset Filters</span>
                     </Button>
                 }
             </div>
@@ -98,7 +98,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                             <Input
                                 value={selectedSuburb}
                                 onChange={(e) => handleSearch(e.target.value)}
-                                placeholder="Enter your suburb" className='h-12 pl-12 bg-light-green border border-primary/15' />
+                                placeholder="Enter your suburb" className='h-12 pl-12 bg-light border border-primary/15' />
                         </div>
                     </PopoverTrigger>
                     <PopoverContent className="md:w-[350px] lg:w-[434px] p-2">
@@ -137,25 +137,25 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                     <div className='flex gap-3'>
                         <Button
                             onClick={() => handleChangeCarType('auto')}
-                            className={`sm:w-32 w-20 sm:text-base text-xs hover:bg-gray-200 flex justify-center items-center px-0 rounded-md ${carType === 'auto'
+                            className={`sm:w-32 w-20 sm:text-base text-xs flex justify-center items-center px-0 rounded-md ${carType === 'auto'
                                 ? 'bg-secondary text-light hover:bg-secondary hover:text-light'
-                                : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
+                                : 'bg-light border border-primary/20 text-primary/70'}`}
                         >
                             <span>Auto</span>
                         </Button>
                         <Button
                             onClick={() => handleChangeCarType('manual')}
-                            className={`sm:w-32 w-20 sm:text-base text-xs hover:bg-gray-200 hover:text-primary/80 flex justify-center items-center rounded-md ${carType === 'manual'
+                            className={`sm:w-32 w-20 sm:text-base text-xs hover:text-primary/80 flex justify-center items-center rounded-md ${carType === 'manual'
                                 ? 'bg-secondary text-light hover:bg-secondary hover:text-light'
-                                : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
+                                : 'bg-light border border-primary/20 text-primary/70'}`}
                         >
                             <span>Manual</span>
                         </Button>
                         <Button
                             onClick={() => handleChangeCarType('all')}
-                            className={`sm:w-32 w-20 sm:text-base text-xs hover:bg-secondary hover:text-light flex justify-center items-center rounded-md ${carType === 'all'
+                            className={`sm:w-32 w-20 sm:text-base text-xs hover:text-light flex justify-center items-center rounded-md ${carType === 'all'
                                 ? ' text-light'
-                                : 'bg-gray-100 border border-primary/20 text-primary/70'}`}
+                                : 'bg-light border border-primary/20 text-primary/70'}`}
                         >
                             <span>All</span>
                         </Button>

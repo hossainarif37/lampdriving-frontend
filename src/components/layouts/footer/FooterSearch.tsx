@@ -3,15 +3,17 @@ import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command"
 import { sydneySuburbs } from '@/constant/sydneySuburbs';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 
-const FooterSearchBoxDesign: FC = () => {
+const FooterSearch: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [carType, setCarType] = useState<'auto' | 'manual'>('auto');
     const [selectedSuburb, setSelectedSuburb] = useState<string>('');
 
     const router = useRouter();
+    const pathname = usePathname();
+    const isHomePage = pathname === '/';
 
     // search handler
     const handleSearch = () => {
@@ -23,10 +25,9 @@ const FooterSearchBoxDesign: FC = () => {
         setCarType('auto');
     }
     return (
-        <div className="lg:max-w-5xl md:max-w-3xl h-48 md:h-40 flex flex-col md:flex-row items-center justify-center md:gap-4 gap-6 w-full md:rounded-md rounded-lg absolute -top-20 left-1/2 right-1/2 -translate-x-1/2 md:px-20 px-6 bg-[#264649]  z-30">
+        <div className="lg:max-w-5xl mx-auto md:max-w-3xl h-48 md:h-40 flex flex-col md:flex-row items-center justify-center md:gap-4 gap-6 w-full md:rounded-md rounded-lg md:px-20 px-6 bg-[#264649] -translate-y-1/2 absolute left-0 right-0">
 
             <div className='md:w-10/12 flex flex-col lg:flex-row items-center justify-between gap-2'>
-
                 {/* Toggle Buttons */}
                 <div className="w-full font-semibold text-light text-center flex gap-1 border p-1 rounded-md bg-light">
                     <Button
@@ -92,5 +93,5 @@ const FooterSearchBoxDesign: FC = () => {
     );
 };
 
-export default FooterSearchBoxDesign;
+export default FooterSearch;
 

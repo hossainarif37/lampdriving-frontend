@@ -10,7 +10,7 @@ const TotalEarnings = ({ totalEarnings }: { totalEarnings: number }) => {
                     <DollarSign className="text-green-600" size={24} />
                 </div>
                 <span className="text-green-600 flex items-center gap-1">
-                    +15.2% <ArrowUpRight size={16} />
+                    0% <ArrowUpRight size={16} />
                 </span>
             </div>
             <h3 className="text-2xl text-primary font-bold mt-4">${totalEarnings.toLocaleString()}</h3>

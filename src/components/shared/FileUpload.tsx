@@ -10,7 +10,6 @@ import { toast } from '@/hooks/use-toast';
 interface FileUploadProps {
     label?: string;
     maxSize?: string;
-    acceptedFormats?: string;
     setImageUrl?: (url: string) => void;
     setImageError?: (error: string) => void;
     selectedFile: File | null;
@@ -19,7 +18,7 @@ interface FileUploadProps {
     removeImage: () => void;
 }
 
-const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxSize = "1500×1500px", acceptedFormats = ".svg,.png,.jpg", setImageUrl, setImageError, selectedFile, setSelectedFile, imageUrl, removeImage }) => {
+const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxSize = "1500×1500px", setImageUrl, setImageError, selectedFile, setSelectedFile, imageUrl, removeImage }) => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
     const inputRef = useRef<HTMLInputElement>(null);
@@ -156,7 +155,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
                 >
                     <input
                         type="file"
-                        accept={acceptedFormats}
+                        accept='image/*'
                         ref={inputRef}
                         onChange={handleFileChange}
                         className="hidden"

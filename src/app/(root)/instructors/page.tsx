@@ -16,7 +16,7 @@ interface IInstructorProps {
 const InstructorsPage: FC<IInstructorProps> = async ({ searchParams }) => {
     const searchedParams = await searchParams;
     return (
-        <div className='bg-light-green'>
+        <div className='bg-light'>
             <div className='wrapper py-14 space-y-7'>
                 {/* <SectionHeading title='Our Instructors' subtitle='Find the perfect instructor for your learning journey' /> */}
                 <InstructorsSearchFilter searchParams={searchedParams} />

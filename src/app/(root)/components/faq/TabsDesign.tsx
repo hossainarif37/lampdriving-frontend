@@ -18,7 +18,7 @@ const TabsDesign: FC<ITabsDesignProps> = ({ activeTab, setActiveTab }) => {
                         className={`md:px-4 border px-3 py-2 rounded-full text-sm font-medium cursor-pointer
                             ${activeTab === tab
                                 ? "bg-secondary text-light"
-                                : "bg-light text-primary hover:border"
+                                : "bg-gray-100 text-primary border"
                             }`}
                     >
                         {tab}

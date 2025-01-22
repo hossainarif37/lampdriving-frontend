@@ -7,7 +7,8 @@ import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Lamp Driving School",
-  description: "Lamp Driving School is an driving school ",
+  description: "Lamp Driving School is a driving school",
+  keywords: ["Lamp Driving School", "Lamp", "Driving", "Lamp Driving", "Driving School", "Lamp Driving School", "Driving School Australia", "Lamp Driving School Australia", "Driving School in Australia"]
 };
 
 const pathway = Pathway_Extreme({ subsets: ["latin"] });
@@ -18,7 +19,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`${pathway.className}`}
       >

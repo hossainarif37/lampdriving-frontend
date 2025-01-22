@@ -5,7 +5,6 @@ import { Control, Controller, FieldErrors, UseFormRegister } from 'react-hook-fo
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { IVehicle } from '@/types/instructor';
 
-
 interface Inputs {
     name: string;
     model: string;
@@ -72,23 +71,33 @@ const CarInfoFields: FC<ICarInfoFieldsProps> = ({ register, control, errors, def
                 </div>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-                    {/* Cart Type */}
+                    {/* Car Manufacture Year */}
                     <div>
-                        <label htmlFor="year" className='font-semibold text-primary'>Year</label>
+                        <label htmlFor="year" className='font-semibold text-primary'>Manufacture Year</label>
                         <Input
                             {...register('year', {
                                 required: {
                                     value: isRequired,
                                     message: "Year is required",
+                                },
+                                max: {
+                                    value: new Date().getFullYear(),
+                                    message: "Year should be less than current year"
+                                },
+                                min: {
+                                    value: new Date().getFullYear() - 10,
+                                    message: "Year should be greater than 10 years ago"
                                 }
                             })}
                             defaultValue={defaultValues?.year}
                             type="number"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter Manufacture Year"
                             className='h-11 xl:h-14 mt-1'
                         />
                         {errors?.year && <p className='text-red-500 text-sm mt-1'>{errors.year.message}</p>}
                     </div>
+
+                    {/* Car Type */}
                     <div>
                         <label className="font-semibold text-primary">Type</label>
                         <Controller
@@ -116,8 +125,6 @@ const CarInfoFields: FC<ICarInfoFieldsProps> = ({ register, control, errors, def
 
                         {errors?.type && <p className='text-red-500 text-sm mt-1'>{errors?.type?.message}</p>}
                     </div>
-
-
                 </div>
 
                 {/* Car Rating */}

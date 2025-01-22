@@ -25,11 +25,8 @@ const EarningsCalculator: FC = () => {
 
                     <div className="space-y-4">
                         {/* Heading section */}
-                        <h2 className="text-4xl font-bold">
-                            Get Bookings With{" "}
-                            <span className="text-gradient">
-                                Lamp Driving
-                            </span>
+                        <h2 className="text-4xl font-bold text-primary">
+                            Get Bookings With Lamp Driving
                         </h2>
                         <h3 className="text-3xl font-semibold">
                             You could earn{" "}
@@ -44,13 +41,13 @@ const EarningsCalculator: FC = () => {
                         </p>
                     </div>
 
-                    <Card className="p-6 space-y-6 bg-primary/5">
+                    <Card className="p-6 space-y-6">
                         {/* Card for hourly rate and lesson hours sliders */}
                         <div className="space-y-2">
                             {/* Hourly Rate Slider */}
                             <div className="flex justify-between">
-                                <label className="font-medium">Hourly Rate</label>
-                                <span className="font-semibold">${hourlyRate}</span>
+                                <label className="font-medium text-primary">Hourly Rate</label>
+                                <span className="font-semibold text-primary">${hourlyRate}</span>
                             </div>
                             <Slider
                                 value={[hourlyRate]}
@@ -59,15 +56,14 @@ const EarningsCalculator: FC = () => {
                                 max={150}
                                 step={1}
                                 className="w-full"
-
                             />
                         </div>
 
                         <div className="space-y-2">
                             {/* Lesson Hours Slider */}
                             <div className="flex justify-between">
-                                <label className="font-medium">Lesson Hours per Week</label>
-                                <span className="font-semibold">{lessonHours} hours</span>
+                                <label className="font-medium text-primary">Lesson Hours per Week</label>
+                                <span className="font-semibold text-primary">{lessonHours} hours</span>
                             </div>
                             <Slider
                                 value={[lessonHours]}
@@ -80,14 +76,12 @@ const EarningsCalculator: FC = () => {
                         </div>
                     </Card>
 
-                    <div>
-                        {/* Call-to-action button linking to the registration page */}
-                        <Link href="/instructor-registration?step=personal-info">
-                            <Button size="lg" className="w-full sm:w-auto gradient-color">
-                                Sign up now
-                            </Button>
-                        </Link>
-                    </div>
+                    {/* Call-to-action button linking to the registration page */}
+                    <Link href="/instructor-registration?step=personal-info">
+                        <Button className="w-full mt-5 sm:w-auto gradient-color">
+                            Sign up now
+                        </Button>
+                    </Link>
                 </div>
 
                 <div className="relative h-[480px] rounded-2xl overflow-hidden hidden md:block">

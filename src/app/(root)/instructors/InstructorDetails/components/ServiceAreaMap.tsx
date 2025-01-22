@@ -1,8 +1,11 @@
+"use client"
+
 import { MapContainer, TileLayer, Polygon, ZoomControl, useMap } from 'react-leaflet';
 import { ChevronDown, ChevronUp, Maximize, Maximize2 } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import { useState, useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { Tooltip } from '@/components/ui/tooltip';
 
 // Separate component to handle map invalidation
 function MapResizer() {
@@ -19,16 +22,41 @@ function MapResizer() {
     return null;
 }
 
+// Example Sydney suburbs with approximate coordinates
 const SYDNEY_CENTER: [number, number] = [-33.886783, 151.193336];
-const SERVICE_AREA = [
-    [-33.847927, 151.209682],
-    [-33.891014, 151.277575],
-    [-33.920372, 151.192818],
-    [-33.886783, 151.153336],
-    [-33.872761, 151.194359],
-    [-33.847927, 151.209682],
+const SUBURB_AREAS: { name: string; coordinates: [number, number][] }[] = [
+    {
+        name: "Bondi",
+        coordinates: [
+            [-33.8917, 151.2526],
+            [-33.8950, 151.2630],
+            [-33.8994, 151.2680],
+            [-33.9032, 151.2630],
+            [-33.8994, 151.2526],
+            [-33.8917, 151.2526],
+        ] as [number, number][]
+    },
+    {
+        name: "Surry Hills",
+        coordinates: [
+            [-33.8827, 151.2090],
+            [-33.8860, 151.2153],
+            [-33.8915, 151.2147],
+            [-33.8938, 151.2090],
+            [-33.8827, 151.2090],
+        ] as [number, number][]
+    },
+    {
+        name: "Paddington",
+        coordinates: [
+            [-33.8814, 151.2244],
+            [-33.8847, 151.2320],
+            [-33.8890, 151.2320],
+            [-33.8890, 151.2244],
+            [-33.8814, 151.2244],
+        ] as [number, number][]
+    }
 ];
-
 
 import { FC } from 'react';
 
@@ -120,7 +148,7 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
 
                     <MapContainer
                         center={SYDNEY_CENTER}
-                        zoom={11}
+                        zoom={12}
                         className="h-full w-full"
                         zoomControl={false}
                     >
@@ -144,14 +172,20 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
                                 />
                             </>
                         )}
-                        <Polygon
-                            positions={SERVICE_AREA as [number, number][]}
-                            pathOptions={{
-                                color: 'transparent',
-                                fillColor: '#FFD700',
-                                fillOpacity: 0.3,
-                            }}
-                        />
+                        {SUBURB_AREAS.map((suburb, index) => (
+                            <Polygon
+                                key={suburb.name}
+                                positions={suburb.coordinates}
+                                pathOptions={{
+                                    color: '#FFD700',
+                                    weight: 2,
+                                    fillColor: '#FFD700',
+                                    fillOpacity: 0.3,
+                                }}
+                            >
+                                {/* <Tooltip>{suburb.name}</Tooltip> */}
+                            </Polygon>
+                        ))}
                     </MapContainer>
                 </div>
             </div>

@@ -75,22 +75,6 @@ const Pricing: FC = () => {
                         buttonText="Book Now"
                     />
                 </div>
-
-                {/* Bottom CTA */}
-                <div className="relative text-center wrapper group mt-14">
-                    {/* Horizontal border */}
-                    <hr className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-full z-0 border-gray-500" />
-
-                    {/* Centered button */}
-                    <Button
-                        variant="outline"
-                        className="bg-gray-300  border hover:border-primary/25 h-12 rounded-3xl relative z-10"
-                    >
-                        <span className="text-gray-600 mr-2 md:block hidden">Discover what others are saying.</span>
-                        <ChevronRight className='group-hover:translate-x-2 duration-300' />
-                        <span className="font-bold text-secondary">VIEW ALL</span>
-                    </Button>
-                </div>
             </div>
         </div>
     );

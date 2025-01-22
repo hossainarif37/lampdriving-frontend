@@ -10,6 +10,8 @@ import HowLampDrivingWork from './components/how-lampdriving-works/HowLampDrivin
 import MissionVisionSection from './about/components/MissionVisionSection';
 import AboutStats from './about/components/AboutStats/AboutStats';
 import Pricing from './components/pricing/Pricing';
+import TopNavigator from '@/components/shared/TopNavigator';
+import FooterSearch from '@/components/layouts/footer/FooterSearch';
 
 const HomePage: FC = () => {
   return (
@@ -26,6 +28,8 @@ const HomePage: FC = () => {
       <Testimonials />
       <AboutStats />
       <FAQ />
+      {/* <FooterSearch /> */}
+      <TopNavigator />
     </div>
   );
 };

@@ -24,6 +24,9 @@ import TotalEarnings from './components/TotalEarnings';
 import PendingBalance from './components/PendingBalance';
 import CurrentBalance from './components/CurrentBalance';
 import TotalWithdraw from './components/TotalWithdraw';
+import { useGetWalletBalanceQuery } from '@/redux/api/walletApi/walletApi';
+import { useAppSelector } from '@/redux/hook';
+import Loading from '@/components/shared/Loading';
 
 // Mock data for the chart
 const monthlyData = [
@@ -36,9 +39,20 @@ const monthlyData = [
 ];
 
 const WalletPage: FC = () => {
-    const totalEarnings = 18900;
-    const currentBalance = 720;
-    const totalWithdraw = totalEarnings - currentBalance;
+    const { user } = useAppSelector(state => state.authSlice);
+    const instructorId = typeof user?.instructor === 'string' ?
+        user?.instructor :
+        user?.instructor?._id;
+
+    const { data, isLoading } = useGetWalletBalanceQuery({ id: instructorId as string });
+
+
+
+    if (isLoading) {
+        return <Loading />
+    }
+
+
     return (
         <div className="min-h-screen bg-gray-50 p-6">
             <div className="max-w-7xl mx-auto space-y-6">
@@ -57,16 +71,16 @@ const WalletPage: FC = () => {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Total Earnings */}
-                    <TotalEarnings totalEarnings={totalEarnings} />
+                    <TotalEarnings totalEarnings={data?.data?.balance?.totalEarnings} />
 
                     {/* Pending Balance */}
-                    <PendingBalance />
+                    <PendingBalance pendingBalance={data?.data?.balance?.pendingBalance} />
 
                     {/* Current Balance */}
-                    <CurrentBalance currentBalance={currentBalance} />
+                    <CurrentBalance currentBalance={data?.data?.balance?.currentBalance} />
 
                     {/* Total Withdraw */}
-                    <TotalWithdraw totalWithdraw={totalWithdraw} />
+                    <TotalWithdraw totalWithdraw={data?.data?.balance?.totalWithdraw} />
                 </div>
 
                 {/* Chart Section */}

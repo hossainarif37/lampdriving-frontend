@@ -32,7 +32,7 @@ const FAQ: FC = () => {
         setFilteredFaqs(faqs.filter((faq) => faq.category === activeTab));
     }, [activeTab, faqs]);
     return (
-        <div className='space-y-3 md:space-y-6 pt-20 p-3 bg-light-green pb-40'>
+        <div className='h-[700px] space-y-3 md:space-y-6 pt-20 p-3 bg-light'>
             {/*Section Heading*/}
             <SectionHeading title='Frequently Asked Questions' subtitle='Find answers to common queries about our driving courses, instructors, fees, and more.' className='md:mb-14' />
             {/*Tabs button part*/}
