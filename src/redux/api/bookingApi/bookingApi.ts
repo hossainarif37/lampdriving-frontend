@@ -3,7 +3,7 @@ import baseApi from "../baseApi";
 import { IBooking, IBookingInputs } from "@/types/booking";
 
 interface IGetAllBookingsQuery {
-    status: "upcoming" | "ongoing" | "completed" | "refunded";
+    status?: "upcoming" | "ongoing" | "completed" | "refunded";
     searchKey: string;
     limit: string;
     page: string;
@@ -24,7 +24,7 @@ const bookingApi = baseApi.injectEndpoints({
             query: ({ status, searchKey, limit, page }) => `/booking/all?status=${status}&populate=instructor.user,learner.user,payment,schedules&paymentFields=transactionId&learnerFields=user&instructorFields=user&userFields=name,email&schedulesFields=date,time,status,duration${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
         }),
         getMyBookings: builder.query<IResponseWithPaginationData<IBooking[]>, IGetAllBookingsQuery>({
-            query: ({ status, searchKey, limit, page }) => `/booking/my?status=${status}&populate=instructor.user,learner.user,payment,schedules&paymentFields=transactionId&learnerFields=user&instructorFields=user&userFields=name,email&schedulesFields=date,time,status,duration${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
+            query: ({ status, searchKey, limit, page }) => `/booking/my?${status ? `status=${status}` : ""}&populate=instructor.user,learner.user,payment,schedules&paymentFields=transactionId&learnerFields=user&instructorFields=user&userFields=name,email&schedulesFields=date,time,status,duration&sort=-status${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
         }),
         updateBookingStatus: builder.mutation<IResponseBase, { id: string }>({
             query: ({ id }) => ({
