@@ -48,9 +48,22 @@ const scheduleApi = baseApi.injectEndpoints({
                 body: { status }
             }),
             invalidatesTags: ["schedule", "booking"]
+        }),
+        createASchedule: builder.mutation<IResponseWithData<ISchedule>, Partial<ISchedule>>({
+            query: (data) => ({
+                url: '/schedule',
+                method: "POST",
+                body: data
+            }),
+            invalidatesTags: ["schedule", "booking"]
         })
     })
 })
 
 
-export const { useGetInstructorAvailabilityQuery, useGetInstructorsSchedulesQuery, useRescheduleAScheduleMutation, useUpdateAScheduleStatusMutation } = scheduleApi; 
+export const {
+    useGetInstructorAvailabilityQuery,
+    useGetInstructorsSchedulesQuery,
+    useRescheduleAScheduleMutation,
+    useUpdateAScheduleStatusMutation,
+    useCreateAScheduleMutation } = scheduleApi; 

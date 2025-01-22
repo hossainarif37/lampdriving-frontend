@@ -2,12 +2,14 @@
 import { FC, useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { IWorkingHour } from '@/types/instructor';
-import { useGetInstructorAvailabilityQuery } from '@/redux/api/scheduleApi/scheduleApi';
+import { useCreateAScheduleMutation, useGetInstructorAvailabilityQuery } from '@/redux/api/scheduleApi/scheduleApi';
 import ScheduleCalender from '@/app/(root)/instructors/booking/components/schedule-step/ScheduleCalender';
 import ScheduleTimeSlots from '@/app/(root)/instructors/booking/components/schedule-step/ScheduleTimeSlots';
 import { Button } from '@/components/ui/button';
 import { useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi';
 import { useAppSelector } from '@/redux/hook';
+import { toast } from '@/hooks/use-toast';
+import { ISchedule } from '@/types/schedule';
 
 
 const ManageAvailability: FC = () => {
@@ -19,6 +21,8 @@ const ManageAvailability: FC = () => {
     const { data: instructorData } = useGetAInstructorQuery({ username: user?.username || '' });
     const { data } = useGetInstructorAvailabilityQuery({ id: instructorData?.data._id || '' });
     const [selectedTime, setSelectedTime] = useState<string[]>([]);
+
+    const [createASchedule, { isLoading }] = useCreateAScheduleMutation();
     useEffect(() => {
         if (!selectedDate) {
             setBookedTimeSlots([]);
@@ -49,6 +53,32 @@ const ManageAvailability: FC = () => {
         const newTime = time.filter(t => !selectedTime.includes(t));
         const removedTime = selectedTime.filter(t => time.includes(t));
         setSelectedTime(pre => [...pre, ...newTime].filter(t => !removedTime.includes(t)));
+    }
+
+    const handleBlockSlots = () => {
+        const schedule: Partial<ISchedule> = {
+            date: selectedDate || new Date(),
+            time: selectedTime,
+            duration: selectedTime.length,
+            pickupAddress: {
+                address: ' ',
+                suburb: ' '
+            },
+            type: "blank",
+            instructor: instructorData?.data._id
+        }
+        createASchedule(schedule).unwrap().then((res) => {
+            toast({
+                message: res.message
+            })
+            setSelectedTime([]);
+            setSelectedDate(null);
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong"
+            })
+        });
     }
     return (
         <div>
@@ -81,7 +111,7 @@ const ManageAvailability: FC = () => {
                 </div>
             </div>
             <div className='text-end'>
-                <Button className='w-60 mt-4'>Block Slots</Button>
+                <Button loading={isLoading} onClick={handleBlockSlots} disabled={selectedTime.length === 0} className='w-60 mt-4'>Block Slots</Button>
             </div>
         </div>
     );
