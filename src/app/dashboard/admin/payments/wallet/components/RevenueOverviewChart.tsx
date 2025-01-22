@@ -1,17 +1,21 @@
-import React from 'react';
+'use client'
+
+import { toFixedNumber } from '@/lib/utils';
+import { formatDate } from 'date-fns';
+import React, { FC } from 'react';
 import { Line, Tooltip, CartesianGrid, ResponsiveContainer, YAxis, LineChart, XAxis } from 'recharts';
 
 // Mock data for the chart
-const monthlyData = [
-    { month: 'Jan', totalAmount: 12500, platformFee: 2500, instructorPayout: 10000 },
-    { month: 'Feb', totalAmount: 15800, platformFee: 3160, instructorPayout: 12640 },
-    { month: 'Mar', totalAmount: 14200, platformFee: 2840, instructorPayout: 11360 },
-    { month: 'Apr', totalAmount: 18900, platformFee: 3780, instructorPayout: 15120 },
-    { month: 'May', totalAmount: 16700, platformFee: 3340, instructorPayout: 13360 },
-    { month: 'Jun', totalAmount: 19500, platformFee: 3900, instructorPayout: 15600 }
-];
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-const RevenueOverviewChart = () => {
+const RevenueOverviewChart: FC<{ lastSixMonthsStats: any }> = ({ lastSixMonthsStats }) => {
+    const monthlyData = lastSixMonthsStats?.map((item: any, index: number) => ({
+        month: months[index],
+        totalAmount: toFixedNumber(item.totalRevenue),
+        platformFee: toFixedNumber(item.platformFee),
+        instructorPayout: toFixedNumber(item.instructorPayout)
+    }));
+
     return (
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="flex items-center justify-between mb-6">

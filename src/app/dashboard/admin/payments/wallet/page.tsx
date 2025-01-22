@@ -53,7 +53,7 @@ const WalletPage: FC = () => {
                 </div>
 
                 {/* Chart Section */}
-                <RevenueOverviewChart />
+                <RevenueOverviewChart lastSixMonthsStats={data?.data?.lastSixMonthsStats} />
             </div>
         </div>
     );
