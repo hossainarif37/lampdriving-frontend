@@ -52,14 +52,13 @@ const ManageAvailability: FC = () => {
                     <span>Closed / Booked</span>
                 </div>
             </div> */}
-            <div className='grid grid-cols-2 text-black border-y'>
+            <div className='grid grid-cols-2 text-black gap-6'>
                 <div>
                     <ScheduleCalender
                         availableScheduleHours={1}
                         schedules={[]}
                         bookedSchedules={data?.data.schedules || []}
                         workingHours={instructorData?.data.workingHour || null}
-                        classname='border-y-0 border-l-0 shadow-none border-r rounded-none'
                         selectedDate={selectedDate}
                         onSelectDate={setSelectedDate}
                     />
@@ -69,9 +68,9 @@ const ManageAvailability: FC = () => {
                         scheduleTimeSlots={scheduleTimeSlots}
                         setScheduleTimeSlots={setScheduleTimeSlots}
                         workingHour={workingHour}
-                        classname='border-none shadow-none'
                         bookedTimeSlots={bookedTimeSlots}
                         selectedDuration={1}
+                        classname='min-h-[464px]'
                         selectedTime={selectedTime}
                         onSelectTime={setSelectedTime}
                         selectedDate={selectedDate}

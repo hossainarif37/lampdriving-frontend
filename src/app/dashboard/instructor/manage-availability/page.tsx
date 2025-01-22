@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import ManageAvailability from './components/ManageAvailability';
+import ManageWorkingHours from './components/ManageWorkingHours';
 
 const ManageAvailabilityPage: FC = () => {
     return (
@@ -7,7 +8,14 @@ const ManageAvailabilityPage: FC = () => {
             <div className='py-4 px-5 flex items-center justify-between'>
                 <h2 className='font-semibold text-2xl'>Manage Availability</h2>
             </div>
-            <ManageAvailability />
+            <div className='grid grid-cols-12 gap-6'>
+                <div className='col-span-8'>
+                    <ManageAvailability />
+                </div>
+                <div className='col-span-4'>
+                    <ManageWorkingHours />
+                </div>
+            </div>
         </div>
     );
 };
