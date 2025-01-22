@@ -5,7 +5,7 @@ import { Dispatch, FC, SetStateAction } from 'react';
 
 interface IRescheduleTimeProps {
     selectedDate: Date | null;
-    setSelectedDate: Dispatch<SetStateAction<Date | null>>;
+    setSelectedDate: (date: Date) => void;
     scheduleTimeSlots: string[];
     setScheduleTimeSlots: Dispatch<SetStateAction<string[]>>;
     workingHour: { isActive: boolean, startTime: string, endTime: string };
