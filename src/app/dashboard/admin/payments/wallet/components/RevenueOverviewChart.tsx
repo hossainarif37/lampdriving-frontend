@@ -21,7 +21,7 @@ const RevenueOverviewChart: FC<{ lastSixMonthsStats: any }> = ({ lastSixMonthsSt
             <div className="flex items-center justify-between mb-6">
                 <div>
                     <h2 className="text-xl font-bold text-gray-900">Revenue Breakdown</h2>
-                    <p className="text-gray-600">Last 6 months revenue breakdown</p>
+                    <p className="text-gray-600">Last 6 months revenue statistics</p>
                 </div>
                 <div className="flex items-center gap-4">
                     <div className="flex items-center gap-2">

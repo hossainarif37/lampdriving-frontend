@@ -8,6 +8,9 @@ import { useAppSelector } from "@/redux/hook";
 import { BookingList } from "./BookingList";
 import { useGetAdminStatsQuery } from "@/redux/api/statsApi/statsApi";
 import Loading from "@/components/shared/Loading";
+import RevenueOverviewChart from "../../payments/wallet/components/RevenueOverviewChart";
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import BookingStatsChart from "./BookingStatsChart";
 
 // Define the Booking type
 
@@ -47,7 +50,9 @@ const AdminStats: FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <BookingCalendar />
+                    {/* <BookingCalendar /> */}
+                    {/* Chart Section */}
+                    <BookingStatsChart data={data?.data?.lastSixMonthsBookings} />
                     <BookingList bookings={data?.data?.recentBookings} />
                 </div>
             </div>

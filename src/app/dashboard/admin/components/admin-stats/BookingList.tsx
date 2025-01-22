@@ -8,7 +8,7 @@ type Learner = {
 }
 
 type Booking = {
-    id: string;
+    _id: string;
     learner: Learner;
     instructor: string | IUser;
     bookingHours: number;
@@ -34,7 +34,7 @@ export const BookingList: React.FC<BookingListProps> = ({ bookings }) => {
             <div className="divide-y">
                 {bookings.map((booking: Booking) => (
                     <div
-                        key={booking.id}
+                        key={booking._id}
                         className="p-4 hover:bg-gray-50 transition-colors duration-200"
                     >
                         <div className="flex items-center gap-4">

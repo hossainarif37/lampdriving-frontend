@@ -13,9 +13,7 @@ const Sidebar = () => {
     return (
         <div className='fixed lg:flex flex-col lg:h-full w-full lg:w-60 xl:w-70  bg-white z-10'>
             <div className='flex items-center justify-between  my-2 px-3'>
-                <Link href={'/'} className='w-32'>
-                    <LampLogo />
-                </Link>
+                <LampLogo />
 
                 <div className='flex items-center gap-2 lg:hidden'>
                     {/* menu dropdown button for smaller devices */}
