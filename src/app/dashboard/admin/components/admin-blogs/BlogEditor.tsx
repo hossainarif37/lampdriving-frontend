@@ -31,6 +31,7 @@ const BlogEditor: FC = () => {
 
         try {
             const response = await createBlog(blogData).unwrap();
+            console.log(response);
             alert(response.message || "Blog published successfully!");
             setTitle(""); // Clear the form
             setContent("");

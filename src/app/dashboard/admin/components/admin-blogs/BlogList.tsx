@@ -23,7 +23,7 @@ const DUMMY_BLOGS: Blog[] = [
   {
     id: '1',
     title: 'How to Convert Your International Driving Licence In Australia',
-    author: 'EzLicence',
+    author: 'LampDriving',
     excerpt: 'The process for transferring an international driver\'s licence to an Australian licence varies by state and can be confusing. Here we break it down so you know exactly what you need and the steps you need to take to get your Australian licence.',
     image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-FltkzqzMcnyH3LCrAdGu9bHMfPKv5i.png',
     date: '31 Oct 2024'
@@ -31,7 +31,7 @@ const DUMMY_BLOGS: Blog[] = [
   {
     id: '2',
     title: 'Understanding Australian Road Rules',
-    author: 'EzLicence',
+    author: 'LampDriving',
     excerpt: 'A comprehensive guide to Australian road rules and regulations that every new driver needs to know...',
     image: '/placeholder.svg?height=400&width=600',
     date: '15 Nov 2024'
@@ -71,7 +71,7 @@ const BlogList: FC = () => {
                 <div className="space-y-4">
                   <div>
                     <Link href={`/blog/${blog.id}`}>
-                      <h2 className="text-2xl font-bold hover:text-80">
+                      <h2 className="text-2xl font-bold">
                         {blog.title}
                       </h2>
                     </Link>
@@ -85,7 +85,7 @@ const BlogList: FC = () => {
                   <div className="flex items-center gap-4 pt-2">
                     <Link href={`/blog/${blog.id}`}>
                       <Button className="bg-primary">
-                        Continue Reading
+                        details
                       </Button>
                     </Link>
                     <div className="flex gap-2">
