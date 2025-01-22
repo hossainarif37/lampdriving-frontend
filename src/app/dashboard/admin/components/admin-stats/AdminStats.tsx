@@ -10,91 +10,12 @@ import { useGetAdminStatsQuery } from "@/redux/api/statsApi/statsApi";
 import Loading from "@/components/shared/Loading";
 
 // Define the Booking type
-type Booking = {
-    id: string;
-    studentName: string;
-    date: string;
-    time: string;
-    status: "running" | "completed";
-    instructor: string;
-};
 
-// Sample data for bookings
-const initialRunningBookings: Booking[] = [
-    {
-        id: '1',
-        studentName: 'John Doe',
-        date: '2024-03-15',
-        time: '10:00 AM',
-        status: 'running',
-        instructor: 'Mike Johnson'
-    },
-    {
-        id: '2',
-        studentName: 'Jane Smith',
-        date: '2024-03-15',
-        time: '2:00 PM',
-        status: 'running',
-        instructor: 'Sarah Wilson'
-    },
-    {
-        id: '5',
-        studentName: 'Emma Davis',
-        date: '2024-03-15',
-        time: '3:30 PM',
-        status: 'running',
-        instructor: 'Mike Johnson'
-    },
-    {
-        id: '6',
-        studentName: 'Michael Brown',
-        date: '2024-03-15',
-        time: '4:45 PM',
-        status: 'running',
-        instructor: 'Sarah Wilson'
-    }
-];
 
-const initialPastBookings: Booking[] = [
-    {
-        id: '3',
-        studentName: 'Alice Brown',
-        date: '2024-03-14',
-        time: '11:00 AM',
-        status: 'completed',
-        instructor: 'Mike Johnson'
-    },
-    {
-        id: '4',
-        studentName: 'Bob Wilson',
-        date: '2024-03-14',
-        time: '3:00 PM',
-        status: 'completed',
-        instructor: 'Sarah Wilson'
-    },
-    {
-        id: '7',
-        studentName: 'Sophie Turner',
-        date: '2024-03-14',
-        time: '1:15 PM',
-        status: 'completed',
-        instructor: 'Mike Johnson'
-    },
-    {
-        id: '8',
-        studentName: 'James Miller',
-        date: '2024-03-14',
-        time: '5:00 PM',
-        status: 'completed',
-        instructor: 'Sarah Wilson'
-    }
-];
 
 const AdminStats: FC = () => {
     const { user } = useAppSelector(state => state.authSlice);
     const [activeFilter, setActiveFilter] = useState('running');
-    const [runningBookings, setRunningBookings] = useState(initialRunningBookings);
-    const [pastBookings, setPastBookings] = useState(initialPastBookings);
     const { data, isLoading } = useGetAdminStatsQuery(undefined);
 
     if (isLoading) return <Loading />;
@@ -125,26 +46,9 @@ const AdminStats: FC = () => {
                     />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div className="lg:col-span-2">
-                        {/* Booking Filters */}
-                        <div className="flex justify-end">
-                            <BookingFilters
-                                activeFilter={activeFilter}
-                                onFilterChange={setActiveFilter}
-                            />
-                        </div>
-                        {activeFilter === 'running' && (
-                            <BookingList bookings={runningBookings} />
-                        )}
-                        {activeFilter === 'past' && (
-                            <BookingList bookings={pastBookings} />
-
-                        )}
-                    </div>
-                    <div>
-                        <BookingCalendar />
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <BookingCalendar />
+                    <BookingList bookings={data?.data?.recentBookings} />
                 </div>
             </div>
         </div>

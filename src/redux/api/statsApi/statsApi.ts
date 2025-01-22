@@ -9,7 +9,7 @@ const statsApi = baseApi.injectEndpoints({
         }),
 
         getAdminStats: builder.query({
-            query: () => `/stats/admin`
+            query: () => `/stats/admin?populate=learner.user&learnerFields=user`
         })
     })
 })

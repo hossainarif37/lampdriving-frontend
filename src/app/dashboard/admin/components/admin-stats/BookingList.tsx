@@ -1,14 +1,24 @@
 import React from 'react';
 import { Clock, CheckCircle, ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { IUser } from '@/types/user';
 
-interface Booking {
+type Learner = {
     id: string;
-    studentName: string;
-    date: string;
-    time: string;
-    status: 'running' | 'completed';
-    instructor: string;
+    user: IUser;
 }
+
+type Booking = {
+    id: string;
+    learner: Learner;
+    instructor: string | IUser;
+    bookingHours: number;
+    schedules: string[];
+    price: number;
+    status: "upcoming" | "ongoing" | "completed";
+    paymentId: string;
+    createdAt: string;
+    updatedAt: string;
+};
 
 interface BookingListProps {
     // title: string;
@@ -16,14 +26,13 @@ interface BookingListProps {
 }
 
 export const BookingList: React.FC<BookingListProps> = ({ bookings }) => {
+    console.log('Bookings', bookings);
     return (
         <div className="bg-white rounded-lg shadow-sm">
-            {/* <div className="p-6 border-b">
-                <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
-            </div> */}
+            <h1 className="text-xl font-semibold text-primary pt-6 px-6">Recent Bookings</h1>
 
             <div className="divide-y">
-                {bookings.map((booking) => (
+                {bookings.map((booking: Booking) => (
                     <div
                         key={booking.id}
                         className="p-4 hover:bg-gray-50 transition-colors duration-200"
@@ -33,21 +42,17 @@ export const BookingList: React.FC<BookingListProps> = ({ bookings }) => {
                                 <User className="w-5 h-5 text-blue-600" />
                             </div>
                             <div className="flex-grow">
-                                <h3 className="text-lg font-medium text-gray-900">{booking.studentName}</h3>
+                                <h3 className="text-lg font-medium text-gray-900">{typeof booking?.learner === 'object' ? booking?.learner?.user?.name?.firstName : booking?.learner}</h3>
                                 <div className="flex items-center gap-2 text-sm text-gray-600">
-                                    <span>{booking.time}</span>
-                                    <span>•</span>
-                                    <span>2h</span>
+                                    {/* <span>{booking.schedules}</span> */}
+                                    <span>{booking.bookingHours}h</span>
                                 </div>
                             </div>
                             <div>
                                 <button
-                                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-200
-                    ${booking.status === 'completed'
-                                            ? 'bg-green-100 text-green-700'
-                                            : 'bg-red-200 text-primary hover:bg-red-200'}`}
+                                    className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-200 ${booking.status === 'completed' && 'bg-green-100 text-green-700' || booking.status === 'ongoing' && 'bg-orange-100 text-orange-700' || 'bg-blue-100 text-blue-700'}`}
                                 >
-                                    {booking.status === 'completed' ? 'completed' : 'running'}
+                                    {booking.status}
                                 </button>
                             </div>
                         </div>
