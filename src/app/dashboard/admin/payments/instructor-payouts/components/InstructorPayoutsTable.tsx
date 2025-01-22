@@ -30,6 +30,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useGetAllWalletQuery } from '@/redux/api/walletApi/walletApi';
 import Loading from '@/components/shared/Loading';
+import { useCreateInstructorPayoutMutation } from '@/redux/api/transactionApi/transactionApi';
+import DataNotFound from '@/components/shared/DataNotFound';
 
 interface IWalletResponse {
     meta: {
@@ -87,6 +89,7 @@ interface IUser {
 }
 
 interface IInstructorPayout {
+    _id: string;
     name: string;
     lessons: number;
     amount: number;
@@ -95,20 +98,17 @@ interface IInstructorPayout {
     payId: string;
 }
 
-const InstructorPayoutsTable = () => {
+const InstructorPayoutsTable = ({ data }: { data: IWalletResult[] }) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [selectedInstructor, setSelectedInstructor] = useState<IInstructorPayout | null>(null);
     const [transactionId, setTransactionId] = useState<string>('');
     const [isCopied, setIsCopied] = useState<boolean>(false);
-    const { data, isLoading } = useGetAllWalletQuery(undefined);
 
-    if (isLoading) {
-        return <Loading />;
-    }
+    const [createInstructorPayout, { isLoading: isPayoutLoading }] = useCreateInstructorPayoutMutation();
 
-    console.log(data);
 
-    const instructors: IInstructorPayout[] = data?.data?.result?.map((result: IWalletResult) => ({
+    const instructors: IInstructorPayout[] = data?.map((result: IWalletResult) => ({
+        _id: result.instructor._id,
         name: result.instructor.user.name.fullName,
         lessons: result.instructor.completedLessons,
         amount: result.balance.currentBalance,
@@ -124,28 +124,34 @@ const InstructorPayoutsTable = () => {
         setIsModalOpen(true);
     };
 
-    const handleSubmitPayout = () => {
+    const handleSubmitPayout = (instructorId: string) => {
         if (!transactionId.trim()) return;
 
-        console.log('Processing payout:', {
-            instructor: selectedInstructor,
-            transactionId,
-        });
+        createInstructorPayout({ instructorId, transactionId }).unwrap().then((res) => {
+            console.log(res);
+            setIsModalOpen(false);
+            setTransactionId('');
+            setSelectedInstructor(null);
+        }).catch((err) => {
+            console.log(err);
+        })
 
-        setIsModalOpen(false);
-        setTransactionId('');
-        setSelectedInstructor(null);
+
     };
 
-    const copyPayId = async () => {
-        if (selectedInstructor?.payId) {
-            await navigator.clipboard.writeText(selectedInstructor.payId);
+    const copyPayId = async (payId: string) => {
+        if (payId) {
+            await navigator.clipboard.writeText(payId);
             setIsCopied(true);
             setTimeout(() => {
                 setIsCopied(false);
             }, 1000);
         }
     };
+
+    if (instructors.length === 0) {
+        return <DataNotFound dataName="Instructor" />;
+    }
 
     return (
         <>
@@ -243,7 +249,7 @@ const InstructorPayoutsTable = () => {
                                 <Button
                                     variant="outline"
                                     size="icon"
-                                    onClick={copyPayId}
+                                    onClick={() => copyPayId(selectedInstructor?.payId || '')}
                                     className="h-10 w-10"
                                 >
                                     {
@@ -267,7 +273,7 @@ const InstructorPayoutsTable = () => {
                         <Button variant="outline" onClick={() => setIsModalOpen(false)}>
                             Cancel
                         </Button>
-                        <Button onClick={handleSubmitPayout} disabled={!transactionId.trim()}>
+                        <Button onClick={() => handleSubmitPayout(selectedInstructor?._id || '')} disabled={!transactionId.trim() || isPayoutLoading}>
                             Confirm Payout
                         </Button>
                     </DialogFooter>
