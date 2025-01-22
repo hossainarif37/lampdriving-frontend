@@ -1,17 +1,45 @@
 'use client'
 import { FC } from 'react';
-import { Bold, Italic, Strikethrough, Underline, Quote, List, ListOrdered, LinkIcon, ImageIcon, Code, Video, Heading1, Heading2 } from "lucide-react"
+import { Bold, Italic, Strikethrough, Underline, Quote, List, ListOrdered, LinkIcon, ImageIcon, Code, Heading1, Heading2 } from "lucide-react"
 import LabeledInput from "./LabeledInput"
 import TooltipButton from "./TooltipButton"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import TabsComponent from './TabsComponent';
+import { useCreateBlogMutation } from '@/redux/api/blogApi/blogApi';
+
 
 
 const BlogEditor: FC = () => {
     const [content, setContent] = useState("")
     const [title, setTitle] = useState("")
-    const [author, setAuthor] = useState("")
+    const [createBlog, { isLoading, error }] = useCreateBlogMutation();
+
+
+    const handleSubmit = async () => {
+        if (!title || !content) {
+            alert("Title and content are required.");
+            return;
+        }
+
+        const blogData = {
+            title,
+            path: title.toLowerCase().replace(/ /g, "-"), // Generate a path from the title
+            content,
+            image: "", // Handle image upload separately if needed
+        };
+
+        try {
+            const response = await createBlog(blogData).unwrap();
+            console.log(response);
+            alert(response.message || "Blog published successfully!");
+            setTitle(""); // Clear the form
+            setContent("");
+        } catch (err) {
+            console.error(err);
+            alert("Failed to publish the blog.");
+        }
+    };
 
     const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -63,22 +91,13 @@ const BlogEditor: FC = () => {
         }, 0);
     };
     return (
-        <div className="w-full mx-auto p-4 space-y-4">
+        <div className="w-full max-w-8xl mx-auto p-4 space-y-4 ">
             <LabeledInput
                 id="title"
                 label="Blog Title"
                 value={title}
                 placeholder="Enter blog title"
                 onChange={(e) => setTitle(e.target.value)}
-                className="text-2xl font-bold"
-            />
-
-            <LabeledInput
-                id="author"
-                label="Author"
-                value={author}
-                placeholder="Enter author name"
-                onChange={(e) => setAuthor(e.target.value)}
             />
 
             <div className="flex flex-wrap md:w-1/2 gap-2 p-2 bg-gray-100 rounded-md">
@@ -101,11 +120,6 @@ const BlogEditor: FC = () => {
                     icon={<Italic className="h-4 w-4 text-accent/95" strokeWidth={2.5} />}
                     tooltip="Italic"
                     onClick={() => insertMarkdown("italic")}
-                />
-                <TooltipButton
-                    icon={<Strikethrough className="h-4 w-4 text-accent/95" strokeWidth={2.5} />}
-                    tooltip="Strikethrough"
-                    onClick={() => insertMarkdown("strikethrough")}
                 />
                 <TooltipButton
                     icon={<Underline className="h-4 w-4 text-accent/95" strokeWidth={2.5} />}
@@ -153,68 +167,13 @@ const BlogEditor: FC = () => {
                 content={content}
                 setContent={setContent}
                 title={title}
-                author={author}
             />
 
-            <Button className="w-md mx-auto mt-4">
-                Publish Blog
+            <Button className="w-md mx-auto mt-4" disabled={isLoading} onClick={handleSubmit}>
+                {isLoading ? "Publishing..." : "Publish Blog"}
             </Button>
         </div>
     )
 };
 
 export default BlogEditor;
-
-{/* <Tabs defaultValue="write" className="mt-4">
-    <TabsList className='flex gap-2 mb-4'>
-        <TabsTrigger value="write" className='border px-8 py-2 rounded-lg'>Write</TabsTrigger>
-        <TabsTrigger value="preview" className='border px-8 py-2 rounded-lg'>Preview</TabsTrigger>
-    </TabsList>
-    <TabsContent value="write">
-        <Textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Write your blog content here..."
-            className="min-h-[400px] font-mono"
-        />
-    </TabsContent>
-    <TabsContent value="preview">
-        <div className="prose max-w-none">
-            <h1 className="text-3xl font-bold mb-4">{title}</h1>
-            <div className="text-sm text-gray-500 mb-6">
-                by {author} • Last updated {new Date().toLocaleDateString()}
-            </div>
-            <ReactMarkdown
-                rehypePlugins={[rehypeRaw]}
-                components={{
-                    h1: ({ children }) => <h1 className="text-3xl font-bold mt-6 mb-4 text-primary/85">{children}</h1>,
-                    h2: ({ children }) => <h2 className="text-2xl font-bold mt-5 mb-3 text-primary/85">{children}</h2>,
-                    p: ({ children }) => <p className="mb-4 leading-relaxed text-accent">{children}</p>,
-                    ul: ({ children }) => <ul className="list-disc pl-6 my-4 text-accent">{children}</ul>,
-                    ol: ({ children }) => <ol className="list-decimal pl-6 my-4">{children}</ol>,
-                    li: ({ children }) => <li className="my-2 text-accent">{children}</li>,
-                    a: ({ children, href }) => (
-                        <a href={href} className="text-blue-600 hover:underline">
-                            {children}
-                        </a>
-                    ),
-                    img: ({ src, alt }) => (
-                        <Image src={src || "/placeholder.svg"} alt={alt || "Image"} className="w-full rounded-lg my-4" />
-                    ),
-                    code: ({ children }) => (
-                        <code className="bg-gray-100 rounded px-2 py-1">{children}</code>
-                    ),
-                    pre: ({ children }) => (
-                        <pre className="bg-gray-100 rounded-lg p-4 overflow-x-auto my-4">
-                            {children}
-                        </pre>
-                    ),
-                }}
-            >
-                {content.replace(/^>\s?(.*)$/gm, (match, p1) => `"${p1.trim()}"`)}
-            </ReactMarkdown>
-        </div>
-    </TabsContent>
-</Tabs> */}
-
-

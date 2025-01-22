@@ -38,7 +38,7 @@ const Topbar = () => {
                 <ul className="hidden md:flex items-center gap-x-4">
                     <li><Link href="#">Support</Link></li>
                     <Bar />
-                    <li><Link href="#">Blog</Link></li>
+                    <li><Link href="/blog">Blog</Link></li>
                     {
                         !user &&
                         <>

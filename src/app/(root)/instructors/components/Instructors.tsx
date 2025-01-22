@@ -19,7 +19,7 @@ const Instructors: FC<IInstructorProps> = async ({ searchedParams }) => {
     return (
         <div className='min-h-[40vh] space-y-7'>
             {
-                instructors.data.result.length > 0 ?
+                instructors.data?.result.length > 0 ?
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
                         {
                             instructors?.data?.result?.map((instructor, index) => (

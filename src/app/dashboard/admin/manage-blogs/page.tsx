@@ -1,18 +1,17 @@
 'use client'
 import { FC } from 'react';
-
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { PlusCircle, List } from 'lucide-react'
-import { BlogList } from '../components/admin-blogs/BlogList';
+import BlogList from '../components/admin-blogs/BlogList';
 import BlogEditor from '../components/admin-blogs/BlogEditor';
 const BlogPage: FC = () => {
     const [activeView, setActiveView] = useState<'list' | 'create'>('list')
     return (
         <div className="flex h-screen bg-gray-100">
-            <div className="flex-1 md:p-8  overflow-auto">
-                <div className="max-w-8xl mx-auto">
+            <div className="flex-1 md:p-8 overflow-auto">
+                <div className="">
                     <h1 className="text-3xl font-bold mb-6 text-primary/90">Blog Management</h1>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

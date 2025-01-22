@@ -2,19 +2,21 @@ import { FC } from 'react';
 import Image from 'next/image';
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import { Clock } from 'lucide-react';
 
 interface MarkdownPreviewProps {
     content: string;
     title: string;
-    author: string;
 }
 
-const MarkdownPreview: FC<MarkdownPreviewProps> = ({ content, title, author }) => {
+const MarkdownPreview: FC<MarkdownPreviewProps> = ({ content, title }) => {
     return (
         <div className="prose max-w-none">
             <h1 className="text-3xl font-bold mb-4 text-primary/85">{title}</h1>
-            <div className="text-sm text-gray-500 mb-6">
-                by {author} • Last updated {new Date().toLocaleDateString()}
+            <div className="text-xs text-gray-500 mb-6">
+                <span>by lamp driving</span>
+                <Clock className='inline-block ml-6 mr-1 w-4' />
+                <span>Last updated </span> {new Date().toLocaleDateString()}
             </div>
             <ReactMarkdown
                 rehypePlugins={[rehypeRaw]}
