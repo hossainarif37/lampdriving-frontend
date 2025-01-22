@@ -42,21 +42,12 @@ const ManageAvailability: FC = () => {
 
     return (
         <div>
-            {/* <div className="flex items-center justify-center pb-3 gap-6 mt-4 text-sm text-gray-600">
-                <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-primary-600" />
-                    <span>Available</span>
-                </div>
-                <div className="flex items-center gap-2">
-                    <XCircle className="w-4 h-4 text-gray-400" />
-                    <span>Closed / Booked</span>
-                </div>
-            </div> */}
             <div className='grid grid-cols-2 text-black gap-6'>
                 <div>
                     <ScheduleCalender
                         availableScheduleHours={1}
                         schedules={[]}
+                        classname='shadow-none'
                         bookedSchedules={data?.data.schedules || []}
                         workingHours={instructorData?.data.workingHour || null}
                         selectedDate={selectedDate}
@@ -65,12 +56,13 @@ const ManageAvailability: FC = () => {
                 </div>
                 <div>
                     <ScheduleTimeSlots
+                        classname='shadow-none'
+                        slotContainerClassname='h-[350px] overflow-y-scroll'
                         scheduleTimeSlots={scheduleTimeSlots}
                         setScheduleTimeSlots={setScheduleTimeSlots}
                         workingHour={workingHour}
                         bookedTimeSlots={bookedTimeSlots}
                         selectedDuration={1}
-                        classname='min-h-[464px]'
                         selectedTime={selectedTime}
                         onSelectTime={setSelectedTime}
                         selectedDate={selectedDate}
@@ -78,7 +70,7 @@ const ManageAvailability: FC = () => {
                     />
                 </div>
             </div>
-            <div className='text-end mx-6'>
+            <div className='text-end'>
                 <Button className='w-60 mt-4'>Block Slots</Button>
             </div>
         </div>
