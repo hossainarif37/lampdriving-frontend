@@ -12,7 +12,7 @@ import { useState } from "react";
 
 const Navbar = () => {
     const pathname = usePathname();
-    const visible = useWindowScroll(10);
+    const visible = useWindowScroll(5);
 
 
     return (
