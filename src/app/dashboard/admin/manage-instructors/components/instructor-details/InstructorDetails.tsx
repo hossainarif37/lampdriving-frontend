@@ -4,10 +4,15 @@ import { format } from 'date-fns';
 import { Calendar, Car, CheckCircle2, Clock, FileText, Languages, Mail, MapPin, Phone, Star, User, Wallet } from 'lucide-react';
 import Image from 'next/image';
 import { FC } from 'react';
+import InstructorDetailsSkeleton from './InstructorDetailsSkeleton';
 
 
 const InstructorDetails: FC<{ id: string }> = ({ id }) => {
     const { data, isLoading } = useGetAInstructorByAdminQuery({ id: id });
+
+    if (isLoading) {
+        return <InstructorDetailsSkeleton />
+    }
 
     const instructor = data?.data;
     if (!instructor) {
@@ -24,16 +29,16 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                         <div className="flex shrink-0 overflow-hidden rounded-full size-16">
                             <Image
                                 className='object-cover'
-                                src={(instructor as any).user.profileImg}
+                                src={(instructor as any)?.user?.profileImg}
                                 width={100}
                                 height={100}
-                                alt={`${(instructor as any).user.name.firstName[0]}'s image`} />
+                                alt={`${(instructor as any)?.user?.name.firstName[0]}'s image`} />
                         </div>
                         <div className="space-y-2">
                             <div className="flex items-center space-x-2">
                                 <User className="h-4 w-4 text-muted-foreground" />
-                                <h2 className="text-xl font-semibold">{(instructor.user as any).name.fullName}</h2>
-                                {instructor.status === "verified" && (
+                                <h2 className="text-xl font-semibold">{(instructor?.user as any).name.fullName}</h2>
+                                {instructor?.status === "verified" && (
                                     <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white flex items-center justify-center'>
                                         <CheckCircle2 className="h-3 w-3 mr-1" />
                                         Verified
@@ -42,16 +47,16 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Mail className="h-4 w-4 text-muted-foreground" />
-                                <span className="text-sm text-muted-foreground break-all">{(instructor.user as any).email}</span>
+                                <span className="text-sm text-muted-foreground break-all">{(instructor?.user as any).email}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Phone className="h-4 w-4 text-muted-foreground" />
-                                <span className="text-sm text-muted-foreground">{(instructor.user as any).phone}</span>
+                                <span className="text-sm text-muted-foreground">{(instructor?.user as any).phone}</span>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Calendar className="h-4 w-4 text-muted-foreground" />
                                 <span className="text-sm text-muted-foreground">
-                                    Born {format(new Date((instructor.user as any).dateOfBirth), "PPP")}
+                                    Born {format(new Date((instructor?.user as any).dateOfBirth), "PPP")}
                                 </span>
                             </div>
                         </div>
@@ -64,21 +69,21 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                                     <Star className={`h-4 w-4 text-yellow-500`} />
                                     <span>Rating</span>
                                 </div>
-                                <span className="font-semibold">{instructor.feedback.rating}</span>
+                                <span className="font-semibold">{instructor?.feedback?.rating ? instructor?.feedback?.rating : "N/A" }</span>
                             </div>
                             <div className="flex justify-between items-center">
                                 <div className="flex items-center space-x-2">
                                     <CheckCircle2 className={`h-4 w-4 text-green-500`} />
                                     <span>Completed Lessons</span>
                                 </div>
-                                <span className="font-semibold">{instructor.completedLessons}</span>
+                                <span className="font-semibold">{instructor?.completedLessons}</span>
                             </div>
                             <div className="flex justify-between items-center">
                                 <div className="flex items-center space-x-2">
                                     <Wallet className={`h-4 w-4 text-purple-500`} />
                                     <span>Total Earnings</span>
                                 </div>
-                                <span className="font-semibold">{(instructor as any).wallet.balance.totalEarnings}</span>
+                                <span className="font-semibold">{(instructor as any)?.wallet?.balance.totalEarnings}</span>
                             </div>
                         </div>
                     </div>
@@ -92,7 +97,7 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                         <div className="space-y-2">
                             <h4 className="font-medium">Driving License</h4>
                             <img
-                                src={instructor.documents.drivingLicense}
+                                src={instructor?.documents.drivingLicense}
                                 alt="Driving License"
                                 className="w-full h-48 object-cover rounded-lg border hover:opacity-90 transition-opacity"
                             />
@@ -101,7 +106,7 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             <h4 className="font-medium">Experience Certificate</h4>
 
                             <img
-                                src={instructor.documents.experienceCertificate}
+                                src={instructor?.documents.experienceCertificate}
                                 alt="Experience Certificate"
                                 className="w-full h-48 object-cover rounded-lg border hover:opacity-90 transition-opacity"
                             />
@@ -117,28 +122,28 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                         </div>
                         <div className="space-y-4">
                             <img
-                                src={instructor.vehicle.image}
-                                alt={`${instructor.vehicle.name} ${instructor.vehicle.model}`}
+                                src={instructor?.vehicle.image}
+                                alt={`${instructor?.vehicle.name} ${instructor?.vehicle.model}`}
                                 className="w-full h-48 object-cover rounded-lg"
                             />
                             <div className="space-y-2">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center space-x-2">
-                                        <span>{instructor.vehicle.name} {instructor.vehicle.model}</span>
+                                        <span>{instructor?.vehicle.name} {instructor?.vehicle.model}</span>
                                     </div>
                                     <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
-                                        {firstLetterUppercase(instructor.vehicle.type)}
+                                        {firstLetterUppercase(instructor?.vehicle.type)}
                                     </span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-muted-foreground">Year</span>
-                                    <span>{instructor.vehicle.year}</span>
+                                    <span>{instructor?.vehicle.year}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-muted-foreground">Rating</span>
                                     <div className="flex items-center">
                                         ANCAP Rating -
-                                        <span> {instructor.vehicle.rating}</span>
+                                        <span> {instructor?.vehicle.rating}</span>
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +155,7 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             <h3 className="text-lg font-semibold">Working Hours</h3>
                         </div>
                         <div className="space-y-2">
-                            {Object.entries(instructor.workingHour).map(([day, hours]) => (
+                            {Object.entries(instructor?.workingHour).map(([day, hours]) => (
                                 <div key={day} className="flex justify-between items-center ">
                                     <span className="capitalize">{day}</span>
                                     <span className="text-sm">
@@ -166,7 +171,7 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             <h3 className="text-lg font-semibold">Languages</h3>
                         </div>
                         <div className="flex flex-wrap gap-2">
-                            {instructor.languages.map((language, index) => (
+                            {instructor?.languages.map((language, index) => (
                                 <span key={index} className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
                                     {language}
                                 </span>
@@ -179,7 +184,7 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             <h3 className="text-lg font-semibold">Service Areas</h3>
                         </div>
                         <div className="flex flex-wrap gap-2">
-                            {instructor.serviceAreas.map((area, index) => (
+                            {instructor?.serviceAreas.map((area, index) => (
                                 <span key={index} className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
                                     {area}
                                 </span>
