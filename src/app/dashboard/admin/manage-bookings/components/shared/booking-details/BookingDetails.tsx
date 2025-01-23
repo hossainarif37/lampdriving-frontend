@@ -6,6 +6,7 @@ import { ArrowRight, CalendarDays, Clock, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { FC } from 'react';
 import BookingDetailsSkeleton from './BookingDetailsSkeleton';
+import { firstLetterUppercase } from '@/utils/firstLetterUppercase';
 
 
 
@@ -86,7 +87,7 @@ const BookingDetails: FC<{ id: string }> = ({ id }) => {
                 <div className="flex items-center justify-between">
                     <span className="font-medium">Status:</span>
                     <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
-                        {booking.status}
+                        {firstLetterUppercase(booking.status)}
                     </span>
                 </div>
             </div>
@@ -105,10 +106,10 @@ const BookingDetails: FC<{ id: string }> = ({ id }) => {
                                     </div>
                                     <div className='space-x-2'>
                                         <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
-                                            {schedule.type}
+                                            {firstLetterUppercase(schedule.type)}
                                         </span>
                                         <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
-                                            {schedule.status}
+                                            {firstLetterUppercase(schedule.status)}
                                         </span>
                                     </div>
                                 </div>
