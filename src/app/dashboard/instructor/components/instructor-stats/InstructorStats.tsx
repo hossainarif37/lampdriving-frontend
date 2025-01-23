@@ -25,19 +25,8 @@ const stats = {
   totalEarnings: 12450
 };
 
-const runningBookings = [
-  { id: 1, studentName: "John Doe", date: "2024-03-20", time: "10:00 AM", duration: "2h", status: "confirmed" },
-  { id: 2, studentName: "Jane Smith", date: "2024-03-20", time: "2:00 PM", duration: "1h", status: "confirmed" },
-  { id: 3, studentName: "Jane Smith", date: "2024-03-20", time: "2:00 PM", duration: "1h", status: "confirmed" },
-  { id: 4, studentName: "Jane Smith", date: "2024-03-20", time: "2:00 PM", duration: "1h", status: "confirmed" },
-];
 
-const pastBookings = [
-  { id: 3, studentName: "Mike Johnson", date: "2024-03-19", time: "11:00 AM", duration: "1h", status: "completed" },
-  { id: 4, studentName: "Sarah Wilson", date: "2024-03-19", time: "3:00 PM", duration: "2h", status: "completed" },
-  { id: 5, studentName: "Sarah Wilson", date: "2024-03-19", time: "3:00 PM", duration: "2h", status: "completed" },
-  { id: 6, studentName: "Sarah Wilson", date: "2024-03-19", time: "3:00 PM", duration: "2h", status: "completed" },
-];
+
 
 
 const InstructorStats: FC = () => {
@@ -50,6 +39,20 @@ const InstructorStats: FC = () => {
   if (isLoading) {
     return <Loading />
   }
+
+  const upComingSchedules = data.data.upcomingSchedules.map((booking: any) => ({
+    id: booking._id,
+    studentName: booking.learner.user.name.fullName,
+    date: booking.date,
+    time: booking.time,
+    duration: booking.duration,
+    status: booking.status,
+    pickupAddress: {
+      address: booking.pickupAddress.address,
+      suburb: booking.pickupAddress.suburb,
+    },
+  }));
+
 
   console.log('Instructor Stats', data.data);
 
@@ -117,8 +120,8 @@ const InstructorStats: FC = () => {
           {/* Bookings Lists */}
           <div className="lg:col-span-2 space-y-6">
             <BookingsList
-              title="Running Bookings"
-              bookings={runningBookings}
+              title="Upcoming Bookings"
+              bookings={upComingSchedules}
               type="running"
               selectedDate={selectedDate}
             />
