@@ -1,5 +1,6 @@
 import React from 'react';
-import { Clock, User } from 'lucide-react';
+import { Calendar, Clock, User } from 'lucide-react';
+import { formatDate } from 'date-fns';
 
 interface Booking {
   id: number;
@@ -35,28 +36,29 @@ export function BookingsList({ title, bookings, type, selectedDate }: BookingsLi
               className="flex items-center justify-between p-4 rounded-lg border border-gray-200 hover:border-blue-500 transition-colors duration-200"
             >
               <div className="flex items-center space-x-4">
-                <div className={`p-2 rounded-full ${
-                  type === 'running' ? 'bg-blue-100' : 'bg-gray-100'
-                }`}>
-                  <User className={`h-5 w-5 ${
-                    type === 'running' ? 'text-blue-600' : 'text-gray-600'
-                  }`} />
+                <div className={`p-2 rounded-full ${type === 'running' ? 'bg-blue-100' : 'bg-gray-100'
+                  }`}>
+                  <User className={`h-5 w-5 ${type === 'running' ? 'text-blue-600' : 'text-gray-600'
+                    }`} />
                 </div>
-                <div>
+                <div className="flex flex-col gap-y-1">
                   <h3 className="font-medium text-gray-900">{booking.studentName}</h3>
                   <div className="flex items-center space-x-2 text-sm text-gray-500">
                     <Clock className="h-4 w-4" />
-                    <span>{booking.time}</span>
-                    <span>•</span>
-                    <span>{booking.duration}</span>
+                    <span>{booking.time[0]}</span>
+                    <span>-</span>
+                    <span>{booking.duration}h</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm text-gray-500">
+                    <Calendar className="h-4 w-4" />
+                    <span>{formatDate(booking.date, 'dd MMMM yyyy')}</span>
                   </div>
                 </div>
               </div>
-              <div className={`px-3 py-1 rounded-full text-sm font-medium ${
-                type === 'running'
-                  ? 'bg-blue-100 text-blue-800'
-                  : 'bg-green-100 text-green-800'
-              }`}>
+              <div className={`px-3 py-1 rounded-full text-sm font-medium ${type === 'running'
+                ? 'bg-blue-100 text-blue-800'
+                : 'bg-green-100 text-green-800'
+                }`}>
                 {booking.status}
               </div>
             </div>

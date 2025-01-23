@@ -1,8 +1,9 @@
+import { toFixedNumber } from '@/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
-import React from 'react';
+import React, { FC } from 'react';
 
-const TotalPaidOut = () => {
+const TotalPaidOut: FC<{ totalPaidOut: number }> = ({ totalPaidOut }) => {
     return (
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="flex items-center justify-between">
@@ -13,7 +14,7 @@ const TotalPaidOut = () => {
                     This Week <ArrowRight size={16} />
                 </span>
             </div>
-            <h3 className="text-2xl font-bold mt-4">$24,260</h3>
+            <h3 className="text-2xl font-bold mt-4">${toFixedNumber(totalPaidOut)}</h3>
             <p className="text-gray-600">Total Paid to Instructors</p>
         </div>
     );

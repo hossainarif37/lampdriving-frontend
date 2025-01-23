@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
+import { toFixedNumber } from '@/lib/utils';
 import { useBooking } from '@/providers/BookingProvider';
 import { useLoginUserMutation, useRegisterUserMutation } from '@/redux/api/authApi/authApi';
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
@@ -123,7 +124,7 @@ const BookingInfo: FC = () => {
                         <Clock className="size-5 text-primary" />
                         {bookingHours} hrs Booking Credit
                     </span>
-                    <span>${price.originalAmount.toFixed(2)}</span>
+                    <span>${toFixedNumber(price.originalAmount)}</span>
                 </div>
 
                 {
@@ -137,7 +138,7 @@ const BookingInfo: FC = () => {
                                 <span className="text-sm font-medium bg-[#dbeafe] text-primary px-2 py-1 rounded">
                                     {bookingHours >= 10 ? 10 : bookingHours >= 6 ? 6 : 0}% OFF</span>
                             </span>
-                            <span>- ${price.discountedAmount.toFixed(2)}</span>
+                            <span>- ${toFixedNumber(price.discountedAmount)}</span>
                         </div>
                     </>
                 }
@@ -173,7 +174,7 @@ const BookingInfo: FC = () => {
                 <div className="pt-4 border-t">
                     <div className="flex justify-between font-semibold">
                         <span>Total Payable Amount</span>
-                        <span className="text-xl">${price.payableAmount.toFixed(2)}</span>
+                        <span className="text-xl">${toFixedNumber(price.payableAmount)}</span>
                     </div>
                 </div>
 

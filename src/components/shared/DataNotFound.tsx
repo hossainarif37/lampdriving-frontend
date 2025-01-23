@@ -16,7 +16,7 @@ const DataNotFound: FC<IDataNotFoundProps> = ({ dataName = "Data", isSearched })
         replace('?');
     }
     return (
-        <div className="wrapper flex flex-col items-center justify-center py-16 px-4">
+        <div className="min-h-[calc(100vh-117px)] wrapper flex flex-col items-center justify-center py-16 px-4">
             <div className="bg-gray-50 rounded-full p-6 mb-6">
                 <SearchX className="w-12 h-12 text-purple-500" />
             </div>

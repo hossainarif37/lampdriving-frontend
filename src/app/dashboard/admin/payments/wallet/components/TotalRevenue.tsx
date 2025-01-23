@@ -1,8 +1,9 @@
+import { toFixedNumber } from '@/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
 import { DollarSign } from 'lucide-react';
-import React from 'react';
+import React, { FC } from 'react';
 
-const TotalRevenue = () => {
+const TotalRevenue: FC<{ totalRevenue: number }> = ({ totalRevenue }) => {
     return (
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
             <div className="flex items-center justify-between">
@@ -13,7 +14,7 @@ const TotalRevenue = () => {
                     +12.5% <ArrowUpRight size={16} />
                 </span>
             </div>
-            <h3 className="text-2xl font-bold mt-4">$45,850</h3>
+            <h3 className="text-2xl font-bold mt-4">${toFixedNumber(totalRevenue)}</h3>
             <p className="text-gray-600">Total Revenue</p>
         </div>
     );
