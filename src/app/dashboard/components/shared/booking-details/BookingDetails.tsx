@@ -101,7 +101,7 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
             {/* Schedules */}
             <div className="space-y-4">
                 <h4 className="font-semibold">Scheduled Lessons</h4>
-                {(booking?.schedules as ISchedule[]).map((schedule: any) => (
+                {(booking?.schedules as ISchedule[]).map((schedule: ISchedule) => (
                     <div key={schedule._id} className='border rounded-md'>
                         <div className="p-4">
                             <div className="space-y-2">
@@ -121,7 +121,8 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
                                 </div>
                                 <div className="flex items-center space-x-2">
                                     <Clock className="h-4 w-4 text-muted-foreground" />
-                                    <span>{schedule.time.join(" - ")}</span>
+                                    <span>{schedule.time[0]}</span>
+                                    <span> for {schedule.duration} {schedule.duration > 1 ? "Hours" : "Hour"}</span>
                                 </div>
                                 <div className="space-y-2">
                                     <div className="flex items-start space-x-2">
