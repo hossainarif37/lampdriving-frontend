@@ -8,6 +8,9 @@ const instructorApi = baseApi.injectEndpoints({
         getAInstructor: builder.query<IResponseWithData<IInstructor>, { username: string }>({
             query: ({ username }) => `/instructor/${username}`
         }),
+        getAInstructorByAdmin: builder.query<IResponseWithData<IInstructor>, { id: string }>({
+            query: ({ id }) => `/instructor-all-data/${id}`
+        }),
         getAllInstructors: builder.query<IResponseWithPaginationData<IInstructor[]>, { status: "pending" | "verified" | "rejected", searchKey: string, limit: string, page: string }>({
             query:
                 ({ status, searchKey, limit, page }) =>
@@ -26,4 +29,4 @@ const instructorApi = baseApi.injectEndpoints({
 })
 
 
-export const { useGetAInstructorQuery, useGetAllInstructorsQuery, useUpdateInstructorStatusMutation } = instructorApi;
+export const { useGetAInstructorQuery, useGetAInstructorByAdminQuery,useGetAllInstructorsQuery, useUpdateInstructorStatusMutation } = instructorApi;
