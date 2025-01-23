@@ -92,4 +92,6 @@ export interface IBooking {
     payment: string;
     price: number;
     status: "pending" | "accepted" | "completed" | "cancelled";
+    createdAt: Date;
+    updatedAt: Date;
 }
