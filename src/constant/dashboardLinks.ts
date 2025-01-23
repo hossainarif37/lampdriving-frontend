@@ -76,14 +76,6 @@ export const instructorRoutes: IRoute[] = [
                 path: '/dashboard/instructor/payments/wallet'
             },
             {
-                name: 'Withdrawal Requests',
-                path: '/dashboard/instructor/payments/withdrawal-requests'
-            },
-            {
-                name: 'Approved Withdrawals',
-                path: '/dashboard/instructor/payments/approved-withdrawals'
-            },
-            {
                 name: 'Transaction History',
                 path: '/dashboard/instructor/payments/transaction-history'
             }
@@ -158,10 +150,6 @@ export const adminRoutes: IRoute[] = [
             {
                 name: 'Instructor Payouts',
                 path: '/dashboard/admin/payments/instructor-payouts'
-            },
-            {
-                name: 'Approved Withdrawals',
-                path: '/dashboard/admin/payments/approved-withdrawals'
             },
             {
                 name: 'Transaction History',

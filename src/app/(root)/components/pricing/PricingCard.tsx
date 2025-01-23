@@ -7,7 +7,7 @@ interface IPricingCardProps {
     title: string;
     subtitle: string;
     price: number;
-    savings: number;
+    savings?: number;
     features: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>; title: string; description: string }[];
     buttonText: string;
     bestValue?: boolean;
@@ -23,10 +23,10 @@ const PricingCard: FC<IPricingCardProps> = ({
 }) => {
     return (
         <div
-            className={`rounded-2xl  p-8 border border-light/30  hover:border-secondary transition-all duration-300 backdrop-blur-sm ${bestValue ? 'bg-gradient-to-br from-secondary/5 to-primary/80' : 'bg-primary/90'}`}
+            className={`rounded-2xl  p-8 border border-light/30 hover:border-secondary transition-all duration-300 backdrop-blur-sm ${bestValue ? 'bg-gradient-to-br from-secondary/5 to-primary/80' : 'bg-primary/90'}`}
         >
             {bestValue && (
-                <div className="absolute md:top-4 top-2 md:right-4 right-2 ">
+                <div className="absolute md:top-2 top-2 md:right-4 right-2 ">
                     <span className="bg-secondary text-light px-3 py-1 rounded-full text-sm font-semibold">Best Value</span>
                 </div>
             )}
@@ -56,10 +56,10 @@ const PricingCard: FC<IPricingCardProps> = ({
             <div className="flex items-center justify-between">
                 <div>
                     <p className="text-3xl font-bold text-light">${price}</p>
-                    <p className="text-secondary text-sm">Save ${savings}</p>
+                    {savings && <p className="text-secondary text-sm">Save ${savings}</p>}
                 </div>
                 <Link href='/instructors'>
-                    <Button className="px-6 py-3 border border-light/40 bg-primary/5 text-light rounded-lg font-semibold cursor-pointer">
+                    <Button className="px-6 py-3 border hover:border-secondary border-light/40 bg-primary/5 text-light rounded-lg font-semibold cursor-pointer">
                         {buttonText}
                     </Button>
                 </Link>

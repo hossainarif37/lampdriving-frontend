@@ -9,9 +9,18 @@ const transactionApi = baseApi.injectEndpoints({
                 url: '/payment/payment-intent',
                 method: "POST",
                 body: data
-            })
+            }),
         }),
+
+        createInstructorPayout: builder.mutation<IResponseWithData<{ instructorId: string, transactionId: string }>, { instructorId: string, transactionId: string }>({
+            query: (data) => ({
+                url: `/payment/pay-instructor/${data.instructorId}`,
+                method: "POST",
+                body: { transactionId: data.transactionId }
+            }),
+            invalidatesTags: ["wallet"]
+        })
     })
 })
 
-export const { useCreatePaymentIntentMutation } = transactionApi
+export const { useCreatePaymentIntentMutation, useCreateInstructorPayoutMutation } = transactionApi

@@ -4,39 +4,39 @@ import { ChevronRight, Clock, Shield } from 'lucide-react';
 import bgImg from "@/assets/about-page-image/facts-counter-v1-1.jpg"
 import PricingCard from './PricingCard';
 import { Button } from '@/components/ui/button';
-const standard = [
+const testPackage = [
     {
         icon: Clock,
-        title: '90-minute Initial Session',
-        description: 'Complete review of 19 test items and 110 points',
+        title: '2 hour test day',
+        description: 'Complete test preparation',
     },
     {
         icon: Clock,
-        title: '60-minute Follow-up Session',
-        description: 'Mock test practice with detailed feedback',
+        title: 'Pick-up & Drop-off Service',
+        description: 'Door-to-door convenience',
     },
     {
         icon: Shield,
-        title: 'Official Test Preparation',
-        description: '1-hour revision with RMS testing officer',
+        title: '1 hour revision practice',
+        description: 'Final preparation before test',
     },
 ]
 
-const ultimate = [
+const testAndMockTestPackage = [
     {
         icon: Clock,
-        title: '90-minute Initial Session',
-        description: 'Complete review of 19 test items and 110 points',
+        title: '2 hours 1st session',
+        description: 'Comprehensive mock test',
     },
     {
         icon: Clock,
-        title: '4 Practice Sessions',
-        description: '60 minutes each with comprehensive feedback',
+        title: '1 hour 2nd session',
+        description: 'Focused practice',
     },
     {
         icon: Shield,
-        title: 'Official Test Preparation',
-        description: '1-hour revision with RMS testing officer',
+        title: 'Including test day package',
+        description: 'Complete test day preparation',
     },
 ]
 const Pricing: FC = () => {
@@ -56,22 +56,22 @@ const Pricing: FC = () => {
                 <div className="grid md:grid-cols-2 gap-8 relative z-30">
                     {/* Standard Package */}
                     <PricingCard
-                        title="Standard Package"
-                        subtitle="2 Sessions + Test"
-                        price={390}
-                        savings={20}
-                        features={standard}
+                        title="Test Package"
+                        subtitle="Preparation + Test"
+                        price={220}
+                        // savings={20}
+                        features={testPackage}
                         buttonText="Book Now"
                     />
 
                     {/* Ultimate Package */}
                     <PricingCard
-                        title="Ultimate Package"
-                        subtitle="5 Sessions + Test"
-                        price={550}
-                        savings={50}
+                        title="2 Mock Tests + Test Package"
+                        subtitle="Preparation + 2 Mock Tests + Test"
+                        price={390}
+                        savings={20}
                         bestValue={true}
-                        features={ultimate}
+                        features={testAndMockTestPackage}
                         buttonText="Book Now"
                     />
                 </div>

@@ -20,7 +20,7 @@ const Footer: FC = () => {
                 {/* ==== Footer Body === */}
                 <div className='bg-primary/60'>
                     <FooterSearch />
-                    <div className="wrapper grid lg:grid-cols-4 md:grid-cols-2 gap-8 pt-40 pb-10 text-light/70 px-4 z-10 relative">
+                    <div className="wrapper grid lg:grid-cols-4 md:grid-cols-2 gap-8 pb-10 text-light/70 px-4 z-10 relative">
                         {/* About Section */}
                         <div>
                             <LampLogo />
