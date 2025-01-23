@@ -16,7 +16,7 @@ const ViewDetailsDialog: FC<IViewDetailsDialogProps> = ({ children, showAvailabi
     return (
         <Dialog open={showAvailability} onOpenChange={setShowAvailability}>
             <DialogTrigger asChild>
-                <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
+                <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2 w-full'>View Details</Button>
             </DialogTrigger>
             <DialogContent className='max-w-3xl py-0 px-0 space-y-0 gap-0'>
                 <DialogHeader>
