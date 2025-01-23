@@ -10,12 +10,12 @@ import { firstLetterUppercase } from '@/utils/firstLetterUppercase';
 
 
 
-const BookingDetails: FC<{ id: string }> = ({ id }) => {
+const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ id, role }) => {
     const { data, isLoading } = useGetABookingQuery({ id });
     const booking = data?.data;
 
     if (isLoading)
-        return <BookingDetailsSkeleton />
+        return <BookingDetailsSkeleton isAdmin={role ? false : true} />
 
     if (!booking) return <div className='flex justify-center items-center h-96 px-2 py-4'>
         <h1>No Booking Data Found</h1>
@@ -24,40 +24,46 @@ const BookingDetails: FC<{ id: string }> = ({ id }) => {
         <div className="space-y-6 h-96 overflow-y-auto thin-scrollbar px-2 py-4">
             {/* Learner Info */}
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                <div className="flex items-start space-x-4 border rounded-md p-4">
-                    <div className="flex shrink-0 overflow-hidden rounded-full size-16">
-                        <Image
-                            className='object-cover'
-                            src={(booking?.learner as any).user.profileImg}
-                            width={100}
-                            height={100}
-                            alt={`${(booking?.learner as any).user.name.firstName[0]}'s image`} />
+                {
+                    role !== "learner" &&
+                    <div className={`flex items-start space-x-4 border rounded-md p-4 ${role && "col-span-2"}`}>
+                        <div className="flex shrink-0 overflow-hidden rounded-full size-16">
+                            <Image
+                                className='object-cover'
+                                src={(booking?.learner as any).user.profileImg}
+                                width={100}
+                                height={100}
+                                alt={`${(booking?.learner as any).user.name.firstName[0]}'s image`} />
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-semibold">{(booking.learner as any).user.name.fullName}</h3>
+                            <p className="text-sm line-clamp-2 break-all">{(booking.learner as any).user.email}</p>
+                            <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
+                                Learner
+                            </span>
+                        </div>
                     </div>
-                    <div>
-                        <h3 className="text-lg font-semibold">{(booking.learner as any).user.name.fullName}</h3>
-                        <p className="text-sm line-clamp-2 break-all">{(booking.learner as any).user.email}</p>
-                        <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
-                            Learner
-                        </span>
+                }
+                {
+                    role != "instructor" &&
+                    <div className={`flex items-start space-x-4 border rounded-md p-4 ${role && "col-span-2"}`}>
+                        <div className="flex shrink-0 overflow-hidden rounded-full size-16">
+                            <Image
+                                className='object-cover'
+                                src={(booking.instructor as any).user.profileImg}
+                                width={100}
+                                height={100}
+                                alt={`${(booking.instructor as any).user.name.firstName[0]}'s image`} />
+                        </div>
+                        <div>
+                            <h3 className="text-lg font-semibold">{(booking.instructor as any).user.name.fullName}</h3>
+                            <p className="text-sm line-clamp-2 break-all">{(booking.instructor as any).user.email}</p>
+                            <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
+                                Instructor
+                            </span>
+                        </div>
                     </div>
-                </div>
-                <div className="flex items-start space-x-4 border rounded-md p-4">
-                    <div className="flex shrink-0 overflow-hidden rounded-full size-16">
-                        <Image
-                            className='object-cover'
-                            src={(booking.instructor as any).user.profileImg}
-                            width={100}
-                            height={100}
-                            alt={`${(booking.instructor as any).user.name.firstName[0]}'s image`} />
-                    </div>
-                    <div>
-                        <h3 className="text-lg font-semibold">{(booking.instructor as any).user.name.fullName}</h3>
-                        <p className="text-sm line-clamp-2 break-all">{(booking.instructor as any).user.email}</p>
-                        <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
-                            Instructor
-                        </span>
-                    </div>
-                </div>
+                }
             </div>
 
             {/* Booking Info */}

@@ -1,13 +1,13 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { FC } from "react";
 
-const BookingDetailsSkeleton: FC = () => {
+const BookingDetailsSkeleton: FC<{ isAdmin?: boolean }> = ({ isAdmin }) => {
     return (
         <div className="space-y-6 h-96 overflow-y-auto thin-scrollbar px-2 py-4">
             {/* Learner & Instructor Cards */}
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-                {[1, 2].map((item) => (
-                    <div key={item} className="flex items-start space-x-4 border rounded-md p-4">
+                {(isAdmin ? [1, 2] : [1]).map((item) => (
+                    <div key={item} className={`flex items-start space-x-4 border rounded-md p-4 ${!isAdmin && "col-span-2"}`}>
                         <Skeleton className="size-16 rounded-full" />
                         <div className="space-y-2 flex-1">
                             <Skeleton className="h-6 w-3/4" />
