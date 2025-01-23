@@ -4,10 +4,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import DataNotFound from '@/components/shared/DataNotFound';
 import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
-import Loading from '@/components/shared/Loading';
 import { useGetAllLearnersQuery } from '@/redux/api/learnerApi/learnerApi';
 import { ILearner } from '@/types/learner';
 import ManageLearnersActions from './ManageLearnersActions';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const LearnersTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -33,7 +33,7 @@ const LearnersTable: FC = () => {
     }, [urlSearchParams])
 
     if (isLoading) {
-        return <Loading />
+        return <TableSkeleton />
     }
 
     return (

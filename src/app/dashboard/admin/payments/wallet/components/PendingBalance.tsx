@@ -14,7 +14,7 @@ const PendingBalance: FC<{ pendingPayouts: number }> = ({ pendingPayouts }) => {
                     8 instructors <ArrowRight size={16} />
                 </span>
             </div>
-            <h3 className="text-2xl font-bold mt-4">${toFixedNumber(pendingPayouts)}</h3>
+            <h3 className="text-2xl font-bold mt-4">${toFixedNumber(pendingPayouts ?? 0)}</h3>
             <p className="text-gray-600">Pending Balance</p>
         </div>
     );

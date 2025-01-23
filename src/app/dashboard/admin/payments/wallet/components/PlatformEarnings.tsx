@@ -14,7 +14,7 @@ const PlatformEarnings: FC<{ platformEarnings: number }> = ({ platformEarnings }
                     20% cut <ArrowRight size={16} />
                 </span>
             </div>
-            <h3 className="text-2xl font-bold mt-4">${toFixedNumber(platformEarnings)}</h3>
+            <h3 className="text-2xl font-bold mt-4">${toFixedNumber(platformEarnings ?? 0)}</h3>
             <p className="text-gray-600">Platform Earnings</p>
         </div>
     );

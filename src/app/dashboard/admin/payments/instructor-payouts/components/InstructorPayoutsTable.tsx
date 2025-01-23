@@ -150,7 +150,9 @@ const InstructorPayoutsTable = ({ data }: { data: IWalletResult[] }) => {
     };
 
     if (instructors.length === 0) {
-        return <DataNotFound dataName="Instructor" />;
+        return <div className='min-h-[70vh] flex flex-col items-center justify-center'>
+            <DataNotFound dataName="Pending Instructor Payouts" />
+        </div>;
     }
 
     return (
