@@ -29,8 +29,9 @@ const ViewDetailsDialogBtn: FC<IViewDetailsDialogBtnProps> = ({ children, title 
                     title={title}
                     showAvailability={showAvailability}
                     setShowAvailability={setShowAvailability}
-                    children={children}
-                />
+                >
+                    {children}
+                </ViewDetailsDialog>
             ) : (
                 <Button
                     onClick={() => setShowAvailability(true)}
