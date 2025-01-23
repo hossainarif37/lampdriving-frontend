@@ -3,7 +3,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigg
 import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
 import UpdateBookingStatus from '../../components/shared/UpdateBookingStatus';
-import BookingDetails from '../../components/shared/booking-details/BookingDetails';
+import BookingDetails from '../../../../components/shared/booking-details/BookingDetails';
 import ViewDetailsDialogBtn from '@/app/dashboard/components/shared/view-details/ViewDetailsDialogBtn';
 
 interface IUpcomingBookingActionsProps {
