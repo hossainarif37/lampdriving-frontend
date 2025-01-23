@@ -20,26 +20,8 @@ export const learnerRoutes: IRoute[] = [
     },
     {
         name: 'Bookings',
-        path: '#bookings',
-        icon: BookOpen,
-        children: [
-            {
-                name: 'Upcoming Bookings',
-                path: '/dashboard/learner/manage-bookings/upcoming'
-            },
-            {
-                name: 'Ongoing Bookings',
-                path: '/dashboard/learner/manage-bookings/ongoing'
-            },
-            {
-                name: 'Completed Bookings',
-                path: '/dashboard/learner/manage-bookings/completed'
-            },
-            {
-                name: 'Refunded Bookings',
-                path: '/dashboard/learner/manage-bookings/refunded'
-            }
-        ]
+        path: '/dashboard/learner/manage-bookings',
+        icon: BookOpen
     },
     {
         name: 'Transaction History',
@@ -54,6 +36,11 @@ export const instructorRoutes: IRoute[] = [
         name: 'Dashboard',
         path: '/dashboard/instructor',
         icon: LayoutDashboardIcon
+    },
+    {
+        name: 'Schedule',
+        path: '/dashboard/instructor/manage-schedules',
+        icon: Calendar
     },
     {
         name: 'Bookings',
@@ -87,14 +74,6 @@ export const instructorRoutes: IRoute[] = [
             {
                 name: 'Wallet',
                 path: '/dashboard/instructor/payments/wallet'
-            },
-            {
-                name: 'Withdrawal Requests',
-                path: '/dashboard/instructor/payments/withdrawal-requests'
-            },
-            {
-                name: 'Approved Withdrawals',
-                path: '/dashboard/instructor/payments/approved-withdrawals'
             },
             {
                 name: 'Transaction History',
@@ -171,10 +150,6 @@ export const adminRoutes: IRoute[] = [
             {
                 name: 'Instructor Payouts',
                 path: '/dashboard/admin/payments/instructor-payouts'
-            },
-            {
-                name: 'Approved Withdrawals',
-                path: '/dashboard/admin/payments/approved-withdrawals'
             },
             {
                 name: 'Transaction History',

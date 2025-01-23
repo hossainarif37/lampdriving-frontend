@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { BookingsList } from './BookingList';
 import {
   Calendar as CalendarIcon,
@@ -13,34 +13,46 @@ import {
 import { StatsCard } from './StatsCard';
 import { Calendar } from './Calendar';
 import { useAppSelector } from '@/redux/hook';
-
-// Mock data - In a real app, this would come from an API
-const stats = {
-  totalBookings: 156,
-  completedBookings: 134,
-  totalLessons: 245,
-  runningBookings: 22,
-  totalEarnings: 12450
-};
-
-const runningBookings = [
-  { id: 1, studentName: "John Doe", date: "2024-03-20", time: "10:00 AM", duration: "2h", status: "confirmed" },
-  { id: 2, studentName: "Jane Smith", date: "2024-03-20", time: "2:00 PM", duration: "1h", status: "confirmed" },
-  { id: 3, studentName: "Jane Smith", date: "2024-03-20", time: "2:00 PM", duration: "1h", status: "confirmed" },
-  { id: 4, studentName: "Jane Smith", date: "2024-03-20", time: "2:00 PM", duration: "1h", status: "confirmed" },
-];
-
-const pastBookings = [
-  { id: 3, studentName: "Mike Johnson", date: "2024-03-19", time: "11:00 AM", duration: "1h", status: "completed" },
-  { id: 4, studentName: "Sarah Wilson", date: "2024-03-19", time: "3:00 PM", duration: "2h", status: "completed" },
-  { id: 5, studentName: "Sarah Wilson", date: "2024-03-19", time: "3:00 PM", duration: "2h", status: "completed" },
-  { id: 6, studentName: "Sarah Wilson", date: "2024-03-19", time: "3:00 PM", duration: "2h", status: "completed" },
-];
-
+import { useGetInstructorStatsQuery } from '@/redux/api/statsApi/statsApi';
+import Loading from '@/components/shared/Loading';
 
 const InstructorStats: FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const { user } = useAppSelector(state => state.authSlice);
+
+  const instructorId = useMemo(() => {
+    if (!user?.instructor) return null;
+    return typeof user.instructor === 'string' ? user.instructor : user.instructor._id;
+  }, [user]);
+
+  const { data, isLoading } = useGetInstructorStatsQuery(
+    { instructorId: instructorId as string },
+    { skip: !instructorId }
+  );
+
+  if (!instructorId) {
+    return <div>No instructor ID found</div>;
+  }
+
+  if (isLoading) {
+    return <Loading />
+  }
+
+  const upComingSchedules = data.data.upcomingSchedules.map((booking: any) => ({
+    id: booking._id,
+    studentName: booking.learner.user.name.fullName,
+    date: booking.date,
+    time: booking.time,
+    duration: booking.duration,
+    status: booking.status,
+    pickupAddress: {
+      address: booking.pickupAddress.address,
+      suburb: booking.pickupAddress.suburb,
+    },
+  }));
+
+
+  console.log('Instructor Stats', data.data);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -63,31 +75,31 @@ const InstructorStats: FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
           <StatsCard
             title="Total Bookings"
-            value={stats.totalBookings}
+            value={data.data.totalBookings}
             icon={<BookOpen className="h-6 w-6 text-blue-600" />}
             trend="+12% from last month"
           />
           <StatsCard
             title="Completed"
-            value={stats.completedBookings}
+            value={data.data.completedBookings}
             icon={<CheckCircle className="h-6 w-6 text-green-600" />}
             trend="+8% from last month"
           />
           <StatsCard
-            title="Total Lessons"
-            value={stats.totalLessons}
-            icon={<GraduationCap className="h-6 w-6 text-purple-600" />}
-            trend="+15% from last month"
+            title="Ongoing Bookings"
+            value={data.data.ongoingBookings}
+            icon={<Clock className="h-6 w-6 text-orange-600" />}
+            trend="Current active"
           />
           <StatsCard
-            title="Running Bookings"
-            value={stats.runningBookings}
+            title="Upcoming Bookings"
+            value={data.data.upcomingBookings}
             icon={<Clock className="h-6 w-6 text-orange-600" />}
             trend="Current active"
           />
           <StatsCard
             title="Total Earnings"
-            value={`$${stats.totalEarnings}`}
+            value={`$${data.data.totalEarnings}`}
             icon={<DollarSign className="h-6 w-6 text-emerald-600" />}
             trend="+18% from last month"
           />
@@ -106,17 +118,11 @@ const InstructorStats: FC = () => {
           {/* Bookings Lists */}
           <div className="lg:col-span-2 space-y-6">
             <BookingsList
-              title="Running Bookings"
-              bookings={runningBookings}
+              title="Upcoming Bookings"
+              bookings={upComingSchedules}
               type="running"
               selectedDate={selectedDate}
             />
-            {/* <BookingsList 
-              title="Past Bookings" 
-              bookings={pastBookings} 
-              type="past"
-              selectedDate={selectedDate}
-            /> */}
           </div>
         </div>
       </div>

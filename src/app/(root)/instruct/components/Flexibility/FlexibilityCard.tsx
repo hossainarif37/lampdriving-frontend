@@ -12,10 +12,10 @@ interface IFlexibilityCardProps {
 const FlexibilityCard: FC<IFlexibilityCardProps> = ({ feature }) => {
     const { title, description, icon } = feature;
     return (
-        <div className='rounded-lg shadow-md space-y-4 p-5 bg-gradient-to-b from-primary/0 to-primary/5'>
-            <h1 className='text-primary '>{icon}</h1>
+        <div className='rounded-lg shadow-md space-y-4 p-5 bg-light flex flex-col items-center'>
+            <h1 className=''>{icon}</h1>
             <h4 className='text-xl font-semibold text-primary'>{title}</h4>
-            <p className='text-accent'>{description}</p>
+            <p className='text-accent text-center'>{description}</p>
         </div>
     );
 };

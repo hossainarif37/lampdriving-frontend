@@ -1,6 +1,7 @@
 import { DollarSign } from 'lucide-react';
 import { ArrowUpRight } from 'lucide-react';
 import React from 'react';
+import { toFixedNumber } from '@/lib/utils';
 
 const TotalEarnings = ({ totalEarnings }: { totalEarnings: number }) => {
     return (
@@ -10,10 +11,10 @@ const TotalEarnings = ({ totalEarnings }: { totalEarnings: number }) => {
                     <DollarSign className="text-green-600" size={24} />
                 </div>
                 <span className="text-green-600 flex items-center gap-1">
-                    +15.2% <ArrowUpRight size={16} />
+                    0% <ArrowUpRight size={16} />
                 </span>
             </div>
-            <h3 className="text-2xl text-primary font-bold mt-4">${totalEarnings.toLocaleString()}</h3>
+            <h3 className="text-2xl text-primary font-bold mt-4">${toFixedNumber(totalEarnings ?? 0)}</h3>
             <p className="text-gray-600">Total Earnings</p>
         </div>
     );

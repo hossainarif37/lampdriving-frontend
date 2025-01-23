@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 const HowLampDrivingWork: FC = () => {
     return (
-        <div className="py-10 md:pt-20 md:pb-10 min-h-screen bg-light-green">
+        <div className="py-10 md:pt-20 md:pb-10 min-h-screen bg-light">
             <div className="mx-auto px-8 lg:px-0 max-w-6xl">
                 <SectionHeading
                     title="How Lamp Driving Works"

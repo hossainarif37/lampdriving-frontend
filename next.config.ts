@@ -11,10 +11,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  output: 'standalone',
-  server: {
-    port: 3000,
-  }
+  output: 'standalone'
 };
 
 export default nextConfig;

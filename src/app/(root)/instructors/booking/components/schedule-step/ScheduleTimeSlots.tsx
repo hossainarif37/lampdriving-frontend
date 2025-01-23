@@ -12,6 +12,7 @@ interface ScheduleTimeSlotsProps {
     bookedTimeSlots: string[];
     classname?: string;
     btnClassname?: string;
+    slotContainerClassname?: string;
     workingHour: { isActive: boolean, startTime: string, endTime: string }
     scheduleTimeSlots: string[];
     setScheduleTimeSlots: Dispatch<SetStateAction<string[]>>;
@@ -28,6 +29,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         bookedTimeSlots,
         classname,
         btnClassname,
+        slotContainerClassname,
         availableScheduleHours,
         workingHour, scheduleTimeSlots, setScheduleTimeSlots } = props;
 
@@ -69,7 +71,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         setScheduleTimeSlots(getTimeSlots(startTime, endTime));
     }, [startTime, endTime]);
 
-    
+
     return (
         <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", classname)}>
             {
@@ -85,7 +87,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
                                 'Available Times '}
                             for {format(selectedDate, 'MMMM d, yyyy')}
                         </h2>
-                        <div className='h-[244px] overflow-y-auto thin-scrollbar'>
+                        <div className={cn("h-[244px] overflow-y-auto thin-scrollbar", slotContainerClassname)}>
                             <div className="grid grid-cols-1 gap-3">
                                 {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 1)).map((time, index) => {
                                     const slotIndex = scheduleTimeSlots.indexOf(time);

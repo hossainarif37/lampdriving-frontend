@@ -4,6 +4,7 @@ import { useBooking } from '@/providers/BookingProvider';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { formatDate } from 'date-fns';
+import { toFixedNumber } from '@/lib/utils';
 
 const SuccessStep: FC = () => {
     const { instructor, bookingHours, price, testPackage, mockTestPackage, schedules, paymentInfo } = useBooking();
@@ -52,7 +53,7 @@ const SuccessStep: FC = () => {
                                     <Calendar className="h-5 w-5 text-gray-400 mr-3" />
                                     <div>
                                         <p className="text-sm text-gray-500">First Lesson</p>
-                                        <p className="font-medium text-gray-900">{formatDate(new Date(schedules[0].date),"MM/dd/yyyy")} at {schedules[0].time[0]} for {schedules[0].duration} hrs</p>
+                                        <p className="font-medium text-gray-900">{formatDate(new Date(schedules[0].date), "MM/dd/yyyy")} at {schedules[0].time[0]} for {schedules[0].duration} hrs</p>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +75,7 @@ const SuccessStep: FC = () => {
                                                 {bookingHours >= 10 ? 10 : bookingHours >= 6 ? 6 : 0}% OFF
                                             </span>
                                         </span>
-                                        <span className="text-primary">- ${price.discountedAmount.toFixed(2)}</span>
+                                        <span className="text-primary">- ${toFixedNumber(price.discountedAmount)}</span>
                                     </div>
                                     {
                                         testPackage.included && <div className="flex justify-between">

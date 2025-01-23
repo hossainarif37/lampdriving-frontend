@@ -1,32 +1,32 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { toast } from '@/hooks/use-toast';
-import { useUpdateBookingStatusMutation } from '@/redux/api/bookingApi/bookingApi';
+import { useUpdateAScheduleStatusMutation } from '@/redux/api/scheduleApi/scheduleApi';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 
-interface IUpdateBookingStatus {
+interface IUpdateScheduleStatus {
     id: string;
-    status: 'complete' | 'pending' | 'accept' | 'cancel';
+    status: 'ongoing' | 'complete';
     setDropdownIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdownIsOpen }) => {
+const UpdateScheduleStatus: FC<IUpdateScheduleStatus> = ({ id, status, setDropdownIsOpen }) => {
     const [open, isOpen] = useState<boolean>(false);
-    const [updateStatus, { isLoading }] = useUpdateBookingStatusMutation();
-    const reqStatus = status === "complete" ? "completed" : status === "accept" ? "accepted" : status === "pending" ? "pending" : "cancelled";
+    const [UpdateScheduleStatus, { isLoading }] = useUpdateAScheduleStatusMutation();
+    const reqStatus = status === "complete" ? "completed" : "ongoing";
     const handleVerify = () => {
-        // updateStatus({ id, status: reqStatus }).unwrap().then((res) => {
-        //     toast({
-        //         message: res.message,
-        //     })
-        //     isOpen(false);
-        //     setDropdownIsOpen(false);
-        // }).catch((err) => {
-        //     toast({
-        //         success: false,
-        //         message: err.data.message || "Something went wrong",
-        //     })
-        // });
+        UpdateScheduleStatus({ id, status: reqStatus }).unwrap().then((res) => {
+            toast({
+                message: res.message,
+            })
+            isOpen(false);
+            setDropdownIsOpen(false);
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong",
+            })
+        });
     }
     return (
         <Dialog open={open} onOpenChange={isOpen}>
@@ -37,10 +37,7 @@ const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdown
                             status === "complete" ?
                                 "Complete"
                                 :
-                                status === "accept" ?
-                                    "Accept"
-                                    :
-                                    "Reject"
+                                "Ongoing"
                         }
                     </Button>
                 }
@@ -54,12 +51,9 @@ const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdown
                 <DialogDescription>
                     {
                         status === "complete" ?
-                            "Do you want to proceed with completing this booking? Once completed, the booking will be completed."
+                            "Do you want to proceed with completing this schedule? Once completed, the schedule will be completed."
                             :
-                            status === "accept" ?
-                                "Do you want to proceed with accepting this booking? Once accepted, the booking will be confirmed."
-                                :
-                                "Do you want to proceed with rejecting this? Once rejected, the status will be updated, and it will no longer be active."
+                            "Do you want to proceed with ongoing this schedule? Once you make this ongoing, the schedule will be started."
                     }
                 </DialogDescription>
                 <DialogFooter>
@@ -75,20 +69,14 @@ const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdown
                         <Button
                             disabled={isLoading}
                             onClick={handleVerify}
-                            className={status === "cancel" ? "bg-red-500 hover:bg-red-600" : ""}
                         >
                             {
                                 status === "complete" ?
                                     "Complete"
                                     :
-                                    status === "accept" ?
-                                        "Accept"
-                                        :
-                                        "Reject"
+                                    "Ongoing"
                             }
                         </Button>
-
-
                     </div>
                 </DialogFooter>
             </DialogContent>
@@ -96,4 +84,4 @@ const UpdateBookingStatus: FC<IUpdateBookingStatus> = ({ id, status, setDropdown
     );
 };
 
-export default UpdateBookingStatus;
+export default UpdateScheduleStatus;

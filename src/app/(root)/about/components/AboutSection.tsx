@@ -8,7 +8,7 @@ import { ChevronsRight, FileText } from "lucide-react";
 
 const AboutSection: FC = () => {
     return (
-        <div className="py-16 bg-light-green">
+        <div className="py-16 bg-light">
             <div className="wrapper py-12">
                 <div className="flex md:flex-row flex-col gap-14 justify-between  md:max-w-full max-w-lg mx-auto">
                     {/* Left Column with Image */}

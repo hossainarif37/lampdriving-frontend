@@ -39,7 +39,7 @@ const cards = [
 const AboutUs: FC = () => {
     const sub = 'We understand learning to drive can be expensive, but we won’t take advantage by charging more than necessary.'
     return (
-        <section className="bg-light-green px-4 py-16">
+        <section className="bg-light px-4 py-16">
             {/* Section Heading */}
             <SectionHeading title="Why Choose Us?" subtitle={sub} className='mb-8 md:mb-10' />
 

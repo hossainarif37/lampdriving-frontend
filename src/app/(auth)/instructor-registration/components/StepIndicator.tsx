@@ -71,8 +71,6 @@ const StepIndicator: FC = () => {
                         title={step.title}
                         isActive={!step.isDisabled && index <= activeStepIndex}
                         isDisabled={step.isDisabled}
-                        stepIndex={index}
-                        currentStepIndex={activeStepIndex}
                     />
                 ))}
             </ul>

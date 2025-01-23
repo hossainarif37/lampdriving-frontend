@@ -8,9 +8,10 @@ import { IInstructor } from "@/types/instructor";
 interface InstructorInfoProps {
   instructor: IInstructor;
 }
+
 const InstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
   return (
-    <div className="bg-light-green  pb-40">
+    <div className="bg-light pb-40">
       <main className="wrapper py-8">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Main content */}

@@ -7,6 +7,7 @@ import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
 import ServiceAreaMap from './ServiceAreaMap';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 const CheckAvailability = dynamic(
   () => import('../../components/shared/check-availability/CheckAvailability'),
@@ -28,18 +29,15 @@ interface InstructorInfoProps {
 const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
   const [showAvailability, setShowAvailability] = useState(false);
   const user: IUser | undefined = typeof instructor?.user != "string" ? instructor?.user : undefined;
+  const { pricePerHour, vehicle } = instructor;
 
-  //  function for open the image in a new tab 
-  const openImageInNewTab = () => {
-    window.open(instructor.vehicle.image);
-  };
   return (
     <div className="space-y-6">
 
       {/* Hourly Price Section */}
       <section className="bg-white rounded-xl border p-4 md:p-6">
         <h2 className="text-lg font-semibold mb-4 text-primary">Hourly Price</h2>
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           {/* Pricing and available lesson durations */}
           <div className="flex justify-between items-baseline">
             <span className="text-sm text-accent">Offers 1 & 2hr lessons</span>
@@ -63,7 +61,10 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
           </div>
 
           {/* Booking buttons */}
-          <Button className="w-full gradient-color">Book Now</Button>
+          <Link href={`/instructors/booking/?instructor=${user?.username}&step=package-selection`}>
+            <Button className="w-full gradient-color">Book Now</Button>
+          </Link>
+
           <div className="text-center flex items-center justify-center">
             {showAvailability ? (
               <CheckAvailability
@@ -93,16 +94,15 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
           {/* Displaying vehicle image */}
           <div className="aspect-video relative rounded-lg overflow-hidden cursor-pointer">
             <Image
-              onClick={openImageInNewTab}
-              src={carImg}
+              src={vehicle?.image}
               alt="Toyota Yaris 2018"
               fill
               className="object-cover"
             />
           </div>
           <div>
-            <h3 className="font-medium">{instructor.vehicle.name} {instructor.vehicle.model}({instructor.vehicle.type})</h3>
-            <p className="text-sm text-gray-600 mt-1">{instructor.vehicle.rating}</p>
+            <h3 className="font-medium">{vehicle.name} {vehicle.model} {vehicle.year} ({vehicle.type})</h3>
+            <p className="text-sm text-gray-600 mt-1">{vehicle.rating}</p>
           </div>
         </div>
       </section>
