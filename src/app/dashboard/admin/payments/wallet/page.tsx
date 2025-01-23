@@ -20,6 +20,12 @@ const WalletPage: FC = () => {
         return <Loading />
     }
 
+    const totalRevenue = data?.data?.totalRevenue;
+    const platformEarnings = data?.data?.platformEarnings;
+    const pendingBalance = data?.data?.pendingBalance;
+    const totalPayouts = data?.data?.totalPayouts;
+    const lastSixMonthsStats = data?.data?.lastSixMonthsStats;
+
     console.log('admin wallet', data);
 
     return (
@@ -40,20 +46,20 @@ const WalletPage: FC = () => {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Total Revenue */}
-                    <TotalRevenue totalRevenue={data?.data?.totalRevenue} />
+                    <TotalRevenue totalRevenue={totalRevenue} />
 
                     {/* Platform Earnings (20%) */}
-                    <PlatformEarnings platformEarnings={data?.data?.platformEarnings} />
+                    <PlatformEarnings platformEarnings={platformEarnings} />
 
                     {/* Pending Payouts */}
-                    <PendingBalance pendingPayouts={data?.data?.pendingBalance} />
+                    <PendingBalance pendingPayouts={pendingBalance} />
 
                     {/* Total Paid Out */}
-                    <TotalPaidOut totalPaidOut={data?.data?.totalPayouts} />
+                    <TotalPaidOut totalPaidOut={totalPayouts} />
                 </div>
 
                 {/* Chart Section */}
-                <RevenueOverviewChart lastSixMonthsStats={data?.data?.lastSixMonthsStats} />
+                <RevenueOverviewChart lastSixMonthsStats={lastSixMonthsStats} />
             </div>
         </div>
     );

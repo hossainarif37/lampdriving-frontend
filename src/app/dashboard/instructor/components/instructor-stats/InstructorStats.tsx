@@ -1,6 +1,6 @@
 "use client"
 
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { BookingsList } from './BookingList';
 import {
   Calendar as CalendarIcon,
@@ -16,25 +16,23 @@ import { useAppSelector } from '@/redux/hook';
 import { useGetInstructorStatsQuery } from '@/redux/api/statsApi/statsApi';
 import Loading from '@/components/shared/Loading';
 
-// Mock data - In a real app, this would come from an API
-const stats = {
-  totalBookings: 156,
-  completedBookings: 134,
-  totalLessons: 245,
-  runningBookings: 22,
-  totalEarnings: 12450
-};
-
-
-
-
-
 const InstructorStats: FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const { user } = useAppSelector(state => state.authSlice);
 
-  const instructorId = typeof user?.instructor === 'string' ? user?.instructor : user?.instructor?._id;
-  const { data, isLoading } = useGetInstructorStatsQuery({ instructorId: instructorId as string });
+  const instructorId = useMemo(() => {
+    if (!user?.instructor) return null;
+    return typeof user.instructor === 'string' ? user.instructor : user.instructor._id;
+  }, [user]);
+
+  const { data, isLoading } = useGetInstructorStatsQuery(
+    { instructorId: instructorId as string },
+    { skip: !instructorId }
+  );
+
+  if (!instructorId) {
+    return <div>No instructor ID found</div>;
+  }
 
   if (isLoading) {
     return <Loading />

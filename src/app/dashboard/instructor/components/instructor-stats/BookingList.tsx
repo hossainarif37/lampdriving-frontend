@@ -1,5 +1,6 @@
 import React from 'react';
-import { Clock, User } from 'lucide-react';
+import { Calendar, Clock, User } from 'lucide-react';
+import { formatDate } from 'date-fns';
 
 interface Booking {
   id: number;
@@ -40,13 +41,17 @@ export function BookingsList({ title, bookings, type, selectedDate }: BookingsLi
                   <User className={`h-5 w-5 ${type === 'running' ? 'text-blue-600' : 'text-gray-600'
                     }`} />
                 </div>
-                <div>
+                <div className="flex flex-col gap-y-1">
                   <h3 className="font-medium text-gray-900">{booking.studentName}</h3>
                   <div className="flex items-center space-x-2 text-sm text-gray-500">
                     <Clock className="h-4 w-4" />
-                    <span>{booking.time}</span>
+                    <span>{booking.time[0]}</span>
                     <span>-</span>
                     <span>{booking.duration}h</span>
+                  </div>
+                  <div className="flex items-center space-x-2 text-sm text-gray-500">
+                    <Calendar className="h-4 w-4" />
+                    <span>{formatDate(booking.date, 'dd MMMM yyyy')}</span>
                   </div>
                 </div>
               </div>

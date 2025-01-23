@@ -1,16 +1,7 @@
 "use client"
 
-import React, { FC } from 'react';
-import {
-    Wallet,
-    ArrowUpRight,
-    ArrowDownRight,
-    DollarSign,
-    Clock,
-    LineChart,
-    ArrowRight,
-    CalendarCheck
-} from 'lucide-react';
+import React, { FC, useMemo, useState } from 'react';
+import { LineChart } from 'lucide-react';
 import {
     LineChart as RechartsLineChart,
     Line,
@@ -40,18 +31,26 @@ const monthlyData = [
 
 const WalletPage: FC = () => {
     const { user } = useAppSelector(state => state.authSlice);
-    const instructorId = typeof user?.instructor === 'string' ?
-        user?.instructor :
-        user?.instructor?._id;
+    const [loading, setLoading] = useState(true);
+    const instructorId = useMemo(() => {
+        return typeof user?.instructor === 'string' ?
+            user?.instructor :
+            user?.instructor?._id;
+    }, [user]);
 
-    const { data, isLoading } = useGetInstructorWalletQuery({ instructorId });
+    const { data, isLoading } = useGetInstructorWalletQuery(
+        { instructorId },
+        { skip: !instructorId }
+    );
+
+    const totalEarnings = data?.data?.balance?.totalEarnings;
+    const pendingBalance = data?.data?.balance?.pendingBalance;
+    const currentBalance = data?.data?.balance?.currentBalance;
+    const totalWithdraw = data?.data?.balance?.totalWithdraw;
 
     if (isLoading) {
         return <Loading />
     }
-
-    console.log(user);
-    console.log('Instructor ID', instructorId);
 
     return (
         <div className="min-h-screen bg-gray-50 p-6">
@@ -71,16 +70,16 @@ const WalletPage: FC = () => {
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Total Earnings */}
-                    <TotalEarnings totalEarnings={data?.data?.balance?.totalEarnings} />
+                    <TotalEarnings totalEarnings={totalEarnings} />
 
                     {/* Pending Balance */}
-                    <PendingBalance pendingBalance={data?.data?.balance?.pendingBalance} />
+                    <PendingBalance pendingBalance={pendingBalance} />
 
                     {/* Current Balance */}
-                    <CurrentBalance currentBalance={data?.data?.balance?.currentBalance} />
+                    <CurrentBalance currentBalance={currentBalance} />
 
                     {/* Total Withdraw */}
-                    <TotalWithdraw totalWithdraw={data?.data?.balance?.totalWithdraw} />
+                    <TotalWithdraw totalWithdraw={totalWithdraw} />
                 </div>
 
                 {/* Chart Section */}

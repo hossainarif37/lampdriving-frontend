@@ -18,7 +18,6 @@ import BookingStatsChart from "./BookingStatsChart";
 
 const AdminStats: FC = () => {
     const { user } = useAppSelector(state => state.authSlice);
-    const [activeFilter, setActiveFilter] = useState('running');
     const { data, isLoading } = useGetAdminStatsQuery(undefined);
 
     if (isLoading) return <Loading />;
