@@ -5,19 +5,24 @@ import { format } from 'date-fns';
 import { ArrowRight, CalendarDays, Clock, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import { FC } from 'react';
+import BookingDetailsSkeleton from './BookingDetailsSkeleton';
 
 
 
 const BookingDetails: FC<{ id: string }> = ({ id }) => {
     const { data, isLoading } = useGetABookingQuery({ id });
     const booking = data?.data;
-    if (!booking) return <div>
-        <h1>No Booking Found</h1>
+
+    if (isLoading)
+        return <BookingDetailsSkeleton />
+
+    if (!booking) return <div className='flex justify-center items-center h-96 px-2 py-4'>
+        <h1>No Booking Data Found</h1>
     </div>;
     return (
         <div className="space-y-6 h-96 overflow-y-auto thin-scrollbar px-2 py-4">
             {/* Learner Info */}
-            <div className='grid grid-cols-2 gap-6'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 <div className="flex items-start space-x-4 border rounded-md p-4">
                     <div className="flex shrink-0 overflow-hidden rounded-full size-16">
                         <Image
