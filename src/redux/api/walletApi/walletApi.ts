@@ -4,8 +4,8 @@ import baseApi from "../baseApi";
 const walletApi = baseApi.injectEndpoints({
     overrideExisting: true,
     endpoints: (builder) => ({
-        getWalletBalance: builder.query({
-            query: ({ instructorId }) => `/wallet/${instructorId}`
+        getInstructorWallet: builder.query({
+            query: ({ instructorId }) => `/wallet/instructor/${instructorId}`
         }),
 
         getAllWallet: builder.query({
@@ -18,4 +18,4 @@ const walletApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetWalletBalanceQuery, useGetAllWalletQuery, useGetAdminWalletQuery } = walletApi;
+export const { useGetInstructorWalletQuery, useGetAllWalletQuery, useGetAdminWalletQuery } = walletApi;

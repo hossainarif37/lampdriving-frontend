@@ -1,3 +1,4 @@
+import { toFixedNumber } from '@/lib/utils';
 import { DollarSign } from 'lucide-react';
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
@@ -13,7 +14,7 @@ const TotalWithdraw = ({ totalWithdraw }: { totalWithdraw: number }) => {
                     Total <ArrowRight size={16} />
                 </span>
             </div>
-            <h3 className="text-2xl text-primary font-bold mt-4">${totalWithdraw.toLocaleString()}</h3>
+            <h3 className="text-2xl text-primary font-bold mt-4">${toFixedNumber(totalWithdraw)}</h3>
             <p className="text-gray-600">Total Withdraw</p>
         </div>
     );

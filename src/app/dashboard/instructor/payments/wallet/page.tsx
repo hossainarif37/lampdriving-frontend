@@ -24,7 +24,7 @@ import TotalEarnings from './components/TotalEarnings';
 import PendingBalance from './components/PendingBalance';
 import CurrentBalance from './components/CurrentBalance';
 import TotalWithdraw from './components/TotalWithdraw';
-import { useGetWalletBalanceQuery } from '@/redux/api/walletApi/walletApi';
+import { useGetInstructorWalletQuery } from '@/redux/api/walletApi/walletApi';
 import { useAppSelector } from '@/redux/hook';
 import Loading from '@/components/shared/Loading';
 
@@ -44,12 +44,14 @@ const WalletPage: FC = () => {
         user?.instructor :
         user?.instructor?._id;
 
-    const { data, isLoading } = useGetWalletBalanceQuery({ instructorId });
+    const { data, isLoading } = useGetInstructorWalletQuery({ instructorId });
 
     if (isLoading) {
         return <Loading />
     }
 
+    console.log(user);
+    console.log('Instructor ID', instructorId);
 
     return (
         <div className="min-h-screen bg-gray-50 p-6">
@@ -109,58 +111,6 @@ const WalletPage: FC = () => {
                                 />
                             </RechartsLineChart>
                         </ResponsiveContainer>
-                    </div>
-                </div>
-
-                {/* Recent Activity */}
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                    <h2 className="text-xl font-bold text-gray-900 mb-6">Recent Activity</h2>
-                    <div className="space-y-4">
-                        {[
-                            {
-                                type: 'Lesson Completed',
-                                student: 'Alice Brown',
-                                amount: 80,
-                                status: 'completed',
-                                date: 'Today'
-                            },
-                            {
-                                type: 'Weekly Payout',
-                                amount: 640,
-                                status: 'processing',
-                                date: 'Yesterday'
-                            },
-                            {
-                                type: 'Lesson Completed',
-                                student: 'Tom Wilson',
-                                amount: 80,
-                                status: 'completed',
-                                date: 'Mar 18, 2024'
-                            },
-                        ].map((activity, index) => (
-                            <div key={index} className="flex items-center justify-between p-4 hover:bg-gray-50 rounded-lg transition">
-                                <div className="flex items-center gap-4">
-                                    <div className={`p-2 rounded-lg ${activity.type === 'Lesson Completed' ? 'bg-green-100' : 'bg-blue-100'
-                                        }`}>
-                                        {activity.type === 'Lesson Completed' ? (
-                                            <CalendarCheck className="text-green-600" size={20} />
-                                        ) : (
-                                            <Wallet className="text-blue-600" size={20} />
-                                        )}
-                                    </div>
-                                    <div>
-                                        <p className="font-medium text-gray-900">{activity.type}</p>
-                                        {activity.student && (
-                                            <p className="text-sm text-gray-600">Student: {activity.student}</p>
-                                        )}
-                                    </div>
-                                </div>
-                                <div className="text-right">
-                                    <p className="font-medium text-gray-900">${activity.amount}</p>
-                                    <p className="text-sm text-gray-600">{activity.date}</p>
-                                </div>
-                            </div>
-                        ))}
                     </div>
                 </div>
             </div>
