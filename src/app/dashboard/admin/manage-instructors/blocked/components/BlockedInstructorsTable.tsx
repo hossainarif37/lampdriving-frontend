@@ -11,6 +11,7 @@ import { UserRoundSearch } from 'lucide-react';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import BlockedInstructorActions from './BlockedInstructorActions';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const BlockedInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -36,7 +37,7 @@ const BlockedInstructorsTable: FC = () => {
     }, [urlSearchParams])
 
     if (isLoading) {
-        return <Loading />
+        return <TableSkeleton />
     }
 
     return (

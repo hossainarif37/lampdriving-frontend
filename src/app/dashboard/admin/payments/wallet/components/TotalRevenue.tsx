@@ -14,7 +14,7 @@ const TotalRevenue: FC<{ totalRevenue: number }> = ({ totalRevenue }) => {
                     +12.5% <ArrowUpRight size={16} />
                 </span>
             </div>
-            <h3 className="text-2xl font-bold mt-4">${toFixedNumber(totalRevenue)}</h3>
+            <h3 className="text-2xl font-bold mt-4">${toFixedNumber(totalRevenue ?? 0)}</h3>
             <p className="text-gray-600">Total Revenue</p>
         </div>
     );

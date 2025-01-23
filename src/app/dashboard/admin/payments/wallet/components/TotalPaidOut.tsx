@@ -14,7 +14,7 @@ const TotalPaidOut: FC<{ totalPaidOut: number }> = ({ totalPaidOut }) => {
                     This Week <ArrowRight size={16} />
                 </span>
             </div>
-            <h3 className="text-2xl font-bold mt-4">${toFixedNumber(totalPaidOut)}</h3>
+            <h3 className="text-2xl font-bold mt-4">${toFixedNumber(totalPaidOut ?? 0)}</h3>
             <p className="text-gray-600">Total Paid to Instructors</p>
         </div>
     );

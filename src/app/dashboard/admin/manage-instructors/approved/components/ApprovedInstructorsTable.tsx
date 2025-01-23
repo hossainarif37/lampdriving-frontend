@@ -13,11 +13,10 @@ import DataNotFound from '@/components/shared/DataNotFound';
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
 import { useSearchParams } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { UserRoundSearch } from 'lucide-react';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import ApprovedInstructorActions from './ApprovedInstructorActions';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const ApprovedInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -45,7 +44,7 @@ const ApprovedInstructorsTable: FC = () => {
     }, [urlSearchParams])
 
     if (isLoading) {
-        return <Loading />
+        return <TableSkeleton />
     }
 
     return (
