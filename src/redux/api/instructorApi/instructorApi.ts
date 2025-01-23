@@ -9,7 +9,7 @@ const instructorApi = baseApi.injectEndpoints({
             query: ({ username }) => `/instructor/${username}`
         }),
         getAInstructorByAdmin: builder.query<IResponseWithData<IInstructor>, { id: string }>({
-            query: ({ id }) => `/instructor-all-data/${id}`
+            query: ({ id }) => `/instructor/instructor-all-data/${id}?populate=wallet,user&fields=-bookings&walletFields=balance&userFields=-role,-isDeleted,-instructor`
         }),
         getAllInstructors: builder.query<IResponseWithPaginationData<IInstructor[]>, { status: "pending" | "verified" | "rejected", searchKey: string, limit: string, page: string }>({
             query:
