@@ -5,10 +5,10 @@ import { useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi'
 import Loading from '@/components/shared/Loading';
 import { useForm } from 'react-hook-form';
 import { ILoginInputs, IRegisterInputs } from '@/types/auth';
-import { IBookingContext, IPaymentInfo, IPrice, ISchedule, IStep, ITestPackage } from '@/types/booking';
+import { IBookingContext, IPaymentInfo, IPrice, IStep, ITestPackage } from '@/types/booking';
 import { stepsWithOutRegister, stepsWithRegister } from '@/constant/booking/bookingSteps';
-import { UserCheck } from 'lucide-react';
 import { useAppSelector } from '@/redux/hook';
+import { IScheduleInputs } from '@/types/schedule';
 
 
 const BookingContext = createContext<IBookingContext | undefined>(undefined);
@@ -33,7 +33,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [mockTestPackage, setMockTestPackage] = useState<ITestPackage>({ included: false, price: 390 });
     const [price, setPrice] = useState<IPrice>({ payableAmount: 0, originalAmount: 0, discountedAmount: 0 });
     const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({ transactionId: '', method: '' });
-    const [schedules, setSchedules] = useState<ISchedule[]>([]);
+    const [schedules, setSchedules] = useState<IScheduleInputs[]>([]);
 
     const useRegisterForm = useForm<IRegisterInputs>();
     const useLoginForm = useForm<ILoginInputs>();

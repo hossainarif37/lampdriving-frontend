@@ -3,7 +3,7 @@ import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isToday
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { IWorkingHour } from '@/types/instructor';
-import { ISchedule } from '@/types/booking';
+import { IScheduleInputs } from '@/types/schedule';
 
 interface IScheduleCalenderProps {
     selectedDate: Date | null;
@@ -11,7 +11,7 @@ interface IScheduleCalenderProps {
     classname?: string;
     workingHours: IWorkingHour | null;
     bookedSchedules: { date: string; time: [string]; }[];
-    schedules: ISchedule[];
+    schedules: IScheduleInputs[];
     availableScheduleHours: number
 }
 

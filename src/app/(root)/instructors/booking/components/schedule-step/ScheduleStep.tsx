@@ -6,10 +6,10 @@ import { Button } from '@/components/ui/button';
 import { format } from 'date-fns';
 import { useBooking } from '@/providers/BookingProvider';
 import DropOffLocation from './DropOffLocation';
-import { ISchedule } from '@/types/booking';
 import { IWorkingHour } from '@/types/instructor';
 import { CircleAlert } from 'lucide-react';
 import { useGetInstructorAvailabilityQuery } from '@/redux/api/scheduleApi/scheduleApi';
+import { IScheduleInputs } from '@/types/schedule';
 
 
 const ScheduleStep: FC = () => {
@@ -49,7 +49,7 @@ const ScheduleStep: FC = () => {
             setDropOffLocationError({ address: dropOffLocation?.suburb === '', suburb: dropOffLocation?.suburb === '' });
         }
 
-        const schedule: ISchedule = {
+        const schedule: IScheduleInputs = {
             date: new Date(selectedDate && selectedTime ? format(selectedDate, 'yyyy-MM-dd') + ' ' + selectedTime[0] : ''),
             duration: selectedDuration,
             time: selectedTime ? selectedTime : [],
@@ -69,9 +69,11 @@ const ScheduleStep: FC = () => {
         // sort schedule by date
         setSchedules((pre) => [...pre, schedule].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
 
-        setSelectedDate(null);
+        if ((availableScheduleHours - selectedDuration) === 1) {
+            setSelectedDuration(1);
+        }
         setSelectedTime(null);
-        setSelectedDuration(1);
+        // setSelectedDate(null);
     };
 
     useEffect(() => {
@@ -88,6 +90,11 @@ const ScheduleStep: FC = () => {
                 slotArr = [...slotArr, ...schedule.time];
             }
         })
+
+        if ((availableScheduleHours) === 1) {
+            setSelectedDuration(1);
+        }
+
         setBookedTimeSlots([...bookedSlots?.time || '', ...slotArr]);
     }, [data?.data.schedules, selectedDate, schedules]);
 
