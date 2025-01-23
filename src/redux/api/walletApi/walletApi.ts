@@ -9,11 +9,13 @@ const walletApi = baseApi.injectEndpoints({
         }),
 
         getAllWallet: builder.query({
-            query: () => `/wallet/all?populate=instructor,instructor.user&balance.currentBalance[$gt]=1&instructorFields=user,completedLessons`
+            query: () => `/wallet/all?populate=instructor,instructor.user&balance.currentBalance[$gt]=1&instructorFields=user,completedLessons`,
+            providesTags: ["wallet"]
         }),
 
         getAdminWallet: builder.query({
-            query: () => `/wallet/admin`
+            query: () => `/wallet/admin`,
+            providesTags: ["wallet"]
         })
     })
 })
