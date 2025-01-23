@@ -69,7 +69,7 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                                     <Star className={`h-4 w-4 text-yellow-500`} />
                                     <span>Rating</span>
                                 </div>
-                                <span className="font-semibold">{instructor?.feedback?.rating ? instructor?.feedback?.rating : "N/A" }</span>
+                                <span className="font-semibold">{instructor?.feedback?.rating ? instructor?.feedback?.rating : "N/A"}</span>
                             </div>
                             <div className="flex justify-between items-center">
                                 <div className="flex items-center space-x-2">
@@ -96,20 +96,31 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                     <div className="grid md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                             <h4 className="font-medium">Driving License</h4>
-                            <img
-                                src={instructor?.documents.drivingLicense}
-                                alt="Driving License"
-                                className="w-full h-48 object-cover rounded-lg border hover:opacity-90 transition-opacity"
-                            />
+                            <a
+                                href={instructor?.documents.drivingLicense}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                    src={instructor?.documents.drivingLicense}
+                                    alt="Driving License"
+                                    className="w-full h-48 mt-2 object-cover rounded-lg border hover:opacity-90 transition-opacity"
+                                />
+                            </a>
                         </div>
                         <div className="space-y-2">
                             <h4 className="font-medium">Experience Certificate</h4>
-
-                            <img
-                                src={instructor?.documents.experienceCertificate}
-                                alt="Experience Certificate"
-                                className="w-full h-48 object-cover rounded-lg border hover:opacity-90 transition-opacity"
-                            />
+                            <a
+                                href={instructor?.documents.drivingLicense}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                    src={instructor?.documents.experienceCertificate}
+                                    alt="Experience Certificate"
+                                    className="w-full h-48 mt-2 object-cover rounded-lg border hover:opacity-90 transition-opacity"
+                                />
+                            </a>
                         </div>
                     </div>
                 </div>
