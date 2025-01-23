@@ -5,7 +5,7 @@ import LearnerStats from './components/learner-stats/LearnerStats';
 const LearnerStatsPage: FC = () => {
     return (
         <div>
-            <LearnerStats/>
+            <LearnerStats />
         </div>
     );
 };
