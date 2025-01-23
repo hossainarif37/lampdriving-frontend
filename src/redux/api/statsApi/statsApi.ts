@@ -8,10 +8,14 @@ const statsApi = baseApi.injectEndpoints({
             query: () => `/stats/learner?populate=instructor`
         }),
 
+        getInstructorStats: builder.query({
+            query: () => `/stats/instructor?populate=learner.user&userFields=name&learnerFields=user`
+        }),
+
         getAdminStats: builder.query({
             query: () => `/stats/admin?populate=learner.user&learnerFields=user`
         })
     })
 })
 
-export const { useGetLearnerStatsQuery, useGetAdminStatsQuery } = statsApi;
+export const { useGetLearnerStatsQuery, useGetAdminStatsQuery, useGetInstructorStatsQuery } = statsApi;
