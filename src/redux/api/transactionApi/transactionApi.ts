@@ -18,6 +18,7 @@ const transactionApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: { transactionId: data.transactionId }
             }),
+            invalidatesTags: ["wallet"]
         })
     })
 })
