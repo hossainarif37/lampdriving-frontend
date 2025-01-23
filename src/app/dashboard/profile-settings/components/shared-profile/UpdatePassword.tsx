@@ -1,6 +1,8 @@
 import UpdatePasswordField, { IUpdatePasswordInputs } from '@/components/shared/forms/UpdatePasswordFields';
 import { Button } from '@/components/ui/button';
+import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { useUpdatePasswordMutation } from '@/redux/api/authApi/authApi';
 import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -15,6 +17,7 @@ const UpdatePassword: FC<{ className?: string }> = ({ className }) => {
 
     const { register, handleSubmit, formState: { errors }, watch } = useForm<IUpdatePasswordInputs>();
     const router = useRouter();
+    const [updatePassword, { isLoading }] = useUpdatePasswordMutation();
 
     const handlePasswordToggle = (field: string) => {
         if (field === 'new-password') {
@@ -24,7 +27,18 @@ const UpdatePassword: FC<{ className?: string }> = ({ className }) => {
         }
     }
 
-    const onSubmit = (data: IUpdatePasswordInputs) => console.log(data);
+
+
+    const onSubmit = (data: IUpdatePasswordInputs) => {
+        console.log(data);
+        updatePassword(data).unwrap().then((res) => {
+            toast({
+                message: "Password Updated Successfully",
+            })
+        }).catch((err) => {
+            console.log(err);
+        })
+    };
 
     return (
         <form
@@ -40,7 +54,7 @@ const UpdatePassword: FC<{ className?: string }> = ({ className }) => {
                 handlePasswordToggle={handlePasswordToggle}
             />
 
-            <Button className='w-full mt-7 gradient-color h-12'>Update Password</Button>
+            <Button className='w-full mt-7 gradient-color h-12' disabled={isLoading}>Update Password</Button>
         </form >
     );
 };
