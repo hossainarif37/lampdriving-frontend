@@ -15,6 +15,7 @@ import { Calendar } from './Calendar';
 import { useAppSelector } from '@/redux/hook';
 import { useGetInstructorStatsQuery } from '@/redux/api/statsApi/statsApi';
 import Loading from '@/components/shared/Loading';
+import InstructorStatsSkeleton from './InstructorStatsSkeleton';
 
 const InstructorStats: FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -35,7 +36,7 @@ const InstructorStats: FC = () => {
   }
 
   if (isLoading) {
-    return <Loading />
+    return <InstructorStatsSkeleton />
   }
 
   const upComingSchedules = data.data.upcomingSchedules.map((booking: any) => ({
