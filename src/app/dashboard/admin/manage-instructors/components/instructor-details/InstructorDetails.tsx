@@ -1,4 +1,4 @@
-import { useGetAInstructorByAdminQuery, useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi';
+import { useGetAInstructorByAdminQuery } from '@/redux/api/instructorApi/instructorApi';
 import { firstLetterUppercase } from '@/utils/firstLetterUppercase';
 import { format } from 'date-fns';
 import { Calendar, Car, CheckCircle2, Clock, FileText, Languages, Mail, MapPin, Phone, Star, User, Wallet } from 'lucide-react';
@@ -165,12 +165,12 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             <Clock className="h-5 w-5" />
                             <h3 className="text-lg font-semibold">Working Hours</h3>
                         </div>
-                        <div className="space-y-2">
+                        <div className="">
                             {Object.entries(instructor?.workingHour).map(([day, hours]) => (
-                                <div key={day} className="flex justify-between items-center ">
+                                <div key={day} className="flex justify-between items-center border p-2">
                                     <span className="capitalize">{day}</span>
                                     <span className="text-sm">
-                                        {hours.isActive ? `${hours.startTime} - ${hours.endTime}` : 'Closed'}
+                                        {hours.isActive ? `${hours.startTime} - ${hours.endTime}` : 'Off Day'}
                                     </span>
                                 </div>
                             ))}
