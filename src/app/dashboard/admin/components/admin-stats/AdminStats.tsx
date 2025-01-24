@@ -11,6 +11,7 @@ import Loading from "@/components/shared/Loading";
 import RevenueOverviewChart from "../../payments/wallet/components/RevenueOverviewChart";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import BookingStatsChart from "./BookingStatsChart";
+import AdminStatsSkeleton from "./AdminStatsSkeleton";
 
 // Define the Booking type
 
@@ -20,9 +21,7 @@ const AdminStats: FC = () => {
     const { user } = useAppSelector(state => state.authSlice);
     const { data, isLoading } = useGetAdminStatsQuery(undefined);
 
-    if (isLoading) return <Loading />;
-
-    console.log('Data', data);
+    if (isLoading) return <AdminStatsSkeleton />;
 
     return (
         <div className="min-h-screen bg-gray-100">
