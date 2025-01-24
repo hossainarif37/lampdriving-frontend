@@ -11,13 +11,14 @@ import Link from 'next/link';
 import Loading from '@/components/shared/Loading';
 import { useGetAdminWalletQuery } from '@/redux/api/walletApi/walletApi';
 import { FC } from 'react';
+import WalletSkeleton from './components/WalletSkeleton';
 
 
 const WalletPage: FC = () => {
     const { data, isLoading } = useGetAdminWalletQuery(undefined);
 
     if (isLoading) {
-        return <Loading />
+        return <WalletSkeleton />
     }
 
     const totalRevenue = data?.data?.totalRevenue;
