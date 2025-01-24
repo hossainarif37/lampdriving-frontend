@@ -6,7 +6,7 @@ import { FC } from 'react';
 const DashboardLayout: FC<{ children: ReactNode }> = ({ children }) => {
     return (
         <div className='flex flex-col lg:flex-row bg-white'>
-            <div className='lg:min-h-screen lg:w-80 relative '>
+            <div className='lg:min-h-screen lg:w-60 xl:w-72  relative'>
                 <Sidebar />
             </div>
             <div className='flex-1 min-h-screen'>
