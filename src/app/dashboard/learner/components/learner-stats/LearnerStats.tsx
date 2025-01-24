@@ -4,7 +4,7 @@ import { FC } from 'react';
 import React from 'react';
 import { Clock, DollarSign, BookOpen, Calendar, Award, History } from 'lucide-react';
 import Image, { StaticImageData } from 'next/image';
-import personImg from "@/assets/person_1.jpg"
+import placeHolderImage from "@/assets/placeholder_user.svg"
 import { useAppSelector } from '@/redux/hook';
 import StatsCard from '@/app/dashboard/shared/StatsCard';
 import { useGetLearnerStatsQuery } from '@/redux/api/statsApi/statsApi';
@@ -23,7 +23,7 @@ const instructor: Instructor = {
   name: 'John Doe',
   rating: 4.9,
   specialization: 'Defensive Driving Expert',
-  imageUrl: personImg,
+  imageUrl: placeHolderImage,
 };
 
 const LearnerStats: FC = () => {
