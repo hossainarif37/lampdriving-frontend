@@ -249,65 +249,6 @@ const RegisterForm: FC = () => {
                         </div>
                     </div>
 
-                    {/* Overseas Experience */}
-                    {/* <div className="mt-5">
-                        <h1 className='text-2xl font-semibold text-primary mb-3'>Overseas Experience (If Applicable)</h1>
-                        <div className='flex flex-col md:flex-row gap-5'>
-                            <div className='w-full'>
-                                <label htmlFor="overseas-country" className='font-semibold text-primary'>Country Name</label>
-                                <Input
-                                    {...register('overseasExperience.countryName')}
-                                    type="text" id='overseas-country' placeholder="Enter overseas country name" className='xl:h-12 mt-1'
-                                />
-                            </div>
-                            <div className='w-full'>
-                                <label htmlFor="overseas-license" className='font-semibold text-primary'>Overseas License No.</label>
-                                <Input
-                                    {...register('overseasExperience.licenseNumber')}
-                                    type="text" id='overseas-license' placeholder="Enter overseas license No." className='xl:h-12 mt-1'
-                                />
-                            </div>
-                        </div>
-                    </div> */}
-
-                    {/* <div className='flex flex-col md:flex-row gap-5'>
-                        <div className='w-full'>
-                            <label htmlFor="issue-date" className='font-semibold text-primary'>Issue Date</label>
-                            <Input
-                                {...register('overseasExperience.issueDate')}
-                                type="date" id='issue-date' className='xl:h-12 mt-1'
-                            />
-                        </div>
-                        <div className='w-full'>
-                            <label htmlFor="expire-date" className='font-semibold text-primary'>Expiry Date</label>
-                            <Input
-                                {...register('overseasExperience.expiryDate')}
-                                type="date" id='expire-date' className='xl:h-12 mt-1'
-                            />
-                        </div>
-                    </div> */}
-
-                    {/* Previous Learning Experience */}
-                    {/* <div className="mt-5">
-                        <h1 className='text-2xl font-semibold text-primary mb-3'>Previous Learning Experience (If Applicable)</h1>
-                        <div className='flex flex-col md:flex-row gap-5'>
-                            <div className='w-full'>
-                                <label htmlFor="driving-school" className='font-semibold text-primary'>Previous Driving School</label>
-                                <Input
-                                    {...register('previousLearningExperience.schoolName')}
-                                    type="text" id='driving-school' placeholder="Enter previous driving school name" className='xl:h-12 mt-1'
-                                />
-                            </div>
-                            <div className='w-full'>
-                                <label htmlFor="total-hours" className='font-semibold text-primary'>Total Driving Hours</label>
-                                <Input
-                                    {...register('previousLearningExperience.totalLessons')}
-                                    type="number" id='total-hours' placeholder="Enter total driving hours" className='xl:h-12 mt-1'
-                                />
-                            </div>
-                        </div>
-                    </div> */}
-
                     {/* Password Section */}
                     <div className="mt-5">
                         <h1 className='text-2xl font-semibold text-primary mb-3'>Security</h1>

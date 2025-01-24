@@ -6,9 +6,9 @@ interface IStepNavigationButtonsProps {
     prev: string;
     next: string;
     isLoading?: boolean;
+    form?: string;
 }
-
-const StepNavigationButtons: FC<IStepNavigationButtonsProps> = ({ prev, next, isLoading = false }) => {
+const StepNavigationButtons: FC<IStepNavigationButtonsProps> = ({ prev, next, form, isLoading }) => {
     return (
         <div className='flex gap-5 justify-end mt-10'>
             <Link
@@ -16,6 +16,7 @@ const StepNavigationButtons: FC<IStepNavigationButtonsProps> = ({ prev, next, is
                 className={prev === "" ? "pointer-events-none" : ""}
             >
                 <Button
+                    type="button"
                     disabled={prev === ""}
                     className='h-11 xl:h-14 md:w-40'
                 >
@@ -27,6 +28,7 @@ const StepNavigationButtons: FC<IStepNavigationButtonsProps> = ({ prev, next, is
                 loading={isLoading}
                 disabled={isLoading}
                 type='submit'
+                form={form}
                 className='h-11 xl:h-14 md:w-40 bg-primary'
             >
                 {next === "" ? "Submit" : "Save & Next"}

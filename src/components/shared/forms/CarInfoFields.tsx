@@ -9,7 +9,7 @@ interface Inputs {
     name: string;
     model: string;
     type: "auto" | "manual";
-    rating: string;
+    rating: number;
     year: number;
 }
 
@@ -137,7 +137,7 @@ const CarInfoFields: FC<ICarInfoFieldsProps> = ({ register, control, errors, def
                         })
                         }
                         defaultValue={defaultValues?.rating}
-                        type="text" id="rating" placeholder="Enter car rating" className='h-11 xl:h-14 mt-1'
+                        type="number" id="rating" placeholder="Enter car rating" className='h-11 xl:h-14 mt-1'
                     />
                     {errors?.rating && <p className='text-red-500 text-sm mt-1'>{errors?.rating?.message}</p>}
                 </div>

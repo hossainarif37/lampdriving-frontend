@@ -1,14 +1,11 @@
 "use client"
 
 import Image from 'next/image';
-import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from 'react';
-import placeHolderImage from "@/assets/person_1.jpg"
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { Button } from '../ui/button';
 import { ImagePlus, LoaderIcon, Upload, User, X } from 'lucide-react';
 import { generateUniqueIdentifier } from '@/lib/utils';
-import { toast } from '@/hooks/use-toast';
 import { Path, PathValue, UseFormRegister, UseFormSetError, UseFormSetValue } from 'react-hook-form';
-import { IRegisterInputs } from '@/types/auth';
 
 export interface IProfilePhoto {
     file: File | null;
@@ -30,7 +27,7 @@ const PhotoUpload = <T extends { profileImg?: string }>({
     register,
     setValue,
     setError,
-    isRemoveUrl
+    isRemoveUrl,
 }: IPhotoUploadProps<T>) => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isError, setIsError] = useState(false);

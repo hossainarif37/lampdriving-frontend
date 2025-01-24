@@ -9,7 +9,7 @@ import ExperienceFields from '@/components/shared/forms/ExperienceFields';
 import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 interface Inputs {
-    experience: string;
+    experience: number;
     description: string;
     languages: string[];
 }

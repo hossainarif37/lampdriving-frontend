@@ -11,7 +11,7 @@ interface Inputs {
     name: string;
     model: string;
     type: "auto" | "manual";
-    rating: string;
+    rating: number;
     year: number;
 }
 

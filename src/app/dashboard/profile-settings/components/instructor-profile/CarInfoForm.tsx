@@ -8,7 +8,7 @@ interface Inputs {
     name: string;
     model: string;
     type: "auto" | "manual";
-    rating: string;
+    rating: number;
     year: number;
 }
 
@@ -27,7 +27,7 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) =
         name: instructor?.vehicle?.name || '',
         model: instructor?.vehicle?.model || '',
         type: instructor?.vehicle?.type || 'auto',
-        rating: instructor?.vehicle?.rating || '',
+        rating: instructor?.vehicle?.rating || 5,
         image: instructor?.vehicle?.image || '',
         year: instructor?.vehicle?.year || 2024
     }
