@@ -1,14 +1,11 @@
 "use client"
-
 import TotalRevenue from './components/TotalRevenue';
 import PlatformEarnings from './components/PlatformEarnings';
 import PendingBalance from './components/PendingBalance';
 import TotalPaidOut from './components/TotalPaidOut';
 import RevenueOverviewChart from './components/RevenueOverviewChart';
 import { Wallet } from 'lucide-react';
-
 import Link from 'next/link';
-import Loading from '@/components/shared/Loading';
 import { useGetAdminWalletQuery } from '@/redux/api/walletApi/walletApi';
 import { FC } from 'react';
 import WalletSkeleton from './components/WalletSkeleton';

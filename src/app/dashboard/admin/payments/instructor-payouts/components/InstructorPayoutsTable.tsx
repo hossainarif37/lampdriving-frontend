@@ -32,6 +32,7 @@ import { useGetAllWalletQuery } from '@/redux/api/walletApi/walletApi';
 import Loading from '@/components/shared/Loading';
 import { useCreateInstructorPayoutMutation } from '@/redux/api/transactionApi/transactionApi';
 import DataNotFound from '@/components/shared/DataNotFound';
+import { toast } from '@/hooks/use-toast';
 
 interface IWalletResponse {
     meta: {
@@ -106,15 +107,14 @@ const InstructorPayoutsTable = ({ data }: { data: IWalletResult[] }) => {
 
     const [createInstructorPayout, { isLoading: isPayoutLoading }] = useCreateInstructorPayoutMutation();
 
-
     const instructors: IInstructorPayout[] = data?.map((result: IWalletResult) => ({
-        _id: result.instructor._id,
-        name: result.instructor.user.name.fullName,
-        lessons: result.instructor.completedLessons,
-        amount: result.balance.currentBalance,
-        lastPayout: new Date(result.updatedAt).toLocaleDateString(),
-        status: result.balance.currentBalance > 0 ? 'ready' : 'processing',
-        payId: result.bankAccount.payId,
+        _id: result?.instructor?._id as string,
+        name: result?.instructor?.user?.name?.fullName,
+        lessons: result?.instructor?.completedLessons,
+        amount: result?.balance?.currentBalance,
+        lastPayout: new Date(result?.updatedAt)?.toLocaleDateString(),
+        status: result?.balance?.currentBalance > 0 ? 'ready' : 'processing',
+        payId: result?.bankAccount?.payId,
     })) || [];
 
 
@@ -128,12 +128,17 @@ const InstructorPayoutsTable = ({ data }: { data: IWalletResult[] }) => {
         if (!transactionId.trim()) return;
 
         createInstructorPayout({ instructorId, transactionId }).unwrap().then((res) => {
-            console.log(res);
             setIsModalOpen(false);
             setTransactionId('');
             setSelectedInstructor(null);
+            toast({
+                message: res.message
+            })
         }).catch((err) => {
-            console.log(err);
+            toast({
+                success: false,
+                message: err?.data?.message || "Something went wrong"
+            })
         })
 
 
