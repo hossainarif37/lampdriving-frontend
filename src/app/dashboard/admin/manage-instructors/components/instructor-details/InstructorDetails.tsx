@@ -101,8 +101,10 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <img
-                                    src={instructor?.documents.drivingLicense}
+                                <Image
+                                    width={192}
+                                    height={192}
+                                    src={instructor?.documents.drivingLicense || ""}
                                     alt="Driving License"
                                     className="w-full h-48 mt-2 object-cover rounded-lg border hover:opacity-90 transition-opacity"
                                 />
@@ -115,8 +117,10 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <img
-                                    src={instructor?.documents.experienceCertificate}
+                                <Image
+                                    width={192}
+                                    height={192}
+                                    src={instructor?.documents.experienceCertificate || ""}
                                     alt="Experience Certificate"
                                     className="w-full h-48 mt-2 object-cover rounded-lg border hover:opacity-90 transition-opacity"
                                 />
@@ -132,7 +136,9 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             <h3 className="text-lg font-semibold">Vehicle Information</h3>
                         </div>
                         <div className="space-y-4">
-                            <img
+                            <Image
+                                width={192}
+                                height={192}
                                 src={instructor?.vehicle.image}
                                 alt={`${instructor?.vehicle.name} ${instructor?.vehicle.model}`}
                                 className="w-full h-48 object-cover rounded-lg"

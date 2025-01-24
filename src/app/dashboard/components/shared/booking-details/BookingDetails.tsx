@@ -2,7 +2,7 @@
 import { useGetABookingQuery } from '@/redux/api/bookingApi/bookingApi';
 import { ISchedule } from '@/types/schedule';
 import { format } from 'date-fns';
-import { ArrowRight, CalendarDays, Clock, MapPin } from 'lucide-react';
+import { ArrowRight, CalendarDays, Clock, MapPin, User } from 'lucide-react';
 import Image from 'next/image';
 import { FC } from 'react';
 import BookingDetailsSkeleton from './BookingDetailsSkeleton';
@@ -26,42 +26,54 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                 {
                     role !== "learner" &&
-                    <div className={`flex items-start space-x-4 border rounded-md p-4 ${role && "col-span-2"}`}>
-                        <div className="flex shrink-0 overflow-hidden rounded-full size-16">
-                            <Image
-                                className='object-cover'
-                                src={(booking?.learner as any).user.profileImg}
-                                width={100}
-                                height={100}
-                                alt={`${(booking?.learner as any).user.name.firstName[0]}'s image`} />
+                    <div className="bg-white p-4 rounded-lg border relative">
+                        <div className="flex items-center gap-4">
+                            <div className="relative">
+                                <Image
+                                    width={64}
+                                    height={64}
+                                    src={(booking.learner as any).user.profileImg}
+                                    alt="Learner"
+                                    className="w-16 h-16 rounded-full object-cover ring-2 ring-primary ring-offset-2"
+                                />
+                                <div className="absolute -bottom-1 -right-1 bg-primary text-white p-1 rounded-full">
+                                    <User className="w-4 h-4" />
+                                </div>
+                            </div>
+                            <div>
+                                <p className="font-semibold text-gray-900">{(booking.instructor as any).user.name.fullName}</p>
+                                <p className="text-sm font-medium text-primary/80">Email: {(booking.instructor as any).user.email}</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 className="text-lg font-semibold">{(booking.learner as any).user.name.fullName}</h3>
-                            <p className="text-sm line-clamp-2 break-all">{(booking.learner as any).user.email}</p>
-                            <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
-                                Learner
-                            </span>
-                        </div>
+                        <span className='absolute right-3 top-3 rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
+                            Learner
+                        </span>
                     </div>
                 }
                 {
                     role != "instructor" &&
-                    <div className={`flex items-start space-x-4 border rounded-md p-4 ${role && "col-span-2"}`}>
-                        <div className="flex shrink-0 overflow-hidden rounded-full size-16">
-                            <Image
-                                className='object-cover'
-                                src={(booking.instructor as any).user.profileImg}
-                                width={100}
-                                height={100}
-                                alt={`${(booking.instructor as any).user.name.firstName[0]}'s image`} />
+                    <div className="bg-white p-4 rounded-lg border relative">
+                        <div className="flex items-center gap-4 ">
+                            <div className="relative">
+                                <Image
+                                    width={64}
+                                    height={64}
+                                    src={(booking.instructor as any).user.profileImg || ""}
+                                    alt="Instructor"
+                                    className="w-16 h-16 rounded-full object-cover ring-2 ring-primary ring-offset-2"
+                                />
+                                <div className="absolute -bottom-1 -right-1 bg-primary text-white p-1 rounded-full">
+                                    <User className="w-4 h-4" />
+                                </div>
+                            </div>
+                            <div>
+                                <p className="font-semibold text-gray-900">{(booking.instructor as any).user.name.fullName}</p>
+                                <p className="text-sm font-medium text-primary/80">Email: {(booking.instructor as any).user.email}</p>
+                            </div>
                         </div>
-                        <div>
-                            <h3 className="text-lg font-semibold">{(booking.instructor as any).user.name.fullName}</h3>
-                            <p className="text-sm line-clamp-2 break-all">{(booking.instructor as any).user.email}</p>
-                            <span className='rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
-                                Instructor
-                            </span>
-                        </div>
+                        <span className='absolute right-3 top-3 rounded-md border px-2.5 py-0.5 text-xs font-semibold bg-primary text-white'>
+                            Instructor
+                        </span>
                     </div>
                 }
             </div>

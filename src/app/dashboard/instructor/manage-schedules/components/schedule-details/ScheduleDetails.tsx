@@ -5,6 +5,7 @@ import ScheduleDetailsSkeleton from './ScheduleDetailsSkeleton';
 import { Calendar, Clock, DollarSign, MapPin, User } from 'lucide-react';
 import { format } from 'date-fns';
 import { firstLetterUppercase } from '@/utils/firstLetterUppercase';
+import Image from 'next/image';
 
 interface IScheduleDetailsProps {
     role?: 'instructor' | 'learner';
@@ -30,8 +31,10 @@ const ScheduleDetails: FC<IScheduleDetailsProps> = ({ role, id }) => {
                     <div className="bg-white p-4 rounded-lg border">
                         <div className="flex items-center gap-4 relative">
                             <div className="relative">
-                                <img
-                                    src={(schedule.instructor as any).user.profileImg}
+                                <Image
+                                    width={64}
+                                    height={64}
+                                    src={(schedule.instructor as any).user.profileImg || ""}
                                     alt="Instructor"
                                     className="w-16 h-16 rounded-full object-cover ring-2 ring-primary ring-offset-2"
                                 />
@@ -54,7 +57,9 @@ const ScheduleDetails: FC<IScheduleDetailsProps> = ({ role, id }) => {
                     <div className="bg-white p-4 rounded-lg border">
                         <div className="flex items-center gap-4 relative">
                             <div className="relative">
-                                <img
+                                <Image
+                                    width={64}
+                                    height={64}
                                     src={(schedule.learner as any).user.profileImg}
                                     alt="Learner"
                                     className="w-16 h-16 rounded-full object-cover ring-2 ring-primary ring-offset-2"
