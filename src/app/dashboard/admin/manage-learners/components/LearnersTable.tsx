@@ -77,7 +77,7 @@ const LearnersTable: FC = () => {
                                                     {user?.status === 'active' ? 'Active' : 'Blocked'}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <ManageLearnersActions id={typeof learner.user === "string" ? learner.user : learner.user?._id || ''} />
+                                                    <ManageLearnersActions id={learner._id} />
                                                 </TableCell>
                                             </TableRow>
                                         )
