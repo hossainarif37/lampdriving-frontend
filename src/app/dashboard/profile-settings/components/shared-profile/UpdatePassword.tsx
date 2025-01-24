@@ -27,8 +27,6 @@ const UpdatePassword: FC<{ className?: string }> = ({ className }) => {
         }
     }
 
-
-
     const onSubmit = (data: IUpdatePasswordInputs) => {
         console.log(data);
         updatePassword(data).unwrap().then((res) => {

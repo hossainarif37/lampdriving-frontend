@@ -8,11 +8,6 @@ import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 import { IPersonalInfo } from '@/types/instructor';
 import PhotoUpload, { IProfilePhoto } from '@/components/shared/PhotoUpload';
 
-// interface IPersonalInfoFormProps {
-//     personalInfo: IPersonalInfo | undefined;
-//     setPersonalInfo: Dispatch<SetStateAction<IPersonalInfo | undefined>>;
-// }
-
 const PersonalInfoForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control, setValue, setError } = useForm<IPersonalInfoInputs>();
     const router = useRouter();
@@ -21,16 +16,17 @@ const PersonalInfoForm: FC = () => {
         file: null,
         url: personalInfo?.profileImg || undefined
     });
+
     const onSubmit = (data: IPersonalInfo) => {
-        setPersonalInfo(data);
+        if (!personalInfo) {
+            setPersonalInfo(data);
+        }
         router.push("/instructor-registration?step=experience");
     };
 
-    console.log('personalInfo', personalInfo);
-
     return (
         <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
-            <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
+            <form id="personal-info-form" onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
                 <h1 className='text-2xl md:text-3xl font-bold text-primary'>Personal Info</h1>
 
                 <div className='flex flex-col items-center'>
@@ -52,9 +48,11 @@ const PersonalInfoForm: FC = () => {
                     control={control}
                     isRequired={true}
                 />
-                <div>
-                    <StepNavigationButtons prev="" next="experience" />
-                </div>
+                <StepNavigationButtons
+                    prev=""
+                    next="experience"
+                    form="personal-info-form"
+                />
             </form>
         </div>
     );
