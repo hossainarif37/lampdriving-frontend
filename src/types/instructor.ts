@@ -23,7 +23,7 @@ export interface IVehicle {
     name: string;
     model: string;
     type: "auto" | "manual";
-    rating: string;
+    rating: number;
     image: string;
     year: number;
 }
@@ -80,7 +80,7 @@ export interface IPersonalInfo {
 }
 
 export interface IExperience {
-    experience: string;
+    experience: number;
     description: string;
     languages: string[];
     documents: IDocument;
