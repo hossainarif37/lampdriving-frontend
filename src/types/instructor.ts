@@ -51,7 +51,7 @@ export interface IInstructor {
     user: string | IUser;
     description: string;
     documents: IDocument;
-    experience: string;
+    experience: number;
     languages: string[];
     feedback: IFeedback;
     vehicle: IVehicle;
