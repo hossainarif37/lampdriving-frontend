@@ -8,7 +8,7 @@ import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface Inputs {
-    experience: string;
+    experience: number;
     description: string;
     languages: string[];
 }
@@ -24,7 +24,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
     const [isClicked, setIsClicked] = useState(false);
     const { instructor } = useAppSelector((state) => state.authSlice);
     const defaultValues = {
-        experience: instructor?.experience || '',
+        experience: instructor?.experience || 0,
         description: instructor?.description || '',
         languages: instructor?.languages || [],
         documents: instructor?.documents || {}
