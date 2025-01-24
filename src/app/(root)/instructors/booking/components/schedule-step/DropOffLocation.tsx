@@ -4,27 +4,27 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command"
 import { sydneySuburbs } from '@/constant/sydneySuburbs';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
+import { IAddress } from '@/types/user';
 
 interface IDropOffLocationProps {
     value: {
         address: string;
         suburb: string;
     };
-    onChange: Dispatch<React.SetStateAction<{
-        address: string;
-        suburb: string;
-    }>>
+    onChange: Dispatch<React.SetStateAction<IAddress>>
     error: {
         address: boolean;
         suburb: boolean;
     }
+    className?: string;
 }
 
-const DropOffLocation: FC<IDropOffLocationProps> = ({ onChange, value, error }) => {
+const DropOffLocation: FC<IDropOffLocationProps> = ({ onChange, value, error, className }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+        <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", className)}>
             <h2 className="text-lg font-semibold ">Drop Off Location</h2>
             <p className="text-sm text-gray-500 mb-4">
                 Please enter a specific address where you&apos;d like to be drop off

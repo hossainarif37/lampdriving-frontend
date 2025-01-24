@@ -1,11 +1,8 @@
 "use client"
-import { useState } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
 import LampLogo from '@/components/shared/LampLogo';
 import MenuLinks from './MenuLinks';
 import NavLink from '@/components/shared/NavLink';
-import { AlignJustify, Settings } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import MobileMenu from './MobileMenu';
 import UserMenu from '../dashboard-nav/UserMenu';
 

@@ -4,6 +4,7 @@ import { ILoginInputs, IRegisterInputs } from "./auth";
 import { ForwardRefExoticComponent, RefAttributes } from "react";
 import { LucideProps } from "lucide-react";
 import { ILearner } from "./learner";
+import { ISchedule, IScheduleInputs } from "./schedule";
 
 export interface IBookingContext {
     steps: IStep[];
@@ -23,8 +24,8 @@ export interface IBookingContext {
     setIsCustomSelected: React.Dispatch<React.SetStateAction<boolean>>;
     paymentInfo: IPaymentInfo;
     setPaymentInfo: React.Dispatch<React.SetStateAction<IPaymentInfo>>;
-    schedules: ISchedule[];
-    setSchedules: React.Dispatch<React.SetStateAction<ISchedule[]>>;
+    schedules: IScheduleInputs[];
+    setSchedules: React.Dispatch<React.SetStateAction<IScheduleInputs[]>>;
     useRegisterForm: UseFormReturn<IRegisterInputs, unknown, undefined>;
     useLoginForm: UseFormReturn<ILoginInputs, unknown, undefined>;
     handleStepChange: (step: string) => void;
@@ -51,20 +52,6 @@ export interface IPaymentInfo {
     method: string;
 }
 
-export interface ISchedule {
-    date: Date;
-    time: string[];
-    duration: 1 | 2 | 1.5;
-    pickupAddress: {
-        address: string;
-        suburb: string;
-    };
-    dropOffAddress?: {
-        address: string;
-        suburb: string;
-    };
-    type: "lesson" | "test" | "mock-test"
-}
 
 
 export interface IStep {
@@ -81,7 +68,7 @@ export interface IBookingInputs {
         instructor: string;
         price: number;
         bookingHours: number;
-        schedules: ISchedule[];
+        schedules: IScheduleInputs[];
     };
     paymentInfo: {
         user: string;
@@ -101,8 +88,10 @@ export interface IBooking {
     learner: string | ILearner;
     instructor: string | IInstructor;
     bookingHours: number;
-    schedules: ISchedule[];
+    schedules: string | ISchedule[];
     payment: string;
     price: number;
     status: "pending" | "accepted" | "completed" | "cancelled";
+    createdAt: Date;
+    updatedAt: Date;
 }

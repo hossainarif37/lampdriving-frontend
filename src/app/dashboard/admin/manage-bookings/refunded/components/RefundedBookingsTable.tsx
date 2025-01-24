@@ -8,6 +8,7 @@ import Loading from '@/components/shared/Loading';
 import { useGetAllBookingsQuery } from '@/redux/api/bookingApi/bookingApi';
 import { IBooking } from '@/types/booking';
 import RefundedBookingActions from './RefundedBookingActions';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const RefundedBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -35,7 +36,7 @@ const RefundedBookingsTable: FC = () => {
     }, [urlSearchParams])
 
     if (isLoading) {
-        return <Loading />
+        return <TableSkeleton />
     }
 
     return (
@@ -49,8 +50,7 @@ const RefundedBookingsTable: FC = () => {
                                     <TableHead className="min-w-[100px] text-center">No.</TableHead>
                                     <TableHead className='min-w-[214px]'>Learner</TableHead>
                                     <TableHead className='min-w-[214px]'>Instructor</TableHead>
-                                    <TableHead className='min-w-[250px]'>Transaction ID</TableHead>
-                                    <TableHead className='min-w-[140px]'>Price</TableHead>
+                                    <TableHead className='min-w-[250px]'>Payment</TableHead>
                                     <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
                                     <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
                                 </TableRow>
@@ -76,8 +76,16 @@ const RefundedBookingsTable: FC = () => {
                                                         <span className="text-sm text-gray-500">{instructor?.email}</span>
                                                     </div>
                                                 </TableCell>
-                                                <TableCell className="font-medium">{(booking.payment as any).transactionId}</TableCell>
-                                                <TableCell className="font-medium">${booking.price}</TableCell>
+                                                <TableCell className="font-medium">
+                                                    <div>
+                                                        <p>
+                                                            ${(booking.price).toFixed(2)}
+                                                        </p>
+                                                        <p>
+                                                            {(booking.payment as any).transactionId}
+                                                        </p>
+                                                    </div>
+                                                </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>
                                                 </TableCell>
@@ -93,7 +101,7 @@ const RefundedBookingsTable: FC = () => {
                     </div>
                     :
                     <div className='flex-1 flex items-center justify-center'>
-                        <DataNotFound isSearched={isSearched} dataName='Cancelled Bookings' />
+                        <DataNotFound isSearched={isSearched} dataName='Refunded Bookings' />
                     </div>
             }
             <TablePagination meta={data?.data.meta} />

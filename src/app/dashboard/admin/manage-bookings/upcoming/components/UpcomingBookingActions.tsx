@@ -3,6 +3,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigg
 import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
 import UpdateBookingStatus from '../../components/shared/UpdateBookingStatus';
+import BookingDetails from '../../../../components/shared/booking-details/BookingDetails';
+import ViewDetailsDialogBtn from '@/app/dashboard/components/shared/view-details/ViewDetailsDialogBtn';
 
 interface IUpcomingBookingActionsProps {
     id: string;
@@ -22,8 +24,9 @@ const UpcomingBookingActions: FC<IUpcomingBookingActionsProps> = ({ id }) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
-                    <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
-                    <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={"ongoing"} />
+                    <ViewDetailsDialogBtn title={"Booking Details"}>
+                        <BookingDetails id={id} />
+                    </ViewDetailsDialogBtn>
                     <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={"refund"} />
                 </DropdownMenuContent>
             </DropdownMenu>
