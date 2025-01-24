@@ -3,6 +3,7 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLab
 import { MoreHorizontal } from 'lucide-react';
 import { FC, useState } from 'react';
 import DeleteUser from '../../components/shared/DeleteUser';
+import UpdateUserStatus from '../../components/shared/UpdateUserStatus';
 
 interface IManageLearnersActionsProps {
     id: string;
@@ -22,7 +23,7 @@ const ManageLearnersActions: FC<IManageLearnersActionsProps> = ({ id }) => {
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
                     <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
-                    <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>Block</Button>
+                    <UpdateUserStatus id={id} setDropdownIsOpen={setDropdownIsOpen} role='instructor' status='blocked' />
                     <DeleteUser role='learner' id={id} setDropdownIsOpen={setDropdownIsOpen} />
                 </DropdownMenuContent>
             </DropdownMenu>
