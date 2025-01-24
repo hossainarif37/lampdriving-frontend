@@ -22,6 +22,7 @@ export interface IPreviousLearningExperience {
 
 
 export interface ILearner {
+    _id: string;
     user: string | IUser;
     bookings: string[] | IBooking[];
     payments: string[];
