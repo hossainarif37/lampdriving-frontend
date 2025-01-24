@@ -39,7 +39,7 @@ const InstructorStats: FC = () => {
     return <InstructorStatsSkeleton />
   }
 
-  const upComingSchedules = data.data.upcomingSchedules.map((booking: any) => ({
+  const upComingSchedules = data?.data?.upcomingSchedules?.map((booking: any) => ({
     id: booking._id,
     studentName: booking.learner.user.name.fullName,
     date: booking.date,
