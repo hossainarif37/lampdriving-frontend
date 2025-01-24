@@ -1,10 +1,11 @@
 import { IResponseWithData } from "@/types/response";
 import baseApi from "../baseApi";
+import { IWallet } from "@/types/wallet";
 
 const walletApi = baseApi.injectEndpoints({
     overrideExisting: true,
     endpoints: (builder) => ({
-        getInstructorWallet: builder.query({
+        getInstructorWallet: builder.query<IResponseWithData<IWallet>, { instructorId: string }>({
             query: ({ instructorId }) => `/wallet/instructor/${instructorId}`
         }),
 
