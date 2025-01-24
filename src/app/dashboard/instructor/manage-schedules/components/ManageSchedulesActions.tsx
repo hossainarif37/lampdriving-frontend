@@ -5,6 +5,8 @@ import { MoreHorizontal } from 'lucide-react';
 import UpdateBookingStatus from './UpdateScheduleStatus';
 import RescheduleAScheduleBtn from './reschedule-a-schedule/RescheduleAScheduleBtn';
 import { IAddress } from '@/types/user';
+import ViewDetailsDialogBtn from '@/app/dashboard/components/shared/view-details/ViewDetailsDialogBtn';
+import ScheduleDetails from './schedule-details/ScheduleDetails';
 
 interface IManageSchedulesActionsProps {
     id: string;
@@ -30,7 +32,9 @@ const ManageSchedulesActions: FC<IManageSchedulesActionsProps> = ({ id, username
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
-                    <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>View Details</Button>
+                    <ViewDetailsDialogBtn title={"Schedule Details"}>
+                        <ScheduleDetails role='instructor' id={id} />
+                    </ViewDetailsDialogBtn>
                     {
                         (status === "upcoming" || status === "ongoing" || status === "rescheduled") && (
                             <UpdateBookingStatus setDropdownIsOpen={setDropdownIsOpen} id={id} status={(status === "upcoming" || status === "rescheduled") ? "ongoing" : "complete"} />

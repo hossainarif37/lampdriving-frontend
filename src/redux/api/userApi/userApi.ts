@@ -9,16 +9,24 @@ const userApi = baseApi.injectEndpoints({
                 method: "PUT",
                 body: data
             }),
-            invalidatesTags: ["User"]
+            invalidatesTags: ["user"]
         }),
         deleteUser: builder.mutation<IResponseBase, { id: string }>({
             query: ({ id }) => ({
                 url: `/user/${id}`,
                 method: "DELETE"
             }),
-            invalidatesTags: ["User"]
+            invalidatesTags: ["user"]
+        }),
+        updateUserStatus: builder.mutation<IResponseBase, { id: string, status: "active" | "blocked" }>({
+            query: ({ id, status }) => ({
+                url: `/user/status/${id}`,
+                method: "PATCH",
+                body: { status }
+            }),
+            invalidatesTags: ["user", "instructor", "learner"]
         })
     })
 })
 
-export const { useUpdateUserMutation, useDeleteUserMutation } = userApi;
+export const { useUpdateUserMutation, useDeleteUserMutation, useUpdateUserStatusMutation } = userApi;

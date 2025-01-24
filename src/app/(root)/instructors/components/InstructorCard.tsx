@@ -14,7 +14,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
     return (
         <div className="p-4 rounded-lg space-y-5 border border-primary/10 shadow-sm relative">
             {/* car type */}
-            <span className="px-3 py-1 bg-green-200 text-primary/50 font-bold rounded-full text-sm flex items-center gap-1 absolute top-5 right-5 capitalize">
+            <span className="px-3 py-1 bg-green-200/50 text-primary/60 font-bold rounded-full text-sm flex items-center gap-1 absolute top-5 right-5 capitalize">
                 <Car className="w-4 h-4" strokeWidth={2.5} />
                 {vehicle.type}
             </span>
@@ -65,7 +65,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                     {/* Experience */}
                     <div className="flex items-center font-semibold gap-2">
                         <Clock className="w-5 h-5 text-secondary" />
-                        <span className="text-gradient">{experience}</span>
+                        <span className="text-gradient">{experience} Years</span>
                     </div>
                 </div>
             </div>

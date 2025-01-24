@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import InstructorDetails from "../InstructorDetails/components/InstructorDetails"
+import InstructorDetails from "./components/InstructorDetails"
 import { getAInstructor } from '@/api/getAInstructor';
 
 interface IInstructorPageProps {
@@ -11,6 +11,7 @@ interface IInstructorPageProps {
 const InstructorPage: FC<IInstructorPageProps> = async ({ params }) => {
     const { username } = await params;
     const data = await getAInstructor(username);
+    console.log('data', data);
 
     return (
         <div>

@@ -1,4 +1,4 @@
-import { useGetAInstructorByAdminQuery, useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi';
+import { useGetAInstructorByAdminQuery } from '@/redux/api/instructorApi/instructorApi';
 import { firstLetterUppercase } from '@/utils/firstLetterUppercase';
 import { format } from 'date-fns';
 import { Calendar, Car, CheckCircle2, Clock, FileText, Languages, Mail, MapPin, Phone, Star, User, Wallet } from 'lucide-react';
@@ -101,8 +101,10 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <img
-                                    src={instructor?.documents.drivingLicense}
+                                <Image
+                                    width={192}
+                                    height={192}
+                                    src={instructor?.documents.drivingLicense || ""}
                                     alt="Driving License"
                                     className="w-full h-48 mt-2 object-cover rounded-lg border hover:opacity-90 transition-opacity"
                                 />
@@ -115,8 +117,10 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <img
-                                    src={instructor?.documents.experienceCertificate}
+                                <Image
+                                    width={192}
+                                    height={192}
+                                    src={instructor?.documents.experienceCertificate || ""}
                                     alt="Experience Certificate"
                                     className="w-full h-48 mt-2 object-cover rounded-lg border hover:opacity-90 transition-opacity"
                                 />
@@ -132,7 +136,9 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             <h3 className="text-lg font-semibold">Vehicle Information</h3>
                         </div>
                         <div className="space-y-4">
-                            <img
+                            <Image
+                                width={192}
+                                height={192}
                                 src={instructor?.vehicle.image}
                                 alt={`${instructor?.vehicle.name} ${instructor?.vehicle.model}`}
                                 className="w-full h-48 object-cover rounded-lg"
@@ -165,12 +171,12 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             <Clock className="h-5 w-5" />
                             <h3 className="text-lg font-semibold">Working Hours</h3>
                         </div>
-                        <div className="space-y-2">
+                        <div className="">
                             {Object.entries(instructor?.workingHour).map(([day, hours]) => (
-                                <div key={day} className="flex justify-between items-center ">
+                                <div key={day} className="flex justify-between items-center border p-2">
                                     <span className="capitalize">{day}</span>
                                     <span className="text-sm">
-                                        {hours.isActive ? `${hours.startTime} - ${hours.endTime}` : 'Closed'}
+                                        {hours.isActive ? `${hours.startTime} - ${hours.endTime}` : 'Off Day'}
                                     </span>
                                 </div>
                             ))}
