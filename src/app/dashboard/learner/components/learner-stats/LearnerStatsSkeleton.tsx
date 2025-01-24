@@ -3,7 +3,7 @@ import { FC } from 'react';
 const StatsCardSkeleton: FC = () => (
     <div className="bg-white p-6 rounded-xl shadow-sm">
         <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-lg bg-gray-200 animate-pulse"></div>
+            <div className="w-12 h-12 rounded-full bg-gray-200 animate-pulse"></div>
             <div className="space-y-2 flex-1">
                 <div className="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
                 <div className="h-6 w-16 bg-gray-200 rounded animate-pulse"></div>
