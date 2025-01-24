@@ -1,5 +1,6 @@
 import { IResponseWithData } from "@/types/response";
 import baseApi from "../baseApi";
+import { IInstructorStats } from "@/types/stats";
 
 const statsApi = baseApi.injectEndpoints({
     overrideExisting: true,
@@ -8,7 +9,7 @@ const statsApi = baseApi.injectEndpoints({
             query: () => `/stats/learner?populate=instructor`
         }),
 
-        getInstructorStats: builder.query({
+        getInstructorStats: builder.query<IResponseWithData<IInstructorStats>, { instructorId: string }>({
             query: () => `/stats/instructor?populate=learner.user&userFields=name&learnerFields=user`
         }),
 

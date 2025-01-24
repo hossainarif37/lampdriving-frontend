@@ -9,6 +9,7 @@ import { useAppSelector } from '@/redux/hook';
 import StatsCard from '@/app/dashboard/shared/StatsCard';
 import { useGetLearnerStatsQuery } from '@/redux/api/statsApi/statsApi';
 import Loading from '@/components/shared/Loading';
+import LearnerStatsSkeleton from './LearnerStatsSkeleton';
 
 interface Instructor {
   id: string;
@@ -41,7 +42,7 @@ const LearnerStats: FC = () => {
   });
 
   if (isLoading) {
-    return <Loading />
+    return <LearnerStatsSkeleton />
   }
 
   const statsData = [

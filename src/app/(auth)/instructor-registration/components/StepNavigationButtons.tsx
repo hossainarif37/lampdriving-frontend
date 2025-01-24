@@ -2,13 +2,13 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { FC } from 'react';
 
-interface StepNavigationButtonsProps {
+interface IStepNavigationButtonsProps {
     prev: string;
     next: string;
+    isLoading?: boolean;
     form?: string;
 }
-
-const StepNavigationButtons: FC<StepNavigationButtonsProps> = ({ prev, next, form }) => {
+const StepNavigationButtons: FC<IStepNavigationButtonsProps> = ({ prev, next, form, isLoading }) => {
     return (
         <div className='flex gap-5 justify-end mt-10'>
             <Link
@@ -25,6 +25,8 @@ const StepNavigationButtons: FC<StepNavigationButtonsProps> = ({ prev, next, for
             </Link>
 
             <Button
+                loading={isLoading}
+                disabled={isLoading}
                 type='submit'
                 form={form}
                 className='h-11 xl:h-14 md:w-40 bg-primary'

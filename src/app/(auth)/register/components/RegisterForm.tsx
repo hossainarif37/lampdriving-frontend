@@ -161,14 +161,20 @@ const RegisterForm: FC = () => {
                                             maxLength: {
                                                 value: 10,
                                                 message: "Phone number must be 10 digits"
-                                            },
-                                            minLength: {
-                                                value: 10,
-                                                message: "Phone number must be 10 digits"
                                             }
                                         })
                                         }
                                         type="number" id='phone' placeholder="Enter your phone number" className='xl:h-12 mt-1'
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                                                e.preventDefault();
+                                            }
+                                        }}
+                                        onChange={(e) => {
+                                            if (e.target.value.length > 10) {
+                                                e.target.value = e.target.value.slice(0, 10);
+                                            }
+                                        }}
                                     />
                                     {errors?.phone && <p className='text-red-500 text-sm mt-1'>{errors?.phone?.message}</p>}
                                 </div>
@@ -302,7 +308,7 @@ const RegisterForm: FC = () => {
                 </div>
             </div>
 
-            <Button disabled={isRegistering} className='w-full mt-3 gradient-color h-12'>Register</Button>
+            <Button loading={isRegistering} disabled={isRegistering} className='w-full mt-3 gradient-color h-12'>Register</Button>
 
             <p className='mt-5'>Already have an account? <Link href="/login" className='text-blue-500 hover:underline font-semibold'>Login Here</Link></p>
         </form>

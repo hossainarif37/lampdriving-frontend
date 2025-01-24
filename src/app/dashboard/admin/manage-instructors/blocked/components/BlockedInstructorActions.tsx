@@ -5,6 +5,8 @@ import { FC, useState } from 'react';
 import UpdateInstructorStatus from '../../pending/components/UpdateInstructorStatus';
 import ViewDetailsDialogBtn from '@/app/dashboard/components/shared/view-details/ViewDetailsDialogBtn';
 import InstructorDetails from '../../components/instructor-details/InstructorDetails';
+import UpdateUserStatus from '../../../components/shared/UpdateUserStatus';
+import DeleteUser from '../../../components/shared/DeleteUser';
 
 interface IBlockedInstructorActionsProps {
     id: string;
@@ -26,8 +28,8 @@ const BlockedInstructorActions: FC<IBlockedInstructorActionsProps> = ({ id }) =>
                     <ViewDetailsDialogBtn title={"Instructor Details"}>
                         <InstructorDetails id={id} />
                     </ViewDetailsDialogBtn>
-                    <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>Unblock</Button>
-                    <UpdateInstructorStatus status='reject' id={id} setDropdownIsOpen={setDropdownIsOpen} />
+                    <UpdateUserStatus id={id} setDropdownIsOpen={setDropdownIsOpen} role='instructor' status='active' />
+                    <DeleteUser role='instructor' id={id} setDropdownIsOpen={setDropdownIsOpen} />
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>

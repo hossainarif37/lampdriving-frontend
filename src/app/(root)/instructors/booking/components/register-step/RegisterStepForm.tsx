@@ -133,6 +133,16 @@ const RegisterStepForm: FC = () => {
                                             }
                                         })
                                         }
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                                                e.preventDefault();
+                                            }
+                                        }}
+                                        onChange={(e) => {
+                                            if (e.target.value.length > 10) {
+                                                e.target.value = e.target.value.slice(0, 10);
+                                            }
+                                        }}
                                         type="number" id='phone' placeholder="Enter your phone number" className='xl:h-12 mt-1'
                                     />
                                     {errors?.phone && <p className='text-red-500 text-sm mt-1'>{errors?.phone?.message}</p>}
@@ -207,7 +217,7 @@ const RegisterStepForm: FC = () => {
                             </div>
                         </div>
                     </div>
-                    
+
                     {/* Password Section */}
                     <div className="mt-5">
                         {/* <h1 className='text-2xl font-semibold text-primary mb-3'>Security</h1> */}

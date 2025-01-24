@@ -220,7 +220,7 @@ const SecurityForm: FC = () => {
                 </div>
 
                 <div className="mt-6">
-                    <StepNavigationButtons prev="car-info" next="" />
+                    <StepNavigationButtons isLoading={isRegistering} prev="car-info" next="" />
                 </div>
             </form>
         </div>
