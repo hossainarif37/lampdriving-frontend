@@ -3,6 +3,7 @@ import baseApi from "../baseApi";
 import { IResponseBase, IResponseWithData } from "@/types/response";
 import { IUser } from "@/types/user";
 import { IRegisterInstructor } from "@/types/instructor";
+import { IUpdatePasswordInputs } from "@/components/shared/forms/UpdatePasswordFields";
 
 const usersApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -34,8 +35,15 @@ const usersApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: data
             })
-        })
+        }),
+        updatePassword: builder.mutation<IResponseBase, IUpdatePasswordInputs>({
+            query: (data) => ({
+                url: 'auth/password/change',
+                method: "PATCH",
+                body: data
+            })
+        }),
     })
 })
 
-export const { useRegisterUserMutation, useLoginUserMutation, useCurrentUserQuery, useLazyLogOutUserQuery, useRegisterInstructorMutation } = usersApi;
+export const { useRegisterUserMutation, useLoginUserMutation, useCurrentUserQuery, useLazyLogOutUserQuery, useRegisterInstructorMutation, useUpdatePasswordMutation } = usersApi;

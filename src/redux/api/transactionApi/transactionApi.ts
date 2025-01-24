@@ -19,8 +19,12 @@ const transactionApi = baseApi.injectEndpoints({
                 body: { transactionId: data.transactionId }
             }),
             invalidatesTags: ["wallet"]
+        }),
+
+        getTransactionHistory: builder.query({
+            query: () => `/payment/my`,
         })
     })
 })
 
-export const { useCreatePaymentIntentMutation, useCreateInstructorPayoutMutation } = transactionApi
+export const { useCreatePaymentIntentMutation, useCreateInstructorPayoutMutation, useGetTransactionHistoryQuery } = transactionApi
