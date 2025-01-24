@@ -23,7 +23,7 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
     return (
         <div className="space-y-6 h-96 overflow-y-auto thin-scrollbar px-2 py-4">
             {/* Learner Info */}
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+            <div className={`grid grid-cols-1 ${!role && "md:grid-cols-2"} gap-6`}>
                 {
                     role !== "learner" &&
                     <div className="bg-white p-4 rounded-lg border relative">
