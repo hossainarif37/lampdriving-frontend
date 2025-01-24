@@ -32,7 +32,7 @@ const SecurityForm: FC = () => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
-    
+
     // Separate state for checkboxes and their errors
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [termsError, setTermsError] = useState("");
@@ -220,7 +220,7 @@ const SecurityForm: FC = () => {
                 </div>
 
                 <div className="mt-6">
-                    <StepNavigationButtons prev="car-info" next="" />
+                    <StepNavigationButtons isLoading={isRegistering} prev="car-info" next="" />
                 </div>
             </form>
         </div>
