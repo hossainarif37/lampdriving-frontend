@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import { FC } from 'react';
 import { cn } from '@/lib/utils';
 import { Clock, XCircle } from 'lucide-react';
+import { ITestPackage } from '@/types/booking';
 
 interface ScheduleTimeSlotsProps {
     selectedTime: string[] | null;
@@ -17,6 +18,8 @@ interface ScheduleTimeSlotsProps {
     scheduleTimeSlots: string[];
     setScheduleTimeSlots: Dispatch<SetStateAction<string[]>>;
     availableScheduleHours: number;
+    isTestPackageSelected?: boolean;
+    testPackage?: ITestPackage;
 }
 
 
@@ -31,6 +34,8 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         btnClassname,
         slotContainerClassname,
         availableScheduleHours,
+        isTestPackageSelected,
+        testPackage,
         workingHour, scheduleTimeSlots, setScheduleTimeSlots } = props;
 
 
@@ -91,13 +96,18 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
                             <div className="grid grid-cols-1 gap-3">
                                 {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 1)).map((time, index) => {
                                     const slotIndex = scheduleTimeSlots.indexOf(time);
-                                    const isDisabled = (bookedTimeSlots.includes(time) || (isTwoOurSelected && bookedTimeSlots.includes(scheduleTimeSlots[slotIndex + 1])));
+                                    let isDisabled = (bookedTimeSlots.includes(time) || (isTwoOurSelected && bookedTimeSlots.includes(scheduleTimeSlots[slotIndex + 1]))) || availableScheduleHours <= 0;
+                                    if (testPackage?.included) {
+                                        if (!isTestPackageSelected) {
+                                            isDisabled = false;
+                                        }
+                                    }
                                     const isHidden = (isTwoOurSelected) && (index % 2 !== 0);
                                     if (isHidden) return null;
 
                                     return <button
                                         key={index}
-                                        disabled={isDisabled || availableScheduleHours <= 0}
+                                        disabled={isDisabled}
                                         onClick={() => handleSelectTimes(`${time} - ${scheduleTimeSlots[scheduleTimeSlots.indexOf(time) + 1]}`)}
                                         className={cn(`py-2 px-4 rounded-[4px] border text-sm disabled:opacity-50 flex items-center justify-center
                                         ${selectedTime?.includes(time) ? 'border-primary bg-primary/5 text-primary'
