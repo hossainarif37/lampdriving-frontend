@@ -50,77 +50,62 @@ const InstructorStats: FC = () => {
     },
   }));
 
+  console.log('data', data);
 
   return (
-    <div>
-      {/* Header */}
-      {/* <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center space-x-3">
-            <GraduationCap className="h-8 w-8 text-blue-600" />
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Welcome back, {user?.name?.firstName}!</h1>
-              <p className="text-gray-500">Here&apos;s what&apos;s happening with your lessons today</p>
-            </div>
-          </div>
-        </div>
-      </div> */}
+    <div className="py-8 px-5">
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+        <StatsCard
+          title="Total Bookings"
+          value={data?.data?.totalBookings || 0}
+          icon={<BookOpen className="h-6 w-6 text-blue-600" />}
+          trend="+12% from last month"
+        />
+        <StatsCard
+          title="Completed"
+          value={data?.data?.completedBookings || 0}
+          icon={<CheckCircle className="h-6 w-6 text-green-600" />}
+          trend="+8% from last month"
+        />
+        <StatsCard
+          title="Ongoing Bookings"
+          value={data?.data?.ongoingBookings || 0}
+          icon={<Clock className="h-6 w-6 text-orange-600" />}
+          trend="Current active"
+        />
+        <StatsCard
+          title="Upcoming Bookings"
+          value={data?.data?.upcomingBookings || 0}
+          icon={<Clock className="h-6 w-6 text-orange-600" />}
+          trend="Current active"
+        />
+        <StatsCard
+          title="Total Earnings"
+          value={`$${data?.data?.totalEarnings || 0}`}
+          icon={<DollarSign className="h-6 w-6 text-emerald-600" />}
+          trend="+18% from last month"
+        />
+      </div>
 
-      {/* Main Content */}
-      <div className="py-8 px-5">
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-          <StatsCard
-            title="Total Bookings"
-            value={data?.data?.totalBookings || 0}
-            icon={<BookOpen className="h-6 w-6 text-blue-600" />}
-            trend="+12% from last month"
-          />
-          <StatsCard
-            title="Completed"
-            value={data?.data?.completedBookings || 0}
-            icon={<CheckCircle className="h-6 w-6 text-green-600" />}
-            trend="+8% from last month"
-          />
-          <StatsCard
-            title="Ongoing Bookings"
-            value={data?.data?.ongoingBookings || 0}
-            icon={<Clock className="h-6 w-6 text-orange-600" />}
-            trend="Current active"
-          />
-          <StatsCard
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Calendar Section */}
+        <div className="lg:col-span-1 bg-white rounded-lg p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-gray-900">Calendar</h2>
+            <CalendarIcon className="h-5 w-5 text-gray-500" />
+          </div>
+          <Calendar selectedDate={selectedDate} onDateSelect={setSelectedDate} />
+        </div>
+
+        {/* Bookings Lists */}
+        <div className="lg:col-span-2 space-y-6">
+          <BookingsList
             title="Upcoming Bookings"
-            value={data?.data?.upcomingBookings || 0}
-            icon={<Clock className="h-6 w-6 text-orange-600" />}
-            trend="Current active"
+            bookings={upComingSchedules || []}
+            type="running"
+            selectedDate={selectedDate}
           />
-          <StatsCard
-            title="Total Earnings"
-            value={`$${data?.data?.totalEarnings || 0}`}
-            icon={<DollarSign className="h-6 w-6 text-emerald-600" />}
-            trend="+18% from last month"
-          />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Calendar Section */}
-          <div className="lg:col-span-1 bg-white rounded-lg p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">Calendar</h2>
-              <CalendarIcon className="h-5 w-5 text-gray-500" />
-            </div>
-            <Calendar selectedDate={selectedDate} onDateSelect={setSelectedDate} />
-          </div>
-
-          {/* Bookings Lists */}
-          <div className="lg:col-span-2 space-y-6">
-            <BookingsList
-              title="Upcoming Bookings"
-              bookings={upComingSchedules || []}
-              type="running"
-              selectedDate={selectedDate}
-            />
-          </div>
         </div>
       </div>
     </div>

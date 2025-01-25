@@ -27,15 +27,6 @@ const AdminStats: FC = () => {
         <div className="min-h-screen bg-gray-100">
             <div className="mx-auto px-6 py-8 bg-gray-50">
                 <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-primary mb-2">
-                        Welcome back, {user?.name?.firstName}!
-                    </h1>
-                    <p className="text-accent">
-                        Here's what's happening with your driving school today.
-                    </p>
-                </div>
-
-                <div className="mb-8">
                     <DashboardStats
                         totalBookings={data?.data?.totalBookings}
                         completedBookings={data?.data?.completedBookings}
@@ -48,8 +39,6 @@ const AdminStats: FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* <BookingCalendar /> */}
-                    {/* Chart Section */}
                     <BookingStatsChart data={data?.data?.lastSixMonthsBookings} />
                     <BookingList bookings={data?.data?.recentBookings} />
                 </div>
