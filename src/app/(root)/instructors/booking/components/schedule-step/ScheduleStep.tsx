@@ -22,14 +22,14 @@ interface ISelectedSchedule {
 }
 
 const ScheduleStep: FC = () => {
-    const { setSchedules, instructor, schedules, availableScheduleHours, testPackage } = useBooking();
+    const { setSchedules, instructor, schedules, availableScheduleHours, testPackage, isTestPackageSelected } = useBooking();
     const [selectedSchedule, setSelectedSchedule] = useState<ISelectedSchedule>({
         date: null,
         time: null,
-        duration: availableScheduleHours ? 1 : 0,
+        duration: availableScheduleHours ? 1 : (testPackage.included && !isTestPackageSelected) ? 2 : 0,
         pickupAddress: { address: '', suburb: '' },
         dropOffAddress: { address: '', suburb: '' },
-        type: "lesson"
+        type: availableScheduleHours ? "lesson" : (testPackage.included && !isTestPackageSelected) ? "test" : "lesson"
     });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
@@ -44,8 +44,6 @@ const ScheduleStep: FC = () => {
         if (!selectedSchedule.date || !selectedSchedule.time) {
             return;
         }
-        const testPackage = selectedSchedule.type === "test";
-
         if (selectedSchedule.pickupAddress?.address === '' || selectedSchedule.pickupAddress?.suburb === '') {
             setPickupLocationError({ address: selectedSchedule.pickupAddress?.address === '', suburb: selectedSchedule.pickupAddress?.suburb === '' });
             return;
@@ -53,10 +51,10 @@ const ScheduleStep: FC = () => {
             setPickupLocationError({ address: selectedSchedule.pickupAddress?.suburb === '', suburb: selectedSchedule.pickupAddress?.suburb === '' });
         }
 
-        if (testPackage && (selectedSchedule.dropOffAddress?.address === '' || selectedSchedule.dropOffAddress?.suburb === '')) {
+        if (selectedSchedule.type === "test" && (selectedSchedule.dropOffAddress?.address === '' || selectedSchedule.dropOffAddress?.suburb === '')) {
             setDropOffLocationError({ address: selectedSchedule.dropOffAddress?.address === '', suburb: selectedSchedule.dropOffAddress?.suburb === '' });
             return;
-        } else if (testPackage) {
+        } else if (selectedSchedule.type === "test") {
             setDropOffLocationError({ address: selectedSchedule.dropOffAddress?.suburb === '', suburb: selectedSchedule.dropOffAddress?.suburb === '' });
         }
 
@@ -67,21 +65,28 @@ const ScheduleStep: FC = () => {
             pickupAddress: selectedSchedule.pickupAddress,
             type: selectedSchedule.type
         }
-        if (testPackage) {
+
+        if (selectedSchedule.type === "test") {
             schedule.dropOffAddress = selectedSchedule.dropOffAddress;
         }
 
         // sort schedule by date
         setSchedules((pre) => [...pre, schedule].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
 
-        if ((availableScheduleHours - selectedSchedule.duration) === 1) {
-            setSelectedSchedule((pre) => ({ ...pre, duration: 1 }));
-        } else if ((availableScheduleHours - selectedSchedule.duration) === 0) {
-            setSelectedSchedule((pre) => ({ ...pre, duration: 0 }));
-        }
-
         setSelectedSchedule((pre) => ({ ...pre, time: null }));
     };
+
+    useEffect(() => {
+        if (availableScheduleHours > 1) {
+            return;
+        } else if ((availableScheduleHours) === 1) {
+            setSelectedSchedule((pre) => ({ ...pre, duration: 1, type: "lesson" }));
+        } else if ((testPackage.included && !isTestPackageSelected) && (availableScheduleHours) === 0) {
+            setSelectedSchedule((pre) => ({ ...pre, duration: 2, type: "test" }));
+        } else if ((availableScheduleHours) === 0) {
+            setSelectedSchedule((pre) => ({ ...pre, duration: 0, type: "lesson" }));
+        }
+    }, [availableScheduleHours, isTestPackageSelected, testPackage.included])
 
     useEffect(() => {
         if (!selectedSchedule.date) {
@@ -97,10 +102,6 @@ const ScheduleStep: FC = () => {
                 slotArr = [...slotArr, ...schedule.time];
             }
         })
-
-        if ((availableScheduleHours - selectedSchedule.duration) === 1) {
-            setSelectedSchedule((pre) => ({ ...pre, duration: 1 }));
-        }
 
         setBookedTimeSlots([...bookedSlots?.time || '', ...slotArr]);
     }, [data?.data.schedules, selectedSchedule.date, schedules]);
@@ -140,10 +141,8 @@ const ScheduleStep: FC = () => {
         setSelectedSchedule((pre) => ({ ...pre, dropOffAddress: location }));
     }
 
-    const isTestPackageSelected = schedules.find((schedule: { type: string }) => schedule.type === "test") ? true : false;
-
     let isDisable = (selectedSchedule.duration > availableScheduleHours) || !selectedSchedule.date || !selectedSchedule.time;
-    if (testPackage?.included) {
+    if (testPackage.included) {
         if (!isTestPackageSelected) {
             isDisable = false;
         }
@@ -233,7 +232,7 @@ const ScheduleStep: FC = () => {
                     </div>
                 }
                 <div className='col-span-2'>
-                    <Button disabled={isDisable} onClick={handleAddSchedule} className='w-full'>
+                    <Button disabled={isDisable || (selectedSchedule.duration === 0)} onClick={handleAddSchedule} className='w-full'>
                         {selectedSchedule.type === "test" ? "Add Test Schedule" : "Add Lesson Schedule"}
                     </Button>
                 </div>
