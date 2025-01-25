@@ -22,17 +22,17 @@ interface ISelectedSchedule {
 }
 
 const ScheduleStep: FC = () => {
+    const { setSchedules, instructor, schedules, availableScheduleHours, testPackage } = useBooking();
     const [selectedSchedule, setSelectedSchedule] = useState<ISelectedSchedule>({
         date: null,
         time: null,
-        duration: 1,
+        duration: availableScheduleHours ? 1 : 0,
         pickupAddress: { address: '', suburb: '' },
         dropOffAddress: { address: '', suburb: '' },
         type: "lesson"
     });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
-    const { setSchedules, instructor, schedules, availableScheduleHours, testPackage } = useBooking();
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
     const [pickupLocationError, setPickupLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
@@ -131,7 +131,6 @@ const ScheduleStep: FC = () => {
     const handleSelectTime = (time: string[]) => {
         setSelectedSchedule((pre) => ({ ...pre, time }));
     }
-
 
     const handleSelectPickupLocation = (location: IAddress) => {
         setSelectedSchedule((pre) => ({ ...pre, pickupAddress: location }));
