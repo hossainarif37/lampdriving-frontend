@@ -6,7 +6,7 @@ const instructorApi = baseApi.injectEndpoints({
     overrideExisting: true,
     endpoints: (builder) => ({
         getAInstructor: builder.query<IResponseWithData<IInstructor>, { username: string }>({
-            query: ({ username }) => `/instructor/${username}`
+            query: ({ username }) => `/instructor/${username}?populate=user`
         }),
         getAInstructorByAdmin: builder.query<IResponseWithData<IInstructor>, { id: string }>({
             query: ({ id }) => `/instructor/instructor-all-data/${id}?populate=wallet,user&fields=-bookings&walletFields=balance&userFields=-role,-isDeleted,-instructor`
