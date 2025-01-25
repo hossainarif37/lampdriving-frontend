@@ -71,22 +71,16 @@ const ScheduleStep: FC = () => {
             schedule.dropOffAddress = selectedSchedule.dropOffAddress;
         }
 
-        console.log(schedule)
-
         // sort schedule by date
         setSchedules((pre) => [...pre, schedule].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
 
         if ((availableScheduleHours - selectedSchedule.duration) === 1) {
             setSelectedSchedule((pre) => ({ ...pre, duration: 1 }));
+        } else if ((availableScheduleHours - selectedSchedule.duration) === 0) {
+            setSelectedSchedule((pre) => ({ ...pre, duration: 0 }));
         }
-        setSelectedSchedule({
-            date: null,
-            time: null,
-            duration: 1,
-            pickupAddress: { address: '', suburb: '' },
-            dropOffAddress: { address: '', suburb: '' },
-            type: "lesson"
-        });
+
+        setSelectedSchedule((pre) => ({ ...pre, time: null }));
     };
 
     useEffect(() => {
@@ -148,6 +142,13 @@ const ScheduleStep: FC = () => {
     }
 
     const isTestPackageSelected = schedules.find((schedule: { type: string }) => schedule.type === "test") ? true : false;
+
+    let isDisable = (selectedSchedule.duration > availableScheduleHours) || !selectedSchedule.date || !selectedSchedule.time;
+    if (testPackage?.included) {
+        if (!isTestPackageSelected) {
+            isDisable = false;
+        }
+    }
     return (
         <div className="space-y-6 sticky top-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -195,6 +196,8 @@ const ScheduleStep: FC = () => {
                         workingHours={instructor?.workingHour || null}
                         selectedDate={selectedSchedule.date}
                         onSelectDate={handleSelectDate}
+                        testPackage={testPackage}
+                        isTestPackageSelected={isTestPackageSelected}
                     />
                 </div>
                 <div>
@@ -208,6 +211,8 @@ const ScheduleStep: FC = () => {
                         selectedTime={selectedSchedule.time}
                         onSelectTime={handleSelectTime}
                         selectedDate={selectedSchedule.date}
+                        testPackage={testPackage}
+                        isTestPackageSelected={isTestPackageSelected}
                     />
                 </div>
 
@@ -229,7 +234,7 @@ const ScheduleStep: FC = () => {
                     </div>
                 }
                 <div className='col-span-2'>
-                    <Button disabled={(selectedSchedule.duration > availableScheduleHours) || !selectedSchedule.date || !selectedSchedule.time} onClick={handleAddSchedule} className='w-full'>
+                    <Button disabled={isDisable} onClick={handleAddSchedule} className='w-full'>
                         {selectedSchedule.type === "test" ? "Add Test Schedule" : "Add Lesson Schedule"}
                     </Button>
                 </div>
