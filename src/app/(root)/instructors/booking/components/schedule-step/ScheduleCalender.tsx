@@ -13,9 +13,7 @@ interface IScheduleCalenderProps {
     workingHours: IWorkingHour | null;
     bookedSchedules: { date: string; time: [string]; }[];
     schedules: IScheduleInputs[];
-    availableScheduleHours: number;
-    testPackage?: ITestPackage | null;
-    isTestPackageSelected?: boolean;
+    isAllScheduled?: boolean;
 }
 
 const ScheduleCalender: FC<IScheduleCalenderProps> = (props) => {
@@ -26,9 +24,8 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = (props) => {
         workingHours,
         bookedSchedules,
         schedules,
-        availableScheduleHours,
-        testPackage,
-        isTestPackageSelected } = props;
+        isAllScheduled
+    } = props;
 
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [offDays, setOffDays] = useState<string[]>([]);
@@ -185,12 +182,7 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = (props) => {
                     const dayName = (format(day, 'cccc')).toLowerCase();
                     const isOffDay = offDays.includes(dayName);
                     const isFullyBooked = findFullyBookedDate(day);
-                    let isDisable = isOffDay || isPastDate || isFullyBooked || availableScheduleHours <= 0;
-                    if (testPackage?.included) {
-                        if (!isTestPackageSelected) {
-                            isDisable = false;
-                        }
-                    }
+                    let isDisable = isOffDay || isPastDate || isFullyBooked || isAllScheduled;
                     return (
                         <button
                             key={day.toISOString()}

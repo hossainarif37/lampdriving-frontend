@@ -22,7 +22,7 @@ interface ISelectedSchedule {
 }
 
 const ScheduleStep: FC = () => {
-    const { setSchedules, instructor, schedules, availableScheduleHours, testPackage, isTestPackageSelected } = useBooking();
+    const { setSchedules, instructor, schedules, availableScheduleHours, testPackage, isTestPackageSelected, isAllScheduled } = useBooking();
     const [selectedSchedule, setSelectedSchedule] = useState<ISelectedSchedule>({
         date: null,
         time: null,
@@ -188,14 +188,12 @@ const ScheduleStep: FC = () => {
 
                 <div>
                     <ScheduleCalender
-                        availableScheduleHours={availableScheduleHours}
                         schedules={schedules}
                         bookedSchedules={data?.data.schedules || []}
                         workingHours={instructor?.workingHour || null}
                         selectedDate={selectedSchedule.date}
                         onSelectDate={handleSelectDate}
-                        testPackage={testPackage}
-                        isTestPackageSelected={isTestPackageSelected}
+                        isAllScheduled={isAllScheduled}
                     />
                 </div>
                 <div>
@@ -209,8 +207,7 @@ const ScheduleStep: FC = () => {
                         selectedTime={selectedSchedule.time}
                         onSelectTime={handleSelectTime}
                         selectedDate={selectedSchedule.date}
-                        testPackage={testPackage}
-                        isTestPackageSelected={isTestPackageSelected}
+                        isAllScheduled={isAllScheduled}
                     />
                 </div>
 

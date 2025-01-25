@@ -35,6 +35,7 @@ export interface IBookingContext {
     setIsCreatingABooking: React.Dispatch<React.SetStateAction<boolean>>;
     availableScheduleHours: number;
     isTestPackageSelected: boolean;
+    isAllScheduled: boolean;
 }
 
 export interface IPrice {

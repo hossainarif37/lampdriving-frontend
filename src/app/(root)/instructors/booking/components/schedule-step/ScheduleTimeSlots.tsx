@@ -18,8 +18,7 @@ interface ScheduleTimeSlotsProps {
     scheduleTimeSlots: string[];
     setScheduleTimeSlots: Dispatch<SetStateAction<string[]>>;
     availableScheduleHours: number;
-    isTestPackageSelected?: boolean;
-    testPackage?: ITestPackage;
+    isAllScheduled?: boolean;
 }
 
 
@@ -34,8 +33,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         btnClassname,
         slotContainerClassname,
         availableScheduleHours,
-        isTestPackageSelected,
-        testPackage,
+        isAllScheduled,
         workingHour, scheduleTimeSlots, setScheduleTimeSlots } = props;
 
 
@@ -96,12 +94,8 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
                             <div className="grid grid-cols-1 gap-3">
                                 {scheduleTimeSlots.slice(0, scheduleTimeSlots.length - (isTwoOurSelected ? 2 : 1)).map((time, index) => {
                                     const slotIndex = scheduleTimeSlots.indexOf(time);
-                                    let isDisabled = (bookedTimeSlots.includes(time) || (isTwoOurSelected && bookedTimeSlots.includes(scheduleTimeSlots[slotIndex + 1]))) || availableScheduleHours <= 0;
-                                    if (testPackage?.included) {
-                                        if (!isTestPackageSelected) {
-                                            isDisabled = false;
-                                        }
-                                    }
+                                    let isDisabled = (bookedTimeSlots.includes(time) || (isTwoOurSelected && bookedTimeSlots.includes(scheduleTimeSlots[slotIndex + 1]))) || isAllScheduled;
+
                                     const isHidden = (isTwoOurSelected) && (index % 2 !== 0);
                                     if (isHidden) return null;
 
