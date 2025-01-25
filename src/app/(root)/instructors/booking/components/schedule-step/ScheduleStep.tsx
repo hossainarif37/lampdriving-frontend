@@ -32,7 +32,7 @@ const ScheduleStep: FC = () => {
     });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
-    const { setSchedules, instructor, schedules, availableScheduleHours } = useBooking();
+    const { setSchedules, instructor, schedules, availableScheduleHours, testPackage } = useBooking();
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
     const [pickupLocationError, setPickupLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
@@ -147,7 +147,7 @@ const ScheduleStep: FC = () => {
         setSelectedSchedule((pre) => ({ ...pre, dropOffAddress: location }));
     }
 
-
+    const isTestPackageSelected = schedules.find((schedule: { type: string }) => schedule.type === "test") ? true : false;
     return (
         <div className="space-y-6 sticky top-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -161,7 +161,7 @@ const ScheduleStep: FC = () => {
                                     key={duration}
                                     disabled={duration > availableScheduleHours}
                                     onClick={() => handleDuration(duration as 1 | 2, "lesson")}
-                                    className={`flex-1 py-2 px-4 rounded-[4px] border disabled:text-gray-500 ${selectedSchedule.duration === duration
+                                    className={`flex-1 py-2 px-4 rounded-[4px] border disabled:text-gray-500 ${(selectedSchedule.duration === duration && selectedSchedule.type === "lesson")
                                         ? 'border-primary bg-primary/5 text-primary'
                                         : 'border-gray-200 hover:border-primary/70'
                                         }`}
@@ -170,9 +170,9 @@ const ScheduleStep: FC = () => {
                                 </button>
                             ))}
                             <button
-                                disabled={2 > availableScheduleHours}
+                                disabled={!testPackage.included || isTestPackageSelected}
                                 onClick={() => handleDuration(2, "test")}
-                                className={`flex-1 py-2 px-4 rounded-[4px] disabled:text-gray-500 border ${selectedSchedule.duration === 1.5
+                                className={`flex-1 py-2 px-4 rounded-[4px] disabled:text-gray-500 border ${selectedSchedule.type === "test"
                                     ? 'border-primary bg-primary/5 text-primary'
                                     : 'border-gray-200 hover:border-primary/70'
                                     }`}
