@@ -39,7 +39,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const useLoginForm = useForm<ILoginInputs>();
     const [isConfirmTriggered, setIsConfirmTriggered] = useState(false);
     const [isCreatingABooking, setIsCreatingABooking] = useState(false);
-    
+
     // handle step change
     const handleStepChange = (stepKey: string) => {
         const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
@@ -70,7 +70,10 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // calculate available schedule hours
     const addedHours = schedules.reduce((total, schedule) => {
-        return total + (schedule.duration === 1 ? 1 : 2);
+        if (schedule.type === "test") {
+            return total;
+        }
+        return total + schedule.duration;
     }, 0);
     const availableScheduleHours = bookingHours - addedHours;
 
