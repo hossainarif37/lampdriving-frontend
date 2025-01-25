@@ -1,6 +1,7 @@
 import { useBooking } from '@/providers/BookingProvider';
+import { firstLetterUppercase } from '@/utils/firstLetterUppercase';
 import { format } from 'date-fns';
-import { CalendarIcon, MapPinIcon, Timer, X } from 'lucide-react';
+import { CalendarIcon, MapPinIcon, NotepadText, Timer, X } from 'lucide-react';
 import { FC } from 'react';
 
 
@@ -30,12 +31,12 @@ const BookingSchedule: FC = () => {
                                         </button>
                                         <p className="flex items-start gap-2">
                                             <CalendarIcon className="size-5 text-primary mt-0.5" />
-                                            {format(new Date(schedule.date), 'MMMM dd, yyyy')} at {schedule.time[0]}
+                                            {format(new Date(schedule.date), 'dd-MM-yyyy')} at {schedule.time[0]} for {schedule.duration} {schedule.duration == 2 ? 'Hours' : 'Hour'}
                                         </p>
                                     </div>
                                     <div className='flex items-center justify-between'>
                                         <p className='flex items-center gap-2'>
-                                            <Timer className='size-5 text-primary' /> {schedule.duration == 1.5 ? 'Test Package' : `${schedule.duration}-Hours`}
+                                            <NotepadText className='size-5 text-primary' /> {firstLetterUppercase(schedule.type)}
                                         </p>
                                         <p className="flex items-center gap-2">
                                             <MapPinIcon className="size-5 text-primary mt-0.5" />
