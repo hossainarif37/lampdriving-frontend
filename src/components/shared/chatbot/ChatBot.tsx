@@ -47,15 +47,15 @@ const ChatBot: FC = () => {
             )}
 
             {isOpen && (
-                <div className="bg-white rounded-2xl shadow-xl w-80 max-h-[500px] flex flex-col animate-slide-up border-purple-100">
-                    <div className="p-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-t-xl flex justify-between items-center">
+                <div className="bg-white rounded-2xl shadow-xl w-80 max-h-[500px] flex flex-col animate-slide-up border-secondary/10">
+                    <div className="p-4 bg-gradient-to-r from-primary to-secondary text-white rounded-t-xl flex justify-between items-center">
                         <div className="flex items-center gap-2">
                             <Bot className="w-6 h-6 animate-pulse" />
                             <span className="font-medium">Helpful Guide ✨</span>
                         </div>
                         <button
                             onClick={() => setIsOpen(false)}
-                            className="text-white hover:text-pink-200 transition-colors"
+                            className="text-white hover:text-primary/20 transition-colors"
                         >
                             <X className="w-5 h-5" />
                         </button>
@@ -66,12 +66,12 @@ const ChatBot: FC = () => {
                             <div className="space-y-4">
                                 <button
                                     onClick={() => setActiveInstruction(null)}
-                                    className="text-purple-600 hover:text-purple-700 flex items-center gap-1 text-sm"
+                                    className="text-primary hover:text-primary/80 flex items-center gap-1 text-sm"
                                 >
                                     ← Back to topics
                                 </button>
                                 <div className="bg-purple-50 p-4 rounded-xl">
-                                    <h3 className="font-medium text-lg text-purple-800 mb-2">
+                                    <h3 className="font-medium text-lg text-primary mb-2">
                                         {activeInstruction.title}
                                     </h3>
                                     <p className="text-gray-700 whitespace-pre-line">
@@ -84,17 +84,17 @@ const ChatBot: FC = () => {
                                 <button
                                     key={index}
                                     onClick={() => setActiveInstruction(instruction)}
-                                    className="w-full text-left p-3 rounded-xl bg-gradient-to-r from-pink-50 to-purple-50 hover:from-pink-100 hover:to-purple-100 transition-colors flex items-center gap-2 group"
+                                    className="w-full text-left p-3 rounded-xl bg-gradient-to-r from-primary/10 to-secondary/10 hover:from-primary/20 hover:to-secondary/20 transition-colors flex items-center gap-2 group"
                                 >
-                                    <Sparkles className="w-4 h-4 text-purple-500 group-hover:text-purple-600" />
-                                    <span className="text-purple-800 font-medium">{instruction.title}</span>
+                                    <Sparkles className="w-4 h-4 text-primary group-hover:text-primary/80" />
+                                    <span className="text-primary font-medium">{instruction.title}</span>
                                 </button>
                             ))
                         )}
                     </div>
 
-                    <div className="p-3 border-t border-purple-100 bg-purple-50 rounded-b-xl">
-                        <div className="flex items-center gap-2 text-sm text-purple-600">
+                    <div className="p-3 border-t border-primary/10 bg-primary/10 rounded-b-xl">
+                        <div className="flex items-center gap-2 text-sm text-primary">
                             <HelpCircle className="w-4 h-4" />
                             <span>Click any topic for detailed help!</span>
                         </div>
