@@ -84,7 +84,6 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                 <div className='grid grid-cols-2 text-black border-y'>
                     <div>
                         <ScheduleCalender
-                            availableScheduleHours={1}
                             schedules={[]}
                             bookedSchedules={data?.data.schedules || []}
                             workingHours={workingHours}

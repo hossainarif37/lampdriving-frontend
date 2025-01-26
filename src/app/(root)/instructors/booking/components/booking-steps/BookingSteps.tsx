@@ -6,8 +6,9 @@ import { FC, useEffect, useState } from 'react';
 
 const BookingSteps: FC = () => {
     const [userLoggedIn, setUserLoggedIn] = useState(false);
-    const { steps, currentStep, handleStepChange, bookingHours, testPackage, mockTestPackage, schedules, availableScheduleHours } = useBooking();
+    const { isTestPackageSelected, steps, currentStep, handleStepChange, bookingHours, testPackage, mockTestPackage, schedules, availableScheduleHours } = useBooking();
     const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
+
 
     useEffect(() => {
         setUserLoggedIn(isAuthenticate);
@@ -17,8 +18,7 @@ const BookingSteps: FC = () => {
             <div className='flex items-center justify-between gap-4'>
                 {
                     steps.map((step, index) => {
-                        const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
-
+                        const isPackageSelected = bookingHours ? true : false || testPackage.included || mockTestPackage.included;
                         let isDisabled = false;
 
                         if (step.key !== 'instructor' && step.key !== 'package-selection') {
@@ -29,13 +29,22 @@ const BookingSteps: FC = () => {
                             // Handle Register step
                             else if (step.key === 'register') {
                                 isDisabled = !isPackageSelected || (availableScheduleHours > 0);
+                                if (testPackage.included) {
+                                    if (!isTestPackageSelected) {
+                                        isDisabled = true;
+                                    }
+                                }
                             }
                             // Handle Payment step
                             else if (step.key === 'payment') {
-                                isDisabled = !isPackageSelected || !schedules.length || !isAuthenticate;
+                                isDisabled = !isPackageSelected || !schedules.length || !isAuthenticate || (availableScheduleHours > 0);
+                                if (testPackage.included) {
+                                    if (!isTestPackageSelected) {
+                                        isDisabled = true;
+                                    }
+                                }
                             }
                         }
-
                         return (<button
                             key={index}
                             disabled={isDisabled}

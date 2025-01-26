@@ -5,6 +5,7 @@ import { ForwardRefExoticComponent, RefAttributes } from "react";
 import { LucideProps } from "lucide-react";
 import { ILearner } from "./learner";
 import { ISchedule, IScheduleInputs } from "./schedule";
+import { IReview } from "./review";
 
 export interface IBookingContext {
     steps: IStep[];
@@ -34,6 +35,8 @@ export interface IBookingContext {
     isCreatingABooking: boolean;
     setIsCreatingABooking: React.Dispatch<React.SetStateAction<boolean>>;
     availableScheduleHours: number;
+    isTestPackageSelected: boolean;
+    isAllScheduled: boolean;
 }
 
 export interface IPrice {
@@ -89,6 +92,7 @@ export interface IBooking {
     instructor: string | IInstructor;
     bookingHours: number;
     schedules: string | ISchedule[];
+    review: IReview | undefined;
     payment: string;
     price: number;
     status: "pending" | "accepted" | "completed" | "cancelled";

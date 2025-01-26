@@ -18,7 +18,7 @@ const ViewDetailsDialog: FC<IViewDetailsDialogProps> = ({ children, showAvailabi
             <DialogTrigger asChild>
                 <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2 w-full'>View Details</Button>
             </DialogTrigger>
-            <DialogContent className='max-w-3xl py-0 px-0 space-y-0 gap-0'>
+            <DialogContent className='max-w-2xl py-0 px-0 space-y-0 gap-0'>
                 <DialogHeader>
                     <DialogTitle className='text-2xl font-semibold px-4 pt-3 pb-1 text-center'>
                         <span className='text-primary'>{title}</span>

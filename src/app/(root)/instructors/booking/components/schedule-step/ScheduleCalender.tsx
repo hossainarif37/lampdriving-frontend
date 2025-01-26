@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { IWorkingHour } from '@/types/instructor';
 import { IScheduleInputs } from '@/types/schedule';
+import { ITestPackage } from '@/types/booking';
 
 interface IScheduleCalenderProps {
     selectedDate: Date | null;
@@ -12,10 +13,20 @@ interface IScheduleCalenderProps {
     workingHours: IWorkingHour | null;
     bookedSchedules: { date: string; time: [string]; }[];
     schedules: IScheduleInputs[];
-    availableScheduleHours: number
+    isAllScheduled?: boolean;
 }
 
-const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDate, classname, workingHours, bookedSchedules, schedules, availableScheduleHours }) => {
+const ScheduleCalender: FC<IScheduleCalenderProps> = (props) => {
+    const {
+        selectedDate,
+        onSelectDate,
+        classname,
+        workingHours,
+        bookedSchedules,
+        schedules,
+        isAllScheduled
+    } = props;
+
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [offDays, setOffDays] = useState<string[]>([]);
     const today = new Date();
@@ -171,8 +182,7 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = ({ selectedDate, onSelectDa
                     const dayName = (format(day, 'cccc')).toLowerCase();
                     const isOffDay = offDays.includes(dayName);
                     const isFullyBooked = findFullyBookedDate(day);
-                    const isDisable = isOffDay || isPastDate || isFullyBooked || availableScheduleHours <= 0;
-
+                    let isDisable = isOffDay || isPastDate || isFullyBooked || isAllScheduled;
                     return (
                         <button
                             key={day.toISOString()}

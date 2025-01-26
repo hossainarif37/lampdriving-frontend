@@ -22,7 +22,6 @@ const RescheduleTime: FC<IRescheduleTimeProps> = ({ selectedDate, setSelectedDat
         <>
             <div>
                 <ScheduleCalender
-                    availableScheduleHours={1}
                     schedules={[]}
                     bookedSchedules={data?.data.schedules || []}
                     workingHours={instructorData?.data.workingHour as IWorkingHour}

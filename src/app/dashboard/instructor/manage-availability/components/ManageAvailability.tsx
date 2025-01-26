@@ -80,13 +80,12 @@ const ManageAvailability: FC = () => {
             })
         });
     }
-    
+
     return (
         <div>
             <div className='grid grid-cols-2 text-black gap-6'>
                 <div>
                     <ScheduleCalender
-                        availableScheduleHours={1}
                         schedules={[]}
                         classname='shadow-none'
                         bookedSchedules={data?.data.schedules || []}

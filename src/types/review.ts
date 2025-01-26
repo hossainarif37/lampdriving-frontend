@@ -5,3 +5,10 @@ export interface IReview {
     learner: string;
     booking: string;
 }
+
+
+export interface ICreateAReviewReqData {
+    booking: string;
+    rating: number;
+    feedback: string;
+}
