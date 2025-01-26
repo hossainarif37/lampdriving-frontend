@@ -78,6 +78,7 @@ const ScheduleStep: FC = () => {
 
     useEffect(() => {
         if (availableScheduleHours > 1) {
+            setSelectedSchedule((pre) => ({ ...pre, duration: selectedSchedule.type === "test" ? 1 : selectedSchedule.duration, type: "lesson" }));
             return;
         } else if ((availableScheduleHours) === 1) {
             setSelectedSchedule((pre) => ({ ...pre, duration: 1, type: "lesson" }));
@@ -86,7 +87,7 @@ const ScheduleStep: FC = () => {
         } else if ((availableScheduleHours) === 0) {
             setSelectedSchedule((pre) => ({ ...pre, duration: 0, type: "lesson" }));
         }
-    }, [availableScheduleHours, isTestPackageSelected, testPackage.included])
+    }, [availableScheduleHours, isTestPackageSelected, testPackage.included, schedules])
 
     useEffect(() => {
         if (!selectedSchedule.date) {
