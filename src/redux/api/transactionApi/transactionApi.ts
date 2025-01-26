@@ -23,8 +23,12 @@ const transactionApi = baseApi.injectEndpoints({
 
         getTransactionHistory: builder.query({
             query: () => `/payment/my`,
+        }),
+
+        getAllTransactionHistory: builder.query({
+            query: () => `/payment`
         })
     })
 })
 
-export const { useCreatePaymentIntentMutation, useCreateInstructorPayoutMutation, useGetTransactionHistoryQuery } = transactionApi
+export const { useCreatePaymentIntentMutation, useCreateInstructorPayoutMutation, useGetTransactionHistoryQuery, useGetAllTransactionHistoryQuery } = transactionApi

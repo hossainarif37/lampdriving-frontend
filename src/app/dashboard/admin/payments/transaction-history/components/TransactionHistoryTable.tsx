@@ -1,9 +1,7 @@
 "use client"
 
-import { useGetTransactionHistoryQuery } from '@/redux/api/transactionApi/transactionApi';
+import { useGetAllTransactionHistoryQuery, useGetTransactionHistoryQuery } from '@/redux/api/transactionApi/transactionApi';
 import { FC } from 'react';
-import TableSkeleton from './TableSkeleton';
-import TablePagination from './TablePagination';
 import DataNotFound from '@/components/shared/DataNotFound';
 import {
     Table,
@@ -13,9 +11,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import TablePagination from '@/app/dashboard/components/shared/TablePagination';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const TransactionHistoryTable: FC = () => {
-    const { data, isLoading } = useGetTransactionHistoryQuery(undefined);
+    const { data, isLoading } = useGetAllTransactionHistoryQuery(undefined);
 
     if (isLoading) {
         return <TableSkeleton />
