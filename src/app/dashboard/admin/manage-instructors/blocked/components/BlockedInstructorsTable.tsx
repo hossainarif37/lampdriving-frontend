@@ -6,10 +6,7 @@ import DataNotFound from '@/components/shared/DataNotFound';
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
 import { useSearchParams } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { UserRoundSearch } from 'lucide-react';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
-import Loading from '@/components/shared/Loading';
 import BlockedInstructorActions from './BlockedInstructorActions';
 import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
@@ -20,7 +17,7 @@ const BlockedInstructorsTable: FC = () => {
     const [isSearched, setIsSearched] = useState(false);
     const { data, isLoading } = useGetAllInstructorsQuery(
         {
-            status: "verified",
+            userStatus: "blocked",
             searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page

@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import LearnersTable from './components/LearnersTable';
 import TableSearchFilter from '../../components/shared/TableSearchFilter';
-import { Button } from '@/components/ui/button';
 import FilterUserStatus from './components/FilterUserStatus';
 
 const ManageLearnersPage: FC = () => {
