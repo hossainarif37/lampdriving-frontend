@@ -59,6 +59,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
           <h1 className="text-2xl font-bold">{user?.name?.fullName}</h1>
           <div className="flex md:flex-row flex-col md:items-center gap-1 mt-1">
             <div className="flex text-gradient">{'★'.repeat(5)}</div>
+            {/* //TODO: Need to implement dynamic ratings */}
             <span className="text-sm text-accent ml-1">4.6 - 79 ratings</span>
           </div>
         </div>

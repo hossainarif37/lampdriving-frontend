@@ -25,9 +25,9 @@ const HomePage: FC = () => {
       <FeaturedInstructors />
       <MissionVisionSection />
       <AboutUs />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <AboutStats />
-      <FAQ />
+      {/* <FAQ /> */}
       {/* <FooterSearch /> */}
       <TopNavigator />
     </div>

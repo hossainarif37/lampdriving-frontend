@@ -18,7 +18,7 @@ export const config = {
 
 export function middleware(req: NextRequest) {
     // const { pathname } = req.nextUrl;
-    const accessToken = req.cookies.get('access-token')?.value;
+    // const accessToken = req.cookies.get('access-token')?.value;
 
     // const redirectHome = () => NextResponse.redirect(new URL(HOME_URL, req.url));
 
