@@ -5,12 +5,12 @@ import TestPackage from './TestPackage';
 import { useBooking } from '@/providers/BookingProvider';
 
 
-const PacakageSelectionStep: FC = () => {
+const PackageSelectionStep: FC = () => {
 
     const { bookingHours, setBookingHours, instructor, isCustomSelected, setIsCustomSelected, setSchedules } = useBooking();
 
     // handler for package selection
-    const handlePakageSelection = (hours: number, isCustomSelected: boolean) => {
+    const handlePackageSelection = (hours: number, isCustomSelected: boolean) => {
         setBookingHours(hours);
         setIsCustomSelected(isCustomSelected);
         setSchedules([]);
@@ -28,7 +28,7 @@ const PacakageSelectionStep: FC = () => {
                         discount="10% OFF"
                         recommended
                         selected={!isCustomSelected && (bookingHours === 10)}
-                        onSelect={() => handlePakageSelection(10, false)}
+                        onSelect={() => handlePackageSelection(10, false)}
                     />
                     <PackageCard
                         hours={6}
@@ -36,13 +36,13 @@ const PacakageSelectionStep: FC = () => {
                         description="Ideal for overseas license holders or skill refresh"
                         discount="6% OFF"
                         selected={!isCustomSelected && (bookingHours === 6)}
-                        onSelect={() => handlePakageSelection(6, false)}
+                        onSelect={() => handlePackageSelection(6, false)}
                     />
                     <div className='col-span-2'>
                         <CustomPackage
                             bookingHours={bookingHours}
                             selected={isCustomSelected}
-                            onSelect={handlePakageSelection}
+                            onSelect={handlePackageSelection}
                             hourlyRate={instructor?.pricePerHour || 0} />
                     </div>
                 </div>
@@ -53,4 +53,4 @@ const PacakageSelectionStep: FC = () => {
     );
 };
 
-export default PacakageSelectionStep;
+export default PackageSelectionStep;

@@ -10,18 +10,29 @@ import { IWorkingHour } from '@/types/instructor';
 import { CircleAlert } from 'lucide-react';
 import { useGetInstructorAvailabilityQuery } from '@/redux/api/scheduleApi/scheduleApi';
 import { IScheduleInputs } from '@/types/schedule';
+import { IAddress } from '@/types/user';
 
+interface ISelectedSchedule {
+    date: Date | null;
+    time: string[] | null;
+    duration: number;
+    pickupAddress: IAddress;
+    dropOffAddress: IAddress;
+    type: "lesson" | "test" | "mock-test" | "blank";
+}
 
 const ScheduleStep: FC = () => {
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-    const [selectedTime, setSelectedTime] = useState<string[] | null>(null);
-    const [selectedDuration, setSelectedDuration] = useState<1 | 2 | 1.5>(1);
-    const [scheduleType, setScheduleType] = useState<"lesson" | "test" | "mock-test">("lesson");
-    const [pickupLocation, setPickupLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
-    const [dropOffLocation, setDropOffLocation] = useState<{ address: string; suburb: string }>({ address: '', suburb: '' });
+    const { setSchedules, instructor, schedules, availableScheduleHours, testPackage, isTestPackageSelected, isAllScheduled } = useBooking();
+    const [selectedSchedule, setSelectedSchedule] = useState<ISelectedSchedule>({
+        date: null,
+        time: null,
+        duration: availableScheduleHours ? 1 : (testPackage.included && !isTestPackageSelected) ? 2 : 0,
+        pickupAddress: { address: '', suburb: '' },
+        dropOffAddress: { address: '', suburb: '' },
+        type: availableScheduleHours ? "lesson" : (testPackage.included && !isTestPackageSelected) ? "test" : "lesson"
+    });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
-    const { setSchedules, instructor, schedules, availableScheduleHours } = useBooking();
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
     const [workingHour, setWorkingHour] = useState<{ isActive: boolean, startTime: string, endTime: string }>({ isActive: false, startTime: '', endTime: '' });
     const [pickupLocationError, setPickupLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
@@ -30,99 +41,113 @@ const ScheduleStep: FC = () => {
 
     // add schedule handler
     const handleAddSchedule = () => {
-        if (!selectedDate || !selectedTime) {
+        if (!selectedSchedule.date || !selectedSchedule.time) {
             return;
         }
-        const testPackage = selectedDuration === 1.5;
-
-        if (pickupLocation?.address === '' || pickupLocation?.suburb === '') {
-            setPickupLocationError({ address: pickupLocation?.address === '', suburb: pickupLocation?.suburb === '' });
+        if (selectedSchedule.pickupAddress?.address === '' || selectedSchedule.pickupAddress?.suburb === '') {
+            setPickupLocationError({ address: selectedSchedule.pickupAddress?.address === '', suburb: selectedSchedule.pickupAddress?.suburb === '' });
             return;
         } else {
-            setPickupLocationError({ address: pickupLocation?.suburb === '', suburb: pickupLocation?.suburb === '' });
+            setPickupLocationError({ address: selectedSchedule.pickupAddress?.suburb === '', suburb: selectedSchedule.pickupAddress?.suburb === '' });
         }
 
-        if (testPackage && (dropOffLocation?.address === '' || dropOffLocation?.suburb === '')) {
-            setDropOffLocationError({ address: dropOffLocation?.address === '', suburb: dropOffLocation?.suburb === '' });
+        if (selectedSchedule.type === "test" && (selectedSchedule.dropOffAddress?.address === '' || selectedSchedule.dropOffAddress?.suburb === '')) {
+            setDropOffLocationError({ address: selectedSchedule.dropOffAddress?.address === '', suburb: selectedSchedule.dropOffAddress?.suburb === '' });
             return;
-        } else if (testPackage) {
-            setDropOffLocationError({ address: dropOffLocation?.suburb === '', suburb: dropOffLocation?.suburb === '' });
+        } else if (selectedSchedule.type === "test") {
+            setDropOffLocationError({ address: selectedSchedule.dropOffAddress?.suburb === '', suburb: selectedSchedule.dropOffAddress?.suburb === '' });
         }
 
         const schedule: IScheduleInputs = {
-            date: new Date(selectedDate && selectedTime ? format(selectedDate, 'yyyy-MM-dd') + ' ' + selectedTime[0] : ''),
-            duration: selectedDuration,
-            time: selectedTime ? selectedTime : [],
-            pickupAddress: {
-                address: pickupLocation?.address || '',
-                suburb: pickupLocation?.suburb || '',
-            },
-            type: scheduleType
+            date: new Date(selectedSchedule.date && selectedSchedule.time ? format(selectedSchedule.date, 'yyyy-MM-dd') + ' ' + selectedSchedule.time[0] : ''),
+            duration: selectedSchedule.duration,
+            time: selectedSchedule.time ? selectedSchedule.time : [],
+            pickupAddress: selectedSchedule.pickupAddress,
+            type: selectedSchedule.type
         }
-        if (testPackage) {
-            schedule.dropOffAddress = {
-                address: dropOffLocation?.address || '',
-                suburb: dropOffLocation?.suburb || '',
-            }
+
+        if (selectedSchedule.type === "test") {
+            schedule.dropOffAddress = selectedSchedule.dropOffAddress;
         }
 
         // sort schedule by date
         setSchedules((pre) => [...pre, schedule].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
 
-        if ((availableScheduleHours - selectedDuration) === 1) {
-            setSelectedDuration(1);
-        }
-        setSelectedTime(null);
-        // setSelectedDate(null);
+        setSelectedSchedule((pre) => ({ ...pre, time: null }));
     };
 
     useEffect(() => {
-        if (!selectedDate) {
+        if (availableScheduleHours > 1) {
+            setSelectedSchedule((pre) => ({ ...pre, duration: selectedSchedule.type === "test" ? 1 : selectedSchedule.duration, type: "lesson" }));
+            return;
+        } else if ((availableScheduleHours) === 1) {
+            setSelectedSchedule((pre) => ({ ...pre, duration: 1, type: "lesson" }));
+        } else if ((testPackage.included && !isTestPackageSelected) && (availableScheduleHours) === 0) {
+            setSelectedSchedule((pre) => ({ ...pre, duration: 2, type: "test" }));
+        } else if ((availableScheduleHours) === 0) {
+            setSelectedSchedule((pre) => ({ ...pre, duration: 0, type: "lesson" }));
+        }
+    }, [availableScheduleHours, isTestPackageSelected, testPackage.included, schedules])
+
+    useEffect(() => {
+        if (!selectedSchedule.date) {
             setBookedTimeSlots([]);
         }
         const bookedSlots = data?.data.schedules.find((schedule: { date: string, time: string[] }) => {
-            return format(schedule.date, 'yyyy-MM-dd') === format(selectedDate!, 'yyyy-MM-dd');
+            return format(schedule.date, 'yyyy-MM-dd') === format(selectedSchedule.date!, 'yyyy-MM-dd');
         });
 
         let slotArr: string[] = [];
         schedules.map((schedule: { date: Date, time: string[] }) => {
-            if (format(schedule.date, 'yyyy-MM-dd') === format(selectedDate!, 'yyyy-MM-dd')) {
+            if (format(schedule.date, 'yyyy-MM-dd') === format(selectedSchedule.date!, 'yyyy-MM-dd')) {
                 slotArr = [...slotArr, ...schedule.time];
             }
         })
 
-        if ((availableScheduleHours) === 1) {
-            setSelectedDuration(1);
-        }
-
         setBookedTimeSlots([...bookedSlots?.time || '', ...slotArr]);
-    }, [data?.data.schedules, selectedDate, schedules]);
+    }, [data?.data.schedules, selectedSchedule.date, schedules]);
 
 
     useEffect(() => {
-        if (selectedDate && instructor?.workingHour) {
-            const dateName = (format(selectedDate, 'cccc')).toLowerCase() as keyof IWorkingHour;
+        if (selectedSchedule.date && instructor?.workingHour) {
+            const dateName = (format(selectedSchedule.date, 'cccc')).toLowerCase() as keyof IWorkingHour;
             if (instructor?.workingHour) {
                 setWorkingHour(instructor?.workingHour[dateName]);
             }
         }
-    }, [instructor?.workingHour, selectedDate]);
+    }, [instructor?.workingHour, selectedSchedule.date]);
 
     useEffect(() => {
         setPickupLocationError({ address: false, suburb: false });
         setDropOffLocationError({ address: false, suburb: false });
-    }, [pickupLocation, dropOffLocation]);
+    }, [selectedSchedule.pickupAddress, selectedSchedule.dropOffAddress]);
 
-    const handleDuration = (duration: 1 | 2 | 1.5, type: "lesson" | "test" | "mock-test") => {
-        setSelectedDuration(duration)
-        setScheduleType(type);
-        setSelectedTime(null)
+    const handleDuration = (duration: 1 | 2, type: "lesson" | "test" | "mock-test") => {
+        setSelectedSchedule((pre) => ({ ...pre, duration, type, time: null }));
     }
+
     const handleSelectDate = (date: Date) => {
-        setSelectedDate(date);
-        setSelectedTime(null);
+        setSelectedSchedule((pre) => ({ ...pre, date, time: null }));
     }
 
+    const handleSelectTime = (time: string[]) => {
+        setSelectedSchedule((pre) => ({ ...pre, time }));
+    }
+
+    const handleSelectPickupLocation = (location: IAddress) => {
+        setSelectedSchedule((pre) => ({ ...pre, pickupAddress: location }));
+    }
+
+    const handleSelectDropOffLocation = (location: IAddress) => {
+        setSelectedSchedule((pre) => ({ ...pre, dropOffAddress: location }));
+    }
+
+    let isDisable = (selectedSchedule.duration > availableScheduleHours) || !selectedSchedule.date || !selectedSchedule.time;
+    if (testPackage.included) {
+        if (!isTestPackageSelected) {
+            isDisable = false;
+        }
+    }
     return (
         <div className="space-y-6 sticky top-10">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -136,7 +161,7 @@ const ScheduleStep: FC = () => {
                                     key={duration}
                                     disabled={duration > availableScheduleHours}
                                     onClick={() => handleDuration(duration as 1 | 2, "lesson")}
-                                    className={`flex-1 py-2 px-4 rounded-[4px] border disabled:text-gray-500 ${selectedDuration === duration
+                                    className={`flex-1 py-2 px-4 rounded-[4px] border disabled:text-gray-500 ${(selectedSchedule.duration === duration && selectedSchedule.type === "lesson")
                                         ? 'border-primary bg-primary/5 text-primary'
                                         : 'border-gray-200 hover:border-primary/70'
                                         }`}
@@ -145,9 +170,9 @@ const ScheduleStep: FC = () => {
                                 </button>
                             ))}
                             <button
-                                disabled={2 > availableScheduleHours}
-                                onClick={() => handleDuration(1.5, "test")}
-                                className={`flex-1 py-2 px-4 rounded-[4px] disabled:text-gray-500 border ${selectedDuration === 1.5
+                                disabled={!testPackage.included || isTestPackageSelected}
+                                onClick={() => handleDuration(2, "test")}
+                                className={`flex-1 py-2 px-4 rounded-[4px] disabled:text-gray-500 border ${selectedSchedule.type === "test"
                                     ? 'border-primary bg-primary/5 text-primary'
                                     : 'border-gray-200 hover:border-primary/70'
                                     }`}
@@ -164,12 +189,12 @@ const ScheduleStep: FC = () => {
 
                 <div>
                     <ScheduleCalender
-                        availableScheduleHours={availableScheduleHours}
                         schedules={schedules}
                         bookedSchedules={data?.data.schedules || []}
                         workingHours={instructor?.workingHour || null}
-                        selectedDate={selectedDate}
+                        selectedDate={selectedSchedule.date}
                         onSelectDate={handleSelectDate}
+                        isAllScheduled={isAllScheduled}
                     />
                 </div>
                 <div>
@@ -179,33 +204,34 @@ const ScheduleStep: FC = () => {
                         scheduleTimeSlots={scheduleTimeSlots}
                         setScheduleTimeSlots={setScheduleTimeSlots}
                         bookedTimeSlots={bookedTimeSlots}
-                        selectedDuration={selectedDuration}
-                        selectedTime={selectedTime}
-                        onSelectTime={setSelectedTime}
-                        selectedDate={selectedDate}
+                        selectedDuration={selectedSchedule.duration}
+                        selectedTime={selectedSchedule.time}
+                        onSelectTime={handleSelectTime}
+                        selectedDate={selectedSchedule.date}
+                        isAllScheduled={isAllScheduled}
                     />
                 </div>
 
-                <div className={`${selectedDuration === 1.5 ? 'col-span-1' : 'col-span-2'}`}>
+                <div className={`${selectedSchedule.type === "test" ? 'col-span-1' : 'col-span-2'}`}>
                     <PickupLocation
                         error={pickupLocationError}
-                        value={pickupLocation}
-                        onChange={setPickupLocation}
+                        value={selectedSchedule.pickupAddress}
+                        onChange={handleSelectPickupLocation}
                     />
                 </div>
                 {
-                    selectedDuration === 1.5 &&
+                    selectedSchedule.type === "test" &&
                     <div>
                         <DropOffLocation
                             error={dropOffLocationError}
-                            value={dropOffLocation}
-                            onChange={setDropOffLocation}
+                            value={selectedSchedule.dropOffAddress}
+                            onChange={handleSelectDropOffLocation}
                         />
                     </div>
                 }
                 <div className='col-span-2'>
-                    <Button disabled={(selectedDuration > availableScheduleHours) || !selectedDate || !selectedTime} onClick={handleAddSchedule} className='w-full'>
-                        Add Schedule
+                    <Button disabled={isDisable || (selectedSchedule.duration === 0)} onClick={handleAddSchedule} className='w-full'>
+                        {selectedSchedule.type === "test" ? "Add Test Schedule" : "Add Lesson Schedule"}
                     </Button>
                 </div>
             </div>
