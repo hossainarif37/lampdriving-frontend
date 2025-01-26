@@ -29,7 +29,7 @@ const HomePage: FC = () => {
       <AboutStats />
       <FAQ />
       {/* <FooterSearch /> */}
-      <TopNavigator />
+      {/* <TopNavigator /> */}
     </div>
   );
 };
