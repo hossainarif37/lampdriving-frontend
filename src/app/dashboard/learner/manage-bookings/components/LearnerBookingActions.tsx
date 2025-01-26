@@ -10,9 +10,10 @@ import { IReview } from '@/types/review';
 interface ILearnerBookingActionsProps {
     id: string;
     review?: IReview;
+    status: "pending" | "accepted" | "completed" | "cancelled";
 }
 
-const LearnerBookingActions: FC<ILearnerBookingActionsProps> = ({ id, review }) => {
+const LearnerBookingActions: FC<ILearnerBookingActionsProps> = ({ id, review, status }) => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -26,7 +27,7 @@ const LearnerBookingActions: FC<ILearnerBookingActionsProps> = ({ id, review }) 
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
-                    <GiveAReview bookingId={id} review={review} />
+                    {status === "completed" && <GiveAReview bookingId={id} review={review} />}
                     <ViewDetailsDialogBtn title={"Booking Details"}>
                         <BookingDetails role='learner' id={id} />
                     </ViewDetailsDialogBtn>

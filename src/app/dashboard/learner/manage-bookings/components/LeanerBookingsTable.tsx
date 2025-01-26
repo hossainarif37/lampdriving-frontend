@@ -98,7 +98,7 @@ const LearnerBookingsTable: FC = () => {
                                                     {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <LearnerBookingActions review={booking?.review} id={booking._id} />
+                                                    <LearnerBookingActions review={booking?.review} id={booking._id} status={booking.status} />
                                                 </TableCell>
                                             </TableRow>
                                         )
