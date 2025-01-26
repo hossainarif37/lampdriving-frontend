@@ -5,12 +5,14 @@ import { MoreHorizontal } from 'lucide-react';
 import BookingDetails from '@/app/dashboard/components/shared/booking-details/BookingDetails';
 import ViewDetailsDialogBtn from '@/app/dashboard/components/shared/view-details/ViewDetailsDialogBtn';
 import GiveAReview from './GiveAReview';
+import { IReview } from '@/types/review';
 
 interface ILearnerBookingActionsProps {
     id: string;
+    review?: IReview;
 }
 
-const LearnerBookingActions: FC<ILearnerBookingActionsProps> = ({ id }) => {
+const LearnerBookingActions: FC<ILearnerBookingActionsProps> = ({ id, review }) => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -24,7 +26,7 @@ const LearnerBookingActions: FC<ILearnerBookingActionsProps> = ({ id }) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
-                    <GiveAReview bookingId={id} />
+                    <GiveAReview bookingId={id} review={review} />
                     <ViewDetailsDialogBtn title={"Booking Details"}>
                         <BookingDetails role='learner' id={id} />
                     </ViewDetailsDialogBtn>

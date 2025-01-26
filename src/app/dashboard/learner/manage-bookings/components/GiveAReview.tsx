@@ -5,18 +5,19 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
 import { useCreateAReviewMutation } from '@/redux/api/reviewApi/reviewApi';
-import { ICreateAReviewReqData } from '@/types/review';
+import { ICreateAReviewReqData, IReview } from '@/types/review';
 import { Star } from 'lucide-react';
 import { FC, useState } from 'react';
 
 interface IGiveAReviewProps {
     bookingId: string;
+    review?: IReview;
 }
 
-const GiveAReview: FC<IGiveAReviewProps> = ({ bookingId }) => {
+const GiveAReview: FC<IGiveAReviewProps> = ({ bookingId, review }) => {
     const [showReview, setShowReview] = useState(false);
-    const [feedback, setFeedback] = useState<{ content: string, error: boolean }>({ content: '', error: false });
-    const [rating, setRating] = useState<{ value: number, error: boolean }>({ value: 0, error: false });
+    const [feedback, setFeedback] = useState<{ content: string, error: boolean }>({ content: review?.feedback || '', error: false });
+    const [rating, setRating] = useState<{ value: number, error: boolean }>({ value: review?.rating || 0, error: false });
     const [hoveredRating, setHoveredRating] = useState(0);
     const [createAReview, { isLoading }] = useCreateAReviewMutation();
     const handleSubmit = () => {
@@ -64,7 +65,7 @@ const GiveAReview: FC<IGiveAReviewProps> = ({ bookingId }) => {
         <Dialog open={showReview} onOpenChange={setShowReview}>
             <DialogTrigger asChild>
                 <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>
-                    Review
+                    {review ? "Reviewed" : "Review"}
                 </Button>
             </DialogTrigger>
             <DialogContent className='max-w-lg py-0 px-0 space-y-0 gap-0'>
@@ -83,6 +84,7 @@ const GiveAReview: FC<IGiveAReviewProps> = ({ bookingId }) => {
                                     <button
                                         key={value}
                                         type="button"
+                                        disabled={review ? true : false}
                                         onClick={() => setRating({ value, error: false })}
                                         onMouseEnter={() => setHoveredRating(value)}
                                         onMouseLeave={() => setHoveredRating(0)}
@@ -108,7 +110,12 @@ const GiveAReview: FC<IGiveAReviewProps> = ({ bookingId }) => {
                             <Label htmlFor='feedback' className="block text-sm font-medium text-gray-700">
                                 Tell us more about your experience
                             </Label>
-                            <Textarea id='feedback' placeholder='Write your feedback here...' className='h-[100px]' value={feedback.content} onChange={(e) => setFeedback({ content: e.target.value, error: false })} />
+                            <Textarea id='feedback'
+                                disabled={review ? true : false}
+                                placeholder='Write your feedback here...'
+                                className='h-[100px]'
+                                value={feedback.content}
+                                onChange={(e) => setFeedback({ content: e.target.value, error: false })} />
                             {rating.error && <p className="text-red-500 text-sm">Please select a rating</p>}
                             {feedback.error && <p className="text-red-500 text-sm">Please enter your feedback</p>}
                         </div>
@@ -125,8 +132,8 @@ const GiveAReview: FC<IGiveAReviewProps> = ({ bookingId }) => {
                             </Button>
                         </DialogClose>
 
-                        <Button disabled={isLoading} loading={isLoading} onClick={handleSubmit} className='bg-primary w-40' size="lg">
-                            Submit
+                        <Button disabled={isLoading || review ? true : false} loading={isLoading} onClick={handleSubmit} className='bg-primary w-40' size="lg">
+                            {review ? "Reviewed" : "Submit"}
                         </Button>
                     </div>
                 </DialogFooter>
