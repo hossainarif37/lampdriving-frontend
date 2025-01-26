@@ -80,7 +80,7 @@ const CompletedBookingsTable: FC = () => {
                                                     </div>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <h3>N/A</h3>
+                                                    <h3>{booking.review ? booking.review.rating : "N/A"}</h3>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>

@@ -10,6 +10,7 @@ import { useAppSelector } from '@/redux/hook';
 import { ISchedule } from '@/types/schedule';
 import ManageSchedulesActions from './ManageSchedulesActions';
 import { formatDate } from 'date-fns';
+import { firstLetterUppercase } from '@/utils/firstLetterUppercase';
 
 
 const ManageSchedulesTable: FC = () => {
@@ -101,7 +102,7 @@ const ManageSchedulesTable: FC = () => {
                                                     }
                                                 </TableCell>
                                                 <TableCell className='font-medium text-center' >
-                                                    {schedule.status.charAt(0).toUpperCase() + schedule.status.slice(1)}
+                                                    {firstLetterUppercase(schedule.status)} {firstLetterUppercase(schedule.type)}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <ManageSchedulesActions

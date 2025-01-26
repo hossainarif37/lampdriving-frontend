@@ -17,6 +17,8 @@ const LearnersTable: FC = () => {
 
     const { data, isLoading } = useGetAllLearnersQuery(
         {
+            userStatus: urlSearchParams.get('userStatus') === "active" ? 'active' : urlSearchParams.get('userStatus') === "blocked" ? 'blocked' : "",
+            searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page
         });
