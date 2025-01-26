@@ -53,7 +53,7 @@ const InstructorStats: FC = () => {
   console.log('data', data);
 
   return (
-    <div className="py-8 px-5">
+    <div className="p-6">
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
         <StatsCard
@@ -101,7 +101,7 @@ const InstructorStats: FC = () => {
         {/* Bookings Lists */}
         <div className="lg:col-span-2 space-y-6">
           <BookingsList
-            title="Upcoming Bookings"
+            title="Upcoming Schedules"
             bookings={upComingSchedules || []}
             type="running"
             selectedDate={selectedDate}

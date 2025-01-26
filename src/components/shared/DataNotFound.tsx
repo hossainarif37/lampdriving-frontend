@@ -2,13 +2,15 @@ import { SearchX } from 'lucide-react';
 import { FC } from 'react';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 interface IDataNotFoundProps {
     dataName: string;
     isSearched?: boolean;
+    className?: string
 }
 
-const DataNotFound: FC<IDataNotFoundProps> = ({ dataName = "Data", isSearched }) => {
+const DataNotFound: FC<IDataNotFoundProps> = ({ dataName = "Data", isSearched, className }) => {
     const { replace } = useRouter();
     console.log(isSearched);
     // reset search handler
@@ -16,7 +18,7 @@ const DataNotFound: FC<IDataNotFoundProps> = ({ dataName = "Data", isSearched })
         replace('?');
     }
     return (
-        <div className="wrapper flex flex-col items-center justify-center py-16 px-4">
+        <div className={cn("wrapper flex flex-col items-center justify-center py-16 px-4", className)}>
             <div className="bg-gray-50 rounded-full p-6 mb-6">
                 <SearchX className="w-12 h-12 text-purple-500" />
             </div>

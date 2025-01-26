@@ -25,7 +25,7 @@ const AdminStats: FC = () => {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <div className="mx-auto px-6 py-8 bg-gray-50">
+            <div className="mx-auto p-6 bg-gray-50">
                 <div className="mb-8">
                     <DashboardStats
                         totalBookings={data?.data?.totalBookings}

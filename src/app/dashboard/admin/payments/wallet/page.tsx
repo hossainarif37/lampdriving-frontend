@@ -26,7 +26,7 @@ const WalletPage: FC = () => {
     const lastSixMonthsStats = data?.data?.lastSixMonthsStats;
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
+        <div className="min-h-[calc(100vh-300px)] bg-gray-50 p-6">
             <div className="space-y-6">
                 {/* Header */}
                 <div className="flex items-center justify-between">

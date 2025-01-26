@@ -44,7 +44,8 @@ const RegisterForm: FC = () => {
                 message: res.message
             });
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
-            router.push('/')
+
+            router.push('/dashboard/learner')
         }).catch((err) => {
             toast({
                 success: false,

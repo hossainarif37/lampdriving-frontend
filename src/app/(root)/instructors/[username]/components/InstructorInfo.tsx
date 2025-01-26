@@ -1,13 +1,10 @@
 "use client"
 import Image from 'next/image'
-import instructorImg from "@/assets/home-page-image/test-image.webp"
-import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-Taisor-Car-Color-Image.webp"
 import { CircleCheck, User } from 'lucide-react'
 
 import { FC, useState } from 'react';
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
-import { Button } from '@/components/ui/button'
 
 
 interface InstructorInfoProps {
@@ -16,12 +13,12 @@ interface InstructorInfoProps {
 const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const user: IUser | undefined = typeof instructor.user != "string" ? instructor.user : undefined;
-  const { vehicle, languages, description } = instructor;
+  const { vehicle, languages, description, experience } = instructor;
 
   const carInfo = [
     { id: 1, info: 'Auto Lessons & Test Packages' },
     { id: 2, info: 'Verified Working with Children Check' },
-    { id: 3, info: 'Instructed for 15 yr 4 mo' },
+    { id: 3, info: `Instructed for ${experience} yr` },
   ];
 
 

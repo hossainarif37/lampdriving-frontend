@@ -6,12 +6,12 @@ import { FC } from 'react';
 const DashboardLayout: FC<{ children: ReactNode }> = ({ children }) => {
     return (
         <div className='flex flex-col lg:flex-row bg-white'>
-            <div className='lg:min-h-screen lg:w-60 xl:w-72  relative'>
+            <div className='lg:min-h-screen lg:w-60 xl:w-72 relative'>
                 <Sidebar />
             </div>
             <div className='flex-1 min-h-screen'>
                 <DashboardNav />
-                <div className='pt-[85px] pb-3 lg:py-6 lg:px-6 px-3  bg-gray-100 rounded-tl-md'>
+                <div className='pt-[85px] pb-3 lg:py-6 lg:px-6 px-3 bg-gray-100 rounded-tl-md'>
                     {children}
                 </div>
             </div>
