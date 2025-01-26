@@ -30,7 +30,7 @@ const scheduleApi = baseApi.injectEndpoints({
             providesTags: ["schedule"]
         }),
         getInstructorsSchedules: builder.query<IResponseWithPaginationData<ISchedule[]>, IGetSchedulesQuery>({
-            query: ({ id, type, status, searchKey, limit, page }) => `/schedule/instructor/${id}?populate=learner.user&learnerFields=user&userFields=name,email&type=${type}${status ? `&status=${status}` : "&sort=date,-status&status=upcoming&status=ongoing&status=rescheduled&status=completed"}${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`,
+            query: ({ id, type, status, searchKey, limit, page }) => `/schedule/instructor/${id}?populate=learner.user&learnerFields=user&userFields=name,email&type=${type}&type=test${status ? `&status=${status}` : "&sort=date,-status&status=upcoming&status=ongoing&status=rescheduled&status=completed"}${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`,
             providesTags: ["schedule"]
         }),
         getASchedule: builder.query<IResponseWithData<ISchedule>, { id: string }>({

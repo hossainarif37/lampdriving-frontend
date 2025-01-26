@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { FC } from 'react';
-import cardImg from "@/assets/home-page-image/test-image.webp";
-import carImg from "@/assets/car-image/carimg.jpg";
 import { Star } from 'lucide-react';
 import { useBooking } from '@/providers/BookingProvider';
+import { IUser } from '@/types/user';
+import { placeholderCarImage, placeholderUserImage } from '@/constant/placeholderImage';
 
 const InstructorInfo: FC = () => {
     const { instructor } = useBooking();
@@ -14,7 +14,7 @@ const InstructorInfo: FC = () => {
 
             <div className="space-y-4">
                 <div className='flex relative'>
-                    <Image src={cardImg} alt="Instructor" width={110} height={110} className="size-[70px] rounded-full mr-4" />
+                    <Image src={(instructor?.user as IUser)?.profileImg || placeholderUserImage} alt="Instructor" width={110} height={110} className="size-[70px] rounded-full mr-4" />
                     <div>
                         <h6 className='font-semibold'>
                             {typeof instructor?.user !== 'string' && instructor?.user?.name?.firstName}
@@ -42,7 +42,7 @@ const InstructorInfo: FC = () => {
                         <p>{instructor?.vehicle?.rating}</p>
                         <p>Dual controls fitted</p>
                     </div>
-                    <Image src={carImg} alt="Instructor" width={110} height={110}
+                    <Image src={instructor?.vehicle?.image || placeholderCarImage} alt="Instructor" width={110} height={110}
                         className="size-[70px] object-cover rounded-full bg-gray-100 border border-gray-200" />
                 </div>
             </div>
