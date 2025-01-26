@@ -20,7 +20,10 @@ const InstructorsPage: FC<IInstructorProps> = async ({ searchParams }) => {
             <div className='wrapper py-14 space-y-7'>
                 {/* <SectionHeading title='Our Instructors' subtitle='Find the perfect instructor for your learning journey' /> */}
                 <InstructorsSearchFilter searchParams={searchedParams} />
-                <Suspense key={JSON.stringify(searchedParams)} fallback={<InstructorsLoadingSkeleton />}>
+                <Suspense
+                    key={JSON.stringify(searchedParams)}
+                    fallback={<InstructorsLoadingSkeleton />}
+                >
                     <Instructors searchedParams={searchedParams} />
                 </Suspense>
             </div>
