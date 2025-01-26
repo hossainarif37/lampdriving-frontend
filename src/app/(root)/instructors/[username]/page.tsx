@@ -11,8 +11,7 @@ interface IInstructorPageProps {
 const InstructorPage: FC<IInstructorPageProps> = async ({ params }) => {
     const { username } = await params;
     const data = await getAInstructor(username);
-    console.log('data', data);
-
+    
     return (
         <div>
             <InstructorDetails instructor={data.data} />
