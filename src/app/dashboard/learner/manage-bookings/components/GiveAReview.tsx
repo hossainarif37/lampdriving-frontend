@@ -3,15 +3,22 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { toast } from '@/hooks/use-toast';
+import { useCreateAReviewMutation } from '@/redux/api/reviewApi/reviewApi';
+import { ICreateAReviewReqData } from '@/types/review';
 import { Star } from 'lucide-react';
 import { FC, useState } from 'react';
 
-const GiveAReview: FC = () => {
+interface IGiveAReviewProps {
+    bookingId: string;
+}
+
+const GiveAReview: FC<IGiveAReviewProps> = ({ bookingId }) => {
     const [showReview, setShowReview] = useState(false);
     const [feedback, setFeedback] = useState<{ content: string, error: boolean }>({ content: '', error: false });
     const [rating, setRating] = useState<{ value: number, error: boolean }>({ value: 0, error: false });
     const [hoveredRating, setHoveredRating] = useState(0);
-
+    const [createAReview, { isLoading }] = useCreateAReviewMutation();
     const handleSubmit = () => {
         if (rating.value === 0) {
             setRating({ value: 0, error: true });
@@ -20,9 +27,21 @@ const GiveAReview: FC = () => {
             setFeedback({ content: '', error: true });
             return;
         }
-        console.log({ rating: rating.value, content: feedback.content });
-        // setFeedback({ content: '', error: false });
-        // setRating(0);
+        const reqData: ICreateAReviewReqData = {
+            booking: bookingId,
+            rating: rating.value,
+            feedback: feedback.content
+        }
+        createAReview(reqData).unwrap().then((res) => {
+            toast({
+                message: res.message
+            })
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err?.data?.message || "Something went wrong"
+            })
+        });
     };
 
     const getRatingLabel = () => {
@@ -106,7 +125,7 @@ const GiveAReview: FC = () => {
                             </Button>
                         </DialogClose>
 
-                        <Button onClick={handleSubmit} className='bg-primary' size="lg">
+                        <Button disabled={isLoading} loading={isLoading} onClick={handleSubmit} className='bg-primary w-40' size="lg">
                             Submit
                         </Button>
                     </div>

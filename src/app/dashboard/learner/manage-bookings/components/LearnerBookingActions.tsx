@@ -24,7 +24,7 @@ const LearnerBookingActions: FC<ILearnerBookingActionsProps> = ({ id }) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
-                    <GiveAReview />
+                    <GiveAReview bookingId={id} />
                     <ViewDetailsDialogBtn title={"Booking Details"}>
                         <BookingDetails role='learner' id={id} />
                     </ViewDetailsDialogBtn>
