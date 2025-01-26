@@ -30,7 +30,13 @@ const LoginForm: FC = () => {
                 message: res.message
             });
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
-            router.push('/')
+            if (res.data.role === 'instructor') {
+                router.push('/dashboard/instructor')
+            } else if (res.data.role === 'learner') {
+                router.push('/dashboard/learner')
+            } else if (res.data.role === 'admin') {
+                router.push('/dashboard/admin')
+            }
         }).catch((err) => {
             toast({
                 success: false,

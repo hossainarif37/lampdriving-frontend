@@ -1,6 +1,6 @@
 import React from 'react';
 import { FC } from 'react';
-import ChooseBestInstructorSelections from './components/instructor-selection/ChooseBestInstructorSelections';
+// import ChooseBestInstructorSelections from './components/instructor-selection/ChooseBestInstructorSelections';
 import FeaturedInstructors from './components/featured-instructors/FeaturedInstructors';
 import Testimonials from './components/testimonials/Testimonials';
 import AboutUs from './components/about-us-section/AboutUs';
@@ -10,8 +10,8 @@ import HowLampDrivingWork from './components/how-lampdriving-works/HowLampDrivin
 import MissionVisionSection from './about/components/MissionVisionSection';
 import AboutStats from './about/components/AboutStats/AboutStats';
 import Pricing from './components/pricing/Pricing';
-import TopNavigator from '@/components/shared/TopNavigator';
-import FooterSearch from '@/components/layouts/footer/FooterSearch';
+// import TopNavigator from '@/components/shared/TopNavigator';
+// import FooterSearch from '@/components/layouts/footer/FooterSearch';
 
 const HomePage: FC = () => {
   return (

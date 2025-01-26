@@ -14,7 +14,7 @@ import { IRegisterInputs } from '@/types/auth';
 import { Eye, EyeClosed } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 const RegisterForm: FC = () => {
@@ -32,34 +32,20 @@ const RegisterForm: FC = () => {
 
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
+    const phone = watch('phone');
+    console.log(phone)
 
     const router = useRouter();
 
 
     const handleRegister = (data: IRegisterInputs) => {
-        const formData: IRegisterInputs = {
-            name: {
-                firstName: data.name.firstName,
-                lastName: data.name.lastName
-            },
-            email: data.email,
-            phone: data.phone,
-            gender: data.gender,
-            profileImg: profilePhoto.url,
-            localLicense: {
-                licenseNumber: data.localLicense.licenseNumber,
-                issueDate: data.localLicense.issueDate,
-                expiryDate: data.localLicense.expiryDate
-            },
-            password: data.password,
-        }
-
         registerUser(data).unwrap().then((res) => {
             toast({
                 message: res.message
             });
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
-            router.push('/')
+
+            router.push('/dashboard/learner')
         }).catch((err) => {
             toast({
                 success: false,
@@ -158,24 +144,29 @@ const RegisterForm: FC = () => {
                                     <Input
                                         {...register('phone', {
                                             required: "Phone number is required",
-                                            maxLength: {
+                                            minLength: {
                                                 value: 10,
                                                 message: "Phone number must be 10 digits"
                                             }
-                                        })
-                                        }
-                                        type="number" id='phone' placeholder="Enter your phone number" className='xl:h-12 mt-1'
+                                        })}
+                                        type="number"
+                                        id="phone"
+                                        placeholder="Enter your phone number"
+                                        className="xl:h-12 mt-1"
                                         onKeyDown={(e) => {
                                             if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
                                                 e.preventDefault();
                                             }
                                         }}
-                                        onChange={(e) => {
-                                            if (e.target.value.length > 10) {
-                                                e.target.value = e.target.value.slice(0, 10);
+                                        onInput={(e) => {
+                                            const input = e.target as HTMLInputElement;
+                                            if (input.value.length > 10) {
+                                                input.value = input.value.slice(0, 10);
                                             }
                                         }}
                                     />
+
+
                                     {errors?.phone && <p className='text-red-500 text-sm mt-1'>{errors?.phone?.message}</p>}
                                 </div>
                             </div>

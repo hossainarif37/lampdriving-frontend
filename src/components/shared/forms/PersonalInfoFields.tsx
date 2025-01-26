@@ -130,9 +130,10 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
                     e.preventDefault();
                   }
                 }}
-                onChange={(e) => {
-                  if (e.target.value.length > 10) {
-                    e.target.value = e.target.value.slice(0, 10);
+                onInput={(e) => {
+                  const input = e.target as HTMLInputElement;
+                  if (input.value.length > 10) {
+                    input.value = input.value.slice(0, 10);
                   }
                 }}
                 defaultValue={defaultValues?.phone}

@@ -11,9 +11,9 @@ const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 const RevenueOverviewChart: FC<{ lastSixMonthsStats: any }> = ({ lastSixMonthsStats }) => {
     const monthlyData = lastSixMonthsStats?.map((item: any, index: number) => ({
         month: months[index],
-        totalAmount: toFixedNumber(item.totalRevenue),
-        platformFee: toFixedNumber(item.platformFee),
-        instructorPayout: toFixedNumber(item.instructorPayout)
+        totalAmount: toFixedNumber(item.totalRevenue ?? 0),
+        platformFee: toFixedNumber(item.platformFee ?? 0),
+        instructorPayout: toFixedNumber(item.instructorPayout ?? 0),
     }));
 
     return (
