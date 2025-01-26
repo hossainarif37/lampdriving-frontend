@@ -13,7 +13,7 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, mockTestPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, setIsConfirmTriggered, setCurrentStep, steps } = useBooking();
+    const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, mockTestPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, setIsConfirmTriggered, setCurrentStep, steps, isTestPackageSelected } = useBooking();
 
     // register and login button trigger
     const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
@@ -112,8 +112,10 @@ const BookingInfo: FC = () => {
         }
     }
 
-    const isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included && !mockTestPackage.included) ||
-        (currentStep.key === "schedule" && availableScheduleHours > 0) || (isLogging || isRegistering || isCreatingABooking);
+
+    let isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included && !mockTestPackage.included) ||
+        (currentStep.key === "schedule" && (availableScheduleHours > 0 || (testPackage.included && !isTestPackageSelected))) || (isLogging || isRegistering || isCreatingABooking);
+
     return (
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <h2 className="text-lg font-semibold mb-4">Booking Info</h2>
@@ -124,7 +126,7 @@ const BookingInfo: FC = () => {
                         <Clock className="size-5 text-primary" />
                         {bookingHours} hrs Booking Credit
                     </span>
-                    <span>${toFixedNumber(price.originalAmount)}</span>
+                    <span>${toFixedNumber(price.originalAmount ?? 0)}</span>
                 </div>
 
                 {
@@ -138,7 +140,7 @@ const BookingInfo: FC = () => {
                                 <span className="text-sm font-medium bg-[#dbeafe] text-primary px-2 py-1 rounded">
                                     {bookingHours >= 10 ? 10 : bookingHours >= 6 ? 6 : 0}% OFF</span>
                             </span>
-                            <span>- ${toFixedNumber(price.discountedAmount)}</span>
+                            <span>- ${toFixedNumber(price.discountedAmount ?? 0)}</span>
                         </div>
                     </>
                 }
@@ -174,7 +176,7 @@ const BookingInfo: FC = () => {
                 <div className="pt-4 border-t">
                     <div className="flex justify-between font-semibold">
                         <span>Total Payable Amount</span>
-                        <span className="text-xl">${toFixedNumber(price.payableAmount)}</span>
+                        <span className="text-xl">${toFixedNumber(price.payableAmount ?? 0)}</span>
                     </div>
                 </div>
 

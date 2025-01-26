@@ -8,11 +8,8 @@ import { cn } from '@/lib/utils';
 import { IAddress } from '@/types/user';
 
 interface IDropOffLocationProps {
-    value: {
-        address: string;
-        suburb: string;
-    };
-    onChange: Dispatch<React.SetStateAction<IAddress>>
+    value: IAddress;
+    onChange: (location: IAddress) => void;
     error: {
         address: boolean;
         suburb: boolean;
@@ -36,7 +33,7 @@ const DropOffLocation: FC<IDropOffLocationProps> = ({ onChange, value, error, cl
                         <Input
                             type="text"
                             value={value?.address}
-                            onChange={(e) => onChange((pre) => ({ ...pre, address: e.target.value }))}
+                            onChange={(e) => onChange({ address: e.target.value, suburb: value.suburb })}
                             placeholder="Enter your drop off address"
                             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                         />
@@ -60,7 +57,7 @@ const DropOffLocation: FC<IDropOffLocationProps> = ({ onChange, value, error, cl
                                 <div className='relative w-full'>
                                     <Input
                                         value={value.suburb}
-                                        onChange={(e) => onChange((pre) => ({ ...pre, suburb: e.target.value }))}
+                                        onChange={(e) => onChange({ address: value.address, suburb: e.target.value })}
                                         readOnly={value.suburb ? true : false}
                                         className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                                         type="text"
@@ -78,7 +75,7 @@ const DropOffLocation: FC<IDropOffLocationProps> = ({ onChange, value, error, cl
                                                 className='py-3'
                                                 key={index}
                                                 onSelect={() => {
-                                                    onChange((pre) => ({ ...pre, suburb: suburb.label }));
+                                                    onChange({ address: value.address, suburb: suburb.label });
                                                     setIsOpen(false);
                                                 }}
                                             >
