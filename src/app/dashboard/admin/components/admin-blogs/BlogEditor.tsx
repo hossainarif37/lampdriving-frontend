@@ -1,12 +1,13 @@
 'use client'
 import { FC } from 'react';
-import { Bold, Italic, Strikethrough, Underline, Quote, List, ListOrdered, LinkIcon, ImageIcon, Code, Heading1, Heading2 } from "lucide-react"
+import { Bold, Italic, Underline, Quote, List, ListOrdered, LinkIcon, ImageIcon, Code, Heading1, Heading2 } from "lucide-react"
 import LabeledInput from "./LabeledInput"
 import TooltipButton from "./TooltipButton"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import TabsComponent from './TabsComponent';
 import { useCreateBlogMutation } from '@/redux/api/blogApi/blogApi';
+import { toast } from '@/hooks/use-toast';
 
 
 
@@ -17,27 +18,46 @@ const BlogEditor: FC = () => {
 
 
     const handleSubmit = async () => {
-        if (!title || !content) {
-            alert("Title and content are required.");
+        if (!title.trim() || !content.trim()) {
+            toast({
+                success: false,
+                message: "Title and content are required.",
+            });
             return;
         }
 
         const blogData = {
-            title,
-            path: title.toLowerCase().replace(/ /g, "-"), // Generate a path from the title
-            content,
-            image: "", // Handle image upload separately if needed
+            title: title.trim(),
+            path: title.trim().toLowerCase().replace(/ /g, "-"),
+            content: content.trim(),
+            image: "", // Adjust image handling if needed
         };
+
+        console.log("Sending Blog Data:", blogData);
 
         try {
             const response = await createBlog(blogData).unwrap();
-            console.log(response);
-            alert(response.message || "Blog published successfully!");
-            setTitle(""); // Clear the form
-            setContent("");
-        } catch (err) {
-            console.error(err);
-            alert("Failed to publish the blog.");
+            console.log("Response:", response);
+
+            if (response.success) {
+                toast({
+                    success: true,
+                    message: response.message || "Blog published successfully!",
+                });
+                setTitle("");
+                setContent("");
+            } else {
+                toast({
+                    success: false,
+                    message: response.message || "Something went wrong!",
+                });
+            }
+        } catch (err: any) {
+            console.error("Error details:", err);
+            toast({
+                success: false,
+                message: err?.data?.message || "Failed to publish the blog. Please try again.",
+            });
         }
     };
 
@@ -90,6 +110,7 @@ const BlogEditor: FC = () => {
             textarea.setSelectionRange(newCursorPos, newCursorPos);
         }, 0);
     };
+
     return (
         <div className="w-full max-w-8xl mx-auto p-4 space-y-4 ">
             <LabeledInput

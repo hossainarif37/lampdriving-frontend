@@ -1,26 +1,25 @@
-import { IResponseBase } from "@/types/response";
-import baseApi from "../baseApi";
-
 interface ICreateBlogInputs {
     title: string;
     path: string;
     content: string;
     image: string;
 }
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const blogApi = baseApi.injectEndpoints({
-    overrideExisting: true,
+export const blogApi = createApi({
+    reducerPath: "blogApi",
+    baseQuery: fetchBaseQuery({ baseUrl: "https://lampdriving-backend.vercel.app/api/v1/blog" }),
     endpoints: (builder) => ({
-        createBlog: builder.mutation<IResponseBase, ICreateBlogInputs>({
-            query: (data) => ({
-                url: '/blog',
+        createBlog: builder.mutation({
+            query: (blogData) => ({
+                url: "/",
                 method: "POST",
-                body: data,
+                body: blogData,
             }),
-            // invalidatesTags: ["Blog"],
         }),
-        // Add other operations like fetching, updating, and deleting blogs here
     }),
 });
 
 export const { useCreateBlogMutation } = blogApi;
+
+

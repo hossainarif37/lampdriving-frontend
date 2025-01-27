@@ -7,7 +7,7 @@ import BlogCard from './components/BlogCard';
 
 const blogPage: FC = () => {
     return (
-        <div className="bg-light-green pb-28">
+        <div>
             <div className="max-w-6xl mx-auto px-4 py-8">
                 <div className="flex justify-between items-center mb-8">
                     <h1 className="text-4xl text-primary font-bold">Blog</h1>
