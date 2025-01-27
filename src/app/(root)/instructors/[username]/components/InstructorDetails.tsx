@@ -1,15 +1,18 @@
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import InstructorInfo from "./InstructorInfo";
-import OtherInstructors from "./OtherInstructors";
+import dynamic from 'next/dynamic';
+const OtherInstructors = dynamic(() => import('./OtherInstructors'));
 import Reviews from "./Reviews";
 import Sidebar from "./Sidebar";
 import { IInstructor } from "@/types/instructor";
+import Loading from '@/components/shared/Loading';
 
 interface InstructorInfoProps {
   instructor: IInstructor;
 }
 
 const InstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
+
   return (
     <div className="bg-light">
       <main className="wrapper py-8">
@@ -19,9 +22,13 @@ const InstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
             <InstructorInfo instructor={instructor} />
 
             {/* //TODO: Need to implement dynamic reviews */}
-            <Reviews />
+            <Suspense fallback={<Loading />}>
+              <Reviews instructor={instructor} />
+            </Suspense>
             <div className="hidden md:block">
-              <OtherInstructors />
+              <Suspense fallback={<Loading />}>
+                <OtherInstructors serviceAreas={instructor.serviceAreas} instructorId={instructor._id} />
+              </Suspense>
             </div>
           </div>
 

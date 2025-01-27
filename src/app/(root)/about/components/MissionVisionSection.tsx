@@ -30,7 +30,7 @@ const MissionVisionSection: FC = () => {
                 <div className="space-y-6 lg:w-7/12 md:w-8/12">
                     {/* Title Section */}
                     <div className="space-y-4">
-                        <h3 className="w-[120px] bg-green-500 py-[6px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-green-500 text-light before:top-0 before:rounded-[4px] before:-ml-6">
+                        <h3 className="w-[120px] bg-secondary py-[6px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-secondary text-light before:top-0 before:rounded-[4px] before:-ml-6">
                             Statements
                         </h3>
                         <h1 className="lg:text-5xl md:text-4xl text-3xl font-bold leading-[2.3rem] lg:leading-[3.5rem] md:leading-[2.7rem] text-light">

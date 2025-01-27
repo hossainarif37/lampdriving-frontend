@@ -35,7 +35,7 @@ const RoleSelection: FC<RoleSelectionProps> = ({ onRoleSelect }) => {
                     <div className="flex items-start gap-4">
                         <div className="flex-shrink-0 w-6 h-6 mt-1">
                             {selectedRole === 'learner' ? (
-                                <div className="w-6 h-6 rounded-full bg-[#00C853] flex items-center justify-center">
+                                <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center">
                                     <Check className="w-4 h-4 text-white" />
                                 </div>
                             ) : (
@@ -76,7 +76,7 @@ const RoleSelection: FC<RoleSelectionProps> = ({ onRoleSelect }) => {
                     <div className="flex items-start gap-4">
                         <div className="flex-shrink-0 w-6 h-6 mt-1">
                             {selectedRole === 'instructor' ? (
-                                <div className="w-6 h-6 rounded-full bg-[#00C853] flex items-center justify-center">
+                                <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center">
                                     <Check className="w-4 h-4 text-white" />
                                 </div>
                             ) : (
@@ -84,8 +84,8 @@ const RoleSelection: FC<RoleSelectionProps> = ({ onRoleSelect }) => {
                             )}
                         </div>
                         <div className="flex gap-4 items-start">
-                            <div className="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center">
-                                <Award className="w-8 h-8 text-green-500" />
+                            <div className="w-16 h-16 bg-teal-100 rounded-lg flex items-center justify-center">
+                                <Award className="w-8 h-8 text-secondary" />
                             </div>
                             <div>
                                 <h2 className="text-xl font-semibold mb-2">Join as an Instructor</h2>

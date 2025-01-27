@@ -137,24 +137,25 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                     <div className='flex gap-3'>
                         <Button
                             onClick={() => handleChangeCarType('auto')}
-                            className={`sm:w-32 w-20 sm:text-base text-xs flex justify-center items-center px-0 rounded-md ${carType === 'auto'
-                                ? 'bg-secondary text-light hover:bg-secondary hover:text-light'
-                                : 'bg-light border border-primary/20 text-primary/70'}`}
+                            className={`sm:w-32 hover:bg-secondary hover:text-white hover:border-secondary w-20 sm:text-base text-xs flex justify-center items-center px-0 rounded-md 
+                                ${carType === 'auto' ? 'bg-secondary border border-secondary text-light hover:text-light'
+                                    : 'bg-light border border-primary/20 text-primary/70'
+                                }`}
                         >
                             <span>Auto</span>
                         </Button>
                         <Button
                             onClick={() => handleChangeCarType('manual')}
-                            className={`sm:w-32 w-20 sm:text-base text-xs hover:text-primary/80 flex justify-center items-center rounded-md ${carType === 'manual'
-                                ? 'bg-secondary text-light hover:bg-secondary hover:text-light'
+                            className={`sm:w-32 w-20 sm:text-base text-xs hover:bg-secondary hover:text-light hover:border-secondary flex justify-center items-center rounded-md ${carType === 'manual'
+                                ? 'bg-secondary border border-secondary text-light hover:bg-secondary hover:text-light'
                                 : 'bg-light border border-primary/20 text-primary/70'}`}
                         >
                             <span>Manual</span>
                         </Button>
                         <Button
                             onClick={() => handleChangeCarType('all')}
-                            className={`sm:w-32 w-20 sm:text-base text-xs hover:text-light flex justify-center items-center rounded-md ${carType === 'all'
-                                ? ' text-light'
+                            className={`sm:w-32 hover:bg-secondary hover:text-light hover:border-secondary w-20 sm:text-base text-xs flex justify-center items-center rounded-md ${carType === 'all'
+                                ? 'border border-secondary text-light'
                                 : 'bg-light border border-primary/20 text-primary/70'}`}
                         >
                             <span>All</span>
