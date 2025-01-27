@@ -30,7 +30,7 @@ const BlogCard: FC<BlogCardProps> = ({ post }) => {
                             <p className="text-primary/80">{post.excerpt}</p>
                             <Button variant="default" className="w-fit bg-primary text-white" asChild>
                                 {/* <Link href={`/blog/${post.id}`}>Continue Reading</Link> */}
-                                <Link href={`/blog/${post.id}-${slug}`}>Continue Reading</Link>
+                                <Link href={`/blog/${post.id}-${slug}`}>See details</Link>
                             </Button>
                         </div>
                         <div className="relative w-full rounded-md overflow-hidden">
