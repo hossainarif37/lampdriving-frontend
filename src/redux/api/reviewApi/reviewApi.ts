@@ -8,6 +8,7 @@ const reviewApi = baseApi.injectEndpoints({
         getReviews: builder.query<IResponseWithPaginationData<IReview[]>, { id: string }>({
             query: ({ id }) => `/review/${id}`
         }),
+
         createAReview: builder.mutation<IResponseBase, ICreateAReviewReqData>({
             query: (reqData) => ({
                 url: `/review`,

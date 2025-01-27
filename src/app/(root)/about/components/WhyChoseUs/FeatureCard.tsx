@@ -12,8 +12,8 @@ const FeatureCard: FC<FeatureCardProps> = ({ Icon, title, description, alignment
     return (
         <div className="space-y-2">
             <div className={`flex ${justifyContent}`}>
-                <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <Icon className="w-8 h-8 text-emerald-500" />
+                <div className="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center">
+                    <Icon className="w-8 h-8 text-teal-500" />
                 </div>
             </div>
             <div className={`flex items-center ${justifyContent === 'justify-end' ? 'justify-end gap-4' : 'justify-start gap-4'}`}>

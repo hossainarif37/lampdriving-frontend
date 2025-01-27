@@ -10,7 +10,7 @@ const WhyChooseUs: FC = () => {
             {/* Header Section */}
 
             <div className=" mb-12 flex flex-col justify-center items-center gap-3">
-                <h3 className="w-[160px] bg-green-500 py-[7px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-green-500 text-light before:top-0 before:rounded-[4px] before:-ml-6">
+                <h3 className="w-[160px] bg-secondary py-[7px] px-[15px] text-sm font-bold rounded-[4px] ml-2 relative before:absolute before:w-[5px] uppercase before:min-h-full before:bg-secondary text-light before:top-0 before:rounded-[4px] before:-ml-6">
                     WHY CHOOSE US
                 </h3>
                 <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
@@ -31,7 +31,7 @@ const WhyChooseUs: FC = () => {
                         />
                         {/* Absolute Positioned Circle */}
                         <div className="absolute top-[65px] right-[-55px] w-[30px] h-[30px] rounded-full bg-white shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)] flex items-center justify-center z-[10]">
-                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-green-500 scale-100 transition-all duration-500 z-[15]" />
+                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-secondary scale-100 transition-all duration-500 z-[15]" />
                         </div>
                     </div>
                     <div className="text-gray-100 md:text-8xl text-6xl font-bold">
@@ -46,13 +46,13 @@ const WhyChooseUs: FC = () => {
                         />
                         {/* Absolute Positioned Circle */}
                         <div className="absolute bottom-[65px] right-[-55px] w-[30px] h-[30px] rounded-full bg-white shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)] flex items-center justify-center z-[10]">
-                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-green-500 scale-100 transition-all duration-500 z-[15]" />
+                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-secondary scale-100 transition-all duration-500 z-[15]" />
                         </div>
                     </div>
                 </div>
 
                 {/* Main Content Container */}
-                <div className="relative overflow-hidden flex flex-col items-center justify-end md:w-[570px] w-full h-[500px] mx-auto bg-[#04bf61] z-[1]">
+                <div className="relative overflow-hidden flex flex-col items-center justify-end md:w-[570px] w-full h-[500px] mx-auto bg-secondary z-[1]">
                     <div
                         style={{ position: "absolute", left: "-180px", right: "-180px", bottom: "-510px", height: "570px", backgroundColor: "#ffffff", zIndex: 2, borderRadius: "50%", }}
                     />
@@ -80,7 +80,7 @@ const WhyChooseUs: FC = () => {
                         />
                         {/* Absolute Positioned Circle */}
                         <div className="absolute top-[65px] left-[-55px] w-[30px] h-[30px] rounded-full bg-white shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)] flex items-center justify-center z-[10]">
-                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-green-500 scale-100 transition-all duration-500 z-[15]" />
+                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-secondary scale-100 transition-all duration-500 z-[15]" />
                         </div>
                     </div>
                     <div className="text-gray-100 md:text-8xl text-6xl font-bold">
@@ -95,7 +95,7 @@ const WhyChooseUs: FC = () => {
                         />
                         {/* Absolute Positioned Circle */}
                         <div className="absolute bottom-[65px] left-[-55] w-[30px] h-[30px] rounded-full bg-white shadow-[0px_0px_10px_0px_rgba(0,0,0,0.12)] flex items-center justify-center z-[10]">
-                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-green-500 scale-100 transition-all duration-500 z-[15]" />
+                            <div className="absolute w-2 h-2 group-hover:w-5 group-hover:h-5 rounded-full bg-secondary scale-100 transition-all duration-500 z-[15]" />
                         </div>
                     </div>
                 </div>
