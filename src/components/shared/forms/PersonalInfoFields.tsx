@@ -125,6 +125,17 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
                     message: "Phone number must be 10 digits",
                   },
                 })}
+                onKeyDown={(e) => {
+                  if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                    e.preventDefault();
+                  }
+                }}
+                onInput={(e) => {
+                  const input = e.target as HTMLInputElement;
+                  if (input.value.length > 10) {
+                    input.value = input.value.slice(0, 10);
+                  }
+                }}
                 defaultValue={defaultValues?.phone}
                 type="number"
                 placeholder="Enter your phone number"

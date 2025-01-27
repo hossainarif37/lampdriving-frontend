@@ -102,7 +102,7 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
           </div>
           <div>
             <h3 className="font-medium">{vehicle.name} {vehicle.model} {vehicle.year} ({vehicle.type})</h3>
-            <p className="text-sm text-gray-600 mt-1">{vehicle.rating}</p>
+            <p className="text-sm text-gray-600 mt-1">{vehicle.rating}-star ANCAP rating</p>
           </div>
         </div>
       </section>

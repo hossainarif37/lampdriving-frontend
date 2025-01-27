@@ -58,7 +58,6 @@ const CompletedBookingsTable: FC = () => {
                                 {
                                     data.data.result.map((booking: IBooking, index: number) => {
                                         const learner = typeof booking.learner !== 'string' ? typeof booking.learner.user !== 'string' ? booking.learner.user : undefined : undefined;
-                                        const instructor = typeof booking.instructor !== 'string' ? typeof booking.instructor.user !== 'string' ? booking.instructor.user : undefined : undefined;
 
                                         return (
                                             <TableRow key={booking._id}>
@@ -80,7 +79,7 @@ const CompletedBookingsTable: FC = () => {
                                                     </div>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <h3>N/A</h3>
+                                                    <h3>{booking.review ? booking.review.rating : "N/A"}</h3>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>

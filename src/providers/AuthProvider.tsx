@@ -28,9 +28,9 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         dispatch(saveUser(payloadObj))
     }, [userData, isUserLoading, dispatch])
 
-    if (isUserLoading) {
-        return <Loading />
-    }
+    // if (isUserLoading) {
+    //     return <Loading />
+    // }
 
     return (
         <>

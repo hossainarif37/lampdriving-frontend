@@ -18,6 +18,7 @@ import TotalWithdraw from './components/TotalWithdraw';
 import { useGetInstructorWalletQuery } from '@/redux/api/walletApi/walletApi';
 import { useAppSelector } from '@/redux/hook';
 import Loading from '@/components/shared/Loading';
+import AddBankAccount from './components/AddBankAccount';
 
 // Mock data for the chart
 const monthlyData = [
@@ -31,7 +32,6 @@ const monthlyData = [
 
 const WalletPage: FC = () => {
     const { user } = useAppSelector(state => state.authSlice);
-    const [loading, setLoading] = useState(true);
     const instructorId = useMemo(() => {
         return typeof user?.instructor === 'string' ?
             user?.instructor :
@@ -39,7 +39,7 @@ const WalletPage: FC = () => {
     }, [user]);
 
     const { data, isLoading } = useGetInstructorWalletQuery(
-        { instructorId },
+        { instructorId: instructorId || "" },
         { skip: !instructorId }
     );
 
@@ -54,7 +54,7 @@ const WalletPage: FC = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 p-6">
-            <div className="max-w-7xl mx-auto space-y-6">
+            <div className="space-y-6">
                 {/* Header */}
                 <div className="flex items-center justify-between">
                     <div>
@@ -62,24 +62,25 @@ const WalletPage: FC = () => {
                         <p className="text-gray-600">Track your earnings and upcoming payouts</p>
                     </div>
                     <div className="flex items-center gap-3">
-                        <p className="text-sm text-gray-600">Next payout:</p>
-                        <p className="text-sm font-medium text-gray-900">March 22, 2024</p>
+                        {/* <p className="text-sm text-gray-600">Next payout:</p>
+                        <p className="text-sm font-medium text-gray-900">March 22, 2024</p> */}
+                        <AddBankAccount id={data?.data?._id || ""} bankAccount={data?.data.bankAccount} />
                     </div>
                 </div>
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Total Earnings */}
-                    <TotalEarnings totalEarnings={totalEarnings} />
+                    <TotalEarnings totalEarnings={totalEarnings || 0} />
 
                     {/* Pending Balance */}
-                    <PendingBalance pendingBalance={pendingBalance} />
+                    <PendingBalance pendingBalance={pendingBalance || 0} />
 
                     {/* Current Balance */}
-                    <CurrentBalance currentBalance={currentBalance} />
+                    <CurrentBalance currentBalance={currentBalance || 0} />
 
                     {/* Total Withdraw */}
-                    <TotalWithdraw totalWithdraw={totalWithdraw} />
+                    <TotalWithdraw totalWithdraw={totalWithdraw || 0} />
                 </div>
 
                 {/* Chart Section */}

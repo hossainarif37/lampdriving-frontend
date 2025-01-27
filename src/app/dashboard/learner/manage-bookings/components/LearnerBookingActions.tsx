@@ -4,12 +4,16 @@ import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
 import BookingDetails from '@/app/dashboard/components/shared/booking-details/BookingDetails';
 import ViewDetailsDialogBtn from '@/app/dashboard/components/shared/view-details/ViewDetailsDialogBtn';
+import GiveAReview from './GiveAReview';
+import { IReview } from '@/types/review';
 
 interface ILearnerBookingActionsProps {
     id: string;
+    review?: IReview;
+    status: "pending" | "accepted" | "completed" | "cancelled";
 }
 
-const LearnerBookingActions: FC<ILearnerBookingActionsProps> = ({ id }) => {
+const LearnerBookingActions: FC<ILearnerBookingActionsProps> = ({ id, review, status }) => {
     const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
     return (
@@ -23,6 +27,7 @@ const LearnerBookingActions: FC<ILearnerBookingActionsProps> = ({ id }) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className='flex flex-col'>
                     <DropdownMenuLabel className='border-b'>Actions</DropdownMenuLabel>
+                    {status === "completed" && <GiveAReview bookingId={id} review={review} />}
                     <ViewDetailsDialogBtn title={"Booking Details"}>
                         <BookingDetails role='learner' id={id} />
                     </ViewDetailsDialogBtn>

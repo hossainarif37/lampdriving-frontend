@@ -5,6 +5,8 @@ import { FC, useState } from 'react';
 import UpdateInstructorStatus from './UpdateInstructorStatus';
 import ViewDetailsDialogBtn from '@/app/dashboard/components/shared/view-details/ViewDetailsDialogBtn';
 import InstructorDetails from '../../components/instructor-details/InstructorDetails';
+import UpdateUserStatus from '../../../components/shared/UpdateUserStatus';
+import DeleteUser from '../../../components/shared/DeleteUser';
 
 interface IPendingInstructorActionsProps {
     id: string;
@@ -26,9 +28,10 @@ const PendingInstructorActions: FC<IPendingInstructorActionsProps> = ({ id }) =>
                     <ViewDetailsDialogBtn title={"Instructor Details"}>
                         <InstructorDetails id={id} />
                     </ViewDetailsDialogBtn>
-                    <Button variant={"ghost"} className='h-[36px] py-0 font-normal capitalize text-start justify-start px-2'>Block</Button>
                     <UpdateInstructorStatus status='verify' id={id} setDropdownIsOpen={setDropdownIsOpen} />
                     <UpdateInstructorStatus status='reject' id={id} setDropdownIsOpen={setDropdownIsOpen} />
+                    <UpdateUserStatus id={id} setDropdownIsOpen={setDropdownIsOpen} role='instructor' status='blocked' />
+                    <DeleteUser role='instructor' id={id} setDropdownIsOpen={setDropdownIsOpen} />
                 </DropdownMenuContent>
             </DropdownMenu>
         </div>

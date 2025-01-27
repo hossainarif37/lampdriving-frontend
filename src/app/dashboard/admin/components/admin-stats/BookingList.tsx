@@ -1,6 +1,7 @@
 import React from 'react';
 import { Clock, CheckCircle, ChevronLeft, ChevronRight, User } from 'lucide-react';
 import { IUser } from '@/types/user';
+import DataNotFound from '@/components/shared/DataNotFound';
 
 type Learner = {
     id: string;
@@ -31,7 +32,7 @@ export const BookingList: React.FC<BookingListProps> = ({ bookings }) => {
         <div className="bg-white rounded-lg shadow-sm">
             <h1 className="text-xl font-semibold text-primary pt-6 px-6">Recent Bookings</h1>
 
-            <div className="divide-y">
+            {bookings.length === 0 ? <DataNotFound dataName='Recent Bookings' /> : <div className="divide-y">
                 {bookings.map((booking: Booking) => (
                     <div
                         key={booking._id}
@@ -58,7 +59,7 @@ export const BookingList: React.FC<BookingListProps> = ({ bookings }) => {
                         </div>
                     </div>
                 ))}
-            </div>
+            </div>}
         </div>
     );
 };

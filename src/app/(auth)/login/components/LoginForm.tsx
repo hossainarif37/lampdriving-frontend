@@ -30,7 +30,13 @@ const LoginForm: FC = () => {
                 message: res.message
             });
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
-            router.push('/')
+            if (res.data.role === 'instructor') {
+                router.push('/dashboard/instructor')
+            } else if (res.data.role === 'learner') {
+                router.push('/dashboard/learner')
+            } else if (res.data.role === 'admin') {
+                router.push('/dashboard/admin')
+            }
         }).catch((err) => {
             toast({
                 success: false,
@@ -101,7 +107,7 @@ const LoginForm: FC = () => {
             </div>
 
             {/* Submit */}
-            <Button className='w-full mt-3 gradient-color h-12' disabled={isLoginLoading}>Login</Button>
+            <Button loading={isLoginLoading} className='w-full mt-3 gradient-color h-12' disabled={isLoginLoading}>Login</Button>
 
             <p className='mt-5'>Don&apos;t have an account? <Link href="/register" className='text-blue-500 hover:underline font-semibold'>Register Here</Link></p>
         </form>

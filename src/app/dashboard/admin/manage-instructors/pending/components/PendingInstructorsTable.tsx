@@ -13,12 +13,11 @@ import DataNotFound from '@/components/shared/DataNotFound';
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
 import { useSearchParams } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { UserRoundSearch } from 'lucide-react';
+
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
-import UpdateInstructorStatus from './UpdateInstructorStatus';
 import PendingInstructorActions from './PendingInstructorActions';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const PendingInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -46,7 +45,7 @@ const PendingInstructorsTable: FC = () => {
     }, [urlSearchParams])
 
     if (isLoading) {
-        return <Loading />
+        return <TableSkeleton />
     }
 
     return (
@@ -57,14 +56,12 @@ const PendingInstructorsTable: FC = () => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="min-w-[100px] text-center">No.</TableHead>
-                                    <TableHead className='min-w-[214px]'>Name & Username</TableHead>
-                                    <TableHead className='min-w-[280px]'>Email & Phone</TableHead>
-                                    <TableHead className='min-w-[140px]'>Experience</TableHead>
-                                    <TableHead className='min-w-[250px]'>Vehicle</TableHead>
-                                    <TableHead className='min-w-[120px] text-center'>Hourly Rate</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Status</TableHead>
-                                    <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
+                                    <TableHead className="text-center">No.</TableHead>
+                                    <TableHead className=''>Name & Username</TableHead>
+                                    <TableHead className=''>Email & Phone</TableHead>
+                                    <TableHead className=''>Experience</TableHead>
+                                    <TableHead className='text-center'>Hourly Rate</TableHead>
+                                    <TableHead className='text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -88,26 +85,10 @@ const PendingInstructorsTable: FC = () => {
                                                     </div>
                                                 }</TableCell>
                                                 <TableCell className="font-medium">{instructor.experience}</TableCell>
-                                                <TableCell className="font-medium">
-                                                    <div>
-                                                        <h3>{instructor.vehicle.name} - <span className='text-gray-500'>{instructor.vehicle.model}</span></h3>
-                                                        <h3>{instructor.vehicle.rating}</h3>
-                                                    </div>
-                                                </TableCell>
                                                 <TableCell className="font-medium text-center">${instructor.pricePerHour}</TableCell>
-                                                <TableCell className="font-medium text-center">
-                                                    {instructor.status === "verified" ? "Verified" : instructor.status === "pending" ? "Pending" : "Rejected"}
-                                                </TableCell>
                                                 <TableCell className="font-medium">
                                                     <div className='flex items-center justify-center gap-2'>
-                                                        {/* <Button
-                                                            title='View Instructor'
-                                                            size={"icon"}>
-                                                            <UserRoundSearch />
-                                                        </Button> */}
                                                         <PendingInstructorActions id={instructor._id || ""} />
-                                                        {/* <UpdateInstructorStatus status='verify' id={instructor._id || ""} />
-                                                        <UpdateInstructorStatus status='reject' id={instructor._id || ""} /> */}
                                                     </div>
                                                 </TableCell>
                                             </TableRow>

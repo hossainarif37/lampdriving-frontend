@@ -14,7 +14,7 @@ import { IRegisterInputs } from '@/types/auth';
 import { Eye, EyeClosed } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 const RegisterForm: FC = () => {
@@ -32,34 +32,20 @@ const RegisterForm: FC = () => {
 
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
+    const phone = watch('phone');
+    console.log(phone)
 
     const router = useRouter();
 
 
     const handleRegister = (data: IRegisterInputs) => {
-        const formData: IRegisterInputs = {
-            name: {
-                firstName: data.name.firstName,
-                lastName: data.name.lastName
-            },
-            email: data.email,
-            phone: data.phone,
-            gender: data.gender,
-            profileImg: profilePhoto.url,
-            localLicense: {
-                licenseNumber: data.localLicense.licenseNumber,
-                issueDate: data.localLicense.issueDate,
-                expiryDate: data.localLicense.expiryDate
-            },
-            password: data.password,
-        }
-
         registerUser(data).unwrap().then((res) => {
             toast({
                 message: res.message
             });
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
-            router.push('/')
+
+            router.push('/dashboard/learner')
         }).catch((err) => {
             toast({
                 success: false,
@@ -158,18 +144,29 @@ const RegisterForm: FC = () => {
                                     <Input
                                         {...register('phone', {
                                             required: "Phone number is required",
-                                            maxLength: {
-                                                value: 10,
-                                                message: "Phone number must be 10 digits"
-                                            },
                                             minLength: {
                                                 value: 10,
                                                 message: "Phone number must be 10 digits"
                                             }
-                                        })
-                                        }
-                                        type="number" id='phone' placeholder="Enter your phone number" className='xl:h-12 mt-1'
+                                        })}
+                                        type="number"
+                                        id="phone"
+                                        placeholder="Enter your phone number"
+                                        className="xl:h-12 mt-1"
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+                                                e.preventDefault();
+                                            }
+                                        }}
+                                        onInput={(e) => {
+                                            const input = e.target as HTMLInputElement;
+                                            if (input.value.length > 10) {
+                                                input.value = input.value.slice(0, 10);
+                                            }
+                                        }}
                                     />
+
+
                                     {errors?.phone && <p className='text-red-500 text-sm mt-1'>{errors?.phone?.message}</p>}
                                 </div>
                             </div>
@@ -243,65 +240,6 @@ const RegisterForm: FC = () => {
                         </div>
                     </div>
 
-                    {/* Overseas Experience */}
-                    {/* <div className="mt-5">
-                        <h1 className='text-2xl font-semibold text-primary mb-3'>Overseas Experience (If Applicable)</h1>
-                        <div className='flex flex-col md:flex-row gap-5'>
-                            <div className='w-full'>
-                                <label htmlFor="overseas-country" className='font-semibold text-primary'>Country Name</label>
-                                <Input
-                                    {...register('overseasExperience.countryName')}
-                                    type="text" id='overseas-country' placeholder="Enter overseas country name" className='xl:h-12 mt-1'
-                                />
-                            </div>
-                            <div className='w-full'>
-                                <label htmlFor="overseas-license" className='font-semibold text-primary'>Overseas License No.</label>
-                                <Input
-                                    {...register('overseasExperience.licenseNumber')}
-                                    type="text" id='overseas-license' placeholder="Enter overseas license No." className='xl:h-12 mt-1'
-                                />
-                            </div>
-                        </div>
-                    </div> */}
-
-                    {/* <div className='flex flex-col md:flex-row gap-5'>
-                        <div className='w-full'>
-                            <label htmlFor="issue-date" className='font-semibold text-primary'>Issue Date</label>
-                            <Input
-                                {...register('overseasExperience.issueDate')}
-                                type="date" id='issue-date' className='xl:h-12 mt-1'
-                            />
-                        </div>
-                        <div className='w-full'>
-                            <label htmlFor="expire-date" className='font-semibold text-primary'>Expiry Date</label>
-                            <Input
-                                {...register('overseasExperience.expiryDate')}
-                                type="date" id='expire-date' className='xl:h-12 mt-1'
-                            />
-                        </div>
-                    </div> */}
-
-                    {/* Previous Learning Experience */}
-                    {/* <div className="mt-5">
-                        <h1 className='text-2xl font-semibold text-primary mb-3'>Previous Learning Experience (If Applicable)</h1>
-                        <div className='flex flex-col md:flex-row gap-5'>
-                            <div className='w-full'>
-                                <label htmlFor="driving-school" className='font-semibold text-primary'>Previous Driving School</label>
-                                <Input
-                                    {...register('previousLearningExperience.schoolName')}
-                                    type="text" id='driving-school' placeholder="Enter previous driving school name" className='xl:h-12 mt-1'
-                                />
-                            </div>
-                            <div className='w-full'>
-                                <label htmlFor="total-hours" className='font-semibold text-primary'>Total Driving Hours</label>
-                                <Input
-                                    {...register('previousLearningExperience.totalLessons')}
-                                    type="number" id='total-hours' placeholder="Enter total driving hours" className='xl:h-12 mt-1'
-                                />
-                            </div>
-                        </div>
-                    </div> */}
-
                     {/* Password Section */}
                     <div className="mt-5">
                         <h1 className='text-2xl font-semibold text-primary mb-3'>Security</h1>
@@ -361,7 +299,7 @@ const RegisterForm: FC = () => {
                 </div>
             </div>
 
-            <Button disabled={isRegistering} className='w-full mt-3 gradient-color h-12'>Register</Button>
+            <Button loading={isRegistering} disabled={isRegistering} className='w-full mt-3 gradient-color h-12'>Register</Button>
 
             <p className='mt-5'>Already have an account? <Link href="/login" className='text-blue-500 hover:underline font-semibold'>Login Here</Link></p>
         </form>

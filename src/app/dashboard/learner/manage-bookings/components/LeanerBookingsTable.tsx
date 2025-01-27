@@ -48,13 +48,13 @@ const LearnerBookingsTable: FC = () => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="min-w-[100px] text-center">No.</TableHead>
-                                    <TableHead className='min-w-[214px]'>Instructor</TableHead>
-                                    <TableHead className='min-w-[250px]'>Payment</TableHead>
-                                    <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Upcoming Schedule</TableHead>
-                                    <TableHead className='min-w-[205px] text-center'>Status</TableHead>
-                                    <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
+                                    <TableHead className=" text-center">No.</TableHead>
+                                    <TableHead className=''>Instructor</TableHead>
+                                    <TableHead className=''>Payment</TableHead>
+                                    <TableHead className=' text-center'>Booking Hours</TableHead>
+                                    <TableHead className=' text-center'>Upcoming Schedule</TableHead>
+                                    <TableHead className=' text-center'>Status</TableHead>
+                                    <TableHead className=' text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -98,7 +98,7 @@ const LearnerBookingsTable: FC = () => {
                                                     {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
-                                                    <LearnerBookingActions id={booking._id} />
+                                                    <LearnerBookingActions review={booking?.review} id={booking._id} status={booking.status} />
                                                 </TableCell>
                                             </TableRow>
                                         )

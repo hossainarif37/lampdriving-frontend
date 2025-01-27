@@ -166,10 +166,5 @@ export const adminRoutes: IRoute[] = [
         name: 'Support Articles',
         path: '/dashboard/admin/manage-support-articles',
         icon: HelpCircle
-    },
-    {
-        name: 'Recycle Bin',
-        path: '/dashboard/admin/recycle-bin',
-        icon: Trash2
     }
 ];

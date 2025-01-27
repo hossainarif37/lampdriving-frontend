@@ -6,11 +6,9 @@ import DataNotFound from '@/components/shared/DataNotFound';
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
 import { useSearchParams } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { UserRoundSearch } from 'lucide-react';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
-import Loading from '@/components/shared/Loading';
 import BlockedInstructorActions from './BlockedInstructorActions';
+import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const BlockedInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -19,7 +17,7 @@ const BlockedInstructorsTable: FC = () => {
     const [isSearched, setIsSearched] = useState(false);
     const { data, isLoading } = useGetAllInstructorsQuery(
         {
-            status: "verified",
+            userStatus: "blocked",
             searchKey: urlSearchParams.get('searchKey') || '',
             limit: limit,
             page: page
@@ -36,7 +34,7 @@ const BlockedInstructorsTable: FC = () => {
     }, [urlSearchParams])
 
     if (isLoading) {
-        return <Loading />
+        return <TableSkeleton />
     }
 
     return (
@@ -47,15 +45,14 @@ const BlockedInstructorsTable: FC = () => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="min-w-[100px] text-center">No.</TableHead>
-                                    <TableHead className='min-w-[200px]'>Name & Username</TableHead>
-                                    <TableHead className='min-w-[220px]'>Email & Phone</TableHead>
-                                    <TableHead className='min-w-[140px]'>Experience</TableHead>
-                                    <TableHead className='min-w-[240px]'>Vehicle</TableHead>
-                                    <TableHead className='min-w-[120px] text-center'>Rating</TableHead>
-                                    <TableHead className='min-w-[200px] text-center'>Completed Lessons</TableHead>
-                                    <TableHead className='min-w-[120px] text-center'>Hourly Rate</TableHead>
-                                    <TableHead className='min-w-[120px] text-center'>Actions</TableHead>
+                                    <TableHead className="text-center">No.</TableHead>
+                                    <TableHead className=''>Name & Username</TableHead>
+                                    <TableHead className=''>Email & Phone</TableHead>
+                                    <TableHead className=''>Experience</TableHead>
+                                    <TableHead className='text-center'>Rating</TableHead>
+                                    <TableHead className='text-center'>Completed Lessons</TableHead>
+                                    <TableHead className='text-center'>Hourly Rate</TableHead>
+                                    <TableHead className='text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -86,14 +83,6 @@ const BlockedInstructorsTable: FC = () => {
                                                     </div>
                                                 }</TableCell>
                                                 <TableCell className="font-medium">{instructor.experience}</TableCell>
-                                                <TableCell className="font-medium">
-                                                    <div>
-                                                        <h3>{instructor.vehicle.name} -
-                                                            <span className='text-gray-500'> {instructor.vehicle.model}
-                                                            </span></h3>
-                                                        <h3>{instructor.vehicle.rating}</h3>
-                                                    </div>
-                                                </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     {instructor?.feedback?.rating ? instructor?.feedback?.rating : "N/A"}
                                                 </TableCell>

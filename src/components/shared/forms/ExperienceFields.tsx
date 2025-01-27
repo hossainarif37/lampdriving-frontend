@@ -8,7 +8,7 @@ import { languageList } from '@/constant/languageList';
 import { IExperience } from '@/types/instructor';
 
 interface IExperienceInputs {
-    experience: string;
+    experience: number;
     description: string;
     languages: string[];
 }
@@ -59,7 +59,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
                         })
                         }
                         defaultValue={defaultValues?.experience}
-                        type="text" id='experience' placeholder="Enter your experience (ex: 2 years)" className='h-11 xl:h-14 mt-1'
+                        type="number" id='experience' placeholder="How many years of experience you have?" className='h-11 xl:h-14 mt-1'
                     />
                     {errors?.experience && <p className='text-red-500 text-sm mt-1'>{errors?.experience?.message}</p>}
                 </div>

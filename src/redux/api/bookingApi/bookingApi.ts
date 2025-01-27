@@ -24,7 +24,7 @@ const bookingApi = baseApi.injectEndpoints({
             query: ({ status, searchKey, limit, page }) => `/booking/all?status=${status}&populate=instructor.user,learner.user,payment,schedules&paymentFields=transactionId&learnerFields=user&instructorFields=user&userFields=name,email&schedulesFields=date,time,status,duration${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
         }),
         getMyBookings: builder.query<IResponseWithPaginationData<IBooking[]>, IGetAllBookingsQuery>({
-            query: ({ status, searchKey, limit, page }) => `/booking/my?${status ? `status=${status}` : ""}&populate=instructor.user,learner.user,payment,schedules&paymentFields=transactionId&learnerFields=user&instructorFields=user&userFields=name,email&schedulesFields=date,time,status,duration&sort=-status${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
+            query: ({ status, searchKey, limit, page }) => `/booking/my?${status ? `status=${status}` : ""}&populate=instructor.user,learner.user,payment,schedules,review&paymentFields=transactionId&learnerFields=user&instructorFields=user&userFields=name,email&schedulesFields=date,time,status,duration&reviewFields=rating,feedback&sort=-status${searchKey && `&searchKey=${searchKey}`}&limit=${limit}&page=${page}`, providesTags: ["booking"]
         }),
         getABooking: builder.query<IResponseWithData<IBooking>, { id: string }>({
             query: ({ id }) => `/booking/${id}?populate=learner.user,instructor.user,schedules&learnerFields=user&instructorFields=user&userFields=name,email,profileImg&schedulesFields=-instructor,-learner,-booking`

@@ -11,13 +11,14 @@ interface InstructorInfoProps {
 
 const InstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
   return (
-    <div className="bg-light pb-40">
+    <div className="bg-light">
       <main className="wrapper py-8">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Main content */}
           <div className="md:col-span-2 space-y-8">
             <InstructorInfo instructor={instructor} />
 
+            {/* //TODO: Need to implement dynamic reviews */}
             <Reviews />
             <div className="hidden md:block">
               <OtherInstructors />

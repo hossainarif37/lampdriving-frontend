@@ -32,7 +32,7 @@ const SecurityForm: FC = () => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
-    
+
     // Separate state for checkboxes and their errors
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [termsError, setTermsError] = useState("");
@@ -99,7 +99,8 @@ const SecurityForm: FC = () => {
                     message: res.message
                 });
                 dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
-                router.push('/')
+
+                router.push('/dashboard/instructor');
             }).catch((err) => {
                 console.log(err);
                 toast({
@@ -141,7 +142,7 @@ const SecurityForm: FC = () => {
                                 />
 
                                 <span
-                                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                                    className="absolute cursor-pointer right-3 top-1/2 -translate-y-1/2"
                                     onClick={() => handlePasswordToggle("password")}
                                 >
                                     {passwordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
@@ -174,7 +175,7 @@ const SecurityForm: FC = () => {
                                 />
 
                                 <span
-                                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                                    className="absolute cursor-pointer right-3 top-1/2 -translate-y-1/2"
                                     onClick={() => handlePasswordToggle("confirm-password")}
                                 >
                                     {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
@@ -193,7 +194,7 @@ const SecurityForm: FC = () => {
                             <div className="flex items-center space-x-2">
                                 <Input
                                     type="checkbox"
-                                    className="h-4 w-4"
+                                    className="h-4 w-4 cursor-pointer"
                                     id="terms"
                                     checked={termsAccepted}
                                     onChange={(e) => handleTermsChange(e.target.checked)}
@@ -220,7 +221,7 @@ const SecurityForm: FC = () => {
                 </div>
 
                 <div className="mt-6">
-                    <StepNavigationButtons prev="car-info" next="" />
+                    <StepNavigationButtons isLoading={isRegistering} prev="car-info" next="" />
                 </div>
             </form>
         </div>

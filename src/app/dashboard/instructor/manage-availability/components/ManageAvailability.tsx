@@ -57,7 +57,7 @@ const ManageAvailability: FC = () => {
 
     const handleBlockSlots = () => {
         const schedule: Partial<ISchedule> = {
-            date: selectedDate || new Date(),
+            date: new Date(selectedDate && selectedTime ? format(selectedDate, 'yyyy-MM-dd') + ' ' + selectedTime[0] : ''),
             time: selectedTime,
             duration: selectedTime.length,
             pickupAddress: {
@@ -80,12 +80,12 @@ const ManageAvailability: FC = () => {
             })
         });
     }
+
     return (
         <div>
             <div className='grid grid-cols-2 text-black gap-6'>
                 <div>
                     <ScheduleCalender
-                        availableScheduleHours={1}
                         schedules={[]}
                         classname='shadow-none'
                         bookedSchedules={data?.data.schedules || []}

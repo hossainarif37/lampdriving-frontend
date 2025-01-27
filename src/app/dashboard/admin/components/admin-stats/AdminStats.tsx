@@ -11,6 +11,7 @@ import Loading from "@/components/shared/Loading";
 import RevenueOverviewChart from "../../payments/wallet/components/RevenueOverviewChart";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import BookingStatsChart from "./BookingStatsChart";
+import AdminStatsSkeleton from "./AdminStatsSkeleton";
 
 // Define the Booking type
 
@@ -20,22 +21,11 @@ const AdminStats: FC = () => {
     const { user } = useAppSelector(state => state.authSlice);
     const { data, isLoading } = useGetAdminStatsQuery(undefined);
 
-    if (isLoading) return <Loading />;
-
-    console.log('Data', data);
+    if (isLoading) return <AdminStatsSkeleton />;
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <div className="mx-auto px-6 py-8 bg-gray-50">
-                <div className="mb-8">
-                    <h1 className="text-3xl font-bold text-primary mb-2">
-                        Welcome back, {user?.name?.firstName}!
-                    </h1>
-                    <p className="text-accent">
-                        Here's what's happening with your driving school today.
-                    </p>
-                </div>
-
+            <div className="mx-auto p-6 bg-gray-50">
                 <div className="mb-8">
                     <DashboardStats
                         totalBookings={data?.data?.totalBookings}
@@ -49,8 +39,6 @@ const AdminStats: FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {/* <BookingCalendar /> */}
-                    {/* Chart Section */}
                     <BookingStatsChart data={data?.data?.lastSixMonthsBookings} />
                     <BookingList bookings={data?.data?.recentBookings} />
                 </div>

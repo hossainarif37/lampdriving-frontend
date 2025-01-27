@@ -25,13 +25,13 @@ const DashboardStats: FC<DashboardStatsProps> = ({
 }) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <StatsCard bgColor="bg-blue-100 text-primary" icon={<BookOpen size={24} />} title="Total bookings" value={toFixedNumber(totalBookings)} />
-            <StatsCard bgColor="bg-green-100 text-green-600" icon={<CheckCircle size={24} />} title="Completed Bookings" value={toFixedNumber(completedBookings)} />
-            <StatsCard bgColor="bg-purple-100 text-purple-600" icon={<Clock size={24} />} title="Ongoing Bookings" value={toFixedNumber(ongoingBookings)} />
-            <StatsCard bgColor="bg-purple-100 text-purple-600" icon={<Clock size={24} />} title="Upcoming Bookings" value={toFixedNumber(upcomingBookings)} />
-            <StatsCard bgColor="bg-blue-100 text-primary" icon={<Users size={24} />} title="Total Learners" value={toFixedNumber(totalLearners)} />
-            <StatsCard bgColor="bg-blue-100 text-primary" icon={<Users size={24} />} title="Total Instructors" value={toFixedNumber(totalInstructors)} />
-            <StatsCard bgColor="bg-blue-100 text-primary" icon={<DollarSign size={24} />} title="Total Revenue" value={toFixedNumber(totalRevenue)} />
+            <StatsCard bgColor="bg-blue-50 text-blue-500" icon={<BookOpen size={24} />} title="Total bookings" value={toFixedNumber(totalBookings ?? 0)} />
+            <StatsCard bgColor="bg-green-50 text-green-500" icon={<CheckCircle size={24} />} title="Completed Bookings" value={toFixedNumber(completedBookings ?? 0)} />
+            <StatsCard bgColor="bg-purple-50 text-purple-500" icon={<Clock size={24} />} title="Ongoing Bookings" value={toFixedNumber(ongoingBookings ?? 0)} />
+            <StatsCard bgColor="bg-purple-50 text-purple-500" icon={<Clock size={24} />} title="Upcoming Bookings" value={toFixedNumber(upcomingBookings ?? 0)} />
+            <StatsCard bgColor="bg-blue-50 text-blue-500" icon={<Users size={24} />} title="Total Learners" value={toFixedNumber(totalLearners ?? 0)} />
+            <StatsCard bgColor="bg-blue-50 text-blue-500" icon={<Users size={24} />} title="Total Instructors" value={toFixedNumber(totalInstructors ?? 0)} />
+            <StatsCard bgColor="bg-blue-50 text-blue-500" icon={<DollarSign size={24} />} title="Total Revenue" value={toFixedNumber(totalRevenue ?? 0)} />
         </div>
     );
 };
