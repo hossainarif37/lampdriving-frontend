@@ -1,6 +1,21 @@
+"use client";
+
+import { useGetInstructorReviewsQuery } from '@/redux/api/reviewApi/reviewApi';
+import { IInstructor } from '@/types/instructor';
 import { FC } from 'react';
 
-const Reviews: FC = () => {
+interface IReviewsProps {
+  instructor: IInstructor;
+}
+
+const Reviews: FC<IReviewsProps> = ({ instructor }) => {
+  const username = typeof instructor.user === 'object' ? instructor.user.username : instructor.user;
+
+  // Use the username in the query
+  // const { data, isLoading, isError } = useGetInstructorReviewsQuery({ username });
+
+  // if (isLoading) return <div>Loading reviews...</div>;
+  // if (isError) return <div>Error loading reviews</div>;
   const reviews = [
     {
       id: 1,

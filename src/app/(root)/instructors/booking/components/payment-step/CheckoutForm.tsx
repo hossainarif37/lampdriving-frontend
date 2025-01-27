@@ -39,18 +39,20 @@ const CheckoutForm: FC<{ clientSecret: string }> = () => {
 
 
         if (error) {
-            toast({
-                success: false,
-                message: error.payment_intent?.status == "succeeded" ? "Duplicate payment" : error.message || "Payment failed"
-            })
-            setIsCreatingABooking(false);
+            if (error.payment_intent?.status !== "succeeded") {
+                toast({
+                    success: false,
+                    message: error.message || "Payment failed"
+                })
+                setIsCreatingABooking(false);
+            }
         }
 
-        if (!user?._id || !instructor?._id || !paymentIntent) {
+        if (!user?._id || !instructor?._id || (!paymentIntent && !error.payment_intent?.status)) {
             setIsCreatingABooking(false);
             return;
         }
-        setPaymentInfo(pre => ({ ...pre, transactionId: paymentIntent.id }))
+        setPaymentInfo(pre => ({ ...pre, transactionId: paymentIntent?.id || (error as any)?.payment_intent?.id }))
 
         const reqData: IBookingInputs = {
             bookingInfo: {
@@ -63,10 +65,11 @@ const CheckoutForm: FC<{ clientSecret: string }> = () => {
             paymentInfo: {
                 user: user?._id,
                 amount: price.payableAmount,
-                transactionId: paymentIntent?.id,
+                transactionId: paymentIntent?.id || (error as any)?.payment_intent?.id,
                 method: "card",
             }
         }
+
         createABooking(reqData).unwrap().then((res) => {
             toast({
                 message: res.message,

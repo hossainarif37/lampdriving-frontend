@@ -34,7 +34,7 @@ const BlogDetails: FC<PageProps> = async ({ params }) => {
     }
 
     return (
-        <article className="pb-32 bg-light-green">
+        <article className="">
             <div className="max-w-6xl mx-auto px-4 py-8">
                 <div className="max-w-4xl mx-auto">
                     {/* Meta Information */}
@@ -62,7 +62,7 @@ const BlogDetails: FC<PageProps> = async ({ params }) => {
                         {/* Image */}
                         <Image
                             src={img}
-                            alt={post.title}
+                            alt="blog-image"
                             className="float-right md:ml-4 mb-4 md:w-1/3 rounded-md shadow-md md:h-36 h-44 object-cover object-center"
                         />
 

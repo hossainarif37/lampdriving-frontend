@@ -22,12 +22,12 @@ const BannerHeading: FC = () => {
                 <div className="md:space-y-8 space-y-5 md:my-8 my-5 text-center md:text-left">
                     {/* Review block */}
                     <div className="flex gap-3 items-center justify-center md:justify-start">
-                        <p className="w-14 h-14 rounded-full bg-secondary flex justify-center items-center text-light font-bold">
+                        <p className="w-14 h-14 rounded-full bg-secondary/50 backdrop-blur-sm flex justify-center items-center text-light font-bold">
                             4.9
                         </p>
                         <div>
                             {/* Star rating */}
-                            <div className="text-secondary font-bold flex gap-1">
+                            <div className="text-secondary/50 font-bold flex gap-1">
                                 {[...Array(5)].map((_, i) => (
                                     <Star key={i} className='fill-secondary' />
                                 ))}
@@ -38,7 +38,7 @@ const BannerHeading: FC = () => {
 
                     {/* Button */}
                     <Link href={'/instructors'}>
-                        <Button className="h-12 w-44 md:w-52 mt-7 hover:bg-secondary/90">
+                        <Button className="h-12 w-44 md:w-52 mt-7 bg-secondary/70 backdrop-blur-sm">
                             Discover Lesson
                         </Button>
                     </Link>
@@ -54,7 +54,7 @@ const BannerHeading: FC = () => {
                 {/* Pricing badge */}
                 <div className=' flex md:flex-none justify-center'>
                     <div
-                        className="flex flex-col justify-center items-center bg-secondary w-28 h-28 text-light font-bold lg:text-base text-sm"
+                        className="flex flex-col justify-center items-center bg-secondary/50 backdrop-blur-sm w-28 h-28 text-light font-bold lg:text-base text-sm"
                         style={{
                             clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
                         }}

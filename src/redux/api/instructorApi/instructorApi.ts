@@ -32,9 +32,13 @@ const instructorApi = baseApi.injectEndpoints({
                 body: { status }
             }),
             invalidatesTags: ["instructor"]
-        })
+        }),
+
+        getInstructorsByServiceAreas: builder.query({
+            query: (serviceAreas) => `/instructor/verified?populate=user&fields=user,serviceAreas&limit=4&userFields=name,profileImg,username&serviceAreas=${serviceAreas.join('|')}`,
+        }),
     })
 })
 
 
-export const { useGetAInstructorQuery, useGetAInstructorByAdminQuery, useGetAllInstructorsQuery, useUpdateInstructorStatusMutation } = instructorApi;
+export const { useGetAInstructorQuery, useGetAInstructorByAdminQuery, useGetAllInstructorsQuery, useUpdateInstructorStatusMutation, useGetInstructorsByServiceAreasQuery } = instructorApi;
