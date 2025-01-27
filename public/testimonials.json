@@ -1,42 +1,65 @@
 [
   {
-    "name": "John Doe",
+    "name": "Tarikul Islam",
     "title": "Excellent Experience!",
     "image": "../src/assets/home-page-image/test-image.webp",
-    "rating": 3.5,
-    "description": "This was a fantastic learning experience. The instructors were very professional, and I gained valuable skills.",
+    "rating": 5.0,
+    "description": "Driving is great skill that you should learn. Really amazing experience to drive with the best instructor.I have learned a lot from Lamp driving school. The most important part is that don’t be nervous when you go to test. Take easy, relax. Best of luck.",
     "position": "Software Engineer"
   },
   {
-    "name": "Jane Smith",
+    "name": "Sumon Ahmed",
     "title": "Highly Recommend!",
-     "image": "../src/assets/home-page-image/test-image.webp",
-    "rating": 4.5,
-    "description": "The flexible scheduling and supportive staff made it easy to learn. I highly recommend this program!",
+    "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 5.0,
+    "description": "Alo vhai is very good driving instructor and i am very happy with lamp driving school. Thanks.",
     "position": "Project Manager"
   },
   {
-    "name": "Emily Johnson",
+    "name": "Saiful Islam",
     "title": "Great Instructors!",
-     "image": "../src/assets/home-page-image/test-image.webp",
-    "rating": 2.5,
-    "description": "The instructors were knowledgeable and patient. I feel much more confident in my abilities now.",
+    "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 5.0,
+    "description": "Very very good instractor. I am very happy. Brother Alo teachs everything in details about roles and safty and also i think he is a very honest trainer. Best of Luck.",
     "position": "UI/UX Designer"
   },
   {
-    "name": "Michael Brown",
+    "name": "Sadia Afrin",
     "title": "Value for Money!",
     "image": "../src/assets/home-page-image/test-image.webp",
-    "rating": 4.5,
-    "description": "Affordable pricing with top-notch quality training. I would definitely recommend it to others.",
+    "rating": 5.0,
+    "description": "I found a excellent instructor like anzuman apu. She is very friendly. I felt that apu is perfect for me for driving class. Bcz of I was very scare but apu make a easy for everything. So that I am so proud of her 💜.",
     "position": "Data Analyst"
   },
   {
-    "name": "Sophia Davis",
+    "name": "Aniruddha Hati",
     "title": "Life-Changing Experience!",
-     "image": "../src/assets/home-page-image/test-image.webp",
-    "rating": 3.5,
-    "description": "This training has been life-changing for me. I have learned so much and grown tremendously.",
+    "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 5.0,
+    "description": "Lamp Driving School helped me in learning driving from the start. With continuous explanations of the rules and the requirements at the road by my respected instructor (Alo bhai) helped me become a responsible driver today.🙏",
+    "position": "Product Manager"
+  },
+  {
+    "name": "Mr Sayem",
+    "title": "Life-Changing Experience!",
+    "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 5.0,
+    "description": "My experience with lamp driving school was 5 stars. Mr Alo is an excellent driving instructor with over almost two decades of experience. Unlike most others driving instructor he is on the point according to the need of the students from very first day. His suggestions are bang on the bucks and if you just follow them while enjoy driving it's a first go pass trust me. Give them a try at least, your invest in that one lesson will get you more than several lessons from others. Good luck everyone and thanks Mr Alo again for guiding me through to get my full Australian licence."
+  },
+  {
+    "name": "Razib Ahmed",
+    "title": "Life-Changing Experience!",
+    "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 5.0,
+    "description": "I am very thankful to them.They are just outstanding. Anzuman Apu is too good and polite.",
+    "position": "Product Manager"
+  },
+  {
+    "name": "Farjana Islam Tina",
+    "title": "Life-Changing Experience!",
+    "image": "../src/assets/home-page-image/test-image.webp",
+    "rating": 5.0,
+    "description": "Highly recommended. Special thanks to Anzuman apu. She provided me confidence in my abilities from the day 1. Thanks a tons for teaching me how to drive.Thank you so much.",
     "position": "Product Manager"
   }
 ]
