@@ -9,6 +9,7 @@ import { useGetInstructorsByServiceAreasQuery } from '@/redux/api/instructorApi/
 import Loading from '@/components/shared/Loading';
 import OtherInstructorSkeleton from './OtherInstructorSkeleton';
 import DataNotFound from '@/components/shared/DataNotFound';
+import { useRouter } from 'next/navigation';
 
 interface IOtherInstructorsProps {
   serviceAreas: string[];
@@ -16,6 +17,7 @@ interface IOtherInstructorsProps {
 }
 
 const OtherInstructors: FC<IOtherInstructorsProps> = ({ serviceAreas, instructorId }) => {
+  const router = useRouter();
   const { data: instructorsResponse, isLoading, isError } = useGetInstructorsByServiceAreasQuery(serviceAreas);
 
   if (isLoading) return <OtherInstructorSkeleton />
@@ -31,6 +33,11 @@ const OtherInstructors: FC<IOtherInstructorsProps> = ({ serviceAreas, instructor
   }
   const filteredInstructors = instructors.filter((instructor: any) => instructor?._id !== instructorId);
 
+  // Function to handle navigation
+  const handleInstructorClick = (username: string) => {
+    router.push(`/instructors/${username}`);
+  };
+
   return (
     <Carousel
       opts={{
@@ -39,9 +46,13 @@ const OtherInstructors: FC<IOtherInstructorsProps> = ({ serviceAreas, instructor
       className="w-full bg-white rounded-xl border p-6"
     >
       <h2 className="text-xl font-semibold mb-6">Other instructors in the same service area</h2>
-      <CarouselContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <CarouselContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         {filteredInstructors.map((instructor: any) => (
-          <div key={instructor?._id} className="flex flex-col items-center gap-y-2 w-full px-6">
+          <div
+            key={instructor?._id}
+            className="flex flex-col items-center gap-y-2 w-full px-6 hover:scale-[.97] duration-100 cursor-pointer"
+            onClick={() => handleInstructorClick(instructor?.user?.username)}
+          >
             <div className="w-24 h-24 overflow-hidden rounded-full">
               <Image
                 src={instructor?.user?.profileImg}
@@ -51,7 +62,7 @@ const OtherInstructors: FC<IOtherInstructorsProps> = ({ serviceAreas, instructor
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="text-xs text-accent font-medium">{instructor?.user?.name?.fullName}</p>
+            <p className="text-xs text-accent font-medium text-nowrap">{instructor?.user?.name?.fullName}</p>
           </div>
         ))}
       </CarouselContent>
