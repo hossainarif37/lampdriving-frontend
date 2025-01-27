@@ -95,11 +95,14 @@ const LearnerStats: FC = () => {
 
   return (
     <div className="min-h-[calc(100vh-117px)] bg-gray-50 p-6">
-      {!hasUpcomingOrOngoingBookings && <div className='mb-6 flex'>
-        <Link href="/instructors" className="text-primary hover:underline">
-          <Button variant={"secondary"}>Book a Lesson</Button>
-        </Link>
-      </div>}
+      {
+        !hasUpcomingOrOngoingBookings && <div className='mb-6 flex'>
+          <Link href="/instructors" className="text-primary hover:underline">
+            <Button variant={"secondary"}>Book a Lesson</Button>
+          </Link>
+        </div>
+      }
+
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {statsData.map((stat) => (

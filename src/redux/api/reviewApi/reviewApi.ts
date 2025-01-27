@@ -14,8 +14,12 @@ const reviewApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: reqData
             })
-        })
+        }),
+
+        getInstructorReviews: builder.query<IResponseWithPaginationData<IReview[]>, { username: string }>({
+            query: ({ username }) => `/review/instructor/${username}`
+        }),
     })
 })
 
-export const { useGetReviewsQuery, useCreateAReviewMutation } = reviewApi;
+export const { useGetReviewsQuery, useCreateAReviewMutation, useGetInstructorReviewsQuery } = reviewApi;

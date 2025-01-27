@@ -22,7 +22,9 @@ const InstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
             <InstructorInfo instructor={instructor} />
 
             {/* //TODO: Need to implement dynamic reviews */}
-            <Reviews />
+            <Suspense fallback={<Loading />}>
+              <Reviews instructor={instructor} />
+            </Suspense>
             <div className="hidden md:block">
               <Suspense fallback={<Loading />}>
                 <OtherInstructors serviceAreas={instructor.serviceAreas} instructorId={instructor._id} />
