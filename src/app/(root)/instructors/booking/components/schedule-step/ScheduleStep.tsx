@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import ScheduleCalender from './ScheduleCalender';
 import ScheduleTimeSlots from './ScheduleTimeSlots';
 import PickupLocation from './PickupLocation';
@@ -11,6 +11,8 @@ import { CircleAlert } from 'lucide-react';
 import { useGetInstructorAvailabilityQuery } from '@/redux/api/scheduleApi/scheduleApi';
 import { IScheduleInputs } from '@/types/schedule';
 import { IAddress } from '@/types/user';
+import { useAppDispatch } from '@/redux/hook';
+import { showNotification } from '@/redux/slices/notificationSlice/notificationSlice';
 
 interface ISelectedSchedule {
     date: Date | null;
@@ -38,10 +40,11 @@ const ScheduleStep: FC = () => {
     const [pickupLocationError, setPickupLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
     const [dropOffLocationError, setDropOffLocationError] = useState<{ address: boolean, suburb: boolean }>({ address: false, suburb: false });
 
-
+    const dispatch = useAppDispatch();
     // add schedule handler
     const handleAddSchedule = () => {
         if (!selectedSchedule.date || !selectedSchedule.time) {
+            dispatch(showNotification("Please select a date and time"));
             return;
         }
         if (selectedSchedule.pickupAddress?.address === '' || selectedSchedule.pickupAddress?.suburb === '') {
@@ -74,7 +77,17 @@ const ScheduleStep: FC = () => {
         setSchedules((pre) => [...pre, schedule].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
 
         setSelectedSchedule((pre) => ({ ...pre, time: null }));
+        if (testPackage.included) {
+            console.log('first')
+            if ((((availableScheduleHours - selectedSchedule.duration) === 0) || availableScheduleHours === 0) && (isTestPackageSelected || selectedSchedule.type === "test")) {
+                console.log('second')
+                dispatch(showNotification("All schedules are booked, you can go forward next"));
+            }
+        } else if ((((availableScheduleHours - selectedSchedule.duration) === 0) || availableScheduleHours === 0)) {
+            dispatch(showNotification("All schedules are booked, you can go forward next"));
+        }
     };
+
 
     useEffect(() => {
         if (availableScheduleHours > 1) {
@@ -123,6 +136,7 @@ const ScheduleStep: FC = () => {
     }, [selectedSchedule.pickupAddress, selectedSchedule.dropOffAddress]);
 
     const handleDuration = (duration: 1 | 2, type: "lesson" | "test" | "mock-test") => {
+        dispatch(showNotification(`${duration}-Hour ${type} selected`));
         setSelectedSchedule((pre) => ({ ...pre, duration, type, time: null }));
     }
 

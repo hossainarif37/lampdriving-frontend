@@ -6,9 +6,9 @@ import notificationReducer from "./slices/notificationSlice/notificationSlice";
 
 const store = configureStore({
     reducer: {
-        [baseApi.reducerPath]: baseApi.reducer,
+        notificationSlice: notificationReducer,
         authSlice: authReducer,
-        notificationSlice: notificationReducer
+        [baseApi.reducerPath]: baseApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware)
 });
