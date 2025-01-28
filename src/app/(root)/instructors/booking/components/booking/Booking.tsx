@@ -26,8 +26,8 @@ const Booking: FC = () => {
             <div hidden={successStep}>
                 <BookingSteps />
             </div>
-            <div className='py-8 grid md:grid-cols-6 gap-6'>
-                {/* <div className={`${successStep ? 'col-span-6' : 'col-span-4'}`}>
+            <div className='py-8 md2:grid md2:grid-cols-6 gap-6 space-y-6 md2:space-y-0'>
+                <div className={`${successStep ? 'col-span-6' : 'col-span-4'}`}>
                     {
                         packageSelectionStep ? <PackageSelectionStep /> :
                             scheduleStep ? <ScheduleStep /> :
@@ -35,8 +35,9 @@ const Booking: FC = () => {
                                     paymentStep ? <PaymentStep /> :
                                         successStep && <SuccessStep />
                     }
-                </div> */}
-                <div hidden={successStep} className='col-span-2 space-y-6'>
+                </div>
+                <hr className='md2:hidden' />
+                <div hidden={successStep} className='col-span-2 space-y-6 w-full'>
                     <BookingInfo />
                     <BookingSchedule />
                     <InstructorInfo />

@@ -26,7 +26,7 @@ const TestPackage: FC = () => {
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-            <div className="bg-gradient-to-br from-primary/5 to-white rounded-xl p-8 border-2 border-blue-100">
+            <div className="bg-gradient-to-br from-primary/5 to-white rounded-xl p-4 lg:p-8 border-2 border-blue-100">
                 <div className="inline-block bg-primary text-white px-4 py-1 rounded-[4px] text-sm font-medium mb-4">
                     Test Day
                 </div>
