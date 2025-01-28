@@ -67,7 +67,7 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
             </DialogTrigger>
             <DialogContent className='max-w-3xl py-0 px-0 space-y-0 gap-0'>
                 <DialogHeader>
-                    <DialogTitle className='text-2xl font-semibold px-4 pt-3 pb-1 text-center'>
+                    <DialogTitle className='text-xl sm:text-2xl font-semibold px-4 pt-3 pb-1 text-center'>
                         <span className='text-primary'>Check Availability for</span> <span className='font-semibold text-gradient'>{name}</span>
                     </DialogTitle>
                 </DialogHeader>
@@ -81,13 +81,13 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                         <span>Closed / Booked</span>
                     </div>
                 </div>
-                <div className='grid grid-cols-2 text-black border-y'>
+                <div className='sm:grid sm:grid-cols-2 text-black border-y h-[368px] overflow-y-auto'>
                     <div>
                         <ScheduleCalender
                             schedules={[]}
                             bookedSchedules={data?.data.schedules || []}
                             workingHours={workingHours}
-                            classname='border-y-0 border-l-0 shadow-none border-r rounded-none'
+                            classname='border-y-0 border-l-0 shadow-none border-r-0 sm:border-r rounded-none p-0 sm:p-4'
                             selectedDate={selectedDate}
                             onSelectDate={setSelectedDate}
                         />
@@ -109,17 +109,18 @@ const CheckAvailability: FC<ICheckAvailabilityProps> = ({ id, name, username, wo
                     </div>
                 </div>
                 <DialogFooter className='pt-4 bg-gray-50'>
-                    <div className="flex items-center justify-end gap-4 pb-4 px-4">
+                    <div className="flex  items-center justify-end gap-4 pb-4 px-4">
                         <DialogClose asChild>
                             <Button
+
                                 variant={"outline"}
-                                className=""
+                                className="px-3 w-full"
                             >
                                 Cancel
                             </Button>
                         </DialogClose>
                         <Link href={`/instructors/booking?instructor=${username}&step=package-selection`}>
-                            <Button className='bg-primary' size="lg">
+                            <Button className='bg-primary px-2 sm:px-8' size="lg">
                                 Continue to Booking
                             </Button>
                         </Link>
