@@ -4,8 +4,8 @@ import ManageWorkingHours from './components/ManageWorkingHours';
 
 const ManageAvailabilityPage: FC = () => {
     return (
-        <div className='bg-white rounded-xl min-h-[calc(100vh-117px)] flex flex-col text-primary'>
-            <div className='py-4 px-5 flex items-center justify-between'>
+        <div className='dashboard-wrapper'>
+            <div className='dashboard-heading'>
                 <h2 className='font-semibold text-2xl'>Manage Availability</h2>
             </div>
             <div className='grid grid-cols-12 gap-6 px-5 py-4'>

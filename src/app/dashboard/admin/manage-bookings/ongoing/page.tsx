@@ -4,8 +4,8 @@ import OngoingBookingsTable from './components/OngoingBookingsTable';
 
 const CompletedBookingsPage: FC = () => {
     return (
-        <div className='bg-white rounded-xl min-h-[calc(100vh-117px)] flex flex-col text-primary'>
-            <div className='py-4 px-5 flex items-center justify-between'>
+        <div className='dashboard-wrapper'>
+            <div className='dashboard-heading'>
                 <h2 className='font-semibold text-2xl'>Ongoing Bookings</h2>
                 <TableSearchFilter />
             </div>

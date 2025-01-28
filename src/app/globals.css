@@ -8,12 +8,12 @@
     @apply max-w-6xl mx-auto px-3 lg:px-0
   }
 
-  /* .dashboard-wrapper {
-    
-  } */
+  .dashboard-wrapper {
+    @apply bg-white rounded-xl min-h-[calc(100vh-117px)] flex flex-col text-primary
+  }
 
   .dashboard-heading {
-    @apply py-4 px-3 md:px-5 flex md:items-center justify-between flex-col gap-2
+    @apply py-4 px-3 md:px-5 flex md:items-center justify-between flex-col md:flex-row gap-2
   }
 
   .gradient-color {

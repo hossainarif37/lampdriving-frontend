@@ -4,7 +4,7 @@ import ManageSchedulesTable from './components/ManageSchedulesTable';
 
 const ManageSchedulesPage: FC = () => {
     return (
-        <div className='bg-white rounded-xl min-h-[calc(100vh-117px)] flex flex-col text-primary'>
+        <div className='dashboard-wrapper'>
             <div className='dashboard-heading'>
                 <h2 className='font-semibold text-2xl'>Manage Schedules</h2>
                 <TableSearchFilter />
