@@ -36,7 +36,7 @@ const Booking: FC = () => {
                                         successStep && <SuccessStep />
                     }
                 </div>
-                <hr className='md2:hidden' />
+                <hr hidden={successStep} className='md2:hidden' />
                 <div hidden={successStep} className='col-span-2 space-y-6 w-full'>
                     <BookingInfo />
                     <BookingSchedule />
