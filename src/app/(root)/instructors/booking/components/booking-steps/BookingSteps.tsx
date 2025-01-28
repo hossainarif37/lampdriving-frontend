@@ -14,7 +14,7 @@ const BookingSteps: FC = () => {
         setUserLoggedIn(isAuthenticate);
     }, [])
     return (
-        <div className='max-w-3xl w-full mx-auto relative'>
+        <div className='max-w-3xl w-full mx-auto relative hidden sm:block'>
             <div className='flex items-center justify-between gap-4'>
                 {
                     steps.map((step, index) => {

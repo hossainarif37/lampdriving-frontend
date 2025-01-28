@@ -26,7 +26,7 @@ const Booking: FC = () => {
             <div hidden={successStep}>
                 <BookingSteps />
             </div>
-            <div className='py-8 md2:grid md2:grid-cols-6 gap-6 space-y-6 md2:space-y-0'>
+            <div className='sm:py-8 md2:grid md2:grid-cols-6 gap-6 space-y-6 md2:space-y-0'>
                 <div className={`${successStep ? 'col-span-6' : 'col-span-4'}`}>
                     {
                         packageSelectionStep ? <PackageSelectionStep /> :
