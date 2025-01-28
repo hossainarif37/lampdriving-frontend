@@ -9,7 +9,7 @@
   }
 
   .dashboard-wrapper {
-    @apply bg-white rounded-xl min-h-[calc(100vh-117px)] flex flex-col text-primary
+    @apply bg-white lg:rounded-xl min-h-[calc(100vh-117px)] flex flex-col text-primary
   }
 
   .dashboard-heading {
