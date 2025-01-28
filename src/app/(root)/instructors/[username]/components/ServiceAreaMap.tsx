@@ -184,17 +184,20 @@ export default ServiceAreaMap;
 
 
 
+// "use client";
 
-
-
-// import { FC } from 'react';
-// import { MapContainer, TileLayer, ZoomControl, GeoJSON, useMap } from 'react-leaflet';
-// import { ChevronDown, ChevronUp, Maximize, Maximize2 } from 'lucide-react';
-// import 'leaflet/dist/leaflet.css';
-// import { useState, useCallback, useEffect } from 'react';
-// import { Button } from '@/components/ui/button';
-// import { Tooltip } from '@/components/ui/tooltip';
-// import { sydneySuburbs } from '@/constant/sydneySuburbs';
+// import { FC, useState, useCallback, useEffect } from "react";
+// import {
+//     MapContainer,
+//     TileLayer,
+//     Polygon,
+//     ZoomControl,
+//     useMap,
+// } from "react-leaflet";
+// import "leaflet/dist/leaflet.css";
+// import { Button } from "@/components/ui/button";
+// import { ChevronDown, ChevronUp, Maximize, Maximize2 } from "lucide-react";
+// import { sydneySuburbs } from "@/constant/sydneySuburbs";
 
 // // Separate component to handle map invalidation
 // function MapResizer() {
@@ -219,9 +222,9 @@ export default ServiceAreaMap;
 // }
 
 // const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
-//     const [mapType, setMapType] = useState<'map' | 'satellite'>('map');
+//     const [mapType, setMapType] = useState<"map" | "satellite">("map");
 //     const [isFullscreen, setIsFullscreen] = useState(false);
-//     const mapContainerId = 'map-container';
+//     const mapContainerId = "map-container";
 //     const [showList, setShowList] = useState(false);
 
 //     const toggleFullscreen = useCallback(() => {
@@ -242,30 +245,49 @@ export default ServiceAreaMap;
 //             }
 //         };
 
-//         document.addEventListener('fullscreenchange', handleFullscreenChange);
-//         return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+//         document.addEventListener("fullscreenchange", handleFullscreenChange);
+//         return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
 //     }, []);
 
-//     // Map serviceAreas to their respective GeoJSON data
-//     const mappedSuburbData = serviceAreas.map((area) => {
-//         const suburb = sydneySuburbs.find((sub) => sub.value === area);
-//         return suburb ? suburb.geometry : null;
-//     }).filter(Boolean);
+//     // Map serviceAreas to their respective polygon coordinates
+//     const mappedPolygons = serviceAreas
+//         .map((area) => {
+//             const suburb = sydneySuburbs.find((sub) => sub.value === area);
+//             if (!suburb) {
+//                 console.warn(`Suburb not found: ${area}`);
+//             }
+//             return suburb
+//                 ? {
+//                     name: suburb.label,
+//                     polygonCoordinates: suburb.polygonCoordinates,
+//                 }
+//                 : null;
+//         })
+//         .filter(Boolean);
+//     console.log("Mapped Polygons:", mappedPolygons);
 
 //     return (
 //         <>
+//             {/* Header and Toggle Button */}
 //             <div className="top-4 left-4 right-4 z-[1000] flex justify-between items-center bg-white rounded-lg shadow-lg p-4">
-//                 <h2 className="text-[12px] font-semibold">Cliff services {serviceAreas.length} suburbs</h2>
+//                 <h2 className="text-[12px] font-semibold">
+//                     Cliff services {serviceAreas.length} suburbs
+//                 </h2>
 //                 <Button
 //                     size="sm"
 //                     onClick={() => setShowList(!showList)}
 //                     className="flex items-center gap-2 text-[10px] capitalize bg-white border text-primary hover:bg-neutral-50"
 //                 >
 //                     View full list
-//                     {showList ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+//                     {showList ? (
+//                         <ChevronUp className="h-4 w-4" />
+//                     ) : (
+//                         <ChevronDown className="h-4 w-4" />
+//                     )}
 //                 </Button>
 //             </div>
 
+//             {/* Service Area List */}
 //             {showList && (
 //                 <div className="bg-white rounded-lg shadow-sm p-4">
 //                     <div className="flex flex-wrap gap-2">
@@ -281,31 +303,41 @@ export default ServiceAreaMap;
 //                 </div>
 //             )}
 
+//             {/* Map Container */}
 //             <div className="w-full h-[400px] rounded-lg overflow-hidden" id={mapContainerId}>
 //                 <div className="relative h-full">
+//                     {/* Map Type Toggle */}
 //                     <div className="absolute top-4 left-4 z-[1000] bg-white rounded-md shadow">
 //                         <button
-//                             className={`px-4 py-2 ${mapType === 'map' ? 'bg-white text-primary font-bold border-r rounded-md' : ''}`}
-//                             onClick={() => setMapType('map')}
+//                             className={`px-4 py-2 ${mapType === "map"
+//                                 ? "bg-white text-primary font-bold border-r rounded-md"
+//                                 : ""
+//                                 }`}
+//                             onClick={() => setMapType("map")}
 //                         >
 //                             Map
 //                         </button>
 //                         <button
-//                             className={`px-4 py-2 ${mapType === 'satellite' ? 'bg-white text-primary font-bold border-l rounded-md' : ''}`}
-//                             onClick={() => setMapType('satellite')}
+//                             className={`px-4 py-2 ${mapType === "satellite"
+//                                 ? "bg-white text-primary font-bold border-l rounded-md"
+//                                 : ""
+//                                 }`}
+//                             onClick={() => setMapType("satellite")}
 //                         >
 //                             Satellite
 //                         </button>
 //                     </div>
 
+//                     {/* Fullscreen Button */}
 //                     <button
 //                         onClick={toggleFullscreen}
 //                         className="absolute top-4 right-4 z-[1000] bg-white p-2 rounded-md shadow hover:bg-gray-100 transition-colors"
-//                         aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+//                         aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
 //                     >
 //                         {isFullscreen ? <Maximize2 size={20} /> : <Maximize size={20} />}
 //                     </button>
 
+//                     {/* Map Component */}
 //                     <MapContainer
 //                         center={SYDNEY_CENTER}
 //                         zoom={12}
@@ -314,7 +346,7 @@ export default ServiceAreaMap;
 //                     >
 //                         <MapResizer />
 //                         <ZoomControl position="bottomright" />
-//                         {mapType === 'map' ? (
+//                         {mapType === "map" ? (
 //                             <TileLayer
 //                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 //                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -332,9 +364,24 @@ export default ServiceAreaMap;
 //                                 />
 //                             </>
 //                         )}
-//                         {mappedSuburbData.map((geometry, index) => (
-//                             geometry && <GeoJSON key={index} data={geometry as GeoJSON.GeoJsonObject} />
-//                         ))}
+//                         {/* Polygons */}
+//                         {mappedPolygons.map((suburb, i) =>
+//                             suburb?.polygonCoordinates.map((polygon, index) => (
+//                                 <Polygon
+//                                     key={`${suburb.name}-${index}`}
+//                                     positions={polygon as [number, number][]}
+//                                     pathOptions={{
+//                                         color: "#FFD700",
+//                                         weight: 2,
+//                                         fillColor: "#FFD700",
+//                                         fillOpacity: 0.3,
+//                                     }}
+//                                 >
+//                                     {/* Comment this to debug */}
+//                                     {/* <Tooltip>{suburb.name}</Tooltip> */}
+//                                 </Polygon>
+//                             ))
+//                         )}
 //                     </MapContainer>
 //                 </div>
 //             </div>
@@ -343,4 +390,7 @@ export default ServiceAreaMap;
 // };
 
 // export default ServiceAreaMap;
+
+
+
 
