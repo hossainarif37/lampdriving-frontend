@@ -117,7 +117,7 @@ const BookingInfo: FC = () => {
         (currentStep.key === "schedule" && (availableScheduleHours > 0 || (testPackage.included && !isTestPackageSelected))) || (isLogging || isRegistering || isCreatingABooking);
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
             <h2 className="text-lg font-semibold mb-4">Booking Info</h2>
 
             <div className="space-y-4">

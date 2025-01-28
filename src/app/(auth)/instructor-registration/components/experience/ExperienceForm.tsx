@@ -72,8 +72,6 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
         router.push("/instructor-registration?step=services");
     }
 
-    console.log('drivingLicenseURL', drivingLicenseURL);
-    console.log('experienceCertificateURL', experienceCertificateURL);
 
     useEffect(() => {
         if (isClicked) {
@@ -96,9 +94,9 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
     }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile, experienceInfo]);
 
     return (
-        <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
+        <div className='md:border md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
-                <h1 className='text-2xl md:text-3xl font-bold text-primary'>Experience and Certifications</h1>
+                <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-primary'>Experience and Certifications</h1>
 
                 <ExperienceFields
                     errors={errors}

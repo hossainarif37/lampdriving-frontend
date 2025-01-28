@@ -76,7 +76,7 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
 
 
     return (
-        <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", classname)}>
+        <div className={cn("bg-white rounded-lg shadow-sm p-4 lg:p-6 border border-gray-200", classname)}>
             {
                 !selectedDate ?
                     <>

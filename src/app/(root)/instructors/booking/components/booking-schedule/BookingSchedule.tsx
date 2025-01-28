@@ -18,7 +18,7 @@ const BookingSchedule: FC = () => {
         <>
             {
                 schedules.length > 0 &&
-                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
                     <h2 className="text-lg font-semibold mb-4">Booking Schedule</h2>
                     <div className='max-h-[234px] overflow-y-auto thin-scrollbar'>
                         {

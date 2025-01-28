@@ -21,7 +21,7 @@ const RegisterStep: FC = () => {
         <div>
             {
                 isAuthenticate ?
-                    <div className='bg-white p-6 rounded-lg shadow-sm border border-gray-200 min-h-60 flex items-center justify-center'>
+                    <div className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200 min-h-60 flex items-center justify-center'>
                         <h3 className='text-3xl font-semibold text-left'>Successfully logged in</h3>
                     </div>
                     :

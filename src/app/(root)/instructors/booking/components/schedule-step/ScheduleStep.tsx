@@ -164,12 +164,11 @@ const ScheduleStep: FC = () => {
     }
     return (
         <div className="space-y-6 sticky top-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
+            <div className="md:grid space-y-4 sm:space-y-6 md:space-y-0 grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 <div className="space-y-6 col-span-2">
-                    <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200 relative">
+                    <div className="bg-white rounded-lg shadow-sm  p-4 lg:p-6 border border-gray-200 relative">
                         <h2 className="text-lg font-semibold mb-4">Select Duration</h2>
-                        <div className="flex gap-4">
+                        <div className="flex gap-4 flex-wrap">
                             {[1, 2].map((duration) => (
                                 <button
                                     key={duration}
@@ -194,7 +193,7 @@ const ScheduleStep: FC = () => {
                                 Test Package
                             </button>
                         </div>
-                        <button title={availableScheduleHours === 0 ? 'No hours left to schedule' : `Add more ${availableScheduleHours} ${availableScheduleHours === 1 ? 'hour' : 'hours'} schedules`} className='absolute top-6 right-6 flex items-center gap-2'>
+                        <button title={availableScheduleHours === 0 ? 'No hours left to schedule' : `Add more ${availableScheduleHours} ${availableScheduleHours === 1 ? 'hour' : 'hours'} schedules`} className='absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2'>
                             <span className='text-sm'>{availableScheduleHours}-Hours left</span>
                             <CircleAlert size={16} />
                         </button>

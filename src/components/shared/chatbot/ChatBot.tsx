@@ -3,7 +3,7 @@ import { IInstruction, instructions } from '@/constant/chat';
 import { useAppDispatch } from '@/redux/hook';
 import { useAppSelector } from '@/redux/hook';
 import { clearNotification } from '@/redux/slices/notificationSlice/notificationSlice';
-import { HelpCircle } from 'lucide-react';
+import { Cross, HelpCircle } from 'lucide-react';
 import { Sparkles } from 'lucide-react';
 import { X } from 'lucide-react';
 import { Bot } from 'lucide-react';
@@ -27,7 +27,7 @@ const ChatBot: FC = () => {
 
 
     return (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-2 md:bottom-6 right-2 md:right-6 z-50">
             {
                 isShow && (
                     <div className="mb-4 animate-slide-up">
@@ -50,24 +50,21 @@ const ChatBot: FC = () => {
                     </div>
                 )
             }
-
             <div className='flex items-start justify-end'>
                 {!isOpen && (
                     <button
                         onClick={() => setIsOpen(true)}
-                        className="bg-gradient-to-r from-primary to-secondary text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 group"
+                        className="bg-gradient-to-r from-primary to-secondary text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 group relative"
                     >
-                        <Bot className="w-6 h-6 group-hover:animate-bounce" />
-                        <span className="text-sm font-medium">Help Me! ✨</span>
+                        <Bot className="size-7 group-hover:animate-bounce" />
                     </button>
                 )}
-
             </div>
             {isOpen && (
-                <div className="bg-white rounded-2xl shadow-xl w-80 max-h-[500px] flex flex-col animate-slide-up border-secondary/10">
+                <div className="bg-white rounded-2xl shadow-xl w-[300px] max-h-[400px] flex flex-col animate-slide-up border-secondary/10">
                     <div className="p-4 bg-gradient-to-r from-primary to-secondary text-white rounded-t-xl flex justify-between items-center">
                         <div className="flex items-center gap-2">
-                            <Bot className="w-6 h-6 animate-pulse" />
+                            <Bot className="size-7 animate-pulse" />
                             <span className="font-medium">Helpful Guide ✨</span>
                         </div>
                         <button

@@ -26,7 +26,7 @@ const CustomPackage: FC<ICustomPackageProps> = ({ onSelect, hourlyRate, bookingH
             selected={selected}
             onSelect={() => handleHoursChange(hours)}
             customContent={
-                <div className="absolute top-6 right-6">
+                <div className="sm:absolute top-6 right-6">
                     <Select
                         onValueChange={(value: string) => handleHoursChange(Number(value))}
                         value={hours.toString()}

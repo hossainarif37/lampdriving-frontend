@@ -34,7 +34,7 @@ const Testimonials: FC = () => {
             >
                 <CarouselContent>
                     {testimonials.map((testimonial, index) => (
-                        <CarouselItem key={index} className="lg:h-[350px] h-[400px] md:basis-1/1 lg:basis-1/2">
+                        <CarouselItem key={index} className="md:mb-24 mb-16 md:basis-1/1 lg:basis-1/2">
                             <div className='md:px-4'>
                                 <TestimonialCard testimonial={testimonial} />
                             </div>

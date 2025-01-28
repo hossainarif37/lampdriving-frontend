@@ -31,13 +31,13 @@ const TransactionHistoryTable: FC = () => {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead className="min-w-[100px] text-center">No.</TableHead>
-                            <TableHead className='min-w-[214px]'>Transaction ID</TableHead>
-                            <TableHead className='min-w-[214px]'>Method</TableHead>
-                            <TableHead className='min-w-[120px] text-center'>Amount</TableHead>
-                            <TableHead className='min-w-[140px] text-center'>Type</TableHead>
-                            <TableHead className='min-w-[140px] text-center'>Status</TableHead>
-                            <TableHead className='min-w-[205px] text-center'>Date</TableHead>
+                            <TableHead className="text-center">No.</TableHead>
+                            <TableHead className='text-nowrap'>Transaction ID</TableHead>
+                            <TableHead className=''>Method</TableHead>
+                            <TableHead className='text-center'>Amount</TableHead>
+                            <TableHead className='text-center'>Type</TableHead>
+                            <TableHead className='text-center'>Status</TableHead>
+                            <TableHead className='text-center'>Date</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>

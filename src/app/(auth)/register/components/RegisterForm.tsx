@@ -33,8 +33,6 @@ const RegisterForm: FC = () => {
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
     const phone = watch('phone');
-    console.log(phone)
-
     const router = useRouter();
 
 
@@ -82,7 +80,7 @@ const RegisterForm: FC = () => {
             <div className='w-full mt-10'>
                 <div className='flex flex-col gap-3'>
                     <div>
-                        <h1 className='text-2xl font-semibold text-primary mb-3'>Personal Information</h1>
+                        {/* <h1 className='text-2xl font-semibold text-primary mb-3'>Personal Information</h1> */}
 
                         <div className='flex flex-col items-center'>
                             <PhotoUpload
@@ -203,9 +201,8 @@ const RegisterForm: FC = () => {
 
                     {/* License Information */}
                     <div className="mt-5">
-                        <h1 className='text-2xl font-semibold text-primary mb-3'>Local License</h1>
-
-                        <div className='flex flex-col md:flex-row gap-5'>
+                        {/* <h1 className='text-2xl font-semibold text-primary mb-3'>Local License</h1> */}
+                        <div className='flex flex-col lg:flex-row gap-5'>
                             <div className='w-full'>
                                 <label htmlFor="local-license" className='font-semibold text-primary'>Local License No.</label>
                                 <Input
@@ -242,7 +239,7 @@ const RegisterForm: FC = () => {
 
                     {/* Password Section */}
                     <div className="mt-5">
-                        <h1 className='text-2xl font-semibold text-primary mb-3'>Security</h1>
+                        {/* <h1 className='text-2xl font-semibold text-primary mb-3'>Security</h1> */}
                         <div className='flex flex-col md:flex-row gap-5 mb-5'>
                             <div className='w-full'>
                                 <label htmlFor="password" className='font-semibold text-primary'>Password</label>

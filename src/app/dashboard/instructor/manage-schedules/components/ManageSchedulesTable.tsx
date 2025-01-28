@@ -53,13 +53,13 @@ const ManageSchedulesTable: FC = () => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="min-w-[100px] text-center">No.</TableHead>
-                                    <TableHead className='min-w-[214px]'>Learner</TableHead>
-                                    <TableHead className='min-w-[250px]'>Schedule</TableHead>
-                                    <TableHead className='min-w-[120px] text-center'>Pickup Address</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Drop-off Address</TableHead>
-                                    <TableHead className='min-w-[205px] text-center'>Status</TableHead>
-                                    <TableHead className='min-w-[100px] text-center'>Actions</TableHead>
+                                    <TableHead className="text-center">No.</TableHead>
+                                    <TableHead className=''>Learner</TableHead>
+                                    <TableHead className=''>Schedule</TableHead>
+                                    <TableHead className='text-nowrap text-center'>Pickup Address</TableHead>
+                                    <TableHead className='text-nowrap text-center'>Drop-off Address</TableHead>
+                                    <TableHead className='text-center'>Status</TableHead>
+                                    <TableHead className='text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>

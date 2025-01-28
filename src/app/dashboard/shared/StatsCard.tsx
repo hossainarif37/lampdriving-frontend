@@ -9,7 +9,7 @@ interface StatsCardProps {
 
 const StatsCard: FC<StatsCardProps> = ({ bgColor, icon, title, value }) => {
     return (
-        <div className="bg-white rounded-xl shadow-sm p-6 flex items-center">
+        <div className="bg-white rounded-xl border p-6 flex items-center">
             <div className={`rounded-full p-3 mr-4 ${bgColor}`}>
                 {icon}
             </div>

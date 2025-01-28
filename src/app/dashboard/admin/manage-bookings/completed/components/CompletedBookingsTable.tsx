@@ -47,12 +47,13 @@ const CompletedBookingsTable: FC = () => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="min-w-[100px] text-center">No.</TableHead>
-                                    <TableHead className='min-w-[214px]'>Learner</TableHead>
-                                    <TableHead className='min-w-[214px]'>Instructor</TableHead>
-                                    <TableHead className='min-w-[250px]'>Payment</TableHead>
-                                    <TableHead className='min-w-[120px] text-center'>Booking Hours</TableHead>
-                                    <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
+                                    <TableHead className="text-center">No.</TableHead>
+                                    <TableHead className=''>Learner</TableHead>
+                                    <TableHead className=''>Instructor</TableHead>
+                                    <TableHead className=''>Payment</TableHead>
+                                    <TableHead className='text-center'>Rating</TableHead>
+                                    <TableHead className='text-nowrap text-center'>Booking Hours</TableHead>
+                                    <TableHead className='text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -85,6 +86,9 @@ const CompletedBookingsTable: FC = () => {
                                                             {(booking.payment as any).transactionId}
                                                         </p>
                                                     </div>
+                                                </TableCell>
+                                                <TableCell className="font-medium text-center">
+                                                    <h3>{booking.review?.rating}</h3>
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     <h3>{booking.bookingHours}</h3>

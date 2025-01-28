@@ -75,25 +75,25 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
     }
 
     return (
-        <div className='md:flex items-center md:justify-between justify-center'>
+        <div className='md:flex gap-1 items-center md:justify-between justify-center'>
             <div className='hidden md:block'>
                 {
                     (searchParams?.searchKey || searchParams?.['vehicle.type']) &&
                     <Button
                         onClick={handleResetFilters}
-                        className='border-red-500 bg-light hover:bg-light text-red-500 border flex items-center gap-2  '
+                        className='border-red-500 bg-light hover:bg-light text-red-500 border flex items-center gap-2 md:px-4'
                     >
-                        <Paintbrush className="w-6 h-6" /> <span>Reset Filters</span>
+                        <Paintbrush className="w-6 h-6 hidden lg:block" /> <span>Reset Filters</span>
                     </Button>
                 }
             </div>
-            <div className='flex flex-col md:flex-row gap-5 md:justify-end justify-center'>
+            <div className='flex flex-col md:flex-row lg:gap-5 gap-3 md:justify-end justify-center'>
                 <Popover
                     open={searchPopOverOpen}
                     onOpenChange={(open) => setSearchPopOverOpen(open)} // Update popover state
                 >
                     <PopoverTrigger asChild >
-                        <div className='relative md:w-[350px] lg:w-[434px] sm:w-[500px] w-full mx-auto md:mx-0 ' >
+                        <div className='relative md:w-[250px] lg:w-[434px] sm:w-[500px] w-full mx-auto md:mx-0 ' >
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
                             <Input
                                 value={selectedSuburb}
@@ -101,7 +101,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                                 placeholder="Enter your suburb" className='h-12 pl-12 bg-light border border-primary/15' />
                         </div>
                     </PopoverTrigger>
-                    <PopoverContent className="md:w-[350px] lg:w-[434px] p-2">
+                    <PopoverContent className="md:w-[250px] lg:w-[434px] p-2">
                         <Command>
                             <CommandInput placeholder="Enter your suburb" />
                             <CommandList>
@@ -122,22 +122,11 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                     </PopoverContent>
                 </Popover>
 
-                <div className="font-semibold text-light text-center flex gap-3 justify-between md:mx-auto">
-                    <div className='md:hidden block'>
-                        {
-                            (searchParams?.searchKey || searchParams?.['vehicle.type']) &&
-                            <Button
-                                onClick={handleResetFilters}
-                                className='border-[#ff5200]/60 hover:border-primary/30 bg-light-green hover:bg-light-green text-primary border px-7 text-xs md:text-base'
-                            >
-                                Reset
-                            </Button>
-                        }
-                    </div>
-                    <div className='flex gap-3'>
+                <div className="font-semibold text-light text-center flex gap-3 justify-between md:mx-auto flex-wrap">
+                    <div className='flex flex-wrap md:flex-nowrap justify-center items-center mx-auto gap-3'>
                         <Button
                             onClick={() => handleChangeCarType('auto')}
-                            className={`sm:w-32 hover:bg-secondary hover:text-white hover:border-secondary w-20 sm:text-base text-xs flex justify-center items-center px-0 rounded-md 
+                            className={`sm:w-[100px] hover:bg-secondary hover:text-white hover:border-secondary w-20 sm:text-base text-xs flex justify-center items-center px-0 rounded-md 
                                 ${carType === 'auto' ? 'bg-secondary border border-secondary text-light hover:text-light'
                                     : 'bg-light border border-primary/20 text-primary/70'
                                 }`}
@@ -146,7 +135,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                         </Button>
                         <Button
                             onClick={() => handleChangeCarType('manual')}
-                            className={`sm:w-32 w-20 sm:text-base text-xs hover:bg-secondary hover:text-light hover:border-secondary flex justify-center items-center rounded-md ${carType === 'manual'
+                            className={`sm:w-[100px] w-20 sm:text-base text-xs hover:bg-secondary hover:text-light hover:border-secondary flex justify-center items-center rounded-md ${carType === 'manual'
                                 ? 'bg-secondary border border-secondary text-light hover:bg-secondary hover:text-light'
                                 : 'bg-light border border-primary/20 text-primary/70'}`}
                         >
@@ -154,12 +143,21 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                         </Button>
                         <Button
                             onClick={() => handleChangeCarType('all')}
-                            className={`sm:w-32 hover:bg-secondary hover:text-light hover:border-secondary w-20 sm:text-base text-xs flex justify-center items-center rounded-md ${carType === 'all'
+                            className={`sm:w-[100px] hover:bg-secondary hover:text-light hover:border-secondary w-20 sm:text-base text-xs flex justify-center items-center rounded-md ${carType === 'all'
                                 ? 'border border-secondary text-light'
                                 : 'bg-light border border-primary/20 text-primary/70'}`}
                         >
                             <span>All</span>
                         </Button>
+                        {
+                            (searchParams?.searchKey || searchParams?.['vehicle.type']) &&
+                            <Button
+                                onClick={handleResetFilters}
+                                className='border-red-500 bg-light hover:bg-light text-red-500 border flex items-center gap-2 w-full mx-auto max-w-[264px] sm:max-w-[324px] md:hidden'
+                            >
+                                <Paintbrush className="w-6 h-6" /> <span>Reset Filters</span>
+                            </Button>
+                        }
                     </div>
 
                 </div>
