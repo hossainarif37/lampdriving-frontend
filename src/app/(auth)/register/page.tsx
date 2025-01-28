@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import RoleSelection from '../components/role-selection/RoleSelection';
 import RegisterForm from './components/RegisterForm';

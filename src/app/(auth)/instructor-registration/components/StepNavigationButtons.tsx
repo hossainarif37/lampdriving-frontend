@@ -18,7 +18,7 @@ const StepNavigationButtons: FC<IStepNavigationButtonsProps> = ({ prev, next, fo
                 <Button
                     type="button"
                     disabled={prev === ""}
-                    className='h-11 xl:h-14 md:w-40'
+                    className='h-11 xl:h-14  w-28 md:w-40'
                 >
                     Previous
                 </Button>
@@ -29,7 +29,7 @@ const StepNavigationButtons: FC<IStepNavigationButtonsProps> = ({ prev, next, fo
                 disabled={isLoading}
                 type='submit'
                 form={form}
-                className='h-11 xl:h-14 md:w-40 bg-primary'
+                className='h-11 xl:h-14 w-28  md:w-40 bg-primary'
             >
                 {next === "" ? "Submit" : "Save & Next"}
             </Button>

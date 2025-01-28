@@ -77,7 +77,7 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
   }, [schedule, onUpdate]);
 
   return (
-    <div className="space-y-4 rounded-md border p-4 mt-1">
+    <div className="space-y-4 rounded-md border p-2 pb-0 sm:p-4 mt-1">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold">Schedule</h3>
         <Button
@@ -102,18 +102,22 @@ const WorkingHoursSelector: React.FC<WorkingHoursProps> = ({ onUpdate, schedule,
             <div className="flex items-center justify-between py-3">
               <div className="flex items-center gap-4">
                 <Switch
+                  className="hidden sm:block"
                   id={`${day}-active`}
                   checked={schedule[day]?.isActive}
                   onCheckedChange={(checked) => {
                     updateSchedule(day, { isActive: checked });
-                    // if (!checked) {
-                    //   setWorkingHoursError('At least one working day must be active');
-                    // }else{
-                    //   setWorkingHoursError('');
-                    // }
-                  }
-
-                  }
+                  }}
+                />
+                <Input
+                  type="checkbox"
+                  id={`${day}-active`}
+                  className="h-4 w-4 rounded cursor-pointer border-gray-300 text-primary focus:ring-primary sm:hidden"
+                  checked={schedule[day]?.isActive}
+                  onChange={(e) => {
+                    const isChecked = e.target.checked;
+                    updateSchedule(day, { isActive: isChecked });
+                  }}
                 />
                 <Label
                   htmlFor={`${day}-active`}
