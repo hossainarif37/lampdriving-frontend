@@ -15,25 +15,25 @@ const TableSkeleton: FC<ITableSkeletonProps> = ({ rows }) => {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead className="min-w-[100px] text-center">
+                            <TableHead className="text-center">
                                 <Skeleton className="w-12 h-6 mx-auto" />
                             </TableHead>
-                            <TableHead className='min-w-[214px]'>
+                            <TableHead className=''>
                                 <Skeleton className="w-20 h-6" />
                             </TableHead>
-                            <TableHead className='min-w-[214px]'>
+                            <TableHead className=''>
                                 <Skeleton className="w-24 h-6" />
                             </TableHead>
-                            <TableHead className='min-w-[250px]'>
+                            <TableHead className=''>
                                 <Skeleton className="w-20 h-6" />
                             </TableHead>
-                            <TableHead className='min-w-[120px] text-center'>
+                            <TableHead className='text-center'>
                                 <Skeleton className="w-28 h-6 mx-auto" />
                             </TableHead>
-                            <TableHead className='min-w-[140px] text-center'>
+                            <TableHead className='text-center'>
                                 <Skeleton className="w-32 h-6 mx-auto" />
                             </TableHead>
-                            <TableHead className='min-w-[205px] text-center'>
+                            <TableHead className='text-center'>
                                 <Skeleton className="w-20 h-6 mx-auto" />
                             </TableHead>
                         </TableRow>
