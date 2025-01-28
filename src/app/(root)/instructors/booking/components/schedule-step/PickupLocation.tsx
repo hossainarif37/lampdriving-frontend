@@ -24,7 +24,7 @@ const PickupLocation: FC<IPickupLocationProps> = ({ onChange, value, error, clas
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", className)}>
+        <div className={cn("bg-white rounded-lg shadow-sm p-4 lg:p-6 border border-gray-200", className)}>
             <h2 className="text-lg font-semibold ">Pickup Location</h2>
             <p className="text-sm text-gray-500 mb-4">
                 Please enter a specific address where you&apos;d like to be picked up
