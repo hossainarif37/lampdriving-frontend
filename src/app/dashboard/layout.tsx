@@ -11,7 +11,7 @@ const DashboardLayout: FC<{ children: ReactNode }> = ({ children }) => {
             </div>
             <div className='flex-1 min-h-screen'>
                 <DashboardNav />
-                <div className='pt-[85px] pb-3 lg:py-6 lg:px-6 px-3 bg-gray-100 rounded-tl-md'>
+                <div className='pt-[85px] lg:py-6 lg:px-6 bg-gray-100 lg:rounded-tl-md'>
                     {children}
                 </div>
             </div>

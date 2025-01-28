@@ -36,7 +36,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
       {/* Profile section */}
       <div className="flex items-start gap-6">
         <div className="relative flex-shrink-0">
-          <div className='w-[120px] h-[120px] rounded-full overflow-hidden shadow-lg border flex items-center justify-center text-accent'>
+          <div className='size-[100px] md:size-[120px] rounded-full overflow-hidden shadow-lg border flex items-center justify-center text-accent'>
             {
               user?.profileImg ?
                 <Image src={user?.profileImg} alt="Instructor" className='w-full' width={120} height={120} />

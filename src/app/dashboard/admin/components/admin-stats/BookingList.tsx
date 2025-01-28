@@ -29,7 +29,7 @@ interface BookingListProps {
 export const BookingList: React.FC<BookingListProps> = ({ bookings }) => {
     console.log('Bookings', bookings);
     return (
-        <div className="bg-white rounded-lg shadow-sm">
+        <div className="bg-white rounded-lg border">
             <h1 className="text-xl font-semibold text-primary pt-6 px-6">Recent Bookings</h1>
 
             {bookings.length === 0 ? <DataNotFound dataName='Recent Bookings' /> : <div className="divide-y">

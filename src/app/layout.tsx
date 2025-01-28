@@ -4,7 +4,6 @@ import { Pathway_Extreme } from "next/font/google";
 import ReduxProvider from "@/providers/ReduxProvider";
 import AuthProvider from "@/providers/AuthProvider";
 import { Toaster } from "@/components/ui/toaster";
-import ChatBot from "@/components/shared/chatbot/ChatBot";
 
 export const metadata: Metadata = {
   title: "Lamp Driving School",
@@ -27,7 +26,6 @@ export default function MainLayout({
         <ReduxProvider>
           <AuthProvider>
             <Toaster />
-            <ChatBot />
             {children}
           </AuthProvider>
         </ReduxProvider>

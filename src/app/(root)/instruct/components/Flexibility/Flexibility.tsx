@@ -25,9 +25,9 @@ const features = [
 ];
 const Flexibility: FC = () => {
     return (
-        <section className='py-14 bg-light md:space-y-14 space-y-10'>
+        <section className='py-14 bg-light md:space-y-14 space-y-10 wrapper'>
             <SectionHeading title='Flexibility, independence & growth' subtitle='Set your own schedule & lesson price, instruct on your terms.' />
-            <div className='wrapper grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-6'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto gap-6'>
                 {
                     features.map((feature, index) => (
                         <FlexibilityCard key={index} feature={feature} />

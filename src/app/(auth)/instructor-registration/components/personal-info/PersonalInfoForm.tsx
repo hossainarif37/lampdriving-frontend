@@ -25,9 +25,9 @@ const PersonalInfoForm: FC = () => {
     };
 
     return (
-        <div className='border p-5 md:p-16 md:shadow-lg md:rounded-lg mt-5'>
+        <div className='md:border md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form id="personal-info-form" onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
-                <h1 className='text-2xl md:text-3xl font-bold text-primary'>Personal Info</h1>
+                <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-primary'>Personal Info</h1>
 
                 <div className='flex flex-col items-center'>
                     <PhotoUpload

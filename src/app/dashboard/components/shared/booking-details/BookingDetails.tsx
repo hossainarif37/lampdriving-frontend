@@ -27,7 +27,7 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
                 {
                     role !== "learner" &&
                     <div className="bg-white p-4 rounded-lg border relative">
-                        <div className="flex items-center gap-4">
+                        <div className="flex flex-col sm:flex-row items-center gap-4">
                             <div className="relative">
                                 <Image
                                     width={64}
@@ -53,7 +53,7 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
                 {
                     role != "instructor" &&
                     <div className="bg-white p-4 rounded-lg border relative">
-                        <div className="flex items-center gap-4 ">
+                        <div className="flex flex-col sm:flex-row items-center gap-4 ">
                             <div className="relative">
                                 <Image
                                     width={64}
@@ -117,7 +117,7 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
                     <div key={schedule._id} className='border rounded-md'>
                         <div className="p-4">
                             <div className="space-y-2">
-                                <div className="flex items-center justify-between">
+                                <div className="flex items-start sm:items-center justify-between flex-col-reverse sm:flex-row gap-1">
                                     <div className="flex items-center space-x-2">
                                         <CalendarDays className="h-4 w-4 text-muted-foreground" />
                                         <span>{format(new Date(schedule.date), "PPP")}</span>

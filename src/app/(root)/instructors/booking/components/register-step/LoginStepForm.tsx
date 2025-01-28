@@ -23,7 +23,7 @@ const LoginFormStep: FC = () => {
 
     return (
         <form
-            className='bg-white p-6 rounded-lg shadow-sm border border-gray-200'
+            className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200'
         >
             <h2 className="text-xl font-semibold mb-6 text-left">Learner Login</h2>
 

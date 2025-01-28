@@ -29,7 +29,7 @@ const ScheduleDetails: FC<IScheduleDetailsProps> = ({ role, id }) => {
                 {
                     role === "learner" &&
                     <div className="bg-white p-4 rounded-lg border">
-                        <div className="flex items-center gap-4 relative">
+                        <div className="flex flex-col sm:flex-row items-center gap-4 relative">
                             <div className="relative">
                                 <Image
                                     width={64}
@@ -55,7 +55,7 @@ const ScheduleDetails: FC<IScheduleDetailsProps> = ({ role, id }) => {
                 {
                     role === "instructor" &&
                     <div className="bg-white p-4 rounded-lg border">
-                        <div className="flex items-center gap-4 relative">
+                        <div className="flex flex-col sm:flex-row items-center gap-4 relative">
                             <div className="relative">
                                 <Image
                                     width={64}
@@ -80,7 +80,7 @@ const ScheduleDetails: FC<IScheduleDetailsProps> = ({ role, id }) => {
                 }
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="space-y-4 md:space-y-0 md:grid md:grid-cols-2 gap-4">
                 <div className={`border rounded-xl p-4 ${!schedule.dropOffAddress && "col-span-2"}`}>
                     <div className="flex items-start gap-3">
                         <div className="mt-1">

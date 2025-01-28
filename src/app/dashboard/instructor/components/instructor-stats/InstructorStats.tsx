@@ -50,10 +50,8 @@ const InstructorStats: FC = () => {
     },
   }));
 
-  console.log('data', data);
-
   return (
-    <div className="p-6">
+    <div className="dashboard-wrapper p-3 lg:p-6">
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
         <StatsCard

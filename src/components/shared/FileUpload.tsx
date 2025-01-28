@@ -143,7 +143,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
     };
 
     return (
-        <div className="w-full mx-auto bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg">
+        <div className="w-full mx-auto bg-white dark:bg-black border-neutral-200 dark:border-neutral-800 rounded-lg overflow-hidden">
             {/* Upload Area */}
             {(!imageUrl && !selectedFile) && (
                 <div
@@ -172,7 +172,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
             {/* File Info (only if a file is selected) */}
             {(imageUrl || selectedFile) && (
                 <div className={`border ${isError ? 'bg-[#FFF5F3] border-[#E12525]' : 'border-gray-300'}  rounded-lg w-full ${(!isSuccess || selectedFile) ? 'mt-4' : 'mt-0'} p-4 flex items-center justify-between`}>
-                    <div className="flex items-center">
+                    <div className="flex items-center flex-1 size-12">
                         <Image
                             src={imageUrl || (selectedFile ? URL.createObjectURL(selectedFile) : '')}
                             alt={selectedFile?.name || 'Selected file'}
@@ -180,14 +180,14 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
                             height={48}
                             className="object-cover rounded-md mr-4 border"
                         />
-
-                        <div>
-                            <p className="font-medium">{selectedFile?.name || imageDetails?.fileName}</p>
+                        <div className='hidden sm:block'>
+                            <p className="font-medium max-w-[140px] md:max-w-full overflow-hidden text-ellipsis">{selectedFile?.name || imageDetails?.fileName}</p>
                             <p className="text-gray-500 text-sm">
                                 {selectedFile?.size ? (toFixedNumber(selectedFile.size / 1024)) : (toFixedNumber(Number(imageDetails?.size) / 1024))}kb, Added just now
                             </p>
                         </div>
                     </div>
+
                     <div className="flex items-center space-x-2">
                         {
                             imageUrl ?
@@ -201,11 +201,6 @@ const FileUpload: React.FC<FileUploadProps> = ({ label = "Click to upload", maxS
                                     <span className="text-[15px]">{isError ? 'Re-Upload' : `${imageUploadLoading ? 'Uploading...' : 'Upload'}`}</span>
                                 </button>
                         }
-
-                        {/* Edit Image Button */}
-                        {/* <button type='button' className='text-accent'>
-                            <SquarePen width={17} height={17} />
-                        </button> */}
                         <button className='text-accent'
                             type='button'
                             onClick={removeImage}

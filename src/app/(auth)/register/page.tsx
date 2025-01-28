@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import RoleSelection from '../components/role-selection/RoleSelection';
 import RegisterForm from './components/RegisterForm';
@@ -19,7 +19,7 @@ const RegisterPage: FC = () => {
     };
 
     return (
-        <div className="min-h-[calc(100vh-56px)] py-20 flex items-center justify-center">
+        <div className="min-h-[calc(100vh-56px)] md:py-10 lg:py-20 flex items-center justify-center">
             {selectedRole === null ? (
                 // Show role selection initially
                 <RoleSelection onRoleSelect={handleRoleSelection} />

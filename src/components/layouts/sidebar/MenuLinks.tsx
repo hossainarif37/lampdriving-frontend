@@ -3,8 +3,8 @@ import NavLink from '@/components/shared/NavLink';
 import { Button } from '@/components/ui/button';
 import { adminRoutes, instructorRoutes, learnerRoutes } from '@/constant/dashboardLinks';
 import { useAppSelector } from '@/redux/hook';
-import { BookOpen, Calendar, ChevronDown, FileText, HelpCircle, History, LayoutDashboardIcon, Trash2, UserCheck, Users, Wallet } from 'lucide-react';
-import { ReactNode, useState, useRef } from 'react';
+import { ChevronDown } from 'lucide-react';
+import { useState, useRef } from 'react';
 
 
 
