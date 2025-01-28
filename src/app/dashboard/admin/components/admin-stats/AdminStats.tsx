@@ -24,8 +24,8 @@ const AdminStats: FC = () => {
     if (isLoading) return <AdminStatsSkeleton />;
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <div className="mx-auto p-6 bg-gray-50">
+        <div className="dashboard-wrapper">
+            <div className="p-3 lg:p-6 w-full">
                 <div className="mb-8">
                     <DashboardStats
                         totalBookings={data?.data?.totalBookings}
