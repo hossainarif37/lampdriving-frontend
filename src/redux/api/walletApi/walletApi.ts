@@ -5,7 +5,7 @@ import { IWallet } from "@/types/wallet";
 const walletApi = baseApi.injectEndpoints({
     overrideExisting: true,
     endpoints: (builder) => ({
-        getInstructorWallet: builder.query<IResponseWithData<IWallet>, { instructorId: string }>({
+        getInstructorWallet: builder.query<IResponseWithData<{ wallet: IWallet, lastSixMonthsStats: object }>, { instructorId: string }>({
             query: ({ instructorId }) => `/wallet/instructor/${instructorId}`,
             providesTags: ["wallet"]
         }),

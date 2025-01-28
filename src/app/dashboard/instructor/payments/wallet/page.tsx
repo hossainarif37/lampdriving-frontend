@@ -43,10 +43,12 @@ const WalletPage: FC = () => {
         { skip: !instructorId }
     );
 
-    const totalEarnings = data?.data?.balance?.totalEarnings;
-    const pendingBalance = data?.data?.balance?.pendingBalance;
-    const currentBalance = data?.data?.balance?.currentBalance;
-    const totalWithdraw = data?.data?.balance?.totalWithdraw;
+    console.log(data);
+
+    const totalEarnings = data?.data?.wallet.balance?.totalEarnings;
+    const pendingBalance = data?.data?.wallet.balance?.pendingBalance;
+    const currentBalance = data?.data?.wallet.balance?.currentBalance;
+    const totalWithdraw = data?.data?.wallet.balance?.totalWithdraw;
 
     if (isLoading) {
         return <Loading />
@@ -64,7 +66,7 @@ const WalletPage: FC = () => {
                     <div className="flex items-center gap-3">
                         {/* <p className="text-sm text-gray-600">Next payout:</p>
                         <p className="text-sm font-medium text-gray-900">March 22, 2024</p> */}
-                        <AddBankAccount id={data?.data?._id || ""} bankAccount={data?.data.bankAccount} />
+                        <AddBankAccount id={data?.data?.wallet._id || ""} bankAccount={data?.data.wallet.bankAccount} />
                     </div>
                 </div>
 

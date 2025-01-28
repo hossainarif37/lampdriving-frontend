@@ -1,56 +1,70 @@
 "use client"
-
-import { HelpCircle } from 'lucide-react';
+import { IInstruction, instructions } from '@/constant/chat';
+import { useAppDispatch } from '@/redux/hook';
+import { useAppSelector } from '@/redux/hook';
+import { clearNotification } from '@/redux/slices/notificationSlice/notificationSlice';
+import { Cross, HelpCircle } from 'lucide-react';
 import { Sparkles } from 'lucide-react';
 import { X } from 'lucide-react';
 import { Bot } from 'lucide-react';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
-interface Instruction {
-    title: string;
-    content: string;
-  }
 
 const ChatBot: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [activeInstruction, setActiveInstruction] = useState<Instruction | null>(null);
-  
-    const instructions: Instruction[] = [
-      {
-        title: "📚 Getting Started",
-        content: "Welcome to our site! Click on any section below for helpful tips and guidance."
-      },
-      {
-        title: "🎯 How to Book",
-        content: "1. Enter your suburb in the search bar\n2. Choose AUTO or MANUAL\n3. Browse available instructors\n4. Click BOOK on your preferred instructor\n5. Select your preferred date and time"
-      },
-      {
-        title: "🌟 Choosing an Instructor",
-        content: "Look for:\n• Experience years\n• Rating stars\n• Completed lessons\n• Hourly rate\n• Location proximity"
-      },
-      {
-        title: "💳 Payment Info",
-        content: "We accept:\n• Credit/Debit cards\n• PayPal\n• Direct bank transfer\n\nPayment is required at the time of booking."
-      }
-    ];
-  
+    const [activeInstruction, setActiveInstruction] = useState<IInstruction | null>(null);
+    const { notification, isShow } = useAppSelector(state => state.notificationSlice);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (isShow) {
+            setTimeout(() => {
+                dispatch(clearNotification());
+            }, 3000);
+        }
+    }, [isShow, dispatch]);
+
+
+
     return (
         <div className="fixed bottom-2 md:bottom-6 right-2 md:right-6 z-50">
-            {!isOpen && (
-                <button
-                    onClick={() => setIsOpen(true)}
-                    className="bg-gradient-to-r from-primary to-secondary text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 group"
-                >
-                    <Bot className="w-6 h-6 group-hover:animate-bounce" />
-                    <span className="text-sm font-medium">Help Me! ✨</span>
-                </button>
-            )}
-
+            {
+                isShow && (
+                    <div className="mb-4 animate-slide-up">
+                        <div className="relative bg-white rounded-lg shadow-lg p-4 w-[320px] border border-gray-100">
+                            <button
+                                onClick={() => dispatch(clearNotification())}
+                                className="absolute top-2 right-2 text-gray-400 hover:text-gray-600"
+                            >
+                                <X className="w-4 h-4" />
+                            </button>
+                            <div className="flex items-start gap-3">
+                                <div className="pt-1">
+                                    <p className="text-sm text-gray-600 mt-1">
+                                        {notification}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="absolute -bottom-2 right-12 w-4 h-4 bg-white border-r border-b border-gray-100 transform rotate-45"></div>
+                        </div>
+                    </div>
+                )
+            }
+            <div className='flex items-start justify-end'>
+                {!isOpen && (
+                    <button
+                        onClick={() => setIsOpen(true)}
+                        className="bg-gradient-to-r from-primary to-secondary text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2 group relative"
+                    >
+                        <Bot className="size-7 group-hover:animate-bounce" />
+                    </button>
+                )}
+            </div>
             {isOpen && (
                 <div className="bg-white rounded-2xl shadow-xl w-[300px] max-h-[400px] flex flex-col animate-slide-up border-secondary/10">
                     <div className="p-4 bg-gradient-to-r from-primary to-secondary text-white rounded-t-xl flex justify-between items-center">
                         <div className="flex items-center gap-2">
-                            <Bot className="w-6 h-6 animate-pulse" />
+                            <Bot className="size-7 animate-pulse" />
                             <span className="font-medium">Helpful Guide ✨</span>
                         </div>
                         <button
@@ -61,7 +75,7 @@ const ChatBot: FC = () => {
                         </button>
                     </div>
 
-                    <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                    <div className="flex-1 overflow-y-auto p-4 space-y-3 thin-scrollbar">
                         {activeInstruction ? (
                             <div className="space-y-4">
                                 <button
