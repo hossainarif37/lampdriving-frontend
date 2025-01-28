@@ -50,10 +50,10 @@ const BookingSteps: FC = () => {
                             disabled={isDisabled}
                             onClick={() => handleStepChange(step.key)}
                             className={`flex flex-col items-center justify-between gap-2 flex-1 ${step.key === 'instructor' && 'cursor-default'}`}>
-                            <div className={`w-10 h-10 flex items-center justify-center rounded-full ${(currentStep.index >= step.index) ? 'gradient-color text-white' : 'bg-[#dbeafe] text-primary'}`}>
+                            <div className={`size-10 flex items-center justify-center rounded-full ${(currentStep.index >= step.index) ? 'gradient-color text-white' : 'bg-[#dbeafe] text-primary'}`}>
                                 <step.icon />
                             </div>
-                            <p className='text-sm font-medium'>{step.name}</p>
+                            <p className='text-[13px] sm:text-sm font-medium'>{step.name}</p>
                         </button>)
                     })
                 }
