@@ -35,7 +35,7 @@ const ChatBot: FC = () => {
     ];
   
     return (
-        <div className="fixed bottom-6 right-6 z-50">
+        <div className="fixed bottom-2 md:bottom-6 right-2 md:right-6 z-50">
             {!isOpen && (
                 <button
                     onClick={() => setIsOpen(true)}
@@ -47,7 +47,7 @@ const ChatBot: FC = () => {
             )}
 
             {isOpen && (
-                <div className="bg-white rounded-2xl shadow-xl w-80 max-h-[500px] flex flex-col animate-slide-up border-secondary/10">
+                <div className="bg-white rounded-2xl shadow-xl w-[300px] max-h-[400px] flex flex-col animate-slide-up border-secondary/10">
                     <div className="p-4 bg-gradient-to-r from-primary to-secondary text-white rounded-t-xl flex justify-between items-center">
                         <div className="flex items-center gap-2">
                             <Bot className="w-6 h-6 animate-pulse" />
