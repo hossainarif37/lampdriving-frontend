@@ -62,10 +62,9 @@ const BannerSearch: FC = () => {
                     >
                         <PopoverTrigger asChild>
                             <input
-                                onFocus={() => setIsOpen(true)}
                                 value={selectedSuburb}
                                 onChange={(e) => setSelectedSuburb(e.target.value)}
-                                readOnly={true}
+                                readOnly
                                 className="flex-1 px-4 py-3 rounded-md text-primary focus:outline-none placeholder:text-accent"
                                 type="text"
                                 placeholder="Enter your suburb"

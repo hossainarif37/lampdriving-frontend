@@ -2,11 +2,10 @@
 "use client";
 
 import PersonalInfoFields, { IPersonalInfoInputs } from '@/components/shared/forms/PersonalInfoFields';
-import { FC, useState, useEffect, useMemo } from 'react';
-import { useForm } from 'react-hook-form';
+import { FC, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
-import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import PhotoUpload, { IProfilePhoto } from '@/components/shared/PhotoUpload';
+import { useAppSelector } from '@/redux/hook';
+import PhotoUpload from '@/components/shared/PhotoUpload';
 import { useFormWithDefaultValues } from '@/hooks/useFormWithDefaultValues';
 import { useImage } from '@/hooks/useImage';
 import { useUpdateUserMutation } from '@/redux/api/userApi/userApi';

@@ -13,8 +13,11 @@ const InstructorInfo: FC = () => {
             <h2 className="text-lg font-semibold mb-4">Instructor Info</h2>
 
             <div className="space-y-4 w-full">
-                <div className='flex relative'>
-                    <Image src={(instructor?.user as IUser)?.profileImg || placeholderUserImage} alt="Instructor" width={110} height={110} className="size-[50px] sm:size-[70px] rounded-full mr-4" />
+                <div className='flex gap-x-4 relative'>
+                    <div className='flex-shrink-0 size-[50px] sm:size-[70px] overflow-hidden rounded-full'>
+                        <Image src={(instructor?.user as IUser)?.profileImg || placeholderUserImage} alt="Instructor" width={96} height={96} className="w-full h-full object-cover" />
+                    </div>
+
                     <div className='w-full'>
                         <div className='flex flex-col sm:flex-row sm:items-center justify-between w-full'>
                             <h6 className='font-semibold'>
@@ -34,20 +37,21 @@ const InstructorInfo: FC = () => {
                         <p>Offers 1 & 2hr lessons</p>
                         <p>{instructor?.completedLessons} Lessons Completed</p>
                     </div>
-
                 </div>
+
                 <hr />
+
                 <div className='flex items-center justify-between '>
                     <div>
-                        <h6 className='font-semibold'>
-                            {`${instructor?.vehicle?.name} ${instructor?.vehicle?.model}`}
-                            ({instructor?.vehicle?.type === 'auto' ? 'Auto' : 'Manual'})
-                        </h6>
-                        <p>{instructor?.vehicle?.rating}</p>
-                        <p>Dual controls fitted</p>
+                        <h3 className="font-medium">{instructor?.vehicle?.name} {instructor?.vehicle?.model} {instructor?.vehicle?.year} ({instructor?.vehicle?.type})</h3>
+                        <p className="text-sm text-gray-600 mt-1">{instructor?.vehicle?.rating}-star ANCAP rating</p>
                     </div>
-                    <Image src={instructor?.vehicle?.image || placeholderCarImage} alt="Instructor" width={110} height={110}
-                        className="size-[50px] sm:size-[70px] object-cover rounded-full bg-gray-100 border border-gray-200" />
+
+                    <div className='flex-shrink-0 size-[50px] sm:size-[70px] overflow-hidden rounded-full border shadow'>
+                        <Image src={instructor?.vehicle?.image || placeholderCarImage} alt="Instructor" width={110} height={110}
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { toFixedNumber } from '@/lib/utils';
@@ -13,85 +15,29 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, mockTestPackage, useRegisterForm, useLoginForm, currentStep, handleStepChange, setIsConfirmTriggered, setCurrentStep, steps, isTestPackageSelected } = useBooking();
+    const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, mockTestPackage, currentStep, handleStepChange, setIsConfirmTriggered, isTestPackageSelected, registerButtonRef, loginButtonRef, isLogging, isRegistering } = useBooking();
 
     // register and login button trigger
-    const { trigger: registerTrigger, handleSubmit: handleRegisterSubmit } = useRegisterForm;
-    const { trigger: loginTrigger, handleSubmit: handleLoginSubmit } = useLoginForm;
     const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
-    // register, login, booking create mutation
-    const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
-    const [loginUser, { isLoading: isLogging }] = useLoginUserMutation();
-
-    const dispatch = useAppDispatch();
 
     const urlSearchParams = useSearchParams();
     const searchParams = new URLSearchParams(urlSearchParams);
-    const router = useRouter();
-
-    // handle register function
-    const handleRegister = (data: IRegisterInputs) => {
-        registerUser(data).unwrap().then((res) => {
-            toast({
-                message: res.message
-            });
-            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
-            router.push('/')
-            const params = new URLSearchParams(urlSearchParams.toString());
-            const step = steps.find(step => step.key === "payment");
-            if (!step) {
-                return;
-            }
-            params.set('step', step.key);
-            router.push(`?${params.toString()}`);
-            setCurrentStep(step);
-            handleStepChange("payment");
-        }).catch((err) => {
-            toast({
-                success: false,
-                message: err.data.message || "Something went wrong",
-            })
-        })
-    }
-
-
-    // handle login function
-    const handleLogin = (data: ILoginInputs) => {
-        loginUser(data).unwrap().then((res) => {
-            toast({
-                message: res.message
-            });
-            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
-            const params = new URLSearchParams(urlSearchParams.toString());
-            const step = steps.find(step => step.key === "payment");
-            if (!step) {
-                return;
-            }
-            params.set('step', step.key);
-            router.push(`?${params.toString()}`);
-            setCurrentStep(step);
-            handleStepChange("payment");
-        }).catch((err) => {
-            toast({
-                success: false,
-                message: err.data.message || "Something went wrong"
-            });
-        })
-    }
-
 
     // handle trigger function for hook form
-    const registerStep = searchParams.get('step');
-    const handleTrigger = async () => {
-        if (registerStep == "register") {
-            await registerTrigger().then((_res) => handleRegisterSubmit(handleRegister)());
-        } else if (registerStep == "login") {
-            await loginTrigger().then((_res) => handleLoginSubmit(handleLogin)());
-        }
+    const steps = searchParams.get('step');
+    const registerStep = steps === 'register';
+    const loginStep = steps === 'login';
+
+    const handleRegisterTrigger = () => {
+        registerButtonRef.current?.click();
+    }
+    const handleLoginTrigger = () => {
+        loginButtonRef.current?.click();
     }
 
     // handler for navigating
     const handleNavigate = () => {
+        console.log(currentStep.key);
         if (currentStep.key === "instructor") {
             return handleStepChange("package-selection");
         }
@@ -105,9 +51,12 @@ const BookingInfo: FC = () => {
                 return handleStepChange("register");
             }
         }
-        else if (currentStep.key === "register") {
-            handleTrigger();
-        } else if (currentStep.key === "payment") {
+        else if (registerStep) {
+            handleRegisterTrigger();
+        } else if (loginStep) {
+            handleLoginTrigger();
+        }
+        else if (currentStep.key === "payment") {
             setIsConfirmTriggered(true);
         }
     }
@@ -185,10 +134,9 @@ const BookingInfo: FC = () => {
                         currentStep.key == "instructor" ? "Choose Instructor" :
                             currentStep.key == "package-selection" ? "Continue" :
                                 currentStep.key == "schedule" ? "Continue" :
-                                    (registerStep == "register") ? isAuthenticate ? "Continue" : "Register" :
-                                        (registerStep == "login") ? isAuthenticate ? "Continue" : "Login" :
+                                    (steps == "register") ? isAuthenticate ? "Continue" : "Register" :
+                                        (steps == "login") ? isAuthenticate ? "Continue" : "Login" :
                                             currentStep.key == "payment" && "Pay & Confirm"
-
                     }
                 </Button>
             </div>
