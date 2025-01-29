@@ -140,7 +140,7 @@ const ScheduleCalender: FC<IScheduleCalenderProps> = (props) => {
     }, [schedules])
 
     return (
-        <div className={cn("bg-white rounded-lg shadow-sm p-6 border border-gray-200", classname)}>
+        <div className={cn("bg-white rounded-lg shadow-sm p-4 lg:p-6 border border-gray-200", classname)}>
             <div className="flex justify-between items-center mb-6">
                 <h2 className="text-lg font-semibold">
                     {format(currentMonth, 'MMMM yyyy')}

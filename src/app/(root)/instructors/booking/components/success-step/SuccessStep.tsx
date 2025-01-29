@@ -9,7 +9,7 @@ import { toFixedNumber } from '@/lib/utils';
 const SuccessStep: FC = () => {
     const { instructor, bookingHours, price, testPackage, mockTestPackage, schedules, paymentInfo } = useBooking();
     return (
-        <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+        <div className="bg-white rounded-lg lg:p-6  border-gray-200">
             <div className="max-w-3xl mx-auto">
                 <div className="text-center mb-12">
                     <CheckCircle className="mx-auto h-16 w-16 text-green-500 mb-4" />
@@ -17,8 +17,8 @@ const SuccessStep: FC = () => {
                     <p className="mt-2 text-gray-600">Your driving lesson has been successfully scheduled</p>
                 </div>
 
-                <div className="bg-white shadow rounded-lg overflow-hidden">
-                    <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-white border rounded-lg overflow-hidden">
+                    <div className="p-4 lg:p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Left Column - Booking Details */}
                         <div>
                             <h2 className="text-xl font-semibold mb-6">Booking Details</h2>
@@ -59,10 +59,12 @@ const SuccessStep: FC = () => {
                             </div>
                         </div>
 
+                        <hr className='md:hidden' />
+
                         {/* Right Column - Payment Summary */}
                         <div>
                             <h2 className="text-xl font-semibold mb-6">Payment Summary</h2>
-                            <div className="bg-gray-50 p-4 rounded-lg">
+                            <div className="bg-gray-50  p-4 lg:p-6 rounded-lg">
                                 <div className="space-y-3">
                                     <div className="flex justify-between">
                                         <span className="text-gray-600">Booking Credit</span>
@@ -103,10 +105,9 @@ const SuccessStep: FC = () => {
                                     <Receipt className="h-5 w-5" />
                                     <span>Transaction ID</span>
                                 </div>
-                                <div className="bg-gray-50 p-3 rounded-lg">
-                                    <div className="bg-white px-3 py-2 rounded flex items-center justify-between">
-                                        <span className="font-mono text-sm">{paymentInfo.transactionId}</span>
-                                        {/* <span className="text-primary text-sm">Completed</span> */}
+                                <div className="bg-gray-50 md:p-3 rounded-lg">
+                                    <div className="bg-white px-3 py-2 rounded flex items-center justify-between overflow-hidden">
+                                        <span className="font-mono text-sm break-words">{paymentInfo.transactionId}</span>
                                     </div>
                                 </div>
                             </div>

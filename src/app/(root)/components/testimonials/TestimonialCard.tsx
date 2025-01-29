@@ -43,7 +43,7 @@ const TestimonialCard: FC<ITestimonialCardProps> = ({ testimonial }) => {
                 </div>
             </div>
 
-            <div className="relative flex md:flex-row flex-col md:gap-7 gap-5 p-4 lg:p-6">
+            <div className="relative flex md:flex-row flex-col md:gap-7 gap-2 p-4 lg:p-6">
                 <div className="">
                     <div className='flex gap-4'>
                         <Image
@@ -62,7 +62,7 @@ const TestimonialCard: FC<ITestimonialCardProps> = ({ testimonial }) => {
                 </div>
                 <div className="md:w-2/3 text-accent md:mb-0 mb-4 ">
                     <h4 className='text-xl font-semibold mb-2 hidden md:block'>{name}</h4>
-                    <p>
+                    <p onClick={toggleDescription}>
                         {isExpanded ? <span>{description}</span> : <span>{truncatedDescription}...</span>}
                         {descriptionLength > 15 && <button onClick={toggleDescription} className="text-primary text-xs inline  underline font-semibold">
                             {isExpanded ? "Show less" : "Show more"}

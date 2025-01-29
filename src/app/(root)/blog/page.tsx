@@ -9,7 +9,7 @@ const blogPage: FC = () => {
     return (
         <div>
             <div className="max-w-6xl mx-auto px-4 py-8">
-                <div className="flex justify-between items-center mb-8">
+                <div className="flex justify-between items-center mb-8 gap-3 flex-col md:flex-row">
                     <h1 className="text-4xl text-primary font-bold">Blog</h1>
                     <div className="flex items-center gap-4">
                         <span className="text-muted-foreground">Follow Lamp driving on</span>

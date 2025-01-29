@@ -43,20 +43,22 @@ const WalletPage: FC = () => {
         { skip: !instructorId }
     );
 
-    const totalEarnings = data?.data?.balance?.totalEarnings;
-    const pendingBalance = data?.data?.balance?.pendingBalance;
-    const currentBalance = data?.data?.balance?.currentBalance;
-    const totalWithdraw = data?.data?.balance?.totalWithdraw;
+    console.log(data);
+
+    const totalEarnings = data?.data?.wallet.balance?.totalEarnings;
+    const pendingBalance = data?.data?.wallet.balance?.pendingBalance;
+    const currentBalance = data?.data?.wallet.balance?.currentBalance;
+    const totalWithdraw = data?.data?.wallet.balance?.totalWithdraw;
 
     if (isLoading) {
         return <Loading />
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
+        <div className="dashboard-wrapper p-3 lg:p-6">
             <div className="space-y-6">
                 {/* Header */}
-                <div className="flex items-center justify-between">
+                <div className="dashboard-heading">
                     <div>
                         <h1 className="text-2xl font-bold text-gray-900">Instructor Earnings</h1>
                         <p className="text-gray-600">Track your earnings and upcoming payouts</p>
@@ -64,7 +66,7 @@ const WalletPage: FC = () => {
                     <div className="flex items-center gap-3">
                         {/* <p className="text-sm text-gray-600">Next payout:</p>
                         <p className="text-sm font-medium text-gray-900">March 22, 2024</p> */}
-                        <AddBankAccount id={data?.data?._id || ""} bankAccount={data?.data.bankAccount} />
+                        <AddBankAccount id={data?.data?.wallet._id || ""} bankAccount={data?.data.wallet.bankAccount} />
                     </div>
                 </div>
 

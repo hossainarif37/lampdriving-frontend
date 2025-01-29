@@ -15,7 +15,7 @@ const PackageCard: FC<IPackageCardProps> = ({ hours, price, description, discoun
     return (
         <div
             onClick={onSelect}
-            className={`relative p-6 rounded-xl transition-all cursor-pointer border-2 border-gray-200
+            className={`relative p-4 lg:p-6 rounded-xl transition-all cursor-pointer border-2 border-gray-200
         ${selected ? 'bg-primary/5  border-primary' : 'bg-white border-gray-200 hover:border-primary/70'}`}
         >
             {recommended && (

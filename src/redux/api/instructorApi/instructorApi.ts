@@ -30,7 +30,7 @@ const instructorApi = baseApi.injectEndpoints({
 
         updateInstructorStatus: builder.mutation<IResponseWithData<IInstructor>, { id: string, status: "pending" | "verified" | "rejected" }>({
             query: ({ id, status }) => ({
-                url: `/ instructor / status / ${id}`,
+                url: `/instructor/status/${id}`,
                 method: "PATCH",
                 body: { status }
             }),

@@ -10,13 +10,13 @@ import {
   GraduationCap
 } from 'lucide-react';
 import { StatsCard } from './StatsCard';
-import { Calendar } from './Calendar';
 import { useAppSelector } from '@/redux/hook';
 import { useGetInstructorStatsQuery } from '@/redux/api/statsApi/statsApi';
 import InstructorStatsSkeleton from './InstructorStatsSkeleton';
+import Calendar from './Calendar';
 
 const InstructorStats: FC = () => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const { user } = useAppSelector(state => state.authSlice);
 
   const instructorId = useMemo(() => {
@@ -28,10 +28,6 @@ const InstructorStats: FC = () => {
     { instructorId: instructorId as string },
     { skip: !instructorId }
   );
-
-  if (!instructorId) {
-    return <div>No instructor ID found</div>;
-  }
 
   if (isLoading) {
     return <InstructorStatsSkeleton />
@@ -50,10 +46,8 @@ const InstructorStats: FC = () => {
     },
   }));
 
-  console.log('data', data);
-
   return (
-    <div className="p-6">
+    <div className="dashboard-wrapper p-3 lg:p-6">
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
         <StatsCard
@@ -90,13 +84,8 @@ const InstructorStats: FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Calendar Section */}
-        <div className="lg:col-span-1 bg-white rounded-lg p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-gray-900">Calendar</h2>
-            <CalendarIcon className="h-5 w-5 text-gray-500" />
-          </div>
-          <Calendar selectedDate={selectedDate} onDateSelect={setSelectedDate} />
-        </div>
+        <Calendar
+          selectedDate={selectedDate} onSelectDate={setSelectedDate} />
 
         {/* Bookings Lists */}
         <div className="lg:col-span-2 space-y-6">

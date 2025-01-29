@@ -10,9 +10,5 @@ export const navLinks = [
     {
         title: "About",
         href: "/about",
-    },
-    {
-        title: "Pricing",
-        href: "#",
     }
 ]

@@ -14,7 +14,7 @@ const HowLampDrivingWork: FC = () => {
                     subtitle="Simple, Trusted & Flexible Booking System"
                 />
 
-                <div className="gap-12 grid md:grid-cols-3 mb-12">
+                <div className="gap-12 grid md:grid-cols-2 lg:grid-cols-3 mb-12">
                     <FeatureCard
                         number={1}
                         icon={Car}

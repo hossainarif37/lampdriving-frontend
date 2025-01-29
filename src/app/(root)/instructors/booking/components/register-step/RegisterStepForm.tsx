@@ -55,7 +55,7 @@ const RegisterStepForm: FC = () => {
     return (
         <form
             // onSubmit={handleSubmit(handleRegister)}
-            className='bg-white p-6 rounded-lg shadow-sm border border-gray-200'
+            className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200'
         >
             <h2 className="text-xl font-semibold mb-6 text-left">Register Learner</h2>
             <div className='w-full mt-10'>

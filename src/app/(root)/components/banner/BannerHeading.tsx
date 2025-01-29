@@ -44,28 +44,30 @@ const BannerHeading: FC = () => {
                     </Link>
                 </div>
 
-                {/* Center content: Pricing */}
-                <div className='text-center md:text-left'>
-                    <p className="md:flex flex-col md:mt-14 mb-4 md:mb-0">
-                        Courses Start <span>from</span>
-                    </p>
-                </div>
+                <div className='flex flex-col lg:flex-row gap-4'>
+                    {/* Center content: Pricing */}
+                    <div className='text-center lg:text-left '>
+                        <p className="md:flex flex-col md:mt-14 mb-4 md:mb-0">
+                            Courses Start <span>from</span>
+                        </p>
+                    </div>
 
-                {/* Pricing badge */}
-                <div className=' flex md:flex-none justify-center'>
-                    <div
-                        className="flex flex-col justify-center items-center bg-secondary/50 backdrop-blur-sm w-28 h-28 text-light font-bold lg:text-base text-sm"
-                        style={{
-                            clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
-                        }}
-                    >
-                        <h4>$69</h4>
-                        <span>Per hour</span>
+                    {/* Pricing badge */}
+                    <div className=' flex md:flex-none justify-center '>
+                        <div
+                            className="flex flex-col justify-center items-center bg-secondary/50 backdrop-blur-sm w-28 h-28 text-light font-bold lg:text-base text-sm"
+                            style={{
+                                clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
+                            }}
+                        >
+                            <h4>$69</h4>
+                            <span>Per hour</span>
+                        </div>
                     </div>
                 </div>
 
                 {/* Decorative arrow image */}
-                <div className="absolute top-0 right-40 animate-slide hidden md:block">
+                <div className="absolute top-0 right-40 animate-slide hidden lg:block">
                     <Image src={arrowImg.src} alt="Decorative arrow" width={100} height={100} />
                 </div>
             </div>

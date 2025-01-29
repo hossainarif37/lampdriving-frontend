@@ -26,7 +26,7 @@ const buttonVariants = cva(
         activeSidebar: "gradient-color duration-150 text-light dark:bg-primary dark:text-light",
       },
       size: {
-        default: "h-12 px-10",
+        default: "h-12 px-3 md:px-10",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",

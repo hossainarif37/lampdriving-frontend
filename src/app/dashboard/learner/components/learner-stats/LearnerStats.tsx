@@ -8,9 +8,7 @@ import placeHolderImage from "@/assets/placeholder_user.svg"
 import { useAppSelector } from '@/redux/hook';
 import StatsCard from '@/app/dashboard/shared/StatsCard';
 import { useGetLearnerStatsQuery } from '@/redux/api/statsApi/statsApi';
-import Loading from '@/components/shared/Loading';
 import LearnerStatsSkeleton from './LearnerStatsSkeleton';
-import DataNotFound from '@/components/shared/DataNotFound';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
@@ -91,10 +89,9 @@ const LearnerStats: FC = () => {
     });
   };
 
-  console.log('learnerStats', learnerStats)
-
   return (
-    <div className="min-h-[calc(100vh-117px)] bg-gray-50 p-6">
+    <div className="dashboard-wrapper p-3 lg:p-6">
+
       {
         !hasUpcomingOrOngoingBookings && <div className='mb-6 flex'>
           <Link href="/instructors" className="text-primary hover:underline">
@@ -118,7 +115,7 @@ const LearnerStats: FC = () => {
 
       {/* Instructor Section - Only shown if there are upcoming/ongoing bookings */}
       {hasUpcomingOrOngoingBookings && (
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+        <div className="bg-white rounded-xl border p-6 mb-8">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Your Instructor</h2>
           <div className="flex items-center">
             <Image
@@ -141,7 +138,7 @@ const LearnerStats: FC = () => {
       {/* Bookings Sections */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Upcoming Lessons */}
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white rounded-xl border p-6">
           <div className="flex items-center mb-4">
             <Calendar className="h-5 w-5 text-blue-600 mr-2" />
             <h2 className="text-xl font-bold text-gray-900">Upcoming Lessons</h2>
@@ -162,7 +159,7 @@ const LearnerStats: FC = () => {
         </div>
 
         {/* Completed Lessons */}
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white rounded-xl border p-6">
           <div className="flex items-center mb-4">
             <History className="h-5 w-5 text-gray-600 mr-2" />
             <h2 className="text-xl font-bold text-gray-900">Completed Lessons</h2>

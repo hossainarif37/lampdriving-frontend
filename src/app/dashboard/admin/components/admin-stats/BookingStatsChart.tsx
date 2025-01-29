@@ -17,7 +17,7 @@ const BookingStatsChart = ({ data }: { data: any }) => {
     }));
 
     return (
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+        <div className="bg-white rounded-xl p-6 border">
             <div className="flex items-center justify-between mb-6">
                 <div>
                     <h2 className="text-xl font-bold text-gray-900">Booking Trends</h2>

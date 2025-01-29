@@ -10,7 +10,7 @@ const TabsDesign: FC<ITabsDesignProps> = ({ activeTab, setActiveTab }) => {
 
     return (
         <div>
-            <div className="flex md:space-x-4 space-x-1 mx-auto justify-center">
+            <div className="flex mx-auto justify-center flex-wrap gap-4">
                 {tabs.map((tab) => (
                     <button
                         key={tab}

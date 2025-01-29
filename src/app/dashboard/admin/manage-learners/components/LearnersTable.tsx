@@ -46,12 +46,12 @@ const LearnersTable: FC = () => {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead className="min-w-[100px] text-center">No.</TableHead>
-                                    <TableHead className='min-w-[214px]'>Name & Username</TableHead>
-                                    <TableHead className='min-w-[280px]'>Email & Phone</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Total Bookings</TableHead>
-                                    <TableHead className='min-w-[140px] text-center'>Status</TableHead>
-                                    <TableHead className='min-w-[205px] text-center'>Actions</TableHead>
+                                    <TableHead className="text-center">No.</TableHead>
+                                    <TableHead className='text-nowrap'>Name & Username</TableHead>
+                                    <TableHead className='text-nowrap'>Email & Phone</TableHead>
+                                    <TableHead className='text-nowrap text-center'>Total Bookings</TableHead>
+                                    <TableHead className='text-center'>Status</TableHead>
+                                    <TableHead className='text-center'>Actions</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
