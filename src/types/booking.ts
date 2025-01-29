@@ -37,6 +37,12 @@ export interface IBookingContext {
     availableScheduleHours: number;
     isTestPackageSelected: boolean;
     isAllScheduled: boolean;
+    registerButtonRef: React.RefObject<HTMLButtonElement>;
+    isRegistering: boolean;
+    setIsRegistering: React.Dispatch<React.SetStateAction<boolean>>;
+    loginButtonRef: React.RefObject<HTMLButtonElement>;
+    isLogging: boolean;
+    setIsLogging: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IPrice {

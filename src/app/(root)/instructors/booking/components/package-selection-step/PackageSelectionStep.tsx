@@ -47,7 +47,8 @@ const PackageSelectionStep: FC = () => {
                             bookingHours={bookingHours}
                             selected={isCustomSelected}
                             onSelect={handlePackageSelection}
-                            hourlyRate={instructor?.pricePerHour || 0} />
+                            hourlyRate={instructor?.pricePerHour || 0}
+                        />
                     </div>
                 </div>
             </div>
