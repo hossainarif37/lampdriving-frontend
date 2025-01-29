@@ -54,7 +54,7 @@ const Testimonials: FC = () => {
                 {/* Horizontal border */}
                 <hr className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-full z-0 border-primary/10" />
                 <Link
-                    href="https://www.google.com/maps/place/Lamp+Driving+School/@-33.951881,151.1322347,16z/data=!4m5!3m4!1s0x6b12b98b735c3b87:0x75805c144446463d!8m2!3d-33.951881!4d151.1322347?entry=ttu&review"
+                    href="https://www.google.com/maps/place/Lamp+Driving+School/@-33.951881,151.1322347,16z/data=!4m8!3m7!1s0x6b12b98b735c3b87:0x75805c144446463d!8m2!3d-33.951881!4d151.1322347!9m1!1b1!16s%2Fg%2F11p5g7j2jr?entry=ttu&search_query=reviews"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
