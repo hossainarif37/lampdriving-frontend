@@ -56,9 +56,10 @@ const FooterSearch: FC = () => {
                     >
                         <PopoverTrigger asChild>
                             <input
+                                onFocus={() => setIsOpen(true)}
                                 value={selectedSuburb}
                                 onChange={(e) => setSelectedSuburb(e.target.value)}
-                                readOnly={selectedSuburb ? true : false}
+                                readOnly={true}
                                 className="md:flex-1 px-4 py-3 rounded-md text-primary focus:outline-none placeholder:text-accent w-[300px] md:w-[380px] lg:w-[280px]"
                                 type="text"
                                 placeholder="Enter your suburb"

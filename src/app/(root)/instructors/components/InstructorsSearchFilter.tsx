@@ -96,6 +96,8 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                         <div className='relative md:w-[250px] lg:w-[434px] sm:w-[500px] w-full mx-auto md:mx-0 ' >
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
                             <Input
+                                onFocus={() => setSearchPopOverOpen(true)}
+                                readOnly={true}
                                 value={selectedSuburb}
                                 onChange={(e) => handleSearch(e.target.value)}
                                 placeholder="Enter your suburb" className='h-12 pl-12 bg-light border border-primary/15' />
