@@ -18,11 +18,12 @@ interface IExperienceFormProps {
     setDrivingLicenseFile: Dispatch<SetStateAction<File | null>>;
     experienceCertificateFile: File | null;
     setExperienceCertificateFile: Dispatch<SetStateAction<File | null>>;
+    instructor: any;
 }
 
-const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
+const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile, instructor }) => {
     const [isClicked, setIsClicked] = useState(false);
-    const { instructor } = useAppSelector((state) => state.authSlice);
+    // const { instructor } = useAppSelector((state) => state.authSlice);
     const defaultValues = {
         experience: instructor?.experience || 0,
         description: instructor?.description || '',
