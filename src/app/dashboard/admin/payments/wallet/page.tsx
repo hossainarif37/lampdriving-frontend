@@ -26,10 +26,10 @@ const WalletPage: FC = () => {
     const lastSixMonthsStats = data?.data?.lastSixMonthsStats;
 
     return (
-        <div className="min-h-[calc(100vh-300px)] bg-gray-50 p-6">
+        <div className="dashboard-wrapper p-3 lg:p-6">
             <div className="space-y-6">
                 {/* Header */}
-                <div className="flex items-center justify-between">
+                <div className="dashboard-heading">
                     <div>
                         <h1 className="text-2xl font-bold text-gray-900">Admin Financial Dashboard</h1>
                         <p className="text-gray-600">Manage payments and instructor payouts</p>
