@@ -8,13 +8,13 @@ const ManageAvailabilityPage: FC = () => {
             <div className='dashboard-heading'>
                 <h2 className='font-semibold text-2xl'>Manage Availability</h2>
             </div>
-            <div className='grid grid-cols-12 gap-6 px-5 py-4'>
-                <div className='col-span-8'>
+            <div className='grid md:grid-cols-12 gap-6 p-3 lg:p-6'>
+                <div className='md:col-span-12 lg:col-span-8'>
                     <ManageAvailability />
                 </div>
-                <div className='col-span-4'>
+                <div className='md:col-span-12 lg:col-span-4'>
                 </div>
-                <div className='col-span-12'>
+                <div className='md:col-span-12 lg:col-span-12'>
                     <ManageWorkingHours />
                 </div>
             </div>

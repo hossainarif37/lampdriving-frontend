@@ -83,7 +83,7 @@ const ManageAvailability: FC = () => {
 
     return (
         <div>
-            <div className='grid grid-cols-2 text-black gap-6'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 text-black gap-3 md:gap-6'>
                 <div>
                     <ScheduleCalender
                         schedules={[]}

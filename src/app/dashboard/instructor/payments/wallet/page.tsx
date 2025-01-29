@@ -55,10 +55,10 @@ const WalletPage: FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
+        <div className="dashboard-wrapper p-3 lg:p-6">
             <div className="space-y-6">
                 {/* Header */}
-                <div className="flex items-center justify-between">
+                <div className="dashboard-heading">
                     <div>
                         <h1 className="text-2xl font-bold text-gray-900">Instructor Earnings</h1>
                         <p className="text-gray-600">Track your earnings and upcoming payouts</p>
