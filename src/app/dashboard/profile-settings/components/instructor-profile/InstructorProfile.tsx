@@ -2,15 +2,21 @@
 
 import { TabNavigation } from '@/components/shared/TabNavigation';
 import { Settings } from 'lucide-react';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import PersonalInfoForm from './PersonalInfoForm';
 import ExperienceForm from './ExperienceForm';
 import ServicesForm from './ServicesForm';
 import CarInfoForm from './CarInfoForm';
 import SecurityForm from './SecurityForm';
+import { useAppSelector } from '@/redux/hook';
+import { useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi';
+import Loading from '@/components/shared/Loading';
+import { saveUser } from '@/redux/slices/authSlice/authSlice';
 
 const InstructorProfile: FC = () => {
   const [activeTab, setActiveTab] = useState('personal');
+  const { user } = useAppSelector((state) => state.authSlice);
+  const { data, isLoading } = useGetAInstructorQuery({ username: user?.username as string });
 
   // Experience
   const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
@@ -30,11 +36,12 @@ const InstructorProfile: FC = () => {
             setDrivingLicenseFile={setDrivingLicenseFile}
             experienceCertificateFile={experienceCertificateFile}
             setExperienceCertificateFile={setExperienceCertificateFile}
+            instructor={data?.data}
           />
         );
       case 'services':
         return (
-          <ServicesForm />
+          <ServicesForm instructor={data?.data} />
         );
       case 'car':
         return (
@@ -52,12 +59,16 @@ const InstructorProfile: FC = () => {
     }
   };
 
+  if (isLoading) {
+    return <Loading />
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-5xl mx-auto py-6 sm:px-6 lg:px-8">
+      <div className="md:max-w-5xl mx-auto py-6 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <div className="mt-2 flex items-center">
+          <div className="ml-2 md:ml-0 mt-2 flex items-center">
             <Settings className="w-8 h-8 text-blue-600" />
             <h1 className="ml-3 text-2xl font-bold text-gray-900">Profile Settings</h1>
           </div>

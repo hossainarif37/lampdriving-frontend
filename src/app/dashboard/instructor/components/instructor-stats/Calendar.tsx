@@ -95,7 +95,7 @@ const Calendar: FC<ICalendarProps> = (props) => {
                                 aspect-square p-2 rounded-[4px] flex items-center justify-center text-sm disabled:opacity-50
                                 ${isSelected ? 'bg-primary text-white' :
                   isTodayDate ? 'bg-primary/5 text-primary' :
-                    isPastDate ? 'text-gray-300 ' :
+                    isPastDate ? 'disabled:opacity-30' :
                       'hover:bg-gray-50'}
                             `}
             >

@@ -39,19 +39,21 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
           <div className='size-[100px] md:size-[120px] rounded-full overflow-hidden shadow-lg border flex items-center justify-center text-accent'>
             {
               user?.profileImg ?
-                <Image src={user?.profileImg} alt="Instructor" className='w-full' width={120} height={120} />
+                <Image src={user?.profileImg} alt="Instructor" className='w-full h-full object-cover' width={120} height={120} />
                 :
                 <User size={60} />
             }
           </div>
 
-          <Image
-            src={vehicle?.image}
-            alt="Vehicle"
-            width={70}
-            height={70}
-            className="absolute -bottom-2 -right-2 rounded-full"
-          />
+          <div className='absolute w-16 h-16 border shadow -bottom-2 -right-2 rounded-full overflow-hidden'>
+            <Image
+              src={vehicle?.image}
+              alt="Vehicle"
+              width={70}
+              height={70}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
         <div className="flex-1">
           <h1 className="text-2xl font-bold">{user?.name?.fullName}</h1>

@@ -12,9 +12,8 @@ interface Inputs {
     pricePerHour: number;
 }
 
-const ServicesForm: FC = () => {
+const ServicesForm: FC<{ instructor: any }> = ({ instructor }) => {
     const { user } = useAppSelector((state) => state.authSlice);
-    const instructor = user?.instructor as IInstructor;
     const defaultValues: IServices = {
         pricePerHour: instructor.pricePerHour,
         serviceAreas: instructor.serviceAreas,
