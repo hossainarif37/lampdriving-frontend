@@ -1,18 +1,26 @@
 "use client"
 import PhotoUpload from '@/components/shared/PhotoUpload';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { genderOptions } from '@/constant/gender';
+import { toast } from '@/hooks/use-toast';
 import { IProfilePhoto } from '@/hooks/useImage';
 import { useBooking } from '@/providers/BookingProvider';
+import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
+import { useAppDispatch } from '@/redux/hook';
+import { saveUser } from '@/redux/slices/authSlice/authSlice';
+import { IRegisterInputs } from '@/types/auth';
 import { Eye, EyeClosed } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
-import { Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 
 
 const RegisterStepForm: FC = () => {
-    const { register, handleSubmit, formState: { errors }, control, watch, setError, setValue } = useBooking().useRegisterForm;
+    const { register, handleSubmit, formState: { errors }, control, watch, setError, setValue } = useForm<IRegisterInputs>();
+    const { steps, setCurrentStep, handleStepChange, registerButtonRef, isRegistering, setIsRegistering } = useBooking();
+    const dispatch = useAppDispatch();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
@@ -21,6 +29,7 @@ const RegisterStepForm: FC = () => {
         url: undefined
     });
 
+    const [registerUser] = useRegisterUserMutation();
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
 
@@ -29,6 +38,7 @@ const RegisterStepForm: FC = () => {
 
     // handler for navigating with exisiting query
     const handleNavigate = () => {
+        handleStepChange("login");
         const searchParams = new URLSearchParams(urlSearchParams);
         searchParams.set('step', 'login');
         router.replace(`?${searchParams.toString()}`);
@@ -40,6 +50,32 @@ const RegisterStepForm: FC = () => {
         } else if (field === 'confirm-password') {
             setConfirmPasswordVisible((prev) => !prev);
         }
+    }
+
+    const handleRegister = (data: IRegisterInputs) => {
+        setIsRegistering(true);
+        registerUser(data).unwrap().then((res) => {
+            toast({
+                message: res.message
+            });
+            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
+            setIsRegistering(false);
+            const params = new URLSearchParams(urlSearchParams.toString());
+            const step = steps.find(step => step.key === "payment");
+            if (!step) {
+                return;
+            }
+            params.set('step', step.key);
+            router.push(`?${params.toString()}`);
+            setCurrentStep(step);
+            handleStepChange("payment");
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong",
+            })
+            setIsRegistering(false);
+        })
     }
 
     useEffect(() => {
@@ -54,7 +90,7 @@ const RegisterStepForm: FC = () => {
 
     return (
         <form
-            // onSubmit={handleSubmit(handleRegister)}
+            onSubmit={handleSubmit(handleRegister)}
             className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200'
         >
             <h2 className="text-xl font-semibold mb-6 text-left">Register Learner</h2>
@@ -123,27 +159,26 @@ const RegisterStepForm: FC = () => {
                                     <Input
                                         {...register('phone', {
                                             required: "Phone number is required",
-                                            maxLength: {
-                                                value: 10,
-                                                message: "Phone number must be 10 digits"
-                                            },
                                             minLength: {
                                                 value: 10,
                                                 message: "Phone number must be 10 digits"
                                             }
-                                        })
-                                        }
+                                        })}
+                                        type="number"
+                                        id="phone"
+                                        placeholder="Enter your phone number"
+                                        className="xl:h-12 mt-1"
                                         onKeyDown={(e) => {
                                             if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
                                                 e.preventDefault();
                                             }
                                         }}
-                                        onChange={(e) => {
-                                            if (e.target.value.length > 10) {
-                                                e.target.value = e.target.value.slice(0, 10);
+                                        onInput={(e) => {
+                                            const input = e.target as HTMLInputElement;
+                                            if (input.value.length > 10) {
+                                                input.value = input.value.slice(0, 10);
                                             }
                                         }}
-                                        type="number" id='phone' placeholder="Enter your phone number" className='xl:h-12 mt-1'
                                     />
                                     {errors?.phone && <p className='text-red-500 text-sm mt-1'>{errors?.phone?.message}</p>}
                                 </div>
@@ -277,10 +312,20 @@ const RegisterStepForm: FC = () => {
                 </div>
             </div>
 
+            <Button
+                disabled={isRegistering}
+                ref={registerButtonRef}
+                type="submit"
+                className='w-full mt-6 hidden'
+            >
+                Register
+            </Button>
+
             <p className='mt-5'>Already have an account? <span onClick={handleNavigate} className='text-blue-500 hover:underline font-semibold cursor-pointer'>
                 Login Here
             </span>
             </p>
+
         </form>
     );
 };

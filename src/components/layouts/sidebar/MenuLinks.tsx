@@ -35,7 +35,7 @@ const MenuLinks = () => {
                         {route.children ? (
                             <>
                                 <Button
-                                    className={`md:h-10 xl:h-11 w-full font-semibold justify-start px-3 group capitalize mb-1`}
+                                    className={`md:h-10 xl:h-11 w-full font-semibold justify-start px-3 md:px-3 group capitalize mb-1`}
                                     variant={"sidebar"}
                                     onClick={() => handleGroupRouteOpen(route.path)}
                                 >

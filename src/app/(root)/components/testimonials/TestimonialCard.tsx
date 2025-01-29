@@ -43,7 +43,7 @@ const TestimonialCard: FC<ITestimonialCardProps> = ({ testimonial }) => {
                 </div>
             </div>
 
-            <div className="relative flex md:flex-row flex-col md:gap-7 gap-5 p-4 lg:p-6">
+            <div className="relative flex md:flex-row flex-col md:gap-7 gap-2 p-4 lg:p-6">
                 <div className="">
                     <div className='flex gap-4'>
                         <Image

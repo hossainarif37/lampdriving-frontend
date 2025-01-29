@@ -24,7 +24,7 @@ export function BookingsList({ title, bookings, type, selectedDate }: BookingsLi
     : bookings;
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
+    <div className="bg-white rounded-lg border p-3 lg:p-6">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">{title}</h2>
       {filteredBookings.length === 0 ? (
         <p className="text-gray-500 text-center py-4">No bookings found</p>

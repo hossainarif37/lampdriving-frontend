@@ -30,6 +30,8 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
         documents: instructor?.documents || {}
     }
 
+    console.log('Instructor', instructor);
+
     // Driving License
     const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(defaultValues?.documents?.drivingLicense || '');
 

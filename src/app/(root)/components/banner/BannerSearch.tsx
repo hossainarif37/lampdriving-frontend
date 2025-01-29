@@ -46,7 +46,7 @@ const BannerSearch: FC = () => {
                     <Button
                         onClick={() => setCarType('manual')}
                         className={`w-1/2 hover:bg-gray-200 duration-150 flex justify-center items-center ${carType === 'manual'
-                            ? 'bg-primary text-light hover:bg-primary' 
+                            ? 'bg-primary text-light hover:bg-primary'
                             : 'bg-gray-200 text-primary'}`}
                     >
                         {carType === "manual" && <span><Check className='w-5' /></span>}
@@ -64,7 +64,7 @@ const BannerSearch: FC = () => {
                             <input
                                 value={selectedSuburb}
                                 onChange={(e) => setSelectedSuburb(e.target.value)}
-                                readOnly={selectedSuburb ? true : false}
+                                readOnly
                                 className="flex-1 px-4 py-3 rounded-md text-primary focus:outline-none placeholder:text-accent"
                                 type="text"
                                 placeholder="Enter your suburb"

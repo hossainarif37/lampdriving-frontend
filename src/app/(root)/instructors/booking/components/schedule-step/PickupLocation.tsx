@@ -61,7 +61,7 @@ const PickupLocation: FC<IPickupLocationProps> = ({ onChange, value, error, clas
                                     <Input
                                         value={value.suburb}
                                         onChange={(e) => onChange({ address: value.address, suburb: e.target.value })}
-                                        readOnly={value.suburb ? true : false}
+                                        readOnly
                                         className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                                         type="text"
                                         placeholder="Enter your pickup suburb"

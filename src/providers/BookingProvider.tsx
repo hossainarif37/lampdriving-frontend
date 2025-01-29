@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, FC, ReactNode, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { IInstructor } from '@/types/instructor';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi';
@@ -18,6 +18,14 @@ const BookingContext = createContext<IBookingContext | undefined>(undefined);
 export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const urlSearchParams = useSearchParams();
     const step = urlSearchParams.get('step');
+
+    // Submit button ref
+    const registerButtonRef = useRef<HTMLButtonElement>(null);
+    const loginButtonRef = useRef<HTMLButtonElement>(null);
+
+    const [isRegistering, setIsRegistering] = useState(false);
+    const [isLogging, setIsLogging] = useState(false);
+
     const { isAuthenticate, isAuthLoading } = useAppSelector(state => state.authSlice);
 
 
@@ -93,8 +101,12 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         handleStepChange,
         isConfirmTriggered, setIsConfirmTriggered,
         isCreatingABooking, setIsCreatingABooking,
-        mockTestPackage, setMockTestPackage, availableScheduleHours, isTestPackageSelected, isAllScheduled
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, availableScheduleHours, mockTestPackage, isTestPackageSelected, isAllScheduled]);
+        mockTestPackage, setMockTestPackage, availableScheduleHours, isTestPackageSelected, isAllScheduled,
+        registerButtonRef,
+        isRegistering, setIsRegistering,
+        loginButtonRef,
+        isLogging, setIsLogging
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, availableScheduleHours, mockTestPackage, isTestPackageSelected, isAllScheduled, registerButtonRef]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams.get('instructor');
