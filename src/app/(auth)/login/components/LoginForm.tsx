@@ -102,7 +102,7 @@ const LoginForm: FC = () => {
                 </div>
 
                 <p className='text-right mt-2'>
-                    <Link href="#" className='text-primary hover:underline font-semibold'>Forgot password?</Link>
+                    <Link href="/forgot-password" className='text-primary hover:underline font-semibold'>Forgot password?</Link>
                 </p>
             </div>
 
