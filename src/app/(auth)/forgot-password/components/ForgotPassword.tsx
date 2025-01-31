@@ -3,22 +3,23 @@ import { useSearchParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 import SendVerificationEmail from './SendVerificationEmail';
 import VerifyOtp from './VerifyOtp';
+import ChangePassword from './ChangePassword';
 
 const ForgotPassword: FC = () => {
     const [email, setEmail] = useState();
     const searchParams = useSearchParams();
     const urlStep = searchParams.get('step');
-    const [step, setStep] = useState<"send-otp" | "verify-otp" | "reset-password" | "success">("send-otp");
+    const [step, setStep] = useState<"send-otp" | "verify-otp" | "change-password" | "success">("send-otp");
     useEffect(() => {
         if (urlStep === "send-otp") {
             setStep("send-otp");
         } else if (urlStep === "verify-otp") {
             setStep("verify-otp");
-        } else if (urlStep === "reset-password") {
-            setStep("reset-password");
+        } else if (urlStep === "change-password") {
+            setStep("change-password");
         } else if (urlStep === "success") {
             setStep("success");
-        } else{
+        } else {
             setStep("send-otp");
         }
     }, [urlStep])
@@ -27,7 +28,8 @@ const ForgotPassword: FC = () => {
         <>
             {
                 step === "send-otp" ? <SendVerificationEmail /> :
-                    step === "verify-otp" && <VerifyOtp />
+                    step === "verify-otp" ? <VerifyOtp /> :
+                        step === "change-password" && <ChangePassword />
             }
         </>
     );

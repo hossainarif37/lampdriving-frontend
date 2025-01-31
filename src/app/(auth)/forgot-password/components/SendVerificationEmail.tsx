@@ -16,12 +16,12 @@ const SendVerificationEmail: FC = () => {
     return (
         <div className="w-full md:w-[450px] xl:w-[500px] max-w-[500px] mx-auto p-10  md:shadow-lg md:rounded-lg md:border">
             <div className="flex items-center justify-center mb-3">
-                <span className="p-5 bg-secondary/40 rounded-full flex  items-center justify-center">
+                <span className="p-5 bg-secondary/30 rounded-full flex  items-center justify-center">
                     <Lock className="text-primary size-10 " />
                 </span>
             </div>
-            <h1 className="text-2xl font-bold text-primary/90 text-center mb-4">Forgot Password</h1>
-            <p className="mb-2 text-sm text-accent">Enter your email. We will send you a OTP for verification.</p>
+            <h1 className="text-2xl font-bold text-primary/90 text-center">Forgot Password</h1>
+            <p className="mb-4 text-sm text-accent text-center">Enter your email. We will send you a OTP for verification.</p>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <Input
                     type="email"
