@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { toast } from '@/hooks/use-toast';
+import { useResetPasswordMutation } from '@/redux/api/authApi/authApi';
 import { Eye, EyeClosed, KeyRound, Lock } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FC, useState } from 'react';
 
 const ChangePassword: FC = () => {
@@ -10,16 +12,30 @@ const ChangePassword: FC = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-
+    const [error, setError] = useState<string>("")
+    const [resetPassword, { isLoading }] = useResetPasswordMutation();
+    const searchParams = useSearchParams();
+    const token = searchParams.get('token');
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (password !== confirmPassword) {
-            alert("Passwords don't match")
-            return
+            setError("Passwords do not match")
+            return;
+        } else if (!token) {
+            return;
         }
-        console.log("Resetting password")
-        alert("Password reset successfully!")
-        router.push("/forgot-password?step=success")
+
+        resetPassword({ newPassword: password, token: token }).unwrap().then((res) => {
+            toast({
+                message: res.message
+            })
+            router.push("/forgot-password?step=success")
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message
+            })
+        })
     }
     const handlePasswordToggle = (field: string) => {
         if (field === 'password') {
@@ -70,9 +86,15 @@ const ChangePassword: FC = () => {
                         {confirmPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
                     </span>
                 </div>
-                <Button className="w-full" type="submit">
-                    Confirm
-                </Button>
+                <div>
+                    {
+                        error &&
+                        <p className='text-red-500 mb-2'>{error}</p>
+                    }
+                    <Button loading={isLoading} disabled={isLoading || (!password || !confirmPassword)} className="w-full" type="submit">
+                        Confirm
+                    </Button>
+                </div>
             </form>
         </div>
     );
