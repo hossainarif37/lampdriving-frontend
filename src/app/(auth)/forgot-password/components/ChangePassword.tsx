@@ -4,9 +4,14 @@ import { toast } from '@/hooks/use-toast';
 import { useResetPasswordMutation } from '@/redux/api/authApi/authApi';
 import { Eye, EyeClosed, KeyRound, Lock } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { FC, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 
-const ChangePassword: FC = () => {
+
+interface IChangePasswordProps {
+    setSuccess: Dispatch<SetStateAction<boolean>>
+}
+
+const ChangePassword: FC<IChangePasswordProps> = ({ setSuccess }) => {
     const router = useRouter()
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
@@ -29,6 +34,7 @@ const ChangePassword: FC = () => {
             toast({
                 message: res.message
             })
+            setSuccess(true)
             router.push("/forgot-password?step=success")
         }).catch((err) => {
             toast({

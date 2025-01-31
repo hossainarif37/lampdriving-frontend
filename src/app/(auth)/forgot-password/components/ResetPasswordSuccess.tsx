@@ -1,9 +1,16 @@
 import { Button } from '@/components/ui/button';
 import { CircleCheckBig } from 'lucide-react';
 import Link from 'next/link';
-import { FC } from 'react';
+import { useRouter } from 'next/navigation';
+import { FC, useEffect } from 'react';
 
-const ResetPasswordSuccess: FC = () => {
+const ResetPasswordSuccess: FC<{ success: boolean }> = ({ success }) => {
+    const router = useRouter();
+    useEffect(() => {
+        if (!success) {
+            router.push('/forgot-password');
+        }
+    }, [success])
     return (
         <div className="w-full md:w-[450px] xl:w-[500px] max-w-[500px] mx-auto p-10  md:shadow-lg md:rounded-lg md:border">
             <div className="flex items-center justify-center mb-3">

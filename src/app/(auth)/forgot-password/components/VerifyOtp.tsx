@@ -4,15 +4,15 @@ import { toast } from '@/hooks/use-toast';
 import { useVerifyResetPasswordOtpMutation } from '@/redux/api/authApi/authApi';
 import { Lock, ShieldEllipsis } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 interface IVerifyOtpProps {
     email: string
 }
 
 const VerifyOtp: FC<IVerifyOtpProps> = ({ email }) => {
-    const router = useRouter()
-    const [otp, setOtp] = useState("")
+    const router = useRouter();
+    const [otp, setOtp] = useState("");
     const [verifyOtp, { isLoading }] = useVerifyResetPasswordOtpMutation();
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -28,6 +28,12 @@ const VerifyOtp: FC<IVerifyOtpProps> = ({ email }) => {
             })
         })
     };
+
+    useEffect(() => {
+        if (!email) {
+            router.push("/forgot-password");
+        }
+    }, [email])
     return (
         <div className="w-full md:w-[450px] xl:w-[500px] max-w-[500px] p-3 md:p-10 md:shadow-lg md:rounded-md md:border">
             <div className="flex items-center justify-center mb-3">
