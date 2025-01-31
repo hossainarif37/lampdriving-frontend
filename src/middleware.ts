@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 import { jwtDecode } from 'jwt-decode';
 
 const COMMON_PROTECTED_ROUTES = /^\/dashboard\/(profile|settings)/;
-const AUTH_ROUTES = /^\/(?:login|register|instructor-registration)$/;
+const AUTH_ROUTES = /^\/(?:login|register|instructor-registration|forgot-password)$/;
 
 const ROUTE_PERMISSIONS = {
     learner: /^\/dashboard\/learner/,
@@ -17,7 +17,7 @@ const LOGIN_URL = '/login';
 type UserRole = keyof typeof ROUTE_PERMISSIONS;
 
 export const config = {
-    matcher: ['/dashboard/:path*', '/login', '/register', '/instructor-registration']
+    matcher: ['/dashboard/:path*', '/login', '/register', '/instructor-registration', '/forgot-password']
 };
 
 export function middleware(req: NextRequest) {
