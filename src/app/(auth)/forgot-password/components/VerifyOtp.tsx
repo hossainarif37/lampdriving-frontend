@@ -1,17 +1,32 @@
 import { Button } from '@/components/ui/button';
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp';
+import { toast } from '@/hooks/use-toast';
+import { useVerifyResetPasswordOtpMutation } from '@/redux/api/authApi/authApi';
 import { Lock, ShieldEllipsis } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 
-const VerifyOtp: FC = () => {
+interface IVerifyOtpProps {
+    email: string
+}
+
+const VerifyOtp: FC<IVerifyOtpProps> = ({ email }) => {
     const router = useRouter()
     const [otp, setOtp] = useState("")
-
+    const [verifyOtp, { isLoading }] = useVerifyResetPasswordOtpMutation();
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        console.log("Verifying OTP:", otp)
-        router.push("/forgot-password?step=change-password")
+        verifyOtp({ email, otp }).unwrap().then((res) => {
+            toast({
+                message: "OTP verified successfully"
+            })
+            router.push(`/forgot-password?step=change-password&token=${res.data.resetToken}`)
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message
+            })
+        })
     };
     return (
         <div className="w-full md:w-[450px] xl:w-[500px] max-w-[500px] p-3 md:p-10 md:shadow-lg md:rounded-md md:border">
@@ -21,7 +36,7 @@ const VerifyOtp: FC = () => {
                 </span>
             </div>
             <h1 className="text-2xl font-bold text-center text-primary/90">Verify OTP</h1>
-            <p className="mb-2 text-sm text-center">Enter the OTP from your reset password email.</p>
+            <p className="mb-2 text-sm text-center text-accent">Enter the OTP from your reset password email.</p>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className='text-center flex items-center justify-center mt-4'>
                     <InputOTP maxLength={6} onChange={setOtp}>
@@ -38,7 +53,7 @@ const VerifyOtp: FC = () => {
                         </InputOTPGroup>
                     </InputOTP>
                 </div>
-                <Button className="w-full" type="submit">
+                <Button className="w-full" type="submit" loading={isLoading} disabled={otp.length !== 6 || isLoading}>
                     Verify
                 </Button>
             </form>

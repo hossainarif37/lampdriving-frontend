@@ -29,7 +29,7 @@ const ForgotPassword: FC = () => {
         <>
             {
                 step === "send-otp" ? <SendVerificationEmail email={email} setEmail={setEmail} /> :
-                    step === "verify-otp" ? <VerifyOtp /> :
+                    step === "verify-otp" ? <VerifyOtp email={email} /> :
                         step === "change-password" ? <ChangePassword /> :
                             step === "success" && <ResetPasswordSuccess />
             }

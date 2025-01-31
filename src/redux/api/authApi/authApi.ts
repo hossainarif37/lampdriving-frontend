@@ -47,6 +47,13 @@ const usersApi = baseApi.injectEndpoints({
                 url: `/auth/password/reset-email/${data.email}`,
                 method: "POST"
             })
+        }),
+        verifyResetPasswordOtp: builder.mutation<IResponseWithData<{ resetToken: string }>, { email: string, otp: string }>({
+            query: (data) => ({
+                url: `/auth/password/reset/verify-otp`,
+                method: "POST",
+                body: data
+            })
         })
     })
 })
@@ -57,5 +64,6 @@ export const { useRegisterUserMutation,
     useLazyLogOutUserQuery,
     useRegisterInstructorMutation,
     useUpdatePasswordMutation,
-    useResetPasswordEmailMutation
+    useResetPasswordEmailMutation,
+    useVerifyResetPasswordOtpMutation
 } = usersApi;
