@@ -12,7 +12,7 @@ const SendVerificationEmail: FC = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         console.log("Sending reset OTP to:", email)
-        router.push("/forgot-password/verify-otp")
+        router.push("/forgot-password?step=verify-otp")
     }
     return (
         <div className="w-full md:w-[450px] xl:w-[500px] max-w-[500px] mx-auto p-10  md:shadow-lg md:rounded-lg md:border">
