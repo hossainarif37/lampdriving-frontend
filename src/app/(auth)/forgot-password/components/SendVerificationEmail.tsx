@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 
 const SendVerificationEmail: FC = () => {
     const router = useRouter()
-
     const [email, setEmail] = useState("")
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -17,7 +16,7 @@ const SendVerificationEmail: FC = () => {
     return (
         <div className="w-full md:w-[450px] xl:w-[500px] max-w-[500px] mx-auto p-10  md:shadow-lg md:rounded-lg md:border">
             <div className="flex items-center justify-center mb-3">
-                <span className="p-3 bg-secondary/40 rounded-full flex  items-center justify-center">
+                <span className="p-5 bg-secondary/40 rounded-full flex  items-center justify-center">
                     <Lock className="text-primary size-10 " />
                 </span>
             </div>
