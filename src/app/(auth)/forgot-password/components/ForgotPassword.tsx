@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react';
 import SendVerificationEmail from './SendVerificationEmail';
 import VerifyOtp from './VerifyOtp';
 import ChangePassword from './ChangePassword';
+import ResetPasswordSuccess from './ResetPasswordSuccess';
 
 const ForgotPassword: FC = () => {
     const [email, setEmail] = useState();
@@ -29,7 +30,8 @@ const ForgotPassword: FC = () => {
             {
                 step === "send-otp" ? <SendVerificationEmail /> :
                     step === "verify-otp" ? <VerifyOtp /> :
-                        step === "change-password" && <ChangePassword />
+                        step === "change-password" ? <ChangePassword /> :
+                            step === "success" && <ResetPasswordSuccess />
             }
         </>
     );

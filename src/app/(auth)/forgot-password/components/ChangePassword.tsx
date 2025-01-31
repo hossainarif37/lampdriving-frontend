@@ -19,7 +19,7 @@ const ChangePassword: FC = () => {
         }
         console.log("Resetting password")
         alert("Password reset successfully!")
-        router.push("/login")
+        router.push("/forgot-password?step=success")
     }
     const handlePasswordToggle = (field: string) => {
         if (field === 'password') {
