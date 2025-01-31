@@ -1,17 +1,32 @@
-import { FC, useState } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Lock } from "lucide-react"
 import { useRouter } from 'next/navigation';
+import { useResetPasswordEmailMutation } from '@/redux/api/authApi/authApi';
+import { toast } from '@/hooks/use-toast';
 
-const SendVerificationEmail: FC = () => {
+interface ISendVerificationEmailProps {
+    email: string;
+    setEmail: Dispatch<SetStateAction<string>>;
+}
+
+const SendVerificationEmail: FC<ISendVerificationEmailProps> = ({ email, setEmail }) => {
     const router = useRouter()
-    const [email, setEmail] = useState("")
-
+    const [sendResetPasswordEmail, { isLoading }] = useResetPasswordEmailMutation();
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        console.log("Sending reset OTP to:", email)
-        router.push("/forgot-password?step=verify-otp")
+        sendResetPasswordEmail({ email }).unwrap().then((res) => {
+            toast({
+                message: "An reset email has been sent to your email"
+            })
+            router.push("/forgot-password?step=verify-otp")
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong"
+            })
+        })
     }
     return (
         <div className="w-full md:w-[450px] xl:w-[500px] max-w-[500px] mx-auto p-10  md:shadow-lg md:rounded-lg md:border">
@@ -31,7 +46,7 @@ const SendVerificationEmail: FC = () => {
                     required
                     className='w-full xl:h-12 mt-1 pr-10'
                 />
-                <Button className="w-full" type="submit">
+                <Button disabled={!email || isLoading} loading={isLoading} className="w-full" type="submit">
                     Next
                 </Button>
             </form>

@@ -28,7 +28,6 @@ const usersApi = baseApi.injectEndpoints({
         logOutUser: builder.query<IResponseBase, void>({
             query: () => '/auth/logout'
         }),
-
         registerInstructor: builder.mutation<IResponseWithData<IUser>, IRegisterInstructor>({
             query: (data) => ({
                 url: '/auth/instructors/register',
@@ -43,7 +42,20 @@ const usersApi = baseApi.injectEndpoints({
                 body: data
             })
         }),
+        resetPasswordEmail: builder.mutation<IResponseBase, { email: string }>({
+            query: (data) => ({
+                url: `/auth/password/reset-email/${data.email}`,
+                method: "POST"
+            })
+        })
     })
 })
 
-export const { useRegisterUserMutation, useLoginUserMutation, useCurrentUserQuery, useLazyLogOutUserQuery, useRegisterInstructorMutation, useUpdatePasswordMutation } = usersApi;
+export const { useRegisterUserMutation,
+    useLoginUserMutation,
+    useCurrentUserQuery,
+    useLazyLogOutUserQuery,
+    useRegisterInstructorMutation,
+    useUpdatePasswordMutation,
+    useResetPasswordEmailMutation
+} = usersApi;

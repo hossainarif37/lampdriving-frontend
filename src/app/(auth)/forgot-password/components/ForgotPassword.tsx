@@ -7,7 +7,7 @@ import ChangePassword from './ChangePassword';
 import ResetPasswordSuccess from './ResetPasswordSuccess';
 
 const ForgotPassword: FC = () => {
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState<string>('');
     const searchParams = useSearchParams();
     const urlStep = searchParams.get('step');
     const [step, setStep] = useState<"send-otp" | "verify-otp" | "change-password" | "success">("send-otp");
@@ -28,7 +28,7 @@ const ForgotPassword: FC = () => {
     return (
         <>
             {
-                step === "send-otp" ? <SendVerificationEmail /> :
+                step === "send-otp" ? <SendVerificationEmail email={email} setEmail={setEmail} /> :
                     step === "verify-otp" ? <VerifyOtp /> :
                         step === "change-password" ? <ChangePassword /> :
                             step === "success" && <ResetPasswordSuccess />
