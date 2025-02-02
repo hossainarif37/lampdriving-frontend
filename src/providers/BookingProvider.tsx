@@ -38,7 +38,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [bookingHours, setBookingHours] = useState<number>(0);
     const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: 225 });
     const [mockTestPackage, setMockTestPackage] = useState<ITestPackage>({ included: false, price: 390 });
-    const [price, setPrice] = useState<IPrice>({ payableAmount: 0, originalAmount: 0, discountedAmount: 0 });
+    const [price, setPrice] = useState<IPrice>({ paidAmount: 0, originalAmount: 0, discountedAmount: 0, discountedPercentage: 0 });
     const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({ transactionId: '', method: '' });
     const [schedules, setSchedules] = useState<IScheduleInputs[]>([]);
     const [isAllScheduled, setIsAllScheduled] = useState(false);
@@ -138,18 +138,18 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     useEffect(() => {
         const totalAmount = bookingHours * (instructor?.pricePerHour || 0);
         if (bookingHours >= 10) {
-            setPrice({ originalAmount: totalAmount, payableAmount: totalAmount * 0.9, discountedAmount: totalAmount * 0.1 }); // 10% discount
+            setPrice({ originalAmount: totalAmount, paidAmount: totalAmount * 0.9, discountedAmount: totalAmount * 0.1, discountedPercentage: 10 }); // 10% discount
         } else if (bookingHours >= 6) {
-            setPrice({ originalAmount: totalAmount, payableAmount: totalAmount * 0.94, discountedAmount: totalAmount * 0.06 }); // 6% discount (equivalent to paying 94%)
+            setPrice({ originalAmount: totalAmount, paidAmount: totalAmount * 0.94, discountedAmount: totalAmount * 0.06, discountedPercentage: 6 }); // 6% discount (equivalent to paying 94%)
         } else {
-            setPrice({ originalAmount: totalAmount, payableAmount: totalAmount, discountedAmount: 0 }); // No discount
+            setPrice({ originalAmount: totalAmount, paidAmount: totalAmount, discountedAmount: 0, discountedPercentage: 0 }); // No discount
         }
         if (testPackage.included) {
-            setPrice((prevPrice) => ({ ...prevPrice, payableAmount: prevPrice.payableAmount + testPackage.price })); // Add test package price
+            setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + testPackage.price })); // Add test package price
         }
 
         if (mockTestPackage.included) {
-            setPrice((prevPrice) => ({ ...prevPrice, payableAmount: prevPrice.payableAmount + mockTestPackage.price })); // Add test package price
+            setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + mockTestPackage.price })); // Add test package price
         }
     }, [bookingHours, testPackage.included, mockTestPackage.included]);
 

@@ -46,9 +46,10 @@ export interface IBookingContext {
 }
 
 export interface IPrice {
-    payableAmount: number;
+    paidAmount: number;
     originalAmount: number;
     discountedAmount: number;
+    discountedPercentage: number;
 }
 
 export interface ITestPackage {
@@ -75,7 +76,7 @@ export interface IBookingInputs {
     bookingInfo: {
         learner: string;
         instructor: string;
-        price: number;
+        price: IPrice;
         bookingHours: number;
         schedules: IScheduleInputs[];
     };

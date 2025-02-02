@@ -58,13 +58,13 @@ const CheckoutForm: FC<{ clientSecret: string }> = () => {
             bookingInfo: {
                 learner: user ? typeof user?.learner !== "string" ? user?.learner?._id ?? "" : user?.learner ?? "" : "",
                 instructor: instructor?._id,
-                price: price.payableAmount,
+                price: price,
                 bookingHours,
                 schedules
             },
             paymentInfo: {
                 user: user?._id,
-                amount: price.payableAmount,
+                amount: price.paidAmount,
                 transactionId: paymentIntent?.id || (error as any)?.payment_intent?.id,
                 method: "card",
             }
