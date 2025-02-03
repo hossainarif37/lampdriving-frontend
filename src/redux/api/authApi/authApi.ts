@@ -75,7 +75,8 @@ const usersApi = baseApi.injectEndpoints({
             query: (data) => ({
                 url: `/auth/email/verify/${data.token}`,
                 method: "PATCH"
-            })
+            }),
+            invalidatesTags: ['user']
         })
     })
 })
