@@ -64,6 +64,12 @@ const usersApi = baseApi.injectEndpoints({
                     body: data
                 })
             }
+        }),
+        sendEmailVerification: builder.mutation<IResponseBase, { email: string }>({
+            query: (data) => ({
+                url: `/auth/email/verification/${data.email}`,
+                method: "POST"
+            })
         })
     })
 })
@@ -76,5 +82,6 @@ export const { useRegisterUserMutation,
     useUpdatePasswordMutation,
     useResetPasswordEmailMutation,
     useVerifyResetPasswordOtpMutation,
-    useResetPasswordMutation
+    useResetPasswordMutation,
+    useSendEmailVerificationMutation
 } = usersApi;
