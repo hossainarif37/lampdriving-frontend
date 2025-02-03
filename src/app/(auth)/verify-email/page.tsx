@@ -21,8 +21,8 @@ const VerifyEmailPage: FC = () => {
             router.push('/');
             return;
         }
-        if (token && user?.email) {
-            verifyEmail({ email: user.email }).unwrap().then((res) => {
+        if (token && isAuthenticate) {
+            verifyEmail({ token }).unwrap().then((res) => {
                 toast({
                     message: res.message
                 })

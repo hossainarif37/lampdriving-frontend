@@ -71,10 +71,10 @@ const usersApi = baseApi.injectEndpoints({
                 method: "POST"
             })
         }),
-        verifyEmail: builder.mutation<IResponseBase, { email: string }>({
+        verifyEmail: builder.mutation<IResponseBase, { token: string }>({
             query: (data) => ({
-                url: `/auth/email/verification/${data.email}`,
-                method: "POST"
+                url: `/auth/email/verify/${data.token}`,
+                method: "PATCH"
             })
         })
     })
