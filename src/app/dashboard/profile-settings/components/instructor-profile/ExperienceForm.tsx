@@ -2,6 +2,9 @@
 
 import ExperienceFields from '@/components/shared/forms/ExperienceFields';
 import { Button } from '@/components/ui/button';
+import { toast } from '@/hooks/use-toast';
+import { useUpdateInstructorMutation } from '@/redux/api/instructorApi/instructorApi';
+import { useUpdateUserMutation } from '@/redux/api/userApi/userApi';
 import { useAppSelector } from '@/redux/hook';
 import { IInstructor } from '@/types/instructor';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
@@ -25,13 +28,13 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
     const [isClicked, setIsClicked] = useState(false);
     // const { instructor } = useAppSelector((state) => state.authSlice);
     const defaultValues = {
-        experience: instructor?.experience || 0,
-        description: instructor?.description || '',
-        languages: instructor?.languages || [],
-        documents: instructor?.documents || {}
+        experience: instructor?.experience,
+        description: instructor?.description,
+        languages: instructor?.languages,
+        documents: instructor?.documents
     }
 
-    console.log('Instructor', instructor);
+    const [updateInstructor, { isLoading: isUpdating }] = useUpdateInstructorMutation();
 
     // Driving License
     const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(defaultValues?.documents?.drivingLicense || '');
@@ -67,13 +70,24 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
         }
 
         const experienceData = {
-            ...data,
+            experience: Number(data.experience),
+            description: data.description,
             documents: {
                 drivingLicense: drivingLicenseURL,
                 experienceCertificate: experienceCertificateURL
             },
             languages: selectedLanguages
         }
+
+        updateInstructor(experienceData).unwrap()
+            .then((res) => {
+                console.log('res', res);
+                toast({ message: res.message })
+            })
+            .catch((error) => {
+                console.error('Failed to update profile:', error);
+                toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
+            })
     }
 
     useEffect(() => {
@@ -123,7 +137,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
                     selectedLanguagesError={selectedLanguagesError}
                 />
 
-                <Button type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>
+                <Button disabled={isUpdating} loading={isUpdating} type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>
             </form>
         </div>
     );

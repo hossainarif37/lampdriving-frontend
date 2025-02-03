@@ -48,6 +48,7 @@ const InstructorProfile: FC = () => {
           <CarInfoForm
             carImageFile={carImageFile}
             setCarImageFile={setCarImageFile}
+            instructor={data?.data}
           />
         );
       case 'security':
