@@ -101,7 +101,7 @@ export interface IBooking {
     schedules: string | ISchedule[];
     review: IReview | undefined;
     payment: string;
-    price: number;
+    price: IPrice;
     status: "pending" | "accepted" | "completed" | "cancelled";
     createdAt: Date;
     updatedAt: Date;
