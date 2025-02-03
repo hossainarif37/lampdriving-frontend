@@ -52,10 +52,8 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const handleStepChange = (stepKey: string) => {
         const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
 
-        const requestedStep = steps.find(step => step.key === stepKey);
-
+        const requestedStep = stepsWithRegister.find(step => step.key === stepKey);
         if (!requestedStep || requestedStep.key === 'instructor') return;
-
         // validation for each step
         if (stepKey !== 'instructor' && stepKey !== 'package-selection') {
             if (stepKey === 'schedule' && !isPackageSelected) {
@@ -68,7 +66,6 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
                 return;
             }
         }
-
         // if pass all validation then redirect to the step
         const params = new URLSearchParams(urlSearchParams.toString());
         params.set('step', stepKey);
@@ -106,7 +103,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         isRegistering, setIsRegistering,
         loginButtonRef,
         isLogging, setIsLogging
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, availableScheduleHours, mockTestPackage, isTestPackageSelected, isAllScheduled, registerButtonRef]);
+    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, availableScheduleHours, mockTestPackage, isTestPackageSelected, isAllScheduled, registerButtonRef, steps]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams.get('instructor');
@@ -121,9 +118,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     // handle steps
     useEffect(() => {
         setSteps(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
-    }, [isAuthLoading])
+    }, [isAuthLoading, isAuthenticate])
 
-
+    // 
     // handle instructor data
     useEffect(() => {
         if (!instructorResponse?.success && !isLoading) {
@@ -163,7 +160,6 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
             handleStepChange('package-selection');
             return;
         }
-        // console.log(isPackageSelected, schedules.length, isAuthenticate)
         // Validate the URL step
 
         const isAllScheduled = (testPackage.included ? isTestPackageSelected ? true : false : true) && availableScheduleHours === 0;
@@ -179,11 +175,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
                 return;
             }
             else if (stepFromUrl === 'payment' && (!isPackageSelected || !isAllScheduled || !isAuthenticate)) {
-                console.log('first')
                 if (!isPackageSelected) {
                     handleStepChange('package-selection');
                 } else if (!isAllScheduled) {
-                    console.log('second');
                     handleStepChange('schedule');
                 } else if (!isAuthenticate) {
                     handleStepChange('register');
