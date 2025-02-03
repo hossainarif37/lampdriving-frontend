@@ -76,7 +76,7 @@ const LearnerBookingsTable: FC = () => {
                                                 <TableCell className="font-medium">
                                                     <div>
                                                         <p>
-                                                            ${(booking.price).toFixed(2)}
+                                                            ${(booking.price).paidAmount.toFixed(2)}
                                                         </p>
                                                         <p>
                                                             {(booking.payment as any).transactionId}
