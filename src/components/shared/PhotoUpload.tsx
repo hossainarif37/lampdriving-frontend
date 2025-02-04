@@ -123,7 +123,7 @@ const PhotoUpload = <T extends { profileImg?: string }>({
     };
 
     return (
-        <div className='w-full flex justify-center mt-10 overflow-hidden'>
+        <div className='w-full flex justify-center mt-10'>
             <div className='relative'>
                 {/* Image */}
                 <div className={`w-[170px] h-[170px] rounded-2xl overflow-hidden shadow-lg border flex items-center justify-center text-accent`}>
@@ -171,7 +171,7 @@ const PhotoUpload = <T extends { profileImg?: string }>({
 
                 {
                     (profilePhoto?.file && !isSuccess) &&
-                    <Button disabled={imageUploadLoading} type='button' onClick={handleRemoveImage} className='absolute top-0 right-0 shadow-lg bg-primary hover:bg-red-500 px-0 h-8 w-8 -translate-y-3 translate-x-3 rounded-lg flex justify-center items-center'>
+                    <Button disabled={imageUploadLoading} type='button' onClick={handleRemoveImage} className='absolute top-0 right-0 shadow-lg bg-primary hover:bg-red-500 px-0 h-4 w-4 -translate-y-3 translate-x-3 rounded-lg flex justify-center items-center'>
                         <X />
                     </Button>
                 }
