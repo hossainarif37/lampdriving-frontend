@@ -35,9 +35,15 @@ interface IExperienceFieldsProps {
     setDrivingLicenseError: Dispatch<SetStateAction<string>>;
     experienceCertificateError: string;
     setExperienceCertificateError: Dispatch<SetStateAction<string>>;
+    instructorLicenseFile: File | null;
+    setInstructorLicenseFile: Dispatch<SetStateAction<File | null>>;
+    instructorLicenseURL: string;
+    setInstructorLicenseURL: Dispatch<SetStateAction<string>>;
+    instructorLicenseError: string;
+    setInstructorLicenseError: Dispatch<SetStateAction<string>>;
 }
 
-const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaultValues, setDefaultValues, isRequired, selectedLanguages, drivingLicenseFile, setDrivingLicenseFile, drivingLicenseURL, setDrivingLicenseURL, experienceCertificateFile, setExperienceCertificateFile, experienceCertificateURL, setExperienceCertificateURL, setSelectedLanguages, drivingLicenseError, setDrivingLicenseError, selectedLanguagesError, setSelectedLanguagesError, experienceCertificateError, setExperienceCertificateError }) => {
+const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaultValues, setDefaultValues, isRequired, selectedLanguages, drivingLicenseFile, setDrivingLicenseFile, drivingLicenseURL, setDrivingLicenseURL, experienceCertificateFile, setExperienceCertificateFile, experienceCertificateURL, setExperienceCertificateURL, setSelectedLanguages, drivingLicenseError, setDrivingLicenseError, selectedLanguagesError, setSelectedLanguagesError, experienceCertificateError, setExperienceCertificateError, instructorLicenseFile, setInstructorLicenseFile, instructorLicenseURL, setInstructorLicenseURL, instructorLicenseError, setInstructorLicenseError }) => {
     const removeDrivingLicense = () => {
         setDrivingLicenseFile(null);
         setDrivingLicenseURL('');
@@ -46,6 +52,11 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
     const removeExperienceCertificate = () => {
         setExperienceCertificateFile(null);
         setExperienceCertificateURL('');
+    };
+
+    const removeInstructorLicense = () => {
+        setInstructorLicenseFile(null);
+        setInstructorLicenseURL('');
     };
 
     return (
@@ -91,6 +102,22 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
                         className='mt-1'
                     />
                     {selectedLanguagesError && <p className='text-red-500 text-sm mt-1'>{selectedLanguagesError}</p>}
+                </div>
+
+                {/* Driving License */}
+                <div className='w-full space-y-1'>
+                    <label htmlFor="first-name" className='font-semibold text-primary'>Instructor License</label>
+                    <FileUpload
+                        label="Click 1 file to upload"
+                        maxSize="1500x1500px"
+                        imageUrl={instructorLicenseURL}
+                        setImageUrl={setInstructorLicenseURL}
+                        setImageError={setInstructorLicenseError}
+                        selectedFile={instructorLicenseFile}
+                        setSelectedFile={setInstructorLicenseFile}
+                        removeImage={removeInstructorLicense}
+                    />
+                    {drivingLicenseError && <p className='text-red-500 text-sm mt-1'>{drivingLicenseError}</p>}
                 </div>
 
                 {/* Driving License */}

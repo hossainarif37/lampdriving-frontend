@@ -7,9 +7,9 @@ interface IGetSchedulesQuery {
     id: string;
     type: "lesson" | "test" | "mock-test" | "blank";
     status?: "upcoming" | "ongoing" | "completed" | "rescheduled" | "cancelled";
-    searchKey: string;
-    limit: string;
-    page: string;
+    searchKey?: string;
+    limit?: string;
+    page?: string;
 }
 
 interface IRescheduleASchedule {
@@ -59,7 +59,13 @@ const scheduleApi = baseApi.injectEndpoints({
                 body: data
             }),
             invalidatesTags: ["schedule", "booking"]
-        })
+        }),
+
+        getLearnerSchedules: builder.query({
+            query: ({ learnerId }) => `/schedule/learner/${learnerId}?populate=instructor.user&instructorFields=experience,feedback,user&userFields=name,profileImg,username`,
+            providesTags: ["schedule"]
+        }),
+
     })
 })
 
@@ -70,4 +76,6 @@ export const {
     useRescheduleAScheduleMutation,
     useUpdateAScheduleStatusMutation,
     useCreateAScheduleMutation,
-    useGetAScheduleQuery } = scheduleApi; 
+    useGetAScheduleQuery,
+    useGetLearnerSchedulesQuery
+} = scheduleApi; 

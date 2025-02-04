@@ -15,7 +15,7 @@ const UpdatePassword: FC<{ className?: string }> = ({ className }) => {
         newPasswordVisible: false
     });
 
-    const { register, handleSubmit, formState: { errors }, watch } = useForm<IUpdatePasswordInputs>();
+    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm<IUpdatePasswordInputs>();
     const router = useRouter();
     const [updatePassword, { isLoading }] = useUpdatePasswordMutation();
 
@@ -30,11 +30,15 @@ const UpdatePassword: FC<{ className?: string }> = ({ className }) => {
     const onSubmit = (data: IUpdatePasswordInputs) => {
         console.log(data);
         updatePassword(data).unwrap().then((res) => {
+            console.log('res', res);
             toast({
                 message: "Password Updated Successfully",
             })
-        }).catch((err) => {
-            console.log(err);
+            reset();
+
+        }).catch((error) => {
+            console.log('Failed to update profile:', error);
+            toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
         })
     };
 
@@ -52,7 +56,7 @@ const UpdatePassword: FC<{ className?: string }> = ({ className }) => {
                 handlePasswordToggle={handlePasswordToggle}
             />
 
-            <Button className='w-full mt-7 gradient-color h-12' disabled={isLoading}>Update Password</Button>
+            <Button className='w-full mt-7 gradient-color h-12' disabled={isLoading} loading={isLoading}>Update Password</Button>
         </form >
     );
 };

@@ -45,7 +45,7 @@ const UpdatePasswordField: FC<UpdatePasswordFieldProps> = ({ register, errors, h
                         />
 
                         <span
-                            className="absolute right-3 top-1/2 -translate-y-1/2"
+                            className="absolute cursor-pointer right-3 top-1/2 -translate-y-1/2"
                             onClick={() => handlePasswordToggle("old-password")}
                         >
                             {oldPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
@@ -78,7 +78,7 @@ const UpdatePasswordField: FC<UpdatePasswordFieldProps> = ({ register, errors, h
                         />
 
                         <span
-                            className="absolute right-3 top-1/2 -translate-y-1/2"
+                            className="absolute cursor-pointer right-3 top-1/2 -translate-y-1/2"
                             onClick={() => handlePasswordToggle("new-password")}
                         >
                             {newPasswordVisible ? <Eye width={20} height={20} /> : <EyeClosed width={20} height={20} />}
