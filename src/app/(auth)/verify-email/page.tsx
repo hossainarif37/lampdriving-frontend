@@ -51,7 +51,7 @@ const VerifyEmailPage: FC = () => {
                             <div className="text-center mb-12">
                                 <CheckCircle className="mx-auto h-16 w-16 text-green-500 mb-4" />
                                 <h1 className="text-3xl font-bold text-gray-900">{error}</h1>
-                                <p className="mt-2 text-gray-600">You can't do any actions with your account before verify your email.</p>
+                                <p className="mt-2 text-gray-600">You can&apos;t do any actions with your account before verify your email.</p>
                             </div>
                             :
                             <div className="text-center mb-12">

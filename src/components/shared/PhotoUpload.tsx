@@ -123,7 +123,7 @@ const PhotoUpload = <T extends { profileImg?: string }>({
     };
 
     return (
-        <div className='w-full flex justify-center mt-10 overflow-hidden'>
+        <div className='w-full flex justify-center mt-10'>
             <div className='relative'>
                 {/* Image */}
                 <div className={`w-[170px] h-[170px] rounded-2xl overflow-hidden shadow-lg border flex items-center justify-center text-accent`}>

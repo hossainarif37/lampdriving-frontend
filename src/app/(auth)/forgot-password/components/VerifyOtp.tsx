@@ -100,7 +100,7 @@ const VerifyOtp: FC<IVerifyOtpProps> = ({ email, handleResendResetPasswordEmail 
                         Verify
                     </Button>
                     <div className="flex items-center justify-center gap-2 text-sm mt-2">
-                        <span className="text-primary/90">Didn't receive code? <span className='font-medium'>{formatTime(timer)}</span></span>
+                        <span className="text-primary/90">Didn&apos;t receive code? <span className='font-medium'>{formatTime(timer)}</span></span>
                         <button
                             onClick={handleResend}
                             disabled={isResendDisabled}

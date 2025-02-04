@@ -6,6 +6,7 @@ import { Calendar, Clock, DollarSign, MapPin, User } from 'lucide-react';
 import { format } from 'date-fns';
 import { firstLetterUppercase } from '@/utils/firstLetterUppercase';
 import Image from 'next/image';
+import { IBooking } from '@/types/booking';
 
 interface IScheduleDetailsProps {
     role?: 'instructor' | 'learner';
@@ -144,7 +145,7 @@ const ScheduleDetails: FC<IScheduleDetailsProps> = ({ role, id }) => {
                         <div className="flex-1">
                             <h4 className="font-medium text-gray-900">Booking Information</h4>
                             <div className="mt-1 space-y-1">
-                                <p className="text-gray-600">Price: ${(schedule.booking as any).price}</p>
+                                <p className="text-gray-600">Price: ${(schedule.booking as any as IBooking).price.paidAmount}</p>
                                 {
                                     (schedule.booking as any).bookingHours &&
                                     <p className="text-gray-600">Total Credit: {(schedule.booking as any).bookingHours} hours</p>
