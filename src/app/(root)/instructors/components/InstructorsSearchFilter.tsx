@@ -1,11 +1,10 @@
 "use client";
 import { Input } from '@/components/ui/input';
 import { Brush, Paintbrush, Search } from 'lucide-react';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command"
-import { sydneySuburbs } from '@/constant/sydneySuburbs';
 import { Button } from '@/components/ui/button';
 interface IInstructorSearchFilterProps {
     searchParams?: {
@@ -21,51 +20,104 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
     const [carType, setCarType] = useState<'auto' | 'manual' | 'all'>(
         searchParams?.['vehicle.type'] === "auto" || searchParams?.['vehicle.type'] === "manual" ? searchParams?.['vehicle.type'] : 'all');
     const [selectedSuburb, setSelectedSuburb] = useState<string>(searchParams?.searchKey || '');
+    const [filteredSuburbs, setFilteredSuburbs] = useState<{ label: string; value: string }[]>([]);
 
 
-    const urlSearchParams = useSearchParams();
+
+    const urlSearchParams = useSearchParams() || new URLSearchParams();
     const { replace } = useRouter();
 
-    // Function to handle search
+
+    // Fetch initial suburbs on mount
+    useEffect(() => {
+        fetch(`/api/sydneySuburbApi?limit=12`)
+            .then((res) => res.json())
+            .then((data) => setFilteredSuburbs(data))
+            .catch((err) => console.error("Error fetching suburbs:", err));
+    }, []);
+    // Handle search input change
+    const handleSearchChange = async (query: string) => {
+        setSelectedSuburb(query);
+
+        const searchURL = query
+            ? `/api/sydneySuburbApi?search=${query}`
+            : `/api/sydneySuburbApi?limit=12`;
+
+        fetch(searchURL)
+            .then((res) => res.json())
+            .then((data) => setFilteredSuburbs(data))
+            .catch((err) => console.error("Error fetching suburbs:", err));
+    };
+
     const handleSearch = (searchKey: string) => {
-        const searchParams = new URLSearchParams(urlSearchParams);
+        const searchParams = new URLSearchParams(urlSearchParams || '');
 
         if (searchKey) {
-            searchParams.set('searchKey', searchKey.toString());
-            searchParams.delete('page');
+            searchParams.set('searchKey', searchKey);
+            searchParams.delete('page'); // Reset pagination on search
             setSelectedSuburb(searchKey);
         } else {
             searchParams.delete('searchKey');
         }
-        replace(`?${searchParams.toString()}`);
-    }
 
-    // Function to handle filter
-    const handleFilter = (field: string, value: string) => {
-        const searchParams = new URLSearchParams(urlSearchParams);
-        if (value) {
-            searchParams.set(field, value);
-            replace(`?${searchParams.toString()}`);
-        } else {
-            searchParams.delete(field);
-        }
-        searchParams.delete('page');
         replace(`?${searchParams.toString()}`);
-    }
+    };
 
-    // Function to handle car type
+
+    // Function to handle car type change
     const handleChangeCarType = (type: 'auto' | 'manual' | 'all') => {
         setCarType(type);
-        if (type == "auto" || type == "manual") {
-            handleFilter('vehicle.type', type);
+        const searchParams = new URLSearchParams(urlSearchParams || '');
+
+        if (type === "auto" || type === "manual") {
+            searchParams.set('vehicle.type', type);
         } else {
-            handleFilter('vehicle.type', '');
+            searchParams.delete('vehicle.type');
         }
-    }
+
+        searchParams.delete('page');
+        replace(`?${searchParams.toString()}`);
+    };
+    // Function to handle search
+    // const handleSearch = (searchKey: string) => {
+    //     const searchParams = new URLSearchParams(urlSearchParams || '');
+
+    //     if (searchKey) {
+    //         searchParams.set('searchKey', searchKey.toString());
+    //         searchParams.delete('page');
+    //         setSelectedSuburb(searchKey);
+    //     } else {
+    //         searchParams.delete('searchKey');
+    //     }
+    //     replace(`?${searchParams.toString()}`);
+    // }
+
+    // // Function to handle filter
+    // const handleFilter = (field: string, value: string) => {
+    //     const searchParams = new URLSearchParams(urlSearchParams || '');
+    //     if (value) {
+    //         searchParams.set(field, value);
+    //         replace(`?${searchParams.toString()}`);
+    //     } else {
+    //         searchParams.delete(field);
+    //     }
+    //     searchParams.delete('page');
+    //     replace(`?${searchParams.toString()}`);
+    // }
+
+    // Function to handle car type
+    // const handleChangeCarType = (type: 'auto' | 'manual' | 'all') => {
+    //     setCarType(type);
+    //     if (type == "auto" || type == "manual") {
+    //         handleFilter('vehicle.type', type);
+    //     } else {
+    //         handleFilter('vehicle.type', '');
+    //     }
+    // }
 
     // Function to handle reset filters
     const handleResetFilters = () => {
-        const searchParams = new URLSearchParams(urlSearchParams);
+        const searchParams = new URLSearchParams(urlSearchParams || '');
         searchParams.delete('searchKey');
         searchParams.delete('vehicle.type');
         searchParams.delete('page');
@@ -98,15 +150,15 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
                             <Input
                                 readOnly
                                 value={selectedSuburb}
-                                onChange={(e) => handleSearch(e.target.value)}
+                                onChange={(e) => handleSearchChange(e.target.value)}
                                 placeholder="Enter your suburb" className='h-12 pl-12 bg-light border border-primary/15' />
                         </div>
                     </PopoverTrigger>
                     <PopoverContent className="md:w-[250px] lg:w-[434px] p-2">
                         <Command>
-                            <CommandInput placeholder="Enter your suburb" />
+                            <CommandInput onValueChange={handleSearchChange} placeholder="Enter your suburb" />
                             <CommandList>
-                                {sydneySuburbs.map((suburb, index) => (
+                                {filteredSuburbs.map((suburb, index) => (
                                     <CommandItem
                                         className='py-3'
                                         key={index}
