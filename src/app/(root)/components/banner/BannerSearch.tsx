@@ -2,8 +2,7 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Command, CommandInput, CommandList, CommandItem } from "@/components/ui/command"
 import { useRouter } from 'next/navigation';
-import { FC, useState } from 'react';
-import { sydneySuburbs } from '@/constant/sydneySuburbs';
+import { FC, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Check } from 'lucide-react';
 
@@ -11,6 +10,7 @@ const BannerSearch: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [carType, setCarType] = useState<'auto' | 'manual'>('auto');
     const [selectedSuburb, setSelectedSuburb] = useState<string>('');
+    const [filteredSuburbs, setFilteredSuburbs] = useState<{ label: string; value: string }[]>([]);
 
     const router = useRouter();
 
@@ -21,6 +21,34 @@ const BannerSearch: FC = () => {
         }
         router.push(`/instructors?vehicle.type=${carType}&searchKey=${selectedSuburb}`)
     }
+
+
+    // Fetch JSON data
+    useEffect(() => {
+        fetch(`/api/sydneySuburbApi?limit=12`)
+            .then((res) => res.json())
+            .then((data) => {
+                setFilteredSuburbs(data);
+            })
+            .catch((err) => console?.error("Error fetching suburbs:", err));
+    }, []);
+
+    // Handle search input change
+    const handleSearchChange = async (query: string) => {
+        setSelectedSuburb(query); // Ensure input updates
+
+        const searchURL = query
+            ? `/api/sydneySuburbApi?search=${query}`
+            : `/api/sydneySuburbApi?limit=12`;
+
+        fetch(searchURL)
+            .then((res) => res.json())
+            .then((data) => {
+                setFilteredSuburbs(data);
+            })
+            .catch((err) => console.error("Error fetching suburbs:", err));
+    };
+
 
     return (
         <div className="bg-light lg:w-[500px] md:w-[400px] w-full rounded-lg lg:px-8 md:px-6 px-3 lg:py-14 md:py-10 py-7">
@@ -63,8 +91,8 @@ const BannerSearch: FC = () => {
                         <PopoverTrigger asChild>
                             <input
                                 value={selectedSuburb}
-                                onChange={(e) => setSelectedSuburb(e.target.value)}
-                                readOnly
+                                onChange={(e) => handleSearchChange(e.target.value)}
+                                // readOnly
                                 className="flex-1 px-4 py-3 rounded-md text-primary focus:outline-none placeholder:text-accent"
                                 type="text"
                                 placeholder="Enter your suburb"
@@ -72,9 +100,9 @@ const BannerSearch: FC = () => {
                         </PopoverTrigger>
                         <PopoverContent className="md:w-[350px] lg:w-[434px] p-2">
                             <Command>
-                                <CommandInput placeholder="Enter your suburb" />
+                                <CommandInput onValueChange={handleSearchChange} placeholder="Enter your suburb" />
                                 <CommandList>
-                                    {sydneySuburbs.map((suburb, index) => (
+                                    {filteredSuburbs.map((suburb, index) => (
                                         <CommandItem
                                             className='py-3'
                                             key={index}
