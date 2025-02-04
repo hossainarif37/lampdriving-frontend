@@ -117,7 +117,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ register, errors, defaul
                         setSelectedFile={setInstructorLicenseFile}
                         removeImage={removeInstructorLicense}
                     />
-                    {drivingLicenseError && <p className='text-red-500 text-sm mt-1'>{drivingLicenseError}</p>}
+                    {instructorLicenseError && <p className='text-red-500 text-sm mt-1'>{instructorLicenseError}</p>}
                 </div>
 
                 {/* Driving License */}
