@@ -171,7 +171,7 @@ const PhotoUpload = <T extends { profileImg?: string }>({
 
                 {
                     (profilePhoto?.file && !isSuccess) &&
-                    <Button disabled={imageUploadLoading} type='button' onClick={handleRemoveImage} className='absolute top-0 right-0 shadow-lg bg-primary hover:bg-red-500 px-0 h-8 w-8 -translate-y-3 translate-x-3 rounded-lg flex justify-center items-center'>
+                    <Button disabled={imageUploadLoading} size={"icon"} type='button' onClick={handleRemoveImage} className='absolute top-0 right-0 shadow-lg bg-primary hover:bg-red-500 -translate-y-3 translate-x-3 rounded-lg flex justify-center items-center'>
                         <X />
                     </Button>
                 }
