@@ -19,7 +19,7 @@ const InstructorRegistration: FC = () => {
     const [carImageFile, setCarImageFile] = useState<File | null>(null);
 
     const searchParams = useSearchParams();
-    const step = searchParams.get('step');
+    const step = searchParams?.get('step');
 
     const isPersonalInfoStep = step === 'personal-info';
     const isExperienceStep = step === 'experience';
