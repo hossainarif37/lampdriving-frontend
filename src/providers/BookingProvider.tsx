@@ -17,7 +17,7 @@ const BookingContext = createContext<IBookingContext | undefined>(undefined);
 // Create the provider component
 export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const urlSearchParams = useSearchParams();
-    const step = urlSearchParams.get('step');
+    const step = urlSearchParams?.get('step');
 
     // Submit button ref
     const registerButtonRef = useRef<HTMLButtonElement>(null);
@@ -67,7 +67,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
             }
         }
         // if pass all validation then redirect to the step
-        const params = new URLSearchParams(urlSearchParams.toString());
+        const params = new URLSearchParams(urlSearchParams?.toString());
         params.set('step', stepKey);
         router.push(`?${params.toString()}`);
         setCurrentStep(requestedStep);
@@ -106,7 +106,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, availableScheduleHours, mockTestPackage, isTestPackageSelected, isAllScheduled, registerButtonRef, steps]);
 
     const router = useRouter();
-    const instructorQuery = urlSearchParams.get('instructor');
+    const instructorQuery = urlSearchParams?.get('instructor');
 
     if (!instructorQuery) {
         router.push('/');
@@ -153,7 +153,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // Handle initial step and URL changes
     useEffect(() => {
-        const stepFromUrl = urlSearchParams.get('step');
+        const stepFromUrl = urlSearchParams?.get('step');
         const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
 
         if (!stepFromUrl) {

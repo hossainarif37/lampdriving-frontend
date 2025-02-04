@@ -20,7 +20,7 @@ const ChangePassword: FC<IChangePasswordProps> = ({ setSuccess }) => {
 
     const [resetPassword, { isLoading }] = useResetPasswordMutation();
     const searchParams = useSearchParams();
-    const token = searchParams.get('token');
+    const token = searchParams?.get('token');
 
     const { register, handleSubmit, formState: { errors }, watch } = useForm<{ password: string, confirmPassword: string }>();
     const password = watch('password');

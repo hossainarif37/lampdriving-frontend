@@ -7,7 +7,7 @@ import { FC } from 'react';
 const InstructorsNotFound: FC = () => {
     const urlSearchParams = useSearchParams();
     const { replace } = useRouter();
-    const searchParams = new URLSearchParams(urlSearchParams);
+    const searchParams = new URLSearchParams(urlSearchParams || '');
     const searchKey = searchParams.get('searchKey');
     const vehicleType = searchParams.get('vehicle.type');
     const page = searchParams.get('page');

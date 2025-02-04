@@ -17,7 +17,7 @@ const BookingInfo: FC = () => {
     const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
 
     const urlSearchParams = useSearchParams();
-    const searchParams = new URLSearchParams(urlSearchParams);
+    const searchParams = new URLSearchParams(urlSearchParams || '');
 
     // handle trigger function for hook form
     const steps = searchParams.get('step');

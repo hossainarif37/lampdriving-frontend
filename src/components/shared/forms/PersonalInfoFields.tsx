@@ -29,7 +29,7 @@ interface PersonalInfoFieldsProps {
 
 const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, defaultValues, control, isRequired }) => {
   const pathname = usePathname();
-  const isDashboard = pathname.includes("dashboard");
+  const isDashboard = pathname?.includes("dashboard");
   return (
     <>
       <div className='w-full mt-5'>

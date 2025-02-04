@@ -145,7 +145,7 @@ export const MultiSelect = React.forwardRef<
     // const [isAnimating, setIsAnimating] = React.useState(false);
     const searchParams = useSearchParams()
 
-    const step = searchParams.get('step');
+    const step = searchParams?.get('step');
     const isServicesStep = step === 'services';
     const isExperienceStep = step === 'experience';
 

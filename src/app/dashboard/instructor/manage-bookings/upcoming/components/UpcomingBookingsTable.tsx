@@ -14,23 +14,23 @@ import { ISchedule } from '@/types/schedule';
 
 const UpcomingBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
-    const [page, setPage] = useState(urlSearchParams.get('page') || '1');
-    const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
+    const [page, setPage] = useState(urlSearchParams?.get('page') || '1');
+    const [limit, setLimit] = useState(urlSearchParams?.get('limit') || '8');
     const [isSearched, setIsSearched] = useState(false);
 
     const { data, isLoading } = useGetMyBookingsQuery(
         {
             status: "upcoming",
-            searchKey: urlSearchParams.get('searchKey') || '',
+            searchKey: urlSearchParams?.get('searchKey') || '',
             limit: limit,
             page: page
         });
 
     useEffect(() => {
-        setPage(urlSearchParams.get('page') || '1');
-        setLimit(urlSearchParams.get('limit') || '8');
+        setPage(urlSearchParams?.get('page') || '1');
+        setLimit(urlSearchParams?.get('limit') || '8');
 
-        if (urlSearchParams.get('searchKey')?.length) {
+        if (urlSearchParams?.get('searchKey')?.length) {
             setIsSearched(true);
         } else {
             setIsSearched(false);
@@ -63,7 +63,7 @@ const UpcomingBookingsTable: FC = () => {
                                         const learner = typeof booking.learner !== 'string' ? typeof booking.learner.user !== 'string' ? booking.learner.user : undefined : undefined;
                                         // sort the schedules by date
                                         const schedules: ISchedule[] = typeof booking.schedules !== 'string' ? [...booking.schedules].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()) : [];
-                                        
+
                                         // find the first upcoming or rescheduled schedule
                                         const upcomingSchedule = schedules.find((schedule: ISchedule) => (schedule.status === 'upcoming' || schedule.status === 'rescheduled'));
                                         return (

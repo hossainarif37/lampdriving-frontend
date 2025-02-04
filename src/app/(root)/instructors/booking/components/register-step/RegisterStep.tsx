@@ -8,7 +8,7 @@ import { useAppSelector } from '@/redux/hook';
 const RegisterStep: FC = () => {
     const urlSearchParams = useSearchParams();
 
-    const step = urlSearchParams.get('step');
+    const step = urlSearchParams?.get('step');
 
 
     const registerStep = step === 'register'

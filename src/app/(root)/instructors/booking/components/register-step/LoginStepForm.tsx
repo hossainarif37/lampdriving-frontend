@@ -29,7 +29,7 @@ const LoginFormStep: FC = () => {
                 message: res.message
             });
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
-            const params = new URLSearchParams(urlSearchParams.toString());
+            const params = new URLSearchParams(urlSearchParams?.toString());
             const step = steps.find(step => step.key === "payment");
             if (!step) {
                 return;
@@ -50,7 +50,7 @@ const LoginFormStep: FC = () => {
     // handler for navigating with exisiting query
     const handleNavigate = () => {
         handleStepChange("register");
-        const searchParams = new URLSearchParams(urlSearchParams);
+        const searchParams = new URLSearchParams(urlSearchParams || '');
         searchParams.set('step', 'register');
         router.replace(`?${searchParams.toString()}`);
     }

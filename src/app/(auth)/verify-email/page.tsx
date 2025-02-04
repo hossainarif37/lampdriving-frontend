@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 import { Skeleton } from '@/components/ui/skeleton';
 import { toast } from '@/hooks/use-toast';
@@ -11,7 +12,7 @@ import { FC, useEffect, useState } from 'react';
 const VerifyEmailPage: FC = () => {
     const { user, isAuthenticate, isAuthLoading } = useAppSelector(state => state.authSlice);
     const [error, setError] = useState("");
-    const token = useSearchParams().get('token');
+    const token = useSearchParams()?.get('token');
     const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
 
     const router = useRouter();
