@@ -1,0 +1,202 @@
+[
+    {
+        "label": "Abbotsford, NSW 2046",
+        "value": "Abbotsford, NSW 2046",
+        "coordinates": [
+            -33.8506,
+            151.1298
+        ]
+    },
+    {
+        "label": "Alexandria, NSW 2015",
+        "value": "Alexandria, NSW 2015",
+        "coordinates": [
+            -33.9022,
+            151.2006
+        ]
+    },
+    {
+        "label": "Annandale, NSW 2038",
+        "value": "Annandale, NSW 2038",
+        "coordinates": [
+            -33.8811,
+            151.1705
+        ]
+    },
+    {
+        "label": "Ashfield, NSW 2131",
+        "value": "Ashfield, NSW 2131",
+        "coordinates": [
+            -33.8888,
+            151.1223
+        ]
+    },
+    {
+        "label": "Balmain, NSW 2041",
+        "value": "Balmain, NSW 2041",
+        "coordinates": [
+            -33.8578,
+            151.1805
+        ]
+    },
+    {
+        "label": "Bankstown, NSW 2200",
+        "value": "Bankstown, NSW 2200",
+        "coordinates": [
+            -33.9180,
+            151.0333
+        ]
+    },
+    {
+        "label": "Bondi, NSW 2026",
+        "value": "Bondi, NSW 2026",
+        "coordinates": [
+            -33.8915,
+            151.2767
+        ]
+    },
+    {
+        "label": "Burwood, NSW 2134",
+        "value": "Burwood, NSW 2134",
+        "coordinates": [
+            -33.8779,
+            151.1033
+        ]
+    },
+    {
+        "label": "Camperdown, NSW 2050",
+        "value": "Camperdown, NSW 2050",
+        "coordinates": [
+            -33.8888,
+            151.1861
+        ]
+    },
+    {
+        "label": "Chatswood, NSW 2067",
+        "value": "Chatswood, NSW 2067",
+        "coordinates": [
+            -33.7960,
+            151.1810
+        ]
+    },
+    {
+        "label": "Coogee, NSW 2034",
+        "value": "Coogee, NSW 2034",
+        "coordinates": [
+            -33.9200,
+            151.2550
+        ]
+    },
+    {
+        "label": "Cronulla, NSW 2230",
+        "value": "Cronulla, NSW 2230",
+        "coordinates": [
+            -34.0525,
+            151.1527
+        ]
+    },
+    {
+        "label": "Darlinghurst, NSW 2010",
+        "value": "Darlinghurst, NSW 2010",
+        "coordinates": [
+            -33.8788,
+            151.2153
+        ]
+    },
+    {
+        "label": "Double Bay, NSW 2028",
+        "value": "Double Bay, NSW 2028",
+        "coordinates": [
+            -33.8750,
+            151.2417
+        ]
+    },
+    {
+        "label": "Drummoyne, NSW 2047",
+        "value": "Drummoyne, NSW 2047",
+        "coordinates": [
+            -33.8486,
+            151.1561
+        ]
+    },
+    {
+        "label": "Dulwich Hill, NSW 2203",
+        "value": "Dulwich Hill, NSW 2203",
+        "coordinates": [
+            -33.9025,
+            151.1400
+        ]
+    },
+    {
+        "label": "Eastwood, NSW 2122",
+        "value": "Eastwood, NSW 2122",
+        "coordinates": [
+            -33.7890,
+            151.0810
+        ]
+    },
+    {
+        "label": "Epping, NSW 2121",
+        "value": "Epping, NSW 2121",
+        "coordinates": [
+            -33.7725,
+            151.0820
+        ]
+    },
+    {
+        "label": "Fairfield, NSW 2165",
+        "value": "Fairfield, NSW 2165",
+        "coordinates": [
+            -33.8728,
+            150.9500
+        ]
+    },
+    {
+        "label": "Liverpool, NSW 2170",
+        "value": "Liverpool, NSW 2170",
+        "coordinates": [
+            -33.9200,
+            150.9250
+        ]
+    },
+    {
+        "label": "Manly, NSW 2095",
+        "value": "Manly, NSW 2095",
+        "coordinates": [
+            -33.8000,
+            151.2867
+        ]
+    },
+    {
+        "label": "Newtown, NSW 2042",
+        "value": "Newtown, NSW 2042",
+        "coordinates": [
+            -33.8980,
+            151.1740
+        ]
+    },
+    {
+        "label": "Sydney, NSW 2000",
+        "value": "Sydney, NSW 2000",
+        "coordinates": [
+            -33.8688,
+            151.2093
+        ]
+    },
+    {
+        "label": "Woollahra, NSW 2025",
+        "value": "Woollahra, NSW 2025",
+        "coordinates": [
+            -33.8890,
+            151.2440
+        ]
+    },
+    {
+        "label": "Zetland, NSW 2017",
+        "value": "Zetland, NSW 2017",
+        "coordinates": [
+            -33.9070,
+            151.2090
+        ]
+    }
+]
