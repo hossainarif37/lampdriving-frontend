@@ -69,6 +69,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ instructorLicenseFile, setIn
         const experienceData = {
             ...data,
             documents: {
+                instructorLicense: instructorLicenseURL,
                 drivingLicense: drivingLicenseURL,
                 experienceCertificate: experienceCertificateURL
             },

@@ -23,12 +23,12 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
     return (
         <div className="space-y-6 h-96 overflow-y-auto thin-scrollbar px-2 py-4">
             {/* Learner Info */}
-            <div className={`grid grid-cols-1 ${!role && "md:grid-cols-2"} gap-6`}>
+            <div className={`grid grid-cols-1 gap-3`}>
                 {
                     role !== "learner" &&
                     <div className="bg-white p-4 rounded-lg border relative">
                         <div className="flex flex-col sm:flex-row items-center gap-4">
-                            <div className="relative">
+                            <div className="relative size-16">
                                 <Image
                                     width={64}
                                     height={64}
@@ -54,7 +54,7 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
                     role != "instructor" &&
                     <div className="bg-white p-4 rounded-lg border relative">
                         <div className="flex flex-col sm:flex-row items-center gap-4 ">
-                            <div className="relative">
+                            <div className="relative size-16">
                                 <Image
                                     width={64}
                                     height={64}
@@ -93,10 +93,6 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
                         <span className="font-medium">Booked On:</span>
                     </div>
                     <span>{format(new Date(booking.createdAt), "PPP")}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                    <span className="font-medium">Price per Hour:</span>
-                    <span>${booking.price.paidAmount}</span>
                 </div>
                 <div className="flex items-center justify-between">
                     <span className="font-medium">Total Amount:</span>
