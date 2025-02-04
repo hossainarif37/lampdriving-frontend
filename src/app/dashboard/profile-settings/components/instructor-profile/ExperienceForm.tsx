@@ -17,6 +17,8 @@ interface Inputs {
 }
 
 interface IExperienceFormProps {
+    instructorLicenseFile: File | null;
+    setInstructorLicenseFile: Dispatch<SetStateAction<File | null>>;
     drivingLicenseFile: File | null;
     setDrivingLicenseFile: Dispatch<SetStateAction<File | null>>;
     experienceCertificateFile: File | null;
@@ -24,7 +26,7 @@ interface IExperienceFormProps {
     instructor: any;
 }
 
-const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile, instructor }) => {
+const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile, instructor, instructorLicenseFile, setInstructorLicenseFile }) => {
     const [isClicked, setIsClicked] = useState(false);
     // const { instructor } = useAppSelector((state) => state.authSlice);
     const defaultValues = {
@@ -35,6 +37,11 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
     }
 
     const [updateInstructor, { isLoading: isUpdating }] = useUpdateInstructorMutation();
+
+    // Instructor License
+    const [instructorLicenseURL, setInstructorLicenseURL] = useState<string>(defaultValues?.documents?.instructorLicense || '');
+
+    const [instructorLicenseError, setInstructorLicenseError] = useState<string>('');
 
     // Driving License
     const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(defaultValues?.documents?.drivingLicense || '');
@@ -73,6 +80,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
             experience: Number(data.experience),
             description: data.description,
             documents: {
+                instructorLicense: instructorLicenseURL,
                 drivingLicense: drivingLicenseURL,
                 experienceCertificate: experienceCertificateURL
             },
@@ -135,6 +143,12 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
                     selectedLanguages={selectedLanguages}
                     setSelectedLanguages={setSelectedLanguages}
                     selectedLanguagesError={selectedLanguagesError}
+                    instructorLicenseFile={instructorLicenseFile}
+                    setInstructorLicenseFile={setInstructorLicenseFile}
+                    instructorLicenseURL={instructorLicenseURL}
+                    setInstructorLicenseURL={setInstructorLicenseURL}
+                    instructorLicenseError={instructorLicenseError}
+                    setInstructorLicenseError={setInstructorLicenseError}
                 />
 
                 <Button disabled={isUpdating} loading={isUpdating} type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>

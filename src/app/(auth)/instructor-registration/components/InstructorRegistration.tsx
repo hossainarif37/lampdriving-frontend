@@ -10,6 +10,7 @@ import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 
 const InstructorRegistration: FC = () => {
     // Experience
+    const [instructorLicenseFile, setInstructorLicenseFile] = useState<File | null>(null);
     const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
     const [experienceCertificateFile, setExperienceCertificateFile] = useState<File | null>(null);
     const { personalInfo, experienceInfo, servicesInfo, carInfo } = useInstructorRegister();
@@ -33,13 +34,25 @@ const InstructorRegistration: FC = () => {
             {isPersonalInfoStep && <PersonalInfoForm />}
 
             {/* Experience */}
-            {(isExperienceStep && personalInfo) && <ExperienceForm drivingLicenseFile={drivingLicenseFile} setDrivingLicenseFile={setDrivingLicenseFile} experienceCertificateFile={experienceCertificateFile} setExperienceCertificateFile={setExperienceCertificateFile} />}
+            {(isExperienceStep && personalInfo) && (
+                <ExperienceForm
+                    instructorLicenseFile={instructorLicenseFile}
+                    setInstructorLicenseFile={setInstructorLicenseFile}
+                    drivingLicenseFile={drivingLicenseFile}
+                    setDrivingLicenseFile={setDrivingLicenseFile} experienceCertificateFile={experienceCertificateFile} setExperienceCertificateFile={setExperienceCertificateFile}
+                />
+            )}
 
             {/* Services */}
             {(isServicesStep && experienceInfo) && <ServicesForm />}
 
             {/* Vehicle */}
-            {(isCarInfoStep && servicesInfo) && <CarInfoForm carImageFile={carImageFile} setCarImageFile={setCarImageFile} />}
+            {(isCarInfoStep && servicesInfo) && (
+                <CarInfoForm
+                    carImageFile={carImageFile}
+                    setCarImageFile={setCarImageFile}
+                />
+            )}
 
             {/* Security */}
             {(isSecurityStep && carInfo) && <SecurityForm />}
