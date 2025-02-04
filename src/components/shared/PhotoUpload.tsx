@@ -130,9 +130,8 @@ const PhotoUpload = <T extends { profileImg?: string }>({
                     {
                         profilePhoto?.file || profilePhoto?.url ?
                             <Image
-                                src={profilePhoto?.file ?
-                                    URL.createObjectURL(profilePhoto.file) :
-                                    (profilePhoto?.url || '')}
+                                src={profilePhoto?.url || (profilePhoto?.file ?
+                                    URL.createObjectURL(profilePhoto.file) : '')}
                                 alt="Profile Image"
                                 className='w-full'
                                 width={150}
