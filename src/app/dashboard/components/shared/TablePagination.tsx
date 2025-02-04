@@ -11,11 +11,11 @@ interface ITablePaginationProps {
 
 const TablePagination: FC<ITablePaginationProps> = ({ meta }) => {
     const urlSearchParams = useSearchParams();
-    const [limit, setLimit] = useState<string>(urlSearchParams.get('limit') || '8');
+    const [limit, setLimit] = useState<string>(urlSearchParams?.get('limit') || '8');
     const { replace } = useRouter();
 
     const handleLimit = (reqLimit: string) => {
-        const searchParams = new URLSearchParams(urlSearchParams);
+        const searchParams = new URLSearchParams(urlSearchParams || '');
         searchParams.set('limit', reqLimit);
         const page = searchParams.get('page');
         if (page) {

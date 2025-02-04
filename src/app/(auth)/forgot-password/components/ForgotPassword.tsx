@@ -12,7 +12,7 @@ const ForgotPassword: FC = () => {
     const [email, setEmail] = useState<string>('');
     const [success, setSuccess] = useState<boolean>(false);
     const searchParams = useSearchParams();
-    const urlStep = searchParams.get('step');
+    const urlStep = searchParams?.get('step');
     const [step, setStep] = useState<"send-otp" | "verify-otp" | "change-password" | "success">("send-otp");
 
     const router = useRouter();
