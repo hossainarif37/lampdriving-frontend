@@ -28,7 +28,6 @@ const usersApi = baseApi.injectEndpoints({
         logOutUser: builder.query<IResponseBase, void>({
             query: () => '/auth/logout'
         }),
-
         registerInstructor: builder.mutation<IResponseWithData<IUser>, IRegisterInstructor>({
             query: (data) => ({
                 url: '/auth/instructors/register',
@@ -43,7 +42,54 @@ const usersApi = baseApi.injectEndpoints({
                 body: data
             })
         }),
+        resetPasswordEmail: builder.mutation<IResponseBase, { email: string }>({
+            query: (data) => ({
+                url: `/auth/password/reset-email/${data.email}`,
+                method: "POST"
+            })
+        }),
+        verifyResetPasswordOtp: builder.mutation<IResponseWithData<{ resetToken: string }>, { email: string, otp: string }>({
+            query: (data) => ({
+                url: `/auth/password/reset/verify-otp`,
+                method: "POST",
+                body: data
+            })
+        }),
+        resetPassword: builder.mutation<IResponseBase, { token: string, newPassword: string }>({
+            query: (data) => {
+                console.log(data);
+                return ({
+                    url: `/auth/password/reset/${data.token}`,
+                    method: "PATCH",
+                    body: data
+                })
+            }
+        }),
+        sendEmailVerification: builder.mutation<IResponseBase, { email: string }>({
+            query: (data) => ({
+                url: `/auth/email/verification/${data.email}`,
+                method: "POST"
+            })
+        }),
+        verifyEmail: builder.mutation<IResponseBase, { token: string }>({
+            query: (data) => ({
+                url: `/auth/email/verify/${data.token}`,
+                method: "PATCH"
+            }),
+            invalidatesTags: ['user']
+        })
     })
 })
 
-export const { useRegisterUserMutation, useLoginUserMutation, useCurrentUserQuery, useLazyLogOutUserQuery, useRegisterInstructorMutation, useUpdatePasswordMutation } = usersApi;
+export const { useRegisterUserMutation,
+    useLoginUserMutation,
+    useCurrentUserQuery,
+    useLazyLogOutUserQuery,
+    useRegisterInstructorMutation,
+    useUpdatePasswordMutation,
+    useResetPasswordEmailMutation,
+    useVerifyResetPasswordOtpMutation,
+    useResetPasswordMutation,
+    useSendEmailVerificationMutation,
+    useVerifyEmailMutation
+} = usersApi;

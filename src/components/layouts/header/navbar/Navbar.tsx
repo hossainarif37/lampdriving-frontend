@@ -7,8 +7,6 @@ import Link from "next/link";
 import MobileNav from "./MobileNav";
 import { usePathname } from "next/navigation";
 import useWindowScroll from "@/hooks/useWindowScroll";
-import { useEffect } from "react";
-import { useState } from "react";
 
 const Navbar = () => {
     const pathname = usePathname();

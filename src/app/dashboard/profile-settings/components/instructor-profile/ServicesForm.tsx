@@ -3,6 +3,8 @@
 import ServicesFields from '@/components/shared/forms/ServicesFields';
 import { Button } from '@/components/ui/button';
 import { DAYS } from '@/constant/days';
+import { toast } from '@/hooks/use-toast';
+import { useUpdateInstructorMutation } from '@/redux/api/instructorApi/instructorApi';
 import { useAppSelector } from '@/redux/hook';
 import { IInstructor, ISchedule, IServices, IWorkingHour } from '@/types/instructor';
 import { useRouter } from 'next/navigation';
@@ -12,9 +14,8 @@ interface Inputs {
     pricePerHour: number;
 }
 
-const ServicesForm: FC = () => {
+const ServicesForm: FC<{ instructor: any }> = ({ instructor }) => {
     const { user } = useAppSelector((state) => state.authSlice);
-    const instructor = user?.instructor as IInstructor;
     const defaultValues: IServices = {
         pricePerHour: instructor.pricePerHour,
         serviceAreas: instructor.serviceAreas,
@@ -37,6 +38,7 @@ const ServicesForm: FC = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>();
     const router = useRouter();
+    const [updateInstructor, { isLoading: isUpdating }] = useUpdateInstructorMutation();
 
     const onSubmit = (data: Inputs) => {
         setIsClicked(true);
@@ -44,6 +46,7 @@ const ServicesForm: FC = () => {
             setSelectedLocationsError('Service areas are required');
             return;
         }
+
         const workingHour: IWorkingHour = {
             saturday: schedule.saturday,
             sunday: schedule.sunday,
@@ -58,7 +61,12 @@ const ServicesForm: FC = () => {
         for (const day in workingHour) {
             const dayKey = day as keyof IWorkingHour;
             if (!workingHour[dayKey]?.isActive) {
-                delete workingHour[dayKey];
+                const { startTime, endTime } = workingHour[dayKey] || {};
+                workingHour[dayKey] = {
+                    isActive: false,
+                    startTime: startTime || "09:00",
+                    endTime: endTime || "17:00"
+                };
             } else {
                 hasActiveDay = true;
             }
@@ -74,6 +82,16 @@ const ServicesForm: FC = () => {
             serviceAreas: selectedLocations,
             workingHour: workingHour
         }
+
+        updateInstructor(servicesData).unwrap()
+            .then((res) => {
+                console.log('res', res);
+                toast({ message: res.message })
+            })
+            .catch((error) => {
+                console.error('Failed to update profile:', error);
+                toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
+            })
     }
 
     useEffect(() => {
@@ -103,7 +121,7 @@ const ServicesForm: FC = () => {
                     defaultValues={defaultValues}
                 />
 
-                <Button type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>
+                <Button disabled={isUpdating} loading={isUpdating} type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>
             </form>
         </div>
     );

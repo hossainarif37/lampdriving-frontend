@@ -7,13 +7,13 @@ import { FC } from 'react';
 const InstructorsNotFound: FC = () => {
     const urlSearchParams = useSearchParams();
     const { replace } = useRouter();
+    const searchParams = new URLSearchParams(urlSearchParams || '');
+    const searchKey = searchParams.get('searchKey');
+    const vehicleType = searchParams.get('vehicle.type');
+    const page = searchParams.get('page');
 
     // remove search handler
     const handleRemoveSearch = () => {
-        const searchParams = new URLSearchParams(urlSearchParams);
-        const searchKey = searchParams.get('searchKey');
-        const vehicleType = searchParams.get('vehicle.type');
-        const page = searchParams.get('page');
 
         if (searchKey) {
             searchParams.delete('searchKey');
@@ -37,9 +37,17 @@ const InstructorsNotFound: FC = () => {
                 Instructors Not Found
             </h3>
             <p className="text-gray-600 text-center max-w-md mb-6">
-                We couldn&apos;t find any instructors matching your search criteria. Try adjusting your filters or search terms.
+                {
+                    (searchKey || vehicleType || page) ?
+                        "We couldn't find any instructors matching your search criteria. Try adjusting your filters or search terms."
+                        :
+                        "We couldn't find any instructors."
+                }
             </p>
-            <Button onClick={() => handleRemoveSearch()} className='w-44 md:w-52 gradient-color'>Reset Search</Button>
+            {
+                (searchKey || vehicleType || page) &&
+                <Button onClick={() => handleRemoveSearch()} className='w-44 md:w-52 gradient-color'>Reset Search</Button>
+            }
         </div>
     );
 };
