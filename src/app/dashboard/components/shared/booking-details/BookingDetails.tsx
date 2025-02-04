@@ -96,11 +96,11 @@ const BookingDetails: FC<{ id: string, role?: 'learner' | 'instructor' }> = ({ i
                 </div>
                 <div className="flex items-center justify-between">
                     <span className="font-medium">Price per Hour:</span>
-                    <span>${booking.price}</span>
+                    <span>${booking.price.paidAmount}</span>
                 </div>
                 <div className="flex items-center justify-between">
                     <span className="font-medium">Total Amount:</span>
-                    <span className="text-lg font-bold">${booking.price * booking.bookingHours}</span>
+                    <span className="text-lg font-bold">${booking.price.paidAmount * booking.bookingHours}</span>
                 </div>
                 <div className="flex items-center justify-between">
                     <span className="font-medium">Status:</span>

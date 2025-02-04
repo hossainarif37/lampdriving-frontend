@@ -15,7 +15,7 @@ const StripePayment: FC = () => {
     const [clientSecret, setClientSecret] = useState<string | null>(null);
 
     useEffect(() => {
-        createPaymentIntent({ price: Number(price.payableAmount) }).unwrap().then((response) => {
+        createPaymentIntent({ price: Number(price.paidAmount) }).unwrap().then((response) => {
             if (response.data) {
                 setClientSecret(response.data.clientSecret);
             }

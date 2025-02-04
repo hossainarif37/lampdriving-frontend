@@ -94,7 +94,7 @@ const SuccessStep: FC = () => {
                                     <div className="pt-3 border-t border-gray-200">
                                         <div className="flex justify-between">
                                             <span className="font-medium text-gray-900">Total Paid</span>
-                                            <span className="font-bold text-gray-900">${price.payableAmount}</span>
+                                            <span className="font-bold text-gray-900">${price.paidAmount}</span>
                                         </div>
                                     </div>
                                 </div>

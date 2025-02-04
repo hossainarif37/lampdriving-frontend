@@ -1,15 +1,11 @@
 "use client"
 
 import { Button } from '@/components/ui/button';
-import { toast } from '@/hooks/use-toast';
 import { toFixedNumber } from '@/lib/utils';
 import { useBooking } from '@/providers/BookingProvider';
-import { useLoginUserMutation, useRegisterUserMutation } from '@/redux/api/authApi/authApi';
-import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { saveUser } from '@/redux/slices/authSlice/authSlice';
-import { ILoginInputs, IRegisterInputs } from '@/types/auth';
+import { useAppSelector } from '@/redux/hook';
 import { Clock, NotepadText, TicketPercent } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 
 
@@ -125,7 +121,7 @@ const BookingInfo: FC = () => {
                 <div className="pt-4 border-t">
                     <div className="flex justify-between font-semibold">
                         <span>Total Payable Amount</span>
-                        <span className="text-xl">${toFixedNumber(price.payableAmount ?? 0)}</span>
+                        <span className="text-xl">${toFixedNumber(price.paidAmount ?? 0)}</span>
                     </div>
                 </div>
 
