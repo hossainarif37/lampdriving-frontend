@@ -19,6 +19,7 @@ const InstructorProfile: FC = () => {
   const { data, isLoading } = useGetAInstructorQuery({ username: user?.username as string });
 
   // Experience
+  const [instructorLicenseFile, setInstructorLicenseFile] = useState<File | null>(null);
   const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
   const [experienceCertificateFile, setExperienceCertificateFile] = useState<File | null>(null);
   const [carImageFile, setCarImageFile] = useState<File | null>(null);
@@ -32,6 +33,8 @@ const InstructorProfile: FC = () => {
       case 'experience':
         return (
           <ExperienceForm
+            instructorLicenseFile={instructorLicenseFile}
+            setInstructorLicenseFile={setInstructorLicenseFile}
             drivingLicenseFile={drivingLicenseFile}
             setDrivingLicenseFile={setDrivingLicenseFile}
             experienceCertificateFile={experienceCertificateFile}
@@ -48,6 +51,7 @@ const InstructorProfile: FC = () => {
           <CarInfoForm
             carImageFile={carImageFile}
             setCarImageFile={setCarImageFile}
+            instructor={data?.data}
           />
         );
       case 'security':

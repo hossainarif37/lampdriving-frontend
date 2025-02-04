@@ -10,7 +10,7 @@ import WarningBar from '@/components/shared/WarningBar';
 
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
     return (
-        <div className='flex flex-col min-h-screen overflow-hidden'>
+        <div className='flex flex-col min-h-screen'>
             <WarningBar />
             <Topbar />
             <Navbar />

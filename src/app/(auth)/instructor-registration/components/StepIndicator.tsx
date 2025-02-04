@@ -7,7 +7,7 @@ import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 const StepIndicator: FC = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const currentStep = searchParams.get("step");
+    const currentStep = searchParams?.get("step");
     const { personalInfo, experienceInfo, servicesInfo, carInfo } = useInstructorRegister();
 
     const steps = useMemo(() => [

@@ -14,7 +14,8 @@ const instructorApi = baseApi.injectEndpoints({
     overrideExisting: true,
     endpoints: (builder) => ({
         getAInstructor: builder.query<IResponseWithData<IInstructor>, { username: string }>({
-            query: ({ username }) => `/instructor/${username}?populate=user`
+            query: ({ username }) => `/instructor/${username}?populate=user`,
+            providesTags: ["instructor"]
         }),
 
         getAInstructorByAdmin: builder.query<IResponseWithData<IInstructor>, { id: string }>({
@@ -40,8 +41,17 @@ const instructorApi = baseApi.injectEndpoints({
         getInstructorsByServiceAreas: builder.query({
             query: (serviceAreas) => `/instructor/verified?populate=user&fields=user,serviceAreas&limit=4&userFields=name,profileImg,username&serviceAreas=${serviceAreas.join('|')}`,
         }),
+
+        updateInstructor: builder.mutation<IResponseWithData<IInstructor>, Partial<IInstructor>>({
+            query: (data) => ({
+                url: `/instructor/me`,
+                method: "PUT",
+                body: data
+            }),
+            invalidatesTags: ["instructor"]
+        })
     })
 })
 
 
-export const { useGetAInstructorQuery, useGetAInstructorByAdminQuery, useGetAllInstructorsQuery, useUpdateInstructorStatusMutation, useGetInstructorsByServiceAreasQuery } = instructorApi;
+export const { useGetAInstructorQuery, useGetAInstructorByAdminQuery, useGetAllInstructorsQuery, useUpdateInstructorStatusMutation, useGetInstructorsByServiceAreasQuery, useUpdateInstructorMutation } = instructorApi;

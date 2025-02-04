@@ -1,6 +1,9 @@
 import CarInfoFields from '@/components/shared/forms/CarInfoFields';
 import { Button } from '@/components/ui/button';
+import { toast } from '@/hooks/use-toast';
+import { useUpdateInstructorMutation } from '@/redux/api/instructorApi/instructorApi';
 import { useAppSelector } from '@/redux/hook';
+import { IVehicle } from '@/types/instructor';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -15,21 +18,21 @@ interface Inputs {
 
 interface ICarInfoFormProps {
     carImageFile: File | null;
-    setCarImageFile: Dispatch<SetStateAction<File | null>>
+    setCarImageFile: Dispatch<SetStateAction<File | null>>,
+    instructor: any
 }
 
 
-const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) => {
+const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile, instructor }) => {
     const [isClicked, setIsClicked] = useState(false);
-    const { instructor } = useAppSelector(state => state.authSlice);
 
-    const defaultValues = {
-        name: instructor?.vehicle?.name || '',
-        model: instructor?.vehicle?.model || '',
-        type: instructor?.vehicle?.type || 'auto',
-        rating: instructor?.vehicle?.rating || 5,
-        image: instructor?.vehicle?.image || '',
-        year: instructor?.vehicle?.year || 2024
+    const defaultValues: IVehicle = {
+        name: instructor?.vehicle?.name,
+        model: instructor?.vehicle?.model,
+        type: instructor?.vehicle?.type,
+        rating: instructor?.vehicle?.rating,
+        image: instructor?.vehicle?.image,
+        year: instructor?.vehicle?.year
     }
 
     // Car Image
@@ -38,6 +41,7 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) =
 
 
     const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
+    const [updateInstructor, { isLoading: isUpdating }] = useUpdateInstructorMutation();
 
     const onSubmit = (data: Inputs) => {
         setIsClicked(true);
@@ -47,9 +51,23 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) =
         }
 
         const carInfo = {
-            ...data,
+            name: data.name,
+            model: data.model,
+            type: data.type,
+            rating: Number(data.rating),
+            year: Number(data.year),
             image: carImageURL
         }
+
+        updateInstructor({ vehicle: carInfo }).unwrap()
+            .then((res) => {
+                console.log('res', res);
+                toast({ message: res.message })
+            })
+            .catch((error) => {
+                console.error('Failed to update profile:', error);
+                toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
+            })
     }
 
     useEffect(() => {

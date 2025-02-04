@@ -5,14 +5,14 @@ import { FC, useState } from 'react';
 
 const FilterUserStatus: FC = () => {
     const urlSearchParams = useSearchParams();
-    const [status, setStatus] = useState(urlSearchParams.get('userStatus') || 'all');
+    const [status, setStatus] = useState(urlSearchParams?.get('userStatus') || 'all');
 
     const { replace } = useRouter();
 
     // search handler
     const handleSearch = (userStatus: string) => {
         setStatus(userStatus);
-        const searchParams = new URLSearchParams(urlSearchParams);
+        const searchParams = new URLSearchParams(urlSearchParams || '');
         if (userStatus) {
             searchParams.set('userStatus', userStatus);
         } else {

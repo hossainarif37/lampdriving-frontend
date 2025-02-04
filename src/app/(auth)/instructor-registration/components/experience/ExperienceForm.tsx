@@ -17,16 +17,23 @@ interface Inputs {
 interface IExperienceFormProps {
     // experienceInfo: IExperience | undefined;
     // setExperienceInfo: Dispatch<SetStateAction<IExperience | undefined>>
+    instructorLicenseFile: File | null;
+    setInstructorLicenseFile: Dispatch<SetStateAction<File | null>>;
     drivingLicenseFile: File | null;
     setDrivingLicenseFile: Dispatch<SetStateAction<File | null>>;
     experienceCertificateFile: File | null;
     setExperienceCertificateFile: Dispatch<SetStateAction<File | null>>;
 }
 
-const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
+const ExperienceForm: FC<IExperienceFormProps> = ({ instructorLicenseFile, setInstructorLicenseFile, drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
     const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
     const { experienceInfo, setExperienceInfo } = useInstructorRegister();
+
+    // Instructor License
+    const [instructorLicenseURL, setInstructorLicenseURL] = useState<string>(experienceInfo?.documents?.instructorLicense || '');
+
+    const [instructorLicenseError, setInstructorLicenseError] = useState<string>('');
 
     // Driving License
     const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(experienceInfo?.documents?.drivingLicense || '');
@@ -62,6 +69,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
         const experienceData = {
             ...data,
             documents: {
+                instructorLicense: instructorLicenseURL,
                 drivingLicense: drivingLicenseURL,
                 experienceCertificate: experienceCertificateURL
             },
@@ -120,6 +128,12 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
                     selectedLanguages={selectedLanguages}
                     setSelectedLanguages={setSelectedLanguages}
                     selectedLanguagesError={selectedLanguagesError}
+                    instructorLicenseURL={instructorLicenseURL}
+                    setInstructorLicenseURL={setInstructorLicenseURL}
+                    instructorLicenseError={instructorLicenseError}
+                    setInstructorLicenseError={setInstructorLicenseError}
+                    instructorLicenseFile={instructorLicenseFile}
+                    setInstructorLicenseFile={setInstructorLicenseFile}
                 />
 
                 <div>

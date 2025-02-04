@@ -3,6 +3,7 @@ import { IName, IUser } from "./user";
 
 // interface for document
 export interface IDocument {
+    instructorLicense?: string;
     drivingLicense?: string;
     experienceCertificate?: string;
 }

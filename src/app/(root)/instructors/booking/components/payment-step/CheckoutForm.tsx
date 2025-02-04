@@ -74,7 +74,7 @@ const CheckoutForm: FC<{ clientSecret: string }> = () => {
             toast({
                 message: res.message,
             })
-            const searchParams = new URLSearchParams(urlSearchParams);
+            const searchParams = new URLSearchParams(urlSearchParams || "");
             searchParams.set('step', "success");
             router.replace(`?${searchParams.toString()}`);
             setIsCreatingABooking(false)

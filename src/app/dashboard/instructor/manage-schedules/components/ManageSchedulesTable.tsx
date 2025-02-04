@@ -15,8 +15,8 @@ import { firstLetterUppercase } from '@/utils/firstLetterUppercase';
 
 const ManageSchedulesTable: FC = () => {
     const urlSearchParams = useSearchParams();
-    const [page, setPage] = useState(urlSearchParams.get('page') || '1');
-    const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
+    const [page, setPage] = useState(urlSearchParams?.get('page') || '1');
+    const [limit, setLimit] = useState(urlSearchParams?.get('limit') || '8');
     const [isSearched, setIsSearched] = useState(false);
     const user = useAppSelector(state => state.authSlice.user);
 
@@ -25,16 +25,16 @@ const ManageSchedulesTable: FC = () => {
             id: (typeof user?.instructor === "string" ? user?.instructor : "") || "",
             type: "lesson",
             // status: "",
-            searchKey: urlSearchParams.get('searchKey') || '',
+            searchKey: urlSearchParams?.get('searchKey') || '',
             limit: limit,
             page: page
         });
 
     useEffect(() => {
-        setPage(urlSearchParams.get('page') || '1');
-        setLimit(urlSearchParams.get('limit') || '8');
+        setPage(urlSearchParams?.get('page') || '1');
+        setLimit(urlSearchParams?.get('limit') || '8');
 
-        if (urlSearchParams.get('searchKey')?.length) {
+        if (urlSearchParams?.get('searchKey')?.length) {
             setIsSearched(true);
         } else {
             setIsSearched(false);
