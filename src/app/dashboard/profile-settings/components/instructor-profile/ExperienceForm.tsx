@@ -89,7 +89,6 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
 
         updateInstructor(experienceData).unwrap()
             .then((res) => {
-                console.log('res', res);
                 toast({ message: res.message })
             })
             .catch((error) => {

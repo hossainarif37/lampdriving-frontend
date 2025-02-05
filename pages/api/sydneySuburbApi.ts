@@ -9,7 +9,6 @@ interface Suburb {
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { limit, search } = req.query;
     let data = suburbs;
-    console.log(data);
 
     if (search) {
         data = suburbs.filter((suburb: Suburb) =>

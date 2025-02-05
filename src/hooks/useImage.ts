@@ -7,7 +7,6 @@ export interface IProfilePhoto {
 
 export function useImage(initialUrl: string | undefined) {
     const [profilePhoto, setProfilePhoto] = useState<IProfilePhoto>(() => {
-        console.log('Initializing profilePhoto state with:', initialUrl);
         return {
             file: null,
             url: initialUrl
@@ -16,7 +15,6 @@ export function useImage(initialUrl: string | undefined) {
 
     useEffect(() => {
         if (initialUrl !== profilePhoto.url) {
-            console.log('Updating profilePhoto due to initialUrl change:', initialUrl);
             setProfilePhoto(prev => ({
                 ...prev,
                 url: initialUrl

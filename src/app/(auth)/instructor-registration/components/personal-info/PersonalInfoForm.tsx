@@ -21,12 +21,7 @@ const PersonalInfoForm = <T extends { profileImg?: string }>({
     const router = useRouter();
     const { setPersonalInfo, personalInfo } = useInstructorRegister();
 
-
-    console.log('personalInfo', personalInfo);
-    console.log('profilePhoto', profilePhoto);
-
     const onSubmit = (data: IPersonalInfo) => {
-        console.log('data', data);
         setPersonalInfo(data);
         router.push("/instructor-registration?step=experience");
     };

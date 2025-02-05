@@ -61,7 +61,6 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile, ins
 
         updateInstructor({ vehicle: carInfo }).unwrap()
             .then((res) => {
-                console.log('res', res);
                 toast({ message: res.message })
             })
             .catch((error) => {

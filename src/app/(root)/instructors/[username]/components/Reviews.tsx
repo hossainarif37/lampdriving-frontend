@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from '@/components/shared/Loading';
 import { useGetInstructorReviewsQuery } from '@/redux/api/reviewApi/reviewApi';
 import { IInstructor } from '@/types/instructor';
 import { formatDate } from 'date-fns';
@@ -15,9 +16,8 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
   // Use the username in the query
   const { data, isLoading, isError } = useGetInstructorReviewsQuery({ username });
 
-  if (isLoading) return <div>Loading reviews...</div>;
+  if (isLoading) return <Loading />;
   if (isError) return <div>Error loading reviews</div>;
-  console.log('data', data);
   const reviews = data?.data?.result.map((review: any) => ({
     id: review?._id,
     name: review?.learner?.user?.name?.firstName,
@@ -26,8 +26,6 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
     comment: review?.feedback
   })
   ) || [];
-
-  console.log('reviews', reviews);
 
   return (
     <section className="bg-light rounded-xl border p-4 md:p-6">
