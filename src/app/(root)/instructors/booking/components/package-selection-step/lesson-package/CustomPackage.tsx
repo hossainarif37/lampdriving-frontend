@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
-import PackageCard from './PackageCard';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import PackageCard from './PackageCard';
 
 interface ICustomPackageProps {
     onSelect: (hours: number, isCustomSelected: boolean) => void;

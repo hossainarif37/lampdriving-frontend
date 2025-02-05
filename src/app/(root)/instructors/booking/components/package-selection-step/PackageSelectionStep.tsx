@@ -7,12 +7,12 @@ import LessonPackage from './lesson-package/LessonPackage';
 
 const PackageSelectionStep: FC = () => {
     const [selectedTab, setSelectedTab] = useState<"lesson" | "test">("lesson");
-    const { bookingHours, setBookingHours, instructor, isCustomSelected, setIsCustomSelected, setSchedules } = useBooking();
+    const { bookingHours, setBookingHours, instructor, isCustomLessonSelected, setIsCustomLessonSelected, setSchedules } = useBooking();
 
     // handler for package selection
-    const handlePackageSelection = (hours: number, isCustomSelected: boolean) => {
+    const handlePackageSelection = (hours: number, isCustomLessonSelected: boolean) => {
         setBookingHours(hours);
-        setIsCustomSelected(isCustomSelected);
+        setIsCustomLessonSelected(isCustomLessonSelected);
         setSchedules([]);
     }
 
@@ -39,10 +39,10 @@ const PackageSelectionStep: FC = () => {
                     <LessonPackage
                         instructor={instructor}
                         handlePackageSelection={handlePackageSelection}
-                        isCustomSelected={isCustomSelected}
+                        isCustomLessonSelected={isCustomLessonSelected}
                         bookingHours={bookingHours}
-                     />
-                    : 
+                    />
+                    :
                     selectedTab == "test" &&
                     <TestPackage />
             }

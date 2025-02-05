@@ -5,7 +5,7 @@ import { useGetAInstructorQuery } from '@/redux/api/instructorApi/instructorApi'
 import Loading from '@/components/shared/Loading';
 import { useForm } from 'react-hook-form';
 import { ILoginInputs, IRegisterInputs } from '@/types/auth';
-import { IBookingContext, IPaymentInfo, IPrice, IStep, ITestPackage } from '@/types/booking';
+import { IBookingContext, IMockTestPackage, IPaymentInfo, IPrice, IStep, ITestPackage } from '@/types/booking';
 import { stepsWithOutRegister, stepsWithRegister } from '@/constant/booking/bookingSteps';
 import { useAppSelector } from '@/redux/hook';
 import { IScheduleInputs } from '@/types/schedule';
@@ -34,10 +34,11 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [steps, setSteps] = useState<IStep[]>(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
 
     const [instructor, setInstructor] = useState<Partial<IInstructor> | null>(null);
-    const [isCustomSelected, setIsCustomSelected] = useState(false);
+    const [isCustomLessonSelected, setIsCustomLessonSelected] = useState(false);
+    const [isCustomMockTestSelected, setIsCustomMockTestSelected] = useState(false);
     const [bookingHours, setBookingHours] = useState<number>(0);
     const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: 225 });
-    const [mockTestPackage, setMockTestPackage] = useState<ITestPackage>({ included: false, price: 390 });
+    const [mockTestPackage, setMockTestPackage] = useState<IMockTestPackage>({ included: false, price: 390, mockTestCount: 2 });
     const [price, setPrice] = useState<IPrice>({ paidAmount: 0, originalAmount: 0, discountedAmount: 0, discountedPercentage: 0 });
     const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({ transactionId: '', method: '' });
     const [schedules, setSchedules] = useState<IScheduleInputs[]>([]);
@@ -90,7 +91,8 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         bookingHours, setBookingHours,
         testPackage, setTestPackage,
         price, setPrice,
-        isCustomSelected, setIsCustomSelected,
+        isCustomLessonSelected, setIsCustomLessonSelected,
+        isCustomMockTestSelected, setIsCustomMockTestSelected,
         paymentInfo, setPaymentInfo,
         schedules, setSchedules,
         steps: steps, currentStep, setCurrentStep,
@@ -103,7 +105,11 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         isRegistering, setIsRegistering,
         loginButtonRef,
         isLogging, setIsLogging
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, availableScheduleHours, mockTestPackage, isTestPackageSelected, isAllScheduled, registerButtonRef, steps]);
+    }), [instructor, bookingHours, testPackage, price, isCustomLessonSelected,
+        isCustomMockTestSelected, paymentInfo, schedules, currentStep,
+        useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered,
+        isCreatingABooking, setIsCreatingABooking, availableScheduleHours,
+        mockTestPackage, isTestPackageSelected, isAllScheduled, registerButtonRef, steps]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams?.get('instructor');
