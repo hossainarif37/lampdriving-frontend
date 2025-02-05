@@ -9,6 +9,7 @@ import { IBookingContext, IPaymentInfo, IPrice, IStep, ITestPackage } from '@/ty
 import { stepsWithOutRegister, stepsWithRegister } from '@/constant/booking/bookingSteps';
 import { useAppSelector } from '@/redux/hook';
 import { IScheduleInputs } from '@/types/schedule';
+import { drivingTestPrice } from '@/constant/booking/testPackage';
 
 
 const BookingContext = createContext<IBookingContext | undefined>(undefined);
@@ -37,7 +38,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [isCustomLessonSelected, setIsCustomLessonSelected] = useState(false);
     const [isCustomMockTestSelected, setIsCustomMockTestSelected] = useState(false);
     const [bookingHours, setBookingHours] = useState<number>(0);
-    const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: 225, mockTestCount: 0 });
+    const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: drivingTestPrice, mockTestCount: 0 });
     const [price, setPrice] = useState<IPrice>({ paidAmount: 0, originalAmount: 0, discountedAmount: 0, discountedPercentage: 0 });
     const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({ transactionId: '', method: '' });
     const [schedules, setSchedules] = useState<IScheduleInputs[]>([]);
@@ -146,10 +147,14 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         } else {
             setPrice({ originalAmount: totalAmount, paidAmount: totalAmount, discountedAmount: 0, discountedPercentage: 0 }); // No discount
         }
-        if (testPackage.included) {
-            setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + testPackage.price })); // Add test package price
+        if (testPackage.included) {                                    // Add test package price
+            if (testPackage.mockTestCount > 0) {
+                setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + (testPackage.price + (testPackage.mockTestCount * (instructor?.pricePerHour || 0))) }));
+            } else {
+                setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + testPackage.price }));
+            }
         }
-    }, [bookingHours, testPackage.included]);
+    }, [bookingHours, testPackage]);
 
 
     // Handle initial step and URL changes
