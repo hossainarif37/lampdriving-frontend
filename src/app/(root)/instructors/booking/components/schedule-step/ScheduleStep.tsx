@@ -78,9 +78,7 @@ const ScheduleStep: FC = () => {
 
         setSelectedSchedule((pre) => ({ ...pre, time: null }));
         if (testPackage.included) {
-            console.log('first')
             if ((((availableScheduleHours - selectedSchedule.duration) === 0) || availableScheduleHours === 0) && (isTestPackageSelected || selectedSchedule.type === "test")) {
-                console.log('second')
                 dispatch(showNotification("All schedules are booked, you can go forward next"));
             }
         } else if ((((availableScheduleHours - selectedSchedule.duration) === 0) || availableScheduleHours === 0)) {

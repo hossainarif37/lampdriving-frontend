@@ -22,11 +22,6 @@ const OtherInstructors: FC<IOtherInstructorsProps> = ({ serviceAreas, instructor
 
   if (isLoading) return <OtherInstructorSkeleton />
 
-  if (isError) {
-    console.log("isError", isError);
-    return <div>Error fetching data</div>;
-  }
-
   const instructors = instructorsResponse?.data?.result || [];
   if (instructors.length === 0) {
     return <h1 className='text-xl text-center py-10 text-primary'>In this service area there are no other instructors!</h1>;

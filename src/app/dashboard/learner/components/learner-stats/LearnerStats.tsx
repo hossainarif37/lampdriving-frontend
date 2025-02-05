@@ -54,9 +54,6 @@ const LearnerStats: FC = () => {
     username: learnerSchedules?.data?.result[0]?.instructor?.user?.username || ''
   };
 
-  console.log('learnerStats', learnerStats);
-  console.log('learnerSchedules', learnerSchedules);
-
   const statsData = [
     {
       id: 1,

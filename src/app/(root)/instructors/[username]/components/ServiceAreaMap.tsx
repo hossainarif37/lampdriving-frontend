@@ -264,7 +264,6 @@ export default ServiceAreaMap;
 //                 : null;
 //         })
 //         .filter(Boolean);
-//     console.log("Mapped Polygons:", mappedPolygons);
 
 //     return (
 //         <>

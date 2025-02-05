@@ -8,19 +8,21 @@ import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 import { IPersonalInfo } from '@/types/instructor';
 import PhotoUpload, { IProfilePhoto } from '@/components/shared/PhotoUpload';
 
-const PersonalInfoForm: FC = () => {
+interface IPersonalInfoFormProps<T extends { profileImg?: string }> {
+    profilePhoto: IProfilePhoto;
+    setProfilePhoto: Dispatch<SetStateAction<IProfilePhoto>>;
+}
+
+const PersonalInfoForm = <T extends { profileImg?: string }>({
+    profilePhoto,
+    setProfilePhoto
+}: IPersonalInfoFormProps<T>) => {
     const { register, handleSubmit, formState: { errors }, control, setValue, setError } = useForm<IPersonalInfoInputs>();
     const router = useRouter();
     const { setPersonalInfo, personalInfo } = useInstructorRegister();
-    const [profilePhoto, setProfilePhoto] = useState<IProfilePhoto>({
-        file: null,
-        url: personalInfo?.profileImg || undefined
-    });
 
     const onSubmit = (data: IPersonalInfo) => {
-        if (!personalInfo) {
-            setPersonalInfo(data);
-        }
+        setPersonalInfo(data);
         router.push("/instructor-registration?step=experience");
     };
 
@@ -48,6 +50,7 @@ const PersonalInfoForm: FC = () => {
                     control={control}
                     isRequired={true}
                 />
+
                 <StepNavigationButtons
                     prev=""
                     next="experience"

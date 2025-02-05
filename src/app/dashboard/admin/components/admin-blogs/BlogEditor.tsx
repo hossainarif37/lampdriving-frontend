@@ -33,11 +33,8 @@ const BlogEditor: FC = () => {
             image: "", // Adjust image handling if needed
         };
 
-        console.log("Sending Blog Data:", blogData);
-
         try {
             const response = await createBlog(blogData).unwrap();
-            console.log("Response:", response);
 
             if (response.success) {
                 toast({
