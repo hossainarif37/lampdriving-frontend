@@ -18,7 +18,7 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
 
   if (isLoading) return <Loading />;
   if (isError) return <div>Error loading reviews</div>;
-  const reviews = data?.data?.result.map((review: any) => ({
+  const reviews = data?.data?.result?.map((review: any) => ({
     id: review?._id,
     name: review?.learner?.user?.name?.firstName,
     date: review?.createdAt,
@@ -36,8 +36,7 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
 
         {/* No reviews message */}
         {
-          reviews.length === 0 ? <p className="text-gray-500">No reviews yet.</p>
-            :
+          reviews.length === 0 ?
             <>
               {reviews.map((review: any) => (
                 <div key={review?._id} className="border-b last:border-b-0 pb-6 last:pb-0">
@@ -52,6 +51,8 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
                 </div>
               ))}
             </>
+            :
+            <p className="text-gray-500">No reviews yet.</p>
         }
 
 
