@@ -1,20 +1,19 @@
-import { Circle, CircleCheck } from 'lucide-react';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 interface ITestPackageCardProps {
     heading: string;
     description: string;
     price: number;
     features: { title: string; icon: React.ElementType }[];
-    handleAddTestPackage: (mockTestCount: number) => void;
+    onSelect: () => void;
     selected: boolean;
     mockTestCount: number;
 }
 
-const TestPackageCard: FC<ITestPackageCardProps> = ({ heading, description, price, features, handleAddTestPackage, selected, mockTestCount }) => {
+const TestPackageCard: FC<ITestPackageCardProps> = ({ heading, description, price, features, onSelect, selected }) => {
     return (
         <div
-            onClick={() => handleAddTestPackage(mockTestCount)}
+            onClick={onSelect}
             className={`bg-gradient-to-br from-primary/5 to-white rounded-xl p-4 lg:p-6 cursor-pointer border-2 border-gray-200
         ${selected ? 'bg-primary/5  border-primary' : 'bg-white border-gray-200 hover:border-primary/70'}`}>
             <div className="inline-block bg-primary text-white px-4 py-1 rounded-[4px] text-sm font-medium mb-4">
