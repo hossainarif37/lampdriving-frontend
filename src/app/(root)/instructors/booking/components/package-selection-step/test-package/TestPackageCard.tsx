@@ -6,14 +6,15 @@ interface ITestPackageCardProps {
     description: string;
     price: number;
     features: { title: string; icon: React.ElementType }[];
-    handleAddTestPackage: () => void;
+    handleAddTestPackage: (mockTestCount: number) => void;
     selected: boolean;
+    mockTestCount: number;
 }
 
-const TestPackageCard: FC<ITestPackageCardProps> = ({ heading, description, price, features, handleAddTestPackage, selected }) => {
+const TestPackageCard: FC<ITestPackageCardProps> = ({ heading, description, price, features, handleAddTestPackage, selected, mockTestCount }) => {
     return (
         <div
-            onClick={handleAddTestPackage}
+            onClick={() => handleAddTestPackage(mockTestCount)}
             className={`bg-gradient-to-br from-primary/5 to-white rounded-xl p-4 lg:p-6 cursor-pointer border-2 border-gray-200
         ${selected ? 'bg-primary/5  border-primary' : 'bg-white border-gray-200 hover:border-primary/70'}`}>
             <div className="inline-block bg-primary text-white px-4 py-1 rounded-[4px] text-sm font-medium mb-4">

@@ -4,13 +4,13 @@ import { IInstructor } from '@/types/instructor';
 import CustomPackage from './CustomPackage';
 
 interface ILessonPackageProps {
-    handlePackageSelection: (hours: number, isCustomLessonSelected: boolean) => void;
+    handleLessonPackageSelection: (hours: number, isCustomLessonSelected: boolean) => void;
     isCustomLessonSelected: boolean;
     bookingHours: number;
     instructor: Partial<IInstructor> | null;
 }
 
-const LessonPackage: FC<ILessonPackageProps> = ({ instructor, handlePackageSelection, isCustomLessonSelected, bookingHours }) => {
+const LessonPackage: FC<ILessonPackageProps> = ({ instructor, handleLessonPackageSelection, isCustomLessonSelected, bookingHours }) => {
     return (
         <div className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200'>
             <h2 className="text-xl font-semibold mb-6">Choose Your Lesson Package</h2>
@@ -23,7 +23,7 @@ const LessonPackage: FC<ILessonPackageProps> = ({ instructor, handlePackageSelec
                         discount="10% OFF"
                         recommended
                         selected={!isCustomLessonSelected && (bookingHours === 10)}
-                        onSelect={() => handlePackageSelection(10, false)}
+                        onSelect={() => handleLessonPackageSelection(10, false)}
                     />
                 </div>
                 <div className='col-span-1'>
@@ -33,14 +33,14 @@ const LessonPackage: FC<ILessonPackageProps> = ({ instructor, handlePackageSelec
                         description="Ideal for overseas license holders or skill refresh"
                         discount="6% OFF"
                         selected={!isCustomLessonSelected && (bookingHours === 6)}
-                        onSelect={() => handlePackageSelection(6, false)}
+                        onSelect={() => handleLessonPackageSelection(6, false)}
                     />
                 </div>
                 <div className='col-span-2'>
                     <CustomPackage
                         bookingHours={bookingHours}
                         selected={isCustomLessonSelected}
-                        onSelect={handlePackageSelection}
+                        onSelect={handleLessonPackageSelection}
                         hourlyRate={instructor?.pricePerHour || 0}
                     />
                 </div>

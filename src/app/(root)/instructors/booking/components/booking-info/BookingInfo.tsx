@@ -11,7 +11,7 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, mockTestPackage, currentStep, handleStepChange, setIsConfirmTriggered, isTestPackageSelected, registerButtonRef, loginButtonRef, isLogging, isRegistering } = useBooking();
+    const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, currentStep, handleStepChange, setIsConfirmTriggered, isTestPackageSelected, registerButtonRef, loginButtonRef, isLogging, isRegistering } = useBooking();
 
     // register and login button trigger
     const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
@@ -58,7 +58,7 @@ const BookingInfo: FC = () => {
     }
 
 
-    let isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included && !mockTestPackage.included) ||
+    let isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
         (currentStep.key === "schedule" && (availableScheduleHours > 0 || (testPackage.included && !isTestPackageSelected))) || (isLogging || isRegistering || isCreatingABooking);
 
     return (
@@ -100,20 +100,6 @@ const BookingInfo: FC = () => {
                                 Driving Test Package
                             </span>
                             <span>${testPackage.price}</span>
-                        </div>
-                    </>
-                }
-
-                {
-                    mockTestPackage.included &&
-                    <>
-                        <hr />
-                        <div className="flex justify-between">
-                            <span className="flex gap-2">
-                                <NotepadText className="size-5 text-primary" />
-                                Mock Tests + Test Package
-                            </span>
-                            <span>${mockTestPackage.price}</span>
                         </div>
                     </>
                 }

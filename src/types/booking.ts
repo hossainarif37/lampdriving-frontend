@@ -17,8 +17,6 @@ export interface IBookingContext {
     setBookingHours: React.Dispatch<React.SetStateAction<number>>;
     testPackage: ITestPackage;
     setTestPackage: React.Dispatch<React.SetStateAction<ITestPackage>>;
-    mockTestPackage: IMockTestPackage;
-    setMockTestPackage: React.Dispatch<React.SetStateAction<IMockTestPackage>>;
     price: IPrice;
     setPrice: React.Dispatch<React.SetStateAction<IPrice>>;
     isCustomLessonSelected: boolean;
@@ -55,11 +53,6 @@ export interface IPrice {
 }
 
 export interface ITestPackage {
-    included: boolean;
-    price: number;
-}
-
-export interface IMockTestPackage {
     mockTestCount: number;
     included: boolean;
     price: number;
@@ -109,7 +102,6 @@ export interface IBooking {
     schedules: string | ISchedule[];
     review: IReview | undefined;
     testPackage: ITestPackage;
-    mockTestPackage: IMockTestPackage;
     payment: string;
     price: IPrice;
     status: "pending" | "accepted" | "completed" | "cancelled";

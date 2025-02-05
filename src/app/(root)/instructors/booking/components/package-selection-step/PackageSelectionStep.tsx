@@ -7,12 +7,24 @@ import LessonPackage from './lesson-package/LessonPackage';
 
 const PackageSelectionStep: FC = () => {
     const [selectedTab, setSelectedTab] = useState<"lesson" | "test">("lesson");
-    const { bookingHours, setBookingHours, instructor, isCustomLessonSelected, setIsCustomLessonSelected, setSchedules } = useBooking();
+    const { bookingHours,
+        setBookingHours,
+        instructor,
+        isCustomLessonSelected,
+        setIsCustomLessonSelected,
+        isCustomMockTestSelected,
+        setIsCustomMockTestSelected,
+        setSchedules } = useBooking();
 
     // handler for package selection
-    const handlePackageSelection = (hours: number, isCustomLessonSelected: boolean) => {
+    const handleLessonPackageSelection = (hours: number, isCustomLessonSelected: boolean) => {
         setBookingHours(hours);
         setIsCustomLessonSelected(isCustomLessonSelected);
+        setSchedules([]);
+    }
+
+    const handleTestPackageSelection = (count: number, isCustomMockTestSelected: boolean) => {
+        setIsCustomMockTestSelected(isCustomMockTestSelected);
         setSchedules([]);
     }
 
@@ -38,13 +50,18 @@ const PackageSelectionStep: FC = () => {
                 selectedTab == "lesson" ?
                     <LessonPackage
                         instructor={instructor}
-                        handlePackageSelection={handlePackageSelection}
+                        handleLessonPackageSelection={handleLessonPackageSelection}
                         isCustomLessonSelected={isCustomLessonSelected}
                         bookingHours={bookingHours}
                     />
                     :
                     selectedTab == "test" &&
-                    <TestPackage />
+                    <TestPackage
+                        instructor={instructor}
+                        handleTestPackageSelection={handleTestPackageSelection}
+                        isCustomMockTestSelected={isCustomMockTestSelected}
+                        bookingHours={bookingHours}
+                    />
             }
 
         </div>
