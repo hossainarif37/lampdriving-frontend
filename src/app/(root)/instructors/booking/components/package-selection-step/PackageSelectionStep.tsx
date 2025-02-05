@@ -23,13 +23,13 @@ const PackageSelectionStep: FC = () => {
                     <Button
                         onClick={() => setSelectedTab("lesson")}
                         variant={selectedTab == "lesson" ? "default" : "outline"}
-                        className={`capitalize ${selectedTab == "lesson" && "hover:bg-secondary/90"}`}>
+                        className={`capitalize hover:border-secondary ${selectedTab == "lesson" && "hover:bg-secondary/90"}`}>
                         Lesson Package
                     </Button>
                     <Button
                         onClick={() => setSelectedTab("test")}
                         variant={selectedTab == "test" ? "default" : "outline"}
-                        className={`capitalize ${selectedTab == "test" && "hover:bg-secondary/90"}`}>
+                        className={`capitalize hover:border-secondary ${selectedTab == "test" && "hover:bg-secondary/90"}`}>
                         Test Package
                     </Button>
                 </div>
