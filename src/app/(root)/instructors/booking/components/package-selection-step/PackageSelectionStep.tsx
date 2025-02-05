@@ -24,12 +24,18 @@ const PackageSelectionStep: FC = () => {
     }
 
     const handleTestPackageSelection = (mockTestCount: number, isCustom: boolean) => {
-        if ((mockTestCount === testPackage.mockTestCount) && testPackage.included) {
+        if (isCustom !== isCustomMockTestSelected) {
+            setTestPackage(pre => ({ ...pre, mockTestCount, included: true }));
+            setIsCustomMockTestSelected(isCustom);
+            return;
+        }
+        if (((mockTestCount === testPackage.mockTestCount) && testPackage.included)) {
+            setIsCustomMockTestSelected(false);
             setTestPackage(pre => ({ ...pre, included: false }));
             return;
         }
-        setIsCustomMockTestSelected(isCustom);
         setTestPackage(pre => ({ ...pre, mockTestCount, included: true }));
+        setIsCustomMockTestSelected(isCustom);
     };
 
 
