@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
-import TestPackage from './TestPackage';
+import TestPackage from './test-package/TestPackage';
 import { useBooking } from '@/providers/BookingProvider';
 import { Button } from '@/components/ui/button';
-import LessonPackage from './LessonPackage';
+import LessonPackage from './lesson-package/LessonPackage';
 
 
 const PackageSelectionStep: FC = () => {
@@ -42,7 +42,7 @@ const PackageSelectionStep: FC = () => {
                         isCustomSelected={isCustomSelected}
                         bookingHours={bookingHours}
                      />
-                    :
+                    : 
                     selectedTab == "test" &&
                     <TestPackage />
             }
