@@ -36,7 +36,7 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
 
         {/* No reviews message */}
         {
-          reviews.length === 0 ?
+          reviews.length > 0 ?
             <>
               {reviews.map((review: any) => (
                 <div key={review?._id} className="border-b last:border-b-0 pb-6 last:pb-0">
