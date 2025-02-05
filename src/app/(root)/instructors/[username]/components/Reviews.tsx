@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from '@/components/shared/Loading';
 import { useGetInstructorReviewsQuery } from '@/redux/api/reviewApi/reviewApi';
 import { IInstructor } from '@/types/instructor';
 import { formatDate } from 'date-fns';
@@ -15,10 +16,9 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
   // Use the username in the query
   const { data, isLoading, isError } = useGetInstructorReviewsQuery({ username });
 
-  if (isLoading) return <div>Loading reviews...</div>;
+  if (isLoading) return <Loading />;
   if (isError) return <div>Error loading reviews</div>;
-  console.log('data', data);
-  const reviews = data?.data?.result.map((review: any) => ({
+  const reviews = data?.data?.result?.map((review: any) => ({
     id: review?._id,
     name: review?.learner?.user?.name?.firstName,
     date: review?.createdAt,
@@ -26,8 +26,6 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
     comment: review?.feedback
   })
   ) || [];
-
-  console.log('reviews', reviews);
 
   return (
     <section className="bg-light rounded-xl border p-4 md:p-6">
@@ -38,8 +36,7 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
 
         {/* No reviews message */}
         {
-          reviews.length === 0 ? <p className="text-gray-500">No reviews yet.</p>
-            :
+          reviews.length === 0 ?
             <>
               {reviews.map((review: any) => (
                 <div key={review?._id} className="border-b last:border-b-0 pb-6 last:pb-0">
@@ -54,6 +51,8 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
                 </div>
               ))}
             </>
+            :
+            <p className="text-gray-500">No reviews yet.</p>
         }
 
 

@@ -85,7 +85,6 @@ const ServicesForm: FC<{ instructor: any }> = ({ instructor }) => {
 
         updateInstructor(servicesData).unwrap()
             .then((res) => {
-                console.log('res', res);
                 toast({ message: res.message })
             })
             .catch((error) => {

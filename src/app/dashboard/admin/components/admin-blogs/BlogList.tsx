@@ -48,7 +48,6 @@ const BlogList: FC = () => {
 
   const handleDelete = async (id: string) => {
     // Add your delete logic here
-    console.log('Deleting blog:', id)
   }
 
   return (

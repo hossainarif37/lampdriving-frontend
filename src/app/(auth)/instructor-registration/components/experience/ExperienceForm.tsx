@@ -53,7 +53,10 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ instructorLicenseFile, setIn
 
     const onSubmit = (data: Inputs) => {
         setIsClicked(true);
-        if (!drivingLicenseURL || !experienceCertificateURL || selectedLanguages.length === 0) {
+        if (!instructorLicenseURL || !drivingLicenseURL || !experienceCertificateURL || selectedLanguages.length === 0) {
+            if (!instructorLicenseURL) {
+                setInstructorLicenseError(`${instructorLicenseError ? instructorLicenseError : 'Instructor License is required'}`);
+            }
             if (!drivingLicenseURL) {
                 setDrivingLicenseError(`${drivingLicenseError ? drivingLicenseError : 'Driving License is required'}`);
             }
@@ -83,6 +86,11 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ instructorLicenseFile, setIn
 
     useEffect(() => {
         if (isClicked) {
+            if (instructorLicenseURL) {
+                setInstructorLicenseError('');
+            } else {
+                setInstructorLicenseError(`${instructorLicenseFile ? 'Upload Instructor License' : 'Instructor License is required'}`);
+            }
             if (drivingLicenseURL) {
                 setDrivingLicenseError('');
             } else {
@@ -99,7 +107,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ instructorLicenseFile, setIn
                 setSelectedLanguagesError('Languages are required');
             }
         }
-    }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile, experienceInfo]);
+    }, [instructorLicenseURL, instructorLicenseFile, drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile, experienceInfo]);
 
     return (
         <div className='md:border md:p-16 md:shadow-lg md:rounded-lg mt-5'>

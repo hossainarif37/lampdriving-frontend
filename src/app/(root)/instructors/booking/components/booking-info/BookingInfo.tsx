@@ -33,7 +33,6 @@ const BookingInfo: FC = () => {
 
     // handler for navigating
     const handleNavigate = () => {
-        console.log(currentStep.key);
         if (currentStep.key === "instructor") {
             return handleStepChange("package-selection");
         }

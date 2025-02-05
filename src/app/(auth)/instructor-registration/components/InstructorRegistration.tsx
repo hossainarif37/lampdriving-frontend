@@ -6,14 +6,20 @@ import CarInfoForm from './car-info/CarInfoForm';
 import SecurityForm from './security/SecurityForm';
 import ServicesForm from './services/ServicesForm';
 import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
+import { IProfilePhoto } from '@/components/shared/PhotoUpload';
 
 
 const InstructorRegistration: FC = () => {
+    const { personalInfo, experienceInfo, servicesInfo, carInfo } = useInstructorRegister();
     // Experience
     const [instructorLicenseFile, setInstructorLicenseFile] = useState<File | null>(null);
     const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
     const [experienceCertificateFile, setExperienceCertificateFile] = useState<File | null>(null);
-    const { personalInfo, experienceInfo, servicesInfo, carInfo } = useInstructorRegister();
+    const [profilePhoto, setProfilePhoto] = useState<IProfilePhoto>({
+        file: null,
+        url: personalInfo?.profileImg || undefined
+    });
+
 
     // Car Info
     const [carImageFile, setCarImageFile] = useState<File | null>(null);
@@ -31,7 +37,10 @@ const InstructorRegistration: FC = () => {
     return (
         <>
             {/* Personal Info */}
-            {isPersonalInfoStep && <PersonalInfoForm />}
+            {isPersonalInfoStep && <PersonalInfoForm
+                profilePhoto={profilePhoto}
+                setProfilePhoto={setProfilePhoto}
+            />}
 
             {/* Experience */}
             {(isExperienceStep && personalInfo) && (

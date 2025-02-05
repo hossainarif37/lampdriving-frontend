@@ -43,8 +43,6 @@ const WalletPage: FC = () => {
         { skip: !instructorId }
     );
 
-    console.log(data);
-
     const totalEarnings = data?.data?.wallet.balance?.totalEarnings;
     const pendingBalance = data?.data?.wallet.balance?.pendingBalance;
     const currentBalance = data?.data?.wallet.balance?.currentBalance;
