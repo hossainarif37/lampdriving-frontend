@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 interface ITestPackageCardProps {
     heading: string;
@@ -8,13 +8,14 @@ interface ITestPackageCardProps {
     onSelect: () => void;
     selected: boolean;
     mockTestCount: number;
+    customContent?: ReactNode;
 }
 
-const TestPackageCard: FC<ITestPackageCardProps> = ({ heading, description, price, features, onSelect, selected }) => {
+const TestPackageCard: FC<ITestPackageCardProps> = ({ heading, description, price, features, onSelect, selected, customContent }) => {
     return (
         <div
             onClick={onSelect}
-            className={`bg-gradient-to-br from-primary/5 to-white rounded-xl p-4 lg:p-6 cursor-pointer border-2 border-gray-200
+            className={`bg-gradient-to-br from-primary/5 to-white rounded-xl p-4 lg:p-6 cursor-pointer border-2 border-gray-200 relative 
         ${selected ? 'bg-primary/5  border-primary' : 'bg-white border-gray-200 hover:border-primary/70'}`}>
             <div className="inline-block bg-primary text-white px-4 py-1 rounded-[4px] text-sm font-medium mb-4">
                 {heading}
@@ -30,6 +31,7 @@ const TestPackageCard: FC<ITestPackageCardProps> = ({ heading, description, pric
                     </div>
                 ))}
             </div>
+            {customContent}
             {/* <div className='absolute top-4 right-4'>
                 {
                     selected ?
