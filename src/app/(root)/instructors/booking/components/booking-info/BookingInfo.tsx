@@ -11,7 +11,7 @@ import { FC } from 'react';
 
 
 const BookingInfo: FC = () => {
-    const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, mockTestPackage, currentStep, handleStepChange, setIsConfirmTriggered, isTestPackageSelected, registerButtonRef, loginButtonRef, isLogging, isRegistering } = useBooking();
+    const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, currentStep, handleStepChange, setIsConfirmTriggered, isTestPackageSelected, registerButtonRef, loginButtonRef, isLogging, isRegistering, instructor } = useBooking();
 
     // register and login button trigger
     const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
@@ -57,7 +57,7 @@ const BookingInfo: FC = () => {
     }
 
 
-    let isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included && !mockTestPackage.included) ||
+    let isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
         (currentStep.key === "schedule" && (availableScheduleHours > 0 || (testPackage.included && !isTestPackageSelected))) || (isLogging || isRegistering || isCreatingABooking);
 
     return (
@@ -96,7 +96,7 @@ const BookingInfo: FC = () => {
                         <div className="flex justify-between">
                             <span className="flex gap-2">
                                 <NotepadText className="size-5 text-primary" />
-                                Driving Test Package
+                                Driving Test
                             </span>
                             <span>${testPackage.price}</span>
                         </div>
@@ -104,15 +104,15 @@ const BookingInfo: FC = () => {
                 }
 
                 {
-                    mockTestPackage.included &&
+                    testPackage.mockTestCount > 0 &&
                     <>
                         <hr />
                         <div className="flex justify-between">
                             <span className="flex gap-2">
                                 <NotepadText className="size-5 text-primary" />
-                                Mock Tests + Test Package
+                                Mock Test * {testPackage.mockTestCount}
                             </span>
-                            <span>${mockTestPackage.price}</span>
+                            <span>${testPackage.mockTestCount * (instructor?.pricePerHour || 0)}</span>
                         </div>
                     </>
                 }

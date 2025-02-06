@@ -5,7 +5,7 @@ import { FC, useEffect, useState } from 'react';
 
 
 const BookingSteps: FC = () => {
-    const { isTestPackageSelected, steps, currentStep, handleStepChange, bookingHours, testPackage, mockTestPackage, schedules, availableScheduleHours } = useBooking();
+    const { isTestPackageSelected, steps, currentStep, handleStepChange, bookingHours, testPackage, schedules, availableScheduleHours } = useBooking();
     const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
 
 
@@ -14,7 +14,7 @@ const BookingSteps: FC = () => {
             <div className='flex items-center justify-between gap-4'>
                 {
                     steps.map((step, index) => {
-                        const isPackageSelected = bookingHours ? true : false || testPackage.included || mockTestPackage.included;
+                        const isPackageSelected = bookingHours ? true : false || testPackage.included;
                         let isDisabled = false;
 
                         if (step.key !== 'instructor' && step.key !== 'package-selection') {

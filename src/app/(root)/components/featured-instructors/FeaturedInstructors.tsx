@@ -3,20 +3,15 @@ import SectionHeading from '../shared/section-heading/SectionHeading';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { getInstructors } from '@/api/getInstructors';
-// import InstructorCard from './InstructorCard';
 import InstructorCard from '../../instructors/components/InstructorCard';
+import { IResponseWithPaginationData } from '@/types/response';
+import { IInstructor } from '@/types/instructor';
+import { envConfigs } from '@/configs/envConfigs';
 
 
-interface IInstructorProps {
-    searchedParams?: {
-        carType?: string;
-        searchKey?: string;
-        page?: string;
-    };
-}
-const FeaturedInstructors: FC<IInstructorProps> = async ({ searchedParams }) => {
-    const instructors = await getInstructors({ limit: "4" });
+const FeaturedInstructors: FC = async () => {
+    const res = await fetch(`${envConfigs.apiUrl}/instructor/verified?populate=user&limit=4`, { cache: "no-cache" });
+    const data: IResponseWithPaginationData<IInstructor[]> = await res.json();
     return (
         <section className="md:py-16 py-12 md:p-6 bg-light">
             <div className="wrapper">
@@ -29,7 +24,7 @@ const FeaturedInstructors: FC<IInstructorProps> = async ({ searchedParams }) => 
                 {/* Instructors Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-7 mt-16 mx-auto">
                     {
-                        instructors?.data?.result.map((instructor, index) => (
+                        data?.data?.result?.map((instructor, index) => (
                             <InstructorCard key={index} instructor={instructor} />
                         ))
                     }

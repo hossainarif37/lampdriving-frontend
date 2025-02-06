@@ -9,6 +9,7 @@ import { IBookingContext, IPaymentInfo, IPrice, IStep, ITestPackage } from '@/ty
 import { stepsWithOutRegister, stepsWithRegister } from '@/constant/booking/bookingSteps';
 import { useAppSelector } from '@/redux/hook';
 import { IScheduleInputs } from '@/types/schedule';
+import { drivingTestPrice } from '@/constant/booking/testPackage';
 
 
 const BookingContext = createContext<IBookingContext | undefined>(undefined);
@@ -34,10 +35,10 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [steps, setSteps] = useState<IStep[]>(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
 
     const [instructor, setInstructor] = useState<Partial<IInstructor> | null>(null);
-    const [isCustomSelected, setIsCustomSelected] = useState(false);
+    const [isCustomLessonSelected, setIsCustomLessonSelected] = useState(false);
+    const [isCustomMockTestSelected, setIsCustomMockTestSelected] = useState(false);
     const [bookingHours, setBookingHours] = useState<number>(0);
-    const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: 225 });
-    const [mockTestPackage, setMockTestPackage] = useState<ITestPackage>({ included: false, price: 390 });
+    const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: drivingTestPrice, mockTestCount: 0 });
     const [price, setPrice] = useState<IPrice>({ paidAmount: 0, originalAmount: 0, discountedAmount: 0, discountedPercentage: 0 });
     const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({ transactionId: '', method: '' });
     const [schedules, setSchedules] = useState<IScheduleInputs[]>([]);
@@ -50,7 +51,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // handle step change
     const handleStepChange = (stepKey: string) => {
-        const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
+        const isPackageSelected = bookingHours || testPackage.included;
 
         const requestedStep = stepsWithRegister.find(step => step.key === stepKey);
         if (!requestedStep || requestedStep.key === 'instructor') return;
@@ -90,7 +91,8 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         bookingHours, setBookingHours,
         testPackage, setTestPackage,
         price, setPrice,
-        isCustomSelected, setIsCustomSelected,
+        isCustomLessonSelected, setIsCustomLessonSelected,
+        isCustomMockTestSelected, setIsCustomMockTestSelected,
         paymentInfo, setPaymentInfo,
         schedules, setSchedules,
         steps: steps, currentStep, setCurrentStep,
@@ -98,12 +100,16 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         handleStepChange,
         isConfirmTriggered, setIsConfirmTriggered,
         isCreatingABooking, setIsCreatingABooking,
-        mockTestPackage, setMockTestPackage, availableScheduleHours, isTestPackageSelected, isAllScheduled,
+        availableScheduleHours, isTestPackageSelected, isAllScheduled,
         registerButtonRef,
         isRegistering, setIsRegistering,
         loginButtonRef,
         isLogging, setIsLogging
-    }), [instructor, bookingHours, testPackage, price, isCustomSelected, paymentInfo, schedules, currentStep, useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered, isCreatingABooking, setIsCreatingABooking, availableScheduleHours, mockTestPackage, isTestPackageSelected, isAllScheduled, registerButtonRef, steps]);
+    }), [instructor, bookingHours, testPackage, price, isCustomLessonSelected,
+        isCustomMockTestSelected, paymentInfo, schedules, currentStep,
+        useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered,
+        isCreatingABooking, setIsCreatingABooking, availableScheduleHours,
+        isTestPackageSelected, isAllScheduled, registerButtonRef, steps]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams?.get('instructor');
@@ -141,20 +147,20 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         } else {
             setPrice({ originalAmount: totalAmount, paidAmount: totalAmount, discountedAmount: 0, discountedPercentage: 0 }); // No discount
         }
-        if (testPackage.included) {
-            setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + testPackage.price })); // Add test package price
+        if (testPackage.included) {                                    // Add test package price
+            if (testPackage.mockTestCount > 0) {
+                setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + (testPackage.price + (testPackage.mockTestCount * (instructor?.pricePerHour || 0))) }));
+            } else {
+                setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + testPackage.price }));
+            }
         }
-
-        if (mockTestPackage.included) {
-            setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + mockTestPackage.price })); // Add test package price
-        }
-    }, [bookingHours, testPackage.included, mockTestPackage.included]);
+    }, [bookingHours, testPackage]);
 
 
     // Handle initial step and URL changes
     useEffect(() => {
         const stepFromUrl = urlSearchParams?.get('step');
-        const isPackageSelected = bookingHours || testPackage.included || mockTestPackage.included;
+        const isPackageSelected = bookingHours || testPackage.included;
 
         if (!stepFromUrl) {
             handleStepChange('package-selection');
@@ -191,7 +197,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         if (validStep) {
             setCurrentStep(validStep);
         }
-    }, [urlSearchParams, bookingHours, testPackage.included, mockTestPackage.included, schedules, isAuthenticate, isTestPackageSelected, availableScheduleHours]);
+    }, [urlSearchParams, bookingHours, testPackage.included, schedules, isAuthenticate, isTestPackageSelected, availableScheduleHours]);
 
     if (isLoading) {
         return <Loading />

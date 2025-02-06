@@ -7,7 +7,7 @@ import { formatDate } from 'date-fns';
 import { toFixedNumber } from '@/lib/utils';
 
 const SuccessStep: FC = () => {
-    const { instructor, bookingHours, price, testPackage, mockTestPackage, schedules, paymentInfo } = useBooking();
+    const { instructor, bookingHours, price, testPackage, schedules, paymentInfo } = useBooking();
     return (
         <div className="bg-white rounded-lg lg:p-6  border-gray-200">
             <div className="max-w-3xl mx-auto">
@@ -83,12 +83,6 @@ const SuccessStep: FC = () => {
                                         testPackage.included && <div className="flex justify-between">
                                             <span className="text-gray-600">Test Package</span>
                                             <span className="font-medium text-gray-900">${testPackage.price}</span>
-                                        </div>
-                                    }
-                                    {
-                                        mockTestPackage.included && <div className="flex justify-between">
-                                            <span className="text-gray-600">Mock Test Package</span>
-                                            <span className="font-medium text-gray-900">${mockTestPackage.price}</span>
                                         </div>
                                     }
                                     <div className="pt-3 border-t border-gray-200">

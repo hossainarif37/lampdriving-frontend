@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
-import PackageCard from './PackageCard';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import PackageCard from './PackageCard';
 
 interface ICustomPackageProps {
     onSelect: (hours: number, isCustomSelected: boolean) => void;
@@ -10,6 +10,7 @@ interface ICustomPackageProps {
 }
 
 const CustomPackage: FC<ICustomPackageProps> = ({ onSelect, hourlyRate, bookingHours, selected }) => {
+    const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false);
     const [hours, setHours] = useState<number>(bookingHours);
 
     // handler for changing hours
@@ -17,17 +18,18 @@ const CustomPackage: FC<ICustomPackageProps> = ({ onSelect, hourlyRate, bookingH
         setHours(value);
         onSelect(value, true);
     };
-
     return (
         <PackageCard
             hours={hours}
             price={hourlyRate}
             description="Choose your own hours based on your needs"
             selected={selected}
-            onSelect={() => handleHoursChange(hours)}
+            onSelect={() => !isSelectOpen && handleHoursChange(hours)}
             customContent={
                 <div className="sm:absolute top-6 right-6">
                     <Select
+                        open={isSelectOpen}
+                        onOpenChange={(open) => setIsSelectOpen(open)}
                         onValueChange={(value: string) => handleHoursChange(Number(value))}
                         value={hours.toString()}
                     >
