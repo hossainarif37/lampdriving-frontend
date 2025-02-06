@@ -54,7 +54,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
 
         if (searchKey) {
             searchParams.set('searchKey', searchKey);
-            searchParams.delete('page'); // Reset pagination on search
+            searchParams.delete('page');
             setSelectedSuburb(searchKey);
         } else {
             searchParams.delete('searchKey');

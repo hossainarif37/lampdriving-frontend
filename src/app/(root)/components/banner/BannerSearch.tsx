@@ -92,7 +92,7 @@ const BannerSearch: FC = () => {
                             <input
                                 value={selectedSuburb}
                                 onChange={(e) => handleSearchChange(e.target.value)}
-                                // readOnly
+                                readOnly
                                 className="flex-1 px-4 py-3 rounded-md text-primary focus:outline-none placeholder:text-accent"
                                 type="text"
                                 placeholder="Enter your suburb"
