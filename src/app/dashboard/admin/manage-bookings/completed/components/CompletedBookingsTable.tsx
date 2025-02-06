@@ -12,23 +12,23 @@ import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
 
 const CompletedBookingsTable: FC = () => {
     const urlSearchParams = useSearchParams();
-    const [page, setPage] = useState(urlSearchParams.get('page') || '1');
-    const [limit, setLimit] = useState(urlSearchParams.get('limit') || '8');
+    const [page, setPage] = useState(urlSearchParams?.get('page') || '1');
+    const [limit, setLimit] = useState(urlSearchParams?.get('limit') || '8');
     const [isSearched, setIsSearched] = useState(false);
 
     const { data, isLoading } = useGetAllBookingsQuery(
         {
             status: "completed",
-            searchKey: urlSearchParams.get('searchKey') || '',
+            searchKey: urlSearchParams?.get('searchKey') || '',
             limit: limit,
             page: page
         });
 
     useEffect(() => {
-        setPage(urlSearchParams.get('page') || '1');
-        setLimit(urlSearchParams.get('limit') || '8');
+        setPage(urlSearchParams?.get('page') || '1');
+        setLimit(urlSearchParams?.get('limit') || '8');
 
-        if (urlSearchParams.get('searchKey')?.length) {
+        if (urlSearchParams?.get('searchKey')?.length) {
             setIsSearched(true);
         } else {
             setIsSearched(false);
@@ -80,7 +80,7 @@ const CompletedBookingsTable: FC = () => {
                                                 <TableCell className="font-medium">
                                                     <div>
                                                         <p>
-                                                            ${(booking.price).toFixed(2)}
+                                                            ${(booking.price).paidAmount.toFixed(2)}
                                                         </p>
                                                         <p>
                                                             {(booking.payment as any).transactionId}

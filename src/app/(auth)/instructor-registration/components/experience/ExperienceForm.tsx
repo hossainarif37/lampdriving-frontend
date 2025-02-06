@@ -17,16 +17,23 @@ interface Inputs {
 interface IExperienceFormProps {
     // experienceInfo: IExperience | undefined;
     // setExperienceInfo: Dispatch<SetStateAction<IExperience | undefined>>
+    instructorLicenseFile: File | null;
+    setInstructorLicenseFile: Dispatch<SetStateAction<File | null>>;
     drivingLicenseFile: File | null;
     setDrivingLicenseFile: Dispatch<SetStateAction<File | null>>;
     experienceCertificateFile: File | null;
     setExperienceCertificateFile: Dispatch<SetStateAction<File | null>>;
 }
 
-const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
+const ExperienceForm: FC<IExperienceFormProps> = ({ instructorLicenseFile, setInstructorLicenseFile, drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile }) => {
     const [isClicked, setIsClicked] = useState(false);
     const router = useRouter();
     const { experienceInfo, setExperienceInfo } = useInstructorRegister();
+
+    // Instructor License
+    const [instructorLicenseURL, setInstructorLicenseURL] = useState<string>(experienceInfo?.documents?.instructorLicense || '');
+
+    const [instructorLicenseError, setInstructorLicenseError] = useState<string>('');
 
     // Driving License
     const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(experienceInfo?.documents?.drivingLicense || '');
@@ -46,7 +53,10 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
 
     const onSubmit = (data: Inputs) => {
         setIsClicked(true);
-        if (!drivingLicenseURL || !experienceCertificateURL || selectedLanguages.length === 0) {
+        if (!instructorLicenseURL || !drivingLicenseURL || !experienceCertificateURL || selectedLanguages.length === 0) {
+            if (!instructorLicenseURL) {
+                setInstructorLicenseError(`${instructorLicenseError ? instructorLicenseError : 'Instructor License is required'}`);
+            }
             if (!drivingLicenseURL) {
                 setDrivingLicenseError(`${drivingLicenseError ? drivingLicenseError : 'Driving License is required'}`);
             }
@@ -62,6 +72,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
         const experienceData = {
             ...data,
             documents: {
+                instructorLicense: instructorLicenseURL,
                 drivingLicense: drivingLicenseURL,
                 experienceCertificate: experienceCertificateURL
             },
@@ -75,6 +86,11 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
 
     useEffect(() => {
         if (isClicked) {
+            if (instructorLicenseURL) {
+                setInstructorLicenseError('');
+            } else {
+                setInstructorLicenseError(`${instructorLicenseFile ? 'Upload Instructor License' : 'Instructor License is required'}`);
+            }
             if (drivingLicenseURL) {
                 setDrivingLicenseError('');
             } else {
@@ -91,7 +107,7 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
                 setSelectedLanguagesError('Languages are required');
             }
         }
-    }, [drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile, experienceInfo]);
+    }, [instructorLicenseURL, instructorLicenseFile, drivingLicenseURL, experienceCertificateURL, selectedLanguages, isClicked, drivingLicenseFile, experienceCertificateFile, experienceInfo]);
 
     return (
         <div className='md:border md:p-16 md:shadow-lg md:rounded-lg mt-5'>
@@ -120,6 +136,12 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
                     selectedLanguages={selectedLanguages}
                     setSelectedLanguages={setSelectedLanguages}
                     selectedLanguagesError={selectedLanguagesError}
+                    instructorLicenseURL={instructorLicenseURL}
+                    setInstructorLicenseURL={setInstructorLicenseURL}
+                    instructorLicenseError={instructorLicenseError}
+                    setInstructorLicenseError={setInstructorLicenseError}
+                    instructorLicenseFile={instructorLicenseFile}
+                    setInstructorLicenseFile={setInstructorLicenseFile}
                 />
 
                 <div>

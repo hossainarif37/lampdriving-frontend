@@ -12,7 +12,6 @@ interface IDataNotFoundProps {
 
 const DataNotFound: FC<IDataNotFoundProps> = ({ dataName = "Data", isSearched, className }) => {
     const { replace } = useRouter();
-    console.log(isSearched);
     // reset search handler
     const handleResetSearch = () => {
         replace('?');

@@ -11,22 +11,17 @@ import { useGetLearnerStatsQuery } from '@/redux/api/statsApi/statsApi';
 import LearnerStatsSkeleton from './LearnerStatsSkeleton';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { useGetLearnerSchedulesQuery } from '@/redux/api/scheduleApi/scheduleApi';
 
 interface Instructor {
   id: string;
   name: string;
-  rating: number;
-  specialization: string;
+  experience: number;
   imageUrl: StaticImageData;
+  username: string;
 }
 
-const instructor: Instructor = {
-  id: '1',
-  name: 'John Doe',
-  rating: 4.9,
-  specialization: 'Defensive Driving Expert',
-  imageUrl: placeHolderImage,
-};
+
 
 const LearnerStats: FC = () => {
   const { user } = useAppSelector(state => state.authSlice);
@@ -42,9 +37,22 @@ const LearnerStats: FC = () => {
     skip: !learnerId
   });
 
-  if (isLoading) {
+  const { data: learnerSchedules, isLoading: isLoadingSchedules } = useGetLearnerSchedulesQuery({ learnerId }, {
+    skip: !learnerId
+  });
+
+
+  if (isLoading || isLoadingSchedules) {
     return <LearnerStatsSkeleton />
   }
+
+  const instructor: Instructor = {
+    id: learnerSchedules?.data?.result[0]?.instructor?._id || '',
+    name: learnerSchedules?.data?.result[0]?.instructor?.user?.name?.fullName || '',
+    experience: learnerSchedules?.data?.result[0]?.instructor?.experience || 0,
+    imageUrl: learnerSchedules?.data?.result[0]?.instructor?.user?.profileImg || placeHolderImage,
+    username: learnerSchedules?.data?.result[0]?.instructor?.user?.username || ''
+  };
 
   const statsData = [
     {
@@ -113,25 +121,32 @@ const LearnerStats: FC = () => {
         ))}
       </div>
 
-      {/* Instructor Section - Only shown if there are upcoming/ongoing bookings */}
+      {/* Instructor Section */}
       {hasUpcomingOrOngoingBookings && (
-        <div className="bg-white rounded-xl border p-6 mb-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Your Instructor</h2>
-          <div className="flex items-center">
-            <Image
-              src={instructor.imageUrl}
-              alt={instructor.name}
-              className="w-16 h-16 rounded-full object-cover mr-4"
-            />
-            <div>
-              <h3 className="font-semibold text-gray-900">{instructor.name}</h3>
-              <p className="text-gray-600 text-sm">{instructor.specialization}</p>
-              <div className="flex items-center mt-1">
-                <Award className="h-4 w-4 text-yellow-400 mr-1" />
-                <span className="text-sm text-gray-600">{instructor.rating} rating</span>
+        <div className="bg-white rounded-xl border p-6 mb-8 flex justify-between items-center">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Your Instructor</h2>
+            <div className="flex items-center">
+              <Image
+                src={instructor.imageUrl}
+                alt={instructor.name}
+                width={64}
+                height={64}
+                className="w-16 h-16 rounded-full object-cover mr-4"
+              />
+              <div>
+                <h3 className="font-semibold text-gray-900">{instructor.name}</h3>
+                <div className="flex items-center mt-1">
+                  <Award className="h-4 w-4 text-yellow-400 mr-1" />
+                  <span className="text-sm text-gray-600">{instructor.experience} years of experience</span>
+                </div>
               </div>
             </div>
+
           </div>
+          <Link href={`/instructors/${instructor.username}`} className="text-primary hover:underline">
+            <Button variant={"secondary"}>View Instructor Profile</Button>
+          </Link>
         </div>
       )}
 
@@ -144,7 +159,7 @@ const LearnerStats: FC = () => {
             <h2 className="text-xl font-bold text-gray-900">Upcoming Lessons</h2>
           </div>
           <div className="space-y-4">
-            {learnerStats?.data?.upcomingSchedules?.map((schedule: any) => (
+            {learnerSchedules?.data?.result?.map((schedule: any) => (
               <div key={schedule._id} className="border-l-4 border-blue-600 pl-4">
                 <p className="font-semibold">{formatDate(schedule.date)}</p>
                 <p className="text-sm text-gray-600">
@@ -152,7 +167,7 @@ const LearnerStats: FC = () => {
                 </p>
               </div>
             ))}
-            {(!learnerStats?.data?.upcomingSchedules || learnerStats?.data?.upcomingSchedules.length === 0) && (
+            {(learnerSchedules?.data?.result.length === 0) && (
               <p className="text-gray-600">No upcoming lessons scheduled</p>
             )}
           </div>

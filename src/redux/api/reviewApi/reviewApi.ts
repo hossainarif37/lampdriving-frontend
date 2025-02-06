@@ -18,7 +18,7 @@ const reviewApi = baseApi.injectEndpoints({
         }),
 
         getInstructorReviews: builder.query<IResponseWithPaginationData<IReview[]>, { username: string }>({
-            query: ({ username }) => `/review/instructor/${username}`
+            query: ({ username }) => `/review/instructor/${username}?limit=3&populate=learner.user&userFields=name,profileImg`
         }),
     })
 })

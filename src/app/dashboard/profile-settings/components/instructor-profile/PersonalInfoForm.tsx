@@ -42,7 +42,6 @@ const PersonalInfoForm: FC = () => {
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
     const onSubmit = async (data: IPersonalInfoInputs) => {
-        console.log('profilePhoto', profilePhoto);
         // Validate the image before proceeding
         if (!validateImage()) return;
 
@@ -56,8 +55,6 @@ const PersonalInfoForm: FC = () => {
             ...modifiedFields,
             ...(isImageModified && profilePhoto.url ? { profileImg: profilePhoto.url } : {}),
         };
-
-        console.log('payload', payload);
 
         updateUser(payload).unwrap()
             .then((res) => {

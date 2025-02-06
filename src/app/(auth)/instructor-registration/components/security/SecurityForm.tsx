@@ -102,7 +102,7 @@ const SecurityForm: FC = () => {
 
                 router.push('/dashboard/instructor');
             }).catch((err) => {
-                console.log(err);
+                console.log('Failed to register instructor', err);
                 toast({
                     success: false,
                     message: err.data.message || "Something went wrong",

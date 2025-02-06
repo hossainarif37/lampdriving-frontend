@@ -57,13 +57,25 @@ const usersApi = baseApi.injectEndpoints({
         }),
         resetPassword: builder.mutation<IResponseBase, { token: string, newPassword: string }>({
             query: (data) => {
-                console.log(data);
                 return ({
                     url: `/auth/password/reset/${data.token}`,
                     method: "PATCH",
                     body: data
                 })
             }
+        }),
+        sendEmailVerification: builder.mutation<IResponseBase, { email: string }>({
+            query: (data) => ({
+                url: `/auth/email/verification/${data.email}`,
+                method: "POST"
+            })
+        }),
+        verifyEmail: builder.mutation<IResponseBase, { token: string }>({
+            query: (data) => ({
+                url: `/auth/email/verify/${data.token}`,
+                method: "PATCH"
+            }),
+            invalidatesTags: ['user']
         })
     })
 })
@@ -76,5 +88,7 @@ export const { useRegisterUserMutation,
     useUpdatePasswordMutation,
     useResetPasswordEmailMutation,
     useVerifyResetPasswordOtpMutation,
-    useResetPasswordMutation
+    useResetPasswordMutation,
+    useSendEmailVerificationMutation,
+    useVerifyEmailMutation
 } = usersApi;

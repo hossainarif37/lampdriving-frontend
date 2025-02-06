@@ -24,6 +24,46 @@
         ]
     },
     {
+        "label": "Ashfield, NSW 2131",
+        "value": "Ashfield, NSW 2131",
+        "coordinates": [
+            -33.8888,
+            151.1223
+        ]
+    },
+    {
+        "label": "Balmain, NSW 2041",
+        "value": "Balmain, NSW 2041",
+        "coordinates": [
+            -33.8578,
+            151.1805
+        ]
+    },
+    {
+        "label": "Bankstown, NSW 2200",
+        "value": "Bankstown, NSW 2200",
+        "coordinates": [
+            -33.918,
+            151.0333
+        ]
+    },
+    {
+        "label": "Bondi, NSW 2026",
+        "value": "Bondi, NSW 2026",
+        "coordinates": [
+            -33.8915,
+            151.2767
+        ]
+    },
+    {
+        "label": "Burwood, NSW 2134",
+        "value": "Burwood, NSW 2134",
+        "coordinates": [
+            -33.8779,
+            151.1033
+        ]
+    },
+    {
         "label": "Camperdown, NSW 2050",
         "value": "Camperdown, NSW 2050",
         "coordinates": [
@@ -32,18 +72,42 @@
         ]
     },
     {
+        "label": "Chatswood, NSW 2067",
+        "value": "Chatswood, NSW 2067",
+        "coordinates": [
+            -33.796,
+            151.181
+        ]
+    },
+    {
         "label": "Coogee, NSW 2034",
         "value": "Coogee, NSW 2034",
         "coordinates": [
-            -33.9200,
-            151.2550
+            -33.92,
+            151.255
+        ]
+    },
+    {
+        "label": "Cronulla, NSW 2230",
+        "value": "Cronulla, NSW 2230",
+        "coordinates": [
+            -34.0525,
+            151.1527
+        ]
+    },
+    {
+        "label": "Darlinghurst, NSW 2010",
+        "value": "Darlinghurst, NSW 2010",
+        "coordinates": [
+            -33.8788,
+            151.2153
         ]
     },
     {
         "label": "Double Bay, NSW 2028",
         "value": "Double Bay, NSW 2028",
         "coordinates": [
-            -33.8750,
+            -33.875,
             151.2417
         ]
     },
@@ -56,19 +120,203 @@
         ]
     },
     {
+        "label": "Dulwich Hill, NSW 2203",
+        "value": "Dulwich Hill, NSW 2203",
+        "coordinates": [
+            -33.9025,
+            151.14
+        ]
+    },
+    {
+        "label": "Eastwood, NSW 2122",
+        "value": "Eastwood, NSW 2122",
+        "coordinates": [
+            -33.789,
+            151.081
+        ]
+    },
+    {
         "label": "Enmore, NSW 2042",
         "value": "Enmore, NSW 2042",
         "coordinates": [
-            -33.8980,
-            151.1740
+            -33.898,
+            151.174
+        ]
+    },
+    {
+        "label": "Epping, NSW 2121",
+        "value": "Epping, NSW 2121",
+        "coordinates": [
+            -33.7725,
+            151.082
+        ]
+    },
+    {
+        "label": "Fairfield, NSW 2165",
+        "value": "Fairfield, NSW 2165",
+        "coordinates": [
+            -33.8728,
+            150.95
         ]
     },
     {
         "label": "Five Dock, NSW 2046",
         "value": "Five Dock, NSW 2046",
         "coordinates": [
-            -33.8650,
-            151.1270
+            -33.865,
+            151.127
+        ]
+    },
+    {
+        "label": "Glebe, NSW 2037",
+        "value": "Glebe, NSW 2037",
+        "coordinates": [
+            -33.88,
+            151.19
+        ]
+    },
+    {
+        "label": "Granville, NSW 2142",
+        "value": "Granville, NSW 2142",
+        "coordinates": [
+            -33.8333,
+            151.0167
+        ]
+    },
+    {
+        "label": "Greenacre, NSW 2190",
+        "value": "Greenacre, NSW 2190",
+        "coordinates": [
+            -33.9,
+            151.0667
+        ]
+    },
+    {
+        "label": "Hornsby, NSW 2077",
+        "value": "Hornsby, NSW 2077",
+        "coordinates": [
+            -33.702,
+            151.1
+        ]
+    },
+    {
+        "label": "Hurstville, NSW 2220",
+        "value": "Hurstville, NSW 2220",
+        "coordinates": [
+            -33.967,
+            151.1
+        ]
+    },
+    {
+        "label": "Kensington, NSW 2033",
+        "value": "Kensington, NSW 2033",
+        "coordinates": [
+            -33.911,
+            151.224
+        ]
+    },
+    {
+        "label": "Kingsford, NSW 2032",
+        "value": "Kingsford, NSW 2032",
+        "coordinates": [
+            -33.924,
+            151.227
+        ]
+    },
+    {
+        "label": "Lane Cove, NSW 2066",
+        "value": "Lane Cove, NSW 2066",
+        "coordinates": [
+            -33.814,
+            151.17
+        ]
+    },
+    {
+        "label": "Leichhardt, NSW 2040",
+        "value": "Leichhardt, NSW 2040",
+        "coordinates": [
+            -33.883,
+            151.157
+        ]
+    },
+    {
+        "label": "Liverpool, NSW 2170",
+        "value": "Liverpool, NSW 2170",
+        "coordinates": [
+            -33.92,
+            150.925
+        ]
+    },
+    {
+        "label": "Manly, NSW 2095",
+        "value": "Manly, NSW 2095",
+        "coordinates": [
+            -33.8,
+            151.2867
+        ]
+    },
+    {
+        "label": "Marrickville, NSW 2204",
+        "value": "Marrickville, NSW 2204",
+        "coordinates": [
+            -33.91,
+            151.15
+        ]
+    },
+    {
+        "label": "Mosman, NSW 2088",
+        "value": "Mosman, NSW 2088",
+        "coordinates": [
+            -33.829,
+            151.247
+        ]
+    },
+    {
+        "label": "Newtown, NSW 2042",
+        "value": "Newtown, NSW 2042",
+        "coordinates": [
+            -33.898,
+            151.174
+        ]
+    },
+    {
+        "label": "North Sydney, NSW 2060",
+        "value": "North Sydney, NSW 2060",
+        "coordinates": [
+            -33.839,
+            151.209
+        ]
+    },
+    {
+        "label": "Paddington, NSW 2021",
+        "value": "Paddington, NSW 2021",
+        "coordinates": [
+            -33.8845,
+            151.2282
+        ]
+    },
+    {
+        "label": "Parramatta, NSW 2150",
+        "value": "Parramatta, NSW 2150",
+        "coordinates": [
+            -33.815,
+            151.0011
+        ]
+    },
+    {
+        "label": "Randwick, NSW 2031",
+        "value": "Randwick, NSW 2031",
+        "coordinates": [
+            -33.9176,
+            151.2416
+        ]
+    },
+    {
+        "label": "Surry Hills, NSW 2010",
+        "value": "Surry Hills, NSW 2010",
+        "coordinates": [
+            -33.884,
+            151.211
         ]
     },
     {
@@ -80,11 +328,67 @@
         ]
     },
     {
+        "label": "Ultimo, NSW 2007",
+        "value": "Ultimo, NSW 2007",
+        "coordinates": [
+            -33.88,
+            151.197
+        ]
+    },
+    {
+        "label": "Waverley, NSW 2024",
+        "value": "Waverley, NSW 2024",
+        "coordinates": [
+            -33.905,
+            151.253
+        ]
+    },
+    {
+        "label": "Woollahra, NSW 2025",
+        "value": "Woollahra, NSW 2025",
+        "coordinates": [
+            -33.889,
+            151.244
+        ]
+    },
+    {
+        "label": "Zetland, NSW 2017",
+        "value": "Zetland, NSW 2017",
+        "coordinates": [
+            -33.907,
+            151.209
+        ]
+    },
+    {
         "label": "Acacia Gardens, NSW 2763",
         "value": "Acacia Gardens, NSW 2763",
         "coordinates": [
-            -33.7350,
-            150.9290
+            -33.735,
+            150.929
+        ]
+    },
+    {
+        "label": "Auburn, NSW 2144",
+        "value": "Auburn, NSW 2144",
+        "coordinates": [
+            -33.8567,
+            151.022
+        ]
+    },
+    {
+        "label": "Baulkham Hills, NSW 2153",
+        "value": "Baulkham Hills, NSW 2153",
+        "coordinates": [
+            -33.7333,
+            151.03
+        ]
+    },
+    {
+        "label": "Bexley, NSW 2207",
+        "value": "Bexley, NSW 2207",
+        "coordinates": [
+            -33.9328,
+            151.1146
         ]
     },
     {
@@ -96,11 +400,35 @@
         ]
     },
     {
+        "label": "Blacktown, NSW 2148",
+        "value": "Blacktown, NSW 2148",
+        "coordinates": [
+            -33.7734,
+            150.917
+        ]
+    },
+    {
         "label": "Blakehurst, NSW 2221",
         "value": "Blakehurst, NSW 2221",
         "coordinates": [
             -33.9702,
-            151.1200
+            151.12
+        ]
+    },
+    {
+        "label": "Bondi Junction, NSW 2022",
+        "value": "Bondi Junction, NSW 2022",
+        "coordinates": [
+            -33.8915,
+            151.2605
+        ]
+    },
+    {
+        "label": "Botany, NSW 2019",
+        "value": "Botany, NSW 2019",
+        "coordinates": [
+            -33.9294,
+            151.2051
         ]
     },
     {
@@ -108,7 +436,15 @@
         "value": "Beverley Hills, NSW 2209",
         "coordinates": [
             -33.9583,
-            151.0770
+            151.077
+        ]
+    },
+    {
+        "label": "Brighton-Le-Sands, NSW 2216",
+        "value": "Brighton-Le-Sands, NSW 2216",
+        "coordinates": [
+            -33.9527,
+            151.1516
         ]
     },
     {
@@ -116,7 +452,15 @@
         "value": "Burwood Heights, NSW 2136",
         "coordinates": [
             -33.8789,
-            151.0950
+            151.095
+        ]
+    },
+    {
+        "label": "Cabramatta, NSW 2166",
+        "value": "Cabramatta, NSW 2166",
+        "coordinates": [
+            -33.8925,
+            150.9382
         ]
     },
     {
@@ -128,11 +472,67 @@
         ]
     },
     {
+        "label": "Caringbah, NSW 2229",
+        "value": "Caringbah, NSW 2229",
+        "coordinates": [
+            -34.0322,
+            151.135
+        ]
+    },
+    {
+        "label": "Carlingford, NSW 2118",
+        "value": "Carlingford, NSW 2118",
+        "coordinates": [
+            -33.7796,
+            151.0333
+        ]
+    },
+    {
         "label": "Chatswood West, NSW 2067",
         "value": "Chatswood West, NSW 2067",
         "coordinates": [
             -33.7876,
             151.1743
+        ]
+    },
+    {
+        "label": "Chester Hill, NSW 2162",
+        "value": "Chester Hill, NSW 2162",
+        "coordinates": [
+            -33.8955,
+            151.022
+        ]
+    },
+    {
+        "label": "Clovelly, NSW 2031",
+        "value": "Clovelly, NSW 2031",
+        "coordinates": [
+            -33.91,
+            151.2519
+        ]
+    },
+    {
+        "label": "Croydon, NSW 2132",
+        "value": "Croydon, NSW 2132",
+        "coordinates": [
+            -33.8855,
+            151.1186
+        ]
+    },
+    {
+        "label": "Croydon Park, NSW 2133",
+        "value": "Croydon Park, NSW 2133",
+        "coordinates": [
+            -33.889,
+            151.1167
+        ]
+    },
+    {
+        "label": "Crows Nest, NSW 2065",
+        "value": "Crows Nest, NSW 2065",
+        "coordinates": [
+            -33.8205,
+            151.2063
         ]
     },
     {
@@ -147,7 +547,7 @@
         "label": "East Ryde, NSW 2113",
         "value": "East Ryde, NSW 2113",
         "coordinates": [
-            -33.8000,
+            -33.8,
             151.0867
         ]
     },
@@ -160,11 +560,27 @@
         ]
     },
     {
+        "label": "Fairfield East, NSW 2165",
+        "value": "Fairfield East, NSW 2165",
+        "coordinates": [
+            -33.8735,
+            150.9565
+        ]
+    },
+    {
         "label": "Fairfield Heights, NSW 2165",
         "value": "Fairfield Heights, NSW 2165",
         "coordinates": [
             -33.8811,
             150.9611
+        ]
+    },
+    {
+        "label": "Flemington, NSW 2140",
+        "value": "Flemington, NSW 2140",
+        "coordinates": [
+            -33.8583,
+            151.0167
         ]
     },
     {
@@ -179,7 +595,7 @@
         "label": "Glenhaven, NSW 2156",
         "value": "Glenhaven, NSW 2156",
         "coordinates": [
-            -33.7370,
+            -33.737,
             151.0005
         ]
     },
@@ -192,11 +608,51 @@
         ]
     },
     {
+        "label": "Gordon, NSW 2072",
+        "value": "Gordon, NSW 2072",
+        "coordinates": [
+            -33.7354,
+            151.1825
+        ]
+    },
+    {
+        "label": "Greystanes, NSW 2145",
+        "value": "Greystanes, NSW 2145",
+        "coordinates": [
+            -33.8643,
+            150.9967
+        ]
+    },
+    {
+        "label": "Guildford, NSW 2161",
+        "value": "Guildford, NSW 2161",
+        "coordinates": [
+            -33.853,
+            151.0175
+        ]
+    },
+    {
+        "label": "Haberfield, NSW 2045",
+        "value": "Haberfield, NSW 2045",
+        "coordinates": [
+            -33.8767,
+            151.1567
+        ]
+    },
+    {
+        "label": "Harris Park, NSW 2150",
+        "value": "Harris Park, NSW 2150",
+        "coordinates": [
+            -33.8172,
+            151.0033
+        ]
+    },
+    {
         "label": "Hawkesbury, NSW 2570",
         "value": "Hawkesbury, NSW 2570",
         "coordinates": [
             -33.5797,
-            150.6610
+            150.661
         ]
     },
     {
@@ -205,6 +661,14 @@
         "coordinates": [
             -33.9472,
             151.2408
+        ]
+    },
+    {
+        "label": "Homebush, NSW 2140",
+        "value": "Homebush, NSW 2140",
+        "coordinates": [
+            -33.8835,
+            151.072
         ]
     },
     {
@@ -219,7 +683,7 @@
         "label": "Illawong, NSW 2234",
         "value": "Illawong, NSW 2234",
         "coordinates": [
-            -34.0000,
+            -34,
             151.0333
         ]
     },
@@ -227,8 +691,16 @@
         "label": "Jannali, NSW 2226",
         "value": "Jannali, NSW 2226",
         "coordinates": [
-            -34.0330,
+            -34.033,
             151.0667
+        ]
+    },
+    {
+        "label": "Kogarah, NSW 2217",
+        "value": "Kogarah, NSW 2217",
+        "coordinates": [
+            -33.9667,
+            151.1346
         ]
     },
     {
@@ -251,7 +723,7 @@
         "label": "La Perouse, NSW 2036",
         "value": "La Perouse, NSW 2036",
         "coordinates": [
-            -33.9930,
+            -33.993,
             151.2214
         ]
     },
@@ -272,19 +744,27 @@
         ]
     },
     {
+        "label": "Lidcombe, NSW 2141",
+        "value": "Lidcombe, NSW 2141",
+        "coordinates": [
+            -33.8613,
+            151.062
+        ]
+    },
+    {
+        "label": "Lurnea, NSW 2170",
+        "value": "Lurnea, NSW 2170",
+        "coordinates": [
+            -33.925,
+            150.9343
+        ]
+    },
+    {
         "label": "Maconochie, NSW 2586",
         "value": "Maconochie, NSW 2586",
         "coordinates": [
             -33.8342,
-            150.9110
-        ]
-    },
-    {
-        "label": "Manly, NSW 2095",
-        "value": "Manly, NSW 2095",
-        "coordinates": [
-            -33.8000,
-            151.2867
+            150.911
         ]
     },
     {
@@ -304,6 +784,70 @@
         ]
     },
     {
+        "label": "Miranda, NSW 2228",
+        "value": "Miranda, NSW 2228",
+        "coordinates": [
+            -34.0397,
+            151.1283
+        ]
+    },
+    {
+        "label": "Moore Park, NSW 2021",
+        "value": "Moore Park, NSW 2021",
+        "coordinates": [
+            -33.8947,
+            151.2223
+        ]
+    },
+    {
+        "label": "Mortdale, NSW 2223",
+        "value": "Mortdale, NSW 2223",
+        "coordinates": [
+            -33.9741,
+            151.0516
+        ]
+    },
+    {
+        "label": "Mount Druitt, NSW 2770",
+        "value": "Mount Druitt, NSW 2770",
+        "coordinates": [
+            -33.7481,
+            150.8345
+        ]
+    },
+    {
+        "label": "North Bondi, NSW 2026",
+        "value": "North Bondi, NSW 2026",
+        "coordinates": [
+            -33.8913,
+            151.2772
+        ]
+    },
+    {
+        "label": "North Epping, NSW 2121",
+        "value": "North Epping, NSW 2121",
+        "coordinates": [
+            -33.7715,
+            151.095
+        ]
+    },
+    {
+        "label": "North Parramatta, NSW 2151",
+        "value": "North Parramatta, NSW 2151",
+        "coordinates": [
+            -33.7925,
+            151.0708
+        ]
+    },
+    {
+        "label": "North Rocks, NSW 2151",
+        "value": "North Rocks, NSW 2151",
+        "coordinates": [
+            -33.7796,
+            151.0235
+        ]
+    },
+    {
         "label": "Oakhurst, NSW 2761",
         "value": "Oakhurst, NSW 2761",
         "coordinates": [
@@ -312,11 +856,35 @@
         ]
     },
     {
-        "label": "Parramatta, NSW 2150",
-        "value": "Parramatta, NSW 2150",
+        "label": "Oatlands, NSW 2117",
+        "value": "Oatlands, NSW 2117",
         "coordinates": [
-            -33.8130,
-            151.0025
+            -33.7732,
+            151.0427
+        ]
+    },
+    {
+        "label": "Padstow, NSW 2211",
+        "value": "Padstow, NSW 2211",
+        "coordinates": [
+            -33.9324,
+            151.03
+        ]
+    },
+    {
+        "label": "Peakhurst, NSW 2210",
+        "value": "Peakhurst, NSW 2210",
+        "coordinates": [
+            -33.9553,
+            151.0642
+        ]
+    },
+    {
+        "label": "Petersham, NSW 2049",
+        "value": "Petersham, NSW 2049",
+        "coordinates": [
+            -33.895,
+            151.1636
         ]
     },
     {
@@ -328,11 +896,27 @@
         ]
     },
     {
+        "label": "Pymble, NSW 2073",
+        "value": "Pymble, NSW 2073",
+        "coordinates": [
+            -33.7716,
+            151.1717
+        ]
+    },
+    {
         "label": "Quakers Hill, NSW 2763",
         "value": "Quakers Hill, NSW 2763",
         "coordinates": [
             -33.7258,
-            150.8990
+            150.899
+        ]
+    },
+    {
+        "label": "Revesby, NSW 2212",
+        "value": "Revesby, NSW 2212",
+        "coordinates": [
+            -33.945,
+            151.0277
         ]
     },
     {
@@ -341,6 +925,22 @@
         "coordinates": [
             -33.9517,
             151.0507
+        ]
+    },
+    {
+        "label": "Rockdale, NSW 2216",
+        "value": "Rockdale, NSW 2216",
+        "coordinates": [
+            -33.9511,
+            151.1404
+        ]
+    },
+    {
+        "label": "Rouse Hill, NSW 2155",
+        "value": "Rouse Hill, NSW 2155",
+        "coordinates": [
+            -33.7363,
+            150.9498
         ]
     },
     {
@@ -364,7 +964,7 @@
         "value": "Saratoga, NSW 2251",
         "coordinates": [
             -33.4172,
-            151.3090
+            151.309
         ]
     },
     {
@@ -373,6 +973,22 @@
         "coordinates": [
             -33.9015,
             151.0043
+        ]
+    },
+    {
+        "label": "South Hurstville, NSW 2221",
+        "value": "South Hurstville, NSW 2221",
+        "coordinates": [
+            -33.9791,
+            151.0903
+        ]
+    },
+    {
+        "label": "South Penrith, NSW 2750",
+        "value": "South Penrith, NSW 2750",
+        "coordinates": [
+            -33.7491,
+            150.6736
         ]
     },
     {
@@ -400,11 +1016,51 @@
         ]
     },
     {
+        "label": "The Ponds, NSW 2769",
+        "value": "The Ponds, NSW 2769",
+        "coordinates": [
+            -33.7083,
+            150.915
+        ]
+    },
+    {
         "label": "Tweed Heads, NSW 2485",
         "value": "Tweed Heads, NSW 2485",
         "coordinates": [
             -28.1942,
-            153.5330
+            153.533
+        ]
+    },
+    {
+        "label": "Vaucluse, NSW 2030",
+        "value": "Vaucluse, NSW 2030",
+        "coordinates": [
+            -33.8695,
+            151.2837
+        ]
+    },
+    {
+        "label": "Villawood, NSW 2163",
+        "value": "Villawood, NSW 2163",
+        "coordinates": [
+            -33.8978,
+            151.0046
+        ]
+    },
+    {
+        "label": "Wahroonga, NSW 2076",
+        "value": "Wahroonga, NSW 2076",
+        "coordinates": [
+            -33.7,
+            151.1037
+        ]
+    },
+    {
+        "label": "Waitara, NSW 2077",
+        "value": "Waitara, NSW 2077",
+        "coordinates": [
+            -33.724,
+            151.0974
         ]
     },
     {
@@ -416,11 +1072,43 @@
         ]
     },
     {
+        "label": "West Pennant Hills, NSW 2125",
+        "value": "West Pennant Hills, NSW 2125",
+        "coordinates": [
+            -33.725,
+            151.0535
+        ]
+    },
+    {
+        "label": "West Ryde, NSW 2114",
+        "value": "West Ryde, NSW 2114",
+        "coordinates": [
+            -33.8037,
+            151.0814
+        ]
+    },
+    {
         "label": "Westmead, NSW 2145",
         "value": "Westmead, NSW 2145",
         "coordinates": [
             -33.8011,
-            151.0120
+            151.012
+        ]
+    },
+    {
+        "label": "Wiley Park, NSW 2195",
+        "value": "Wiley Park, NSW 2195",
+        "coordinates": [
+            -33.9333,
+            151.0657
+        ]
+    },
+    {
+        "label": "Willoughby, NSW 2068",
+        "value": "Willoughby, NSW 2068",
+        "coordinates": [
+            -33.7983,
+            151.1822
         ]
     },
     {
@@ -440,11 +1128,19 @@
         ]
     },
     {
-        "label": "Brighton-Le-Sands, NSW 2216",
-        "value": "Brighton-Le-Sands, NSW 2216",
+        "label": "Yagoona, NSW 2199",
+        "value": "Yagoona, NSW 2199",
         "coordinates": [
-            -33.9507,
-            151.1349
+            -33.9213,
+            151.0391
+        ]
+    },
+    {
+        "label": "Yennora, NSW 2161",
+        "value": "Yennora, NSW 2161",
+        "coordinates": [
+            -33.852,
+            151.0001
         ]
     },
     {
@@ -456,11 +1152,27 @@
         ]
     },
     {
-        "label": "Chatswood, NSW 2067",
-        "value": "Chatswood, NSW 2067",
+        "label": "Canterbury, NSW 2193",
+        "value": "Canterbury, NSW 2193",
         "coordinates": [
-            -33.7958,
-            151.1864
+            -33.9147,
+            151.1224
+        ]
+    },
+    {
+        "label": "Castle Hill, NSW 2154",
+        "value": "Castle Hill, NSW 2154",
+        "coordinates": [
+            -33.7324,
+            151.0032
+        ]
+    },
+    {
+        "label": "Chipping Norton, NSW 2170",
+        "value": "Chipping Norton, NSW 2170",
+        "coordinates": [
+            -33.9244,
+            150.9411
         ]
     },
     {
@@ -472,11 +1184,11 @@
         ]
     },
     {
-        "label": "Cronulla, NSW 2230",
-        "value": "Cronulla, NSW 2230",
+        "label": "Daceyville, NSW 2032",
+        "value": "Daceyville, NSW 2032",
         "coordinates": [
-            -34.0625,
-            151.1507
+            -33.9244,
+            151.231
         ]
     },
     {
@@ -488,11 +1200,27 @@
         ]
     },
     {
+        "label": "Denistone, NSW 2114",
+        "value": "Denistone, NSW 2114",
+        "coordinates": [
+            -33.7995,
+            151.0873
+        ]
+    },
+    {
+        "label": "Dentist Point, NSW 2011",
+        "value": "Dentist Point, NSW 2011",
+        "coordinates": [
+            -33.9089,
+            151.2177
+        ]
+    },
+    {
         "label": "Forestville, NSW 2087",
         "value": "Forestville, NSW 2087",
         "coordinates": [
             -33.7475,
-            151.2190
+            151.219
         ]
     },
     {
@@ -500,7 +1228,7 @@
         "value": "Frenchs Forest, NSW 2086",
         "coordinates": [
             -33.7537,
-            151.2170
+            151.217
         ]
     },
     {
@@ -512,83 +1240,51 @@
         ]
     },
     {
-        "label": "Guildford, NSW 2161",
-        "value": "Guildford, NSW 2161",
-        "coordinates": [
-            -33.8580,
-            151.0059
-        ]
-    },
-    {
-        "label": "Lane Cove, NSW 2066",
-        "value": "Lane Cove, NSW 2066",
-        "coordinates": [
-            -33.8174,
-            151.1841
-        ]
-    },
-    {
-        "label": "Leichhardt, NSW 2040",
-        "value": "Leichhardt, NSW 2040",
-        "coordinates": [
-            -33.8863,
-            151.1625
-        ]
-    },
-    {
         "label": "Lindfield, NSW 2070",
         "value": "Lindfield, NSW 2070",
         "coordinates": [
             -33.7703,
-            151.1690
+            151.169
         ]
     },
     {
-        "label": "Miranda, NSW 2228",
-        "value": "Miranda, NSW 2228",
+        "label": "Macquarie Park, NSW 2113",
+        "value": "Macquarie Park, NSW 2113",
         "coordinates": [
-            -34.0397,
-            151.1283
+            -33.7741,
+            151.1285
         ]
     },
     {
-        "label": "North Parramatta, NSW 2151",
-        "value": "North Parramatta, NSW 2151",
+        "label": "Potts Point, NSW 2011",
+        "value": "Potts Point, NSW 2011",
         "coordinates": [
-            -33.8066,
-            151.0075
+            -33.8702,
+            151.2205
         ]
     },
     {
-        "label": "Oatlands, NSW 2117",
-        "value": "Oatlands, NSW 2117",
+        "label": "Prairiewood, NSW 2176",
+        "value": "Prairiewood, NSW 2176",
         "coordinates": [
-            -33.7724,
-            151.0456
+            -33.8905,
+            150.8929
         ]
     },
     {
-        "label": "Paddington, NSW 2021",
-        "value": "Paddington, NSW 2021",
+        "label": "Rhodes, NSW 2138",
+        "value": "Rhodes, NSW 2138",
         "coordinates": [
-            -33.8834,
-            151.2299
+            -33.8295,
+            151.0833
         ]
     },
     {
-        "label": "Peakhurst, NSW 2210",
-        "value": "Peakhurst, NSW 2210",
+        "label": "Rozelle, NSW 2039",
+        "value": "Rozelle, NSW 2039",
         "coordinates": [
-            -33.9621,
-            151.0480
-        ]
-    },
-    {
-        "label": "Rockdale, NSW 2216",
-        "value": "Rockdale, NSW 2216",
-        "coordinates": [
-            -33.9573,
-            151.1344
+            -33.8679,
+            151.1734
         ]
     },
     {
@@ -605,6 +1301,14 @@
         "coordinates": [
             -33.7987,
             150.9679
+        ]
+    },
+    {
+        "label": "St Ives, NSW 2075",
+        "value": "St Ives, NSW 2075",
+        "coordinates": [
+            -33.733,
+            151.1484
         ]
     },
     {
@@ -628,15 +1332,7 @@
         "value": "Strathfield, NSW 2135",
         "coordinates": [
             -33.8763,
-            151.0940
-        ]
-    },
-    {
-        "label": "Surry Hills, NSW 2010",
-        "value": "Surry Hills, NSW 2010",
-        "coordinates": [
-            -33.8835,
-            151.2142
+            151.094
         ]
     },
     {
@@ -644,15 +1340,15 @@
         "value": "Sydenham, NSW 2044",
         "coordinates": [
             -33.9202,
-            151.1610
+            151.161
         ]
     },
     {
-        "label": "The Ponds, NSW 2769",
-        "value": "The Ponds, NSW 2769",
+        "label": "Telopea, NSW 2117",
+        "value": "Telopea, NSW 2117",
         "coordinates": [
-            -33.7118,
-            150.9199
+            -33.7885,
+            151.0514
         ]
     },
     {
@@ -664,19 +1360,11 @@
         ]
     },
     {
-        "label": "Ultimo, NSW 2007",
-        "value": "Ultimo, NSW 2007",
+        "label": "Winston Hills, NSW 2153",
+        "value": "Winston Hills, NSW 2153",
         "coordinates": [
-            -33.8835,
-            151.2039
-        ]
-    },
-    {
-        "label": "Waitara, NSW 2077",
-        "value": "Waitara, NSW 2077",
-        "coordinates": [
-            -33.7219,
-            151.1091
+            -33.7685,
+            151.0299
         ]
     },
     {
@@ -696,38 +1384,6 @@
         ]
     },
     {
-        "label": "Ashfield, NSW 2131",
-        "value": "Ashfield, NSW 2131",
-        "coordinates": [
-            -33.8843,
-            151.1381
-        ]
-    },
-    {
-        "label": "Balmain, NSW 2041",
-        "value": "Balmain, NSW 2041",
-        "coordinates": [
-            -33.8642,
-            151.1987
-        ]
-    },
-    {
-        "label": "Bankstown, NSW 2200",
-        "value": "Bankstown, NSW 2200",
-        "coordinates": [
-            -33.9210,
-            151.0035
-        ]
-    },
-    {
-        "label": "Baulkham Hills, NSW 2153",
-        "value": "Baulkham Hills, NSW 2153",
-        "coordinates": [
-            -33.7333,
-            151.0221
-        ]
-    },
-    {
         "label": "Berala, NSW 2141",
         "value": "Berala, NSW 2141",
         "coordinates": [
@@ -740,23 +1396,7 @@
         "value": "Blaxland, NSW 2774",
         "coordinates": [
             -33.7393,
-            150.5670
-        ]
-    },
-    {
-        "label": "Bondi, NSW 2026",
-        "value": "Bondi, NSW 2026",
-        "coordinates": [
-            -33.8915,
-            151.2773
-        ]
-    },
-    {
-        "label": "Bondi Junction, NSW 2022",
-        "value": "Bondi Junction, NSW 2022",
-        "coordinates": [
-            -33.8914,
-            151.2575
+            150.567
         ]
     },
     {
@@ -776,19 +1416,11 @@
         ]
     },
     {
-        "label": "Burwood, NSW 2134",
-        "value": "Burwood, NSW 2134",
-        "coordinates": [
-            -33.8845,
-            151.0970
-        ]
-    },
-    {
         "label": "Camden, NSW 2570",
         "value": "Camden, NSW 2570",
         "coordinates": [
             -34.0735,
-            150.6970
+            150.697
         ]
     },
     {
@@ -797,22 +1429,6 @@
         "coordinates": [
             -33.8181,
             151.2156
-        ]
-    },
-    {
-        "label": "Canterbury, NSW 2193",
-        "value": "Canterbury, NSW 2193",
-        "coordinates": [
-            -33.9181,
-            151.1153
-        ]
-    },
-    {
-        "label": "Carlingford, NSW 2118",
-        "value": "Carlingford, NSW 2118",
-        "coordinates": [
-            -33.8002,
-            151.0257
         ]
     },
     {
@@ -829,14 +1445,6 @@
         "coordinates": [
             -33.8797,
             151.0175
-        ]
-    },
-    {
-        "label": "Castle Hill, NSW 2154",
-        "value": "Castle Hill, NSW 2154",
-        "coordinates": [
-            -33.7322,
-            151.0275
         ]
     },
     {
@@ -864,67 +1472,11 @@
         ]
     },
     {
-        "label": "Clovelly, NSW 2031",
-        "value": "Clovelly, NSW 2031",
-        "coordinates": [
-            -33.9125,
-            151.2580
-        ]
-    },
-    {
-        "label": "Croydon, NSW 2132",
-        "value": "Croydon, NSW 2132",
-        "coordinates": [
-            -33.8839,
-            151.1244
-        ]
-    },
-    {
-        "label": "Croydon Park, NSW 2133",
-        "value": "Croydon Park, NSW 2133",
-        "coordinates": [
-            -33.9039,
-            151.1184
-        ]
-    },
-    {
-        "label": "Crows Nest, NSW 2065",
-        "value": "Crows Nest, NSW 2065",
-        "coordinates": [
-            -33.8260,
-            151.2084
-        ]
-    },
-    {
-        "label": "Daceyville, NSW 2032",
-        "value": "Daceyville, NSW 2032",
-        "coordinates": [
-            -33.9347,
-            151.2361
-        ]
-    },
-    {
-        "label": "Darlinghurst, NSW 2010",
-        "value": "Darlinghurst, NSW 2010",
-        "coordinates": [
-            -33.8760,
-            151.2120
-        ]
-    },
-    {
         "label": "Darlington, NSW 2008",
         "value": "Darlington, NSW 2008",
         "coordinates": [
             -33.8947,
-            151.2050
-        ]
-    },
-    {
-        "label": "Denistone, NSW 2114",
-        "value": "Denistone, NSW 2114",
-        "coordinates": [
-            -33.8042,
-            151.0803
+            151.205
         ]
     },
     {
@@ -933,14 +1485,6 @@
         "coordinates": [
             -33.8096,
             151.0863
-        ]
-    },
-    {
-        "label": "Dulwich Hill, NSW 2203",
-        "value": "Dulwich Hill, NSW 2203",
-        "coordinates": [
-            -33.9079,
-            151.1377
         ]
     },
     {
@@ -956,15 +1500,7 @@
         "value": "East Lindfield, NSW 2070",
         "coordinates": [
             -33.7761,
-            151.1630
-        ]
-    },
-    {
-        "label": "Eastwood, NSW 2122",
-        "value": "Eastwood, NSW 2122",
-        "coordinates": [
-            -33.7745,
-            151.0964
+            151.163
         ]
     },
     {
@@ -984,107 +1520,11 @@
         ]
     },
     {
-        "label": "Epping, NSW 2121",
-        "value": "Epping, NSW 2121",
-        "coordinates": [
-            -33.7712,
-            151.0984
-        ]
-    },
-    {
-        "label": "Fairfield, NSW 2165",
-        "value": "Fairfield, NSW 2165",
-        "coordinates": [
-            -33.8601,
-            150.9390
-        ]
-    },
-    {
-        "label": "Fairfield East, NSW 2165",
-        "value": "Fairfield East, NSW 2165",
-        "coordinates": [
-            -33.8766,
-            150.9544
-        ]
-    },
-    {
         "label": "Fairlight, NSW 2094",
         "value": "Fairlight, NSW 2094",
         "coordinates": [
             -33.8091,
-            151.2850
-        ]
-    },
-    {
-        "label": "Flemington, NSW 2140",
-        "value": "Flemington, NSW 2140",
-        "coordinates": [
-            -33.8654,
-            151.0701
-        ]
-    },
-    {
-        "label": "Glebe, NSW 2037",
-        "value": "Glebe, NSW 2037",
-        "coordinates": [
-            -33.8792,
-            151.1883
-        ]
-    },
-    {
-        "label": "Gordon, NSW 2072",
-        "value": "Gordon, NSW 2072",
-        "coordinates": [
-            -33.7711,
-            151.1267
-        ]
-    },
-    {
-        "label": "Granville, NSW 2142",
-        "value": "Granville, NSW 2142",
-        "coordinates": [
-            -33.8560,
-            151.0032
-        ]
-    },
-    {
-        "label": "Greenacre, NSW 2190",
-        "value": "Greenacre, NSW 2190",
-        "coordinates": [
-            -33.9141,
-            151.0322
-        ]
-    },
-    {
-        "label": "Greystanes, NSW 2145",
-        "value": "Greystanes, NSW 2145",
-        "coordinates": [
-            -33.8410,
-            150.9831
-        ]
-    },
-    {
-        "label": "Haberfield, NSW 2045",
-        "value": "Haberfield, NSW 2045",
-        "coordinates": [
-            -33.8914,
-            151.1425
-        ]
-    },
-    {
-        "label": "Harris Park, NSW 2150",
-        "value": "Harris Park, NSW 2150",
-        "coordinates": [
-            -33.8144,
-            151.0045
-        ]
-    },
-    {
-        "label": "Homebush, NSW 2140",
-        "value": "Homebush, NSW 2140",
-        "coordinates": [
-            -33.8746,
-            151.0601
+            151.285
         ]
     },
     {
@@ -1096,51 +1536,11 @@
         ]
     },
     {
-        "label": "Hornsby, NSW 2077",
-        "value": "Hornsby, NSW 2077",
-        "coordinates": [
-            -33.7006,
-            151.1043
-        ]
-    },
-    {
-        "label": "Hurstville, NSW 2220",
-        "value": "Hurstville, NSW 2220",
-        "coordinates": [
-            -33.9666,
-            151.0976
-        ]
-    },
-    {
-        "label": "Kensington, NSW 2033",
-        "value": "Kensington, NSW 2033",
-        "coordinates": [
-            -33.9159,
-            151.2252
-        ]
-    },
-    {
         "label": "Killarney Heights, NSW 2087",
         "value": "Killarney Heights, NSW 2087",
         "coordinates": [
             -33.7639,
             151.2097
-        ]
-    },
-    {
-        "label": "Kingsford, NSW 2032",
-        "value": "Kingsford, NSW 2032",
-        "coordinates": [
-            -33.9181,
-            151.2314
-        ]
-    },
-    {
-        "label": "Kogarah, NSW 2217",
-        "value": "Kogarah, NSW 2217",
-        "coordinates": [
-            -33.9719,
-            151.1371
         ]
     },
     {
@@ -1152,14 +1552,6 @@
         ]
     },
     {
-        "label": "Lidcombe, NSW 2141",
-        "value": "Lidcombe, NSW 2141",
-        "coordinates": [
-            -33.8745,
-            151.0339
-        ]
-    },
-    {
         "label": "Linfield, NSW 2070",
         "value": "Linfield, NSW 2070",
         "coordinates": [
@@ -1168,43 +1560,11 @@
         ]
     },
     {
-        "label": "Liverpool, NSW 2170",
-        "value": "Liverpool, NSW 2170",
-        "coordinates": [
-            -33.9203,
-            150.9163
-        ]
-    },
-    {
         "label": "Longueville, NSW 2066",
         "value": "Longueville, NSW 2066",
         "coordinates": [
             -33.8154,
             151.1792
-        ]
-    },
-    {
-        "label": "Lurnea, NSW 2170",
-        "value": "Lurnea, NSW 2170",
-        "coordinates": [
-            -33.9252,
-            150.9032
-        ]
-    },
-    {
-        "label": "Macquarie Park, NSW 2113",
-        "value": "Macquarie Park, NSW 2113",
-        "coordinates": [
-            -33.7737,
-            151.1195
-        ]
-    },
-    {
-        "label": "Marrickville, NSW 2204",
-        "value": "Marrickville, NSW 2204",
-        "coordinates": [
-            -33.9022,
-            151.1587
         ]
     },
     {
@@ -1243,40 +1603,8 @@
         "label": "Minto, NSW 2566",
         "value": "Minto, NSW 2566",
         "coordinates": [
-            -34.0200,
+            -34.02,
             150.8509
-        ]
-    },
-    {
-        "label": "Moore Park, NSW 2021",
-        "value": "Moore Park, NSW 2021",
-        "coordinates": [
-            -33.9021,
-            151.2223
-        ]
-    },
-    {
-        "label": "Mortdale, NSW 2223",
-        "value": "Mortdale, NSW 2223",
-        "coordinates": [
-            -33.9745,
-            151.0779
-        ]
-    },
-    {
-        "label": "Mosman, NSW 2088",
-        "value": "Mosman, NSW 2088",
-        "coordinates": [
-            -33.8345,
-            151.2444
-        ]
-    },
-    {
-        "label": "Mount Druitt, NSW 2770",
-        "value": "Mount Druitt, NSW 2770",
-        "coordinates": [
-            -33.7667,
-            150.8443
         ]
     },
     {
@@ -1296,83 +1624,11 @@
         ]
     },
     {
-        "label": "Newtown, NSW 2042",
-        "value": "Newtown, NSW 2042",
-        "coordinates": [
-            -33.8976,
-            151.1792
-        ]
-    },
-    {
-        "label": "North Bondi, NSW 2026",
-        "value": "North Bondi, NSW 2026",
-        "coordinates": [
-            -33.8940,
-            151.2760
-        ]
-    },
-    {
-        "label": "North Epping, NSW 2121",
-        "value": "North Epping, NSW 2121",
-        "coordinates": [
-            -33.7731,
-            151.1149
-        ]
-    },
-    {
-        "label": "North Rocks, NSW 2151",
-        "value": "North Rocks, NSW 2151",
-        "coordinates": [
-            -33.7743,
-            151.0324
-        ]
-    },
-    {
-        "label": "North Sydney, NSW 2060",
-        "value": "North Sydney, NSW 2060",
-        "coordinates": [
-            -33.8467,
-            151.2099
-        ]
-    },
-    {
         "label": "Oatley, NSW 2223",
         "value": "Oatley, NSW 2223",
         "coordinates": [
             -33.9721,
             151.0819
-        ]
-    },
-    {
-        "label": "Padstow, NSW 2211",
-        "value": "Padstow, NSW 2211",
-        "coordinates": [
-            -33.9573,
-            151.0241
-        ]
-    },
-    {
-        "label": "Petersham, NSW 2049",
-        "value": "Petersham, NSW 2049",
-        "coordinates": [
-            -33.8973,
-            151.1613
-        ]
-    },
-    {
-        "label": "Potts Point, NSW 2011",
-        "value": "Potts Point, NSW 2011",
-        "coordinates": [
-            -33.8677,
-            151.2132
-        ]
-    },
-    {
-        "label": "Prairiewood, NSW 2176",
-        "value": "Prairiewood, NSW 2176",
-        "coordinates": [
-            -33.8835,
-            150.8857
         ]
     },
     {
@@ -1387,16 +1643,8 @@
         "label": "Putney, NSW 2112",
         "value": "Putney, NSW 2112",
         "coordinates": [
-            -33.8110,
+            -33.811,
             151.1163
-        ]
-    },
-    {
-        "label": "Pymble, NSW 2073",
-        "value": "Pymble, NSW 2073",
-        "coordinates": [
-            -33.7735,
-            151.1689
         ]
     },
     {
@@ -1404,23 +1652,7 @@
         "value": "Queens Park, NSW 2022",
         "coordinates": [
             -33.9063,
-            151.2560
-        ]
-    },
-    {
-        "label": "Randwick, NSW 2031",
-        "value": "Randwick, NSW 2031",
-        "coordinates": [
-            -33.9172,
-            151.2550
-        ]
-    },
-    {
-        "label": "Revesby, NSW 2212",
-        "value": "Revesby, NSW 2212",
-        "coordinates": [
-            -33.9476,
-            151.0433
+            151.256
         ]
     },
     {
@@ -1432,51 +1664,11 @@
         ]
     },
     {
-        "label": "Rhodes, NSW 2138",
-        "value": "Rhodes, NSW 2138",
-        "coordinates": [
-            -33.8349,
-            151.0789
-        ]
-    },
-    {
-        "label": "Rouse Hill, NSW 2155",
-        "value": "Rouse Hill, NSW 2155",
-        "coordinates": [
-            -33.7322,
-            150.9350
-        ]
-    },
-    {
-        "label": "Rozelle, NSW 2039",
-        "value": "Rozelle, NSW 2039",
-        "coordinates": [
-            -33.8640,
-            151.1646
-        ]
-    },
-    {
         "label": "Seaforth, NSW 2092",
         "value": "Seaforth, NSW 2092",
         "coordinates": [
-            -33.7840,
+            -33.784,
             151.2294
-        ]
-    },
-    {
-        "label": "South Hurstville, NSW 2221",
-        "value": "South Hurstville, NSW 2221",
-        "coordinates": [
-            -33.9670,
-            151.0919
-        ]
-    },
-    {
-        "label": "South Penrith, NSW 2750",
-        "value": "South Penrith, NSW 2750",
-        "coordinates": [
-            -33.7514,
-            150.6691
         ]
     },
     {
@@ -1485,14 +1677,6 @@
         "coordinates": [
             -33.8919,
             151.0873
-        ]
-    },
-    {
-        "label": "St Ives, NSW 2075",
-        "value": "St Ives, NSW 2075",
-        "coordinates": [
-            -33.7444,
-            151.1712
         ]
     },
     {
@@ -1508,7 +1692,7 @@
         "value": "Sutherland, NSW 2232",
         "coordinates": [
             -34.0405,
-            151.0740
+            151.074
         ]
     },
     {
@@ -1516,7 +1700,7 @@
         "value": "Sutherland Shire, NSW",
         "coordinates": [
             -34.0356,
-            151.1050
+            151.105
         ]
     },
     {
@@ -1525,14 +1709,6 @@
         "coordinates": [
             -33.8919,
             151.2744
-        ]
-    },
-    {
-        "label": "Telopea, NSW 2117",
-        "value": "Telopea, NSW 2117",
-        "coordinates": [
-            -33.7852,
-            151.0401
         ]
     },
     {
@@ -1568,43 +1744,11 @@
         ]
     },
     {
-        "label": "Vaucluse, NSW 2030",
-        "value": "Vaucluse, NSW 2030",
-        "coordinates": [
-            -33.8644,
-            151.2811
-        ]
-    },
-    {
-        "label": "Villawood, NSW 2163",
-        "value": "Villawood, NSW 2163",
-        "coordinates": [
-            -33.8975,
-            150.9415
-        ]
-    },
-    {
-        "label": "Wahroonga, NSW 2076",
-        "value": "Wahroonga, NSW 2076",
-        "coordinates": [
-            -33.7134,
-            151.1226
-        ]
-    },
-    {
         "label": "Warrawee, NSW 2074",
         "value": "Warrawee, NSW 2074",
         "coordinates": [
-            -33.7270,
+            -33.727,
             151.1159
-        ]
-    },
-    {
-        "label": "Waverley, NSW 2024",
-        "value": "Waverley, NSW 2024",
-        "coordinates": [
-            -33.8915,
-            151.2633
         ]
     },
     {
@@ -1616,22 +1760,6 @@
         ]
     },
     {
-        "label": "West Pennant Hills, NSW 2125",
-        "value": "West Pennant Hills, NSW 2125",
-        "coordinates": [
-            -33.7321,
-            151.0340
-        ]
-    },
-    {
-        "label": "West Ryde, NSW 2114",
-        "value": "West Ryde, NSW 2114",
-        "coordinates": [
-            -33.7964,
-            151.1009
-        ]
-    },
-    {
         "label": "Wetherill Park, NSW 2164",
         "value": "Wetherill Park, NSW 2164",
         "coordinates": [
@@ -1640,67 +1768,11 @@
         ]
     },
     {
-        "label": "Wiley Park, NSW 2195",
-        "value": "Wiley Park, NSW 2195",
-        "coordinates": [
-            -33.9200,
-            151.0631
-        ]
-    },
-    {
-        "label": "Willoughby, NSW 2068",
-        "value": "Willoughby, NSW 2068",
-        "coordinates": [
-            -33.8126,
-            151.1844
-        ]
-    },
-    {
-        "label": "Winston Hills, NSW 2153",
-        "value": "Winston Hills, NSW 2153",
-        "coordinates": [
-            -33.7814,
-            150.9932
-        ]
-    },
-    {
-        "label": "Woollahra, NSW 2025",
-        "value": "Woollahra, NSW 2025",
-        "coordinates": [
-            -33.8809,
-            151.2304
-        ]
-    },
-    {
         "label": "Woolooware, NSW 2230",
         "value": "Woolooware, NSW 2230",
         "coordinates": [
             -34.0506,
             151.1255
-        ]
-    },
-    {
-        "label": "Yagoona, NSW 2199",
-        "value": "Yagoona, NSW 2199",
-        "coordinates": [
-            -33.9205,
-            151.0154
-        ]
-    },
-    {
-        "label": "Yennora, NSW 2161",
-        "value": "Yennora, NSW 2161",
-        "coordinates": [
-            -33.8565,
-            150.9933
-        ]
-    },
-    {
-        "label": "Zetland, NSW 2017",
-        "value": "Zetland, NSW 2017",
-        "coordinates": [
-            -33.9181,
-            151.2175
         ]
     },
     {
@@ -1723,7 +1795,7 @@
         "label": "Albury, NSW 2640",
         "value": "Albury, NSW 2640",
         "coordinates": [
-            -36.0700,
+            -36.07,
             146.9128
         ]
     },
@@ -1732,7 +1804,7 @@
         "value": "Alfords Point, NSW 2234",
         "coordinates": [
             -34.0383,
-            151.0210
+            151.021
         ]
     },
     {
@@ -1740,14 +1812,14 @@
         "value": "Allambie Heights, NSW 2100",
         "coordinates": [
             -33.7721,
-            151.2470
+            151.247
         ]
     },
     {
         "label": "Angus, NSW 2487",
         "value": "Angus, NSW 2487",
         "coordinates": [
-            -28.1310,
+            -28.131,
             153.3128
         ]
     },
@@ -1756,7 +1828,7 @@
         "value": "Araluen, NSW 2622",
         "coordinates": [
             -35.0499,
-            149.5750
+            149.575
         ]
     },
     {
@@ -1771,7 +1843,7 @@
         "label": "Arncliffe, NSW 2205",
         "value": "Arncliffe, NSW 2205",
         "coordinates": [
-            -33.9310,
+            -33.931,
             151.1567
         ]
     },
@@ -1779,16 +1851,8 @@
         "label": "Ashbury, NSW 2193",
         "value": "Ashbury, NSW 2193",
         "coordinates": [
-            -33.9020,
+            -33.902,
             151.1028
-        ]
-    },
-    {
-        "label": "Auburn, NSW 2144",
-        "value": "Auburn, NSW 2144",
-        "coordinates": [
-            -33.8570,
-            151.0150
         ]
     },
     {
@@ -1804,7 +1868,7 @@
         "value": "Balgowlah, NSW 2093",
         "coordinates": [
             -33.8053,
-            151.2800
+            151.28
         ]
     },
     {
@@ -1819,7 +1883,7 @@
         "label": "Barrack Heights, NSW 2528",
         "value": "Barrack Heights, NSW 2528",
         "coordinates": [
-            -34.5990,
+            -34.599,
             150.8582
         ]
     },
@@ -1832,14 +1896,6 @@
         ]
     },
     {
-        "label": "Bexley, NSW 2207",
-        "value": "Bexley, NSW 2207",
-        "coordinates": [
-            -33.9519,
-            151.1030
-        ]
-    },
-    {
         "label": "Birchgrove, NSW 2041",
         "value": "Birchgrove, NSW 2041",
         "coordinates": [
@@ -1848,18 +1904,10 @@
         ]
     },
     {
-        "label": "Blacktown, NSW 2148",
-        "value": "Blacktown, NSW 2148",
-        "coordinates": [
-            -33.7680,
-            150.9100
-        ]
-    },
-    {
         "label": "Bligh Park, NSW 2756",
         "value": "Bligh Park, NSW 2756",
         "coordinates": [
-            -33.6000,
+            -33.6,
             150.8769
         ]
     },
@@ -1880,27 +1928,11 @@
         ]
     },
     {
-        "label": "Botany, NSW 2019",
-        "value": "Botany, NSW 2019",
-        "coordinates": [
-            -33.9335,
-            151.2120
-        ]
-    },
-    {
         "label": "Bundeena, NSW 2230",
         "value": "Bundeena, NSW 2230",
         "coordinates": [
             -34.0651,
             151.1465
-        ]
-    },
-    {
-        "label": "Cabramatta, NSW 2166",
-        "value": "Cabramatta, NSW 2166",
-        "coordinates": [
-            -33.8920,
-            150.9447
         ]
     },
     {
@@ -1915,16 +1947,8 @@
         "label": "Canley Vale, NSW 2166",
         "value": "Canley Vale, NSW 2166",
         "coordinates": [
-            -33.8910,
-            150.9520
-        ]
-    },
-    {
-        "label": "Caringbah, NSW 2229",
-        "value": "Caringbah, NSW 2229",
-        "coordinates": [
-            -34.0420,
-            151.1375
+            -33.891,
+            150.952
         ]
     },
     {
@@ -1936,27 +1960,11 @@
         ]
     },
     {
-        "label": "Chester Hill, NSW 2162",
-        "value": "Chester Hill, NSW 2162",
-        "coordinates": [
-            -33.8924,
-            151.0297
-        ]
-    },
-    {
         "label": "Chifley, NSW 2036",
         "value": "Chifley, NSW 2036",
         "coordinates": [
-            -33.9240,
-            151.2180
-        ]
-    },
-    {
-        "label": "Chipping Norton, NSW 2170",
-        "value": "Chipping Norton, NSW 2170",
-        "coordinates": [
-            -33.9227,
-            150.9613
+            -33.924,
+            151.218
         ]
     },
     {
@@ -1964,7 +1972,7 @@
         "value": "Coffs Harbour, NSW 2450",
         "coordinates": [
             -30.2987,
-            153.1130
+            153.113
         ]
     },
     {
@@ -1973,6 +1981,62 @@
         "coordinates": [
             -33.7767,
             150.8191
+        ]
+    },
+    {
+        "label": "Concord West, NSW 2138",
+        "value": "Concord West, NSW 2138",
+        "coordinates": [
+            -33.8498,
+            151.0887
+        ]
+    },
+    {
+        "label": "Dolans Bay, NSW 2229",
+        "value": "Dolans Bay, NSW 2229",
+        "coordinates": [
+            -34.0282,
+            151.1298
+        ]
+    },
+    {
+        "label": "Erskineville, NSW 2043",
+        "value": "Erskineville, NSW 2043",
+        "coordinates": [
+            -33.8948,
+            151.1919
+        ]
+    },
+    {
+        "label": "Milperra, NSW 2214",
+        "value": "Milperra, NSW 2214",
+        "coordinates": [
+            -33.9442,
+            150.97
+        ]
+    },
+    {
+        "label": "Penrith, NSW 2750",
+        "value": "Penrith, NSW 2750",
+        "coordinates": [
+            -33.7541,
+            150.6917
+        ]
+    },
+    {
+        "label": "Redfern, NSW 2016",
+        "value": "Redfern, NSW 2016",
+        "coordinates": [
+            -33.8921,
+            151.2046
+        ]
+    },
+    {
+        "label": "Rose Bay, NSW 2029",
+        "value": "Rose Bay, NSW 2029",
+        "coordinates": [
+            -33.872,
+            151.273
         ]
     }
 ]

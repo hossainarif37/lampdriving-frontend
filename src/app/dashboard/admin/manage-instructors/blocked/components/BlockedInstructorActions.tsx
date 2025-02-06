@@ -18,7 +18,7 @@ const BlockedInstructorActions: FC<IBlockedInstructorActionsProps> = ({ id }) =>
         <div>
             <DropdownMenu open={dropdownIsOpen} onOpenChange={setDropdownIsOpen}>
                 <DropdownMenuTrigger asChild>
-                    <Button className="h-8 w-8 p-0 bg-transparent hover:bg-gray-100 text-primary">
+                    <Button size={"icon"} className="bg-transparent hover:bg-gray-100 text-primary">
                         <span className="sr-only">Open menu</span>
                         <MoreHorizontal />
                     </Button>

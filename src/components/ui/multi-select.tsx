@@ -145,7 +145,7 @@ export const MultiSelect = React.forwardRef<
     // const [isAnimating, setIsAnimating] = React.useState(false);
     const searchParams = useSearchParams()
 
-    const step = searchParams.get('step');
+    const step = searchParams?.get('step');
     const isServicesStep = step === 'services';
     const isExperienceStep = step === 'experience';
 
@@ -316,11 +316,11 @@ export const MultiSelect = React.forwardRef<
                   </div>
                   <span>(Select All)</span>
                 </CommandItem>
-                {options.map((option) => {
+                {options.map((option, index) => {
                   const isSelected = selectedValues.includes(option.value);
                   return (
                     <CommandItem
-                      key={option.value}
+                      key={index}
                       onSelect={() => toggleOption(option.value)}
                       className="cursor-pointer"
                     >

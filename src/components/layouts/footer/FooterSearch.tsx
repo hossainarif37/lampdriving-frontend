@@ -26,7 +26,6 @@ const FooterSearch: FC = () => {
         setCarType('auto');
     }
 
-
     // Fetch JSON data
     useEffect(() => {
         fetch(`/api/sydneySuburbApi?limit=12`)
@@ -39,6 +38,7 @@ const FooterSearch: FC = () => {
 
     // Handle search input change
     const handleSearchChange = async (query: string) => {
+        console.log('query', query);
         setSelectedSuburb(query); // Ensure input updates
 
         const searchURL = query

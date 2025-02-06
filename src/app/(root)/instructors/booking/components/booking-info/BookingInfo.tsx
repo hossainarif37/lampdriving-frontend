@@ -1,27 +1,23 @@
 "use client"
 
 import { Button } from '@/components/ui/button';
-import { toast } from '@/hooks/use-toast';
 import { toFixedNumber } from '@/lib/utils';
 import { useBooking } from '@/providers/BookingProvider';
-import { useLoginUserMutation, useRegisterUserMutation } from '@/redux/api/authApi/authApi';
-import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { saveUser } from '@/redux/slices/authSlice/authSlice';
-import { ILoginInputs, IRegisterInputs } from '@/types/auth';
+import { useAppSelector } from '@/redux/hook';
 import { Clock, NotepadText, TicketPercent } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { FC } from 'react';
 
 
 
 const BookingInfo: FC = () => {
-    const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, mockTestPackage, currentStep, handleStepChange, setIsConfirmTriggered, isTestPackageSelected, registerButtonRef, loginButtonRef, isLogging, isRegistering } = useBooking();
+    const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, currentStep, handleStepChange, setIsConfirmTriggered, isTestPackageSelected, registerButtonRef, loginButtonRef, isLogging, isRegistering, instructor } = useBooking();
 
     // register and login button trigger
     const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
 
     const urlSearchParams = useSearchParams();
-    const searchParams = new URLSearchParams(urlSearchParams);
+    const searchParams = new URLSearchParams(urlSearchParams || '');
 
     // handle trigger function for hook form
     const steps = searchParams.get('step');
@@ -37,7 +33,6 @@ const BookingInfo: FC = () => {
 
     // handler for navigating
     const handleNavigate = () => {
-        console.log(currentStep.key);
         if (currentStep.key === "instructor") {
             return handleStepChange("package-selection");
         }
@@ -62,7 +57,7 @@ const BookingInfo: FC = () => {
     }
 
 
-    let isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included && !mockTestPackage.included) ||
+    let isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
         (currentStep.key === "schedule" && (availableScheduleHours > 0 || (testPackage.included && !isTestPackageSelected))) || (isLogging || isRegistering || isCreatingABooking);
 
     return (
@@ -101,7 +96,7 @@ const BookingInfo: FC = () => {
                         <div className="flex justify-between">
                             <span className="flex gap-2">
                                 <NotepadText className="size-5 text-primary" />
-                                Driving Test Package
+                                Driving Test
                             </span>
                             <span>${testPackage.price}</span>
                         </div>
@@ -109,15 +104,15 @@ const BookingInfo: FC = () => {
                 }
 
                 {
-                    mockTestPackage.included &&
+                    testPackage.mockTestCount > 0 &&
                     <>
                         <hr />
                         <div className="flex justify-between">
                             <span className="flex gap-2">
                                 <NotepadText className="size-5 text-primary" />
-                                Mock Tests + Test Package
+                                Mock Test * {testPackage.mockTestCount}
                             </span>
-                            <span>${mockTestPackage.price}</span>
+                            <span>${testPackage.mockTestCount * (instructor?.pricePerHour || 0)}</span>
                         </div>
                     </>
                 }
@@ -125,7 +120,7 @@ const BookingInfo: FC = () => {
                 <div className="pt-4 border-t">
                     <div className="flex justify-between font-semibold">
                         <span>Total Payable Amount</span>
-                        <span className="text-xl">${toFixedNumber(price.payableAmount ?? 0)}</span>
+                        <span className="text-xl">${toFixedNumber(price.paidAmount ?? 0)}</span>
                     </div>
                 </div>
 

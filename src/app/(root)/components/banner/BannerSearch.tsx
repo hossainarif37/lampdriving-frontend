@@ -35,6 +35,7 @@ const BannerSearch: FC = () => {
 
     // Handle search input change
     const handleSearchChange = async (query: string) => {
+        console.log('query', query)
         setSelectedSuburb(query); // Ensure input updates
 
         const searchURL = query

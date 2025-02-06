@@ -14,7 +14,7 @@ import PackageSelectionStep from '../package-selection-step/PackageSelectionStep
 
 const Booking: FC = () => {
     const urlSearchParams = useSearchParams();
-    const step = urlSearchParams.get('step');
+    const step = urlSearchParams?.get('step');
 
     const packageSelectionStep = step === 'package-selection';
     const scheduleStep = step === 'schedule';

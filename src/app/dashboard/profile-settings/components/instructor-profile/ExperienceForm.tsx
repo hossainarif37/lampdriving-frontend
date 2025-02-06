@@ -2,6 +2,9 @@
 
 import ExperienceFields from '@/components/shared/forms/ExperienceFields';
 import { Button } from '@/components/ui/button';
+import { toast } from '@/hooks/use-toast';
+import { useUpdateInstructorMutation } from '@/redux/api/instructorApi/instructorApi';
+import { useUpdateUserMutation } from '@/redux/api/userApi/userApi';
 import { useAppSelector } from '@/redux/hook';
 import { IInstructor } from '@/types/instructor';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
@@ -14,6 +17,8 @@ interface Inputs {
 }
 
 interface IExperienceFormProps {
+    instructorLicenseFile: File | null;
+    setInstructorLicenseFile: Dispatch<SetStateAction<File | null>>;
     drivingLicenseFile: File | null;
     setDrivingLicenseFile: Dispatch<SetStateAction<File | null>>;
     experienceCertificateFile: File | null;
@@ -21,17 +26,22 @@ interface IExperienceFormProps {
     instructor: any;
 }
 
-const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile, instructor }) => {
+const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivingLicenseFile, experienceCertificateFile, setExperienceCertificateFile, instructor, instructorLicenseFile, setInstructorLicenseFile }) => {
     const [isClicked, setIsClicked] = useState(false);
     // const { instructor } = useAppSelector((state) => state.authSlice);
     const defaultValues = {
-        experience: instructor?.experience || 0,
-        description: instructor?.description || '',
-        languages: instructor?.languages || [],
-        documents: instructor?.documents || {}
+        experience: instructor?.experience,
+        description: instructor?.description,
+        languages: instructor?.languages,
+        documents: instructor?.documents
     }
 
-    console.log('Instructor', instructor);
+    const [updateInstructor, { isLoading: isUpdating }] = useUpdateInstructorMutation();
+
+    // Instructor License
+    const [instructorLicenseURL, setInstructorLicenseURL] = useState<string>(defaultValues?.documents?.instructorLicense || '');
+
+    const [instructorLicenseError, setInstructorLicenseError] = useState<string>('');
 
     // Driving License
     const [drivingLicenseURL, setDrivingLicenseURL] = useState<string>(defaultValues?.documents?.drivingLicense || '');
@@ -67,13 +77,24 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
         }
 
         const experienceData = {
-            ...data,
+            experience: Number(data.experience),
+            description: data.description,
             documents: {
+                instructorLicense: instructorLicenseURL,
                 drivingLicense: drivingLicenseURL,
                 experienceCertificate: experienceCertificateURL
             },
             languages: selectedLanguages
         }
+
+        updateInstructor(experienceData).unwrap()
+            .then((res) => {
+                toast({ message: res.message })
+            })
+            .catch((error) => {
+                console.error('Failed to update profile:', error);
+                toast({ success: false, message: error.data.message as string || 'Failed to update profile.' });
+            })
     }
 
     useEffect(() => {
@@ -121,9 +142,15 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ drivingLicenseFile, setDrivi
                     selectedLanguages={selectedLanguages}
                     setSelectedLanguages={setSelectedLanguages}
                     selectedLanguagesError={selectedLanguagesError}
+                    instructorLicenseFile={instructorLicenseFile}
+                    setInstructorLicenseFile={setInstructorLicenseFile}
+                    instructorLicenseURL={instructorLicenseURL}
+                    setInstructorLicenseURL={setInstructorLicenseURL}
+                    instructorLicenseError={instructorLicenseError}
+                    setInstructorLicenseError={setInstructorLicenseError}
                 />
 
-                <Button type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>
+                <Button disabled={isUpdating} loading={isUpdating} type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>
             </form>
         </div>
     );
