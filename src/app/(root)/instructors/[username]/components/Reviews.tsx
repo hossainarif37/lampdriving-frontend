@@ -38,8 +38,8 @@ const Reviews: FC<IReviewsProps> = ({ instructor }) => {
         {
           reviews.length > 0 ?
             <>
-              {reviews.map((review: any) => (
-                <div key={review?._id} className="border-b last:border-b-0 pb-6 last:pb-0">
+              {reviews.map((review: any, index) => (
+                <div key={index} className="border-b last:border-b-0 pb-6 last:pb-0">
                   <div className="flex justify-between items-start mb-2">
                     <div>
                       <h3 className="font-medium text-primary">{review?.name}</h3>

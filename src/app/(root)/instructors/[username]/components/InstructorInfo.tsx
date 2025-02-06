@@ -36,7 +36,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
       {/* Profile section */}
       <div className="flex items-start gap-6">
         <div className="relative flex-shrink-0">
-          <div className='size-[100px] md:size-[120px] rounded-full overflow-hidden shadow-lg border flex items-center justify-center text-accent'>
+          <div className='size-[80px] md:size-[120px] rounded-full overflow-hidden shadow-lg border flex items-center justify-center text-accent'>
             {
               user?.profileImg ?
                 <Image src={user?.profileImg} alt="Instructor" className='w-full h-full object-cover' width={120} height={120} />
@@ -45,7 +45,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
             }
           </div>
 
-          <div className='absolute w-16 h-16 border shadow -bottom-2 -right-2 rounded-full overflow-hidden'>
+          <div className='absolute size-10 sm:size-16 border shadow -bottom-2 -right-2 rounded-full overflow-hidden'>
             <Image
               src={vehicle?.image}
               alt="Vehicle"
@@ -56,7 +56,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
           </div>
         </div>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold">{user?.name?.fullName}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold">{user?.name?.fullName}</h1>
           <div className="flex md:flex-row flex-col md:items-center gap-1 mt-1">
             <div className="flex text-gradient">{'★'.repeat(5)}</div>
             {/* //TODO: Need to implement dynamic ratings */}
