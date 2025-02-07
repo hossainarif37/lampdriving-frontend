@@ -1,3 +1,4 @@
+
 "use client";
 import { FC } from 'react';
 import { MapContainer, TileLayer, Polygon, ZoomControl, useMap } from 'react-leaflet';
@@ -5,10 +6,9 @@ import { ChevronDown, ChevronUp, Maximize, Maximize2 } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 import { useState, useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Tooltip } from '@/components/ui/tooltip';
-import { sydneySuburbs } from '@/constant/sydneySuburbs';
+import suburbsData from '@/constant/sydneySuburbs.json';
 
-// Separate component to handle map invalidation
+// Manual suburb polygon coordinates
 function MapResizer() {
     const map = useMap();
 
@@ -23,7 +23,6 @@ function MapResizer() {
     return null;
 }
 
-// Example Sydney suburbs center
 const SYDNEY_CENTER: [number, number] = [-33.886783, 151.193336];
 
 interface IServiceAreasProps {
@@ -58,22 +57,53 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
         return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
     }, []);
 
-    // Map serviceAreas to their respective coordinates
+
+    function isValidCoordinate(coord: any): coord is { lat: number; lng: number } {
+        return typeof coord.lat === 'number' && typeof coord.lng === 'number';
+    }
+
     const mappedCoordinates = serviceAreas.map((area) => {
-        const suburb = sydneySuburbs.find((sub) => sub.value === area);
-        return suburb
-            ? {
-                name: suburb.label,
-                coordinates: [
-                    [suburb.coordinates[0] - 0.001, suburb.coordinates[1] - 0.001],
-                    [suburb.coordinates[0] - 0.001, suburb.coordinates[1] + 0.001],
-                    [suburb.coordinates[0] + 0.001, suburb.coordinates[1] + 0.001],
-                    [suburb.coordinates[0] + 0.001, suburb.coordinates[1] - 0.001],
-                    [suburb.coordinates[0] - 0.001, suburb.coordinates[1] - 0.001],
-                ],
-            }
-            : null;
+        const suburb = suburbsData.find(sub => sub.label === area);
+        if (suburb && suburb.coordinates) {
+            const validCoordinates = suburb.coordinates.filter(isValidCoordinate);
+
+            return {
+                name: area,
+                coordinates: validCoordinates.map(coord => [coord.lat, coord.lng])
+            };
+        } else if (!suburb) {
+            console.warn(`Suburb "${area}" not found in JSON data.`);
+        }
+
+        return null;
     }).filter(Boolean);
+
+    const calculateBounds = () => {
+        if (mappedCoordinates.length === 0) return null;
+
+        let minLat = Infinity;
+        let maxLat = -Infinity;
+        let minLng = Infinity;
+        let maxLng = -Infinity;
+
+        mappedCoordinates.forEach(suburb => {
+            if (suburb && suburb.coordinates) { // Check if suburb and coordinates exist
+                (suburb.coordinates as [number, number][]).forEach(([lat, lng]) => {
+                    minLat = Math.min(minLat, lat);
+                    maxLat = Math.max(maxLat, lat);
+                    minLng = Math.min(minLng, lng);
+                    maxLng = Math.max(maxLng, lng);
+                });
+            }
+        });
+
+        return [
+            [minLat - 0.02, minLng - 0.02],
+            [maxLat + 0.02, maxLng + 0.02]
+        ];
+    };
+
+    const bounds = calculateBounds();
 
     return (
         <>
@@ -131,9 +161,10 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
 
                     <MapContainer
                         center={SYDNEY_CENTER}
-                        zoom={12}
+                        zoom={11}
                         className="h-full w-full"
                         zoomControl={false}
+                        bounds={bounds as [[number, number], [number, number]] | undefined}
                     >
                         <MapResizer />
                         <ZoomControl position="bottomright" />
@@ -156,7 +187,7 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
                             </>
                         )}
                         {mappedCoordinates.map((suburb, index) =>
-                            suburb && (
+                            suburb && suburb.coordinates && (
                                 <Polygon
                                     key={suburb.name}
                                     positions={suburb.coordinates as [number, number][]}
@@ -166,9 +197,7 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
                                         fillColor: '#FFD700',
                                         fillOpacity: 0.3,
                                     }}
-                                >
-                                    {/* <Tooltip>{suburb.name}</Tooltip> */}
-                                </Polygon>
+                                />
                             )
                         )}
                     </MapContainer>
@@ -179,7 +208,6 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
 };
 
 export default ServiceAreaMap;
-
 
 
 
