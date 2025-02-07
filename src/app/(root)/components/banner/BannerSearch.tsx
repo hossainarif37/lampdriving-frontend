@@ -25,7 +25,7 @@ const BannerSearch: FC = () => {
 
     // Fetch JSON data
     useEffect(() => {
-        fetch(`/api/sydneySuburbApi?limit=12`)
+        fetch(`/api/sydney-suburbs?limit=12`)
             .then((res) => res.json())
             .then((data) => {
                 setFilteredSuburbs(data);
@@ -36,11 +36,11 @@ const BannerSearch: FC = () => {
     // Handle search input change
     const handleSearchChange = async (query: string) => {
         console.log('query', query)
-        setSelectedSuburb(query); // Ensure input updates
+        setSelectedSuburb(query);
 
         const searchURL = query
-            ? `/api/sydneySuburbApi?search=${query}`
-            : `/api/sydneySuburbApi?limit=12`;
+            ? `/api/sydney-suburbs?search=${query}`
+            : `/api/sydney-suburbs?limit=12`;
 
         fetch(searchURL)
             .then((res) => res.json())
