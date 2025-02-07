@@ -5,10 +5,8 @@ import { useRouter } from 'next/navigation';
 import RoleSelection from '../components/role-selection/RoleSelection';
 import RegisterForm from './components/RegisterForm';
 import { useRole } from '@/providers/RoleProvider';
-import VerifyEmail from '../components/verify-email/VerifyEmail';
 
 const RegisterPage: FC = () => {
-    const [step, setStep] = useState<'register' | 'verify'>('register');
     const { selectedRole, setSelectedRole } = useRole();
     const router = useRouter();
 
@@ -28,9 +26,7 @@ const RegisterPage: FC = () => {
             ) : (
                 // Show register form for learners
                 selectedRole === 'learner' && (
-                    step !== "register" ?
-                        <RegisterForm setStep={setStep} /> :
-                        <VerifyEmail />
+                    <RegisterForm />
                 )
             )}
         </div>

@@ -14,14 +14,11 @@ import { IRegisterInputs } from '@/types/auth';
 import { Eye, EyeClosed } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-interface IRegisterFormProps {
-    setStep: Dispatch<SetStateAction<'register' | 'verify'>>
-}
 
-const RegisterForm: FC<IRegisterFormProps> = ({ setStep }) => {
+const RegisterForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control, watch, setError, setValue } = useForm<IRegisterInputs>();
     const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
@@ -41,20 +38,19 @@ const RegisterForm: FC<IRegisterFormProps> = ({ setStep }) => {
 
 
     const handleRegister = (data: IRegisterInputs) => {
-        setStep("verify");
-        // registerUser(data).unwrap().then((res) => {
-        //     toast({
-        //         message: res.message
-        //     });
-        //     dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
+        registerUser(data).unwrap().then((res) => {
+            toast({
+                message: res.message
+            });
+            dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
 
-        //     router.push('/dashboard/learner')
-        // }).catch((err) => {
-        //     toast({
-        //         success: false,
-        //         message: err?.data?.message || "Something went wrong",
-        //     })
-        // })
+            router.push('/dashboard/learner')
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err?.data?.message || "Something went wrong",
+            })
+        })
     }
 
     const handlePasswordToggle = (field: string) => {
