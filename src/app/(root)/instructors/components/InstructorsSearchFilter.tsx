@@ -30,7 +30,7 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
 
     // Fetch initial suburbs on mount
     useEffect(() => {
-        fetch(`/api/sydneySuburbApi?limit=12`)
+        fetch(`/api/sydney-suburbs?limit=12`)
             .then((res) => res.json())
             .then((data) => setFilteredSuburbs(data))
             .catch((err) => console.error("Error fetching suburbs:", err));
@@ -40,8 +40,8 @@ const InstructorsSearchFilter: FC<IInstructorSearchFilterProps> = ({ searchParam
         setSelectedSuburb(query);
 
         const searchURL = query
-            ? `/api/sydneySuburbApi?search=${query}`
-            : `/api/sydneySuburbApi?limit=12`;
+            ? `/api/sydney-suburbs?search=${query}`
+            : `/api/sydney-suburbs?limit=12`;
 
         fetch(searchURL)
             .then((res) => res.json())
