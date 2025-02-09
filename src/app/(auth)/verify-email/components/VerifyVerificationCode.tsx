@@ -3,10 +3,9 @@ import { Button } from '@/components/ui/button';
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp';
 import { toast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import { useVerifyEmailMutation } from '@/redux/api/authApi/authApi';
+import { useSendEmailVerificationMutation, useVerifyEmailMutation } from '@/redux/api/authApi/authApi';
 import { useAppSelector } from '@/redux/hook';
 import { ShieldCheck, ShieldEllipsis } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 
 const VerifyVerificationCode: FC = () => {
@@ -14,7 +13,9 @@ const VerifyVerificationCode: FC = () => {
     const [verificationCode, setVerificationCode] = useState('');
     const [timer, setTimer] = useState(300);
     const [isResendDisabled, setIsResendDisabled] = useState(true)
-    const [verifyEmail, { isLoading }] = useVerifyEmailMutation();
+    const [verifyEmail, { isLoading: isVerifying }] = useVerifyEmailMutation();
+    const [sendVerifyEmail, { isLoading: isSendingVerifyEmail }] = useSendEmailVerificationMutation();
+
     const { user, isAuthenticate } = useAppSelector(state => state.authSlice);
 
 
@@ -40,7 +41,17 @@ const VerifyVerificationCode: FC = () => {
 
     // Resend OTP
     const handleResend = () => {
-        // handleResendResetPasswordEmail();
+        sendVerifyEmail({ email: user?.email || "" }).unwrap().then((res) => {
+            toast({
+                message: res.message
+            })
+        }).catch((err) => {
+            toast({
+                success: false,
+                message: err.data.message || "Something went wrong"
+            })
+        });
+
         setTimer(300)
         setIsResendDisabled(true)
     }
@@ -111,7 +122,7 @@ const VerifyVerificationCode: FC = () => {
                                 </InputOTP>
                             </div>
                             <div>
-                                <Button className="w-full" type="submit" loading={isLoading} disabled={verificationCode.length !== 6 || isLoading}>
+                                <Button className="w-full" type="submit" loading={isVerifying} disabled={verificationCode.length !== 6 || isVerifying || isSendingVerifyEmail}>
                                     Verify
                                 </Button>
                                 <div className="flex items-center justify-center gap-2 text-sm mt-2">
