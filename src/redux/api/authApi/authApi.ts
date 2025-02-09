@@ -6,6 +6,7 @@ import { IRegisterInstructor } from "@/types/instructor";
 import { IUpdatePasswordInputs } from "@/components/shared/forms/UpdatePasswordFields";
 
 const usersApi = baseApi.injectEndpoints({
+    overrideExisting: true,
     endpoints: (builder) => ({
         registerUser: builder.mutation<IResponseWithData<IUser>, IRegisterInputs>({
             query: (data) => ({
@@ -72,7 +73,7 @@ const usersApi = baseApi.injectEndpoints({
         }),
         verifyEmail: builder.mutation<IResponseBase, { token?: string, email?: string, verificationCode?: string; }>({
             query: (data) => ({
-                url: `/auth/email/verify-email?token=${data.token}`,
+                url: `/auth/email/verify-email?token=${data.token || ""}`,
                 method: "PATCH",
                 body: {
                     email: data.email,
