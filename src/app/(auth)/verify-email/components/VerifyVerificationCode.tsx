@@ -8,18 +8,20 @@ import { useAppSelector } from '@/redux/hook';
 import { Send, ShieldCheck, ShieldEllipsis } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, VoidFunctionComponent } from 'react';
 
 interface IVerifyVerificationCodeProps {
     className?: string;
     isGoToDashboard?: boolean;
+    onSuccess?: () => void;
 }
-const VerifyVerificationCode: FC<IVerifyVerificationCodeProps> = ({ className, isGoToDashboard = true }) => {
+const VerifyVerificationCode: FC<IVerifyVerificationCodeProps> = ({ className, isGoToDashboard = true, onSuccess }) => {
     const searchParams = useSearchParams();
     const [success, setSuccess] = useState<boolean>(false);
     const [verificationCode, setVerificationCode] = useState('');
     const [timer, setTimer] = useState(0);
     const [isResendDisabled, setIsResendDisabled] = useState(true)
+
 
     const [isEmailSent, setIsEmailSent] = useState(searchParams.get('emailSent') === 'true' ? true : false);
 
@@ -40,9 +42,11 @@ const VerifyVerificationCode: FC<IVerifyVerificationCodeProps> = ({ className, i
                 message: "Email verified successfully"
             })
             setSuccess(true);
+            onSuccess?.();
         }).catch((err) => {
             toast({
                 success: false,
+
                 message: err.data.message
             })
         })

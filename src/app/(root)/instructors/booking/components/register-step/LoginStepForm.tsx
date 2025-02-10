@@ -38,7 +38,8 @@ const LoginFormStep: FC = () => {
                 params.set('step', step.key);
                 handleStepChange("payment");
                 setCurrentStep(step);
-            } 
+                router.push(`?${params.toString()}`);
+            }
         }).catch((err) => {
             toast({
                 success: false,
