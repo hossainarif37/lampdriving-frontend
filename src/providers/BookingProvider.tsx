@@ -76,7 +76,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // calculate available schedule hours
     const addedHours = schedules.reduce((total, schedule) => {
-        if (schedule.type === "test") {
+        if (schedule.type === "test" || schedule.type === "mock-test") {
             return total;
         }
         return total + schedule.duration;
@@ -171,7 +171,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         }
         // Validate the URL step
 
-        const isAllScheduled = (testPackage.included ? isTestPackageSelected ? true : false : true) && availableScheduleHours === 0;
+        const isAllScheduled = (testPackage.included ? isTestPackageSelected ? true : false : true) && (testPackage.mockTestCount ? (isFirstMockTestScheduled && isAllMockTestScheduled) ? true : false : true) && availableScheduleHours === 0;
         setIsAllScheduled(isAllScheduled);
 
         if (stepFromUrl !== 'instructor' && stepFromUrl !== 'package-selection') {
@@ -200,7 +200,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         if (validStep) {
             setCurrentStep(validStep);
         }
-    }, [urlSearchParams, bookingHours, testPackage.included, schedules, isAuthenticate, isTestPackageSelected, availableScheduleHours]);
+    }, [urlSearchParams, bookingHours, testPackage.included, schedules, isAuthenticate, isTestPackageSelected, availableScheduleHours, isFirstMockTestScheduled, isAllMockTestScheduled]);
 
     if (isLoading) {
         return <Loading />
