@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 
-const VerifyVerificationCode: FC = () => {
+const VerifyVerificationCode: FC<{ className?: string }> = ({ className }) => {
     const searchParams = useSearchParams();
     const [success, setSuccess] = useState<boolean>(false);
     const [verificationCode, setVerificationCode] = useState('');
@@ -88,7 +88,7 @@ const VerifyVerificationCode: FC = () => {
     }, [isResendDisabled])
 
     return (
-        <div className="w-full md:w-[450px] xl:w-[500px] max-w-[500px] p-3 md:p-10 md:shadow-lg md:rounded-md md:border">
+        <div className={cn("w-full md:w-[450px] xl:w-[500px] max-w-[500px] p-3 md:p-10 md:shadow-lg md:rounded-md md:border", className)}>
             {
                 !isEmailSent ?
                     <>

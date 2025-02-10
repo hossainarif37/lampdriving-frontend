@@ -4,6 +4,7 @@ import RegisterStepForm from './RegisterStepForm';
 import { useSearchParams } from 'next/navigation';
 import LoginFormStep from './LoginStepForm';
 import { useAppSelector } from '@/redux/hook';
+import VerifyVerificationCode from '@/app/(auth)/verify-email/components/VerifyVerificationCode';
 
 const RegisterStep: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -21,8 +22,11 @@ const RegisterStep: FC = () => {
         <div>
             {
                 isAuthenticate ?
-                    <div className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200 min-h-60 flex items-center justify-center'>
-                        <h3 className='text-3xl font-semibold text-left'>Successfully logged in</h3>
+                    <div className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200'>
+                        <h2 className="text-xl font-semibold mb-6 text-left">Verify Email</h2>
+                        <div className='flex items-center justify-center'>
+                        <VerifyVerificationCode className="md:border-none md:shadow-none" />
+                        </div>
                     </div>
                     :
                     <>

@@ -34,10 +34,11 @@ const LoginFormStep: FC = () => {
             if (!step) {
                 return;
             }
-            params.set('step', step.key);
-            router.push(`?${params.toString()}`);
-            setCurrentStep(step);
-            handleStepChange("payment");
+            if (res.data.isEmailVerified) {
+                params.set('step', step.key);
+                handleStepChange("payment");
+                setCurrentStep(step);
+            } 
         }).catch((err) => {
             toast({
                 success: false,
