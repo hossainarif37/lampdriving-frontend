@@ -10,12 +10,17 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { FC, useEffect, useState } from 'react';
 
-const VerifyVerificationCode: FC<{ className?: string }> = ({ className }) => {
+interface IVerifyVerificationCodeProps {
+    className?: string;
+    isGoToDashboard?: boolean;
+}
+const VerifyVerificationCode: FC<IVerifyVerificationCodeProps> = ({ className, isGoToDashboard = true }) => {
     const searchParams = useSearchParams();
     const [success, setSuccess] = useState<boolean>(false);
     const [verificationCode, setVerificationCode] = useState('');
-    const [timer, setTimer] = useState(300);
+    const [timer, setTimer] = useState(0);
     const [isResendDisabled, setIsResendDisabled] = useState(true)
+
     const [isEmailSent, setIsEmailSent] = useState(searchParams.get('emailSent') === 'true' ? true : false);
 
     const [verifyEmail, { isLoading: isVerifying }] = useVerifyEmailMutation();
@@ -49,22 +54,16 @@ const VerifyVerificationCode: FC<{ className?: string }> = ({ className }) => {
                 message: res.message
             })
             setIsEmailSent(true);
+            setTimer(300)
+            setIsResendDisabled(true)
         }).catch((err) => {
             toast({
                 success: false,
+
                 message: err.data.message || "Something went wrong"
             })
         });
     }
-
-    // Resend OTP
-    const handleResend = () => {
-        handleSendEmail();
-
-        setTimer(300)
-        setIsResendDisabled(true)
-    }
-
 
     const formatTime = (seconds: number) => {
         const minutes = Math.floor(seconds / 60)
@@ -111,13 +110,16 @@ const VerifyVerificationCode: FC<{ className?: string }> = ({ className }) => {
                                     <ShieldCheck className="text-primary size-10 " />
                                 </span>
                             </div>
-                            <h1 className="text-2xl font-bold text-primary/90 text-center">Password Reset Success</h1>
-                            <p className="mb-4 text-sm text-accent text-center">Your password has been successfully reset.</p>
-                            <Link href={'/'}>
-                                <Button className="w-full mt-3">
-                                    Back to Home
-                                </Button>
-                            </Link>
+                            <h1 className="text-2xl font-bold text-primary/90 text-center">Email Verified Successfully</h1>
+                            <p className="mb-4 text-sm text-accent text-center">Your email has been successfully verified.</p>
+                            {
+                                isGoToDashboard &&
+                                <Link href={`/dashboard/${user?.role === "learner" ? "learner" : "instructor"}`}>
+                                    <Button className="w-full mt-3">
+                                        Go to Dashboard
+                                    </Button>
+                                </Link>
+                            }
                         </>
                         :
                         <>
@@ -153,7 +155,7 @@ const VerifyVerificationCode: FC<{ className?: string }> = ({ className }) => {
                                     <div className="flex items-center justify-center gap-2 text-sm mt-2">
                                         <span className="text-primary/90">Didn&apos;t receive code? <span className='font-medium'>{formatTime(timer)}</span></span>
                                         <button
-                                            onClick={handleResend}
+                                            onClick={handleSendEmail}
                                             disabled={isResendDisabled || isSendingVerifyEmail || isVerifying}
                                             className={cn("p-0 h-auto underline text-[#2A9D8F] font-medium", isResendDisabled && "text-gray-400 pointer-events-none")}
                                         >

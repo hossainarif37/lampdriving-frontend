@@ -58,7 +58,8 @@ const BookingInfo: FC = () => {
 
 
     let isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
-        (currentStep.key === "schedule" && (availableScheduleHours > 0 || (testPackage.included && !isTestPackageSelected))) || (isLogging || isRegistering || isCreatingABooking);
+        (currentStep.key === "schedule" && (availableScheduleHours > 0 || (testPackage.included && !isTestPackageSelected))) || (isLogging || isRegistering || isCreatingABooking) ||
+        ((registerStep || loginStep) && (isAuthenticate && !user?.isEmailVerified));
 
     return (
         <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">

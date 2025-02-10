@@ -25,7 +25,7 @@ const RegisterStep: FC = () => {
                     <div className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200'>
                         <h2 className="text-xl font-semibold mb-6 text-left">Verify Email</h2>
                         <div className='flex items-center justify-center'>
-                        <VerifyVerificationCode className="md:border-none md:shadow-none" />
+                            <VerifyVerificationCode className="md:border-none md:shadow-none" isGoToDashboard={false} />
                         </div>
                     </div>
                     :
