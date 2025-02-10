@@ -85,6 +85,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // check if test package is selected
     const isTestPackageSelected = schedules.find(schedule => schedule.type === "test") ? true : false;
+    const isFirstMockTestScheduled = schedules.find(schedule => schedule.type === "mock-test" && schedule.duration === 2) ? true : false;
+    const mockTestCount = schedules.filter(schedule => schedule.type === "mock-test" && schedule.duration === 1).length;
+    const isAllMockTestScheduled = mockTestCount === (testPackage.mockTestCount - 1);
 
     const value = useMemo(() => ({
         instructor, setInstructor,
@@ -104,12 +107,12 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         registerButtonRef,
         isRegistering, setIsRegistering,
         loginButtonRef,
-        isLogging, setIsLogging
+        isLogging, setIsLogging, isFirstMockTestScheduled, isAllMockTestScheduled
     }), [instructor, bookingHours, testPackage, price, isCustomLessonSelected,
         isCustomMockTestSelected, paymentInfo, schedules, currentStep,
         useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered,
         isCreatingABooking, setIsCreatingABooking, availableScheduleHours,
-        isTestPackageSelected, isAllScheduled, registerButtonRef, steps]);
+        isTestPackageSelected, isAllScheduled, registerButtonRef, steps, isFirstMockTestScheduled, isAllMockTestScheduled]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams?.get('instructor');

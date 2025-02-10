@@ -24,15 +24,23 @@ interface ISelectedSchedule {
 }
 
 const ScheduleStep: FC = () => {
-    const { setSchedules, instructor, schedules, availableScheduleHours, testPackage, isTestPackageSelected, isAllScheduled } = useBooking();
-    const [selectedSchedule, setSelectedSchedule] = useState<ISelectedSchedule>({
-        date: null,
-        time: null,
-        duration: availableScheduleHours ? 1 : (testPackage.included && !isTestPackageSelected) ? 2 : 0,
-        pickupAddress: { address: '', suburb: '' },
-        dropOffAddress: { address: '', suburb: '' },
-        type: availableScheduleHours ? "lesson" : (testPackage.included && !isTestPackageSelected) ? "test" : "lesson"
-    });
+    const { setSchedules,
+        instructor,
+        schedules,
+        availableScheduleHours,
+        testPackage,
+        isTestPackageSelected,
+        isAllScheduled,
+        isFirstMockTestScheduled, isAllMockTestScheduled } = useBooking();
+    const [selectedSchedule,
+        setSelectedSchedule] = useState<ISelectedSchedule>({
+            date: null,
+            time: null,
+            duration: availableScheduleHours ? 1 : (testPackage.included && !isTestPackageSelected) ? 2 : 0,
+            pickupAddress: { address: '', suburb: '' },
+            dropOffAddress: { address: '', suburb: '' },
+            type: availableScheduleHours ? "lesson" : (testPackage.included && !isTestPackageSelected) ? "test" : "lesson"
+        });
     const [bookedTimeSlots, setBookedTimeSlots] = useState<string[]>([]);
     const [scheduleTimeSlots, setScheduleTimeSlots] = useState<string[]>([]);
     const { data } = useGetInstructorAvailabilityQuery({ id: instructor?._id || "" });
@@ -193,9 +201,9 @@ const ScheduleStep: FC = () => {
                                 Driving Test
                             </button>
                             <button
-                                disabled={!testPackage.included || isTestPackageSelected}
-                                onClick={() => handleDuration(2, "test")}
-                                className={`py-2 px-4 text-nowrap rounded-[4px] disabled:text-gray-500 border ${selectedSchedule.type === "test"
+                                disabled={!(testPackage.mockTestCount) || isFirstMockTestScheduled}
+                                onClick={() => handleDuration(2, "mock-test")}
+                                className={`py-2 px-4 text-nowrap rounded-[4px] disabled:text-gray-500 border ${selectedSchedule.type === "mock-test" && selectedSchedule.duration === 2
                                     ? 'border-primary bg-primary/5 text-primary'
                                     : 'border-gray-200 hover:border-primary/70'
                                     }`}
@@ -203,9 +211,9 @@ const ScheduleStep: FC = () => {
                                 First Mock Test
                             </button>
                             <button
-                                disabled={!testPackage.included || isTestPackageSelected}
-                                onClick={() => handleDuration(2, "test")}
-                                className={`py-2 px-4 text-nowrap rounded-[4px] disabled:text-gray-500 border ${selectedSchedule.type === "test"
+                                disabled={!(testPackage.mockTestCount) || isAllMockTestScheduled}
+                                onClick={() => handleDuration(1, "mock-test")}
+                                className={`py-2 px-4 text-nowrap rounded-[4px] disabled:text-gray-500 border ${selectedSchedule.type === "mock-test" && selectedSchedule.duration === 1
                                     ? 'border-primary bg-primary/5 text-primary'
                                     : 'border-gray-200 hover:border-primary/70'
                                     }`}
