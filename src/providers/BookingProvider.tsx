@@ -27,12 +27,12 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [isRegistering, setIsRegistering] = useState(false);
     const [isLogging, setIsLogging] = useState(false);
 
-    const { isAuthenticate, isAuthLoading } = useAppSelector(state => state.authSlice);
+    const { isAuthenticate, isAuthLoading, user } = useAppSelector(state => state.authSlice);
 
 
     const initialCurrentStep = (step && stepsWithRegister.find(currstep => currstep.key === (step === "login" ? "register" : step))) || stepsWithRegister[0];
     const [currentStep, setCurrentStep] = useState<IStep>(initialCurrentStep);
-    const [steps, setSteps] = useState<IStep[]>(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
+    const [steps, setSteps] = useState<IStep[]>((isAuthenticate && user?.isEmailVerified) ? stepsWithOutRegister : stepsWithRegister);
 
     const [instructor, setInstructor] = useState<Partial<IInstructor> | null>(null);
     const [isCustomLessonSelected, setIsCustomLessonSelected] = useState(false);
@@ -126,8 +126,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // handle steps
     useEffect(() => {
-        setSteps(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
-    }, [isAuthLoading, isAuthenticate])
+        setSteps((isAuthenticate && user?.isEmailVerified) ? stepsWithOutRegister : stepsWithRegister);
+    }, [isAuthLoading, isAuthenticate, user?.isEmailVerified])
+
 
     // 
     // handle instructor data

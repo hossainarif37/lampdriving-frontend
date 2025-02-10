@@ -101,9 +101,9 @@ const ScheduleStep: FC = () => {
         } else if ((availableScheduleHours) === 1) {
             setSelectedSchedule((pre) => ({ ...pre, duration: 1, type: "lesson" }));
         } else if ((testPackage.included && (!isTestPackageSelected || !isFirstMockTestScheduled || !isAllMockTestScheduled)) && (availableScheduleHours <= 0)) {
-            if (!isFirstMockTestScheduled) {
+            if (!isFirstMockTestScheduled && testPackage.mockTestCount > 0) {
                 setSelectedSchedule((pre) => ({ ...pre, duration: 2, type: "mock-test" }));
-            } else if (!isAllMockTestScheduled) {
+            } else if (!isAllMockTestScheduled && testPackage.mockTestCount > 0) {
                 setSelectedSchedule((pre) => ({ ...pre, duration: 1, type: "mock-test" }));
             } else {
                 setSelectedSchedule((pre) => ({ ...pre, duration: 2, type: "test" }));
