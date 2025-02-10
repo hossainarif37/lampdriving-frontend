@@ -221,10 +221,58 @@ const ScheduleStep: FC = () => {
                                 Mock Test
                             </button>
                         </div>
-                        <button title={availableScheduleHours === 0 ? 'No hours left to schedule' : `Add more ${availableScheduleHours} ${availableScheduleHours === 1 ? 'hour' : 'hours'} schedules`} className='absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center gap-2'>
-                            <span className='text-sm'>{availableScheduleHours}-Hours left</span>
-                            <CircleAlert size={16} />
-                        </button>
+                        <div className='absolute top-4 right-4 sm:top-6 sm:right-6'>
+                            {
+                                selectedSchedule.type === "lesson" ?
+                                    <button
+                                        title={availableScheduleHours === 0 ? 'No hours left to schedule' : `Add more ${availableScheduleHours} ${availableScheduleHours === 1 ? 'hour' : 'hours'} schedules`}
+                                        className='flex items-center gap-2'
+                                    >
+                                        <span className='text-sm'>
+                                            {availableScheduleHours === 0 ? 'No hours left to schedule' : `${availableScheduleHours}-Hours left`}
+                                        </span>
+                                        <CircleAlert size={16} />
+                                    </button>
+                                    :
+                                    (selectedSchedule.type === "test" && !isTestPackageSelected) ?
+                                        <button
+                                            title='Schedule driving test'
+                                            className='flex items-center gap-2'
+
+                                        >
+                                            <span className='text-sm'>Schedule driving test</span>
+                                            <CircleAlert size={16} />
+                                        </button>
+                                        :
+                                        (selectedSchedule.type === "mock-test" && selectedSchedule.duration === 2 && !isFirstMockTestScheduled) ?
+                                            <button
+                                                title='Schedule first mock test'
+                                                className='flex items-center gap-2'
+                                            >
+                                                <span className='text-sm'>Schedule first mock test</span>
+                                                <CircleAlert size={16} />
+                                            </button>
+                                            :
+                                            (selectedSchedule.type === "mock-test" && selectedSchedule.duration === 1 && !isAllMockTestScheduled) ?
+                                                <button
+                                                    title='Schedule all mock tests'
+                                                    className='flex items-center gap-2'
+
+                                                >
+                                                    <span className='text-sm'>Schedule all mock tests</span>
+                                                    <CircleAlert size={16} />
+                                                </button>
+                                                :
+                                                <button
+                                                    title='Nothing is left to schedule'
+                                                    className='flex items-center gap-2'
+
+                                                >
+                                                    <span className='text-sm'>Nothing is left to schedule</span>
+                                                    <CircleAlert size={16} />
+                                                </button>
+                            }
+                        </div>
                     </div>
                 </div>
 
