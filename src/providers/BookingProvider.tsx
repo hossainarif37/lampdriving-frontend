@@ -180,7 +180,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
                 handleStepChange('package-selection');
                 return;
             }
-            else if (stepFromUrl === 'register' && (!isPackageSelected || !isAllScheduled)) {
+            else if ((stepFromUrl === 'register' || stepFromUrl === 'login') && (!isPackageSelected || !isAllScheduled)) {
                 handleStepChange(isPackageSelected ? 'schedule' : 'package-selection');
                 return;
             }
