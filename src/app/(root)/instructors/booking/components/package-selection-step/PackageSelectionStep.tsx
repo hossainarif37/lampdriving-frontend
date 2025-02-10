@@ -17,9 +17,22 @@ const PackageSelectionStep: FC = () => {
         setSchedules, testPackage, setTestPackage } = useBooking();
 
     // handler for package selection
-    const handleLessonPackageSelection = (hours: number, isCustomLessonSelected: boolean) => {
+    const handleLessonPackageSelection = (hours: number, isCustom: boolean) => {
+        if (isCustom !== isCustomLessonSelected) {
+            setBookingHours(hours);
+            setIsCustomLessonSelected(isCustom);
+            setSchedules([]);
+            return;
+        }
+        if (hours === bookingHours) {
+            setIsCustomLessonSelected(false);
+            setBookingHours(0);
+            setSchedules([]);
+            return;
+        }
         setBookingHours(hours);
-        setIsCustomLessonSelected(isCustomLessonSelected);
+        setIsCustomLessonSelected(isCustom);
+
         setSchedules([]);
     }
 
@@ -36,6 +49,7 @@ const PackageSelectionStep: FC = () => {
         }
         setTestPackage(pre => ({ ...pre, mockTestCount, included: true }));
         setIsCustomMockTestSelected(isCustom);
+        setSchedules([]);
     };
 
 
