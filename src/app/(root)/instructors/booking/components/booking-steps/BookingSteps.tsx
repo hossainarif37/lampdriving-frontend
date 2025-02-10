@@ -1,7 +1,7 @@
 "use client";
 import { useBooking } from '@/providers/BookingProvider';
 import { useAppSelector } from '@/redux/hook';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
 
 const BookingSteps: FC = () => {
@@ -33,7 +33,7 @@ const BookingSteps: FC = () => {
                             }
                             // Handle Payment step
                             else if (step.key === 'payment') {
-                                isDisabled = !isPackageSelected || !schedules.length || !isAuthenticate || (availableScheduleHours > 0);
+                                isDisabled = !isPackageSelected || !schedules.length || !isAuthenticate || !user?.isEmailVerified || (availableScheduleHours > 0);
                                 if (testPackage.included) {
                                     if (!isTestPackageSelected) {
                                         isDisabled = true;
