@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form';
 
 const LoginFormStep: FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<ILoginInputs>();
-    const { steps, setCurrentStep, handleStepChange, loginButtonRef, isLogging, setIsRegistering } = useBooking();
+    const { steps, setCurrentStep, handleStepChange, loginButtonRef, isLogging, setIsLogging } = useBooking();
     const dispatch = useAppDispatch();
     const [loginUser] = useLoginUserMutation();
 
@@ -24,25 +24,30 @@ const LoginFormStep: FC = () => {
 
     // handle login function
     const handleLogin = (data: ILoginInputs) => {
+        setIsLogging(true);
         loginUser(data).unwrap().then((res) => {
             toast({
                 message: res.message
             });
+            setIsLogging(false);
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false }));
             const params = new URLSearchParams(urlSearchParams?.toString());
             const step = steps.find(step => step.key === "payment");
             if (!step) {
                 return;
             }
-            params.set('step', step.key);
-            router.push(`?${params.toString()}`);
-            setCurrentStep(step);
-            handleStepChange("payment");
+            if (res.data.isEmailVerified) {
+                params.set('step', step.key);
+                handleStepChange("payment");
+                setCurrentStep(step);
+                router.push(`?${params.toString()}`);
+            }
         }).catch((err) => {
             toast({
                 success: false,
                 message: err.data.message || "Something went wrong"
             });
+            setIsLogging(false);
         })
     }
 

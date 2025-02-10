@@ -43,6 +43,8 @@ export interface IBookingContext {
     loginButtonRef: React.RefObject<HTMLButtonElement>;
     isLogging: boolean;
     setIsLogging: React.Dispatch<React.SetStateAction<boolean>>;
+    isFirstMockTestScheduled: boolean;
+    isAllMockTestScheduled: boolean;
 }
 
 export interface IPrice {
