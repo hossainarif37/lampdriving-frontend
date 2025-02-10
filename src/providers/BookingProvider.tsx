@@ -112,7 +112,8 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         isCustomMockTestSelected, paymentInfo, schedules, currentStep,
         useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered,
         isCreatingABooking, setIsCreatingABooking, availableScheduleHours,
-        isTestPackageSelected, isAllScheduled, registerButtonRef, steps, isFirstMockTestScheduled, isAllMockTestScheduled]);
+        isTestPackageSelected, isAllScheduled, registerButtonRef, steps, isFirstMockTestScheduled, isAllMockTestScheduled,
+        isRegistering, isLogging]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams?.get('instructor');
