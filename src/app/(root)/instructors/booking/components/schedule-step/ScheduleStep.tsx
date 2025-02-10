@@ -98,15 +98,20 @@ const ScheduleStep: FC = () => {
     useEffect(() => {
         if (availableScheduleHours > 1) {
             setSelectedSchedule((pre) => ({ ...pre, duration: selectedSchedule.type === "test" ? 1 : selectedSchedule.duration, type: "lesson" }));
-            return;
         } else if ((availableScheduleHours) === 1) {
             setSelectedSchedule((pre) => ({ ...pre, duration: 1, type: "lesson" }));
-        } else if ((testPackage.included && !isTestPackageSelected) && (availableScheduleHours) === 0) {
-            setSelectedSchedule((pre) => ({ ...pre, duration: 2, type: "test" }));
+        } else if ((testPackage.included && (!isTestPackageSelected || !isFirstMockTestScheduled || !isAllMockTestScheduled)) && (availableScheduleHours <= 0)) {
+            if (!isFirstMockTestScheduled) {
+                setSelectedSchedule((pre) => ({ ...pre, duration: 2, type: "mock-test" }));
+            } else if (!isAllMockTestScheduled) {
+                setSelectedSchedule((pre) => ({ ...pre, duration: 1, type: "mock-test" }));
+            } else {
+                setSelectedSchedule((pre) => ({ ...pre, duration: 2, type: "test" }));
+            }
         } else if ((availableScheduleHours) === 0) {
             setSelectedSchedule((pre) => ({ ...pre, duration: 0, type: "lesson" }));
         }
-    }, [availableScheduleHours, isTestPackageSelected, testPackage.included, schedules])
+    }, [availableScheduleHours, isTestPackageSelected, isFirstMockTestScheduled, isAllMockTestScheduled, testPackage.included, schedules])
 
     useEffect(() => {
         if (!selectedSchedule.date) {
