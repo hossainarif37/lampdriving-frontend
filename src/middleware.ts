@@ -32,16 +32,18 @@ export function middleware(req: NextRequest) {
         if (AUTH_ROUTES.test(pathname)) {
             return NextResponse.next();
         }
-        // return redirectLogin();
-        return NextResponse.next();
+        return redirectLogin();
     }
 
     try {
-        const { role } = jwtDecode<{ role: UserRole }>(accessToken);
+        const { role, isEmailVerified } = jwtDecode<{ role: UserRole, isEmailVerified: boolean }>(accessToken);
+
+        if (!isEmailVerified) {
+            return NextResponse.redirect(new URL('/verify-email', req.url));
+        }
 
         if (AUTH_ROUTES.test(pathname)) {
-            // return redirectHome();
-            return NextResponse.next();
+            return redirectHome();
         }
 
         // Check if it's a common protected route
@@ -51,11 +53,9 @@ export function middleware(req: NextRequest) {
 
         // Check role-specific access
         const hasAccess = ROUTE_PERMISSIONS[role].test(pathname);
-        // return hasAccess ? NextResponse.next() : redirectHome();
-        return NextResponse.next();
+        return hasAccess ? NextResponse.next() : redirectHome();
     } catch {
-        // return redirectLogin();
-        return NextResponse.next();
+        return redirectLogin();
     }
 
 }
