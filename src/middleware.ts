@@ -32,8 +32,7 @@ export function middleware(req: NextRequest) {
         if (AUTH_ROUTES.test(pathname)) {
             return NextResponse.next();
         }
-        // return redirectLogin();
-        return NextResponse.next();
+        return redirectLogin();
     }
 
     try {
@@ -44,8 +43,7 @@ export function middleware(req: NextRequest) {
         }
         
         if (AUTH_ROUTES.test(pathname)) {
-            // return redirectHome();
-            return NextResponse.next();
+            return redirectHome();
         }
 
         // Check if it's a common protected route
@@ -55,11 +53,9 @@ export function middleware(req: NextRequest) {
 
         // Check role-specific access
         const hasAccess = ROUTE_PERMISSIONS[role].test(pathname);
-        // return hasAccess ? NextResponse.next() : redirectHome();
-        return NextResponse.next();
+        return hasAccess ? NextResponse.next() : redirectHome();
     } catch {
-        // return redirectLogin();
-        return NextResponse.next();
+        return redirectLogin();
     }
 
 }
