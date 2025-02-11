@@ -8,7 +8,7 @@ import { useAppSelector } from '@/redux/hook';
 import { Send, ShieldCheck, ShieldEllipsis } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { FC, useEffect, useState, VoidFunctionComponent } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 interface IVerifyVerificationCodeProps {
     className?: string;
@@ -88,7 +88,14 @@ const VerifyVerificationCode: FC<IVerifyVerificationCodeProps> = ({ className, i
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [isResendDisabled])
+    }, [isResendDisabled]);
+
+
+    useEffect(() => {
+        if (searchParams.get('emailSent') === 'true') {
+            setIsEmailSent(true);
+        }
+    }, [searchParams]);
 
     return (
         <div className={cn("w-full md:w-[450px] xl:w-[500px] max-w-[500px] p-3 md:p-10 md:shadow-lg md:rounded-md md:border", className)}>
