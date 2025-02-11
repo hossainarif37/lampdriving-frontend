@@ -41,7 +41,7 @@ export function middleware(req: NextRequest) {
         if (!isEmailVerified) {
             return NextResponse.redirect(new URL('/verify-email', req.url));
         }
-
+        
         if (AUTH_ROUTES.test(pathname)) {
             return redirectHome();
         }
