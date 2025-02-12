@@ -9,7 +9,7 @@ const BannerHeading: FC = () => {
     return (
         <div className="text-light">
             {/* Main heading */}
-            <h2 className="uppercase md:text-5xl text-4xl  text-center md:text-left flex flex-col font-bold md:gap-4 gap-1">
+            <h2 className="uppercase md:text-5xl text-4xl text-center md:text-left flex flex-col font-bold md:gap-4 gap-1">
                 <span>Drive safe</span>
                 <span className="leading-10">& smart with</span>
                 <span>Lamp Driving</span>

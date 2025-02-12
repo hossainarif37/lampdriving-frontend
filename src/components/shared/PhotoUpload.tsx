@@ -1,20 +1,23 @@
 "use client"
 
 import Image from 'next/image';
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
 import { Button } from '../ui/button';
-import { ImagePlus, LoaderIcon, Upload, User, X } from 'lucide-react';
-import { generateUniqueIdentifier } from '@/lib/utils';
+import { ImagePlus, LoaderIcon, User, X } from 'lucide-react';
+import { getPublicIdFromUrl } from '@/lib/utils';
 import { Path, PathValue, UseFormRegister, UseFormSetError, UseFormSetValue } from 'react-hook-form';
+import { uploadFile } from '@/api/uploadFile';
+import { deleteFile } from '@/api/deleteFile';
+import ConfirmationModal from './ConfirmationModal';
 
-export interface IProfilePhoto {
+export interface IPhoto {
     file: File | null;
     url: string | undefined;
 }
 
 interface IPhotoUploadProps<T extends { profileImg?: string }> {
-    profilePhoto: IProfilePhoto;
-    setProfilePhoto: Dispatch<SetStateAction<IProfilePhoto>>;
+    profilePhoto: IPhoto;
+    setProfilePhoto: Dispatch<SetStateAction<IPhoto>>;
     register: UseFormRegister<T>;
     setValue: UseFormSetValue<T>;
     setError: UseFormSetError<T>;
@@ -32,8 +35,12 @@ const PhotoUpload = <T extends { profileImg?: string }>({
     const [isSuccess, setIsSuccess] = useState(false);
     const [isError, setIsError] = useState(false);
     const [imageUploadLoading, setImageUploadLoading] = useState(false);
+    const [imageRemoveLoading, setImageRemoveLoading] = useState(false);
+    const fileRef = useRef<HTMLInputElement>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+
+    const handleFileUpload = async (e: ChangeEvent<HTMLInputElement>) => {
         setIsSuccess(false);
         const file = e.target.files?.[0];
 
@@ -48,57 +55,17 @@ const PhotoUpload = <T extends { profileImg?: string }>({
                 url: isRemoveUrl ? undefined : prev.url
             }
         ));
-    }
 
-    const handleRemoveImage = () => {
-        if (setValue && isRemoveUrl) {
-            setValue('profileImg' as Path<T>, "" as PathValue<T, Path<T>>);
-        }
-        setProfilePhoto((prev) => (
-            {
-                ...prev,
-                file: null,
-                url: isRemoveUrl ? "" : prev.url
-            }
-        ));
-    }
-
-    const handleUploadFile = async () => {
         try {
-            if (!profilePhoto.file) {
+            if (!file) {
                 throw new Error('No file selected.');
             }
-            const uniqueIdentifier = generateUniqueIdentifier(profilePhoto.file);
+
             setImageUploadLoading(true);
-            const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-            const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-            if (!cloudName || !uploadPreset) {
-                throw new Error('Cloudinary credentials are missing.');
-            }
-            // Create a FormData object
-            const formData = new FormData();
-            formData.append('file', profilePhoto.file!);
-            formData.append('upload_preset', uploadPreset);
-            formData.append('cloud_name', cloudName);
-            formData.append('public_id', uniqueIdentifier);
-
-            // Make a POST request to Cloudinary's upload API
-            const response = await fetch(
-                `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-                {
-                    method: 'POST',
-                    body: formData
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
+            const url = await uploadFile(file);
 
             if (setValue) {
-                setValue('profileImg' as Path<T>, data.secure_url as PathValue<T, Path<T>>);
+                setValue('profileImg' as Path<T>, url as PathValue<T, Path<T>>);
             }
             if (setError) {
                 setError('profileImg' as Path<T>, {
@@ -109,18 +76,55 @@ const PhotoUpload = <T extends { profileImg?: string }>({
 
             setProfilePhoto((prev) => ({
                 ...prev,
-                url: data.secure_url
+                url: url
             }));
 
             setIsSuccess(true);
             setIsError(false);
+
         } catch (error) {
+
             console.error('Error uploading image to Cloudinary:', error);
         }
         finally {
             setImageUploadLoading(false);
         }
+    }
+
+
+
+    const handleDeleteImage = async () => {
+        try {
+            if (!profilePhoto?.url) throw new Error('No image url to delete.');
+            setImageRemoveLoading(true);
+
+            const publicId = getPublicIdFromUrl(profilePhoto.url);
+
+            if (!publicId) {
+                throw new Error('Invalid image public ID.');
+            }
+
+            // Make a DELETE request to Cloudinary
+            await deleteFile(publicId);
+
+            // Reset form and state
+            if (setValue) {
+                setValue('profileImg' as Path<T>, "" as PathValue<T, Path<T>>);
+            }
+            setProfilePhoto({ file: null, url: "" });
+            setIsModalOpen(false);
+
+        } catch (error) {
+            console.error('Error deleting image from Cloudinary:', error);
+        }
+        finally {
+            setImageRemoveLoading(false);
+        }
     };
+
+
+    console.log('profilePhoto', profilePhoto);
+
 
     return (
         <div className='w-full flex justify-center mt-10'>
@@ -143,37 +147,61 @@ const PhotoUpload = <T extends { profileImg?: string }>({
                 </div>
 
                 {/* File Input */}
-                <input accept='image/*' {...register?.('profileImg' as Path<T>, {
-                    required: !profilePhoto?.url ? "Please upload a profile photo" : false
-                })} onChange={handleFileChange} className='hidden' type="file" name="image" id="image" />
+                <input
+                    accept='image/*'
+                    {...register?.('profileImg' as Path<T>, {
+                        required: !profilePhoto?.url ? "Please upload a profile photo" : false
+                    })}
+                    onChange={handleFileUpload}
+                    className='hidden'
+                    type="file"
+                    name="image"
+                    id="image"
+                />
 
                 {
-                    profilePhoto?.file && !isSuccess ?
-                        <Button onClick={handleUploadFile} type='button' className='text-primary border cursor-pointer shadow-lg mx-auto bg-light hover:bg-light px-0 w-36 text-sm capitalize h-9 rounded-lg flex justify-center items-center gap-2 -translate-y-5'
-                        >
+                    !profilePhoto?.url && (
+                        <Button
+                            type='button'
+                            disabled={imageUploadLoading}
+                            onClick={() => document.getElementById('image')?.click()} className='text-primary border cursor-pointer font-bold bg-light hover:bg-light shadow-lg mx-auto text-sm capitalize w-36 h-9 rounded-lg flex justify-center items-center gap-2 -translate-y-5'>
                             {
                                 imageUploadLoading ?
-                                    <>
+                                    <span className='flex items-center gap-x-2'>
                                         <LoaderIcon className='animate-spin' width={16} height={16} /><span>Uploading..</span>
-                                    </>
+                                    </span>
                                     :
-                                    <>
-                                        <Upload width={16} height={16} /><span>Upload</span>
-                                    </>
+                                    <span className='flex items-center gap-x-2'>
+                                        <ImagePlus width={16} height={16} /><span>Choose</span>
+                                    </span>
                             }
+
                         </Button>
-                        :
-                        <label htmlFor='image' className='text-primary border cursor-pointer font-bold bg-light hover:bg-light shadow-lg mx-auto text-sm capitalize w-36 h-9 rounded-lg flex justify-center items-center gap-2 -translate-y-5'>
-                            <ImagePlus width={16} height={16} /><span>Choose</span>
-                        </label>
+                    )
                 }
 
                 {
-                    (profilePhoto?.file && !isSuccess) &&
-                    <Button disabled={imageUploadLoading} size={"icon"} type='button' onClick={handleRemoveImage} className='absolute top-0 right-0 shadow-lg bg-primary hover:bg-red-500 -translate-y-3 translate-x-3 rounded-lg flex justify-center items-center'>
-                        <X />
-                    </Button>
+                    profilePhoto?.file || profilePhoto?.url ? (
+                        <Button
+                            disabled={imageUploadLoading}
+                            size={"icon"}
+                            type='button'
+                            title='Remove Image'
+                            onClick={() => setIsModalOpen(true)}
+                            className='absolute top-0 right-0 shadow-lg bg-primary hover:bg-red-500 -translate-y-3 translate-x-3 rounded-lg flex justify-center items-center'
+                        >
+                            <X />
+                        </Button>
+                    ) : null
                 }
+
+                <ConfirmationModal
+                    onConfirm={handleDeleteImage}
+                    isOpen={isModalOpen}
+                    setIsOpen={setIsModalOpen}
+                    isLoading={imageRemoveLoading}
+                />
+
             </div>
         </div>
     );

@@ -92,6 +92,8 @@ const SecurityForm: FC = () => {
             }
         }
 
+        console.log('instructorFormData', instructorFormData);
+
 
         registerInstructor(instructorFormData).unwrap()
             .then((res) => {

@@ -6,11 +6,11 @@ import { useRouter } from 'next/navigation';
 import PersonalInfoFields, { IPersonalInfoInputs } from '@/components/shared/forms/PersonalInfoFields';
 import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 import { IPersonalInfo } from '@/types/instructor';
-import PhotoUpload, { IProfilePhoto } from '@/components/shared/PhotoUpload';
+import PhotoUpload, { IPhoto } from '@/components/shared/PhotoUpload';
 
 interface IPersonalInfoFormProps<T extends { profileImg?: string }> {
-    profilePhoto: IProfilePhoto;
-    setProfilePhoto: Dispatch<SetStateAction<IProfilePhoto>>;
+    profilePhoto: IPhoto;
+    setProfilePhoto: Dispatch<SetStateAction<IPhoto>>;
 }
 
 const PersonalInfoForm = <T extends { profileImg?: string }>({
@@ -20,9 +20,14 @@ const PersonalInfoForm = <T extends { profileImg?: string }>({
     const { register, handleSubmit, formState: { errors }, control, setValue, setError } = useForm<IPersonalInfoInputs>();
     const router = useRouter();
     const { setPersonalInfo, personalInfo } = useInstructorRegister();
+    console.log('Profile Photo', profilePhoto);
 
     const onSubmit = (data: IPersonalInfo) => {
-        setPersonalInfo(data);
+        console.log('data', data);
+        setPersonalInfo({
+            profileImg: profilePhoto.url,
+            ...data
+        });
         router.push("/instructor-registration?step=experience");
     };
 

@@ -5,6 +5,7 @@ import { CircleCheck, User } from 'lucide-react'
 import { FC, useState } from 'react';
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
+import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-Taisor-Car-Color-Image.webp";
 
 
 interface InstructorInfoProps {
@@ -47,7 +48,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
 
           <div className='absolute size-10 sm:size-16 border shadow -bottom-2 -right-2 rounded-full overflow-hidden'>
             <Image
-              src={vehicle?.image}
+              src={vehicle?.images?.[0]?.url || carImg}
               alt="Vehicle"
               width={70}
               height={70}
