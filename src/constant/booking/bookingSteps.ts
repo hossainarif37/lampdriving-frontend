@@ -48,7 +48,7 @@ export const stepsWithRegister = [
         index: 3
     },
     {
-        name: 'Register',
+        name: 'Account',
         icon: User2,
         key: 'register',
         index: 4

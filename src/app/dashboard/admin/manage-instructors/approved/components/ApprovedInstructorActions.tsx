@@ -29,7 +29,6 @@ const ApprovedInstructorActions: FC<IApprovedInstructorActionsProps> = ({ id }) 
                     <ViewDetailsDialogBtn title={"Instructor Details"}>
                         <InstructorDetails id={id} />
                     </ViewDetailsDialogBtn>
-                    <UpdateInstructorStatus status='reject' id={id} setDropdownIsOpen={setDropdownIsOpen} />
                     <UpdateUserStatus id={id} setDropdownIsOpen={setDropdownIsOpen} role='instructor' status='blocked' />
                     <DeleteUser role='instructor' id={id} setDropdownIsOpen={setDropdownIsOpen} />
                 </DropdownMenuContent>

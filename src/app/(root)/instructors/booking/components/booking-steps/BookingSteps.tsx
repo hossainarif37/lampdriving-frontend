@@ -1,12 +1,12 @@
 "use client";
 import { useBooking } from '@/providers/BookingProvider';
 import { useAppSelector } from '@/redux/hook';
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
 
 const BookingSteps: FC = () => {
     const { isTestPackageSelected, steps, currentStep, handleStepChange, bookingHours, testPackage, schedules, availableScheduleHours } = useBooking();
-    const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
+    const { isAuthenticate, user } = useAppSelector(state => state.authSlice);
 
 
     return (
@@ -33,7 +33,7 @@ const BookingSteps: FC = () => {
                             }
                             // Handle Payment step
                             else if (step.key === 'payment') {
-                                isDisabled = !isPackageSelected || !schedules.length || !isAuthenticate || (availableScheduleHours > 0);
+                                isDisabled = !isPackageSelected || !schedules.length || !isAuthenticate || !user?.isEmailVerified || (availableScheduleHours > 0);
                                 if (testPackage.included) {
                                     if (!isTestPackageSelected) {
                                         isDisabled = true;
@@ -57,7 +57,7 @@ const BookingSteps: FC = () => {
             <div className='h-3 bg-gray-200 rounded-md absolute top-3.5 -z-10 w-11/12 mx-auto left-0 right-0'>
                 <div className={`h-full gradient-color rounded-md z-10 
                 transition-all duration-300
-                ${isAuthenticate ?
+                ${(isAuthenticate && user?.isEmailVerified) ?
                         `${currentStep.key === 'instructor' && 'w-2/12'}
                     ${currentStep.key === 'package-selection' && 'w-6/12'}
                     ${currentStep.key === 'schedule' && 'w-9/12'}

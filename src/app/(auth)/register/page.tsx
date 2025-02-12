@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import RoleSelection from '../components/role-selection/RoleSelection';
 import RegisterForm from './components/RegisterForm';
@@ -25,7 +25,9 @@ const RegisterPage: FC = () => {
                 <RoleSelection onRoleSelect={handleRoleSelection} />
             ) : (
                 // Show register form for learners
-                selectedRole === 'learner' && <RegisterForm />
+                selectedRole === 'learner' && (
+                    <RegisterForm />
+                )
             )}
         </div>
     );

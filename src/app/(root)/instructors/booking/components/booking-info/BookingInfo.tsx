@@ -14,7 +14,7 @@ const BookingInfo: FC = () => {
     const { isCreatingABooking, price, bookingHours, availableScheduleHours, testPackage, currentStep, handleStepChange, setIsConfirmTriggered, isTestPackageSelected, registerButtonRef, loginButtonRef, isLogging, isRegistering, instructor } = useBooking();
 
     // register and login button trigger
-    const isAuthenticate = useAppSelector(state => state.authSlice.isAuthenticate);
+    const { isAuthenticate, user } = useAppSelector(state => state.authSlice);
 
     const urlSearchParams = useSearchParams();
     const searchParams = new URLSearchParams(urlSearchParams || '');
@@ -40,7 +40,7 @@ const BookingInfo: FC = () => {
             return handleStepChange("schedule");
         }
         else if (currentStep.key === "schedule") {
-            if (isAuthenticate) {
+            if (isAuthenticate && user?.isEmailVerified) {
                 return handleStepChange("payment");
             } else {
                 return handleStepChange("register");
@@ -58,7 +58,8 @@ const BookingInfo: FC = () => {
 
 
     let isDisable = (currentStep.key === "package-selection" && !bookingHours && !testPackage.included) ||
-        (currentStep.key === "schedule" && (availableScheduleHours > 0 || (testPackage.included && !isTestPackageSelected))) || (isLogging || isRegistering || isCreatingABooking);
+        (currentStep.key === "schedule" && (availableScheduleHours > 0 || (testPackage.included && !isTestPackageSelected))) || (isLogging || isRegistering || isCreatingABooking) ||
+        ((registerStep || loginStep) && (isAuthenticate && !user?.isEmailVerified));
 
     return (
         <div className="bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">

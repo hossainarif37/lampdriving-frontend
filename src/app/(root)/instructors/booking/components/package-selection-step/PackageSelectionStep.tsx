@@ -17,9 +17,22 @@ const PackageSelectionStep: FC = () => {
         setSchedules, testPackage, setTestPackage } = useBooking();
 
     // handler for package selection
-    const handleLessonPackageSelection = (hours: number, isCustomLessonSelected: boolean) => {
+    const handleLessonPackageSelection = (hours: number, isCustom: boolean) => {
+        if (isCustom !== isCustomLessonSelected) {
+            setBookingHours(hours);
+            setIsCustomLessonSelected(isCustom);
+            setSchedules([]);
+            return;
+        }
+        if (hours === bookingHours) {
+            setIsCustomLessonSelected(false);
+            setBookingHours(0);
+            setSchedules([]);
+            return;
+        }
         setBookingHours(hours);
-        setIsCustomLessonSelected(isCustomLessonSelected);
+        setIsCustomLessonSelected(isCustom);
+
         setSchedules([]);
     }
 
@@ -36,6 +49,7 @@ const PackageSelectionStep: FC = () => {
         }
         setTestPackage(pre => ({ ...pre, mockTestCount, included: true }));
         setIsCustomMockTestSelected(isCustom);
+        setSchedules([]);
     };
 
 
@@ -43,7 +57,7 @@ const PackageSelectionStep: FC = () => {
     return (
         <div className='space-y-6'>
             <div className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200'>
-                <div className="md:grid md:grid-cols-2 gap-4 space-y-4 md:space-y-0">
+                <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
                     <Button
                         onClick={() => setSelectedTab("lesson")}
                         variant={selectedTab == "lesson" ? "default" : "outline"}

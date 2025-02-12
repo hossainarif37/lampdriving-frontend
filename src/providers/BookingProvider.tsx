@@ -27,12 +27,12 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [isRegistering, setIsRegistering] = useState(false);
     const [isLogging, setIsLogging] = useState(false);
 
-    const { isAuthenticate, isAuthLoading } = useAppSelector(state => state.authSlice);
+    const { isAuthenticate, isAuthLoading, user } = useAppSelector(state => state.authSlice);
 
 
     const initialCurrentStep = (step && stepsWithRegister.find(currstep => currstep.key === (step === "login" ? "register" : step))) || stepsWithRegister[0];
     const [currentStep, setCurrentStep] = useState<IStep>(initialCurrentStep);
-    const [steps, setSteps] = useState<IStep[]>(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
+    const [steps, setSteps] = useState<IStep[]>((isAuthenticate && user?.isEmailVerified) ? stepsWithOutRegister : stepsWithRegister);
 
     const [instructor, setInstructor] = useState<Partial<IInstructor> | null>(null);
     const [isCustomLessonSelected, setIsCustomLessonSelected] = useState(false);
@@ -76,7 +76,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // calculate available schedule hours
     const addedHours = schedules.reduce((total, schedule) => {
-        if (schedule.type === "test") {
+        if (schedule.type === "test" || schedule.type === "mock-test") {
             return total;
         }
         return total + schedule.duration;
@@ -85,6 +85,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // check if test package is selected
     const isTestPackageSelected = schedules.find(schedule => schedule.type === "test") ? true : false;
+    const isFirstMockTestScheduled = schedules.find(schedule => schedule.type === "mock-test" && schedule.duration === 2) ? true : false;
+    const mockTestCount = schedules.filter(schedule => schedule.type === "mock-test" && schedule.duration === 1).length;
+    const isAllMockTestScheduled = mockTestCount === (testPackage.mockTestCount - 1);
 
     const value = useMemo(() => ({
         instructor, setInstructor,
@@ -104,12 +107,13 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         registerButtonRef,
         isRegistering, setIsRegistering,
         loginButtonRef,
-        isLogging, setIsLogging
+        isLogging, setIsLogging, isFirstMockTestScheduled, isAllMockTestScheduled
     }), [instructor, bookingHours, testPackage, price, isCustomLessonSelected,
         isCustomMockTestSelected, paymentInfo, schedules, currentStep,
         useRegisterForm, useLoginForm, isConfirmTriggered, setIsConfirmTriggered,
         isCreatingABooking, setIsCreatingABooking, availableScheduleHours,
-        isTestPackageSelected, isAllScheduled, registerButtonRef, steps]);
+        isTestPackageSelected, isAllScheduled, registerButtonRef, steps, isFirstMockTestScheduled, isAllMockTestScheduled,
+        isRegistering, isLogging]);
 
     const router = useRouter();
     const instructorQuery = urlSearchParams?.get('instructor');
@@ -123,8 +127,9 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // handle steps
     useEffect(() => {
-        setSteps(isAuthenticate ? stepsWithOutRegister : stepsWithRegister);
-    }, [isAuthLoading, isAuthenticate])
+        setSteps((isAuthenticate && user?.isEmailVerified) ? stepsWithOutRegister : stepsWithRegister);
+    }, [isAuthLoading, isAuthenticate, user?.isEmailVerified])
+
 
     // 
     // handle instructor data
@@ -168,7 +173,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         }
         // Validate the URL step
 
-        const isAllScheduled = (testPackage.included ? isTestPackageSelected ? true : false : true) && availableScheduleHours === 0;
+        const isAllScheduled = (testPackage.included ? isTestPackageSelected ? true : false : true) && (testPackage.mockTestCount ? (isFirstMockTestScheduled && isAllMockTestScheduled) ? true : false : true) && availableScheduleHours === 0;
         setIsAllScheduled(isAllScheduled);
 
         if (stepFromUrl !== 'instructor' && stepFromUrl !== 'package-selection') {
@@ -176,7 +181,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
                 handleStepChange('package-selection');
                 return;
             }
-            else if (stepFromUrl === 'register' && (!isPackageSelected || !isAllScheduled)) {
+            else if ((stepFromUrl === 'register' || stepFromUrl === 'login') && (!isPackageSelected || !isAllScheduled)) {
                 handleStepChange(isPackageSelected ? 'schedule' : 'package-selection');
                 return;
             }
@@ -197,7 +202,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         if (validStep) {
             setCurrentStep(validStep);
         }
-    }, [urlSearchParams, bookingHours, testPackage.included, schedules, isAuthenticate, isTestPackageSelected, availableScheduleHours]);
+    }, [urlSearchParams, bookingHours, testPackage.included, schedules, isAuthenticate, isTestPackageSelected, availableScheduleHours, isFirstMockTestScheduled, isAllMockTestScheduled]);
 
     if (isLoading) {
         return <Loading />

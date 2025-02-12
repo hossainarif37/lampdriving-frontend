@@ -14,8 +14,9 @@ import { IRegisterInputs } from '@/types/auth';
 import { Eye, EyeClosed } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+
 
 const RegisterForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control, watch, setError, setValue } = useForm<IRegisterInputs>();
@@ -42,8 +43,8 @@ const RegisterForm: FC = () => {
                 message: res.message
             });
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
-
-            router.push('/dashboard/learner')
+            
+            router.push("/verify-email?emailSent=true")
         }).catch((err) => {
             toast({
                 success: false,

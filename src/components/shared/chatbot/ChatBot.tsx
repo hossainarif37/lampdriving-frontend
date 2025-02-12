@@ -28,7 +28,7 @@ const ChatBot: FC = () => {
 
     return (
         <div className="fixed bottom-2 md:bottom-6 right-2 md:right-6 z-50">
-            {
+            {/* {
                 isShow && (
                     <div className="mb-4 animate-slide-up">
                         <div className="relative bg-white rounded-lg shadow-lg p-4 w-[320px] border border-gray-100">
@@ -49,7 +49,7 @@ const ChatBot: FC = () => {
                         </div>
                     </div>
                 )
-            }
+            } */}
             <div className='flex items-start justify-end'>
                 {!isOpen && (
                     <button

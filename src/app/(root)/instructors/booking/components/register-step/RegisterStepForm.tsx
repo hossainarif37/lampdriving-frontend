@@ -19,7 +19,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 const RegisterStepForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control, watch, setError, setValue } = useForm<IRegisterInputs>();
-    const { steps, setCurrentStep, handleStepChange, registerButtonRef, isRegistering, setIsRegistering } = useBooking();
+    const { steps, handleStepChange, registerButtonRef, isRegistering, setIsRegistering } = useBooking();
     const dispatch = useAppDispatch();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -65,10 +65,14 @@ const RegisterStepForm: FC = () => {
             if (!step) {
                 return;
             }
-            params.set('step', step.key);
-            router.push(`?${params.toString()}`);
-            setCurrentStep(step);
-            handleStepChange("payment");
+            // if (res.data.isEmailVerified) {
+            //     params.set('step', step.key);
+            //     handleStepChange("payment");
+            //     setCurrentStep(step);
+            // } else {
+                params.set('emailSent', "true");
+                router.push(`?${params.toString()}`);
+            // }
         }).catch((err) => {
             toast({
                 success: false,
