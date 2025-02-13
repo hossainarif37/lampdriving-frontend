@@ -147,7 +147,7 @@ const LearnerStats: FC = () => {
                   <Award className="h-4 w-4 text-yellow-400 mr-1" />
                   <span className="text-sm text-gray-600">
                     {
-                      calculateExperience(instructor.experience.month, instructor.experience.year)
+                      calculateExperience(instructor?.experience?.month, instructor?.experience?.year)
                     }
                   </span>
                 </div>
