@@ -17,6 +17,7 @@ import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import ApprovedInstructorActions from './ApprovedInstructorActions';
 import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
+import { calculateExperience } from '@/lib/utils';
 
 const ApprovedInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -92,7 +93,11 @@ const ApprovedInstructorsTable: FC = () => {
                                                         }
                                                     </div>
                                                 }</TableCell>
-                                                <TableCell className="font-medium">{instructor.experience}</TableCell>
+                                                <TableCell className="font-medium">
+                                                    {
+                                                        calculateExperience(instructor.experience.month, instructor.experience.year)
+                                                    }
+                                                </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     {instructor?.feedback?.rating ? instructor?.feedback?.rating : "N/A"}
                                                 </TableCell>

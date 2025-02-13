@@ -6,23 +6,50 @@ import CarInfoForm from './car-info/CarInfoForm';
 import SecurityForm from './security/SecurityForm';
 import ServicesForm from './services/ServicesForm';
 import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
-import { IProfilePhoto } from '@/components/shared/PhotoUpload';
-
+import { IPhoto } from '@/components/shared/PhotoUpload';
+import { IExperienceCertificate, IVehicleImages } from '@/types/instructor';
 
 const InstructorRegistration: FC = () => {
     const { personalInfo, experienceInfo, servicesInfo, carInfo } = useInstructorRegister();
-    // Experience
-    const [instructorLicenseFile, setInstructorLicenseFile] = useState<File | null>(null);
-    const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
-    const [experienceCertificateFile, setExperienceCertificateFile] = useState<File | null>(null);
-    const [profilePhoto, setProfilePhoto] = useState<IProfilePhoto>({
+
+
+    const [profilePhoto, setProfilePhoto] = useState<IPhoto>({
         file: null,
         url: personalInfo?.profileImg || undefined
     });
 
+    const [instructorLicense, setInstructorLicense] = useState<IPhoto>({
+        file: null,
+        url: experienceInfo?.documents?.instructorLicense || undefined
+    })
+
+    const [drivingLicense, setDrivingLicense] = useState<IPhoto>({
+        file: null,
+        url: experienceInfo?.documents?.drivingLicense || undefined
+    })
+
+    const [experienceCertificates, setExperienceCertificates] = useState<IExperienceCertificate[]>([
+        {
+            experienceType: '',
+            url: experienceInfo?.documents?.experienceCertificates?.[0]?.url || ''
+        }
+    ]);
 
     // Car Info
-    const [carImageFile, setCarImageFile] = useState<File | null>(null);
+    const [carImages, setCarImages] = useState<IVehicleImages[]>([
+        {
+            id: carInfo?.images?.[0]?.id || '',
+            url: carInfo?.images?.[0]?.url || ''
+        },
+        {
+            id: carInfo?.images?.[1]?.id || '',
+            url: carInfo?.images?.[1]?.url || ''
+        },
+        {
+            id: carInfo?.images?.[2]?.id || '',
+            url: carInfo?.images?.[2]?.url || ''
+        },
+    ]);
 
     const searchParams = useSearchParams();
     const step = searchParams?.get('step');
@@ -33,6 +60,7 @@ const InstructorRegistration: FC = () => {
     const isCarInfoStep = step === 'car-info';
     const isSecurityStep = step === 'security';
 
+    console.log('experienceInfo', experienceInfo);
 
     return (
         <>
@@ -45,10 +73,12 @@ const InstructorRegistration: FC = () => {
             {/* Experience */}
             {(isExperienceStep && personalInfo) && (
                 <ExperienceForm
-                    instructorLicenseFile={instructorLicenseFile}
-                    setInstructorLicenseFile={setInstructorLicenseFile}
-                    drivingLicenseFile={drivingLicenseFile}
-                    setDrivingLicenseFile={setDrivingLicenseFile} experienceCertificateFile={experienceCertificateFile} setExperienceCertificateFile={setExperienceCertificateFile}
+                    instructorLicense={instructorLicense}
+                    setInstructorLicense={setInstructorLicense}
+                    drivingLicense={drivingLicense}
+                    setDrivingLicense={setDrivingLicense}
+                    experienceCertificates={experienceCertificates}
+                    setExperienceCertificates={setExperienceCertificates}
                 />
             )}
 
@@ -58,8 +88,8 @@ const InstructorRegistration: FC = () => {
             {/* Vehicle */}
             {(isCarInfoStep && servicesInfo) && (
                 <CarInfoForm
-                    carImageFile={carImageFile}
-                    setCarImageFile={setCarImageFile}
+                    carImages={carImages}
+                    setCarImages={setCarImages}
                 />
             )}
 

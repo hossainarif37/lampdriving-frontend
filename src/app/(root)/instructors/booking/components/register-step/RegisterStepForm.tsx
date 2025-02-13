@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { genderOptions } from '@/constant/gender';
 import { toast } from '@/hooks/use-toast';
-import { IProfilePhoto } from '@/hooks/useImage';
+import { IPhoto } from '@/hooks/useImage';
 import { useBooking } from '@/providers/BookingProvider';
 import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
 import { useAppDispatch } from '@/redux/hook';
@@ -24,7 +24,7 @@ const RegisterStepForm: FC = () => {
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-    const [profilePhoto, setProfilePhoto] = useState<IProfilePhoto>({
+    const [profilePhoto, setProfilePhoto] = useState<IPhoto>({
         file: null,
         url: undefined
     });

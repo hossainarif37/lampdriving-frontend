@@ -12,11 +12,15 @@ import LearnerStatsSkeleton from './LearnerStatsSkeleton';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useGetLearnerSchedulesQuery } from '@/redux/api/scheduleApi/scheduleApi';
+import { calculateExperience } from '@/lib/utils';
 
 interface Instructor {
   id: string;
   name: string;
-  experience: number;
+  experience: {
+    month: string;
+    year: string;
+  };
   imageUrl: StaticImageData;
   username: string;
 }
@@ -49,7 +53,10 @@ const LearnerStats: FC = () => {
   const instructor: Instructor = {
     id: learnerSchedules?.data?.result[0]?.instructor?._id || '',
     name: learnerSchedules?.data?.result[0]?.instructor?.user?.name?.fullName || '',
-    experience: learnerSchedules?.data?.result[0]?.instructor?.experience || 0,
+    experience: {
+      month: learnerSchedules?.data?.result[0]?.instructor?.experience?.month || 0,
+      year: learnerSchedules?.data?.result[0]?.instructor?.experience?.year || 0
+    },
     imageUrl: learnerSchedules?.data?.result[0]?.instructor?.user?.profileImg || placeHolderImage,
     username: learnerSchedules?.data?.result[0]?.instructor?.user?.username || ''
   };
@@ -138,7 +145,11 @@ const LearnerStats: FC = () => {
                 <h3 className="font-semibold text-gray-900">{instructor.name}</h3>
                 <div className="flex items-center mt-1">
                   <Award className="h-4 w-4 text-yellow-400 mr-1" />
-                  <span className="text-sm text-gray-600">{instructor.experience} years of experience</span>
+                  <span className="text-sm text-gray-600">
+                    {
+                      calculateExperience(instructor.experience.month, instructor.experience.year)
+                    }
+                  </span>
                 </div>
               </div>
             </div>

@@ -18,12 +18,6 @@ const InstructorProfile: FC = () => {
   const { user } = useAppSelector((state) => state.authSlice);
   const { data, isLoading } = useGetAInstructorQuery({ username: user?.username as string });
 
-  // Experience
-  const [instructorLicenseFile, setInstructorLicenseFile] = useState<File | null>(null);
-  const [drivingLicenseFile, setDrivingLicenseFile] = useState<File | null>(null);
-  const [experienceCertificateFile, setExperienceCertificateFile] = useState<File | null>(null);
-  const [carImageFile, setCarImageFile] = useState<File | null>(null);
-
   const renderTabContent = () => {
     switch (activeTab) {
       case 'personal':
@@ -32,15 +26,7 @@ const InstructorProfile: FC = () => {
         );
       case 'experience':
         return (
-          <ExperienceForm
-            instructorLicenseFile={instructorLicenseFile}
-            setInstructorLicenseFile={setInstructorLicenseFile}
-            drivingLicenseFile={drivingLicenseFile}
-            setDrivingLicenseFile={setDrivingLicenseFile}
-            experienceCertificateFile={experienceCertificateFile}
-            setExperienceCertificateFile={setExperienceCertificateFile}
-            instructor={data?.data}
-          />
+          <ExperienceForm instructor={data?.data} />
         );
       case 'services':
         return (
@@ -48,11 +34,7 @@ const InstructorProfile: FC = () => {
         );
       case 'car':
         return (
-          <CarInfoForm
-            carImageFile={carImageFile}
-            setCarImageFile={setCarImageFile}
-            instructor={data?.data}
-          />
+          <CarInfoForm instructor={data?.data} />
         );
       case 'security':
         return (

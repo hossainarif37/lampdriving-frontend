@@ -18,6 +18,7 @@ import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import Loading from '@/components/shared/Loading';
 import PendingInstructorActions from './PendingInstructorActions';
 import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
+import { calculateExperience } from '@/lib/utils';
 
 const PendingInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -84,7 +85,12 @@ const PendingInstructorsTable: FC = () => {
                                                         {user?.phone && <span className="text-sm text-gray-500">{user?.phone}</span>}
                                                     </div>
                                                 }</TableCell>
-                                                <TableCell className="font-medium">{instructor.experience}</TableCell>
+                                                <TableCell className="font-medium">
+                                                    {
+                                                        calculateExperience(instructor.experience.month, instructor.experience.year)
+
+                                                    }
+                                                </TableCell>
                                                 <TableCell className="font-medium text-center">${instructor.pricePerHour}</TableCell>
                                                 <TableCell className="font-medium">
                                                     <div className='flex items-center justify-center gap-2'>

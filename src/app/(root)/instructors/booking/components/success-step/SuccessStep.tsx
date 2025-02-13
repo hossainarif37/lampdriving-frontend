@@ -110,7 +110,7 @@ const SuccessStep: FC = () => {
                 </div>
 
                 <div className="mt-8 flex justify-center space-x-4">
-                    <Link href={'/dashboard/learner'}>
+                    <Link href={'/dashboard/learner'} replace={true}>
                         <Button >
                             Go to Dashboard
                         </Button>
