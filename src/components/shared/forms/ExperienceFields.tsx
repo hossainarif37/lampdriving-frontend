@@ -202,8 +202,8 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ defaultValues, setDefaul
                             />
 
                             {
-                                errors.experience?.month && (
-                                    <p className='text-red-500 text-sm mt-1'>{errors.experience.month.message}</p>
+                                errors?.experience?.month && (
+                                    <p className='text-red-500 text-sm mt-1'>{errors?.experience?.month?.message}</p>
                                 )
                             }
                         </div>

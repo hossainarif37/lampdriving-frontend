@@ -85,7 +85,7 @@ const BlockedInstructorsTable: FC = () => {
                                                 }</TableCell>
                                                 <TableCell className="font-medium">
                                                     {
-                                                        calculateExperience(instructor.experience.month, instructor.experience.year)
+                                                        calculateExperience(instructor?.experience?.month, instructor?.experience?.year)
                                                     }
                                                 </TableCell>
                                                 <TableCell className="font-medium text-center">

@@ -70,7 +70,7 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                             <Clock className="w-5 h-5 text-secondary" />
                             <span className="text-gradient">
                                 {
-                                    calculateExperience(experience.month, experience.year)
+                                    calculateExperience(experience?.month, experience?.year)
                                 }
                             </span>
                         </div>

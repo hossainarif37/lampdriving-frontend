@@ -87,7 +87,7 @@ const PendingInstructorsTable: FC = () => {
                                                 }</TableCell>
                                                 <TableCell className="font-medium">
                                                     {
-                                                        calculateExperience(instructor.experience.month, instructor.experience.year)
+                                                        calculateExperience(instructor?.experience?.month, instructor?.experience?.year)
 
                                                     }
                                                 </TableCell>
