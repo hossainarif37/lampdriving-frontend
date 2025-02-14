@@ -72,7 +72,7 @@ const BookingInfo: FC = () => {
                         <Clock className="size-5 text-primary" />
                         {bookingHours} hrs Booking Credit
                     </span>
-                    <span>${toFixedNumber(price.originalAmount ?? 0)}</span>
+                    <span>${toFixedNumber(price.lessonPrice ?? 0)}</span>
                 </div>
 
                 {
@@ -100,7 +100,7 @@ const BookingInfo: FC = () => {
                                 <NotepadText className="size-5 text-primary" />
                                 Driving Test
                             </span>
-                            <span>${drivingTestPrice}</span>
+                            <span>${price.drivingTestPrice}</span>
                         </div>
                     </>
                 }
@@ -114,7 +114,7 @@ const BookingInfo: FC = () => {
                                 <NotepadText className="size-5 text-primary" />
                                 Mock Test * {testPackage.mockTestCount}
                             </span>
-                            <span>${testPackage.mockTestCount * (instructor?.pricePerHour || 0)}</span>
+                            <span>${price.mockTestPrice}</span>
                         </div>
                     </>
                 }

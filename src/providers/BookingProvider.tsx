@@ -153,18 +153,18 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     useEffect(() => {
         const lessonPrice = bookingHours * (instructor?.pricePerHour || 0);
         if (bookingHours >= 10) {
-            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, paidAmount: lessonPrice * 0.9, discount: { amount: lessonPrice * 0.1, percentage: 10 } })); // 10% discount
+            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, lessonPrice, paidAmount: lessonPrice * 0.9, discount: { amount: lessonPrice * 0.1, percentage: 10 } })); // 10% discount
         } else if (bookingHours >= 6) {
-            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, paidAmount: lessonPrice * 0.94, discount: { amount: lessonPrice * 0.06, percentage: 6 } })); // 6% discount (equivalent to paying 94%)
+            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, lessonPrice, paidAmount: lessonPrice * 0.94, discount: { amount: lessonPrice * 0.06, percentage: 6 } })); // 6% discount (equivalent to paying 94%)
         } else {
-            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, paidAmount: lessonPrice, lessonPrice })); // No discount
+            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, lessonPrice, paidAmount: lessonPrice, discount: { amount: 0, percentage: 0 } })); // No discount
         }
         if (testPackage.included) {                                    // Add test package price
             if (testPackage.mockTestCount > 0) {
-                const mockTestPrice = testPackage.mockTestCount * (instructor?.pricePerHour || 0);
-                setPrice((prev) => ({ ...prev, paidAmount: prev.paidAmount + (drivingTestPrice + mockTestPrice), mockTestPrice }));
+                const mockTestPrice = (testPackage.mockTestCount + 1) * (instructor?.pricePerHour || 0);
+                setPrice((prev) => ({ ...prev, paidAmount: prev.paidAmount + (drivingTestPrice + mockTestPrice), mockTestPrice, drivingTestPrice, originalAmount: prev.originalAmount + (drivingTestPrice + mockTestPrice) }));
             } else {
-                setPrice((prev) => ({ ...prev, paidAmount: prev.paidAmount + drivingTestPrice }));
+                setPrice((prev) => ({ ...prev, paidAmount: prev.paidAmount + drivingTestPrice, drivingTestPrice, mockTestPrice: 0, originalAmount: prev.originalAmount + drivingTestPrice }));
             }
         }
     }, [bookingHours, testPackage]);
@@ -211,7 +211,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
             setCurrentStep(validStep);
         }
     }, [urlSearchParams, bookingHours, testPackage.included, schedules, isAuthenticate, isTestPackageSelected, availableScheduleHours, isFirstMockTestScheduled, isAllMockTestScheduled]);
-
+    console.log(price);
     if (isLoading) {
         return <Loading />
     }
