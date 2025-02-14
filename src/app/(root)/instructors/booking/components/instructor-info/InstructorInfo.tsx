@@ -48,7 +48,7 @@ const InstructorInfo: FC = () => {
                     </div>
 
                     <div className='flex-shrink-0 size-[50px] sm:size-[70px] overflow-hidden rounded-full border shadow'>
-                        <Image src={instructor?.vehicle?.image || placeholderCarImage} alt="Instructor" width={110} height={110}
+                        <Image src={instructor?.vehicle?.images?.[0]?.url || placeholderCarImage} alt="Instructor" width={110} height={110}
                             className="w-full h-full object-cover"
                         />
                     </div>

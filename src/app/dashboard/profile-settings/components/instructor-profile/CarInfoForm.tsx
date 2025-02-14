@@ -5,61 +5,42 @@ import { useUpdateInstructorMutation } from '@/redux/api/instructorApi/instructo
 import { useAppSelector } from '@/redux/hook';
 import { IVehicle } from '@/types/instructor';
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-
-interface Inputs {
-    name: string;
-    model: string;
-    type: "auto" | "manual";
-    rating: number;
-    year: number;
-}
-
+import { useFieldArray, useForm } from 'react-hook-form';
 
 interface ICarInfoFormProps {
-    carImageFile: File | null;
-    setCarImageFile: Dispatch<SetStateAction<File | null>>,
     instructor: any
 }
 
 
-const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile, instructor }) => {
-    const [isClicked, setIsClicked] = useState(false);
-
-    const defaultValues: IVehicle = {
-        name: instructor?.vehicle?.name,
-        model: instructor?.vehicle?.model,
-        type: instructor?.vehicle?.type,
-        rating: instructor?.vehicle?.rating,
-        image: instructor?.vehicle?.image,
-        year: instructor?.vehicle?.year
-    }
+const CarInfoForm: FC<ICarInfoFormProps> = ({ instructor }) => {
+    const form = useForm<IVehicle>({
+        defaultValues: {
+            ...instructor?.vehicle,
+            images: [
+                { id: '', url: instructor?.images?.[0]?.url || undefined },
+                { id: '', url: instructor?.images?.[1]?.url || undefined },
+                { id: '', url: instructor?.images?.[2]?.url || undefined },
+            ]
+        },
+        mode: 'onChange' // This will trigger validation on each change
+    });
+    const fieldArray = useFieldArray({ name: 'images', control: form.control });
 
     // Car Image
     const [carImageURL, setCarImageURL] = useState<string>(instructor?.vehicle?.image || '');
     const [carImageError, setCarImageError] = useState<string>("");
 
 
-    const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
+    const { register, handleSubmit, formState: { errors }, control } = useForm<IVehicle>();
     const [updateInstructor, { isLoading: isUpdating }] = useUpdateInstructorMutation();
 
-    const onSubmit = (data: Inputs) => {
-        setIsClicked(true);
+    const onSubmit = (data: IVehicle) => {
         if (!carImageURL) {
             setCarImageError(`${carImageError ? carImageError : 'Car Image is required'}`);
             return;
         }
 
-        const carInfo = {
-            name: data.name,
-            model: data.model,
-            type: data.type,
-            rating: Number(data.rating),
-            year: Number(data.year),
-            image: carImageURL
-        }
-
-        updateInstructor({ vehicle: carInfo }).unwrap()
+        updateInstructor({ vehicle: data }).unwrap()
             .then((res) => {
                 toast({ message: res.message })
             })
@@ -69,32 +50,14 @@ const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile, ins
             })
     }
 
-    useEffect(() => {
-        if (isClicked) {
-            if (carImageURL) {
-                setCarImageError('');
-            } else {
-                setCarImageError(`${carImageFile ? 'Upload Car Image' : 'Car Image is required'}`);
-            }
-        }
-    }, [carImageFile, carImageURL, isClicked]);
     return (
         <div className=''>
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex flex-col'>
                 <h1 className='text-2xl font-bold text-primary'>Car Info</h1>
 
                 <CarInfoFields
-                    register={register}
-                    errors={errors}
-                    control={control}
-                    isRequired={true}
-                    carImageError={carImageError}
-                    setCarImageFile={setCarImageFile}
-                    setCarImageURL={setCarImageURL}
-                    carImageURL={carImageURL}
-                    setCarImageError={setCarImageError}
-                    carImageFile={carImageFile}
-                    defaultValues={defaultValues}
+                    form={form}
+                    fieldArray={fieldArray}
                 />
 
                 <Button type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>

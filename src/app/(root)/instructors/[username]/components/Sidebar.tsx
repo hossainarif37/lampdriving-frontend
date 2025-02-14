@@ -94,7 +94,7 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
           {/* Displaying vehicle image */}
           <div className="aspect-video relative rounded-lg overflow-hidden cursor-pointer">
             <Image
-              src={vehicle?.image}
+              src={vehicle?.images?.[0]?.url || carImg}
               alt="Toyota Yaris 2018"
               fill
               className="object-cover"

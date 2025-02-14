@@ -38,7 +38,7 @@ const SharedProfile: FC = () => {
 
     const { profilePhoto, setProfilePhoto, isImageModified, validateImage } = useImage(user?.profileImg);
 
-
+    console.log('defaultValues', defaultValues);
 
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 

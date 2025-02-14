@@ -5,6 +5,7 @@ import Link from "next/link";
 import { IInstructor } from "@/types/instructor";
 import { FC } from "react";
 import CheckAvailabilityBtn from "./shared/check-availability/CheckAvailabilityBtn";
+import { calculateExperience } from "@/lib/utils";
 
 
 
@@ -67,7 +68,11 @@ const InstructorCard: FC<{ instructor: IInstructor }> = ({ instructor }) => {
                         {/* Experience */}
                         <div className="flex items-center font-semibold gap-2">
                             <Clock className="w-5 h-5 text-secondary" />
-                            <span className="text-gradient">{experience} Years</span>
+                            <span className="text-gradient">
+                                {
+                                    calculateExperience(experience?.month, experience?.year)
+                                }
+                            </span>
                         </div>
                     </div>
                 </div>
