@@ -24,7 +24,7 @@ const CustomTestPackage: FC<ICustomTestPackageProps> = ({ testPackage, handleAdd
         mockTestCount,
         features: [
             {
-                title: '2 hours 1st session',
+                title: '100 minuets 1st session',
                 icon: Clock
             },
             {
