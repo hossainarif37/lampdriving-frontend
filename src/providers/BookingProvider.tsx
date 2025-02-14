@@ -211,7 +211,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
             setCurrentStep(validStep);
         }
     }, [urlSearchParams, bookingHours, testPackage.included, schedules, isAuthenticate, isTestPackageSelected, availableScheduleHours, isFirstMockTestScheduled, isAllMockTestScheduled]);
-    console.log(price);
+
     if (isLoading) {
         return <Loading />
     }

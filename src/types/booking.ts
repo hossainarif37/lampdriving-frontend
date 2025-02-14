@@ -86,6 +86,7 @@ export interface IBookingInputs {
         price: IPrice;
         bookingHours: number;
         schedules: IScheduleInputs[];
+        testPackage: ITestPackage
     };
     paymentInfo: {
         user: string;
