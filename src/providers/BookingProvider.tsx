@@ -38,7 +38,7 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [isCustomLessonSelected, setIsCustomLessonSelected] = useState(false);
     const [isCustomMockTestSelected, setIsCustomMockTestSelected] = useState(false);
     const [bookingHours, setBookingHours] = useState<number>(0);
-    const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: drivingTestPrice, mockTestCount: 0 });
+    const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, mockTestCount: 0 });
     const [price, setPrice] = useState<IPrice>({
         mockTestPrice: 0,
         lessonPrice: 0,

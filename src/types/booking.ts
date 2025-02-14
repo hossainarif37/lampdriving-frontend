@@ -62,7 +62,6 @@ export interface IPrice {
 export interface ITestPackage {
     mockTestCount: number;
     included: boolean;
-    price: number;
 }
 
 export interface IPaymentInfo {
