@@ -201,6 +201,7 @@ const ScheduleStep: FC = () => {
                 </div>
                 <div>
                     <ScheduleTimeSlots
+                        isFirstMockTest={selectedSchedule.type === "mock-test" && selectedSchedule.duration === 2}
                         availableScheduleHours={availableScheduleHours}
                         workingHour={workingHour}
                         scheduleTimeSlots={scheduleTimeSlots}
