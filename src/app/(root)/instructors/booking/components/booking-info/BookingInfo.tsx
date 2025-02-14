@@ -76,7 +76,7 @@ const BookingInfo: FC = () => {
                 </div>
 
                 {
-                    bookingHours >= 6 &&
+                    bookingHours >= 5 &&
                     <>
                         <hr />
                         <div className="flex justify-between">

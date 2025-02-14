@@ -154,8 +154,8 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
         const lessonPrice = bookingHours * (instructor?.pricePerHour || 0);
         if (bookingHours >= 10) {
             setPrice(pre => ({ ...pre, originalAmount: lessonPrice, lessonPrice, paidAmount: lessonPrice * 0.9, discount: { amount: lessonPrice * 0.1, percentage: 10 } })); // 10% discount
-        } else if (bookingHours >= 6) {
-            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, lessonPrice, paidAmount: lessonPrice * 0.94, discount: { amount: lessonPrice * 0.06, percentage: 6 } })); // 6% discount (equivalent to paying 94%)
+        } else if (bookingHours >= 5) {
+            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, lessonPrice, paidAmount: lessonPrice * 0.94, discount: { amount: lessonPrice * 0.05, percentage: 5 } })); // 5% discount
         } else {
             setPrice(pre => ({ ...pre, originalAmount: lessonPrice, lessonPrice, paidAmount: lessonPrice, discount: { amount: 0, percentage: 0 } })); // No discount
         }

@@ -25,12 +25,12 @@ const LessonPackage: FC<ILessonPackageProps> = ({ instructor, handleLessonPackag
                     onSelect={() => handleLessonPackageSelection(10, false)}
                 />
                 <PackageCard
-                    hours={6}
+                    hours={5}
                     price={instructor?.pricePerHour || 0}
                     description="Ideal for overseas license holders or skill refresh"
-                    discount="6% OFF"
-                    selected={!isCustomLessonSelected && (bookingHours === 6)}
-                    onSelect={() => handleLessonPackageSelection(6, false)}
+                    discount="5% OFF"
+                    selected={!isCustomLessonSelected && (bookingHours === 5)}
+                    onSelect={() => handleLessonPackageSelection(5, false)}
                 />
                 <div className='col-span-2'>
                     <CustomPackage
