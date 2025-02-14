@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 import { FC, ReactNode } from 'react';
 
 interface IPackageCardProps {
@@ -36,6 +37,15 @@ const PackageCard: FC<IPackageCardProps> = ({ hours, price, description, discoun
                     )}
                 </div>
                 <p className="text-gray-600 text-sm hidden sm:block">{description}</p>
+            </div>
+            <div className={`size-6 absolute -top-2 -right-2 rounded-xl border-2 flex items-center justify-center
+                  ${selected
+                    ? 'border-secondary bg-secondary'
+                    : 'border-gray-300 bg-white'}`}
+            >
+                {selected && (
+                    <Check className="w-4 h-4 text-white" />
+                )}
             </div>
             {customContent}
         </div>
