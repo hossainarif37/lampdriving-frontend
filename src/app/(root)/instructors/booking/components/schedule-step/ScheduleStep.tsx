@@ -167,12 +167,8 @@ const ScheduleStep: FC = () => {
         setSelectedSchedule((pre) => ({ ...pre, dropOffAddress: location }));
     }
 
-    let isDisable = (selectedSchedule.duration > availableScheduleHours) || !selectedSchedule.date || !selectedSchedule.time;
-    if (testPackage.included) {
-        if (!isTestPackageSelected) {
-            isDisable = false;
-        }
-    }
+    let isDisable = isAllScheduled || !selectedSchedule.date || !selectedSchedule.time || !selectedSchedule.pickupAddress.address || !selectedSchedule.pickupAddress.suburb || (selectedSchedule.type === "test" && (!selectedSchedule.dropOffAddress.address || !selectedSchedule.dropOffAddress.suburb));
+
     return (
         <div className="space-y-6 sticky top-10">
             <div className="md:grid space-y-4 sm:space-y-6 md:space-y-0 grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
@@ -201,6 +197,7 @@ const ScheduleStep: FC = () => {
                 </div>
                 <div>
                     <ScheduleTimeSlots
+                        isFirstMockTest={selectedSchedule.type === "mock-test" && selectedSchedule.duration === 2}
                         availableScheduleHours={availableScheduleHours}
                         workingHour={workingHour}
                         scheduleTimeSlots={scheduleTimeSlots}

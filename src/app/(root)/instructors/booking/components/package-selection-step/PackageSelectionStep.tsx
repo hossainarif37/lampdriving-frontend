@@ -56,7 +56,7 @@ const PackageSelectionStep: FC = () => {
 
     return (
         <div className='space-y-6'>
-            <div className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200'>
+            <div className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200 space-y-6'>
                 <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
                     <Button
                         onClick={() => setSelectedTab("lesson")}
@@ -71,25 +71,24 @@ const PackageSelectionStep: FC = () => {
                         Test Package
                     </Button>
                 </div>
+                {
+                    selectedTab == "lesson" ?
+                        <LessonPackage
+                            instructor={instructor}
+                            handleLessonPackageSelection={handleLessonPackageSelection}
+                            isCustomLessonSelected={isCustomLessonSelected}
+                            bookingHours={bookingHours}
+                        />
+                        :
+                        selectedTab == "test" &&
+                        <TestPackage
+                            instructor={instructor}
+                            handleTestPackageSelection={handleTestPackageSelection}
+                            isCustomMockTestSelected={isCustomMockTestSelected}
+                            testPackage={testPackage}
+                        />
+                }
             </div>
-            {
-                selectedTab == "lesson" ?
-                    <LessonPackage
-                        instructor={instructor}
-                        handleLessonPackageSelection={handleLessonPackageSelection}
-                        isCustomLessonSelected={isCustomLessonSelected}
-                        bookingHours={bookingHours}
-                    />
-                    :
-                    selectedTab == "test" &&
-                    <TestPackage
-                        instructor={instructor}
-                        handleTestPackageSelection={handleTestPackageSelection}
-                        isCustomMockTestSelected={isCustomMockTestSelected}
-                        testPackage={testPackage}
-                    />
-            }
-
         </div>
     );
 };

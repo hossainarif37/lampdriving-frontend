@@ -12,30 +12,26 @@ interface ILessonPackageProps {
 
 const LessonPackage: FC<ILessonPackageProps> = ({ instructor, handleLessonPackageSelection, isCustomLessonSelected, bookingHours }) => {
     return (
-        <div className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200'>
+        <div>
             <h2 className="text-xl font-semibold mb-6">Choose Your Lesson Package</h2>
             <div className="md:grid md:grid-cols-2 gap-6 space-y-4 md:space-y-0">
-                <div className='col-span-1'>
-                    <PackageCard
-                        hours={10}
-                        price={instructor?.pricePerHour || 0}
-                        description="Perfect for new learners starting their driving journey"
-                        discount="10% OFF"
-                        recommended
-                        selected={!isCustomLessonSelected && (bookingHours === 10)}
-                        onSelect={() => handleLessonPackageSelection(10, false)}
-                    />
-                </div>
-                <div className='col-span-1'>
-                    <PackageCard
-                        hours={6}
-                        price={instructor?.pricePerHour || 0}
-                        description="Ideal for overseas license holders or skill refresh"
-                        discount="6% OFF"
-                        selected={!isCustomLessonSelected && (bookingHours === 6)}
-                        onSelect={() => handleLessonPackageSelection(6, false)}
-                    />
-                </div>
+                <PackageCard
+                    hours={10}
+                    price={instructor?.pricePerHour || 0}
+                    description="Perfect for new learners starting their driving journey"
+                    discount="10% OFF"
+                    recommended
+                    selected={!isCustomLessonSelected && (bookingHours === 10)}
+                    onSelect={() => handleLessonPackageSelection(10, false)}
+                />
+                <PackageCard
+                    hours={5}
+                    price={instructor?.pricePerHour || 0}
+                    description="Ideal for overseas license holders or skill refresh"
+                    discount="5% OFF"
+                    selected={!isCustomLessonSelected && (bookingHours === 5)}
+                    onSelect={() => handleLessonPackageSelection(5, false)}
+                />
                 <div className='col-span-2'>
                     <CustomPackage
                         bookingHours={bookingHours}

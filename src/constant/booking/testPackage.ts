@@ -47,7 +47,7 @@ export const mockTest: ITestPackage = {
     features: [
         {
             icon: Clock,
-            title: '2 hours 1st session'
+            title: '100 minutes 1st session'
         },
         {
             icon: MapPin,
