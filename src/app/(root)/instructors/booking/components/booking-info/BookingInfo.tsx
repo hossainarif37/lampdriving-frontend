@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from '@/components/ui/button';
+import { drivingTestPrice } from '@/constant/booking/testPackage';
 import { toFixedNumber } from '@/lib/utils';
 import { useBooking } from '@/providers/BookingProvider';
 import { useAppSelector } from '@/redux/hook';
@@ -83,9 +84,9 @@ const BookingInfo: FC = () => {
                                 <TicketPercent className="size-5 text-primary" />
                                 Credit Discount
                                 <span className="text-sm font-medium bg-[#dbeafe] text-primary px-2 py-1 rounded">
-                                    {bookingHours >= 10 ? 10 : bookingHours >= 6 ? 6 : 0}% OFF</span>
+                                    {price.discount.percentage}% OFF</span>
                             </span>
-                            <span>- ${toFixedNumber(price.discountedAmount ?? 0)}</span>
+                            <span>- ${toFixedNumber(price.discount.amount ?? 0)}</span>
                         </div>
                     </>
                 }
@@ -99,7 +100,7 @@ const BookingInfo: FC = () => {
                                 <NotepadText className="size-5 text-primary" />
                                 Driving Test
                             </span>
-                            <span>${testPackage.price}</span>
+                            <span>${drivingTestPrice}</span>
                         </div>
                     </>
                 }
