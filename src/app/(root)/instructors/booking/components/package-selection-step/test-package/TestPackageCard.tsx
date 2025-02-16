@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 import { FC, ReactNode } from 'react';
 
 interface ITestPackageCardProps {
@@ -15,7 +16,7 @@ const TestPackageCard: FC<ITestPackageCardProps> = ({ heading, description, pric
     return (
         <div
             onClick={onSelect}
-            className={`bg-gradient-to-br from-primary/5 to-white rounded-xl p-4 lg:p-6 cursor-pointer border-2 border-gray-200 relative 
+            className={`bg-gradient-to-br from-primary/5 to-white rounded-xl p-3 sm:p-4 lg:p-6 cursor-pointer border-2 border-gray-200 relative 
         ${selected ? 'bg-primary/5  border-primary' : 'bg-white border-gray-200 hover:border-primary/70'}`}>
             <div className="inline-block bg-primary text-white px-4 py-1 rounded-[4px] text-sm font-medium mb-4">
                 {heading}
@@ -32,14 +33,15 @@ const TestPackageCard: FC<ITestPackageCardProps> = ({ heading, description, pric
                 ))}
             </div>
             {customContent}
-            {/* <div className='absolute top-4 right-4'>
-                {
-                    selected ?
-                        <CircleCheck className='size-6' />
-                        :
-                        <Circle className='size-6' />
-                }
-            </div> */}
+            <div className={`size-6 absolute -top-2 -right-2 rounded-xl border-2 flex items-center justify-center
+                  ${selected
+                    ? 'border-secondary bg-secondary'
+                    : 'border-gray-300 bg-white'}`}
+            >
+                {selected && (
+                    <Check className="w-4 h-4 text-white" />
+                )}
+            </div>
         </div>
     );
 };

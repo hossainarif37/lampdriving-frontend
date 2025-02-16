@@ -92,6 +92,8 @@ const SecurityForm: FC = () => {
             }
         }
 
+        console.log('instructorFormData', instructorFormData);
+
 
         registerInstructor(instructorFormData).unwrap()
             .then((res) => {
@@ -100,7 +102,7 @@ const SecurityForm: FC = () => {
                 });
                 dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
 
-                router.push('/dashboard/instructor');
+                router.push("/verify-email?emailSent=true");
             }).catch((err) => {
                 console.log('Failed to register instructor', err);
                 toast({

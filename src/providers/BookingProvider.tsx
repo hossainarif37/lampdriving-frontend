@@ -38,8 +38,15 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [isCustomLessonSelected, setIsCustomLessonSelected] = useState(false);
     const [isCustomMockTestSelected, setIsCustomMockTestSelected] = useState(false);
     const [bookingHours, setBookingHours] = useState<number>(0);
-    const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, price: drivingTestPrice, mockTestCount: 0 });
-    const [price, setPrice] = useState<IPrice>({ paidAmount: 0, originalAmount: 0, discountedAmount: 0, discountedPercentage: 0 });
+    const [testPackage, setTestPackage] = useState<ITestPackage>({ included: false, mockTestCount: 0 });
+    const [price, setPrice] = useState<IPrice>({
+        mockTestPrice: 0,
+        lessonPrice: 0,
+        drivingTestPrice: 0,
+        paidAmount: 0,
+        originalAmount: 0,
+        discount: { amount: 0, percentage: 0 }
+    });
     const [paymentInfo, setPaymentInfo] = useState<IPaymentInfo>({ transactionId: '', method: '' });
     const [schedules, setSchedules] = useState<IScheduleInputs[]>([]);
     const [isAllScheduled, setIsAllScheduled] = useState(false);
@@ -144,19 +151,20 @@ export const BookingProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     // calculate price
     useEffect(() => {
-        const totalAmount = bookingHours * (instructor?.pricePerHour || 0);
+        const lessonPrice = bookingHours * (instructor?.pricePerHour || 0);
         if (bookingHours >= 10) {
-            setPrice({ originalAmount: totalAmount, paidAmount: totalAmount * 0.9, discountedAmount: totalAmount * 0.1, discountedPercentage: 10 }); // 10% discount
-        } else if (bookingHours >= 6) {
-            setPrice({ originalAmount: totalAmount, paidAmount: totalAmount * 0.94, discountedAmount: totalAmount * 0.06, discountedPercentage: 6 }); // 6% discount (equivalent to paying 94%)
+            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, lessonPrice, paidAmount: lessonPrice * 0.9, discount: { amount: lessonPrice * 0.1, percentage: 10 } })); // 10% discount
+        } else if (bookingHours >= 5) {
+            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, lessonPrice, paidAmount: lessonPrice * 0.94, discount: { amount: lessonPrice * 0.05, percentage: 5 } })); // 5% discount
         } else {
-            setPrice({ originalAmount: totalAmount, paidAmount: totalAmount, discountedAmount: 0, discountedPercentage: 0 }); // No discount
+            setPrice(pre => ({ ...pre, originalAmount: lessonPrice, lessonPrice, paidAmount: lessonPrice, discount: { amount: 0, percentage: 0 } })); // No discount
         }
         if (testPackage.included) {                                    // Add test package price
             if (testPackage.mockTestCount > 0) {
-                setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + (testPackage.price + (testPackage.mockTestCount * (instructor?.pricePerHour || 0))) }));
+                const mockTestPrice = (testPackage.mockTestCount + 1) * (instructor?.pricePerHour || 0);
+                setPrice((prev) => ({ ...prev, paidAmount: prev.paidAmount + (drivingTestPrice + mockTestPrice), mockTestPrice, drivingTestPrice, originalAmount: prev.originalAmount + (drivingTestPrice + mockTestPrice) }));
             } else {
-                setPrice((prevPrice) => ({ ...prevPrice, paidAmount: prevPrice.paidAmount + testPackage.price }));
+                setPrice((prev) => ({ ...prev, paidAmount: prev.paidAmount + drivingTestPrice, drivingTestPrice, mockTestPrice: 0, originalAmount: prev.originalAmount + drivingTestPrice }));
             }
         }
     }, [bookingHours, testPackage]);

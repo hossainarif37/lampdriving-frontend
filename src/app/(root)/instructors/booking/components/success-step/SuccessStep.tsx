@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { formatDate } from 'date-fns';
 import { toFixedNumber } from '@/lib/utils';
+import { drivingTestPrice } from '@/constant/booking/testPackage';
 
 const SuccessStep: FC = () => {
     const { instructor, bookingHours, price, testPackage, schedules, paymentInfo } = useBooking();
@@ -74,15 +75,15 @@ const SuccessStep: FC = () => {
                                         <span className="text-primary flex items-center gap-2">
                                             Credit Discount
                                             <span className="bg-blue-100 text-primary text-xs px-2 py-0.5 rounded-full">
-                                                {bookingHours >= 10 ? 10 : bookingHours >= 6 ? 6 : 0}% OFF
+                                                {price.discount.percentage}% OFF
                                             </span>
                                         </span>
-                                        <span className="text-primary">- ${toFixedNumber(price.discountedAmount ?? 0)}</span>
+                                        <span className="text-primary">- ${toFixedNumber(price.discount.amount ?? 0)}</span>
                                     </div>
                                     {
                                         testPackage.included && <div className="flex justify-between">
                                             <span className="text-gray-600">Test Package</span>
-                                            <span className="font-medium text-gray-900">${testPackage.price}</span>
+                                            <span className="font-medium text-gray-900">${drivingTestPrice}</span>
                                         </div>
                                     }
                                     <div className="pt-3 border-t border-gray-200">

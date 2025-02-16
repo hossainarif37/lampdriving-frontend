@@ -1,12 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
 import { IName, IUser } from "./user";
 
-// interface for document
-export interface IDocument {
-    instructorLicense?: string;
-    drivingLicense?: string;
-    experienceCertificate?: string;
-}
+
 
 // interface for schedule
 export interface IDaySchedule {
@@ -19,13 +13,18 @@ export interface ISchedule {
     [key: string]: IDaySchedule
 }
 
+export interface IVehicleImages {
+    id?: string;
+    url: string;
+}
+
 // interface for vehicle
 export interface IVehicle {
     name: string;
     model: string;
     type: "auto" | "manual";
     rating: number;
-    image: string;
+    images: IVehicleImages[];
     year: number;
 }
 
@@ -46,13 +45,28 @@ export interface IWorkingHour {
     friday: { isActive: boolean, startTime: string, endTime: string };
 }
 
+export interface IExperienceCertificate {
+    experienceType?: string;
+    url: string;
+}
+
+// interface for document
+export interface IDocument {
+    instructorLicense?: string;
+    drivingLicense?: string;
+    experienceCertificates?: IExperienceCertificate[];
+}
+
 // interface for instructor
 export interface IInstructor {
     _id?: string;
     user: string | IUser;
     description: string;
     documents: IDocument;
-    experience: number;
+    experience: {
+        month: string;
+        year: string;
+    };
     languages: string[];
     feedback: IFeedback;
     vehicle: IVehicle;
@@ -81,7 +95,10 @@ export interface IPersonalInfo {
 }
 
 export interface IExperience {
-    experience: number;
+    experience: {
+        month: string;
+        year: string;
+    };
     description: string;
     languages: string[];
     documents: IDocument;

@@ -41,7 +41,7 @@ const TransactionHistoryTable: FC = () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {data.data.result.map((transaction: any, index: number) => (
+                        {data?.data?.result?.map((transaction: any, index: number) => (
                             <TableRow key={transaction._id}>
                                 <TableCell className="font-medium text-center">{index + 1}</TableCell>
                                 <TableCell className="font-medium">{transaction.transactionId}</TableCell>

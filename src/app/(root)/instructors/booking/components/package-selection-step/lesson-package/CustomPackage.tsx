@@ -33,7 +33,7 @@ const CustomPackage: FC<ICustomPackageProps> = ({ onSelect, hourlyRate, bookingH
                         onValueChange={(value: string) => handleHoursChange(Number(value))}
                         value={hours.toString()}
                     >
-                        <SelectTrigger className="xl:h-12 mt-1 w-40">
+                        <SelectTrigger className="xl:h-12 mt-1 w-32 px-2 sm:w-40">
                             <SelectValue className="placeholder:text-[#00000012]" placeholder="Select Hours" />
                         </SelectTrigger>
                         <SelectContent>

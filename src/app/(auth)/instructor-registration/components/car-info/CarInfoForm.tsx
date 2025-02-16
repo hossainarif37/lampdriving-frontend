@@ -1,93 +1,52 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import StepNavigationButtons from '../StepNavigationButtons';
-import { useForm } from 'react-hook-form';
+import { useFieldArray, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useInstructorRegister } from '@/providers/InstructorRegisterProvider';
 import CarInfoFields from '@/components/shared/forms/CarInfoFields';
-
-
-interface Inputs {
-    name: string;
-    model: string;
-    type: "auto" | "manual";
-    rating: number;
-    year: number;
-}
-
-
+import { IPhoto } from '@/hooks/useImage';
+import { IVehicle, IVehicleImages } from '@/types/instructor';
 interface ICarInfoFormProps {
-    carImageFile: File | null;
-    setCarImageFile: Dispatch<SetStateAction<File | null>>
+    carImages: IVehicleImages[];
+    setCarImages: Dispatch<SetStateAction<IVehicleImages[]>>;
 }
 
-const carTypes = [
-    "Auto",
-    "Manual"
-]
-
-const CarInfoForm: FC<ICarInfoFormProps> = ({ carImageFile, setCarImageFile }) => {
-    const [isClicked, setIsClicked] = useState(false);
+const CarInfoForm: FC<ICarInfoFormProps> = ({ carImages, setCarImages }) => {
     const router = useRouter();
     const { carInfo, setCarInfo } = useInstructorRegister();
 
-    // Car Image
-    const [carImageURL, setCarImageURL] = useState<string>(carInfo?.image || '');
-    const [carImageError, setCarImageError] = useState<string>("");
+    const form = useForm<IVehicle>({
+        defaultValues: {
+            images: [
+                { id: '', url: carInfo?.images?.[0]?.url || undefined },
+                { id: '', url: carInfo?.images?.[1]?.url || undefined },
+                { id: '', url: carInfo?.images?.[2]?.url || undefined },
+            ]
+        },
+        mode: 'onChange' // This will trigger validation on each change
+    });
+    const fieldArray = useFieldArray({ name: 'images', control: form.control });
 
-
-    const { register, handleSubmit, formState: { errors }, control } = useForm<Inputs>();
-
-    const removeCarImage = () => {
-        setCarImageFile(null);
-        setCarImageURL('');
-    };
-
-    const onSubmit = (data: Inputs) => {
-        setIsClicked(true);
-        if (!carImageURL) {
-            setCarImageError(`${carImageError ? carImageError : 'Car Image is required'}`);
-            return;
-        }
-
-        const carInfo = {
-            ...data,
-            image: carImageURL
-        }
-        setCarInfo(carInfo);
-
+    const onSubmit = (data: IVehicle) => {
+        setCarInfo(data);
         router.push("/instructor-registration?step=security");
     }
-
-    useEffect(() => {
-        if (isClicked) {
-            if (carImageURL) {
-                setCarImageError('');
-            } else {
-                setCarImageError(`${carImageFile ? 'Upload Car Image' : 'Car Image is required'}`);
-            }
-        }
-    }, [carImageFile, carImageURL, isClicked]);
 
     return (
         <div className='md:border md:p-16 md:shadow-lg md:rounded-lg mt-5'>
             <form
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={form.handleSubmit(onSubmit)}
                 className='w-full flex flex-col'
             >
                 <h1 className='text-xl sm:text-2xl md:text-3xl font-bold text-primary'>Car Info</h1>
                 <CarInfoFields
-                    register={register}
-                    errors={errors}
-                    control={control}
+                    form={form}
+                    fieldArray={fieldArray}
                     isRequired={true}
-                    carImageError={carImageError}
-                    setCarImageFile={setCarImageFile}
-                    setCarImageURL={setCarImageURL}
-                    carImageURL={carImageURL}
-                    setCarImageError={setCarImageError}
-                    carImageFile={carImageFile}
                     defaultValues={carInfo}
+                    carImages={carImages}
+                    setCarImages={setCarImages}
                 />
 
                 <div>

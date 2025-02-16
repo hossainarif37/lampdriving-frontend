@@ -9,6 +9,7 @@ import { useSearchParams } from 'next/navigation';
 import TablePagination from '@/app/dashboard/components/shared/TablePagination';
 import BlockedInstructorActions from './BlockedInstructorActions';
 import TableSkeleton from '@/app/dashboard/components/shared/TableSkeleton';
+import { calculateExperience } from '@/lib/utils';
 
 const BlockedInstructorsTable: FC = () => {
     const urlSearchParams = useSearchParams();
@@ -82,7 +83,11 @@ const BlockedInstructorsTable: FC = () => {
                                                         }
                                                     </div>
                                                 }</TableCell>
-                                                <TableCell className="font-medium">{instructor.experience}</TableCell>
+                                                <TableCell className="font-medium">
+                                                    {
+                                                        calculateExperience(instructor?.experience?.month, instructor?.experience?.year)
+                                                    }
+                                                </TableCell>
                                                 <TableCell className="font-medium text-center">
                                                     {instructor?.feedback?.rating ? instructor?.feedback?.rating : "N/A"}
                                                 </TableCell>

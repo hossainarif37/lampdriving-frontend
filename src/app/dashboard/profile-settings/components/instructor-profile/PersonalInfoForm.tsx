@@ -27,6 +27,8 @@ const PersonalInfoForm: FC = () => {
         profileImg: user?.profileImg || '',
     }), [user]);
 
+    console.log('defaultValues', user);
+
     const {
         register,
         handleSubmit,

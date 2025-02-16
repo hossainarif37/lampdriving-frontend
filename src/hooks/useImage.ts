@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-export interface IProfilePhoto {
+export interface IPhoto {
     file: File | null;
     url: string | undefined;
 }
 
 export function useImage(initialUrl: string | undefined) {
-    const [profilePhoto, setProfilePhoto] = useState<IProfilePhoto>(() => {
+    const [profilePhoto, setProfilePhoto] = useState<IPhoto>(() => {
         return {
             file: null,
             url: initialUrl

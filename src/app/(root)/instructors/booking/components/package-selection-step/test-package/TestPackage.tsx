@@ -16,9 +16,9 @@ interface ITestPackageProps {
 const TestPackage: FC<ITestPackageProps> = ({ handleTestPackageSelection, testPackage, isCustomMockTestSelected, instructor }) => {
 
     return (
-        <div className='bg-white p-4 lg:p-6 rounded-lg shadow-sm border border-gray-200'>
+        <div>
             <h2 className="text-xl font-semibold mb-6">Choose Your Test Package</h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+            <div className='md:grid md:grid-cols-2 gap-6 space-y-4 md:space-y-0'>
                 <TestPackageCard
                     selected={testPackage.included && (!isCustomMockTestSelected && testPackage.mockTestCount === 0)}
                     {...drivingTest}

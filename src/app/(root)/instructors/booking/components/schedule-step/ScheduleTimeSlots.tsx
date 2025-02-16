@@ -3,7 +3,6 @@ import { format } from 'date-fns';
 import { FC } from 'react';
 import { cn } from '@/lib/utils';
 import { Clock, XCircle } from 'lucide-react';
-import { ITestPackage } from '@/types/booking';
 
 interface ScheduleTimeSlotsProps {
     selectedTime: string[] | null;
@@ -19,6 +18,7 @@ interface ScheduleTimeSlotsProps {
     setScheduleTimeSlots: Dispatch<SetStateAction<string[]>>;
     availableScheduleHours: number;
     isAllScheduled?: boolean;
+    isFirstMockTest?: boolean;
 }
 
 
@@ -32,9 +32,8 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
         classname,
         btnClassname,
         slotContainerClassname,
-        availableScheduleHours,
         isAllScheduled,
-        workingHour, scheduleTimeSlots, setScheduleTimeSlots } = props;
+        workingHour, scheduleTimeSlots, setScheduleTimeSlots, isFirstMockTest = false } = props;
 
 
     const isTwoOurSelected = selectedDuration !== 1;
@@ -73,7 +72,6 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
     useEffect(() => {
         setScheduleTimeSlots(getTimeSlots(startTime, endTime));
     }, [startTime, endTime]);
-
 
     return (
         <div className={cn("bg-white rounded-lg shadow-sm p-4 lg:p-6 border border-gray-200", classname)}>
@@ -114,7 +112,12 @@ const ScheduleTimeSlots: FC<ScheduleTimeSlotsProps> = (props) => {
                                                 <Clock className="w-4 h-4" />
                                         }
                                         <span className='w-40'>
-                                            {time} - {scheduleTimeSlots[scheduleTimeSlots.indexOf(time) + (isTwoOurSelected ? 2 : 1)]}
+                                            {time} - {
+                                                isFirstMockTest ?
+                                                    format(new Date(new Date(`1970-01-01T${(time?.split(' ')[0])}:00`).getTime() + 100 * 60000), 'hh:mm aa')
+                                                    :
+                                                    format(new Date(new Date(`1970-01-01T${(time?.split(' ')[0])}:00`).getTime() + (isTwoOurSelected ? 120 : 60) * 60000), 'hh:mm aa')
+                                            }
                                         </span>
                                     </button>
                                 })}

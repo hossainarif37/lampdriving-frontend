@@ -48,16 +48,20 @@ export interface IBookingContext {
 }
 
 export interface IPrice {
+    lessonPrice: number;
+    drivingTestPrice: number;
+    mockTestPrice: number;
     paidAmount: number;
     originalAmount: number;
-    discountedAmount: number;
-    discountedPercentage: number;
+    discount: {
+        amount: number;
+        percentage: number;
+    }
 }
 
 export interface ITestPackage {
     mockTestCount: number;
     included: boolean;
-    price: number;
 }
 
 export interface IPaymentInfo {
@@ -82,6 +86,7 @@ export interface IBookingInputs {
         price: IPrice;
         bookingHours: number;
         schedules: IScheduleInputs[];
+        testPackage: ITestPackage
     };
     paymentInfo: {
         user: string;

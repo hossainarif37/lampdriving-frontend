@@ -5,6 +5,14 @@ import { Calendar, Car, CheckCircle2, Clock, FileText, Languages, Mail, MapPin, 
 import Image from 'next/image';
 import { FC } from 'react';
 import InstructorDetailsSkeleton from './InstructorDetailsSkeleton';
+import { Card, CardContent } from "@/components/ui/card"
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
 
 
 const InstructorDetails: FC<{ id: string }> = ({ id }) => {
@@ -15,6 +23,10 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
     }
 
     const instructor = data?.data;
+
+    console.log('Experiences', instructor?.documents?.experienceCertificates?.length);
+    console.log('Experiences', instructor?.documents?.experienceCertificates);
+
     if (!instructor) {
         return <div className='flex justify-center items-center h-96 px-2 py-4'>
             <h1>No Instructor Data Found</h1>
@@ -110,22 +122,26 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                                 />
                             </a>
                         </div>
-                        <div className="space-y-2">
-                            <h4 className="font-medium">Experience Certificate</h4>
-                            <a
-                                href={instructor?.documents.drivingLicense}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Image
-                                    width={192}
-                                    height={192}
-                                    src={instructor?.documents.experienceCertificate || ""}
-                                    alt="Experience Certificate"
-                                    className="w-full h-48 mt-2 object-cover rounded-lg border hover:opacity-90 transition-opacity"
-                                />
-                            </a>
-                        </div>
+                        {
+                            instructor?.documents?.experienceCertificates && instructor?.documents?.experienceCertificates?.length > 0 && instructor?.documents?.experienceCertificates?.map((certificate, i) => (
+                                <div key={i} className="space-y-2">
+                                    <h4 className="font-medium">Experience Certificates</h4>
+                                    <a
+                                        href={certificate.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <Image
+                                            width={192}
+                                            height={192}
+                                            src={certificate.url}
+                                            alt="Experience Certificate"
+                                            className="w-full h-48 mt-2 object-cover rounded-lg border hover:opacity-90 transition-opacity"
+                                        />
+                                    </a>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
 
@@ -136,13 +152,25 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             <h3 className="text-lg font-semibold">Vehicle Information</h3>
                         </div>
                         <div className="space-y-4">
-                            <Image
-                                width={192}
-                                height={192}
-                                src={instructor?.vehicle.image}
-                                alt={`${instructor?.vehicle.name} ${instructor?.vehicle.model}`}
-                                className="w-full h-48 object-cover rounded-lg"
-                            />
+                            <Carousel className="w-full max-w-xs">
+                                <CarouselContent>
+                                    {instructor?.vehicle?.images?.map((image, i) => (
+                                        <CarouselItem key={i}>
+                                            <Image
+                                                key={i}
+                                                width={192}
+                                                height={192}
+                                                src={image.url}
+                                                alt={`${instructor?.vehicle.name} ${instructor?.vehicle.model}`}
+                                                className="w-full h-48 object-cover rounded-lg"
+                                            />
+                                        </CarouselItem>
+                                    ))}
+                                    <CarouselPrevious />
+                                    <CarouselNext />
+                                </CarouselContent>
+                            </Carousel>
+
                             <div className="space-y-2">
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-center space-x-2">
