@@ -110,11 +110,11 @@ const SuccessStep: FC = () => {
                 </div>
 
                 <div className="mt-8 flex justify-center space-x-4">
-                    <Link href={'/dashboard/learner'}>
+                    <a href={'/dashboard/learner'}>
                         <Button >
                             Go to Dashboard
                         </Button>
-                    </Link>
+                    </a>
                     {/* <button className="border border-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-50 transition-colors">
                         Download Receipt
                     </button> */}
