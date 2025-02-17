@@ -81,6 +81,12 @@ const usersApi = baseApi.injectEndpoints({
                 }
             }),
             invalidatesTags: ['user']
+        }),
+        refreshToken: builder.mutation<IResponseWithData<IUser>, void>({
+            query: () => ({
+                url: '/auth/token/refresh',
+                method: "POST"
+            })
         })
     })
 })
@@ -95,5 +101,6 @@ export const { useRegisterUserMutation,
     useVerifyResetPasswordOtpMutation,
     useResetPasswordMutation,
     useSendEmailVerificationMutation,
-    useVerifyEmailMutation
+    useVerifyEmailMutation,
+    useRefreshTokenMutation
 } = usersApi;
