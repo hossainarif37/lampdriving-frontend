@@ -29,6 +29,7 @@ export default function MainLayout({
             {children}
           </AuthProvider>
         </ReduxProvider>
+        <script src="https://unpkg.com/react-scan/dist/auto.global.js" />
       </body>
     </html>
   );
