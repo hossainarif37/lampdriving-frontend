@@ -38,10 +38,10 @@ export function middleware(req: NextRequest) {
     try {
         const { role, isEmailVerified } = jwtDecode<{ role: UserRole, isEmailVerified: boolean }>(accessToken);
 
-        if (!isEmailVerified) {
+        if (isEmailVerified === false) {
             return NextResponse.redirect(new URL('/verify-email', req.url));
         }
-        
+
         if (AUTH_ROUTES.test(pathname)) {
             return redirectHome();
         }
