@@ -108,7 +108,7 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
     return (
         <>
             <div className="top-4 left-4 right-4 z-[1000] flex justify-between items-center bg-white rounded-lg shadow-lg p-4">
-                <h2 className="text-[12px] font-semibold">Cliff services {serviceAreas.length} suburbs</h2>
+                <h2 className="text-[12px] font-semibold">Cliff services {serviceAreas?.length} suburbs</h2>
                 <Button
                     size="sm"
                     onClick={() => setShowList(!showList)}
@@ -122,7 +122,7 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
             {showList && (
                 <div className="bg-white rounded-lg shadow-sm p-4">
                     <div className="flex flex-wrap gap-2">
-                        {serviceAreas.map((area) => (
+                        {serviceAreas?.map((area) => (
                             <div
                                 key={area}
                                 className="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-700 hover:bg-gray-200 transition-colors"
@@ -189,7 +189,7 @@ const ServiceAreaMap: FC<IServiceAreasProps> = ({ serviceAreas }) => {
                         {mappedCoordinates.map((suburb, index) =>
                             suburb && suburb.coordinates && (
                                 <Polygon
-                                    key={suburb.name}
+                                    key={index}
                                     positions={suburb.coordinates as [number, number][]}
                                     pathOptions={{
                                         color: '#FFD700',
