@@ -9,23 +9,18 @@ const baseQuery = fetchBaseQuery({
     baseUrl: envConfigs.apiUrl,
     credentials: "include",
     prepareHeaders: (headers) => {
-        // Add any default headers here
         return headers
     },
 })
-
 const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
-    // wait until the mutex is available without locking it
     await mutex.waitForUnlock()
     let result = await baseQuery(args, api, extraOptions)
 
     if (result.error && result.error.status === 401) {
-        // checking whether the mutex is locked
         if (!mutex.isLocked()) {
             const release = await mutex.acquire()
 
             try {
-                // try to get a new token
                 const refreshResult = await baseQuery(
                     { url: '/auth/token/refresh', method: 'POST' },
                     api,
@@ -33,18 +28,15 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
                 )
 
                 if (refreshResult.data) {
-                    // retry the initial query
                     result = await baseQuery(args, api, extraOptions)
                 } else {
-                    // Handle logout here if needed
-                    // window.location.href = '/login'
+                    document.cookie = 'access-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+                    document.cookie = 'refresh-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
                 }
             } finally {
-                // release must be called once the mutex should be released again.
                 release()
             }
         } else {
-            // wait until the mutex is available without locking it
             await mutex.waitForUnlock()
             result = await baseQuery(args, api, extraOptions)
         }
