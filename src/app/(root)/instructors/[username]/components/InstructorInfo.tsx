@@ -14,7 +14,7 @@ interface InstructorInfoProps {
 const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const user: IUser | undefined = typeof instructor.user != "string" ? instructor.user : undefined;
-  const { vehicle, languages, description, experience } = instructor;
+  const { vehicle, experience } = instructor;
 
   const carInfo = [
     { id: 1, info: 'Auto Lessons & Test Packages' },

@@ -35,7 +35,7 @@ const InstructorDetails: FC<InstructorInfoProps> = async ({ instructor }) => {
 
         <div className="md:col-span-12">
           <Suspense fallback={<Loading />}>
-            <OtherInstructors serviceAreas={instructor.serviceAreas} instructorId={instructor._id} />
+            <OtherInstructors serviceAreas={instructor?.serviceAreas} instructorId={instructor?._id} />
           </Suspense>
         </div>
       </div>
