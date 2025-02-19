@@ -23,27 +23,52 @@ export const config = {
 export function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
     const accessToken = req.cookies.get('access-token')?.value;
+    const refreshToken = req.cookies.get('refresh-token')?.value;
 
     const redirectLogin = () => NextResponse.redirect(new URL(LOGIN_URL, req.url));
     const redirectHome = () => NextResponse.redirect(new URL(HOME_URL, req.url));
 
-    // Check for authentication
-    if (!accessToken) {
-        if (AUTH_ROUTES.test(pathname)) {
+    // Allow unauthenticated access to auth routes
+    if (AUTH_ROUTES.test(pathname)) {
+        if (!accessToken && !refreshToken) {
             return NextResponse.next();
         }
+        return redirectHome();
+    }
+
+    // Check if both tokens are missing
+    if (!accessToken && !refreshToken) {
         return redirectLogin();
     }
 
     try {
-        const { role, isEmailVerified } = jwtDecode<{ role: UserRole, isEmailVerified: boolean }>(accessToken);
+        let decodedToken: { role: UserRole, isEmailVerified: boolean } | undefined;
 
-        if (!isEmailVerified) {
-            return NextResponse.redirect(new URL('/verify-email', req.url));
+        // Try to decode access token first
+        if (accessToken) {
+            try {
+                decodedToken = jwtDecode<{ role: UserRole, isEmailVerified: boolean }>(accessToken);
+            } catch {
+                // If access token is invalid, try refresh token
+                if (refreshToken) {
+                    decodedToken = jwtDecode<{ role: UserRole, isEmailVerified: boolean }>(refreshToken);
+                } else {
+                    throw new Error('No valid token');
+                }
+            }
+        } else if (refreshToken) {
+            // If no access token, try refresh token
+            decodedToken = jwtDecode<{ role: UserRole, isEmailVerified: boolean }>(refreshToken);
         }
-        
-        if (AUTH_ROUTES.test(pathname)) {
-            return redirectHome();
+
+        if (!decodedToken) {
+            return redirectLogin();
+        }
+
+        const { role, isEmailVerified } = decodedToken;
+
+        if (isEmailVerified === false) {
+            return NextResponse.redirect(new URL('/verify-email', req.url));
         }
 
         // Check if it's a common protected route
@@ -54,8 +79,8 @@ export function middleware(req: NextRequest) {
         // Check role-specific access
         const hasAccess = ROUTE_PERMISSIONS[role].test(pathname);
         return hasAccess ? NextResponse.next() : redirectHome();
+
     } catch {
         return redirectLogin();
     }
-
 }
