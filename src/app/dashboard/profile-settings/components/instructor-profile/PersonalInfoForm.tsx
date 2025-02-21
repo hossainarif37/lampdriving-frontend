@@ -23,7 +23,10 @@ const PersonalInfoForm: FC = () => {
         email: user?.email || '',
         phone: user?.phone || '',
         gender: user?.gender || 'male',
-        dateOfBirth: user?.dateOfBirth || '',
+        dateOfBirth: {
+            month: user?.dateOfBirth?.month || '',
+            year: user?.dateOfBirth?.year || '',
+        },
         profileImg: user?.profileImg || '',
     }), [user]);
 
