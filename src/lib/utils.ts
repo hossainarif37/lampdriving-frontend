@@ -32,6 +32,34 @@ export const getYears = (startYear: number): number[] => {
   return years;
 };
 
+const getAge = (month: number | string, year: number | string): string => {
+  // Convert to numbers
+  const birthMonth = Number(month);
+  const birthYear = Number(year);
+
+  // Validate month range
+  if (isNaN(birthMonth) || isNaN(birthYear) || birthMonth < 1 || birthMonth > 12) {
+    throw new Error("Invalid month or year. Month should be between 1 and 12.");
+  }
+
+  const birthDate = new Date(birthYear, birthMonth - 1); // JS months are 0-indexed
+  const today = new Date();
+
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const hasBirthdayPassed =
+    today.getMonth() > birthDate.getMonth() ||
+    (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+
+  if (!hasBirthdayPassed) {
+    age--; // Subtract age if birthday hasn't occurred yet this year
+  }
+
+  return `${age} years old`;
+};
+
+export default getAge;
+
+
 export const getPublicIdFromUrl = (url: string) => {
   const regex = /\/upload\/v\d+\/([^\.]+)/;
   const match = url.match(regex);

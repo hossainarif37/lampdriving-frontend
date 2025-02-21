@@ -12,6 +12,11 @@ export interface IAddress {
     suburb: string;
 }
 
+export interface IDateOfBirth {
+    month: string;
+    year: string;
+}
+
 export interface IUser {
     _id?: string;
     name: IName;
@@ -19,7 +24,7 @@ export interface IUser {
     phone: string;
     username: string;
     password: string;
-    dateOfBirth: string;
+    dateOfBirth: IDateOfBirth;
     address?: IAddress;
     profileImg: string;
     learner?: string | ILearner;
