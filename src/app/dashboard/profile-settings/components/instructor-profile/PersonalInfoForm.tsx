@@ -92,7 +92,7 @@ const PersonalInfoForm: FC = () => {
                     register={register}
                     errors={errors}
                     control={control}
-                    isRequired={false}
+                    isRequired={true}
                     defaultValues={defaultValues}
                 />
 
