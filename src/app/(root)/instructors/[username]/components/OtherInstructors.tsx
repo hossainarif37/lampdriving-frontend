@@ -23,15 +23,15 @@ const OtherInstructors: FC<IOtherInstructorsProps> = ({ serviceAreas, instructor
   if (isLoading) return <OtherInstructorSkeleton />
 
   const instructors = instructorsResponse?.data?.result || [];
-  if (instructors.length === 0) {
-    return <h1 className='text-xl text-center py-10 text-primary'>In this service area there are no other instructors!</h1>;
-  }
+
   const filteredInstructors = instructors.filter((instructor: any) => instructor?._id !== instructorId);
 
   // Function to handle navigation
   const handleInstructorClick = (username: string) => {
     router.push(`/instructors/${username}`);
   };
+
+  if (filteredInstructors?.length === 0) return;
 
   return (
     <Carousel

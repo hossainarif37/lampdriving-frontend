@@ -108,11 +108,11 @@ const Sidebar: FC<InstructorInfoProps> = ({ instructor }) => {
       </section>
 
       {/* Service Areas Section */}
-      <section className="bg-white rounded-xl border">
+      {/* <section className="bg-white rounded-xl border">
         <div className="aspect-video relative rounded-lg z-[10]">
           <ServiceAreaMap serviceAreas={instructor?.serviceAreas} />
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

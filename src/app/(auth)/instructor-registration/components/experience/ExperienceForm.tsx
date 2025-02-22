@@ -21,7 +21,6 @@ interface IExperienceFormProps {
 
 const ExperienceForm: FC<IExperienceFormProps> = ({ instructorLicense, setInstructorLicense, drivingLicense, setDrivingLicense, experienceCertificates, setExperienceCertificates }) => {
     const { experienceInfo, setExperienceInfo } = useInstructorRegister();
-    console.log('experienceInfo', experienceInfo);
 
     const form = useForm<IExperience>({
         defaultValues: {

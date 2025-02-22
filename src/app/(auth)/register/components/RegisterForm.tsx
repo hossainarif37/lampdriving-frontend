@@ -3,6 +3,7 @@
 import PhotoUpload from '@/components/shared/PhotoUpload';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { genderOptions } from '@/constant/gender';
 import { toast } from '@/hooks/use-toast';
@@ -20,6 +21,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 const RegisterForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control, watch, setError, setValue } = useForm<IRegisterInputs>();
+    const [selectedLicense, setSelectedLicense] = useState('');
     const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -43,7 +45,7 @@ const RegisterForm: FC = () => {
                 message: res.message
             });
             dispatch(saveUser({ user: res.data, isAuthenticate: true, isLoading: false, instructor: res.data.instructor }));
-            
+
             router.push("/verify-email?emailSent=true")
         }).catch((err) => {
             toast({
@@ -74,15 +76,13 @@ const RegisterForm: FC = () => {
     return (
         <form
             onSubmit={handleSubmit(handleRegister)}
-            className='w-full md:w-[500px] lg:w-[750px] mx-auto p-5 md:p-10 flex flex-col items-center md:shadow-lg md:rounded-lg md:border'
+            className='w-full lg:w-[850px] mx-auto p-5 md:p-10 flex flex-col items-center md:shadow-lg md:rounded-lg md:border'
         >
             <h1 className='text-2xl md:text-3xl font-bold text-primary'>Learner Registration</h1>
 
             <div className='w-full mt-10'>
                 <div className='flex flex-col gap-3'>
                     <div>
-                        {/* <h1 className='text-2xl font-semibold text-primary mb-3'>Personal Information</h1> */}
-
                         <div className='flex flex-col items-center'>
                             <PhotoUpload
                                 profilePhoto={profilePhoto}
@@ -201,8 +201,7 @@ const RegisterForm: FC = () => {
                     </div>
 
                     {/* License Information */}
-                    <div className="mt-5">
-                        {/* <h1 className='text-2xl font-semibold text-primary mb-3'>Local License</h1> */}
+                    {/* <div className="mt-5">
                         <div className='flex flex-col lg:flex-row gap-5'>
                             <div className='w-full'>
                                 <label htmlFor="local-license" className='font-semibold text-primary'>Local License No.</label>
@@ -236,6 +235,115 @@ const RegisterForm: FC = () => {
                                 {errors?.localLicense?.expiryDate && <p className='text-red-500 text-sm mt-1'>{errors?.localLicense?.expiryDate?.message}</p>}
                             </div>
                         </div>
+                    </div> */}
+
+                    {/* License Options */}
+                    <div className="mt-5 space-y-4">
+                        <label className="font-semibold text-primary">License Type (Select one)</label>
+                        <RadioGroup
+                            value={selectedLicense}
+                            onValueChange={setSelectedLicense}
+                            className="space-y-2"
+                        >
+                            {/* Australian NSW License */}
+                            <div className="space-y-4">
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="nsw" id="nsw" />
+                                    <label htmlFor="nsw">Australian NSW License</label>
+                                </div>
+                                {selectedLicense === 'nsw' && (
+                                    <div className='flex flex-col lg:flex-row gap-5 ml-6'>
+                                        {/* License No */}
+                                        <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="nsw-license-no">License No.</label>
+                                            <Input className="xl:h-12 mt-1" placeholder="License No." />
+                                        </div>
+
+                                        {/* Issue Date */}
+                                        {/* <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="nsw-license-issue-date">Issue Date</label>
+                                            <Input className="xl:h-12 mt-1" type="date" />
+                                        </div> */}
+
+                                        {/* Expiry Date */}
+                                        <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="nsw-license-issue-date">Expiry Date</label>
+                                            <Input className="xl:h-12 mt-1" type="date" />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Other State License */}
+                            <div className="space-y-4">
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="other_state" id="other_state" />
+                                    <label htmlFor="other_state">Other State License</label>
+                                </div>
+                                {selectedLicense === 'other_state' && (
+                                    <div className='flex flex-col lg:flex-row gap-5 ml-6'>
+                                        {/* State Name */}
+                                        <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="other-state-name">State Name</label>
+                                            <Input className="xl:h-12 mt-1" placeholder="State Name" />
+                                        </div>
+
+                                        {/* License No */}
+                                        <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="other-state-license-no">License No.</label>
+                                            <Input className="xl:h-12 mt-1" placeholder="License No." />
+                                        </div>
+
+                                        {/* Issue Date */}
+                                        {/* <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="other-state-license-issue-date">Issue Date</label>
+                                            <Input className="xl:h-12 mt-1" type="date" />
+                                        </div> */}
+
+                                        {/* Expiry Date */}
+                                        <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="other-state-license-issue-date">Expiry Date</label>
+                                            <Input className="xl:h-12 mt-1" type="date" />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Overseas License */}
+                            <div className="space-y-4">
+                                <div className="flex items-center space-x-2">
+                                    <RadioGroupItem value="overseas" id="overseas" />
+                                    <label htmlFor="overseas">Overseas License</label>
+                                </div>
+                                {selectedLicense === 'overseas' && (
+                                    <div className='flex flex-col lg:flex-row gap-5 ml-6'>
+                                        {/* State Name */}
+                                        <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="overseas-country-name">Country Name</label>
+                                            <Input className="xl:h-12 mt-1" placeholder="Country Name" />
+                                        </div>
+
+                                        {/* License No */}
+                                        <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="overseas-license-no">License No.</label>
+                                            <Input className="xl:h-12 mt-1" placeholder="License No." />
+                                        </div>
+
+                                        {/* Issue Date */}
+                                        {/* <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="overseas-license-issue-date">Issue Date</label>
+                                            <Input className="xl:h-12 mt-1" type="date" />
+                                        </div> */}
+
+                                        {/* Expiry Date */}
+                                        <div className='w-full'>
+                                            <label className='font-semibold text-primary' htmlFor="overseas-license-issue-date">Expiry Date</label>
+                                            <Input className="xl:h-12 mt-1" type="date" />
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </RadioGroup>
                     </div>
 
                     {/* Password Section */}

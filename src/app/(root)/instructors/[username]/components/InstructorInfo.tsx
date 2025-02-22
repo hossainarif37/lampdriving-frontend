@@ -6,6 +6,7 @@ import { FC, useState } from 'react';
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
 import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-Taisor-Car-Color-Image.webp";
+import { calculateExperience } from '@/lib/utils';
 
 
 interface InstructorInfoProps {
@@ -19,7 +20,7 @@ const InstructorInfo: FC<InstructorInfoProps> = ({ instructor }) => {
   const carInfo = [
     { id: 1, info: 'Auto Lessons & Test Packages' },
     { id: 2, info: 'Verified Working with Children Check' },
-    { id: 3, info: `Instructed for ${experience} yr` },
+    { id: 3, info: `Instructed for ${calculateExperience(experience?.month, experience?.year)}` },
   ];
 
 
