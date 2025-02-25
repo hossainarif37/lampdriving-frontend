@@ -11,7 +11,7 @@ import { IPhoto } from '@/hooks/useImage';
 import { useRegisterUserMutation } from '@/redux/api/authApi/authApi';
 import { useAppDispatch } from '@/redux/hook';
 import { saveUser } from '@/redux/slices/authSlice/authSlice';
-import { IRegisterInputs } from '@/types/auth';
+import { ILearnerLicense, IRegisterInputs } from '@/types/auth';
 import { Eye, EyeClosed } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -21,7 +21,7 @@ import { Controller, useForm } from 'react-hook-form';
 
 const RegisterForm: FC = () => {
     const { register, handleSubmit, formState: { errors }, control, watch, setError, setValue } = useForm<IRegisterInputs>();
-    const [selectedLicense, setSelectedLicense] = useState('');
+    const [selectedLicense, setSelectedLicense] = useState<'NSW' | 'Other State' | 'Overseas' | ''>('');
     const [registerUser, { isLoading: isRegistering }] = useRegisterUserMutation();
     const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -40,7 +40,44 @@ const RegisterForm: FC = () => {
 
 
     const handleRegister = (data: IRegisterInputs) => {
-        registerUser(data).unwrap().then((res) => {
+        // Clean up the license object based on licenseType
+        let cleanedLicense: ILearnerLicense;
+
+        switch (data.license.licenseType) {
+            case 'NSW':
+                cleanedLicense = {
+                    licenseType: 'NSW',
+                    licenseNumber: data.license.licenseNumber,
+                    expiryDate: data.license.expiryDate
+                };
+                break;
+            case 'Other State':
+                cleanedLicense = {
+                    licenseType: 'Other State',
+                    stateName: data.license.stateName,
+                    licenseNumber: data.license.licenseNumber,
+                    expiryDate: data.license.expiryDate
+                };
+                break;
+            case 'Overseas':
+                cleanedLicense = {
+                    licenseType: 'Overseas',
+                    countryName: data.license.countryName,
+                    licenseNumber: data.license.licenseNumber,
+                    expiryDate: data.license.expiryDate
+                };
+                break;
+            default:
+                throw new Error('Invalid license type');
+        }
+
+        const cleanedData: IRegisterInputs = {
+            ...data,
+            license: cleanedLicense,
+            confirmPassword: undefined // Optionally remove confirmPassword if not needed by backend
+        };
+
+        registerUser(cleanedData).unwrap().then((res) => {
             toast({
                 message: res.message
             });
@@ -172,7 +209,7 @@ const RegisterForm: FC = () => {
 
                             {/* Gender */}
                             <div className='w-full'>
-                                <label className="font-semibold text-primary">Gender</label>
+                                <label className="font-semibold text-primary" htmlFor='gender'>Gender</label>
                                 <Controller
                                     name="gender"
                                     control={control}
@@ -200,150 +237,175 @@ const RegisterForm: FC = () => {
                         </div>
                     </div>
 
-                    {/* License Information */}
-                    {/* <div className="mt-5">
-                        <div className='flex flex-col lg:flex-row gap-5'>
-                            <div className='w-full'>
-                                <label htmlFor="local-license" className='font-semibold text-primary'>Local License No.</label>
-                                <Input
-                                    {...register('localLicense.licenseNumber', {
-                                        required: "Local license number is required"
-                                    })}
-                                    type="text" id='local-license' className='xl:h-12 mt-1'
-                                    placeholder='Enter License No.'
-                                />
-                                {errors?.localLicense?.licenseNumber && <p className='text-red-500 text-sm mt-1'>{errors?.localLicense?.licenseNumber?.message}</p>}
-                            </div>
-                            <div className='w-full'>
-                                <label htmlFor="issue-date" className='font-semibold text-primary'>Issue Date</label>
-                                <Input
-                                    {...register('localLicense.issueDate', {
-                                        required: "Issue date is required"
-                                    })}
-                                    type="date" id='issue-date' className='xl:h-12 mt-1'
-                                />
-                                {errors?.localLicense?.issueDate && <p className='text-red-500 text-sm mt-1'>{errors?.localLicense?.issueDate?.message}</p>}
-                            </div>
-                            <div className='w-full'>
-                                <label htmlFor="expire-date" className='font-semibold text-primary'>Expire Date</label>
-                                <Input
-                                    {...register('localLicense.expiryDate', {
-                                        required: "Expiry date is required"
-                                    })}
-                                    type="date" id='expire-date' className='xl:h-12 mt-1'
-                                />
-                                {errors?.localLicense?.expiryDate && <p className='text-red-500 text-sm mt-1'>{errors?.localLicense?.expiryDate?.message}</p>}
-                            </div>
-                        </div>
-                    </div> */}
-
                     {/* License Options */}
                     <div className="mt-5 space-y-4">
                         <label className="font-semibold text-primary">License Type (Select one)</label>
-                        <RadioGroup
-                            value={selectedLicense}
-                            onValueChange={setSelectedLicense}
-                            className="space-y-2"
-                        >
-                            {/* Australian NSW License */}
-                            <div className="space-y-4">
-                                <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="nsw" id="nsw" />
-                                    <label htmlFor="nsw">Australian NSW License</label>
-                                </div>
-                                {selectedLicense === 'nsw' && (
-                                    <div className='flex flex-col lg:flex-row gap-5 ml-6'>
-                                        {/* License No */}
-                                        <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="nsw-license-no">License No.</label>
-                                            <Input className="xl:h-12 mt-1" placeholder="License No." />
+                        <Controller
+                            name="license.licenseType" // Changed to nested path
+                            control={control}
+                            rules={{ required: "License type is required" }}
+                            render={({ field }) => (
+                                <RadioGroup
+                                    onValueChange={(value: 'NSW' | 'Other State' | 'Overseas') => {
+                                        setSelectedLicense(value);
+                                        field.onChange(value);
+                                    }}
+                                    value={field.value}
+                                    className="space-y-2"
+                                >
+                                    {/* Australian NSW License */}
+                                    <div className="space-y-4">
+                                        <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="NSW" id="nsw" />
+                                            <label className='cursor-pointer' htmlFor="nsw">Australian NSW License</label>
                                         </div>
-
-                                        {/* Issue Date */}
-                                        {/* <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="nsw-license-issue-date">Issue Date</label>
-                                            <Input className="xl:h-12 mt-1" type="date" />
-                                        </div> */}
-
-                                        {/* Expiry Date */}
-                                        <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="nsw-license-issue-date">Expiry Date</label>
-                                            <Input className="xl:h-12 mt-1" type="date" />
-                                        </div>
+                                        {selectedLicense === 'NSW' && (
+                                            <div className='flex flex-col lg:flex-row gap-5 ml-6'>
+                                                <div className='w-full'>
+                                                    <label className='font-semibold text-primary' htmlFor="nsw-license-no">License No.</label>
+                                                    <Input
+                                                        {...register('license.licenseNumber', {
+                                                            required: selectedLicense === 'NSW' ? "License number is required" : false
+                                                        })}
+                                                        className="xl:h-12 mt-1"
+                                                        placeholder="License No."
+                                                        id="nsw-license-no"
+                                                    />
+                                                    {errors.license?.licenseNumber && (
+                                                        <p className='text-red-500 text-sm mt-1'>{errors.license.licenseNumber.message}</p>
+                                                    )}
+                                                </div>
+                                                <div className='w-full'>
+                                                    <label className='font-semibold text-primary' htmlFor="nsw-license-expiry-date">Expiry Date</label>
+                                                    <Input
+                                                        {...register('license.expiryDate', {
+                                                            required: selectedLicense === 'NSW' ? "Expiry date is required" : false
+                                                        })}
+                                                        className="xl:h-12 mt-1"
+                                                        type="date"
+                                                        id="nsw-license-expiry-date"
+                                                    />
+                                                    {errors.license?.expiryDate && (
+                                                        <p className='text-red-500 text-sm mt-1'>{errors.license.expiryDate.message}</p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
 
-                            {/* Other State License */}
-                            <div className="space-y-4">
-                                <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="other_state" id="other_state" />
-                                    <label htmlFor="other_state">Other State License</label>
-                                </div>
-                                {selectedLicense === 'other_state' && (
-                                    <div className='flex flex-col lg:flex-row gap-5 ml-6'>
-                                        {/* State Name */}
-                                        <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="other-state-name">State Name</label>
-                                            <Input className="xl:h-12 mt-1" placeholder="State Name" />
+                                    {/* Other State License */}
+                                    <div className="space-y-4">
+                                        <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="Other State" id="other_state" />
+                                            <label className='cursor-pointer' htmlFor="other_state">Other State License</label>
                                         </div>
-
-                                        {/* License No */}
-                                        <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="other-state-license-no">License No.</label>
-                                            <Input className="xl:h-12 mt-1" placeholder="License No." />
-                                        </div>
-
-                                        {/* Issue Date */}
-                                        {/* <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="other-state-license-issue-date">Issue Date</label>
-                                            <Input className="xl:h-12 mt-1" type="date" />
-                                        </div> */}
-
-                                        {/* Expiry Date */}
-                                        <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="other-state-license-issue-date">Expiry Date</label>
-                                            <Input className="xl:h-12 mt-1" type="date" />
-                                        </div>
+                                        {selectedLicense === 'Other State' && (
+                                            <div className='flex flex-col lg:flex-row gap-5 ml-6'>
+                                                <div className='w-full'>
+                                                    <label className='font-semibold text-primary' htmlFor="other-state-name">State Name</label>
+                                                    <Input
+                                                        {...register('license.stateName', {
+                                                            required: selectedLicense === 'Other State' ? "State name is required" : false
+                                                        })}
+                                                        className="xl:h-12 mt-1"
+                                                        placeholder="State Name"
+                                                        id="other-state-name"
+                                                    />
+                                                    {errors.license?.stateName && (
+                                                        <p className='text-red-500 text-sm mt-1'>{errors.license.stateName.message}</p>
+                                                    )}
+                                                </div>
+                                                <div className='w-full'>
+                                                    <label className='font-semibold text-primary' htmlFor="other-state-license-no">License No.</label>
+                                                    <Input
+                                                        {...register('license.licenseNumber', {
+                                                            required: selectedLicense === 'Other State' ? "License number is required" : false
+                                                        })}
+                                                        className="xl:h-12 mt-1"
+                                                        placeholder="License No."
+                                                        id="other-state-license-no"
+                                                    />
+                                                    {errors.license?.licenseNumber && (
+                                                        <p className='text-red-500 text-sm mt-1'>{errors.license.licenseNumber.message}</p>
+                                                    )}
+                                                </div>
+                                                <div className='w-full'>
+                                                    <label className='font-semibold text-primary' htmlFor="other-state-license-expiry-date">Expiry Date</label>
+                                                    <Input
+                                                        {...register('license.expiryDate', {
+                                                            required: selectedLicense === 'Other State' ? "Expiry date is required" : false
+                                                        })}
+                                                        className="xl:h-12 mt-1"
+                                                        type="date"
+                                                        id="other-state-license-expiry-date"
+                                                    />
+                                                    {errors.license?.expiryDate && (
+                                                        <p className='text-red-500 text-sm mt-1'>{errors.license.expiryDate.message}</p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
 
-                            {/* Overseas License */}
-                            <div className="space-y-4">
-                                <div className="flex items-center space-x-2">
-                                    <RadioGroupItem value="overseas" id="overseas" />
-                                    <label htmlFor="overseas">Overseas License</label>
-                                </div>
-                                {selectedLicense === 'overseas' && (
-                                    <div className='flex flex-col lg:flex-row gap-5 ml-6'>
-                                        {/* State Name */}
-                                        <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="overseas-country-name">Country Name</label>
-                                            <Input className="xl:h-12 mt-1" placeholder="Country Name" />
+                                    {/* Overseas License */}
+                                    <div className="space-y-4">
+                                        <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="Overseas" id="overseas" />
+                                            <label className='cursor-pointer' htmlFor="overseas">Overseas License</label>
                                         </div>
-
-                                        {/* License No */}
-                                        <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="overseas-license-no">License No.</label>
-                                            <Input className="xl:h-12 mt-1" placeholder="License No." />
-                                        </div>
-
-                                        {/* Issue Date */}
-                                        {/* <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="overseas-license-issue-date">Issue Date</label>
-                                            <Input className="xl:h-12 mt-1" type="date" />
-                                        </div> */}
-
-                                        {/* Expiry Date */}
-                                        <div className='w-full'>
-                                            <label className='font-semibold text-primary' htmlFor="overseas-license-issue-date">Expiry Date</label>
-                                            <Input className="xl:h-12 mt-1" type="date" />
-                                        </div>
+                                        {selectedLicense === 'Overseas' && (
+                                            <div className='flex flex-col lg:flex-row gap-5 ml-6'>
+                                                <div className='w-full'>
+                                                    <label className='font-semibold text-primary' htmlFor="overseas-country-name">Country Name</label>
+                                                    <Input
+                                                        {...register('license.countryName', {
+                                                            required: selectedLicense === 'Overseas' ? "Country name is required" : false
+                                                        })}
+                                                        className="xl:h-12 mt-1"
+                                                        placeholder="Country Name"
+                                                        id="overseas-country-name"
+                                                    />
+                                                    {errors.license?.countryName && (
+                                                        <p className='text-red-500 text-sm mt-1'>{errors.license.countryName.message}</p>
+                                                    )}
+                                                </div>
+                                                <div className='w-full'>
+                                                    <label className='font-semibold text-primary' htmlFor="overseas-license-no">License No.</label>
+                                                    <Input
+                                                        {...register('license.licenseNumber', {
+                                                            required: selectedLicense === 'Overseas' ? "License number is required" : false
+                                                        })}
+                                                        className="xl:h-12 mt-1"
+                                                        placeholder="License No."
+                                                        id="overseas-license-no"
+                                                    />
+                                                    {errors.license?.licenseNumber && (
+                                                        <p className='text-red-500 text-sm mt-1'>{errors.license.licenseNumber.message}</p>
+                                                    )}
+                                                </div>
+                                                <div className='w-full'>
+                                                    <label className='font-semibold text-primary' htmlFor="overseas-license-expiry-date">Expiry Date</label>
+                                                    <Input
+                                                        {...register('license.expiryDate', {
+                                                            required: selectedLicense === 'Overseas' ? "Expiry date is required" : false
+                                                        })}
+                                                        className="xl:h-12 mt-1"
+                                                        type="date"
+                                                        id="overseas-license-expiry-date"
+                                                    />
+                                                    {errors.license?.expiryDate && (
+                                                        <p className='text-red-500 text-sm mt-1'>{errors.license.expiryDate.message}</p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
-                        </RadioGroup>
+                                </RadioGroup>
+                            )}
+                        />
+                        {errors.license?.licenseType && (
+                            <p className='text-red-500 text-sm mt-1'>{errors.license.licenseType.message}</p>
+                        )}
                     </div>
 
                     {/* Password Section */}

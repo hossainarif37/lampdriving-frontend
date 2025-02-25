@@ -75,10 +75,14 @@ const LearnerDetails: FC<ILearnerDetailsProps> = ({ id }) => {
                             <FileText className="size-5 text-gray-600" />
                         </div>
                         <div>
-                            <h4 className="font-medium text-gray-900">Local License</h4>
-                            <p className="text-gray-600">License Number: {learner.localLicense?.licenseNumber}</p>
-                            <p className="text-gray-600">Issue Date: {learner.localLicense?.issueDate}</p>
-                            <p className="text-gray-600">Expiry Date: {learner.localLicense.expiryDate}</p>
+                            <h4 className="font-medium text-gray-900">{learner.license.licenseType} License</h4>
+                            {
+                                learner.license.countryName || learner.license.stateName &&
+                                <p className="text-gray-600">
+                                    {learner?.license?.countryName ? learner.license.countryName : learner.license.stateName}
+                                </p>}
+                            <p className="text-gray-600">License Number: {learner.license?.licenseNumber}</p>
+                            <p className="text-gray-600">Expiry Date: {learner.license.expiryDate}</p>
                         </div>
                     </div>
                 </div>
