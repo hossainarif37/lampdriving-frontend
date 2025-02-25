@@ -1,6 +1,14 @@
 import { IInstructor } from "./instructor";
 import { IUser } from "./user";
 
+export interface ILearnerLicense {
+    licenseType: 'NSW' | 'Other State' | 'Overseas';
+    countryName?: string;
+    stateName?: string;
+    licenseNumber: string;
+    expiryDate: string;
+}
+
 export interface IRegisterInputs {
     name: {
         firstName: string;
@@ -9,17 +17,8 @@ export interface IRegisterInputs {
     email: string;
     phone: number;
     gender: string;
-
-    // License Information
-    localLicense: {
-        licenseNumber: string;
-        issueDate: string;
-        expiryDate: string;
-    }
-
-    profileImg?: string;
-
-    // Authentication
+    license: ILearnerLicense;
+    profileImg: string;
     password: string;
     confirmPassword?: string;
 }

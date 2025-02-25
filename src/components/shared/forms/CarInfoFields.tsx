@@ -149,14 +149,14 @@ const CarInfoFields: FC<ICarInfoFieldsProps> = ({ form, fieldArray, carImages, s
                         <label htmlFor="year" className='font-semibold text-primary'>Manufacture Year</label>
                         <Input
                             {...form.register('year', {
-                                required: "Year is required",
+                                required: "Car year is required",
                                 max: {
                                     value: new Date().getFullYear(),
-                                    message: "Year should be less than current year"
+                                    message: "Car year should be less than current year"
                                 },
                                 min: {
                                     value: new Date().getFullYear() - 10,
-                                    message: "Year should be greater than 10 years ago"
+                                    message: "Car year should be maximum 10 years old"
                                 }
                             })}
                             defaultValue={defaultValues?.year}

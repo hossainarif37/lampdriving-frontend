@@ -6,6 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { genderOptions } from '@/constant/gender';
 import { usePathname } from 'next/navigation';
+import { IDateOfBirth } from '@/types/user';
+import { months } from '@/constant/months';
+import { getYears } from '@/lib/utils';
 
 export interface IPersonalInfoInputs {
   name: {
@@ -15,7 +18,7 @@ export interface IPersonalInfoInputs {
   email: string;
   phone: string;
   gender: "male" | "female" | "other";
-  dateOfBirth: string;
+  dateOfBirth: IDateOfBirth;
   profileImg?: string;
 }
 
@@ -90,7 +93,7 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
                   },
                 }}
                 render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value || ''}>
+                  <Select onValueChange={field.onChange} value={typeof field.value === 'string' ? field.value : ''}>
                     <SelectTrigger className="h-11 xl:h-14 mt-1">
                       <SelectValue className="placeholder:text-[#00000012]" placeholder="Select Gender" />
                     </SelectTrigger>
@@ -149,18 +152,67 @@ const PersonalInfoFields: FC<PersonalInfoFieldsProps> = ({ register, errors, def
             {/* Date of Birth */}
             <div className='w-full'>
               <label htmlFor="date-of-birth" className='font-semibold text-primary'>Date of Birth</label>
-              <Input
-                {...register('dateOfBirth', {
-                  required: {
-                    value: isRequired,
-                    message: "Date of birth is required",
-                  },
-                })}
-                defaultValue={defaultValues?.dateOfBirth}
-                type="date"
-                className='h-11 xl:h-14 mt-1'
-              />
-              {errors?.dateOfBirth && <p className='text-red-500 text-sm mt-1'>{errors.dateOfBirth.message}</p>}
+              <div className='flex gap-5'>
+                <div className='w-full'>
+                  <Controller
+                    name="dateOfBirth.month"
+                    control={control}
+                    defaultValue={defaultValues?.dateOfBirth?.month}
+                    rules={{ required: "Month is required" }}
+                    render={({ field }) => (
+                      <Select onValueChange={field.onChange} value={field.value || ''}>
+                        <SelectTrigger id='dateOfBirth-month' className="xl:h-14 mt-1">
+                          <SelectValue className="placeholder:text-[#00000012]" placeholder="Month" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {months.map((month) => (
+                            <SelectItem key={month.value} value={month.value}>
+                              {month.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+
+                  {
+                    errors?.dateOfBirth?.month && (
+                      <p className='text-red-500 text-sm mt-1'>{errors?.dateOfBirth?.month?.message}</p>
+                    )
+                  }
+                </div>
+
+                <div className='w-full'>
+                  <Controller
+                    name="dateOfBirth.year"
+                    control={control}
+                    defaultValue={defaultValues?.dateOfBirth?.year}
+                    rules={{ required: "Year is required" }}
+                    render={({ field }) => (
+                      <Select onValueChange={field.onChange} value={field.value || ''}>
+                        <SelectTrigger id='dateOfBirth-year' className="xl:h-14  mt-1">
+                          <SelectValue className="placeholder:text-[#00000012]" placeholder="Year" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {
+                            getYears(1930).map((year) => (
+                              <SelectItem key={year} value={year.toString()}>
+                                {year}
+                              </SelectItem>
+                            ))
+                          }
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+
+                  {
+                    errors.dateOfBirth?.year && (
+                      <p className='text-red-500 text-sm mt-1'>{errors.dateOfBirth.year.message}</p>
+                    )
+                  }
+                </div>
+              </div>
             </div>
 
             {/* Email */}

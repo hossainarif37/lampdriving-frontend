@@ -202,11 +202,10 @@ export const MultiSelect = React.forwardRef<
         modal={modalPopover}
       >
         <PopoverTrigger asChild>
-          <Button
+          <button
             ref={ref}
             {...props}
             onClick={handleTogglePopover}
-            variant="outline"
             className={cn(
               `flex w-full p-1 rounded-md border ${isServicesStep && selectedValues.length > 1 ? 'h-auto' : 'h-11'} ${isExperienceStep && selectedValues.length > 2 && 'h-auto'} md:h-14 items-center justify-between [&_svg]:pointer-events-auto text-neutral-500`,
               className
@@ -284,7 +283,7 @@ export const MultiSelect = React.forwardRef<
                 <ChevronDown className="h-4 cursor-pointer text-muted-foreground mx-2" />
               </div>
             )}
-          </Button>
+          </button>
         </PopoverTrigger>
         <PopoverContent
           className="w-auto p-0"
