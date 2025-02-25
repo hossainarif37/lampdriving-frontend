@@ -13,14 +13,23 @@ interface IInstructorPageProps {
 }
 
 export const generateStaticParams = async () => {
-    const res = await fetch(
-        `${envConfigs.apiUrl}/instructor/verified?populate=user&limit=16`,
-        { next: { revalidate: 3600 } } 
-    );
-    const data: IResponseWithPaginationData<IInstructor[]> = await res.json();
-    return data.data.result.map((instructor: IInstructor) => ({
-        username: (instructor.user as any as IUser).username
-    }));
+    try {
+        const res = await fetch(
+            `${envConfigs.apiUrl}/instructor/verified?populate=user&limit=16`,
+            { next: { revalidate: 3600 } }
+        );
+
+        if (!res.ok) {
+            return [];
+        }
+
+        const data: IResponseWithPaginationData<IInstructor[]> = await res.json();
+        return data.data.result.map((instructor: IInstructor) => ({
+            username: (instructor.user as any as IUser).username
+        }));
+    } catch (error) {
+        return [];
+    }
 }
 
 const InstructorPage: FC<IInstructorPageProps> = async ({ params }) => {
