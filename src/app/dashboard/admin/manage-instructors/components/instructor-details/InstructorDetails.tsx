@@ -13,6 +13,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
+import getAge from '@/lib/utils';
 
 
 const InstructorDetails: FC<{ id: string }> = ({ id }) => {
@@ -68,7 +69,8 @@ const InstructorDetails: FC<{ id: string }> = ({ id }) => {
                             <div className="flex items-center space-x-2">
                                 <Calendar className="h-4 w-4 text-muted-foreground" />
                                 <span className="text-sm text-muted-foreground">
-                                    Born {format(new Date((instructor?.user as any).dateOfBirth), "PPP")}
+                                    {/* Born {format(new Date((instructor?.user as any).dateOfBirth), "PPP")} */}
+                                    {getAge(10, 1999)}
                                 </span>
                             </div>
                         </div>

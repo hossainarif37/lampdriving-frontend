@@ -21,6 +21,7 @@ interface IExperienceFormProps {
 
 const ExperienceForm: FC<IExperienceFormProps> = ({ instructorLicense, setInstructorLicense, drivingLicense, setDrivingLicense, experienceCertificates, setExperienceCertificates }) => {
     const { experienceInfo, setExperienceInfo } = useInstructorRegister();
+
     const form = useForm<IExperience>({
         defaultValues: {
             experience: {
@@ -43,7 +44,19 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ instructorLicense, setInstru
     const [selectedLanguages, setSelectedLanguages] = useState<string[]>(experienceInfo?.languages || []);
     const [selectedLanguagesError, setSelectedLanguagesError] = useState<string>('');
 
+    useEffect(() => {
+        if (form.formState.isSubmitted) {
+            if (selectedLanguages.length === 0) {
+                setSelectedLanguagesError('Please select at least one language.');
+            } else {
+                setSelectedLanguagesError('');
+            }
+        }
+    }, [selectedLanguages, form.formState.isSubmitted]);
+
     const onSubmit = (data: IExperience) => {
+        if (selectedLanguagesError) return;
+
         const experienceData = {
             ...data,
             languages: selectedLanguages
@@ -71,6 +84,8 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ instructorLicense, setInstru
                     experienceCertificates={experienceCertificates}
                     setExperienceCertificates={setExperienceCertificates}
                     defaultValues={experienceInfo}
+                    selectedLanguagesError={selectedLanguagesError}
+                    setSelectedLanguagesError={setSelectedLanguagesError}
                 />
 
                 <div>

@@ -48,8 +48,6 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ instructor }) => {
     const [selectedLanguages, setSelectedLanguages] = useState<string[]>(instructor?.languages || []);
     const [selectedLanguagesError, setSelectedLanguagesError] = useState<string>('');
 
-    console.log(instructor, 'instructor');
-
     const onSubmit = (data: IExperience) => {
         const experienceData = {
             ...data,
@@ -80,6 +78,8 @@ const ExperienceForm: FC<IExperienceFormProps> = ({ instructor }) => {
                     setInstructorLicense={setInstructorLicense}
                     drivingLicense={drivingLicense}
                     setDrivingLicense={setDrivingLicense}
+                    selectedLanguagesError={selectedLanguagesError}
+                    setSelectedLanguagesError={setSelectedLanguagesError}
                 />
 
                 <Button disabled={isUpdating} loading={isUpdating} type='submit' className='w-full mt-7 gradient-color h-12'>Save</Button>

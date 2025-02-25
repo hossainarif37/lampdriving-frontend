@@ -33,9 +33,11 @@ interface IExperienceFieldsProps {
     isRequired?: boolean;
     selectedLanguages: string[];
     setSelectedLanguages: Dispatch<SetStateAction<string[]>>;
+    selectedLanguagesError: string;
+    setSelectedLanguagesError: Dispatch<SetStateAction<string>>;
 }
 
-const ExperienceFields: FC<IExperienceFieldsProps> = ({ defaultValues, setDefaultValues, isRequired, selectedLanguages, setSelectedLanguages, form, instructorLicense, setInstructorLicense, drivingLicense, setDrivingLicense, experienceCertificates, setExperienceCertificates, fieldArray }) => {
+const ExperienceFields: FC<IExperienceFieldsProps> = ({ defaultValues, setDefaultValues, isRequired, selectedLanguages, setSelectedLanguages, form, instructorLicense, setInstructorLicense, drivingLicense, setDrivingLicense, experienceCertificates, setExperienceCertificates, fieldArray, selectedLanguagesError, setSelectedLanguagesError }) => {
     const [imageUploadLoading, setImageUploadLoading] = useState<{ [key: number]: boolean }>({});
     const [imageRemoveLoading, setImageRemoveLoading] = useState(false);
     const errors = form?.formState?.errors as FieldErrors<IExperience>;
@@ -187,7 +189,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ defaultValues, setDefaul
                                 rules={{ required: "Month is required" }}
                                 render={({ field }) => (
                                     <Select onValueChange={field.onChange} value={field.value || ''}>
-                                        <SelectTrigger id='experience-month' className="xl:h-12  mt-1">
+                                        <SelectTrigger id='experience-month' className="xl:h-14  mt-1">
                                             <SelectValue className="placeholder:text-[#00000012]" placeholder="Select Month" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -216,7 +218,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ defaultValues, setDefaul
                                 rules={{ required: "Year is required" }}
                                 render={({ field }) => (
                                     <Select onValueChange={field.onChange} value={field.value || ''}>
-                                        <SelectTrigger id='experience-year' className="xl:h-12  mt-1">
+                                        <SelectTrigger id='experience-year' className="xl:h-14  mt-1">
                                             <SelectValue className="placeholder:text-[#00000012]" placeholder="Select Year" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -260,14 +262,14 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ defaultValues, setDefaul
                         options={languageList}
                         onValueChange={setSelectedLanguages}
                         defaultValue={defaultValues?.languages || selectedLanguages}
-                        value={defaultValues?.languages}
+                        value={defaultValues?.languages || selectedLanguages}
                         placeholder="Select Languages"
                         variant="inverted"
                         animation={2}
                         maxCount={3}
                         className='mt-1'
                     />
-                    {/* {selectedLanguagesError && <p className='text-red-500 text-sm mt-1'>{selectedLanguagesError}</p>} */}
+                    {selectedLanguagesError && <p className='text-red-500 text-sm mt-1'>{selectedLanguagesError}</p>}
                 </div>
 
                 {/* Instructor License */}
@@ -321,6 +323,7 @@ const ExperienceFields: FC<IExperienceFieldsProps> = ({ defaultValues, setDefaul
                                     </div>
 
                                     <Input
+                                        className='xl:h-14'
                                         id={`certificateType${index}`}
                                         placeholder="e.g., Teaching Certification"
                                         {...form.register(`documents.experienceCertificates.${index}.experienceType`, {

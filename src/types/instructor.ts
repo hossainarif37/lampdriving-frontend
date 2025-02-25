@@ -1,4 +1,4 @@
-import { IName, IUser } from "./user";
+import { IDateOfBirth, IName, IUser } from "./user";
 
 
 
@@ -89,7 +89,7 @@ export interface IPersonalInfo {
     name: IName;
     email: string;
     phone: string;
-    dateOfBirth: string;
+    dateOfBirth: IDateOfBirth;
     gender: 'male' | 'female' | 'other';
     profileImg?: string;
 }
