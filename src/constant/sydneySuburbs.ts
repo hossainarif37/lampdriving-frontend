@@ -443,8 +443,90 @@ export const sydneySuburbs = [
         "label": "Brighton-Le-Sands, NSW 2216",
         "value": "Brighton-Le-Sands, NSW 2216",
         "coordinates": [
-            -33.9527,
-            151.1516
+            {
+                "lat": -33.9527,
+                "lng": 151.1516
+            },
+            {
+                "lat": -33.9489,
+                "lng": 151.1523
+            },
+            {
+                "lat": -33.9472,
+                "lng": 151.1535
+            },
+            {
+                "lat": -33.9463,
+                "lng": 151.1548
+            },
+            {
+                "lat": -33.9458,
+                "lng": 151.1562
+            },
+            {
+                "lat": -33.9465,
+                "lng": 151.1573
+            },
+            {
+                "lat": -33.9483,
+                "lng": 151.1581
+            },
+            {
+                "lat": -33.9501,
+                "lng": 151.1584
+            },
+            {
+                "lat": -33.9519,
+                "lng": 151.1582
+            },
+            {
+                "lat": -33.9537,
+                "lng": 151.1578
+            },
+            {
+                "lat": -33.9554,
+                "lng": 151.1571
+            },
+            {
+                "lat": -33.9569,
+                "lng": 151.1563
+            },
+            {
+                "lat": -33.9581,
+                "lng": 151.1552
+            },
+            {
+                "lat": -33.9589,
+                "lng": 151.1539
+            },
+            {
+                "lat": -33.9592,
+                "lng": 151.1525
+            },
+            {
+                "lat": -33.9588,
+                "lng": 151.1511
+            },
+            {
+                "lat": -33.9579,
+                "lng": 151.1499
+            },
+            {
+                "lat": -33.9565,
+                "lng": 151.1492
+            },
+            {
+                "lat": -33.9549,
+                "lng": 151.1489
+            },
+            {
+                "lat": -33.9535,
+                "lng": 151.1497
+            },
+            {
+                "lat": -33.9527,
+                "lng": 151.1516
+            }
         ]
     },
     {
@@ -931,8 +1013,74 @@ export const sydneySuburbs = [
         "label": "Rockdale, NSW 2216",
         "value": "Rockdale, NSW 2216",
         "coordinates": [
-            -33.9511,
-            151.1404
+            {
+                "lat": -33.9511,
+                "lng": 151.1404
+            },
+            {
+                "lat": -33.9482,
+                "lng": 151.1389
+            },
+            {
+                "lat": -33.9453,
+                "lng": 151.1382
+            },
+            {
+                "lat": -33.9428,
+                "lng": 151.1387
+            },
+            {
+                "lat": -33.9409,
+                "lng": 151.1401
+            },
+            {
+                "lat": -33.9398,
+                "lng": 151.1422
+            },
+            {
+                "lat": -33.9394,
+                "lng": 151.1445
+            },
+            {
+                "lat": -33.9401,
+                "lng": 151.1467
+            },
+            {
+                "lat": -33.9415,
+                "lng": 151.1482
+            },
+            {
+                "lat": -33.9437,
+                "lng": 151.1491
+            },
+            {
+                "lat": -33.9461,
+                "lng": 151.1493
+            },
+            {
+                "lat": -33.9485,
+                "lng": 151.1488
+            },
+            {
+                "lat": -33.9507,
+                "lng": 151.1476
+            },
+            {
+                "lat": -33.9524,
+                "lng": 151.1458
+            },
+            {
+                "lat": -33.9533,
+                "lng": 151.1436
+            },
+            {
+                "lat": -33.9529,
+                "lng": 151.1412
+            },
+            {
+                "lat": -33.9511,
+                "lng": 151.1404
+            }
         ]
     },
     {
@@ -971,8 +1119,74 @@ export const sydneySuburbs = [
         "label": "Sefton, NSW 2162",
         "value": "Sefton, NSW 2162",
         "coordinates": [
-            -33.9015,
-            151.0043
+            {
+                "lat": -33.9015,
+                "lng": 151.0043
+            },
+            {
+                "lat": -33.8987,
+                "lng": 151.0028
+            },
+            {
+                "lat": -33.8962,
+                "lng": 151.0021
+            },
+            {
+                "lat": -33.8938,
+                "lng": 151.0025
+            },
+            {
+                "lat": -33.8919,
+                "lng": 151.0038
+            },
+            {
+                "lat": -33.8906,
+                "lng": 151.0057
+            },
+            {
+                "lat": -33.8901,
+                "lng": 151.0081
+            },
+            {
+                "lat": -33.8905,
+                "lng": 151.0106
+            },
+            {
+                "lat": -33.8918,
+                "lng": 151.0127
+            },
+            {
+                "lat": -33.8937,
+                "lng": 151.0142
+            },
+            {
+                "lat": -33.8961,
+                "lng": 151.0149
+            },
+            {
+                "lat": -33.8986,
+                "lng": 151.0147
+            },
+            {
+                "lat": -33.9008,
+                "lng": 151.0136
+            },
+            {
+                "lat": -33.9025,
+                "lng": 151.0118
+            },
+            {
+                "lat": -33.9034,
+                "lng": 151.0095
+            },
+            {
+                "lat": -33.9033,
+                "lng": 151.0069
+            },
+            {
+                "lat": -33.9015,
+                "lng": 151.0043
+            }
         ]
     },
     {
@@ -2037,6 +2251,158 @@ export const sydneySuburbs = [
         "coordinates": [
             -33.872,
             151.273
+        ]
+    },
+    {
+        "label": "Edmondson Park, NSW 2174",
+        "value": "Edmondson Park, NSW 2174",
+        "coordinates": [
+            -33.9625,
+            150.8578
+        ]
+    },
+    {
+        "label": "Ingleburn, NSW 2565",
+        "value": "Ingleburn, NSW 2565",
+        "coordinates": [
+            -34,
+            150.8667
+        ]
+    },
+    {
+        "label": "Macquarie Fields, NSW 2564",
+        "value": "Macquarie Fields, NSW 2564",
+        "coordinates": [
+            -33.995,
+            150.8883
+        ]
+    },
+    {
+        "label": "Bardia, NSW 2565",
+        "value": "Bardia, NSW 2565",
+        "coordinates": [
+            -33.975,
+            150.8625
+        ]
+    },
+    {
+        "label": "Prestons, NSW 2170",
+        "value": "Prestons, NSW 2170",
+        "coordinates": [
+            -33.9419,
+            150.8708
+        ]
+    },
+    {
+        "label": "Casula, NSW 2170",
+        "value": "Casula, NSW 2170",
+        "coordinates": [
+            -33.95,
+            150.9
+        ]
+    },
+    {
+        "label": "Glenfield, NSW 2167",
+        "value": "Glenfield, NSW 2167",
+        "coordinates": [
+            -33.97,
+            150.895
+        ]
+    },
+    {
+        "label": "Leppington, NSW 2179",
+        "value": "Leppington, NSW 2179",
+        "coordinates": [
+            -33.9667,
+            150.8
+        ]
+    },
+    {
+        "label": "Gregory Hills, NSW 2557",
+        "value": "Gregory Hills, NSW 2557",
+        "coordinates": [
+            -34.0278,
+            150.7667
+        ]
+    },
+    {
+        "label": "Campbelltown, NSW 2560",
+        "value": "Campbelltown, NSW 2560",
+        "coordinates": [
+            -34.0633,
+            150.82
+        ]
+    },
+    {
+        "label": "Leumeah, NSW 2560",
+        "value": "Leumeah, NSW 2560",
+        "coordinates": [
+            -34.05,
+            150.8333
+        ]
+    },
+    {
+        "label": "Banksia, NSW 2216",
+        "value": "Banksia, NSW 2216",
+        "coordinates": [
+            -33.945,
+            151.14
+        ]
+    },
+    {
+        "label": "Beverly Hills, NSW 2209",
+        "value": "Beverly Hills, NSW 2209",
+        "coordinates": [
+            -33.9481,
+            151.0797
+        ]
+    },
+    {
+        "label": "Sans Souci, NSW 2219",
+        "value": "Sans Souci, NSW 2219",
+        "coordinates": [
+            -33.9917,
+            151.1333
+        ]
+    },
+    {
+        "label": "Monterey, NSW 2217",
+        "value": "Monterey, NSW 2217",
+        "coordinates": [
+            -33.9725,
+            151.1483
+        ]
+    },
+    {
+        "label": "Belmore, NSW 2192",
+        "value": "Belmore, NSW 2192",
+        "coordinates": [
+            -33.9167,
+            151.0833
+        ]
+    },
+    {
+        "label": "Kingsgrove, NSW 2208",
+        "value": "Kingsgrove, NSW 2208",
+        "coordinates": [
+            -33.9389,
+            151.1
+        ]
+    },
+    {
+        "label": "Eastgardens, NSW 2036",
+        "value": "Eastgardens, NSW 2036",
+        "coordinates": [
+            -33.945,
+            151.225
+        ]
+    },
+    {
+        "label": "Matraville, NSW 2036",
+        "value": "Matraville, NSW 2036",
+        "coordinates": [
+            -33.9633,
+            151.2333
         ]
     }
 ]
