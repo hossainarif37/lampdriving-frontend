@@ -11,12 +11,12 @@ export const generateUniqueIdentifier = (file: File): string => {
 };
 
 export const extractFileDetails = (url: string): { fileName: string; size: string } | null => {
-  const regex = /\/([^\/]+?\.\w+?)_(\d+)_/; // Matches the filename with extension and ID
+  const regex = /\/([^\/]+?\.\w+?)_(\d+)_/;
   const match = url.match(regex);
   if (match) {
     return {
-      fileName: match[1], // Full filename with extension
-      size: match[2],       // Extracted ID
+      fileName: match[1],
+      size: match[2],
     };
   }
   return null;
