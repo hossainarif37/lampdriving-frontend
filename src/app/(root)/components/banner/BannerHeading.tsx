@@ -6,7 +6,7 @@ import arrowImg from "@/assets/banner-img/main-slider-style1__arrow.png";
 import Link from 'next/link';
 
 const BannerHeading: FC = () => {
-    console.log(first);
+
     return (
         <div className="text-light">
             {/* Main heading */}
@@ -61,7 +61,7 @@ const BannerHeading: FC = () => {
                                 clipPath: 'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
                             }}
                         >
-                            <h4>$68</h4>
+                            <h4>$69</h4>
                             <span>Per hour</span>
                         </div>
                     </div>
