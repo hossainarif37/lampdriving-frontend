@@ -5,9 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start -p 4000",
-    "lint": "next lint",
-    "postinstall": "npm install --force"
+    "start": "next start -p 5090",
+    "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.1",
