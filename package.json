@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start -p 5090",
     "lint": "next lint",
-    "install": "npm install --force"
+    "install": "npm install --legacy-peer-deps"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.1",
