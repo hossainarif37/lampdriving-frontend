@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import carImg from "@/assets/dummy-images/e4d09a76-e66f-4c58-9910-783a39af0b55-Taisor-Car-Color-Image.webp";
 import { IInstructor } from '@/types/instructor';
 import { IUser } from '@/types/user';
-import ServiceAreaMap from './ServiceAreaMap';
+// import ServiceAreaMap from './ServiceAreaMap';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
