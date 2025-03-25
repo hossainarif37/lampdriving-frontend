@@ -6,6 +6,7 @@ import arrowImg from "@/assets/banner-img/main-slider-style1__arrow.png";
 import Link from 'next/link';
 
 const BannerHeading: FC = () => {
+
     return (
         <div className="text-light">
             {/* Main heading */}
